@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Blog (salida de mkdocs build)
+blog/site/
+
+# OSRM local: extracto de Geofabrik y archivos procesados (pesados, se regeneran; documentar fecha en data/fuentes.md)
+osrm-data/
+*.osm.pbf
+*.osrm*
+
+# Claude Code: configuración local de cada integrante (los agentes en .claude/agents/ SÍ se versionan)
+.claude/settings.local.json
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+{
+  "fecha_utc": "2026-10-02T01:28:22Z",
+  "descripcion": "Madrid -> Barcelona en el servidor publico de OSRM, con y sin exclude=toll",
+  "con_exclude_toll": {"url": "https://router.project-osrm.org/route/v1/driving/-3.7038,40.4168;2.1734,41.3851?overview=false&exclude=toll", "respuesta": {"message":"Exclude flag combination is not supported.","code":"InvalidValue"}},
+  "sin_exclude": {"url": "https://router.project-osrm.org/route/v1/driving/-3.7038,40.4168;2.1734,41.3851?overview=false", "respuesta": {"code": "Ok", "distance_m": 617801.6, "duration_s": 24730.7}}
+}

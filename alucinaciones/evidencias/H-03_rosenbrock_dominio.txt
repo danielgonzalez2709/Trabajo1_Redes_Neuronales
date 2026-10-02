@@ -1,0 +1,23 @@
+n=2 error rel. gradiente: 4.8e-11
+n=3 error rel. gradiente: 3.1e-10
+lambda_max(H) en x*=(1,1): 1001.6
+n=2 [-2.048,2.048]   L = max lambda_max(H) ~       5970.7 -> eta <= 1/L = 1.67e-04
+n=2 [-5,10]          L = max lambda_max(H) ~     122133.2 -> eta <= 1/L = 8.19e-06
+n=2 [-30,30]         L = max lambda_max(H) ~    1092133.9 -> eta <= 1/L = 9.16e-07
+n=3 [-2.048,2.048]   L = max lambda_max(H) ~       6837.8 -> eta <= 1/L = 1.46e-04
+n=3 [-5,10]          L = max lambda_max(H) ~     124266.9 -> eta <= 1/L = 8.05e-06
+n=3 [-30,30]         L = max lambda_max(H) ~    1104168.4 -> eta <= 1/L = 9.06e-07
+
+GD proyectado desde 30 inicios aleatorios, 5000 iteraciones (= presupuesto 10000n con k=2n)
+n=2 [-2.048,2.048]   eta=1e-3 (1.0e-03): exito f<1e-4 = 0.17 | mediana f = 1.77e-03 | peor = 1.07e-02
+n=2 [-2.048,2.048]   eta=1/L  (1.7e-04): exito f<1e-4 = 0.03 | mediana f = 1.30e-01 | peor = 2.27e+00
+n=2 [-5,10]          eta=1e-3 (1.0e-03): exito f<1e-4 = 0.03 | mediana f = 8.10e+05 | peor = 8.10e+05
+n=2 [-5,10]          eta=1/L  (8.2e-06): exito f<1e-4 = 0.00 | mediana f = 8.68e-01 | peor = 1.69e+01
+n=2 [-30,30]         eta=1e-3 (1.0e-03): exito f<1e-4 = 0.00 | mediana f = 7.57e+07 | peor = 7.57e+07
+n=2 [-30,30]         eta=1/L  (9.2e-07): exito f<1e-4 = 0.00 | mediana f = 5.71e+01 | peor = 1.21e+04
+n=3 [-2.048,2.048]   eta=1e-3 (1.0e-03): exito f<1e-4 = 0.03 | mediana f = 1.29e-03 | peor = 3.01e-03
+n=3 [-2.048,2.048]   eta=1/L  (1.5e-04): exito f<1e-4 = 0.00 | mediana f = 2.02e-01 | peor = 2.73e+00
+n=3 [-5,10]          eta=1e-3 (1.0e-03): exito f<1e-4 = 0.00 | mediana f = 8.33e+05 | peor = 1.62e+06
+n=3 [-5,10]          eta=1/L  (8.0e-06): exito f<1e-4 = 0.00 | mediana f = 5.60e+00 | peor = 5.41e+02
+n=3 [-30,30]         eta=1e-3 (1.0e-03): exito f<1e-4 = 0.00 | mediana f = 1.62e+08 | peor = 1.62e+08
+n=3 [-30,30]         eta=1/L  (9.1e-07): exito f<1e-4 = 0.00 | mediana f = 2.56e+03 | peor = 1.38e+04
