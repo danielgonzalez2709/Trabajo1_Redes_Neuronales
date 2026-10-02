@@ -2,6 +2,12 @@
 
 Fuente de verdad: `docs/spec/SPEC.md`. Plan de tareas: `docs/spec/PLAN.md`. Idioma del proyecto: español.
 
+## Memoria del proyecto (estado actual — se carga en cada sesión)
+@docs/MEMORIA.md
+
+**Obligatorio:** al cerrar una tarea del PLAN, fusionar un PR o registrar una decisión, actualizar `docs/MEMORIA.md`
+(estado actual, decisiones vigentes, pendientes, cacería y una línea nueva arriba en la bitácora). Mantenerla ≤ 150 líneas.
+
 ## Reglas para cualquier sesión o subagente
 - No contradecir el Spec. Lo marcado [DECIDIDO] no se cambia; lo [PENDIENTE] se escala a los humanos.
 - **Prohibido inventar** datos, constantes, tarifas, referencias o resultados. Si falta algo: `TODO(dato-faltante)` y reportarlo.
@@ -21,3 +27,4 @@ Fuente de verdad: `docs/spec/SPEC.md`. Plan de tareas: `docs/spec/PLAN.md`. Idio
 7. Despachar el verificador especializado indicado en la columna "+ Verificador".
 8. Cualquier error de un subagente que haya sido detectado (fórmula, dato, referencia, conteo) → anotar candidato en `alucinaciones/registro.md`.
 9. Marcar la tarea en `PLAN.md` y abrir el PR para revisión del puente (humano).
+10. Actualizar `docs/MEMORIA.md` (estado, próxima tarea, pendientes, bitácora).
