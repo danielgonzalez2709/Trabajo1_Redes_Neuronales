@@ -1,0 +1,36 @@
+== IGR nuc
+  consultas: 32; con registros: 4
+  registros: 50; cpro distintos: 50
+  por capital: {'001100': 34, '011100': 14, '011110': 1, '111100': 1}
+  tipo: {'NUCL': 49, 'ENSI': 1}
+  nº de propiedades por registro: {14: 50}; nulos/vacíos: 0
+  fecha: 2025-10-16 .. 2025-12-05
+  Cádiz: codine=11012000101 lat=36.52959441 lon=-6.292954632 capital=001100
+  Vitoria-Gasteiz: capital=011110 tipo=NUCL
+  Madrid: capital=111100 tipo=NUCL
+  Murcia: capital=011100 tipo=ENSI
+  códigos consultados: ['001000', '001001', '001010', '001011', '001100', '001101', '001110', '001111', '011000', '011001', '011010', '011011', '011100', '011101', '011110', '011111', '101000', '101001', '101010', '101011', '101100', '101101', '101110', '101111', '111000', '111001', '111010', '111011', '111100', '111101', '111110', '111111']
+
+== Nominatim
+  consultas: 52 (es=47, otras=5: ['Mérida', 'Córdoba', 'León', 'Valencia', 'Guadalajara'])
+  nº de resultados por consulta: {3: 17, 2: 31, 1: 4}
+  addresstype del 1.er resultado (es): {'municipality': 4, 'city': 33, 'province': 3, 'state_district': 7}
+  sin filtro 'Mérida': Mérida, Badajoz, Extremadura, España (38.9543062, -6.3504832)
+  sin filtro 'Córdoba': Córdoba, Andalucía, España (37.8845813, -4.7760138)
+  sin filtro 'León': Lion, Lyon, Métropole de Lyon, Rhône, Auvergne-Rhône-Alpes, Francia metropolitana, Francia (45.7578137, 4.8320114)
+  sin filtro 'Valencia': Valencia, Comarca de Valencia, Valencia, Comunidad Valenciana, España (39.4697065, -0.3763353)
+  sin filtro 'Guadalajara': Guadalajara, Región Centro, Jalisco, 44450, México (20.6720375, -103.3383960)
+  claves de resultado: ['address', 'addresstype', 'boundingbox', 'category', 'display_name', 'importance', 'lat', 'licence', 'lon', 'name', 'osm_id', 'osm_type', 'place_id', 'place_rank', 'type']
+  dist OSM -> cities (según cities_verificacion): mediana 0.58 máx (14.21, 'Almería')
+  Almería recalculada: 14.21 km
+
+== Límites provinciales
+  features: 53; timeStamp: 2026-10-08T03:36:02.015444Z; bytes gz: 13188834
+  nombres no provincia: ['Ceuta', 'Melilla', 'Territorios no asociados a ninguna provincia']
+  propiedades: 8 ['codnut1', 'codnut2', 'codnut3', 'country', 'nameunit', 'nationalcode', 'nationallevel', 'nationallevelname']
+  vacíos por columna: {'codnut3': 53, 'codnut1': 1, 'codnut2': 1}
+  tipos geom: {'MultiPolygon': 53}; vértices: 1193428
+
+== INE 26codmun
+  hojas: 52
+  filas de municipio: 8132

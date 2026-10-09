@@ -1,0 +1,142 @@
+== 0. SHA-256 de los crudos NGMEP
+  202603_NGMEP.mdb: 707826e720d675b91e108679349e798b1907207e0f5db051837a1c56531c531f
+  COMJURIDIC.csv: 3064aeadb0853c2eec26c020adf296c37e945325b7730cddafbc8d302c6dad73
+  EATIMS.csv: 103f0346424729eaa508edd18c03cd6e7dcd7db29a3fed7592796bc80204f285
+  ENTIDADES.csv: d50deb73bfd3cf639e1f324d947830d423167536d07e14dba861d3ded01c8017
+  Memoria_NGMEP_2026.pdf: 47c2103190c476be756c961985009e2d3bb1c7652df9d04597dad1e1eafca365
+  MUNICIPIOS.csv: 00784dfae9d601fd1d3cf2ac7e00e497e755922b260a103b6f01705041bb65a5
+  PROVINCIAS.csv: a4e26a7a66d1a48fdd609ecdaec2dfbc9399af26d96c9cdec0ce3429115ec252
+
+== 1. Forma de los CSV NGMEP (filas de datos, columnas, celdas vacías, CRLF)
+  PROVINCIAS.csv: filas=52 cols=5 anchos={5: 52} CRLF=53/53 vacías={}
+     byte 0x92: 0 veces
+  MUNICIPIOS.csv: filas=8132 cols=18 anchos={18: 8132} CRLF=8133/8133 vacías={}
+     byte 0x92: 0 veces
+  ENTIDADES.csv: filas=153950 cols=15 anchos={15: 153950} CRLF=153951/153951 vacías={}
+     byte 0x92: 3 veces
+  EATIMS.csv: filas=3676 cols=13 anchos={13: 3676} CRLF=3677/3677 vacías={}
+     byte 0x92: 0 veces
+  COMJURIDIC.csv: filas=82 cols=13 anchos={13: 82} CRLF=83/83 vacías={'ORIGENCOOR': 82, 'ALTITUD': 82, 'ORIGENALTITUD': 82}
+     byte 0x92: 0 veces
+  Contexto 0x92 en ENTIDADES: cp1252='MDT;FALSO;FALSO\r\n03093000100;l’Estació;0'  latin-1='MDT;FALSO;FALSO\r\n03093000100;l\x92Estació;0'
+  ENTIDADES decodifica como UTF-8: NO (invalid continuation byte en byte 200)
+
+== 2. Recuentos de ENTIDADES.csv
+  TIPO: {'Entidad singular': 62084, 'Diseminado': 41239, 'Otras entidades': 29459, 'Municipio': 8132, 'Capital de municipio': 8132, 'Entidad colectiva': 4904}
+  ORIGENCOOR: {'Mapa': 55066, 'Coordinado_IGR Poblaciones': 43739, 'Detección automática': 42064, 'Investigación': 10528, 'No disponible': 1272, 'GPS. PNRGM': 1116, 'En estudio': 162, 'GPS': 2, 'MDT': 1}
+  SUPRIMIDA_INE: {'FALSO': 153948, 'VERDADERO': 2}
+  DISCREPANTE_INE: {'FALSO': 153939, 'VERDADERO': 11}
+  CODIGOINE únicos: 153950 de 153950
+  Filas DISCREPANTE_INE=VERDADERO (CODIGOINE, NOMBRE, TIPO):
+     01042000001 Eskauriatza | Capital de municipio
+     08041000001 Canovelles | Capital de municipio
+     08116000001 Les Masies de Roda | Capital de municipio
+     08117000001 Les Masies de Voltregà | Capital de municipio
+     09908000001 El Cañón | Capital de municipio
+     13036000001 Los Cortijos | Capital de municipio
+     17068000001 Foixà | Capital de municipio
+     32068000001 Ramirás | Capital de municipio
+     36029000001 Moaña | Capital de municipio
+     36035000001 Nigrán | Capital de municipio
+     48908000001 Kanpantxua | Capital de municipio
+
+== 3. Lista de capitales desde PROVINCIAS.csv
+  Provincias/ciudades en PROVINCIAS.csv: 52
+  Excluidas (07, 35, 38, 51, 52): [('07', 'Illes Balears', 'Palma'), ('35', 'Las Palmas', 'Las Palmas de Gran Canaria'), ('38', 'Santa Cruz de Tenerife', 'Santa Cruz de Tenerife'), ('51', 'Ceuta', 'Ceuta'), ('52', 'Melilla', 'Melilla')]
+  Capitales peninsulares esperadas: 47
+  TIPO de la entidad COD_INE_CAPITAL: {'Capital de municipio': 47}
+  SUPRIMIDA/DISCREPANTE en las 47: {('FALSO', 'FALSO'): 47}
+
+  cities.csv: 47 filas; columnas=['id', 'capital', 'provincia', 'lat', 'lon', 'fuente', 'fecha_consulta', 'verificado_manual', 'nota']
+  Provincias en PROVINCIAS (sin excluidas) y no en cities: []
+  Provincias en cities y no en PROVINCIAS: []
+  Nombre: cities='Castelló de la Plana' | PROVINCIAS.CAPITAL='Castelló de la Plana/Castellón de la Plana' | ENTIDADES.NOMBRE='Castelló de la Plana'
+  Nombre: cities='Oviedo/Uviéu' | PROVINCIAS.CAPITAL='Oviedo' | ENTIDADES.NOMBRE='Oviedo/Uviéu'
+
+== 4. Comparación coordenadas y CODIGOINE (TODAS las 47; se destacan muestra y lista manual)
+  Semilla 20261008; muestra aleatoria (8, fuera de la lista manual): ['Almería', 'Cuenca', 'Cáceres', 'Logroño', 'Murcia', 'Pontevedra', 'Tarragona', 'Zaragoza']
+  [MANUAL ] Vitoria-Gasteiz          crudo=(42.846824,-2.672340) 01059006301 csv=(42.846824,-2.672340) 01059006301 -> OK
+  [MUESTRA] Almería                  crudo=(36.840113,-2.467672) 04013000101 csv=(36.840113,-2.467672) 04013000101 -> OK
+  [MUESTRA] Cáceres                  crudo=(39.474510,-6.371845) 10037000101 csv=(39.474510,-6.371845) 10037000101 -> OK
+  [MANUAL ] Castelló de la Plana     crudo=(39.986045,-0.037849) 12040000101 csv=(39.986045,-0.037849) 12040000101 -> OK
+  [MANUAL ] Córdoba                  crudo=(37.885200,-4.776242) 14021000901 csv=(37.885200,-4.776242) 14021000901 -> OK
+  [MANUAL ] A Coruña                 crudo=(43.371495,-8.395826) 15030000101 csv=(43.371495,-8.395826) 15030000101 -> OK
+  [MUESTRA] Cuenca                   crudo=(40.077851,-2.130079) 16078000301 csv=(40.077851,-2.130079) 16078000301 -> OK
+  [MANUAL ] Girona                   crudo=(41.983072,2.824786) 17079000501 csv=(41.983072,2.824786) 17079000501 -> OK
+  [MANUAL ] Guadalajara              crudo=(40.633609,-3.167414) 19130000101 csv=(40.633609,-3.167414) 19130000101 -> OK
+  [MANUAL ] Donostia/San Sebastián   crudo=(43.321523,-1.985721) 20069000501 csv=(43.321523,-1.985721) 20069000501 -> OK
+  [MANUAL ] León                     crudo=(42.597629,-5.574232) 24089000201 csv=(42.597629,-5.574232) 24089000201 -> OK
+  [MANUAL ] Lleida                   crudo=(41.614704,0.626734) 25120000601 csv=(41.614704,0.626734) 25120000601 -> OK
+  [MUESTRA] Logroño                  crudo=(42.466307,-2.439098) 26089000201 csv=(42.466307,-2.439098) 26089000201 -> OK
+  [MUESTRA] Murcia                   crudo=(37.983456,-1.130208) 30030000100 csv=(37.983456,-1.130208) 30030000100 -> OK
+  [MANUAL ] Pamplona/Iruña           crudo=(42.818565,-1.644406) 31201000201 csv=(42.818565,-1.644406) 31201000201 -> OK
+  [MANUAL ] Ourense                  crudo=(42.335531,-7.863837) 32054000101 csv=(42.335531,-7.863837) 32054000101 -> OK
+  [MUESTRA] Pontevedra               crudo=(42.431994,-8.646859) 36038000101 csv=(42.431994,-8.646859) 36038000101 -> OK
+  [MUESTRA] Tarragona                crudo=(41.117453,1.254162) 43148001301 csv=(41.117453,1.254162) 43148001301 -> OK
+  [MUESTRA] Zaragoza                 crudo=(41.656208,-0.877318) 50297001701 csv=(41.656208,-0.877318) 50297001701 -> OK
+  Filas con discrepancia (de 47): 0
+  ORIGENCOOR en las 47 (crudo): {'Detección automática': 38, 'Investigación': 6, 'Coordinado_IGR Poblaciones': 2, 'GPS. PNRGM': 1}
+  verificado_manual=true: ['A Coruña', 'Castelló de la Plana', 'Córdoba', 'Donostia/San Sebastián', 'Girona', 'Guadalajara', 'León', 'Lleida', 'Ourense', 'Pamplona/Iruña', 'València', 'Vitoria-Gasteiz']
+
+== 5. IGR vs NGMEP y comparación con la fila TIPO=Municipio (todas las 52 provincias)
+  Registros IGR capitales de provincia: 50
+  [    ] 01 Vitoria-Gasteiz          dist_IGR=0.461 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 02 Albacete                 dist_IGR=0.902 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 03 Alacant/Alicante         dist_IGR=1.405 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 04 Almería                  dist_IGR=1.165 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 05 Ávila                    dist_IGR=0.944 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 06 Badajoz                  dist_IGR=0.918 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [EXCL] 07 Palma                    dist_IGR=0.673 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 08 Barcelona                dist_IGR=2.350 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 09 Burgos                   dist_IGR=2.161 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 10 Cáceres                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  [    ] 11 Cádiz                    dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 12 Castelló de la Plana/Castellón de la Plana dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 13 Ciudad Real              dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 14 Córdoba                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 15 A Coruña                 dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 16 Cuenca                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 17 Girona                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 18 Granada                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 19 Guadalajara              dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 20 Donostia/San Sebastián   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 21 Huelva                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 22 Huesca                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 23 Jaén                     dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 24 León                     dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 25 Lleida                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  [    ] 26 Logroño                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 27 Lugo                     dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 28 Madrid                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 29 Málaga                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 30 Murcia                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  [    ] 31 Pamplona/Iruña           dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 32 Ourense                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=GPS. PNRGM
+  [    ] 33 Oviedo                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 34 Palencia                 dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [EXCL] 35 Las Palmas de Gran Canaria dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 36 Pontevedra               dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 37 Salamanca                dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [EXCL] 38 Santa Cruz de Tenerife   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 39 Santander                dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Coordinado_IGR Poblaciones
+  [    ] 40 Segovia                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  [    ] 41 Sevilla                  dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 42 Soria                    dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 43 Tarragona                dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 44 Teruel                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 45 Toledo                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 46 València                 dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  [    ] 47 Valladolid               dist_IGR=0.444 km  capital==municipio(texto exacto): True ORIGENCOOR=Coordinado_IGR Poblaciones
+  [    ] 48 Bilbao                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 49 Zamora                   dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Detección automática
+  [    ] 50 Zaragoza                 dist_IGR=0.000 km  capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  [EXCL] 51 Ceuta                    dist_IGR=sin IGR   capital==municipio(texto exacto): True ORIGENCOOR=Mapa
+  [EXCL] 52 Melilla                  dist_IGR=sin IGR   capital==municipio(texto exacto): True ORIGENCOOR=Investigación
+  Peninsulares con dist IGR > 1 m: 9 -> ['01', '02', '03', '04', '05', '06', '08', '09', '47']
+  ...de ellas con coord. idéntica a la fila Municipio: 9
+  ORIGENCOOR en esas: {'Detección automática': 8, 'Coordinado_IGR Poblaciones': 1}
+  De las 47, capital==municipio: 47 -> ['Vitoria-Gasteiz', 'Albacete', 'Alacant/Alicante', 'Almería', 'Ávila', 'Badajoz', 'Barcelona', 'Burgos', 'Cáceres', 'Cádiz', 'Castelló de la Plana/Castellón de la Plana', 'Ciudad Real', 'Córdoba', 'A Coruña', 'Cuenca', 'Girona', 'Granada', 'Guadalajara', 'Donostia/San Sebastián', 'Huelva', 'Huesca', 'Jaén', 'León', 'Lleida', 'Logroño', 'Lugo', 'Madrid', 'Málaga', 'Murcia', 'Pamplona/Iruña', 'Ourense', 'Oviedo', 'Palencia', 'Pontevedra', 'Salamanca', 'Santander', 'Segovia', 'Sevilla', 'Soria', 'Tarragona', 'Teruel', 'Toledo', 'València', 'Valladolid', 'Bilbao', 'Zamora', 'Zaragoza']
+
+== 6. Rango y distancias de cities.csv
+  lat min (36.529594, 'Cádiz') max (43.462343, 'Santander'); lon min (-8.646859, 'Pontevedra') max (2.824786, 'Girona')
+  par más cercano (43.050852732510094, 'Palencia', 'Valladolid'); más lejano (991.008332492869, 'Cádiz', 'Girona')

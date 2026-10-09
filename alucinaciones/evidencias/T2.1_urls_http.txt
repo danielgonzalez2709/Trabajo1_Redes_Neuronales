@@ -1,0 +1,9 @@
+Comprobación HTTP de las URL de data/fuentes.md — 2026-10-08 13:03 UTC (curl -L, columnas: URL, código, content-type, bytes).
+Contenido revisado aparte: CNIG muestra 'Nomenclátor Geográfico de Municipios y Entidades de Población ( 2026 )'; CSW gmd:dateStamp = 2026-01-19; IGR-PO identificador 20251216_IGN_especificaciones_IGR-PO_v2024, §3.8 ValorTipoCapital 'Se permiten combinaciones'; 26codmun.xlsx SHA-256 idéntico al crudo (b4bea7c3cc1b295a73f7...).
+https://centrodedescargas.cnig.es/CentroDescargas/catalogo.do?Serie=NGMEN	200	text/html;charset=UTF-8	137063
+https://api-features.ign.es/collections/nuc/items?f=json&limit=1&skipGeometry=true&capital=001100	200	application/json	2049
+https://www.ign.es/resources/IGR/Poblaciones/IGN_especificaciones_IGR-PO.pdf	200	application/pdf	4678856
+https://www.idee.es/csw-inspire-idee/srv/spa/csw?SERVICE=CSW&VERSION=2.0.2&REQUEST=GetRecordById&outputSchema=http://www.isotc211.org/2005/gmd&ElementSetName=full&ID=spaign_IGR_Poblaciones	200	application/xml;charset=UTF-8	40792
+https://api-features.ign.es/collections/administrativeunit/items?f=json&limit=1&nationallevelname=Provincia&skipGeometry=true	200	application/json	2058
+https://www.ine.es/daco/daco42/codmun/26codmun.xlsx	200	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet	318222
+https://nominatim.openstreetmap.org/search?q=Le%C3%B3n&format=jsonv2&limit=1	200	application/json; charset=utf-8	481

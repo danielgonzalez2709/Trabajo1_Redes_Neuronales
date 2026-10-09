@@ -1,0 +1,3 @@
+Municipios: 8132; capitales: 8132; capital con coordenada idéntica (texto) a su fila Municipio: 8078
+ORIGENCOOR de la fila Municipio: {'Detección automática': 7184, 'Investigación': 387, 'GPS. PNRGM': 366, 'Mapa': 129, 'Coordinado_IGR Poblaciones': 66}
+¿ORIGENCOOR capital == ORIGENCOOR municipio?: {True: 8074, False: 4}

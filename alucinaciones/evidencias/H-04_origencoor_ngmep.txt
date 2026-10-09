@@ -1,0 +1,15 @@
+Fuente: data/processed/cities_verificacion.csv (generado desde data/raw/BD_Municipios-Entidades/ENTIDADES.csv, NGMEP 202603)
+Verificado: 2026-10-08
+
+ORIGENCOOR NGMEP en las 47 capitales: {'Detección automática': 38, 'Investigación': 6, 'GPS. PNRGM': 1, 'Coordinado_IGR Poblaciones': 2}
+Capitales cuya coordenada NGMEP difiere de IGR (>1 m): 9
+  Vitoria-Gasteiz: Detección automática, 0.461 km
+  Albacete: Detección automática, 0.902 km
+  Alacant/Alicante: Detección automática, 1.405 km
+  Almería: Detección automática, 1.165 km
+  Ávila: Detección automática, 0.944 km
+  Badajoz: Detección automática, 0.918 km
+  Barcelona: Detección automática, 2.350 km
+  Burgos: Detección automática, 2.161 km
+  Valladolid: Coordinado_IGR Poblaciones, 0.444 km
+ORIGENCOOR en esas 9: {'Detección automática': 8, 'Coordinado_IGR Poblaciones': 1}
