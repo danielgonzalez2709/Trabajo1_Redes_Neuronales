@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.1** — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.2** — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -271,9 +271,10 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 > Todo se descarga **una sola vez** con `scripts/descargar_datos.py` (o pasos manuales documentados) a `data/raw/` con fecha en el nombre; se procesa a `data/processed/`; se registra en `data/fuentes.md`.
 
 #### Bloque 1 — Coordenadas de las 47 capitales
-- **Fuente primaria:** IGN, Nomenclátor Geográfico de Municipios y Entidades de Población (descargable). **Alternativa:** OpenStreetMap / Nominatim.
+- **[DECIDIDO 8-oct-2026] Fuente primaria:** IGN, Nomenclátor Geográfico de Municipios y Entidades de Población (NGMEP), versión 202603: fila `TIPO = "Capital de municipio"` de `ENTIDADES.csv`. **Contraste:** IGN IGR Poblaciones (`api-features.ign.es`, colección `nuc`), umbral 2,5 km. OpenStreetMap / Nominatim **solo como control** (devuelve provincias y homónimos; no sirve como fuente de coordenadas).
+- **Excepción a la descarga por script:** el Centro de Descargas del CNIG exige reCAPTCHA, así que el NGMEP se descarga **a mano** y se guarda en `data/raw/BD_Municipios-Entidades/` (carpeta sin fecha en el nombre; fecha y SHA-256 en `data/fuentes.md`). Se versionan los CSV y la Memoria; el `.mdb` (misma base en formato Access) no.
 - Usar la coordenada de la **entidad de población** (núcleo urbano) de la capital, no el centroide del municipio.
-- **Verificación manual obligatoria** (columna `verificado_manual`): nombres bilingües o ambiguos — Vitoria-Gasteiz, A Coruña, Ourense, Girona, Lleida, Castelló de la Plana, Donostia/San Sebastián, Pamplona/Iruña — y homónimos fuera de España (Mérida, Córdoba, León, Valencia, Guadalajara).
+- **Verificación manual obligatoria** (columna `verificado_manual`): nombres bilingües o ambiguos — Vitoria-Gasteiz, A Coruña, Ourense, Girona, Lleida, Castelló de la Plana, Donostia/San Sebastián, Pamplona/Iruña — y homónimos fuera de España (Córdoba, León, Valencia, Guadalajara). *(v1.2: se retira Mérida, que es capital autonómica de Extremadura pero no de provincia; la de Badajoz es Badajoz.)* Confirmada por Jose Miguel Pulgarin el 8-oct-2026.
 - **Aceptación:** 47 filas; mapa de control con los 47 puntos, cada uno dentro de su provincia; excluidas Palma, Las Palmas de G.C., Santa Cruz de Tenerife, Ceuta y Melilla.
 
 #### Bloque 2 — Distancias y tiempos (OSRM)
