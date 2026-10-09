@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-09 |
-| Fase | **F0 — Fundaciones** (sin empezar) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR abierto en `parte2-tsp-espana`) |
-| Próxima tarea | Parte 2: T2.0 OSRM local (vencida) → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. F0: T0.1 esqueleto (incl. `requirements.txt`, Python 3.12) |
+| Fase | **F0 — Fundaciones** en curso (T0.1 ✅ en rama `integracion/f0-fundaciones`; T0.2–T0.4 con subagentes) · **F2 — Datos Parte 2** en curso (T2.1 ✅ fusionado en `main`, PR #1) |
+| Próxima tarea | F0: T0.2 config/CLI, T0.3 semillas/resultados, T0.4 contador. Parte 1: **arrancar T1.1** (rama sin commits). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 4) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -41,24 +41,23 @@
 - Desarrollo con **Subagent Driven Development**: 10 agentes en `.claude/agents/`, protocolo en `CLAUDE.md`.
 
 ## ⏳ Pendientes / bloqueos
-- [ ] Quién monta **OSRM local** (Docker) — decidir a más tardar **sáb 3-oct**; si no, respaldo openrouteservice.
+- [ ] 🔴 **BLOQUEO CRÍTICO — OSRM:** sin decisión (venció el sáb 3-oct). Sin rutas no hay matriz de costos, ni ACO/GA con datos reales, ni barrido del valor de la hora. Decidir ya: OSRM local (Docker) o respaldo openrouteservice.
 - [ ] **Acabado** del Corolla Sedán 140H (de la ficha oficial de Toyota España).
-- [ ] **Design System** (Daniel lo trae como skill).
+- [x] **Design System:** skill `apple-design` (Emil Kowalski). Falta la **paleta de colores** (T4.1); la skill no la define.
 - [ ] ¿Escenario opcional `post_ap68`?
 - [ ] Confirmar fecha/hora de la sustentación.
-- [ ] Prompts literales para la cacería: H-01 y H-03 (Daniel), H-02 (Camila).
-- [ ] Revisión del puente (Daniel) del PR de T2.1 y de H-04/H-05.
-- [ ] Pruebas de T2.1 corridas con Python 3.11 (no hay 3.12 en la máquina): revalidar con 3.12 en T0.1.
-- [ ] `revisor-spec` y `revisor-calidad` no cargan como tipo de agente: se usan vía agente general con su `.md`.
+- [ ] Prompts literales para la cacería: ~~H-01, H-03 (Daniel)~~ ✅ en `alucinaciones/prompts/asesoria_puente_claude.md`; H-02 (Camila) pendiente.
+- [ ] `revisor-spec` y `revisor-calidad` no cargaban como tipo de agente en la sesión de la Parte 2: reiniciar Claude Code desde la raíz del repo (en la sesión del puente sí cargan).
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **5** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio) —
-confirmados: **2** (H-04, H-05, por el cazador; falta el puente) — categorías cubiertas: Datos, Matemáticas. Faltan Código/Bibliografía/Conceptos.
+Candidatos: **7** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida · H-07 PuLP 4 sin CBC) —
+confirmados: **2** (H-04, H-05; aprobados por el puente en el PR #1) — categorías: Datos, Matemáticas, **Código**. Faltan Bibliografía/Conceptos para tener margen.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-09 | Daniel + Claude | PR #1 revisado (39/39 pruebas, regeneración byte a byte) y fusionado (merge commit). **T0.1 ✅**: `requirements.txt` (Python 3.12.6, `pip freeze`), esqueleto `src/`, `configs/`, `results/`, `media/`. Hallazgos nuevos **H-06** (Mérida) y **H-07** (PuLP 4 sin CBC y API nueva). Design System = skill `apple-design`. Spec v1.3. |
 | 2026-10-09 | Jose Miguel + Claude | **T2.1 ✅**: `cities.csv` (47 capitales, NGMEP 202603), 39 pruebas, mapa de control; revisor-spec ✅, revisor-calidad ✅ (2.ª ronda), cazador ✅. Verificación manual: Jose Miguel (8-oct). Spec v1.2. H-04 y H-05 confirmados. |
 | 2026-10-01 | Daniel + Claude | README temporal, esta memoria (cargada desde `CLAUDE.md`) y ramas `parte1-optimizacion-numerica` / `parte2-tsp-espana`. Primer push (`2cd005b`): Spec v1.1, PLAN, agentes, registro. |
 | 2026-10-01 | Equipo | Decidido: fecha de corte 1-oct, Corolla Sedán 140H, dominio Rosenbrock [−2.048, 2.048]ⁿ (respaldado con experimento). |

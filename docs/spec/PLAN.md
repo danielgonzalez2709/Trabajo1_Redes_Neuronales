@@ -14,7 +14,7 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T0.1 | Esqueleto del repo, `requirements.txt` fijado, `.gitignore`, README inicial | — | Estructura §4 | `pip install -r requirements.txt` en venv limpio | auditor-reproducibilidad | ⬜ |
+| T0.1 | Esqueleto del repo, `requirements.txt` fijado, `.gitignore`, README inicial | — | Estructura §4 | `pip install -r requirements.txt` en venv limpio | auditor-reproducibilidad | ✅ 2026-10-09 (Python 3.12.6; 39 pruebas de T2.1 pasan) |
 | T0.2 | `src/common/config.py` + `cli.py`: YAML + `--set a.b=c` + `run.py` con subcomandos | T0.1 | `run.py part1/part2/figures` (vacíos) | Test de overrides anidados y tipos (int/float/bool/list) | — | ⬜ |
 | T0.3 | `src/common/seeds.py` + `results.py` (escritura JSON con esquema §5.4) | T0.1 | Utilidades | Test de reproducibilidad con generador dummy | — | ⬜ |
 | T0.4 | `src/common/counter.py` (`CountedProblem`, presupuesto, `eval_equiv`) | T0.1 | Contador | `test_counter.py`, `test_budget.py` | verificador-matematico | ⬜ |
@@ -78,7 +78,7 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T4.1 | `src/viz/theme.py` + `style.py` desde el Design System | Design System | Tema Plotly + estilo matplotlib | Aplicado a una figura de muestra | revisor-calidad | ⬜ |
+| T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ⬜ |
 | T4.2 | Figuras Parte 1 (Spec §6.7) | T1.7, T4.1 | HTML/PNG en `blog/docs/figures/` | `run.py figures` regenera todo | revisor-spec | ⬜ |
 | T4.3 | GIFs Parte 1 (GD, PSO) | T1.7, T4.1 | `media/*.gif` | Regenerables | — | ⬜ |
 | T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ⬜ |

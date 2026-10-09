@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.2** — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.3** — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -50,7 +50,9 @@ Entregables (pesos): reporte-blog 25 %, repositorio reproducible 10 %, ejecució
 
 | Tema | Decisión |
 |---|---|
-| Lenguaje y entorno | Python 3.12, un solo `requirements.txt` con versiones fijas |
+| Lenguaje y entorno | Python 3.12, un solo `requirements.txt` con versiones fijas (generado con `pip freeze`, incluye dependencias transitivas). Incluye también las dependencias para **reconstruir datos y figuras** (`openpyxl`, `matplotlib`), aunque la demo no las necesite |
+| Solver exacto | **PuLP 4.0 + HiGHS** (`pulp[highs]`). PuLP 4.0 **ya no incluye CBC** y cambió la API: las variables se crean con `problema.add_variable(nombre, cat="Binary")`, no con `LpVariable(..., cat=...)` (ver H-07) |
+| Design System | Skill **`apple-design`** (https://github.com/emilkowalski/skills/tree/main/skills/apple-design) — ver §8 |
 | Implementación | Algoritmos **desde cero con numpy**. Librerías de optimización (SciPy, pyswarms, DEAP, OR-Tools) **solo para contrastar**, nunca como solución |
 | Funciones Parte 1 | **Rosenbrock + Rastrigin**, en 2D y 3D |
 | Blog | **Material for MkDocs** (100 % Python), publicado en GitHub Pages |
@@ -333,7 +335,7 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 | **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max | m=47, α=1, β=3, ρ=0.2, 300 iteraciones |
 | **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** + intercambio; elitismo | pop=150, gen=1 000, pc=0.9, pm=0.2, torneo k=4, élites=2 |
 | **2-opt** (opcional) | Mejora local sobre la mejor solución; reportar con y sin | — |
-| **Exacto (referencia)** | Formulación DFJ con PuLP + CBC, eliminación iterativa de subtours | — |
+| **Exacto (referencia)** | Formulación DFJ con **PuLP 4.0 + HiGHS**, eliminación iterativa de subtours | — |
 
 - **Aceptación:** `tests/test_tsp_operators.py` — 10 000 cruces/mutaciones aleatorias producen siempre permutaciones válidas; `tests/test_exact_small.py` — con 8 ciudades, el exacto coincide con fuerza bruta.
 - **Comparación justa ACO vs GA:** mismo número de **recorridos evaluados**.
@@ -359,7 +361,21 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 - **Material for MkDocs** (en modo mantenimiento con correcciones hasta 5-nov-2026: suficiente para el proyecto).
 - Ecuaciones: `pymdownx.arithmatex` + KaTeX. Bibliografía: `mkdocs-bibtex` + `apa.csl` (APA 7) [VERIFICAR si requiere pandoc → `pypandoc_binary`].
 - **Hook `blog/hooks/figures.py`:** numera figuras y tablas en orden, resuelve referencias `[[fig:id]]` → "Figura N", y **hace fallar el build** si una figura/tabla no se cita o una cita no existe.
-- Design System: [PENDIENTE — lo aporta el puente] → `src/viz/theme.py` (Plotly), `src/viz/style.py` (matplotlib), `blog/docs/stylesheets/ds.css`.
+- **Design System [DECIDIDO 9-oct-2026]:** skill **`apple-design`** de Emil Kowalski (basada en las charlas de diseño de Apple, WWDC):
+  https://github.com/emilkowalski/skills/tree/main/skills/apple-design. **No se copia al repositorio** (no declara licencia):
+  cada integrante la instala localmente en Claude Code. Se traduce a `src/viz/theme.py` (Plotly), `src/viz/style.py`
+  (matplotlib) y `blog/docs/stylesheets/ds.css`. Qué tomamos de ella:
+  - **Tipografía:** fuente del sistema (`system-ui`), interlineado mayor en texto (≈1.5) y apretado en títulos (≈1.05),
+    tracking negativo en títulos grandes (≈ −0.02em) y ≈0 en el cuerpo; jerarquía por peso + tamaño + interlineado; unidades `rem`.
+  - **Materiales:** barra superior translúcida (`backdrop-filter: blur()` + fondo semitransparente) con el contenido desplazándose
+    debajo; difuminado en los bordes de desplazamiento en lugar de divisores duros.
+  - **Interacción en figuras interactivas:** respuesta continua mientras se arrastra un deslizador (no solo al soltar), nada bloquea la
+    entrada durante una transición, transiciones cortas y sin rebote.
+  - **Accesibilidad:** respetar `prefers-reduced-motion` (sustituir animaciones por fundidos), `prefers-reduced-transparency` y
+    `prefers-contrast: more`; evitar movimiento a pantalla completa y cambios bruscos de brillo (relevante en los GIF).
+  - **Principios:** propósito, simplicidad (no minimalismo), etiquetas específicas, agrupación por proximidad.
+  - ⚠️ La skill **no define paleta de colores**: la paleta (neutros + un color de acento + colores por método/algoritmo) se define en
+    T4.1 y se verifica el contraste en modo claro y oscuro.
 - **Secciones obligatorias del blog:** introducción; fundamentación matemática (funciones, dominio, mínimo; TSP; ecuaciones de cada algoritmo); metodología; datos y fuentes; resultados; discusión; uso de IA (prompts principales e impacto); cacería de la alucinación; referencias APA; enlace al repositorio.
 
 ---
@@ -439,7 +455,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 2. ~~Fecha de corte~~ → 1-oct-2026 ✅ · ¿Se hace el escenario opcional `post_ap68`?
 3. Quién monta OSRM local (Docker, RAM suficiente) o si se usa el respaldo ORS (decidir a más tardar sáb 3-oct).
 4. ~~Carrocería~~ → Sedán ✅ · Acabado del Corolla Sedán 1.8 L (140H) (el curador lo propone según la ficha oficial).
-5. Design System (llega como skill del puente).
+5. ~~Design System~~ → skill `apple-design` ✅ (falta la paleta de colores, T4.1).
 6. Fecha/hora confirmada de la sustentación.
 
 ---

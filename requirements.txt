@@ -1,0 +1,40 @@
+# Entorno del proyecto — Python 3.12 (probado con 3.12.6 en Windows, 9-oct-2026)
+# Instalar:  py -3.12 -m venv .venv  &&  .venv\Scripts\python -m pip install -r requirements.txt
+# Versiones fijas (incluye dependencias transitivas) generadas con `pip freeze`.
+# Dependencias directas: numpy, pandas, PyYAML, pytest, PuLP[highs], plotly, matplotlib, openpyxl.
+#   - openpyxl y matplotlib: necesarias para RECONSTRUIR datos y figuras (p. ej. scripts/construir_cities.py).
+#   - PuLP 4.0 NO incluye solver: el extra [highs] instala highspy (ver alucinaciones H-07).
+# El blog (mkdocs-material, mkdocs-bibtex) se añade en T0.7.
+
+annotated-types==0.8.0
+colorama==0.4.6
+contourpy==1.4.0
+cpsat-logutils==1.0.0
+cycler==0.12.1
+et_xmlfile==2.0.0
+fonttools==4.66.1
+highspy==1.13.1
+iniconfig==2.3.1
+kiwisolver==1.5.1
+matplotlib==3.11.2
+narwhals==2.26.0
+numpy==2.5.3
+openpyxl==3.1.5
+orloge==1.0.0
+packaging==26.3
+pandas==3.0.6
+pillow==12.3.0
+plotly==7.1.0
+pluggy==1.6.0
+PuLP==4.0.0
+pydantic==2.14.0
+pydantic_core==2.50.0
+Pygments==2.21.0
+pyparsing==3.3.3
+pytest==9.1.1
+python-dateutil==2.9.0.post0
+PyYAML==6.0.3
+six==1.17.0
+typing-inspection==0.4.4
+typing_extensions==4.16.0
+tzdata==2026.5
