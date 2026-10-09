@@ -1,0 +1,551 @@
+{
+ "ngmep": {
+  "PROVINCIAS.csv": {
+   "filas": 52,
+   "columnas": 5,
+   "nombres_columnas": [
+    "COD_PROV",
+    "PROVINCIA",
+    "COD_CA",
+    "COMUNIDAD_AUTONOMA",
+    "CAPITAL"
+   ],
+   "nulos": {},
+   "ejemplo": {
+    "COD_PROV": "01",
+    "PROVINCIA": "Araba/Álava",
+    "COD_CA": "16",
+    "COMUNIDAD_AUTONOMA": "País Vasco/Euskadi",
+    "CAPITAL": "Vitoria-Gasteiz"
+   },
+   "bytes_0x80_0x9f": [],
+   "fin_de_linea_crlf": true
+  },
+  "MUNICIPIOS.csv": {
+   "filas": 8132,
+   "columnas": 18,
+   "nombres_columnas": [
+    "COD_INE",
+    "ID_REL",
+    "COD_GEO",
+    "COD_PROV",
+    "PROVINCIA",
+    "NOMBRE_ACTUAL",
+    "POBLACION_MUNI",
+    "SUPERFICIE",
+    "PERIMETRO",
+    "COD_INE_CAPITAL",
+    "CAPITAL",
+    "POBLACION_CAPITAL",
+    "HOJA_MTN25",
+    "LONGITUD_ETRS89_REGCAN95",
+    "LATITUD_ETRS89_REGCAN95",
+    "ORIGENCOOR",
+    "ALTITUD",
+    "ORIGENALTITUD"
+   ],
+   "nulos": {},
+   "ejemplo": {
+    "COD_INE": "01001000000",
+    "ID_REL": "1010014",
+    "COD_GEO": "01010",
+    "COD_PROV": "01",
+    "PROVINCIA": "Araba/Álava",
+    "NOMBRE_ACTUAL": "Alegría-Dulantzi",
+    "POBLACION_MUNI": "2961",
+    "SUPERFICIE": "1994,5872",
+    "PERIMETRO": "35069",
+    "COD_INE_CAPITAL": "01001000101",
+    "CAPITAL": "Alegría-Dulantzi",
+    "POBLACION_CAPITAL": "2842",
+    "HOJA_MTN25": "0113-3",
+    "LONGITUD_ETRS89_REGCAN95": "-2,512507724",
+    "LATITUD_ETRS89_REGCAN95": "42,84045247",
+    "ORIGENCOOR": "Detección automática",
+    "ALTITUD": "568",
+    "ORIGENALTITUD": "MDT"
+   },
+   "bytes_0x80_0x9f": [],
+   "fin_de_linea_crlf": true
+  },
+  "ENTIDADES.csv": {
+   "filas": 153950,
+   "columnas": 15,
+   "nombres_columnas": [
+    "CODIGOINE",
+    "NOMBRE",
+    "COD_PROV",
+    "PROVINCIA",
+    "TIPO",
+    "POBLACION",
+    "INEMUNI",
+    "HOJA_MTN25",
+    "LONGITUD_ETRS89_REGCAN95",
+    "LATITUD_ETRS89_REGCAN95",
+    "ORIGENCOOR",
+    "ALTITUD",
+    "ORIGENALTITUD",
+    "SUPRIMIDA_INE",
+    "DISCREPANTE_INE"
+   ],
+   "nulos": {},
+   "ejemplo": {
+    "CODIGOINE": "01001000000",
+    "NOMBRE": "Alegría-Dulantzi",
+    "COD_PROV": "01",
+    "PROVINCIA": "Araba/Álava",
+    "TIPO": "Municipio",
+    "POBLACION": "2961",
+    "INEMUNI": "01001",
+    "HOJA_MTN25": "0113-3",
+    "LONGITUD_ETRS89_REGCAN95": "-2,512507724",
+    "LATITUD_ETRS89_REGCAN95": "42,84045247",
+    "ORIGENCOOR": "Detección automática",
+    "ALTITUD": "568",
+    "ORIGENALTITUD": "MDT",
+    "SUPRIMIDA_INE": "FALSO",
+    "DISCREPANTE_INE": "FALSO"
+   },
+   "bytes_0x80_0x9f": [
+    146
+   ],
+   "fin_de_linea_crlf": true,
+   "tipos": {
+    "Municipio": 8132,
+    "Entidad singular": 62084,
+    "Capital de municipio": 8132,
+    "Diseminado": 41239,
+    "Otras entidades": 29459,
+    "Entidad colectiva": 4904
+   },
+   "origencoor": {
+    "Detección automática": 42064,
+    "Investigación": 10528,
+    "Coordinado_IGR Poblaciones": 43739,
+    "Mapa": 55066,
+    "No disponible": 1272,
+    "En estudio": 162,
+    "MDT": 1,
+    "GPS. PNRGM": 1116,
+    "GPS": 2
+   },
+   "codigoine_unico": true,
+   "capital_de_municipio_igual_a_municipio": 8078,
+   "capitales_de_municipio": 8132,
+   "suprimida_ine_verdadero": 2,
+   "discrepante_ine_verdadero": 11
+  },
+  "EATIMS.csv": {
+   "filas": 3676,
+   "columnas": 13,
+   "nombres_columnas": [
+    "CODINSCRIP",
+    "CODPROV",
+    "NOMBREPROV",
+    "CODAUTON",
+    "NOMBREAUTON",
+    "DENOMINACION",
+    "CODINE",
+    "INEMUNICIPIO",
+    "LATITUD_ETRS89_REGCAN95",
+    "LONGITUD_ETRS89_REGCAN95",
+    "ORIGENCOOR",
+    "ALTITUD",
+    "ORIGENALTITUD"
+   ],
+   "nulos": {},
+   "ejemplo": {
+    "CODINSCRIP": "4010001",
+    "CODPROV": "01",
+    "NOMBREPROV": "Araba/Álava",
+    "CODAUTON": "16",
+    "NOMBREAUTON": "País Vasco/Euskadi",
+    "DENOMINACION": "Adana",
+    "CODINE": "01053000100",
+    "INEMUNICIPIO": "01053",
+    "LATITUD_ETRS89_REGCAN95": "42,82253382",
+    "LONGITUD_ETRS89_REGCAN95": "-2,47464991",
+    "ORIGENCOOR": "Detección automática",
+    "ALTITUD": "620",
+    "ORIGENALTITUD": "MDT"
+   },
+   "bytes_0x80_0x9f": [],
+   "fin_de_linea_crlf": true
+  },
+  "COMJURIDIC.csv": {
+   "filas": 82,
+   "columnas": 13,
+   "nombres_columnas": [
+    "idCon",
+    "COD_GEOGRAFICO",
+    "NOMBRE_ACTUAL",
+    "PROVINCIA",
+    "MUNICIPIOS",
+    "idINES",
+    "SUPERFICIE",
+    "PERIMETRO",
+    "LONGITUD_ETRS89_REGCAN95",
+    "LATITUD_ETRS89_REGCAN95",
+    "ORIGENCOOR",
+    "ALTITUD",
+    "ORIGENALTITUD"
+   ],
+   "nulos": {
+    "ORIGENCOOR": 82,
+    "ALTITUD": 82,
+    "ORIGENALTITUD": 82
+   },
+   "ejemplo": {
+    "idCon": "1",
+    "COD_GEOGRAFICO": "20999",
+    "NOMBRE_ACTUAL": "Parzonería general de Gipuzkoa y Araba/Álava",
+    "PROVINCIA": "Guipúzcoa",
+    "MUNICIPIOS": "ASPARRENA;SAN MILLÁN-DONEMILIAGA;ZEGAMA;ZERAIN;IDIAZABAL;SEGURA",
+    "idINES": "*;01009;01053;20025;20026;20043;20070",
+    "SUPERFICIE": "3728",
+    "PERIMETRO": "41265,4",
+    "LONGITUD_ETRS89_REGCAN95": "-2,284952",
+    "LATITUD_ETRS89_REGCAN95": "42,93219",
+    "ORIGENCOOR": null,
+    "ALTITUD": null,
+    "ORIGENALTITUD": null
+   },
+   "bytes_0x80_0x9f": [],
+   "fin_de_linea_crlf": true
+  }
+ },
+ "ign_nuc": {
+  "filas": 50,
+  "columnas": 14,
+  "nombres_columnas": [
+   "aislada",
+   "altitud",
+   "capital",
+   "codine",
+   "cpro",
+   "enidpob",
+   "fecha",
+   "habitantes",
+   "ine",
+   "latitud",
+   "longitud",
+   "nombre",
+   "nucrural",
+   "tipo"
+  ],
+  "nulos": {},
+  "ejemplo": {
+   "aislada": 0,
+   "altitud": 4.15,
+   "capital": "001100",
+   "codine": "11012000101",
+   "cpro": 11,
+   "enidpob": 100019653,
+   "fecha": "2025-10-20T12:07:29.702808",
+   "habitantes": 111180,
+   "ine": 1,
+   "latitud": 36.52959441,
+   "longitud": -6.292954632,
+   "nombre": "Cádiz",
+   "nucrural": 0,
+   "tipo": "NUCL"
+  },
+  "consultas": 32,
+  "consultas_con_resultado": 4,
+  "codigos_capital": {
+   "001100": 34,
+   "011100": 14,
+   "011110": 1,
+   "111100": 1
+  },
+  "tipos": {
+   "NUCL": 49,
+   "ENSI": 1
+  },
+  "fecha_registro_min": "2025-10-16",
+  "fecha_registro_max": "2025-12-05"
+ },
+ "ign_provincias": {
+  "filas": 53,
+  "columnas": 8,
+  "nombres_columnas": [
+   "codnut1",
+   "codnut2",
+   "codnut3",
+   "country",
+   "nameunit",
+   "nationalcode",
+   "nationallevel",
+   "nationallevelname"
+  ],
+  "nulos": {
+   "codnut1": 1,
+   "codnut2": 1,
+   "codnut3": 53
+  },
+  "ejemplo": {
+   "codnut1": "ES2",
+   "codnut2": "ES21",
+   "codnut3": null,
+   "country": "ES",
+   "nameunit": "Araba/Álava",
+   "nationalcode": "34160100000",
+   "nationallevel": "https://inspire.ec.europa.eu/codelist/AdministrativeHierarchyLevel/3rdOrder",
+   "nationallevelname": "Provincia"
+  },
+  "tipos_geometria": {
+   "MultiPolygon": 53
+  },
+  "vertices_total": 1193428,
+  "timeStamp": "2026-10-08T03:36:02.015444Z",
+  "bytes_gz": 13188834
+ },
+ "ine_codmun": {
+  "filas": 8132,
+  "columnas": 4,
+  "nombres_columnas": [
+   "CPRO",
+   "CMUN",
+   "DC",
+   "NOMBRE"
+  ],
+  "nulos": {},
+  "ejemplo": {
+   "CPRO": "01",
+   "CMUN": "051",
+   "DC": "3",
+   "NOMBRE": "Agurain/Salvatierra"
+  },
+  "hojas": 52,
+  "titulo": "Relación de municipios y códigos a 1 de enero de 2026"
+ },
+ "nominatim": {
+  "consultas": 52,
+  "por_modo": {
+   "es": 47,
+   "libre": 5
+  },
+  "resultados_por_consulta": {
+   "3": 17,
+   "2": 31,
+   "1": 4
+  },
+  "addresstype_primer_resultado_es": {
+   "municipality": 4,
+   "city": 33,
+   "province": 3,
+   "state_district": 7
+  },
+  "pais_primer_resultado_libre": {
+   "Mérida": "es",
+   "Córdoba": "es",
+   "León": "fr",
+   "Valencia": "es",
+   "Guadalajara": "mx"
+  },
+  "columnas_resultado": [
+   "address",
+   "addresstype",
+   "boundingbox",
+   "category",
+   "display_name",
+   "importance",
+   "lat",
+   "licence",
+   "lon",
+   "name",
+   "osm_id",
+   "osm_type",
+   "place_id",
+   "place_rank",
+   "type"
+  ],
+  "ejemplo": {
+   "place_id": 285269881,
+   "osm_type": "relation",
+   "lat": "43.3454621",
+   "lon": "-8.4138519",
+   "addresstype": "municipality",
+   "display_name": "La Coruña, Galicia, España"
+  }
+ },
+ "cities": {
+  "filas": 47,
+  "columnas": 9,
+  "nombres_columnas": [
+   "id",
+   "capital",
+   "provincia",
+   "lat",
+   "lon",
+   "fuente",
+   "fecha_consulta",
+   "verificado_manual",
+   "nota"
+  ],
+  "nulos": {},
+  "ejemplo": {
+   "id": "0",
+   "capital": "Vitoria-Gasteiz",
+   "provincia": "Araba/Álava",
+   "lat": "42.846824",
+   "lon": "-2.672340",
+   "fuente": "IGN - NGMEP 202603 (ENTIDADES.csv, TIPO 'Capital de municipio')",
+   "fecha_consulta": "2026-10-07",
+   "verificado_manual": "true",
+   "nota": "CODIGOINE 01059006301 (NGMEP 202603, Capital de municipio); ORIGENCOOR NGMEP 'Detección automática'; distancia a IGR Poblaciones (mismo código; NUCL, capitalidad 011110): 0.461 km; municipio INE 01059 'Vitoria-Gasteiz' (relación INE 1-ene-2026); punto dentro de la provincia IGN: sí; OSM/Nominatim a 1.0 km (municipality; misma provincia); VERIFICACIÓN (lista Spec §7.2): CODIGOINE NGMEP = código IGR; municipio oficial INE 2026 y provincia INE 01 'Araba/Álava'; punto NGMEP y punto OSM dentro del polígono provincial IGN; distancia a IGR <= 2,5 km; superada"
+  },
+  "lat_min_max": [
+   36.529594,
+   43.462343
+  ],
+  "lon_min_max": [
+   -8.646859,
+   2.824786
+  ],
+  "verificado_manual": {
+   "true": 12,
+   "false": 35
+  },
+  "par_mas_cercano_km": [
+   43.051,
+   "Palencia",
+   "Valladolid"
+  ],
+  "par_mas_lejano_km": [
+   991.008,
+   "Cádiz",
+   "Girona"
+  ],
+  "osm_dist_km": {
+   "max": 14.21,
+   "mediana": 0.58,
+   "mayores_3km": [
+    [
+     "Almería",
+     14.21
+    ],
+    [
+     "Murcia",
+     5.62
+    ],
+    [
+     "Málaga",
+     5.51
+    ],
+    [
+     "Zaragoza",
+     4.79
+    ],
+    [
+     "Valladolid",
+     3.62
+    ],
+    [
+     "Lugo",
+     3.54
+    ],
+    [
+     "Pontevedra",
+     3.53
+    ],
+    [
+     "A Coruña",
+     3.24
+    ],
+    [
+     "Ávila",
+     3.15
+    ]
+   ]
+  },
+  "en_provincia_ign": {
+   "true": 47
+  },
+  "fuente": {
+   "IGN - NGMEP 202603 (ENTIDADES.csv, TIPO 'Capital de municipio')": 47
+  },
+  "fecha_consulta": {
+   "2026-10-07": 47
+  },
+  "origencoor_ngmep": {
+   "Detección automática": 38,
+   "Investigación": 6,
+   "GPS. PNRGM": 1,
+   "Coordinado_IGR Poblaciones": 2
+  },
+  "capitales_con_coordenada_igual_a_su_municipio_ngmep": 47,
+  "origencoor_ngmep_de_las_distintas_a_igr": {
+   "Detección automática": 8,
+   "Coordinado_IGR Poblaciones": 1
+  },
+  "ngmep": {
+   "max_km": 2.35,
+   "mediana_km": 0.0,
+   "media_km": 0.229,
+   "identicas": 38,
+   "codigos_coinciden": 47,
+   "mayores_0_5km": [
+    [
+     "Albacete",
+     "02",
+     0.902
+    ],
+    [
+     "Alacant/Alicante",
+     "03",
+     1.405
+    ],
+    [
+     "Almería",
+     "04",
+     1.165
+    ],
+    [
+     "Ávila",
+     "05",
+     0.944
+    ],
+    [
+     "Badajoz",
+     "06",
+     0.918
+    ],
+    [
+     "Barcelona",
+     "08",
+     2.35
+    ],
+    [
+     "Burgos",
+     "09",
+     2.161
+    ]
+   ],
+   "distintas_por_cod_prov": [
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "08",
+    "09",
+    "47"
+   ],
+   "distintas_ngmep_mas_cerca_de_osm": [
+    "Albacete",
+    "Alacant/Alicante",
+    "Badajoz",
+    "Barcelona"
+   ],
+   "distintas_igr_mas_cerca_de_osm": [
+    "Vitoria-Gasteiz",
+    "Almería",
+    "Ávila",
+    "Burgos",
+    "Valladolid"
+   ]
+  }
+ }
+}

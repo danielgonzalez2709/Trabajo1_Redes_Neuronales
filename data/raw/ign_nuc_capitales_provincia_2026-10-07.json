@@ -1,0 +1,2240 @@
+[
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001000",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001000"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001000"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001000"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:42.425598Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001001",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001001"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001001"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001001"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:42.980485Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001010",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001010"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001010"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001010"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:43.556528Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001011",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001011"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001011"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001011"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:44.124450Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001100",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "11012000101",
+      "enidpob": 100019653,
+      "nucrural": 0,
+      "latitud": 36.52959441,
+      "altitud": 4.15,
+      "nombre": "Cádiz",
+      "cpro": 11,
+      "ine": 1,
+      "habitantes": 111180,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -6.292954632,
+      "fecha": "2025-10-20T12:07:29.702808"
+     },
+     "id": 100019653,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "23050000901",
+      "enidpob": 100019704,
+      "nucrural": 0,
+      "latitud": 37.7645763,
+      "altitud": 573.653,
+      "nombre": "Jaén",
+      "cpro": 23,
+      "ine": 1,
+      "habitantes": 107056,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -3.790869297,
+      "fecha": "2025-10-20T10:19:23.001441"
+     },
+     "id": 100019704,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "21041000101",
+      "enidpob": 100019740,
+      "nucrural": 0,
+      "latitud": 37.25653557,
+      "altitud": 7.939,
+      "nombre": "Huelva",
+      "cpro": 21,
+      "ine": 1,
+      "habitantes": 143178,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -6.949573738,
+      "fecha": "2025-10-20T09:41:23.667302"
+     },
+     "id": 100019740,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "04013000101",
+      "enidpob": 100019916,
+      "nucrural": 0,
+      "latitud": 36.84118439589734,
+      "altitud": 21.263,
+      "nombre": "Almería",
+      "cpro": 4,
+      "ine": 1,
+      "habitantes": 169100,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -2.4546517628723663,
+      "fecha": "2025-10-16T12:46:46.792779"
+     },
+     "id": 100019916,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "14021000901",
+      "enidpob": 100020110,
+      "nucrural": 0,
+      "latitud": 37.88519997,
+      "altitud": 110.28,
+      "nombre": "Córdoba",
+      "cpro": 14,
+      "ine": 1,
+      "habitantes": 290870,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -4.776241735,
+      "fecha": "2025-12-05T09:02:32.868096"
+     },
+     "id": 100020110,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "29067000502",
+      "enidpob": 100020317,
+      "nucrural": 0,
+      "latitud": 36.72026192,
+      "altitud": 6.235,
+      "nombre": "Málaga",
+      "cpro": 29,
+      "ine": 1,
+      "habitantes": 547105,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -4.41498039,
+      "fecha": "2025-10-20T10:45:53.998222"
+     },
+     "id": 100020317,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "18087000401",
+      "enidpob": 100020492,
+      "nucrural": 0,
+      "latitud": 37.17428891,
+      "altitud": 682.319,
+      "nombre": "Granada",
+      "cpro": 18,
+      "ine": 1,
+      "habitantes": 228525,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -3.598691013,
+      "fecha": "2025-10-17T15:21:23.317655"
+     },
+     "id": 100020492,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "22125000801",
+      "enidpob": 200000292,
+      "nucrural": 0,
+      "latitud": 42.14062757,
+      "altitud": 456.696,
+      "nombre": "Huesca",
+      "cpro": 22,
+      "ine": 1,
+      "habitantes": 53834,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -0.409021685,
+      "fecha": "2025-10-20T12:44:11.525609"
+     },
+     "id": 200000292,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "44216000801",
+      "enidpob": 200001775,
+      "nucrural": 0,
+      "latitud": 40.34354359,
+      "altitud": 916.395,
+      "nombre": "Teruel",
+      "cpro": 44,
+      "ine": 1,
+      "habitantes": 32971,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -1.108028132,
+      "fecha": "2025-10-20T13:15:34.092279"
+     },
+     "id": 200001775,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "42173000401",
+      "enidpob": 700000963,
+      "nucrural": 0,
+      "latitud": 41.76303392,
+      "altitud": 1056.134,
+      "nombre": "Soria",
+      "cpro": 42,
+      "ine": 1,
+      "habitantes": 40346,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -2.464067606,
+      "fecha": "2025-10-21T15:11:37.775427"
+     },
+     "id": 700000963,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "05019000301",
+      "enidpob": 700001365,
+      "nucrural": 0,
+      "latitud": 40.655340766612575,
+      "altitud": 1129.398,
+      "nombre": "Ávila",
+      "cpro": 5,
+      "ine": 1,
+      "habitantes": 58396,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -4.689046052934127,
+      "fecha": "2025-10-21T11:23:19.004023"
+     },
+     "id": 700001365,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "49275000201",
+      "enidpob": 700001369,
+      "nucrural": 0,
+      "latitud": 41.50390438,
+      "altitud": 656.13,
+      "nombre": "Zamora",
+      "cpro": 49,
+      "ine": 1,
+      "habitantes": 59095,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -5.747017887,
+      "fecha": "2025-10-22T09:27:03.581040"
+     },
+     "id": 700001369,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "34120000101",
+      "enidpob": 700001517,
+      "nucrural": 0,
+      "latitud": 42.01111958,
+      "altitud": 737.433,
+      "nombre": "Palencia",
+      "cpro": 34,
+      "ine": 1,
+      "habitantes": 74412,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -4.532801015,
+      "fecha": "2025-10-21T12:47:07.015401"
+     },
+     "id": 700001517,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "37274000201",
+      "enidpob": 700001616,
+      "nucrural": 0,
+      "latitud": 40.96550489,
+      "altitud": 796.482,
+      "nombre": "Salamanca",
+      "cpro": 37,
+      "ine": 1,
+      "habitantes": 144458,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -5.663629175,
+      "fecha": "2025-10-21T13:53:45.263526"
+     },
+     "id": 700001616,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "09059000101",
+      "enidpob": 700004144,
+      "nucrural": 0,
+      "latitud": 42.34912799593381,
+      "altitud": 864.222,
+      "nombre": "Burgos",
+      "cpro": 9,
+      "ine": 1,
+      "habitantes": 170680,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -3.6785581657881865,
+      "fecha": "2025-10-21T12:01:01.925595"
+     },
+     "id": 700004144,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "40194000601",
+      "enidpob": 700004524,
+      "nucrural": 0,
+      "latitud": 40.95056392,
+      "altitud": 1003.321,
+      "nombre": "Segovia",
+      "cpro": 40,
+      "ine": 1,
+      "habitantes": 48856,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -4.1242287,
+      "fecha": "2025-10-21T14:19:00.868945"
+     },
+     "id": 700004524,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "24089000201",
+      "enidpob": 700006077,
+      "nucrural": 0,
+      "latitud": 42.59762867,
+      "altitud": 830.335,
+      "nombre": "León",
+      "cpro": 24,
+      "ine": 1,
+      "habitantes": 116418,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -5.574231879,
+      "fecha": "2025-10-21T12:32:15.986578"
+     },
+     "id": 700006077,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "13034000201",
+      "enidpob": 800000142,
+      "nucrural": 0,
+      "latitud": 38.98489842,
+      "altitud": 625.331,
+      "nombre": "Ciudad Real",
+      "cpro": 13,
+      "ine": 1,
+      "habitantes": 73593,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -3.9284854,
+      "fecha": "2025-10-22T11:28:47.107342"
+     },
+     "id": 800000142,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "16078000301",
+      "enidpob": 800001780,
+      "nucrural": 0,
+      "latitud": 40.07785113,
+      "altitud": 987.66,
+      "nombre": "Cuenca",
+      "cpro": 16,
+      "ine": 1,
+      "habitantes": 52577,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -2.130079149,
+      "fecha": "2025-10-22T16:37:14.726227"
+     },
+     "id": 800001780,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "19130000101",
+      "enidpob": 800002561,
+      "nucrural": 0,
+      "latitud": 40.63360869,
+      "altitud": 692.218,
+      "nombre": "Guadalajara",
+      "cpro": 19,
+      "ine": 1,
+      "habitantes": 88422,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -3.167414258,
+      "fecha": "2025-10-27T11:16:52.586782"
+     },
+     "id": 800002561,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "02003000201",
+      "enidpob": 800003315,
+      "nucrural": 0,
+      "latitud": 38.988843521691535,
+      "altitud": 680.969,
+      "nombre": "Albacete",
+      "cpro": 2,
+      "ine": 1,
+      "habitantes": 166608,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -1.8602448227065271,
+      "fecha": "2025-10-22T10:37:01.818415"
+     },
+     "id": 800003315,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "43148001301",
+      "enidpob": 900000473,
+      "nucrural": 0,
+      "latitud": 41.11745293,
+      "altitud": 49.959,
+      "nombre": "Tarragona",
+      "cpro": 43,
+      "ine": 1,
+      "habitantes": 68450,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": 1.254161558,
+      "fecha": "2025-10-27T11:45:44.265904"
+     },
+     "id": 900000473,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "17079000501",
+      "enidpob": 900008662,
+      "nucrural": 0,
+      "latitud": 41.9830715,
+      "altitud": 68.29,
+      "nombre": "Girona",
+      "cpro": 17,
+      "ine": 1,
+      "habitantes": 102301,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": 2.824785924,
+      "fecha": "2025-10-27T10:44:38.056467"
+     },
+     "id": 900008662,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "25120000601",
+      "enidpob": 900014081,
+      "nucrural": 0,
+      "latitud": 41.61470371,
+      "altitud": 150.114,
+      "nombre": "Lleida",
+      "cpro": 25,
+      "ine": 1,
+      "habitantes": 138333,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": 0.6267342,
+      "fecha": "2025-10-28T15:16:32.120478"
+     },
+     "id": 900014081,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "03014000201",
+      "enidpob": 1000000520,
+      "nucrural": 0,
+      "latitud": 38.354830517146695,
+      "altitud": 67.193,
+      "nombre": "Alacant/Alicante",
+      "cpro": 3,
+      "ine": 1,
+      "habitantes": 345455,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -0.4919545618965544,
+      "fecha": "2025-11-27T09:36:40.980446"
+     },
+     "id": 1000000520,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "12040000101",
+      "enidpob": 1000001968,
+      "nucrural": 0,
+      "latitud": 39.98604534,
+      "altitud": 28.104,
+      "nombre": "Castelló de la Plana",
+      "cpro": 12,
+      "ine": 1,
+      "habitantes": 151489,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -0.037848604,
+      "fecha": "2025-10-28T16:22:03.082768"
+     },
+     "id": 1000001968,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "06015000402",
+      "enidpob": 1100000189,
+      "nucrural": 0,
+      "latitud": 38.870702119052474,
+      "altitud": 196.726,
+      "nombre": "Badajoz",
+      "cpro": 6,
+      "ine": 1,
+      "habitantes": 124930,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -6.97096309966481,
+      "fecha": "2025-11-28T10:17:48.714587"
+     },
+     "id": 1100000189,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "10037000101",
+      "enidpob": 1100003830,
+      "nucrural": 0,
+      "latitud": 39.47450994,
+      "altitud": 438.085,
+      "nombre": "Cáceres",
+      "cpro": 10,
+      "ine": 1,
+      "habitantes": 95304,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -6.37184534,
+      "fecha": "2025-11-28T09:37:39.634467"
+     },
+     "id": 1100003830,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "32054000101",
+      "enidpob": 1200021346,
+      "nucrural": 0,
+      "latitud": 42.33553117,
+      "altitud": 131.469,
+      "nombre": "Ourense",
+      "cpro": 32,
+      "ine": 1,
+      "habitantes": 97977,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -7.863836656,
+      "fecha": "2025-11-27T15:42:59.806296"
+     },
+     "id": 1200021346,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "27028000101",
+      "enidpob": 1200022651,
+      "nucrural": 1,
+      "latitud": 43.01002323,
+      "altitud": 460.331,
+      "nombre": "Lugo",
+      "cpro": 27,
+      "ine": 1,
+      "habitantes": 91610,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -7.555631945,
+      "fecha": "2025-11-27T16:51:32.164075"
+     },
+     "id": 1200022651,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "15030000101",
+      "enidpob": 1200023934,
+      "nucrural": 0,
+      "latitud": 43.37149478,
+      "altitud": 5.928,
+      "nombre": "A Coruña",
+      "cpro": 15,
+      "ine": 1,
+      "habitantes": 213758,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -8.395825599,
+      "fecha": "2025-11-28T08:35:17.226795"
+     },
+     "id": 1200023934,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "36038000101",
+      "enidpob": 1200024715,
+      "nucrural": 0,
+      "latitud": 42.43199391,
+      "altitud": 17.47,
+      "nombre": "Pontevedra",
+      "cpro": 36,
+      "ine": 1,
+      "habitantes": 63659,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -8.646859346,
+      "fecha": "2025-12-04T12:19:08.098415"
+     },
+     "id": 1200024715,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "48020000101",
+      "enidpob": 1600005684,
+      "nucrural": 0,
+      "latitud": 43.26421868,
+      "altitud": 7.176,
+      "nombre": "Bilbao",
+      "cpro": 48,
+      "ine": 1,
+      "habitantes": 347342,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -2.923458983,
+      "fecha": "2025-11-27T12:34:45.109729"
+     },
+     "id": 1600005684,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "20069000501",
+      "enidpob": 1600005871,
+      "nucrural": 0,
+      "latitud": 43.32152279,
+      "altitud": 63.283,
+      "nombre": "Donostia/San Sebastián",
+      "cpro": 20,
+      "ine": 1,
+      "habitantes": 183977,
+      "capital": "001100",
+      "aislada": 0,
+      "longitud": -1.985720943,
+      "fecha": "2025-12-03T09:42:11.299610"
+     },
+     "id": 1600005871,
+     "geometry": null
+    }
+   ],
+   "numberMatched": 34,
+   "numberReturned": 34,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001100"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001100"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001100"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:44.688380Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001101",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001101"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001101"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001101"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:45.401320Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001110",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001110"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001110"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001110"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:45.960332Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001111",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=001111"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=001111"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=001111"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:46.529297Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011000",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011000"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011000"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011000"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:47.082722Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011001",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011001"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011001"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011001"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:47.672213Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011010",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011010"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011010"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011010"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:48.257661Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011011",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011011"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011011"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011011"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:48.806642Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011100",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 41,
+      "habitantes": 685914,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -5.994477382,
+      "fecha": "2025-10-20T11:41:11.048407",
+      "nombre": "Sevilla",
+      "tipo": "NUCL",
+      "codine": "41091000201",
+      "enidpob": 100020164,
+      "nucrural": 0,
+      "latitud": 37.38863668,
+      "altitud": 8.079
+     },
+     "id": 100020164,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 50,
+      "habitantes": 658874,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -0.8773178611,
+      "fecha": "2025-10-20T14:15:56.024260",
+      "nombre": "Zaragoza",
+      "tipo": "NUCL",
+      "codine": "50297001701",
+      "enidpob": 200003486,
+      "nucrural": 0,
+      "latitud": 41.6562079121,
+      "altitud": 210.198
+     },
+     "id": 200003486,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 33,
+      "habitantes": 186513,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -5.844628833,
+      "fecha": "2025-10-20T15:47:21.688622",
+      "nombre": "Oviedo/Uviéu",
+      "tipo": "NUCL",
+      "codine": "33044190101",
+      "enidpob": 300002735,
+      "nucrural": 1,
+      "latitud": 43.36051838,
+      "altitud": 234.811
+     },
+     "id": 300002735,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 7,
+      "habitantes": 326148,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": 2.652351585127107,
+      "fecha": "2025-10-20T17:04:16.502474",
+      "nombre": "Palma",
+      "tipo": "NUCL",
+      "codine": "07040001201",
+      "enidpob": 400000212,
+      "nucrural": 0,
+      "latitud": 39.57495061183886,
+      "altitud": 22.807
+     },
+     "id": 400000212,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 35,
+      "habitantes": 302202,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -15.42846997,
+      "fecha": "2025-10-21T08:12:55.244334",
+      "nombre": "Las Palmas de Gran Canaria",
+      "tipo": "NUCL",
+      "codine": "35016002401",
+      "enidpob": 500002137,
+      "nucrural": 0,
+      "latitud": 28.12492399,
+      "altitud": 4.852
+     },
+     "id": 500002137,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 38,
+      "habitantes": 148213,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -16.2544857,
+      "fecha": "2025-10-21T09:59:13.550521",
+      "nombre": "Santa Cruz de Tenerife",
+      "tipo": "NUCL",
+      "codine": "38038002501",
+      "enidpob": 500002139,
+      "nucrural": 0,
+      "latitud": 28.4700052,
+      "altitud": 40.78
+     },
+     "id": 500002139,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 39,
+      "habitantes": 126690,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -3.80999034481325,
+      "fecha": "2025-10-21T10:30:15.069164",
+      "nombre": "Santander",
+      "tipo": "NUCL",
+      "codine": "39075000501",
+      "enidpob": 600000096,
+      "nucrural": 0,
+      "latitud": 43.4623434360901,
+      "altitud": 5.16
+     },
+     "id": 600000096,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 47,
+      "habitantes": 294756,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -4.72334924,
+      "fecha": "2025-10-22T08:38:36.307900",
+      "nombre": "Valladolid",
+      "tipo": "NUCL",
+      "codine": "47186000501",
+      "enidpob": 700003104,
+      "nucrural": 0,
+      "latitud": 41.65232777,
+      "altitud": 693.644
+     },
+     "id": 700003104,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 45,
+      "habitantes": 60124,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -4.025284848,
+      "fecha": "2025-10-22T15:36:11.740618",
+      "nombre": "Toledo",
+      "tipo": "NUCL",
+      "codine": "45168000103",
+      "enidpob": 800005471,
+      "nucrural": 0,
+      "latitud": 39.85649099,
+      "altitud": 515.5
+     },
+     "id": 800005471,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 8,
+      "habitantes": 1686208,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": 2.1546500002780613,
+      "fecha": "2025-12-03T12:11:25.896381",
+      "nombre": "Barcelona",
+      "tipo": "NUCL",
+      "codine": "08019000101",
+      "enidpob": 900001720,
+      "nucrural": 0,
+      "latitud": 41.39470780340964,
+      "altitud": 46.858
+     },
+     "id": 900001720,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 46,
+      "habitantes": 784303,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -0.37739329,
+      "fecha": "2025-11-28T12:05:20.571716",
+      "nombre": "València",
+      "tipo": "NUCL",
+      "codine": "46250001401",
+      "enidpob": 1000004087,
+      "nucrural": 0,
+      "latitud": 39.46990124,
+      "altitud": 12.883
+     },
+     "id": 1000004087,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 30,
+      "habitantes": 169219,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -1.13020828,
+      "fecha": "2025-11-27T14:09:36.892560",
+      "nombre": "Murcia",
+      "tipo": "ENSI",
+      "codine": "30030000100",
+      "enidpob": 1400004448,
+      "nucrural": 0,
+      "latitud": 37.98345552,
+      "altitud": 42.455
+     },
+     "id": 1400004448,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 31,
+      "habitantes": 208243,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -1.644406262,
+      "fecha": "2025-11-27T13:34:06.264672",
+      "nombre": "Pamplona/Iruña",
+      "tipo": "NUCL",
+      "codine": "31201000201",
+      "enidpob": 1500000353,
+      "nucrural": 0,
+      "latitud": 42.818565,
+      "altitud": 440.375
+     },
+     "id": 1500000353,
+     "geometry": null
+    },
+    {
+     "type": "Feature",
+     "properties": {
+      "ine": 1,
+      "cpro": 26,
+      "habitantes": 148513,
+      "capital": "011100",
+      "aislada": 0,
+      "longitud": -2.439098065,
+      "fecha": "2025-11-27T12:03:40.319214",
+      "nombre": "Logroño",
+      "tipo": "NUCL",
+      "codine": "26089000201",
+      "enidpob": 1700000066,
+      "nucrural": 0,
+      "latitud": 42.46630675,
+      "altitud": 380.819
+     },
+     "id": 1700000066,
+     "geometry": null
+    }
+   ],
+   "numberMatched": 14,
+   "numberReturned": 14,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011100"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011100"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011100"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:49.393478Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011101",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011101"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011101"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011101"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:49.971208Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011110",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "01059006301",
+      "enidpob": 1600005857,
+      "nucrural": 0,
+      "latitud": 42.850964300378166,
+      "altitud": 531.878,
+      "ine": 1,
+      "nombre": "Vitoria-Gasteiz",
+      "cpro": 1,
+      "habitantes": 251916,
+      "capital": "011110",
+      "aislada": 0,
+      "longitud": -2.6720370860050062,
+      "fecha": "2025-11-27T12:56:59.885127"
+     },
+     "id": 1600005857,
+     "geometry": null
+    }
+   ],
+   "numberMatched": 1,
+   "numberReturned": 1,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011110"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011110"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011110"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:50.533656Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011111",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=011111"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=011111"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=011111"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:51.129049Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101000",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101000"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101000"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101000"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:51.703373Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101001",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101001"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101001"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101001"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:52.278738Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101010",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101010"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101010"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101010"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:52.848709Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101011",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101011"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101011"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101011"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:53.405195Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101100",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101100"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101100"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101100"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:53.961185Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101101",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101101"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101101"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101101"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:54.534759Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101110",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101110"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101110"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101110"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:55.132568Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101111",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=101111"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=101111"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=101111"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:55.704441Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111000",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111000"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111000"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111000"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:56.299159Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111001",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111001"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111001"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111001"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:56.859002Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111010",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111010"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111010"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111010"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:57.426671Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111011",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111011"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111011"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111011"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:58.004946Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111100",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [
+    {
+     "type": "Feature",
+     "properties": {
+      "tipo": "NUCL",
+      "codine": "28079000101",
+      "enidpob": 1300000337,
+      "nucrural": 0,
+      "latitud": 40.41902552,
+      "altitud": 645.172,
+      "ine": 1,
+      "nombre": "Madrid",
+      "cpro": 28,
+      "habitantes": 3422416,
+      "capital": "111100",
+      "aislada": 0,
+      "longitud": -3.691978194,
+      "fecha": "2025-11-27T15:15:37.997163"
+     },
+     "id": 1300000337,
+     "geometry": null
+    }
+   ],
+   "numberMatched": 1,
+   "numberReturned": 1,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111100"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111100"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111100"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:58.575729Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111101",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111101"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111101"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111101"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:59.158375Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111110",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111110"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111110"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111110"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:35:59.938210Z"
+  }
+ },
+ {
+  "url": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111111",
+  "fecha_consulta": "2026-10-07",
+  "respuesta": {
+   "type": "FeatureCollection",
+   "features": [],
+   "numberMatched": 0,
+   "numberReturned": 0,
+   "links": [
+    {
+     "type": "application/geo+json",
+     "rel": "self",
+     "title": "This document as GeoJSON",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=json&limit=1000&skipGeometry=true&capital=111111"
+    },
+    {
+     "rel": "alternate",
+     "type": "application/ld+json",
+     "title": "This document as RDF (JSON-LD)",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=jsonld&limit=1000&skipGeometry=true&capital=111111"
+    },
+    {
+     "type": "text/html",
+     "rel": "alternate",
+     "title": "This document as HTML",
+     "href": "https://api-features.ign.es/collections/nuc/items?f=html&limit=1000&skipGeometry=true&capital=111111"
+    },
+    {
+     "type": "application/json",
+     "title": "Núcleos de población",
+     "rel": "collection",
+     "href": "https://api-features.ign.es/collections/nuc"
+    }
+   ],
+   "timeStamp": "2026-10-08T03:36:00.501781Z"
+  }
+ }
+]

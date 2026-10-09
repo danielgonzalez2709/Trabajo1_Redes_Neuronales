@@ -1,0 +1,4 @@
+# Data files are stored byte for byte: their SHA-256 is recorded in data/fuentes.md
+# (the NGMEP CSVs use CRLF and cp1252; core.autocrlf must not rewrite them).
+data/raw/** -text
+data/processed/** -text
