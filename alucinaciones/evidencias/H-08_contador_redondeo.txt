@@ -1,0 +1,3 @@
+k=1/3: se acepta y queda por encima: comprobacion_previa=19.666666666666664 (> budget: False) | estado_si_se_acepta=19.666666666666668 (> budget: True) | budget=19.666666666666664
+k=pi: se rechaza aunque cabe: comprobacion_previa=53.98229715025711 (> budget: True) | estado_si_se_acepta=53.982297150257104 (> budget: False) | budget=53.982297150257104
+k=inf: eval_equiv = n_f + inf*0 = nan -> toda comparación con NaN es False (el presupuesto se anula)
