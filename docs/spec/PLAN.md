@@ -15,9 +15,9 @@
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
 | T0.1 | Esqueleto del repo, `requirements.txt` fijado, `.gitignore`, README inicial | — | Estructura §4 | `pip install -r requirements.txt` en venv limpio | auditor-reproducibilidad | ✅ 2026-10-09 (Python 3.12.6; 39 pruebas de T2.1 pasan) |
-| T0.2 | `src/common/config.py` + `cli.py`: YAML + `--set a.b=c` + `run.py` con subcomandos | T0.1 | `run.py part1/part2/figures` (vacíos) | Test de overrides anidados y tipos (int/float/bool/list) | — | ⬜ |
-| T0.3 | `src/common/seeds.py` + `results.py` (escritura JSON con esquema §5.4) | T0.1 | Utilidades | Test de reproducibilidad con generador dummy | — | ⬜ |
-| T0.4 | `src/common/counter.py` (`CountedProblem`, presupuesto, `eval_equiv`) | T0.1 | Contador | `test_counter.py`, `test_budget.py` | verificador-matematico | ⬜ |
+| T0.2 | `src/common/config.py` + `cli.py`: YAML + `--set a.b=c` + `run.py` con subcomandos | T0.1 | `run.py part1/part2/figures` (vacíos) | Test de overrides anidados y tipos (int/float/bool/list) | — | ✅ 2026-10-09 (4 rondas; YAML 1.2, herencia, regla de bloques; 10/10 mutantes detectados) |
+| T0.3 | `src/common/seeds.py` + `results.py` (escritura JSON genérica: UTF-8, sin NaN/inf, atómica; nombres de archivo §5.4) | T0.1 | Utilidades | Test de reproducibilidad con generador dummy | — | ✅ 2026-10-09 (4 rondas; H-09) |
+| T0.4 | `src/common/counter.py` (`CountedProblem`, presupuesto, `eval_equiv`) | T0.1 | Contador | `test_counter.py`, `test_budget.py` | verificador-matematico | ✅ 2026-10-09 (4 rondas; 0 anomalías en ~9 M llamadas; H-08) |
 | T0.5 | Prueba `test_no_network.py` (bloquea `socket` durante experimentos) | T0.2 | Test | Falla si algún experimento intenta conectarse | auditor-reproducibilidad | ⬜ |
 | T0.6 | `alucinaciones/` (registro, evidencias, prompts) | — | Carpetas + plantilla | — | cazador-alucinaciones | ✅ (creado con el Spec) |
 | T0.7 | Esqueleto del blog MkDocs + hook de figuras + bibtex APA | T0.1 | `mkdocs build` funciona | Build falla con figura no citada y con cita inexistente | revisor-calidad | ⬜ |
@@ -25,6 +25,8 @@
 ---
 
 ## F1 — Parte 1 (Equipo Parte 1) · vie 2 – mar 6 oct
+
+> **Condiciones heredadas de F0 (9-oct):** cada tarea de método (T1.2–T1.6) añade su bloque (`gd:`, `ea:`, `pso:`, `de:`) con **todos** sus parámetros por defecto del Spec a `configs/part1/base.yaml` (si no, `--set pso.c1=…` falla por clave inexistente). T1.7 valida la config **antes** de correr: valores finitos (nada de `.inf`/`.nan`; "sin límite" = `null`) y tipos (`record_frames` bool, `runs`/`base_seed` enteros). Usar `CountedProblem` (`src/common/counter.py`), `make_rng`/`seeds_for_runs` (`src/common/seeds.py`) y `save_json`/`run_filename` (`src/common/results.py`).
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
@@ -34,7 +36,7 @@
 | T1.4 | `ea.py`: GA real (torneo, BLX-α, mutación gaussiana, elitismo) | T0.4 | `optimize()` | Conteo exacto por generación; individuos dentro del dominio | — | ⬜ |
 | T1.5 | `pso.py`: PSO gbest con inercia y manejo de límites | T0.4 | `optimize()` | `test_counter` N·(T+1); partículas dentro del dominio; v_max respetada | verificador-matematico | ⬜ |
 | T1.6 | `de.py`: DE/rand/1/bin | T0.4 | `optimize()` | r1≠r2≠r3≠i; j_rand garantiza ≥1 gen del mutante; conteo exacto | verificador-matematico | ⬜ |
-| T1.7 | `experiment.py`: 20 configs × 30 semillas, `summary.json`, tablas | T1.2–T1.6 | Resultados | Métricas §6.6; k=2n y k=1 | **analista-experimentos** | ⬜ |
+| T1.7 | `experiment.py`: 20 configs × 30 semillas, `summary.json`, tablas | T1.2–T1.6 | Resultados | Métricas §6.6; k=2n y k=1; cada JSON de corrida con las claves exactas de §5.4 (`func, dim, method, seed, k, budget, config, result`) usando `run_filename` y la semilla efectiva | **analista-experimentos** | ⬜ |
 | T1.8 | `configs/part1/demo.yaml` + salida en consola | T1.7 | Demo | < 2 min medido | auditor-reproducibilidad | ⬜ |
 | T1.9 | Contraste con SciPy/pyswarms (solo informativo) | T1.7 | Tabla de contraste | Documenta diferencias (`best1bin`, `polish`) | cazador-alucinaciones | ⬜ |
 
@@ -59,6 +61,8 @@
 ---
 
 ## F3 — Parte 2: algoritmos (Equipo Parte 2) · sáb 3 – mar 6 oct
+
+> **Condiciones heredadas de F0 (9-oct):** T3.3/T3.4 añaden los bloques `aco:` (incl. `iteraciones: 300`, §7.4), `ga:` y `peajes:` con **todos** sus parámetros a `configs/part2/base.yaml`. T3.6 valida la config antes de correr (finita y con tipos correctos) y decide si la prueba de humo de `run.py part2` (tests/test_config.py) se marca como lenta al conectar el manejador real. Solver exacto: PuLP 4.0 + HiGHS con `problema.add_variable(...)` (H-07).
 
 > Se puede empezar **antes** de tener los datos reales usando una matriz sintética (distancias euclidianas entre las 47 coordenadas).
 

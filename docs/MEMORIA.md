@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-09 |
-| Fase | **F0 — Fundaciones** en curso (T0.1 ✅ en rama `integracion/f0-fundaciones`; T0.2–T0.4 con subagentes) · **F2 — Datos Parte 2** en curso (T2.1 ✅ fusionado en `main`, PR #1) |
-| Próxima tarea | F0: T0.2 config/CLI, T0.3 semillas/resultados, T0.4 contador. Parte 1: **arrancar T1.1** (rama sin commits). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
+| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **arrancar T1.1** (rama sin commits). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 4) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -39,6 +39,11 @@
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
 - Front: **Material for MkDocs** + Plotly (interactivas) + matplotlib con estilo DS (GIF). Todo Python.
 - Desarrollo con **Subagent Driven Development**: 10 agentes en `.claude/agents/`, protocolo en `CLAUDE.md`.
+- **F0 disponible para los equipos** (Spec §4.1, §5.1, §5.4): `run.py part1|part2|figures --config … --set clave=valor`;
+  configs con herencia (`hereda: base.yaml`; **cada método añade su bloque completo a `base.yaml`**); YAML 1.2 (`1e-3` es número,
+  `010` es 10, `no` es texto); un bloque no se reemplaza por un valor; `CountedProblem(func, k, budget)` lanza `BudgetExhausted`
+  antes de exceder y lee dominio/dimensión de `problem.func`; `make_rng(base_seed, run_id)`; `save_json` (sin NaN/inf) y
+  `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
 - [ ] 🔴 **BLOQUEO CRÍTICO — OSRM:** sin decisión (venció el sáb 3-oct). Sin rutas no hay matriz de costos, ni ACO/GA con datos reales, ni barrido del valor de la hora. Decidir ya: OSRM local (Docker) o respaldo openrouteservice.
@@ -50,13 +55,15 @@
 - [ ] `revisor-spec` y `revisor-calidad` no cargaban como tipo de agente en la sesión de la Parte 2: reiniciar Claude Code desde la raíz del repo (en la sesión del puente sí cargan).
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **7** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida · H-07 PuLP 4 sin CBC) —
-confirmados: **2** (H-04, H-05; aprobados por el puente en el PR #1) — categorías: Datos, Matemáticas, **Código**. Faltan Bibliografía/Conceptos para tener margen.
+Candidatos: **10** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla) — confirmados: **2** (H-04, H-05) —
+categorías: Datos (5), Matemáticas (1), **Código (4)**. Faltan Bibliografía/Conceptos para tener margen. Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-09 | Daniel + Claude (SDD) | **T0.2, T0.3, T0.4 ✅** con subagentes: implementador → revisor-spec → revisor-calidad (+ verificador-matemático en T0.4), 2–4 rondas cada una; 274 pruebas en total. Spec §4.1/§5.1/§5.4 ampliado (YAML 1.2, herencia, regla de bloques, identificadores, semilla efectiva, BudgetExhausted). Hallazgos **H-08**, **H-09**, **H-10** (Código). |
 | 2026-10-09 | Daniel + Claude | PR #1 revisado (39/39 pruebas, regeneración byte a byte) y fusionado (merge commit). **T0.1 ✅**: `requirements.txt` (Python 3.12.6, `pip freeze`), esqueleto `src/`, `configs/`, `results/`, `media/`. Hallazgos nuevos **H-06** (Mérida) y **H-07** (PuLP 4 sin CBC y API nueva). Design System = skill `apple-design`. Spec v1.3. |
 | 2026-10-09 | Jose Miguel + Claude | **T2.1 ✅**: `cities.csv` (47 capitales, NGMEP 202603), 39 pruebas, mapa de control; revisor-spec ✅, revisor-calidad ✅ (2.ª ronda), cazador ✅. Verificación manual: Jose Miguel (8-oct). Spec v1.2. H-04 y H-05 confirmados. |
 | 2026-10-01 | Daniel + Claude | README temporal, esta memoria (cargada desde `CLAUDE.md`) y ramas `parte1-optimizacion-numerica` / `parte2-tsp-espana`. Primer push (`2cd005b`): Spec v1.1, PLAN, agentes, registro. |
