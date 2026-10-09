@@ -1,0 +1,7 @@
+# Demo Parte 1 (< 2 min) — Spec §6.8: Rastrigin 2D, PSO vs GD, 5 corridas -> tabla en consola + figura de trayectoria.
+# Hereda todo de base.yaml (§4.1 [DECIDIDO 9-oct]) y solo escribe lo que cambia.
+hereda: base.yaml
+func: [rastrigin]
+dim: [2]
+methods: [pso, gdfijo]
+runs: 5

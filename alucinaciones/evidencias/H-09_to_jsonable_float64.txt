@@ -1,0 +1,6 @@
+docstring: ['    numpy escalar → int/float/bool/str; ``np.ndarray`` → listas anidadas; tupla → lista;', '    (``str`` o ``numpy.str_``, Spec §5.4); cualquier otra clave produce ``TypeError`` con su ruta.']
+float64 -> numpy.float64
+list[np.float64] -> numpy.float64
+dict[np.float64] -> numpy.float64
+int64 -> builtins.int
+float32 -> builtins.float

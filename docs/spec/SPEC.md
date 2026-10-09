@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.2** — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.3** — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -50,7 +50,9 @@ Entregables (pesos): reporte-blog 25 %, repositorio reproducible 10 %, ejecució
 
 | Tema | Decisión |
 |---|---|
-| Lenguaje y entorno | Python 3.12, un solo `requirements.txt` con versiones fijas |
+| Lenguaje y entorno | Python 3.12, un solo `requirements.txt` con versiones fijas (generado con `pip freeze`, incluye dependencias transitivas). Incluye también las dependencias para **reconstruir datos y figuras** (`openpyxl`, `matplotlib`), aunque la demo no las necesite |
+| Solver exacto | **PuLP 4.0 + HiGHS** (`pulp[highs]`). PuLP 4.0 **ya no incluye CBC** y cambió la API: las variables se crean con `problema.add_variable(nombre, cat="Binary")`, no con `LpVariable(..., cat=...)` (ver H-07) |
+| Design System | Skill **`apple-design`** (https://github.com/emilkowalski/skills/tree/main/skills/apple-design) — ver §8 |
 | Implementación | Algoritmos **desde cero con numpy**. Librerías de optimización (SciPy, pyswarms, DEAP, OR-Tools) **solo para contrastar**, nunca como solución |
 | Funciones Parte 1 | **Rosenbrock + Rastrigin**, en 2D y 3D |
 | Blog | **Material for MkDocs** (100 % Python), publicado en GitHub Pages |
@@ -109,6 +111,32 @@ mkdocs serve -f blog/mkdocs.yml                                 # blog local
 python scripts/descargar_datos.py                               # SOLO para reconstruir datos (usa internet)
 ```
 - Overrides: `--set clave.subclave=valor` (repetible). Nunca hay que editar código para cambiar parámetros.
+  - [DECIDIDO 9-oct, T0.2] El valor se interpreta como YAML (`--set pso.w=0.9` → float, `--set runs=5` → int, `--set gd.armijo=true` → bool,
+    `--set w=[0,5,10]` → lista). **Una clave que no existe en la configuración cargada es un error** con mensaje claro
+    (evita errores de tipeo durante la modificación en vivo).
+  - El comando imprime la configuración final resuelta antes de ejecutar (sirve para la predicción en vivo).
+  - [DECIDIDO 9-oct, T0.2] ⚠️ PyYAML sigue YAML 1.1: `yaml.safe_load("1e-3")` devuelve el **texto** `'1e-3'` (solo `1.0e-3` da 0.001).
+    El proyecto usa un cargador propio (SafeLoader + regla de flotantes de YAML 1.2) tanto para los archivos `.yaml` como para `--set`,
+    de modo que `1e-3`, `2E5` y `-1.5e-8` sean `float`.
+  - La salida de los comandos se fuerza a UTF-8 (tildes y "ñ" en nombres de ciudades).
+  - [DECIDIDO 9-oct] El cargador usa el **esquema core de YAML 1.2 completo** para bool/int/float: booleanos solo `true`/`false`
+    (`yes`/`no`/`on`/`off` quedan como texto), enteros decimales (`010` → 10, no octal; octal solo con `0o`), sin sexagesimales.
+  - [DECIDIDO 9-oct] **Herencia de valores por defecto:** `configs/part1/base.yaml` y `configs/part2/base.yaml` contienen **todos** los
+    parámetros (valores por defecto del Spec). Cualquier otra config declara `hereda: base.yaml` (ruta relativa a su carpeta) y solo
+    escribe lo que cambia; el cargador hace una fusión profunda (la config hija gana) y elimina la clave `hereda`. Así
+    `--set pso.c1=2.0` funciona en cualquier config. Herencia de un solo nivel o encadenada, con detección de ciclos.
+  - [DECIDIDO 9-oct] "Sin límite" se escribe `null`, nunca `.inf` (los JSON de resultados prohíben inf/NaN).
+  - [DECIDIDO 9-oct] **Un bloque no se puede reemplazar por un valor:** si la base tiene un mapeo (p. ej. `pso:`), una config hija con
+    `pso:` vacío/escalar o un `--set pso=3` es un **error** con mensaje claro ("usa pso.<clave>=valor"). Evita borrar sin querer todos los
+    parámetros de un método durante la modificación en vivo. `--set` tampoco reemplaza un bloque por otro mapeo (`--set pso={w: 1}` es
+    error): se cambian subclaves una a una. En la herencia, en cambio, un mapeo de la hija sí se fusiona. Las claves de las configs son
+    siempre texto (sin claves numéricas).
+  - En PowerShell, los valores con espacios van entre comillas: `--set "methods=[pso, gdfijo]"`.
+  - Claves de nivel superior de las configs: Parte 1 `func`, `dim`, `methods`, `runs`, `base_seed`, `record_frames`
+    (identificadores de §5.4); cada método añade su bloque (`pso:`, `de:`, `ea:`, `gd:`) con sus parámetros por defecto en su tarea.
+    Parte 2 `methods` (lista ⊂ {`aco`, `ga`, `exacto`}), `runs`, `base_seed`, `costo:` (incl. `valor_hora`), `aco:`, `ga:`, `peajes:`.
+    [DECIDIDO 9-oct] En la Parte 1 `func` y `dim` son **listas** (la `base.yaml` describe el experimento completo: 2 funciones × 2 dimensiones);
+    `base_seed: 0` en ambas partes; `costo.valor_hora: 25` en la base de la Parte 2 (valor del demo §7.7; el barrido usa `sweep_w.yaml`).
 - Semillas: `rng = np.random.default_rng(base_seed + run_id)`. Prohibido `np.random.seed` global y `random` sin semilla.
 
 ---
@@ -128,14 +156,27 @@ class TestFunction:
     def grad(self, x: np.ndarray) -> np.ndarray: ...
 
 # src/common/counter.py
+class BudgetExhausted(Exception): ...   # se lanza ANTES de una evaluación que excedería el presupuesto
+
 class CountedProblem:
     """Envuelve una TestFunction. ÚNICO lugar donde se cuentan evaluaciones."""
+    def __init__(self, func, k: float, budget: float): ...   # k = costo de 1 ∇f en evaluaciones de f; budget en evaluaciones equivalentes
+    func; k; budget                                     # [DECIDIDO 9-oct] públicos; budget debe ser FINITO (> 0); los optimizadores leen
+                                                        # dominio y dimensión de problem.func.bounds y problem.func.dim
     n_f: int
     n_grad: int
-    def f(self, x) -> float: ...          # n_f += 1
-    def grad(self, x) -> np.ndarray: ...  # n_grad += 1
-    def eval_equiv(self, k: float) -> float: ...   # n_f + k * n_grad
-    def budget_exhausted(self) -> bool: ...
+    best_x: np.ndarray | None; best_f: float           # mejor punto visto (evaluado u observado)
+    history: list[dict]                                 # [{"eval_equiv", "f_best"}], se agrega SOLO cuando mejora best_f
+    def f(self, x) -> float: ...          # si eval_equiv()+1 > budget → BudgetExhausted; si no, n_f += 1
+    def grad(self, x) -> np.ndarray: ...  # si eval_equiv()+k > budget → BudgetExhausted; si no, n_grad += 1
+    def observe(self, x) -> None: ...     # evalúa f SIN contar, solo para registrar best/history (p. ej. GD de paso fijo,
+                                          # que nunca llama a f). Retorna None a propósito: el algoritmo no puede usar el valor.
+    def eval_equiv(self, k: float | None = None) -> float: ...   # n_f + k * n_grad (k por defecto = el del constructor)
+    def budget_exhausted(self) -> bool: ...                      # True si ya no cabe ni una evaluación de f
+# [DECIDIDO 9-oct, T0.4] Los optimizadores capturan BudgetExhausted y devuelven el mejor resultado:
+# así el presupuesto NUNCA se excede (cumple la regla de truncar la última generación, §6.2).
+# observe() existe para que las curvas de convergencia del GD de paso fijo no le cobren evaluaciones de f
+# que el algoritmo no usa; las evaluaciones de f que un algoritmo SÍ usa para decidir (Armijo, metaheurísticas) se cuentan.
 
 # todos los optimizadores de la Parte 1 (gd.py, ea.py, pso.py, de.py)
 def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> dict
@@ -177,6 +218,14 @@ results/data/part2/sweep_w.json     # [{w, tour, cost, desglose:{tiempo,peajes,c
 results/data/part2/history_{aco|ga}_w{w}.json
 results/data/part2/route_geometry.json   # opcional: geometría simplificada por par y alternativa
 ```
+**[DECIDIDO 9-oct, T0.3] Identificadores y forma del JSON de cada corrida (Parte 1):**
+- `func` ∈ {`rosenbrock`, `rastrigin`}; `method` ∈ {`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`} — en minúsculas y **sin guion bajo**
+  (el `_` separa los campos del nombre de archivo). Ej.: `rastrigin_2d_pso_seed7.json`. `run_filename` **exige** `^[a-z0-9]+$`
+  en `func` y `method` (error si no), para que dos corridas nunca generen el mismo nombre.
+- `seed{k}` y el campo `"seed"` son la **semilla efectiva** `base_seed + run_id` (la que devuelve `seeds_for_runs`), no el `run_id`.
+- Claves de los diccionarios guardados: solo texto (`str`); una clave de otro tipo es un error al guardar.
+- Contenido: `{"func", "dim", "method", "seed", "k", "budget", "config": {...}, "result": {<retorno de optimize() §5.1>}}`.
+- JSON en UTF-8, sangría 2, sin escapar acentos; **NaN/inf prohibidos** (error al guardar).
 
 ---
 
@@ -333,7 +382,7 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 | **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max | m=47, α=1, β=3, ρ=0.2, 300 iteraciones |
 | **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** + intercambio; elitismo | pop=150, gen=1 000, pc=0.9, pm=0.2, torneo k=4, élites=2 |
 | **2-opt** (opcional) | Mejora local sobre la mejor solución; reportar con y sin | — |
-| **Exacto (referencia)** | Formulación DFJ con PuLP + CBC, eliminación iterativa de subtours | — |
+| **Exacto (referencia)** | Formulación DFJ con **PuLP 4.0 + HiGHS**, eliminación iterativa de subtours | — |
 
 - **Aceptación:** `tests/test_tsp_operators.py` — 10 000 cruces/mutaciones aleatorias producen siempre permutaciones válidas; `tests/test_exact_small.py` — con 8 ciudades, el exacto coincide con fuerza bruta.
 - **Comparación justa ACO vs GA:** mismo número de **recorridos evaluados**.
@@ -359,7 +408,21 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 - **Material for MkDocs** (en modo mantenimiento con correcciones hasta 5-nov-2026: suficiente para el proyecto).
 - Ecuaciones: `pymdownx.arithmatex` + KaTeX. Bibliografía: `mkdocs-bibtex` + `apa.csl` (APA 7) [VERIFICAR si requiere pandoc → `pypandoc_binary`].
 - **Hook `blog/hooks/figures.py`:** numera figuras y tablas en orden, resuelve referencias `[[fig:id]]` → "Figura N", y **hace fallar el build** si una figura/tabla no se cita o una cita no existe.
-- Design System: [PENDIENTE — lo aporta el puente] → `src/viz/theme.py` (Plotly), `src/viz/style.py` (matplotlib), `blog/docs/stylesheets/ds.css`.
+- **Design System [DECIDIDO 9-oct-2026]:** skill **`apple-design`** de Emil Kowalski (basada en las charlas de diseño de Apple, WWDC):
+  https://github.com/emilkowalski/skills/tree/main/skills/apple-design. **No se copia al repositorio** (no declara licencia):
+  cada integrante la instala localmente en Claude Code. Se traduce a `src/viz/theme.py` (Plotly), `src/viz/style.py`
+  (matplotlib) y `blog/docs/stylesheets/ds.css`. Qué tomamos de ella:
+  - **Tipografía:** fuente del sistema (`system-ui`), interlineado mayor en texto (≈1.5) y apretado en títulos (≈1.05),
+    tracking negativo en títulos grandes (≈ −0.02em) y ≈0 en el cuerpo; jerarquía por peso + tamaño + interlineado; unidades `rem`.
+  - **Materiales:** barra superior translúcida (`backdrop-filter: blur()` + fondo semitransparente) con el contenido desplazándose
+    debajo; difuminado en los bordes de desplazamiento en lugar de divisores duros.
+  - **Interacción en figuras interactivas:** respuesta continua mientras se arrastra un deslizador (no solo al soltar), nada bloquea la
+    entrada durante una transición, transiciones cortas y sin rebote.
+  - **Accesibilidad:** respetar `prefers-reduced-motion` (sustituir animaciones por fundidos), `prefers-reduced-transparency` y
+    `prefers-contrast: more`; evitar movimiento a pantalla completa y cambios bruscos de brillo (relevante en los GIF).
+  - **Principios:** propósito, simplicidad (no minimalismo), etiquetas específicas, agrupación por proximidad.
+  - ⚠️ La skill **no define paleta de colores**: la paleta (neutros + un color de acento + colores por método/algoritmo) se define en
+    T4.1 y se verifica el contraste en modo claro y oscuro.
 - **Secciones obligatorias del blog:** introducción; fundamentación matemática (funciones, dominio, mínimo; TSP; ecuaciones de cada algoritmo); metodología; datos y fuentes; resultados; discusión; uso de IA (prompts principales e impacto); cacería de la alucinación; referencias APA; enlace al repositorio.
 
 ---
@@ -439,7 +502,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 2. ~~Fecha de corte~~ → 1-oct-2026 ✅ · ¿Se hace el escenario opcional `post_ap68`?
 3. Quién monta OSRM local (Docker, RAM suficiente) o si se usa el respaldo ORS (decidir a más tardar sáb 3-oct).
 4. ~~Carrocería~~ → Sedán ✅ · Acabado del Corolla Sedán 1.8 L (140H) (el curador lo propone según la ficha oficial).
-5. Design System (llega como skill del puente).
+5. ~~Design System~~ → skill `apple-design` ✅ (falta la paleta de colores, T4.1).
 6. Fecha/hora confirmada de la sustentación.
 
 ---

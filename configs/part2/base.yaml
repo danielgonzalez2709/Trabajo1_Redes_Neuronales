@@ -1,0 +1,7 @@
+# Parte 2 — valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
+# Solo claves de nivel superior de §4.1. Los bloques aco:, ga: y peajes: (Spec §7.1, §7.4) los añaden T3.x.
+methods: [aco, ga, exacto]    # §7.5: exacto + ACO + GA
+runs: 10                      # §7.5: ACO (10 corridas) + GA (10 corridas)
+base_seed: 0                  # §4.1 [DECIDIDO 9-oct]: base_seed 0 en ambas partes
+costo:
+  valor_hora: 25              # w en €/h (§7.3); §4.1 [DECIDIDO 9-oct]: valor del demo §7.7 (el barrido usa sweep_w.yaml)

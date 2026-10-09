@@ -1,0 +1,5 @@
+PuLP 4.0.0
+Solvers disponibles: ['HiGHS']
+¿Existe PULP_CBC_CMD (API de versiones anteriores)? False
+LpVariable(..., cat=...) falla: LpVariable.__init__() got an unexpected keyword argument 'cat'
+Óptimo DFJ con HiGHS: 38.0 | fuerza bruta: 38

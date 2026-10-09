@@ -1,0 +1,9 @@
+# Parte 1 — experimento completo y valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
+# Solo claves de nivel superior de §4.1. Los bloques de parámetros de cada método (gd:, ea:, pso:, de:; Spec §6.3-§6.4)
+# los añaden T1.2-T1.6 con los valores por defecto del Spec.
+func: [rosenbrock, rastrigin]                 # §6.1 (identificadores de §5.4)
+dim: [2, 3]                                   # §3: 2D y 3D
+methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
+runs: 30                                      # §6.5
+base_seed: 0                                  # §6.5: semillas 0-29, semilla = base_seed + run_id (§4.1)
+record_frames: true                           # §5.1: frames solo si dim == 2; los GIF (§6.7) se regeneran desde results/data (§9)
