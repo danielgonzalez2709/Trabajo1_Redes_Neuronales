@@ -1,0 +1,4 @@
+Resultado (9-oct-2026, versión ronda 3 de src/common/config.py, con _fusionar reemplazada por una versión que muta la base):
+14 passed, 135 deselected in 0.20s
+=> ninguna de las 14 pruebas de herencia detecta la mutación; test_herencia_no_comparte_objetos_con_la_base no puede fallar
+   porque llama dos veces a load_config y cada llamada relee el disco.

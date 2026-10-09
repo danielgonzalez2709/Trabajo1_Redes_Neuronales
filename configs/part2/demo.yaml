@@ -1,0 +1,8 @@
+# Demo Parte 2 (< 2 min) — Spec §7.7: ACO, w = 25, 100 iteraciones -> costo, gap vs. óptimo precalculado, figura del recorrido.
+# Hereda todo de base.yaml (§4.1 [DECIDIDO 9-oct]) y solo escribe lo que cambia.
+hereda: base.yaml
+methods: [aco]
+costo:
+  valor_hora: 25      # §7.7 fija w = 25 para la demo (explícito aunque hoy coincida con la base)
+aco:
+  iteraciones: 100    # §7.7
