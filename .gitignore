@@ -19,3 +19,7 @@ osrm-data/
 # Sistema
 .DS_Store
 Thumbs.db
+
+.atl/
+# NGMEP en formato Access: redundante con los CSV (ver data/fuentes.md)
+data/raw/BD_Municipios-Entidades/*.mdb

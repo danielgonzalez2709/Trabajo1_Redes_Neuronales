@@ -1,0 +1,14 @@
+Evidencia: literal de la firma PNG corrompido en tests/test_cities.py (estado observado 2026-10-08 ~13:04 UTC).
+Escrito por el subagente agent-a94a4cbb756be828d vía Bash a las 2026-10-08T13:03:35Z (transcripción de la sesión 13b2e22e).
+
+Bytes en el archivo (repr):
+b'[:8] == b"\xc2\x89PNG\r\r\n\x1a\r\n", "El mapa de cont'
+Esperado: b'\x89PNG\r\n\x1a\n' escrito como secuencias de escape (texto), no como bytes de control.
+
+pytest tests/ (venv):
+E   SyntaxError: unterminated string literal (detected at line 139)
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.34s
+
+pytest tests/test_cities_ngmep.py:
+7 passed in 0.99s
