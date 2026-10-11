@@ -1,7 +1,8 @@
 """Prueba de aceptación de T2.2 en el OSRM local: rutas sin restricciones y con exclude=toll.
 
 Lee las coordenadas de data/processed/cities.csv (no hay coordenadas escritas en el código), consulta el servidor
-local con steps=true y guarda las respuestas crudas en data/raw/osrm_<AAAA-MM-DD>/.
+local con steps=true. Por defecto NO escribe nada: solo imprime el resultado. Con --salida DIR guarda las respuestas
+crudas y resumen_aceptacion.json en DIR (p. ej. data/raw/osrm_<AAAA-MM-DD>/ para generar evidencia nueva).
 
 Criterios:
   A. (PLAN T2.2) Madrid -> Barcelona: ambas alternativas responden code == "Ok" y la ruta exclude=toll no tiene
@@ -12,7 +13,7 @@ Criterios:
      intersección con la clase "toll" y la ruta exclude=toll ninguna.
 
 Solo usa la biblioteca estándar y solo habla con el servidor local (no con internet).
-Uso: python3 -I scripts/osrm/prueba_aceptacion.py --raiz <repo> [--url http://127.0.0.1:5001]
+Uso: python3 -I scripts/osrm/prueba_aceptacion.py --raiz <repo> [--url http://127.0.0.1:5001] [--salida DIR]
 """
 
 from __future__ import annotations
@@ -83,7 +84,7 @@ def km_por_ref(respuesta: dict) -> dict[str, float]:
     return {k: round(v / 1000, 1) for k, v in acumulado.items() if v > 5000}
 
 
-def resumir(resp: dict, url: str, archivo: str) -> dict:
+def resumir(resp: dict, url: str, archivo: str | None) -> dict:
     info = {"url": url, "archivo": archivo, "code": resp.get("code"), "message": resp.get("message"),
             "data_version": resp.get("data_version")}
     if resp.get("code") == "Ok":
@@ -105,12 +106,23 @@ def resumir(resp: dict, url: str, archivo: str) -> dict:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--raiz", type=Path, required=True, help="raíz del repositorio")
+    ap.add_argument("--salida", type=Path, default=None,
+                    help="directorio donde guardar los JSON (relativo a --raiz si no es absoluto); "
+                         "si se omite, no se escribe nada")
     ap.add_argument("--url", default="http://127.0.0.1:5001", help="URL base del OSRM local")
     args = ap.parse_args()
 
     cities = args.raiz / "data" / "processed" / "cities.csv"
-    destino_raw = args.raiz / "data" / "raw" / f"osrm_{dt.date.today().isoformat()}"
-    destino_raw.mkdir(parents=True, exist_ok=True)
+    salida = None
+    if args.salida is not None:
+        salida = args.salida if args.salida.is_absolute() else args.raiz / args.salida
+        salida.mkdir(parents=True, exist_ok=True)
+
+    def ruta_legible(p: Path) -> str:
+        try:
+            return str(p.resolve().relative_to(args.raiz.resolve()))
+        except ValueError:
+            return str(p)
 
     resumen: dict = {
         "fecha_consulta_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -128,9 +140,13 @@ def main() -> int:
                "destino_lonlat": [lon_d, lat_d], "exige_toll_en_rapida": exige_peaje, "alternativas": {}}
         for nombre, url in {"rapida": base, "sin_peaje": base + "&exclude=toll"}.items():
             resp = consultar(url)
-            archivo = destino_raw / f"{slug(origen)}_{slug(destino)}_{nombre}.json"
-            archivo.write_text(json.dumps(resp, ensure_ascii=False, indent=1), encoding="utf-8")
-            par["alternativas"][nombre] = resumir(resp, url, str(archivo.relative_to(args.raiz)))
+            nombre_archivo = f"{slug(origen)}_{slug(destino)}_{nombre}.json"
+            archivo = None
+            if salida is not None:
+                destino_json = salida / nombre_archivo
+                destino_json.write_text(json.dumps(resp, ensure_ascii=False, indent=1), encoding="utf-8")
+                archivo = ruta_legible(destino_json)
+            par["alternativas"][nombre] = resumir(resp, url, archivo)
             if resp.get("code") != "Ok":
                 errores.append(f"{origen}-{destino} {nombre}: code={resp.get('code')!r} {resp.get('message')!r}")
         r, s = par["alternativas"]["rapida"], par["alternativas"]["sin_peaje"]
@@ -145,8 +161,9 @@ def main() -> int:
 
     resumen["aceptacion"] = "OK" if not errores else "FALLA"
     resumen["errores"] = errores
-    (destino_raw / "resumen_aceptacion.json").write_text(
-        json.dumps(resumen, ensure_ascii=False, indent=1), encoding="utf-8")
+    if salida is not None:
+        (salida / "resumen_aceptacion.json").write_text(
+            json.dumps(resumen, ensure_ascii=False, indent=1), encoding="utf-8")
 
     for par in resumen["pares"]:
         for nombre, a in par["alternativas"].items():
@@ -156,7 +173,8 @@ def main() -> int:
                       f"pasos_toll={a['n_pasos_con_clase_toll']:3d} refs_toll={a['refs_con_clase_toll']}")
             else:
                 print(f"{etiqueta:34s} code={a['code']} {a['message']}")
-    print(f"Evidencia en {destino_raw.relative_to(args.raiz)}/ — aceptación: {resumen['aceptacion']}")
+    donde = f"evidencia en {ruta_legible(salida)}/" if salida is not None else "sin guardar (use --salida DIR)"
+    print(f"Aceptación: {resumen['aceptacion']} — {donde}")
     for e in errores:
         print(f"ERROR: {e}")
     return 0 if not errores else 1

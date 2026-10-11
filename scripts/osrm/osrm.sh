@@ -32,12 +32,19 @@ md5_de() {
 descargar() {
   mkdir -p "${DATOS}"
   cd "${DATOS}"
-  log "Descargando ${EXTRACTO}.osm.pbf.md5 y ${EXTRACTO}.osm.pbf de ${URL_BASE}"
-  curl -sS -fL -O "${URL_BASE}/${EXTRACTO}.osm.pbf.md5"
-  if [[ -f "${EXTRACTO}.osm.pbf" ]] && [[ "$(md5_de "${EXTRACTO}.osm.pbf")" == "${MD5_ESPERADO}" ]]; then
-    log "El extracto ya existe y su md5 es correcto; no se vuelve a descargar."
+  if [[ -f "${EXTRACTO}.osm.pbf" && -f "${EXTRACTO}.osm.pbf.md5" ]] \
+     && [[ "$(cut -d' ' -f1 "${EXTRACTO}.osm.pbf.md5")" == "${MD5_ESPERADO}" ]] \
+     && [[ "$(md5_de "${EXTRACTO}.osm.pbf")" == "${MD5_ESPERADO}" ]]; then
+    log "PBF y .md5 locales presentes y verificados (${MD5_ESPERADO}); no se accede a la red."
   else
-    curl -sS -fL -D "${EXTRACTO}.headers.txt" -O "${URL_BASE}/${EXTRACTO}.osm.pbf"
+    log "Descargando ${EXTRACTO}.osm.pbf.md5 de ${URL_BASE}"
+    curl -sS -fL -O "${URL_BASE}/${EXTRACTO}.osm.pbf.md5"
+    if [[ -f "${EXTRACTO}.osm.pbf" ]] && [[ "$(md5_de "${EXTRACTO}.osm.pbf")" == "${MD5_ESPERADO}" ]]; then
+      log "El extracto ya existe y su md5 es correcto; no se vuelve a descargar."
+    else
+      log "Descargando ${EXTRACTO}.osm.pbf de ${URL_BASE}"
+      curl -sS -fL -D "${EXTRACTO}.headers.txt" -O "${URL_BASE}/${EXTRACTO}.osm.pbf"
+    fi
   fi
   local publicado calculado
   publicado="$(cut -d' ' -f1 "${EXTRACTO}.osm.pbf.md5")"
@@ -64,7 +71,8 @@ paso() {
 
 preparar() {
   [[ -f "${DATOS}/${EXTRACTO}.osm.pbf" ]] || { log "Falta el extracto; ejecute primero: $0 descargar"; exit 1; }
-  local registro="${DATOS}/preparar_$(date +%F).log"
+  local registro
+  registro="${DATOS}/preparar_$(date +%F).log"
   log "Registro del preprocesado: ${registro}"
   {
     log "Imagen: ${IMAGEN}"
@@ -74,9 +82,38 @@ preparar() {
   } 2>&1 | tee "${registro}"
 }
 
+# Archivos que osrm-routed --algorithm mld necesita (salida de "osrm-routed --algorithm mld --list-inputs":
+# los "required" más los cuatro de MLD que genera partition/customize).
+SUFIJOS_MLD=(datasource_names ebg_nodes edges fileIndex geometry icd maneuver_overrides names nbg_nodes properties
+  ramIndex timestamp tld tls turn_duration_penalties turn_weight_penalties cells cell_metrics mldgr partition)
+
+comprobar_datos() {
+  local faltan=() suf
+  for suf in "${SUFIJOS_MLD[@]}"; do
+    [[ -f "${DATOS}/${EXTRACTO}.osrm.${suf}" ]] || faltan+=("${EXTRACTO}.osrm.${suf}")
+  done
+  if (( ${#faltan[@]} > 0 )); then
+    log "ERROR: faltan ${#faltan[@]} archivos en ${DATOS}: ${faltan[*]}"
+    log "Ejecute primero: $0 descargar && $0 preparar"
+    exit 1
+  fi
+}
+
 arrancar() {
+  comprobar_datos
   if docker ps -a --format '{{.Names}}' | grep -qx "${CONTENEDOR}"; then
-    log "El contenedor ${CONTENEDOR} ya existe; se reinicia."
+    # docker start reutiliza el puerto y la imagen con que se creó el contenedor: si no coinciden con lo pedido, se
+    # aborta (no se recrea en silencio).
+    local publicado imagen_actual
+    publicado="$(docker inspect "${CONTENEDOR}" --format '{{range (index .HostConfig.PortBindings "5000/tcp")}}{{.HostIp}}:{{.HostPort}}{{end}}')"
+    imagen_actual="$(docker inspect "${CONTENEDOR}" --format '{{.Config.Image}}')"
+    if [[ "${publicado}" != "127.0.0.1:${PUERTO}" || "${imagen_actual}" != "${IMAGEN}" ]]; then
+      log "ERROR: el contenedor ${CONTENEDOR} ya existe con puerto '${publicado}' e imagen '${imagen_actual}',"
+      log "       pero se pidió 127.0.0.1:${PUERTO} e imagen ${IMAGEN}."
+      log "       Recréelo con: $0 parar && OSRM_PUERTO=${PUERTO} $0 arrancar"
+      exit 1
+    fi
+    log "El contenedor ${CONTENEDOR} ya existe (127.0.0.1:${PUERTO}); se reinicia si estaba parado."
     docker start "${CONTENEDOR}" >/dev/null
   else
     docker run -d --name "${CONTENEDOR}" -p "127.0.0.1:${PUERTO}:5000" -v "${DATOS}:/data" "${IMAGEN}" \
@@ -84,6 +121,7 @@ arrancar() {
   fi
   log "Esperando a que responda http://127.0.0.1:${PUERTO} ..."
   for _ in $(seq 1 120); do
+    # Comprobación de salud: coordenadas de Madrid tomadas de data/processed/cities.csv.
     if curl -sf "http://127.0.0.1:${PUERTO}/nearest/v1/driving/-3.691978,40.419026" >/dev/null; then
       log "OSRM listo en http://127.0.0.1:${PUERTO} (contenedor ${CONTENEDOR})"; return 0
     fi
@@ -93,16 +131,21 @@ arrancar() {
 }
 
 parar() {
-  docker rm -f "${CONTENEDOR}" >/dev/null 2>&1 && log "Contenedor ${CONTENEDOR} detenido y eliminado." \
-    || log "No había contenedor ${CONTENEDOR}."
+  if docker rm -f "${CONTENEDOR}" >/dev/null 2>&1; then
+    log "Contenedor ${CONTENEDOR} detenido y eliminado."
+  else
+    log "No había contenedor ${CONTENEDOR}."
+  fi
 }
 
 estado() {
   docker ps -a --filter "name=^${CONTENEDOR}$" --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}\t{{.Image}}'
 }
 
+# Por defecto no escribe nada en el repositorio. Para guardar evidencia nueva:
+#   scripts/osrm/osrm.sh prueba --salida data/raw/osrm_<AAAA-MM-DD>
 prueba() {
-  python3 -I "${RAIZ}/scripts/osrm/prueba_aceptacion.py" --raiz "${RAIZ}" --url "http://127.0.0.1:${PUERTO}"
+  python3 -I "${RAIZ}/scripts/osrm/prueba_aceptacion.py" --raiz "${RAIZ}" --url "http://127.0.0.1:${PUERTO}" "$@"
 }
 
 case "${1:-}" in
@@ -111,7 +154,7 @@ case "${1:-}" in
   arrancar)  arrancar ;;
   parar)     parar ;;
   estado)    estado ;;
-  prueba)    prueba ;;
+  prueba)    shift; prueba "$@" ;;
   todo)      descargar; docker pull "${IMAGEN}"; preparar; arrancar; prueba ;;
   *) echo "Uso: $0 {descargar|preparar|arrancar|parar|estado|prueba|todo}"; exit 2 ;;
 esac

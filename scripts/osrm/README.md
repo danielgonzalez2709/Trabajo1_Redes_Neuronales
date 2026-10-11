@@ -38,10 +38,15 @@ Montado y probado el **2026-10-10** (hora local UTC−3; 2026-10-11 02:26–02:4
 ## Requisitos
 
 - Docker. En esta máquina: Colima 0.10.3 (VM `vz`, aarch64) con Docker CLI 29.9.0.
-- **RAM:** la VM de Colima necesita **al menos 12 GiB**. `osrm-extract` llegó a 10,9 GiB según su propio registro
+- **RAM:** el contenedor necesita **al menos 12 GiB** disponibles. Medido en Colima: la VM necesita 12 GiB. `osrm-extract` llegó a 10,9 GiB según su propio registro
   (11,06 GiB de `memory.peak` en el cgroup), muy cerca del techo de 11,65 GiB que ve el contenedor. No ejecute otros
   contenedores pesados durante `preparar`. Con menos memoria, `osrm-extract` probablemente muera por falta de memoria
   (OOM). No se ha probado.
+  - **Docker Desktop (macOS/Windows):** Settings → Resources → Memory **≥ 12 GiB** (la VM de Docker Desktop es el techo
+    del contenedor, igual que en Colima). No se ha probado en esta máquina; la cifra sale del pico medido de
+    `osrm-extract` (10,9 GiB).
+  - **Linux nativo:** no hay VM; el contenedor ve la RAM del host. Hacen falta **≥ 12 GiB libres** en el host durante
+    `preparar` (mismo pico medido, 10,9 GiB). No se ha probado en Linux.
 - **Disco:** 4,8 GB en `osrm-data/` (1,49 GB del PBF y el resto de archivos `.osrm*`). Además, la imagen ocupa unos 129 MB.
 - Python 3 (solo biblioteca estándar) para la prueba de aceptación y para leer la cabecera del PBF.
 - Si Colima está parado: `colima start` (conserva la configuración: 8 CPU, 12 GiB y 60 GiB). Para crearlo desde cero:
@@ -53,11 +58,14 @@ Todo pasa por `scripts/osrm/osrm.sh`. Se ejecuta desde cualquier directorio; los
 ignora.
 
 ```bash
-scripts/osrm/osrm.sh descargar   # baja spain-261001.osm.pbf y su .md5; verifica el md5; imprime la cabecera del PBF
+scripts/osrm/osrm.sh descargar   # baja spain-261001.osm.pbf y su .md5 y verifica el md5; si ambos ya están en
+                                 # osrm-data/ y cuadran con el md5 fijado, no toca la red. Imprime la cabecera del PBF
 docker pull ghcr.io/project-osrm/osrm-backend:v26.10.0-debian@sha256:55dbfd47d984c2cacd64e32901b4321c86b5ec761438e69aa053dc78698a786f
 scripts/osrm/osrm.sh preparar    # extract -> partition -> customize; registro en osrm-data/preparar_<fecha>.log
-scripts/osrm/osrm.sh arrancar    # crea o reinicia el contenedor osrm-espana y espera a que responda
-scripts/osrm/osrm.sh prueba      # prueba de aceptación; deja la evidencia en data/raw/osrm_<fecha>/
+scripts/osrm/osrm.sh arrancar    # crea o reinicia el contenedor osrm-espana y espera a que responda (ver abajo)
+scripts/osrm/osrm.sh prueba      # prueba de aceptación; por defecto NO escribe nada (solo imprime)
+scripts/osrm/osrm.sh prueba --salida /tmp/osrm_prueba            # guarda los JSON en un directorio cualquiera
+scripts/osrm/osrm.sh prueba --salida data/raw/osrm_<AAAA-MM-DD>  # solo para generar evidencia NUEVA y versionarla
 scripts/osrm/osrm.sh estado      # estado del contenedor
 scripts/osrm/osrm.sh parar       # detiene y elimina el contenedor (los datos de osrm-data/ se conservan)
 scripts/osrm/osrm.sh todo        # descargar + pull + preparar + arrancar + prueba
@@ -78,6 +86,22 @@ JSON que descargue T2.3 queda ligado a la fecha del extracto.
 
 Una vez preparado, `arrancar` tarda unos 3 s y `osrm-routed` ocupa unos 2,2 GiB de RAM.
 
+Comportamiento de `arrancar`:
+- Antes de lanzar nada comprueba que existen en `osrm-data/` los 20 archivos `spain-261001.osrm.*` que necesita
+  `osrm-routed --algorithm mld`: los "required" de `--list-inputs` más `cells`, `cell_metrics`, `mldgr` y `partition`.
+  Si falta alguno, falla al instante con la lista de los que faltan y pide ejecutar `descargar` y `preparar`.
+- Si el contenedor `osrm-espana` ya existe, solo lo reutiliza (`docker start`) cuando su puerto publicado es
+  `127.0.0.1:${OSRM_PUERTO:-5001}` y su imagen es la fijada en el script. Si no coincide, **no lo recrea**: sale con
+  error y propone `scripts/osrm/osrm.sh parar && OSRM_PUERTO=<puerto> scripts/osrm/osrm.sh arrancar`.
+
+### Si Geofabrik retira `spain-261001`
+
+Si `descargar` recibe un 404 por `spain-261001.osm.pbf`, **no lo sustituya por `spain-latest`**: tendría datos
+posteriores a la fecha de corte (Spec §7.1) y todas las rutas cambiarían sin aviso. Hay que **escalarlo al puente**
+(Daniel). No se ha comprobado cuánto tiempo conserva Geofabrik los extractos fechados. El 2026-10-10 el listado
+(`data/raw/osrm_2026-10-10/geofabrik_spain_2026-10-10.html`) mostraba `spain-261001` y los extractos de los días
+siguientes.
+
 Fecha de los datos de cualquier PBF: `python3 -I scripts/osrm/cabecera_pbf.py osrm-data/spain-261001.osm.pbf`.
 
 ## Medidas del preprocesado (2026-10-11 UTC; M4, Colima con 8 CPU y 12 GiB)
@@ -94,9 +118,11 @@ cell" en la partición.
 
 ## Prueba de aceptación
 
-`scripts/osrm/osrm.sh prueba` ejecuta `python3 -I scripts/osrm/prueba_aceptacion.py --raiz <repo> --url
-http://127.0.0.1:5001`. Toma las coordenadas de `data/processed/cities.csv` y pide cada par con `steps=true`, sin
-restricciones y con `exclude=toll`. Sale con código distinto de 0 si algo falla.
+`scripts/osrm/osrm.sh prueba [--salida DIR]` ejecuta `python3 -I scripts/osrm/prueba_aceptacion.py --raiz <repo> --url
+http://127.0.0.1:5001 [--salida DIR]`. Toma las coordenadas de `data/processed/cities.csv` y pide cada par con `steps=true`, sin
+restricciones y con `exclude=toll`. Sale con código distinto de 0 si algo falla. **Sin `--salida` no escribe ningún archivo**, así que repetir la prueba no
+toca la evidencia versionada. Con `--salida DIR` (relativo a la raíz del repo o absoluto), guarda en DIR los 6 JSON y
+`resumen_aceptacion.json`.
 
 - **A (PLAN T2.2), Madrid → Barcelona:** las dos alternativas deben responder `code: "Ok"`, y la ruta `exclude=toll` no
   puede tener ninguna intersección con la clase `toll`.
@@ -117,6 +143,10 @@ Resultado del 2026-10-11 02:42 UTC: **OK**.
 
 La evidencia está en `data/raw/osrm_2026-10-10/`: las respuestas crudas `<origen>_<destino>_{rapida,sin_peaje}.json`
 y `resumen_aceptacion.json`. El resumen recoge las URL, los km por `ref` y los pasos con la clase `toll`.
+
+Nota sobre `resumen_aceptacion.json`: antes de existir `--salida`, la prueba se ejecutó una segunda vez en el repo y
+reescribió el archivo. Su `fecha_consulta_utc` (2026-10-11T02:45:50Z) es la de esa última corrida, no la de las 02:42
+UTC de la tabla. Las 6 respuestas de ruta salieron idénticas en las dos corridas. Se deja el archivo como está.
 
 **Observaciones para T2.3 y T2.5:**
 - La ruta rápida de Madrid → Barcelona **no tiene peaje**. Va por A-2 (317 km), AP-2 (216 km), AP-7 (49 km) y B-23
