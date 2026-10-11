@@ -1,0 +1,65 @@
+[
+    {
+        "Id": "sha256:55dbfd47d984c2cacd64e32901b4321c86b5ec761438e69aa053dc78698a786f",
+        "RepoTags": [
+            "ghcr.io/project-osrm/osrm-backend@sha256:55dbfd47d984c2cacd64e32901b4321c86b5ec761438e69aa053dc78698a786f"
+        ],
+        "RepoDigests": [
+            "ghcr.io/project-osrm/osrm-backend@sha256:55dbfd47d984c2cacd64e32901b4321c86b5ec761438e69aa053dc78698a786f"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-01T08:43:21.496810345Z",
+        "Config": {
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "bash"
+            ],
+            "WorkingDir": "/opt",
+            "Labels": {
+                "org.opencontainers.image.created": "2026-10-01T08:13:48.490Z",
+                "org.opencontainers.image.description": "Open Source Routing Machine - C++ backend",
+                "org.opencontainers.image.licenses": "BSD-2-Clause",
+                "org.opencontainers.image.revision": "26a73bd16dd0fba18dc4adc92b5c022bcc40cabe",
+                "org.opencontainers.image.source": "https://github.com/Project-OSRM/osrm-backend",
+                "org.opencontainers.image.title": "osrm-backend",
+                "org.opencontainers.image.url": "https://github.com/Project-OSRM/osrm-backend",
+                "org.opencontainers.image.version": "v26.10.0-arm64-debian"
+            }
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 129423899,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:8227a1264c7ff2f8bd125b585e62c1cec77dd2099c985c33e08d34292d06144f",
+                "sha256:534d08c28ebc39f2b8d3c118ba4baf853bbd99794bef6b2e133ac13407554a6c",
+                "sha256:c915d78eb17ab699e994b87d66420d53b93aec146545a6a0011344f32df16f53",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:7839b7e9a0686b5dc64252762267f1f4c3f0336167dfe62df315b321c10b0af7",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-11T02:25:53.076143984Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:55dbfd47d984c2cacd64e32901b4321c86b5ec761438e69aa053dc78698a786f",
+            "size": 1609
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "ghcr.io/project-osrm/osrm-backend"
+                }
+            ]
+        }
+    }
+]

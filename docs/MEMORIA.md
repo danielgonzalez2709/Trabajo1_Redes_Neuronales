@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-10 |
-| Fase | **F0 — Fundaciones** (sin empezar) · **F2 — Datos Parte 2** en curso (T2.0 ✅, T2.1 ✅; rama `parte2-tsp-espana`) |
-| Próxima tarea | Parte 2: **T2.2** (instalar Docker + OSRM local) → T2.3; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. F0: T0.1 esqueleto (incl. `requirements.txt`, Python 3.12) |
+| Fase | **F0 — Fundaciones** (sin empezar) · **F2 — Datos Parte 2** en curso (T2.0 ✅, T2.1 ✅, T2.2 ✅; rama `parte2-tsp-espana`, sin commit) |
+| Próxima tarea | Parte 2: **T2.3** rutas (OSRM en `127.0.0.1:5001`, `scripts/osrm/osrm.sh arrancar`); en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. F0: T0.1 esqueleto (incl. `requirements.txt`, Python 3.12) |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 3) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -41,7 +41,9 @@
 - Desarrollo con **Subagent Driven Development**: 10 agentes en `.claude/agents/`, protocolo en `CLAUDE.md`.
 
 ## ⏳ Pendientes / bloqueos
-- [ ] Instalar Docker en la máquina del equipo Parte 2 (M4, 16 GB) y levantar OSRM (T2.2).
+- [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
+- [ ] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → precisar antes de T2.5. Aceptación T2.2 Madrid–Barcelona no tiene peaje.
+- [ ] Zona horaria del equipo: `fuentes.md` dice UTC−5, máquina de Parte 2 en UTC−3.
 - [ ] **Acabado** del Corolla Sedán 140H (de la ficha oficial de Toyota España).
 - [ ] **Design System** (Daniel lo trae como skill).
 - [ ] ¿Escenario opcional `post_ap68`?
@@ -52,13 +54,14 @@
 - [ ] `revisor-spec` y `revisor-calidad` no cargan como tipo de agente: se usan vía agente general con su `.md`.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **5** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio) —
-confirmados: **2** (H-04, H-05, por el cazador; falta el puente) — categorías cubiertas: Datos, Matemáticas. Faltan Código/Bibliografía/Conceptos.
+Candidatos: **6** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 campos PBF) —
+confirmados: **2** (H-04, H-05, por el cazador; falta el puente) — categorías cubiertas: Datos, Matemáticas, Código (candidato). Faltan Bibliografía/Conceptos.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-10 | Equipo Parte 2 + Claude | **T2.2 ✅**: Colima + Docker; OSRM v26.10.0 (arm64, digest fijo), extracto `spain-261001` (datos 1-oct 20:22Z, md5 ok); `toll` verificado (AP-68, AP-9). Auditor ✅ (8 menores). H-06 (Código) candidato. |
 | 2026-10-10 | Equipo Parte 2 + Claude | **T2.0 ✅**: OSRM local con Docker (máquina M4, 16 GB; Docker por instalar). ORS queda como contingencia. Spec v1.3. |
 | 2026-10-09 | Jose Miguel + Claude | **T2.1 ✅**: `cities.csv` (47 capitales, NGMEP 202603), 39 pruebas, mapa de control; revisor-spec ✅, revisor-calidad ✅ (2.ª ronda), cazador ✅. Verificación manual: Jose Miguel (8-oct). Spec v1.2. H-04 y H-05 confirmados. |
 | 2026-10-01 | Daniel + Claude | README temporal, esta memoria (cargada desde `CLAUDE.md`) y ramas `parte1-optimizacion-numerica` / `parte2-tsp-espana`. Primer push (`2cd005b`): Spec v1.1, PLAN, agentes, registro. |

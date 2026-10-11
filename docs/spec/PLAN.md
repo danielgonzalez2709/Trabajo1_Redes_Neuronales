@@ -48,7 +48,7 @@
 |---|---|---|---|---|---|---|
 | T2.0 | **Decisión** OSRM local vs. respaldo ORS (humanos) | — | Nota en Spec §14 | Decidido a más tardar **sáb 3-oct** | — | ✅ 2026-10-10 (OSRM local con Docker; Spec v1.3) |
 | T2.1 | Bloque 1: `cities.csv` desde IGN (+ verificación manual de ambiguos) | — | `data/processed/cities.csv` | 47 filas; mapa de control; columna `verificado_manual` completa | **cazador-alucinaciones** | ✅ 2026-10-09 (NGMEP 202603; 39 pruebas; verificación manual: Jose Miguel) |
-| T2.2 | `scripts/osrm/README.md` + levantar OSRM local con extracto Geofabrik | T2.0 | Servidor local + fecha del extracto | `exclude=toll` responde OK en Madrid→Barcelona | auditor-reproducibilidad | ⬜ |
+| T2.2 | `scripts/osrm/README.md` + levantar OSRM local con extracto Geofabrik | T2.0 | Servidor local + fecha del extracto | `exclude=toll` responde OK en Madrid→Barcelona | auditor-reproducibilidad | ✅ 2026-10-10 (OSRM v26.10.0 arm64, extracto `spain-261001` = datos 1-oct 20:22Z; puerto 5001; auditor ✅ con 8 menores) |
 | T2.3 | Bloque 2: `descargar_datos.py` rutas (1 081 pares × 2 alternativas) | T2.1, T2.2 | `data/raw/osrm_<fecha>/`, `rutas.csv` | Sin errores; pasos con `ref` y clases; chequeo de simetría en 20 pares | revisor-spec | ⬜ |
 | T2.4 | Bloque 3a: `peajes_tramos.csv` (estatales, SEITT, forales/autonómicos) | — | Tabla con fuente y fecha por fila | Ninguna fila sin `fuente_url` y `fecha_consulta`; vigencias AP-68 correctas | **cazador-alucinaciones** | ⬜ |
 | T2.5 | Bloque 3b: asignación de peajes a rutas | T2.3, T2.4 | `km_peaje`, `peaje_eur` en `rutas.csv` | Validación de 5 pares (Spec §7.2) documentada; Sevilla–Cádiz = 0 € | cazador-alucinaciones | ⬜ |
