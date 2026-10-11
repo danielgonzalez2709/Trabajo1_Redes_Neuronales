@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.4** — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.5** — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -205,6 +205,8 @@ def solve(C: np.ndarray, cfg: dict, rng: np.random.Generator) -> dict
 |---|---|
 | `data/processed/cities.csv` | `id, capital, provincia, lat, lon, fuente, fecha_consulta, verificado_manual (bool), nota` |
 | `data/processed/rutas.csv` | `i, j, alternativa (rapida/sin_peaje), dist_km, tiempo_h, km_peaje, peaje_eur, vias_peaje (lista), fuente, fecha_extracto_osm` |
+| `data/processed/rutas_resumen.json` | `{fuente, fecha_extracto_osm, n_pares, n_filas, fecha_consulta_utc {min, max}, pares_sin_peaje {criterio, n, pares}, avisos, control_pasos, simetria}` — pares marcados (§7.2 Bloque 2), controles de la descarga y diferencia máxima de simetría (para el blog) |
+| `data/processed/rutas_pasos_peaje.csv` | `i, j, alternativa, paso, ref, nombre, dist_m, n_intersecciones, n_intersecciones_toll, lon_ini, lat_ini, lon_fin, lat_fin` — una fila por paso de OSRM con al menos una intersección de clase `toll`; entrada de T2.5 (los crudos no se versionan) |
 | `data/processed/peajes_tramos.csv` | `id, via, desde, hasta, operador, ambito (estatal/SEITT/foral/autonomico), provincia, km, tarifa_ligeros_eur, eur_km, vigente_desde, vigente_hasta, fuente_url, fecha_consulta, nota` |
 | `data/processed/combustible.json` | `{producto, precio_medio_eur_l, precio_mediano_eur_l, n_estaciones, fecha, fuente_url, archivo_raw}` |
 | `data/processed/vehiculo.yaml` | `{marca, modelo, version, anio, combustible, consumo_wltp_comb_l100, fuente_url, respaldo_url, fecha_consulta}` |
@@ -337,6 +339,10 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
   - Guardar: distancia, duración, pasos (`ref`, distancia, clases, coordenadas) y geometría simplificada.
 - **Simetría:** se asume c_ij = c_ji (se consulta i→j). **Comprobación:** consultar j→i para 20 pares aleatorios y reportar la diferencia máxima en el blog.
 - **Aceptación:** 1 081 × 2 rutas sin errores; si `sin_peaje` coincide con `rapida` (no hay peaje en la ruta), se marca y se reutiliza.
+- **[DECIDIDO 11-oct-2026, T2.3]**
+  - **Criterio de marca:** un par es "sin peaje" si **ninguna intersección** de su ruta `rapida` tiene la clase `toll` (la clase va por intersección, no por paso). Se conservan las dos filas en `rutas.csv` (sin columna nueva): la fila `sin_peaje` reutiliza los valores de la `rapida`. Los pares marcados se listan en `rutas_resumen.json`; si OSRM devolvió para `sin_peaje` una distancia o duración distinta, se emite un aviso.
+  - `vias_peaje`, `km_peaje` y `peaje_eur` quedan vacías en T2.3; las rellena T2.5 a partir de `rutas_pasos_peaje.csv`.
+  - **Crudos:** `data/raw/osrm_<fecha>/{rutas,simetria}/` **no se versionan** (peso). Se versionan `rutas.csv`, `rutas_resumen.json` y `rutas_pasos_peaje.csv`, y la evidencia de T2.2 (`data/raw/osrm_2026-10-10/`).
 
 #### Bloque 3 — Peajes (el bloque más difícil)
 - **Fuentes oficiales:**

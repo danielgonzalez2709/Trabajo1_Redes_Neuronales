@@ -13,6 +13,13 @@ osrm-data/
 *.osm.pbf
 *.osrm*
 
+# T2.3: crudos de rutas OSRM (2 202 .json.gz; no se versionan, Spec §7.2 Bloque 2 v1.5). Se quedan en la máquina
+# de quien ejecuta. La evidencia de T2.2 (data/raw/osrm_2026-10-10/) no tiene estas subcarpetas y SÍ se versiona.
+data/raw/osrm_*/rutas/
+data/raw/osrm_*/simetria/
+# Escrituras atómicas interrumpidas (descargar_datos.py escribe a .tmp y renombra)
+*.tmp
+
 # Claude Code: configuración local de cada integrante (los agentes en .claude/agents/ SÍ se versionan)
 .claude/settings.local.json
 

@@ -169,3 +169,148 @@ UTC de la tabla. Las 6 respuestas de ruta salieron idénticas en las dos corrida
 4. **Memoria justa en `osrm-extract`:** 10,9 GiB de un techo de 11,65 GiB. Ver los requisitos.
 5. El archivo `/opt/OSRM_GITSHA` de la imagen está vacío. El commit se tomó del tag de GitHub (`git ls-remote`).
 6. `docker buildx` no está instalado en esta máquina. Los manifiestos se consultaron con la API del registro de GHCR.
+
+## T2.3 — descargar las 1 081 rutas
+
+Esta sección es para quien tiene el servidor OSRM (la Mac de la Parte 2). El código se escribió y se probó **sin
+servidor real** (con dobles y con las 6 respuestas reales de T2.2; `tests/test_rutas.py`), así que esta es su primera
+ejecución contra OSRM.
+
+### Qué hace
+
+- `scripts/descargar_datos.py --bloque 2 --fecha <FECHA>` pide al OSRM local, para cada par (i, j) con i < j de
+  `data/processed/cities.csv` (1 081 pares), la ruta `rapida` (sin restricciones) y la `sin_peaje` (`exclude=toll`),
+  con `steps=true` y `overview=simplified`. Además pide en sentido j → i las dos alternativas de 20 pares fijos
+  (`np.random.default_rng(0)`) para comprobar la simetría. En total son **2 202 peticiones**.
+- Guarda **un archivo por petición** (JSON compacto comprimido con gzip) en `data/raw/osrm_<FECHA>/rutas/` y
+  `data/raw/osrm_<FECHA>/simetria/`, con nombre `<origen>_<destino>_<alternativa>.json.gz`; los números son el `id`
+  de `cities.csv`. Cada archivo contiene `{url, fecha_consulta_utc, origen, destino, alternativa, respuesta}`.
+  **Estos crudos no se versionan** (Spec §7.2 Bloque 2, v1.5; `.gitignore`): se quedan en la Mac de quien ejecuta.
+- **`--fecha` es obligatoria.** Fija el nombre de la carpeta; si se omitiera, retomar otro día descargaría todo de
+  nuevo en otra carpeta.
+- **Es reanudable:** si se corta (Ctrl+C, apagón, servidor caído), relanzar **el mismo comando con la misma
+  `--fecha`** solo pide lo que falta, lo que está corrupto y lo que falló. Con Ctrl+C imprime
+  `Interrumpido. Para continuar, relance el MISMO comando (se reanuda).` y sale con código 130. Cada archivo se
+  escribe primero como `*.json.gz.tmp` y luego se renombra: un corte nunca deja un `.json.gz` a medias, y un `.tmp`
+  suelto no cuenta como descargado (se puede borrar).
+- Un crudo existente se reutiliza si es válido: `code: "Ok"`, `data_version` esperado, pasos presentes y **la misma
+  ruta y consulta** en la URL. El servidor (host y puerto) **no** se compara: cambiar `--osrm-url` no invalida lo ya
+  descargado; cambiar las coordenadas de `cities.csv`, sí.
+- **Aborta** sin guardar nada si OSRM responde con otro `data_version` (distinto de `2026-10-01T20:22:06Z`): el
+  servidor estaría usando otro extracto y las rutas no serían de la fecha de corte. En ese caso, **no siga**: escale al
+  puente (Daniel).
+- **Aborta** si el servidor no contesta tras 3 intentos (mensaje "¿Está arrancado?").
+- Si una respuesta no es `code: "Ok"` (por ejemplo `NoRoute`), la guarda, sigue con las demás y termina con código de
+  salida 1 y la lista de fallos.
+- `scripts/construir_rutas.py --fecha <FECHA>` (sin red) valida los crudos con el mismo validador y escribe en
+  `data/processed/`:
+  - `rutas.csv` (2 162 filas). Un par es **sin peaje** si ninguna intersección de su ruta `rapida` tiene la clase
+    `toll`; en ese par la fila `sin_peaje` reutiliza los valores de la `rapida`.
+  - `rutas_resumen.json`: pares sin peaje, avisos, control de pasos y simetría.
+  - `rutas_pasos_peaje.csv`: una fila por paso de OSRM con alguna intersección `toll` (entrada de T2.5).
+
+  Si falta un crudo o alguno no es válido, se detiene sin escribir nada.
+
+### Comandos (desde la raíz del repositorio, en la Mac)
+
+Hace falta Python 3.12 con las dependencias del proyecto (como mínimo `numpy`, que elige los 20 pares de simetría,
+y `pytest`). `prueba_aceptacion.py` solo usaba la biblioteca estándar; estos scripts no.
+
+```bash
+git switch parte2-tsp-espana && git pull
+
+# Versión de Python: si `python3.12` no existe, compruebe `python3 --version`; sirve si dice 3.12.x.
+python3.12 --version || python3 --version
+
+# Una sola vez, si no existe .venv en esta máquina (con python3 en lugar de python3.12 si es 3.12.x):
+python3.12 -m venv .venv
+.venv/bin/python --version          # debe decir Python 3.12.x
+.venv/bin/python -m pip install -r requirements.txt
+#   (si alguna dependencia no instalara en macOS, lo imprescindible es:
+#    .venv/bin/python -m pip install numpy==2.5.3 pytest==9.1.1)
+
+# Servidor (T2.2) y su prueba de aceptación: debe terminar en "Aceptación: OK"
+scripts/osrm/osrm.sh arrancar
+scripts/osrm/osrm.sh prueba
+
+# Fecha de la carpeta de crudos. Fíjela UNA vez y repítala en todos los comandos (también al reanudar otro día).
+FECHA=$(date +%F); echo "$FECHA"
+
+# 1) Prueba rápida: 3 pares + 3 pares de simetría en ambos sentidos = 18 peticiones
+.venv/bin/python scripts/descargar_datos.py --bloque 2 --fecha "$FECHA" --limite 3
+.venv/bin/python scripts/construir_rutas.py --fecha "$FECHA" --parcial --salida /tmp/rutas_prueba
+head -5 /tmp/rutas_prueba/rutas.csv /tmp/rutas_prueba/rutas_pasos_peaje.csv
+
+# 2) Corrida completa (reutiliza las 18 peticiones de la prueba)
+.venv/bin/python scripts/descargar_datos.py --bloque 2 --fecha "$FECHA"; echo "código de salida: $?"
+.venv/bin/python scripts/construir_rutas.py --fecha "$FECHA"
+
+# 3) Pruebas
+.venv/bin/python -m pytest -q
+```
+
+Si el servidor no está en el puerto 5001, añada `--osrm-url http://127.0.0.1:<puerto>` (los crudos ya descargados
+siguen valiendo). `--parcial` nunca escribe en `data/processed/` (lo impide el script).
+
+**Duración:** no se ha medido (no había servidor al escribir el código). El script imprime el tiempo total y un
+progreso cada 100 peticiones.
+
+### Qué revisar
+
+1. **Descarga:** `Pares con las 2 alternativas Ok: 1081 / 1081`, `fallos 0` y código de salida `0`. Si hay fallos,
+   relance el mismo comando; si persisten, envíe al puente la lista `FALLO ...` que imprime. Anote el **tamaño en
+   disco** y el **tiempo** que imprime.
+2. **`construir_rutas.py`** imprime:
+   - `rutas.csv: 2162 filas (1081 pares)`;
+   - **`rutas con ref: N/2162`**: anote N. Si es muy bajo, los pasos no traen `ref` y T2.5 no podrá asignar vías;
+     escale;
+   - **control de la clase `toll`**: `sin_peaje con clase toll: 0` (si no es 0, escale) y `rapida con clase toll`
+     mayor que 0 (debe incluir al menos los pares de control de abajo);
+   - `rutas_pasos_peaje.csv: M pasos con clase toll`;
+   - la línea `avisos:` con los tres contadores (ver el punto 4).
+3. **Contraste con T2.2** (mismo sentido de consulta; si no coincide, escale). En `data/processed/rutas.csv`:
+
+   | i, j | alternativa | dist_km | tiempo_h |
+   |---|---|---|---|
+   | 44, 46 (Bilbao → Zaragoza) | rapida | 305.5188 | 3.344833 |
+   | 44, 46 (Bilbao → Zaragoza) | sin_peaje | 294.2625 | 4.358028 |
+   | 13, 33 (A Coruña → Pontevedra) | rapida | 133.5140 | 1.544083 |
+   | 13, 33 (A Coruña → Pontevedra) | sin_peaje | 130.2511 | 2.289417 |
+
+   Madrid–Barcelona es el par (6, 26): se consulta **Barcelona → Madrid**, al revés que en T2.2, así que puede no dar
+   exactamente 617,0448 km.
+
+   En `data/processed/rutas_pasos_peaje.csv`, el par `44,46,rapida` debe tener la AP-68 (en T2.2: paso 14, 94 de 96
+   intersecciones `toll`) y el par `13,33,rapida`, la AP-9 (pasos 5 y 6).
+4. **`data/processed/rutas_resumen.json`:**
+   - `pares_sin_peaje.pares` **no** debe incluir `[44, 46]` ni `[13, 33]`, y debería incluir `[6, 26]` si
+     Barcelona → Madrid, igual que Madrid → Barcelona, no pasa por ninguna intersección `toll`;
+   - `avisos.sin_peaje_con_clase_toll.n` debe ser 0; si no, escale;
+   - `avisos.par_sin_peaje_con_valores_distintos`: pares sin peaje en los que OSRM dio otra ruta para `sin_peaje`
+     (en `rutas.csv` se reutiliza la `rapida`). No es un error, pero anote cuántos hay;
+   - `avisos.sin_peaje_mas_rapida`: no es un error (OSRM minimiza `weight`, no la duración), pero anote cuántos hay;
+   - `simetria`: diferencia máxima absoluta y relativa (km y h) por alternativa; va al blog (Spec §7.2).
+
+### Tamaño
+
+- **Crudos (no se suben):** sobre las 6 respuestas de T2.2, recomprimidas como JSON compacto con gzip, se midieron
+  entre 8,2 y 29,3 KB por respuesta (de 46 a 174 B por km de ruta). Para 2 202 rutas, la estimación queda entre 50 y
+  200 MB. Es solo una estimación: la muestra tiene 6 rutas, y las respuestas de T2.2 no traían la geometría
+  simplificada (`overview=false`). El script imprime el tamaño real al terminar.
+- **`rutas_pasos_peaje.csv` (se sube):** sobre las fixtures de T2.2 salen 3 filas (1 en Bilbao → Zaragoza, 2 en
+  A Coruña → Pontevedra, 0 en Madrid → Barcelona y en las tres `sin_peaje`), unos 91 B por fila más 110 B de cabecera.
+  No se sabe cuántas de las 1 081 rutas rápidas pasan por peaje; aun si todas tuvieran 5 pasos `toll`, serían unas
+  5 400 filas, menos de 0,5 MB.
+- `rutas.csv` y `rutas_resumen.json` son pequeños (texto; 2 162 filas y un resumen).
+
+### Qué subir a git
+
+```bash
+git add data/processed/rutas.csv data/processed/rutas_resumen.json data/processed/rutas_pasos_peaje.csv
+git add data/fuentes.md   # tras rellenar la fecha real de la corrida en la fila de rutas (hoy TODO(dato-faltante))
+```
+
+- **No** suba `data/raw/osrm_<FECHA>/rutas/` ni `data/raw/osrm_<FECHA>/simetria/`: `.gitignore` ya los excluye y se
+  quedan en la Mac de quien ejecuta (son la fuente de `rutas.csv`; no los borre hasta cerrar T2.5).
+- **No** suba `/tmp/rutas_prueba` ni archivos `*.tmp` (también ignorados).
+- Comunique al puente el tamaño en disco y el tiempo que imprimió la descarga.
