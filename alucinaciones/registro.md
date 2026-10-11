@@ -7,7 +7,7 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 4 (H-07, H-08, H-09, H-10) | 0 |
+| Código | 5 (H-07, H-08, H-09, H-10, H-11) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 0 | 0 |
 | Conceptos | 0 | 0 |
@@ -154,9 +154,22 @@
 5. **Corrección:** ronda 4 de T0.2 — la fusión se declara in-place sobre diccionarios recién leídos (documentado) y se elimina la prueba que no podía fallar.
 6. **Lección:** una prueba sin la posibilidad de fallar es una afirmación disfrazada. Técnica útil para el resto del proyecto: **prueba de mutación** — romper a propósito el código y comprobar que alguna prueba se pone roja.
 
+### H-11 — Números de campo del `HeaderBlock` de OSM PBF equivocados (18/19/20 en vez de 32/33/34)
+- **Estado:** candidato — falta cita textual del código erróneo y verificación del cazador
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.2) · **Fecha:** 10/11-oct-2026 · **Quién lo cazó:** el propio subagente (autodetectado: la fecha no salía) y lo reportó al orquestador
+1. **Prompt (literal):** `alucinaciones/prompts/T2.2.md`, "Qué hacer", paso 2: "Registrar la fecha de los datos del extracto tal como la publica Geofabrik".
+2. **Respuesta relevante de la IA:** informe final del subagente: "en mi lector de la cabecera del PBF puse números de campo equivocados (18/19/20 en lugar de 32/33/34) y la fecha no salía". La versión corregida está en `scripts/osrm/cabecera_pbf.py`. PENDIENTE: extraer de la transcripción la versión errónea literal.
+3. **Cómo sospechamos:** el lector no devolvía `osmosis_replication_timestamp`.
+4. **Evidencia:** PENDIENTE (cazador): contrastar con `osmformat.proto` de OSM-binary (https://github.com/openstreetmap/OSM-binary/blob/master/osmpbf/osmformat.proto) y con la fecha 2026-10-01T20:22:06Z que dan `state.txt` de Geofabrik y `osrm-extract` (`data/raw/osrm_2026-10-10/`).
+5. **Corrección:** campos 32/33/34 en `scripts/osrm/cabecera_pbf.py`; la fecha coincide con las otras dos fuentes.
+6. **Lección:** números de campo de un `.proto` se copian de la definición, no de memoria; validar el lector contra una segunda fuente de la misma fecha.
+
 ---
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
+- **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**
+- **Spec §7.2 Bloque 3, paso 1** ("pasos que tienen clase `toll`"): la clase está por intersección, no por paso; un paso de 293 km de la AP-68 tiene 94/96 intersecciones `toll` y uno de 11,4 km de la AP-9, 3/12. Sumar pasos completos sobreestima km de peaje (relevante en T2.5). Evidencia: `data/raw/osrm_2026-10-10/`. Origen del texto sin prompt. **SIN PROMPT.**
 - **Peajes liberados:** preguntar a una IA qué peajes hay entre Bilbao y Zaragoza, o entre Sevilla y Cádiz; comparar con el listado del Ministerio (AP-68, AP-7, AP-4, AP-2).
 - **Consumo sin versión:** preguntar cuánto consume el Tucson híbrido y ver si aclara versión y país (215 CV en Bélgica vs 239 CV en España).
 - **Fuente contradictoria:** una reseña del Corolla lo titula "híbrido enchufable" y en el texto lo describe como autorrecargable; ver si una IA repite el error.

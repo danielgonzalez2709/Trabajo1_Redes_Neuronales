@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.3** — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.4** — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -329,8 +329,8 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 #### Bloque 2 — Distancias y tiempos (OSRM)
 - **Motor:** OSRM con datos de OpenStreetMap.
 - ⚠️ **El servidor público de demostración NO admite `exclude=toll`**: responde `"Exclude flag combination is not supported."` (verificado el 29-sep-2026). Por tanto:
-  - 🟢 **OSRM local con Docker** + extracto de España de **Geofabrik** (documentar fecha del extracto). El perfil de coche por defecto declara `excludable = {toll}, {motorway}, {ferry}` y la clase `toll` (verificado en `profiles/car.lua`, 1-oct-2026). Instrucciones en `scripts/osrm/README.md`. [PENDIENTE: ¿quién tiene Docker y RAM suficiente?]
-  - **Respaldo:** openrouteservice *Directions* con `avoid_features: ["tollways"]` (API key gratuita; 2 000 peticiones/día, 40/min).
+  - 🟢 **OSRM local con Docker** + extracto de España de **Geofabrik** (documentar fecha del extracto). El perfil de coche por defecto declara `excludable = {toll}, {motorway}, {ferry}` y la clase `toll` (verificado en `profiles/car.lua`, 1-oct-2026). Instrucciones en `scripts/osrm/README.md`. **[DECIDIDO 10-oct-2026, T2.0]**: se monta en la máquina del equipo Parte 2 (Apple M4, 16 GB RAM, ~59 GB libres); Docker aún no está instalado → se instala en T2.2.
+  - **Contingencia (solo si T2.2 falla):** openrouteservice *Directions* con `avoid_features: ["tollways"]` (API key gratuita; 2 000 peticiones/día, 40/min).
 - **Para cada par (i, j), i < j (1 081 pares) y cada alternativa:**
   - `rapida`: ruta sin restricciones.
   - `sin_peaje`: ruta con `exclude=toll`.
@@ -487,7 +487,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 ## 13. Riesgos y mitigaciones
 | Riesgo | Mitigación |
 |---|---|
-| OSRM local no se logra montar a tiempo | Respaldo ORS (§7.2 bloque 2); decidir a más tardar el **sáb 3-oct** |
+| OSRM local no se logra montar a tiempo | Decidido OSRM local (T2.0, 10-oct); si T2.2 falla, contingencia ORS (§7.2 bloque 2) |
 | Peajes incompletos o mal asignados | Tabla curada + validación de 5 pares + aproximación documentada |
 | Conteo de evaluaciones inconsistente | Contador único + `test_counter.py` |
 | Subagentes que "rellenan" datos o fórmulas | Regla §0.3, verificador matemático, curador de datos, cazador |
@@ -500,7 +500,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 ## 14. Pendientes [PENDIENTE]
 1. ~~Dominio de Rosenbrock~~ → [−2.048, 2.048]ⁿ ✅
 2. ~~Fecha de corte~~ → 1-oct-2026 ✅ · ¿Se hace el escenario opcional `post_ap68`?
-3. Quién monta OSRM local (Docker, RAM suficiente) o si se usa el respaldo ORS (decidir a más tardar sáb 3-oct).
+3. ~~OSRM local vs. ORS~~ → OSRM local con Docker en la máquina del equipo Parte 2 (decidido 10-oct-2026) ✅
 4. ~~Carrocería~~ → Sedán ✅ · Acabado del Corolla Sedán 1.8 L (140H) (el curador lo propone según la ficha oficial).
 5. ~~Design System~~ → skill `apple-design` ✅ (falta la paleta de colores, T4.1).
 6. Fecha/hora confirmada de la sustentación.
