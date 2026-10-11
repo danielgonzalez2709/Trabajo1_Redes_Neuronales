@@ -14,10 +14,10 @@
 ## 📍 Estado actual
 | | |
 |---|---|
-| Última actualización | 2026-10-09 |
-| Fase | **F0 — Fundaciones** (sin empezar) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR abierto en `parte2-tsp-espana`) |
-| Próxima tarea | Parte 2: T2.0 OSRM local (vencida) → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. F0: T0.1 esqueleto (incl. `requirements.txt`, Python 3.12) |
-| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 4) |
+| Última actualización | 2026-10-10 |
+| Fase | **F0 — Fundaciones** (sin empezar) · **F2 — Datos Parte 2** en curso (T2.0 ✅, T2.1 ✅; rama `parte2-tsp-espana`) |
+| Próxima tarea | Parte 2: **T2.2** (instalar Docker + OSRM local) → T2.3; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. F0: T0.1 esqueleto (incl. `requirements.txt`, Python 3.12) |
+| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 3) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
 ## 👥 Equipo
@@ -32,7 +32,7 @@
 - Parte 1: **Rosenbrock [−2.048, 2.048]ⁿ + Rastrigin [−5.12, 5.12]ⁿ**, 2D y 3D; GD (fijo + Armijo), EA, PSO, DE.
 - Conteo: 1 ∇f = 2n evaluaciones de f (sensibilidad k=1); presupuesto 10 000·n; 30 corridas; éxito f − f* ≤ 1e-4.
 - η: Rastrigin 2e-3 (garantía global, L ≈ 396.8); Rosenbrock 1e-3 (empírico, sin garantía global; L ≈ 5 971 en 2D).
-- Parte 2: fecha de corte **1-oct-2026**; OSRM **local** (el servidor público no admite `exclude=toll`); dos alternativas por par
+- Parte 2: fecha de corte **1-oct-2026**; OSRM **local con Docker** (T2.0, 10-oct; el servidor público no admite `exclude=toll`; ORS solo contingencia); dos alternativas por par
   (rápida / sin peaje); peajes oficiales + forales; Gasolina 95 E5 media nacional; **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
@@ -41,7 +41,7 @@
 - Desarrollo con **Subagent Driven Development**: 10 agentes en `.claude/agents/`, protocolo en `CLAUDE.md`.
 
 ## ⏳ Pendientes / bloqueos
-- [ ] Quién monta **OSRM local** (Docker) — decidir a más tardar **sáb 3-oct**; si no, respaldo openrouteservice.
+- [ ] Instalar Docker en la máquina del equipo Parte 2 (M4, 16 GB) y levantar OSRM (T2.2).
 - [ ] **Acabado** del Corolla Sedán 140H (de la ficha oficial de Toyota España).
 - [ ] **Design System** (Daniel lo trae como skill).
 - [ ] ¿Escenario opcional `post_ap68`?
@@ -59,6 +59,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-10 | Equipo Parte 2 + Claude | **T2.0 ✅**: OSRM local con Docker (máquina M4, 16 GB; Docker por instalar). ORS queda como contingencia. Spec v1.3. |
 | 2026-10-09 | Jose Miguel + Claude | **T2.1 ✅**: `cities.csv` (47 capitales, NGMEP 202603), 39 pruebas, mapa de control; revisor-spec ✅, revisor-calidad ✅ (2.ª ronda), cazador ✅. Verificación manual: Jose Miguel (8-oct). Spec v1.2. H-04 y H-05 confirmados. |
 | 2026-10-01 | Daniel + Claude | README temporal, esta memoria (cargada desde `CLAUDE.md`) y ramas `parte1-optimizacion-numerica` / `parte2-tsp-espana`. Primer push (`2cd005b`): Spec v1.1, PLAN, agentes, registro. |
 | 2026-10-01 | Equipo | Decidido: fecha de corte 1-oct, Corolla Sedán 140H, dominio Rosenbrock [−2.048, 2.048]ⁿ (respaldado con experimento). |
