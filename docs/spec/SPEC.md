@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.6** — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.7** — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -88,7 +88,7 @@ Punto de la rúbrica de evaluación, copiado sin cambios. Sus criterios verifica
 | GIF obligatorios | **matplotlib** con hoja de estilo del Design System |
 | Arquitectura | Los algoritmos **no dibujan**: escriben JSON en `results/data/`; las figuras se construyen después |
 | Datos Parte 2 | Cinco bloques (coordenadas, rutas, peajes, combustible, vehículo) — §7.2. Descarga en un **único script con internet**; el experimento solo lee archivos locales |
-| Vehículo | **Toyota Corolla Sedán Hybrid 2026, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina — acabado: [PENDIENTE] |
+| Vehículo | **Toyota Corolla Sedán Hybrid, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina — acabado **Style Plus 140H e-CVT**, año de modelo **MY27** (el que vendía Toyota España en la fecha de corte; v1.7, ver §7.2 Bloque 5) |
 | Fecha de corte de datos | **1-oct-2026** (escenario base) |
 | Dominio de Rosenbrock | **[−2.048, 2.048]ⁿ** (justificación en §6.1.1) |
 | Combustible | **Gasolina 95 E5**, precio medio **peninsular** en la fecha de corte (v1.6; antes, nacional — ver §7.2 Bloque 4) |
@@ -238,7 +238,7 @@ def solve(C: np.ndarray, cfg: dict, rng: np.random.Generator) -> dict
 | `data/processed/peajes_tramos.csv` | `id, via, desde, hasta, operador, ambito (estatal/SEITT/foral/autonomico), provincia, km, tarifa_ligeros_eur, eur_km, vigente_desde, vigente_hasta, fuente_url, fecha_consulta, nota` |
 | `data/processed/combustible.json` | `{producto, ambito, precio_medio_eur_l, precio_mediano_eur_l, n_estaciones, fecha, fuente_url, archivo_raw}` — `ambito = "peninsular"` (v1.6) |
 | `data/processed/combustible_resumen.json` | `{producto, id_producto, campo_precio, ambito, fecha, fecha_respuesta, fecha_consulta_utc, fuente_url, archivo_raw, redondeo, n_estaciones_respuesta, n_sin_precio, criterio_sin_precio, nacional {n, media, mediana, min, max}, peninsular {n, media, mediana, min, max}, no_peninsular {<territorio>: {n, media, mediana, min, max}}, ccaa_no_peninsulares, contraste_filtro_producto {url, n_estaciones, coincide}}` — desglose y controles de la descarga; la media nacional queda como sensibilidad para el blog (v1.6) |
-| `data/processed/vehiculo.yaml` | `{marca, modelo, version, anio, combustible, consumo_wltp_comb_l100, fuente_url, respaldo_url, fecha_consulta}` |
+| `data/processed/vehiculo.yaml` | `{marca, modelo, version, anio, anio_modelo, combustible, consumo_wltp_comb_l100, fuente_url, respaldo_url, fecha_consulta}` — `anio` = año de compra (2026), `anio_modelo` = "MY27" (v1.7) |
 | `data/fuentes.md` | Tabla `dato | fuente | URL | fecha de consulta | notas` (exigida por el enunciado) |
 
 ### 5.4 Resultados (para figuras y blog)
@@ -397,11 +397,23 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
   - *Antes de v1.6* el modelo era la media nacional.
 
 #### Bloque 5 — Vehículo
-- **[DECIDIDO] Toyota Corolla Sedán Hybrid 2026, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina. Acabado [PENDIENTE]:
-  el consumo WLTP cambia por versión. Los valores de 4,4–4,7 l/100 km del documento del equipo Parte 2 corresponden a otras
-  versiones/carrocerías → **tomar el dato de la ficha del Sedán** [VERIFICAR].
+- **[DECIDIDO] Toyota Corolla Sedán Hybrid, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina.
+- **Acabado [DECIDIDO v1.7, Jose Miguel, 11-oct]: Style Plus 140H e-CVT, año de modelo MY27.**
+  - En la fecha de corte es el único acabado del configurador para particulares, y tiene ficha técnica oficial estructurada.
+  - Se descarta el ECO (flotas, taxi y VTC): Toyota publica para él tres cifras WLTP distintas.
+  - Toyota España pasó de MY26 a MY27 entre el 15 y el 23-sep-2026 (Wayback). El consumo combinado es el mismo (4,6 l/100 km); el CO2 pasa de 104 a 105 g/km.
+  - Los 4,4–4,7 l/100 km del documento del equipo Parte 2 corresponden a otra carrocería (5 puertas), lo que confirma el [VERIFICAR] anterior.
 - Consumo **WLTP combinado** (l/100 km) de la **ficha técnica oficial de Toyota España**; **km77** como respaldo; fecha de consulta.
 - **Sensibilidad:** usar también el consumo de la fase WLTP **"extra alta"** (autopista), si la ficha la publica.
+  *(v1.7)* La ficha actual de Toyota España (MY27) y km77 no la publican. El catálogo de Toyota España del Corolla Sedan,
+  edición 09/2023 (`14764_CORS_48_ES_WEB_S.pdf`, pág. PDF 17), sí la da: "Ritmo extra alto (l/100km) 5,6-6,2". Es un
+  rango de la gama de 2023, con el mismo motor 2ZR-FXE.
+  - **[DECIDIDO v1.7, Jose Miguel, 11-oct]:** el valor base sigue siendo 4,6 l/100 km (WLTP combinado MY27).
+  - 5,6 y 6,2 l/100 km son el **escenario de sensibilidad "autopista"** (§7.5), y se declaran como rango del catálogo de 2023.
+  - Toyota publica además un "máximo" WLTP de 4,8 l/100 km (`FUELCOMBINEDWLTPMAX`). Es el **ciclo combinado**, no la fase de autopista, y no se usa.
+    - En el crudo lleva `Type: "vehicleHigh"`, que según el Reglamento (UE) 2017/1151 (subanexo 4, §4.2.1) es el "vehículo H" de la familia de interpolación, el de mayor demanda de energía.
+    - Toyota no documenta qué configuración concreta es (ver H-12).
+  - La sensibilidad de consumo se hace con el parámetro de consumo sobrescribible (`--set`, §7.3 y §9) y se declara como supuesto.
 - Por qué este vehículo (propuesta del equipo Parte 2): consumo homologado bajo, apto para viajes largos, información oficial
   abundante. **Descartados:** eléctricos (los tiempos de recarga distorsionan el costo del tiempo), híbridos enchufables (su
   WLTP supone batería cargada).
@@ -432,6 +444,12 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 ### 7.5 Experimentos Parte 2
 - Barrido w ∈ {0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100} €/h (más denso en 0–50, rango sugerido por el equipo Parte 2). Para cada w: exacto + ACO (10 corridas) + GA (10 corridas) → mejor, media, desviación, **gap % vs. óptimo**.
 - **Umbral:** donde el recorrido óptimo cambie entre dos w consecutivos, bisección con el solver exacto hasta resolución de 0,5 €/h → responde "¿a partir de qué valor cambia la ruta?".
+- **Sensibilidad de consumo (v1.7):**
+  - Se repite el barrido de w con el solver exacto, con `consumo` = 5,6 y 6,2 l/100 km (fase "extra alta" del catálogo, §7.2 Bloque 5).
+  - Se cambia solo con `--set`, sin editar código.
+  - Se reporta, frente a la base de 4,6:
+    - el costo total y el de combustible;
+    - si cambian el recorrido óptimo y el umbral de w.
 - Referencias contextuales para w [VERIFICAR]: ganancia media por hora en España (INE) o salario de un comercial; valores del tiempo usados por el Ministerio de Transportes en la evaluación de proyectos de carreteras.
 
 ### 7.6 Figuras Parte 2
