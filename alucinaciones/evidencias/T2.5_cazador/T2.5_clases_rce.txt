@@ -1,0 +1,25 @@
+campos: ['id_catalog', 'provincia', 'carretera', 'pk_inicio', 'pk_fin', 'longitud', 'pkinicio_t', 'pkfin_t', 'inicio', 'fin', 'clase']
+('A-31', 'Albacete', 'Autovía') 135.6 km
+('A-31', 'Alicante/Alacant', 'Autovía') 74.2 km
+('A-31', 'Cuenca', 'Autovía') 30.0 km
+('A-42', 'Madrid', 'Autovía') 26.9 km
+('A-42', 'Toledo', 'Autovía') 47.2 km
+('A-66', 'Asturias', 'Autovía') 53.8 km
+('A-66', 'Badajoz', 'Autovía') 134.7 km
+('A-66', 'Cáceres', 'Autovía') 169.5 km
+('A-66', 'Huelva', 'Autovía') 18.5 km
+('A-66', 'León', 'Autovía') 53.2 km
+('A-66', 'Salamanca', 'Autovía') 109.8 km
+('A-66', 'Sevilla', 'Autovía') 50.7 km
+('A-66', 'Zamora', 'Autovía') 105.3 km
+('A-7', 'Alicante/Alacant', 'Autovía') 111.1 km
+('A-7', 'Murcia', 'Autovía') 111.2 km
+('A-70', 'Alicante/Alacant', 'Autovía') 36.0 km
+('AP-4', 'Cádiz', 'Autopista libre') 44.3 km
+('AP-4', 'Sevilla', 'Autopista libre') 48.3 km
+('AP-41', 'Madrid', 'Autopista de peaje') 11.1 km
+('AP-41', 'Toledo', 'Autopista de peaje') 37.5 km
+('AP-66', 'Asturias', 'Autopista de peaje') 19.8 km
+('AP-66', 'León', 'Autopista de peaje') 57.9 km
+('N-622', 'Burgos', 'Carretera convencional') 30.7 km
+('N-622', 'Palencia', 'Carretera convencional') 10.2 km

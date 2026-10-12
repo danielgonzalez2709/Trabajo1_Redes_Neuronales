@@ -14,10 +14,10 @@
 ## 📍 Estado actual
 | | |
 |---|---|
-| Última actualización | 2026-10-09 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
-| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **arrancar T1.1** (rama sin commits). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
-| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 4) |
+| Última actualización | 2026-10-12 |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) |
+| Próxima tarea | Parte 2: **T3.1** costos, **T3.3** ACO, **T3.4** GA (T3.6 desbloqueada en datos). Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
 ## 👥 Equipo
@@ -32,8 +32,12 @@
 - Parte 1: **Rosenbrock [−2.048, 2.048]ⁿ + Rastrigin [−5.12, 5.12]ⁿ**, 2D y 3D; GD (fijo + Armijo), EA, PSO, DE.
 - Conteo: 1 ∇f = 2n evaluaciones de f (sensibilidad k=1); presupuesto 10 000·n; 30 corridas; éxito f − f* ≤ 1e-4.
 - η: Rastrigin 2e-3 (garantía global, L ≈ 396.8); Rosenbrock 1e-3 (empírico, sin garantía global; L ≈ 5 971 en 2D).
-- Parte 2: fecha de corte **1-oct-2026**; OSRM **local** (el servidor público no admite `exclude=toll`); dos alternativas por par
-  (rápida / sin peaje); peajes oficiales + forales; Gasolina 95 E5 media nacional; **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
+- Parte 2: fecha de corte **1-oct-2026**; OSRM **local con Docker** (T2.0, 10-oct; el servidor público no admite `exclude=toll`; ORS solo contingencia); dos alternativas por par
+  (rápida / sin peaje); par sin peaje = la rápida no pasa por ninguna intersección `toll` (Spec v1.5); crudos de rutas NO se versionan,
+  T2.5 usa `rutas_pasos_peaje.csv`; peajes oficiales + forales; Gasolina 95 E5 **media peninsular** (v1.6; la nacional queda como sensibilidad); **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
+- Bloque 3 (Spec v1.9, T2.4): `peajes_tramos.csv` con 56 tramos encadenados; km del **Catálogo RCE 2025** (zip de 24 MB sin versionar)
+  y 11 km forales/autonómicos **medidos en OSM** (aproximación, `scripts/medir_km_osm.py`); una tarifa por tramo (AP-51/61 normal,
+  AP-71 diurna, SEITT efectivo, AP-7 temporada baja); **M-12 paga de la M-40 a la M-13**; AP9-03 = 0 € (calculadora de Audasa).
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
@@ -46,23 +50,47 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
-- [ ] 🔴 **BLOQUEO CRÍTICO — OSRM:** sin decisión (venció el sáb 3-oct). Sin rutas no hay matriz de costos, ni ACO/GA con datos reales, ni barrido del valor de la hora. Decidir ya: OSRM local (Docker) o respaldo openrouteservice.
-- [ ] **Acabado** del Corolla Sedán 140H (de la ficha oficial de Toyota España).
+- [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
+- [x] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → resuelto en T2.5 (Spec v1.10: km por anclas, no por proporción de intersecciones).
+- [ ] **T2.5, verificar a mano:** los 63 anclas no-OSM (5 de 6 verificados por muestreo); parámetros 1,5 km y 95 % sin fuente; `GI-20`/`N-622`/`PA-34` sin cobrar (sin tarifa publicada). Ampliación de §5.3 (5 archivos auxiliares): **confirmada por Jose Miguel el 12-oct.**
+- [x] Zona horaria (T2.8, 12-oct): la 1.ª iteración de OSRM salió del equipo de Camila (UTC−3, Brasil); el resto, del PC de Jose Miguel (UTC−5). Documentado en el encabezado de `fuentes.md`; la atribución a UTC−3 se apoya en `scripts/osrm/README.md`, no en los crudos.
+- [ ] **`AP68-POST-VI`** (Álava, tras el 10-nov): `tarifa_ligeros_eur` en `TODO(dato-faltante)`, sin tarifa oficial. Pendiente de decisión humana; el test lo admite solo fuera de la vigencia del corte y documentado por id.
+- [x] **Acabado** del Corolla: Style Plus 140H e-CVT MY27 (Spec v1.7). Extra alta 5,6–6,2 (catálogo 2023) = sensibilidad.
+- [ ] Puente (Daniel): fijar el estado de H-12 (propuesta: descartar), H-13 (descartar), H-14 (confirmar) y la categoría de H-15.
+- [x] **T2.3 (12-oct):** OSRM depende del historial de consultas del proceso → `--threads 1`, arranque limpio y una
+  corrida (Spec v1.8). 26 `sin_peaje` con `toll` (M-12, AP-15, AP-68): **T2.5 los cobra**. Opcional si sobra tiempo: un
+  proceso por alternativa (probado, 0 con `toll`). **T2.4 debe incluir M-12 y AP-15.**
 - [x] **Design System:** skill `apple-design` (Emil Kowalski). Falta la **paleta de colores** (T4.1); la skill no la define.
-- [ ] ¿Escenario opcional `post_ap68`?
+- [x] **T2.5:** peaje cerrado = **suma de tramos** [DECIDIDO 12-oct]; se reporta la diferencia (41,50 vs. 39,90 €; AP-6 −14 %; sesgo −18 %…+4 %).
+- [ ] Blog (T4.6): reportar los km aproximados de OSM; el contraste de la AP-8 debe citarse como Urgoiti–Durango (17,506 vs. 17,5 km),
+  no Urgoiti–Ermua (parcialmente circular). AP-15 Norte: −12,9 % frente a un contraste derivado, sin explicar.
+- [ ] H-19 (Bibliografía): falta `message.txt` del Prompt C (Daniel o Camila) para confirmar que la cita del BOE vino de la IA.
+- [ ] ¿Escenario opcional `post_ap68`? Tras el 10-nov: La Rioja y Aragón libres, Bizkaia 4,20 €; Álava y Navarra sin tarifa oficial.
 - [ ] Confirmar fecha/hora de la sustentación.
 - [ ] Prompts literales para la cacería: ~~H-01, H-03 (Daniel)~~ ✅ en `alucinaciones/prompts/asesoria_puente_claude.md`; H-02 (Camila) pendiente.
-- [ ] `revisor-spec` y `revisor-calidad` no cargaban como tipo de agente en la sesión de la Parte 2: reiniciar Claude Code desde la raíz del repo (en la sesión del puente sí cargan).
+- [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **10** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
-H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla) — confirmados: **2** (H-04, H-05) —
-categorías: Datos (5), Matemáticas (1), **Código (4)**. Faltan Bibliografía/Conceptos para tener margen. Técnica útil: **prueba de mutación**.
+Candidatos: **20** (H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
+H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
+confirmados por el puente: **2** (H-04, H-05); por el cazador: **2** (H-17, H-18) — categorías: Datos (10), Matemáticas (1), Código (5),
+Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (1: H-19, origen pendiente). Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **T2.8 ✅** (cierra F2): `fuentes.md` completo y `test_data_integrity.py` (51 pruebas; 627 en total). curador-datos 3 rondas; revisor-spec devolvió una aserción de simetría que no podía fallar (la matriz se arma espejando: `rutas.csv` guarda i<j, simetría por construcción, Spec §7.2); revisor-calidad devolvió pruebas tautológicas y duplicadas. La cabecera `Date` de caché (SEITT, Mitma) engañaba: la hora real es la "fecha local de la captura". Zona horaria resuelta. |
+| 2026-10-12 | Jose Miguel + Claude | **T2.5 ✅**: peajes asignados a las 2 162 filas de `rutas.csv` (curador-datos, 2 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅ CONFORME; 568 pruebas). Suma de tramos [DECIDIDO]; `peajes_tramos.csv` no tiene coordenadas → archivos laterales de cadenas y anclas. 5 pares validados (Bilbao–Zaragoza 41,50 €, A Coruña–Pontevedra 16,35 € = Audasa). El cazador refutó la sospecha de tarifa errónea de AP51-01. **Spec v1.10.** |
+| 2026-10-12 | Jose Miguel + Claude | **T2.4 ✅**: tabla de peajes (56 tramos; curador-datos, 6 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅; 512 pruebas). Una ronda previa transcribió matrices origen–destino sin km: se rehízo por tramos con km del Catálogo RCE y de OSM. **Spec v1.9** (AP-68 tras el 10-nov, tarifas, M-12). Cacería: H-17 a H-19. |
+| 2026-10-12 | Jose Miguel + Claude | **T2.3 ✅**. Un diagnóstico mostró que OSRM no excluía peajes y una 2.ª ronda refutó la causa: la respuesta depende del historial de consultas del proceso (H-16). Corrida vigente `osrm_2026-10-12` con `--threads 1`; 26 `sin_peaje` con peaje, que cobra T2.5. **Spec v1.8**. |
+| 2026-10-11 | Jose Miguel + Claude | **T2.7 ✅**: Corolla Style Plus 140H MY27, 4,6 l/100 km; combustible del catálogo de Toyota 09/2023 (descarga manual, verificado). **Spec v1.7**: acabado, `anio_modelo`, sensibilidad de consumo 5,6/6,2 en §7.5. Cacería: H-12 a H-15. |
+| 2026-10-11 | Jose Miguel + Claude | Asumimos las tareas de Camila. **T2.6 ✅** (media peninsular 1,8318 €/l; 3 rondas; 418 pruebas). **T2.3 ejecutada** en Windows (Docker Desktop, `.wslconfig` 16 GB; 1081/1081 pares; `osrm.sh` admite Git Bash). **Spec v1.6**: enunciado y rúbrica literales (§1.2–1.3), combustible peninsular. T2.7 a la espera del acabado. |
+| 2026-10-11 | Jose Miguel + Claude | **T2.3 código listo** (curador-datos, 2 rondas): `descargar_datos.py --bloque 2`, `construir_rutas.py`, 58 pruebas nuevas (332 en total). revisor-spec ✅, revisor-calidad ✅. Spec v1.5: criterio de par sin peaje, `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3, crudos de rutas sin versionar. Falta que Camila lo ejecute. |
+| 2026-10-11 | Daniel + Claude | Integración de la rama de Parte 2 (T2.0/T2.2 de Camila) con `main` (F0). Conflictos resueltos: Spec → v1.4; el H-06 de Camila (campos PBF) pasa a **H-11** porque H-06 ya era Mérida. Reparto: nosotros escribimos T2.3, T3.1, T3.3, T3.4, T2.4; Camila ejecuta T2.3 y hace T2.6 y T2.7. |
+| 2026-10-10 | Equipo Parte 2 + Claude | **T2.2 ✅**: Colima + Docker; OSRM v26.10.0 (arm64, digest fijo), extracto `spain-261001` (datos 1-oct 20:22Z, md5 ok); `toll` verificado (AP-68, AP-9). Auditor ✅ (8 menores). H-11 (Código) candidato. |
+| 2026-10-10 | Equipo Parte 2 + Claude | **T2.0 ✅**: OSRM local con Docker (máquina M4, 16 GB). ORS queda como contingencia. |
 | 2026-10-09 | Daniel + Claude (SDD) | **T0.2, T0.3, T0.4 ✅** con subagentes: implementador → revisor-spec → revisor-calidad (+ verificador-matemático en T0.4), 2–4 rondas cada una; 274 pruebas en total. Spec §4.1/§5.1/§5.4 ampliado (YAML 1.2, herencia, regla de bloques, identificadores, semilla efectiva, BudgetExhausted). Hallazgos **H-08**, **H-09**, **H-10** (Código). |
 | 2026-10-09 | Daniel + Claude | PR #1 revisado (39/39 pruebas, regeneración byte a byte) y fusionado (merge commit). **T0.1 ✅**: `requirements.txt` (Python 3.12.6, `pip freeze`), esqueleto `src/`, `configs/`, `results/`, `media/`. Hallazgos nuevos **H-06** (Mérida) y **H-07** (PuLP 4 sin CBC y API nueva). Design System = skill `apple-design`. Spec v1.3. |
 | 2026-10-09 | Jose Miguel + Claude | **T2.1 ✅**: `cities.csv` (47 capitales, NGMEP 202603), 39 pruebas, mapa de control; revisor-spec ✅, revisor-calidad ✅ (2.ª ronda), cazador ✅. Verificación manual: Jose Miguel (8-oct). Spec v1.2. H-04 y H-05 confirmados. |

@@ -1,6 +1,6 @@
 ---
 name: revisor-calidad
-description: Revisa la calidad del código de una tarea ya aprobada por revisor-spec: legibilidad, estructura, pruebas, eficiencia y facilidad para explicarlo en la sustentación.
+description: "Revisa la calidad del código de una tarea ya aprobada por revisor-spec: legibilidad, estructura, pruebas, eficiencia y facilidad para explicarlo en la sustentación."
 tools: Read, Glob, Grep, Bash
 ---
 

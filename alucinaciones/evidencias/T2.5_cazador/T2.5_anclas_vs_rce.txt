@@ -1,0 +1,22 @@
+ancla 8 AP68 km_cadena=139.140 (Punto intermedio de la cadena, centroide_pasos_osrm); RCE AP-68 pk 138.84
+   candidato lon=-2.3364 lat=42.4474 tramo 138.300000000000000-143.000000000000000 distancia al ancla 0.17 km
+   candidato lon=-2.2989 lat=42.4407 tramo 138.300000000000000-143.000000000000000 distancia al ancla 3.32 km
+   MEJOR distancia: 0.17 km
+ancla 9 AP68 km_cadena=207.437 (Enlace AP-15 (Autop. Navarra), paso_osrm); RCE AP-68 pk 208.3
+   candidato lon=-1.7192 lat=42.0913 tramo 202.100000000000000-208.300000000000000 distancia al ancla 0.05 km
+   candidato lon=-1.7192 lat=42.0913 tramo 208.300000000000000-219.000000000000000 distancia al ancla 0.05 km
+   candidato lon=-1.7680 lat=42.1330 tramo 202.100000000000000-208.300000000000000 distancia al ancla 6.19 km
+   candidato lon=-1.6318 lat=42.0301 tramo 208.300000000000000-219.000000000000000 distancia al ancla 9.87 km
+   MEJOR distancia: 0.05 km
+ancla 32 AP9 km_cadena=72.614 (Santiago sur (Enl. AG-56), centroide_pasos_osrm); RCE AP-9 pk 74.7
+   candidato lon=-8.5824 lat=42.8118 tramo 74.700000000000000-80.800000000000000 distancia al ancla 1.07 km
+   candidato lon=-8.5657 lat=42.8563 tramo 71.700000000000000-74.700000000000000 distancia al ancla 4.35 km
+   candidato lon=-8.5657 lat=42.8563 tramo 74.700000000000000-80.800000000000000 distancia al ancla 4.35 km
+   candidato lon=-8.5321 lat=42.8558 tramo 71.700000000000000-74.700000000000000 distancia al ancla 5.35 km
+   MEJOR distancia: 1.07 km
+ancla 56 R4 km_cadena=46.500 (Ocaña (Enl. A-40), centroide_pasos_osrm); RCE R-4 pk 45.6
+   candidato lon=-3.4769 lat=39.9144 tramo 45.600000000000000-52.730000000000000 distancia al ancla 0.13 km
+   candidato lon=-3.5420 lat=39.9460 tramo 38.400000000000000-45.600000000000000 distancia al ancla 6.48 km
+   candidato lon=-3.5420 lat=39.9460 tramo 45.600000000000000-52.730000000000000 distancia al ancla 6.48 km
+   candidato lon=-3.6010 lat=39.9895 tramo 38.400000000000000-45.600000000000000 distancia al ancla 13.37 km
+   MEJOR distancia: 0.13 km

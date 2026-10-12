@@ -1,0 +1,10 @@
+{
+  "producto": "Gasolina 95 E5",
+  "ambito": "peninsular",
+  "precio_medio_eur_l": 1.8318,
+  "precio_mediano_eur_l": 1.829,
+  "n_estaciones": 10171,
+  "fecha": "2026-10-01",
+  "fuente_url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/01-10-2026",
+  "archivo_raw": "data/raw/carburantes_minetur_hist_2026-10-01.json.gz"
+}

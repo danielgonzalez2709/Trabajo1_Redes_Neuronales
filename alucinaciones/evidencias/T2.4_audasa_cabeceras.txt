@@ -1,0 +1,95 @@
+# Calculadora oficial de Audasa (https://www.audasa.es/la-autopista/tarifas-y-descuentos/), endpoint que usa su JS
+# (wp-content/plugins/itinere-tariff-calculator/assets/js/general.js): POST https://www.audasa.es/wp-admin/admin-ajax.php
+# action=itinere_get_all_tariffs&nonce=<nonce de la página>. Consulta del cazador, 2026-10-12.
+## Página
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:29:54 GMT
+Server: Apache
+P3P: CP="ALL DSP NID CURa ADMa DEVa HISa OTPa OUR NOR NAV DEM"
+Strict-Transport-Security: max-age=
+Content-Security-Policy: upgrade-insecure-requests;
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Link: <https://www.audasa.es/wp-json/>; rel="https://api.w.org/", <https://www.audasa.es/wp-json/wp/v2/pages/211>; rel="alternate"; title="JSON"; type="application/json", <https://www.audasa.es/?p=211>; rel=shortlink
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: PHPSESSID=113c54e210101fc723d43e0ff336f56c; path=/
+Upgrade: h2,h2c
+Connection: Upgrade
+Strict-Transport-Security: max-age=
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+## admin-ajax.php
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:30:16 GMT
+Server: Apache
+X-Robots-Tag: noindex
+Expires: Wed, 11 Jan 1984 05:00:00 GMT
+Cache-Control: no-cache, must-revalidate, max-age=0, no-store, private
+Strict-Transport-Security: max-age=
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Content-Type-Options: nosniff
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Referrer-Policy: strict-origin-when-cross-origin
+X-Frame-Options: SAMEORIGIN
+Content-Security-Policy: frame-ancestors 'self';
+Upgrade: h2,h2c
+Connection: Upgrade
+Strict-Transport-Security: max-age=
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Transfer-Encoding: chunked
+Content-Type: application/json; charset=UTF-8
+
+## PDF oficial de Audasa (no guardado, 4,2 MB): https://www.audasa.es/wp-content/uploads/pdf/tarifas/2026/Tarifas-20260101.pdf
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:29:51 GMT
+Server: Apache
+Upgrade: h2,h2c
+Connection: Upgrade
+Last-Modified: Tue, 30 Dec 2025 16:05:40 GMT
+ETag: "40a093-6472d87efbd00"
+Accept-Ranges: bytes
+Content-Length: 4235411
+Strict-Transport-Security: max-age=
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Content-Type: application/pdf
+
+SHA-256 cbb66724bc3ec34547ae63aef463c01c8a6840438d1b1ffcce8c2026ae8e5549
