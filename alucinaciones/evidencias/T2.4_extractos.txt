@@ -1,0 +1,46 @@
+SHA-256 agent-a899138679be750ed.jsonl: ac1457a8ae1db56c1684b74e3622839d7e1511e26705cf45d5160479b5309351
+SHA-256 agent-aeeee1804aa69cf69.jsonl: 20a67069f31e6752a8ac6e7275294d08ab1cfd304cc129882886b0f83e2acad0
+SHA-256 agent-a35160cedf3b10388.jsonl: 4bd75638376fcc6f2da048cf4abffa8d6d58c47960a037b4be05d5520abf3041
+
+## A. Agente que recibió el prompt 'Ronda 2' de prompts/T2.4.md (primer mensaje):
+T2.4, ronda 2 (reanudación). NO vuelvas a descargar: los crudos ya están en data/raw/peajes_2026-10-12/ (46 archivos, con cabeceras_http.txt). Si algo falta, repórtalo, no lo descargues.
+Tarea: construir data/processed/peajes_tramos.csv con 
+
+## A1. Tarifas de la AP-9 que escribió en scripts/construir_peajes.py (tool_use Write):
+[agent-a899138679be750ed.jsonl, línea 283, 2026-10-12T10:38:46.262Z, rol assistant]
+a\", 7.55), (\"Padrón\", \"Caldas de Reis\", 2.30),\n    (\"Padrón\", \"Curro\", 3.85), (\"Padrón\", \"Pontevedra\", 4.95), (\"Carracedo\", \"Caldas de Reis\", 0.95),\n    (\"Carracedo\", \"Curro\", 2.20), (\"Carracedo\", \"Pontevedra\", 3.45),\n    (\"Caldas de Reis\", \"Curro\", 2.85), (\"Caldas de Reis\", \"Pontevedra\", 1.80),\n    (\"Curro\", \"Pontevedra\", 1.45), (\"Pontevedra\", \"Vilaboa\", 3.65), (\"Pontevedra\", \"Morrazo\", 5.05),\n    (\"Pontevedra\", \"Vigo / Puxeiros\", None), (\"Morrazo\", \"Vigo / Puxeiros\", None)
+
+## A2. Detección por el curador siguiente (informe):
+[agent-aeeee1804aa69cf69.jsonl, línea 503, 2026-10-12T10:52:37.548Z, rol assistant]
+completa de la AP-68 (231 filas) con `km` en TODO en todas las filas, así que T2.5 no podía calcular km × €/km. Además, la transcripción de la AP-9 estaba desplazada a partir de Caldas de Reis. Ejemplos: Caldas–Curro 2,85 donde el PDF dice 1,65, y Curro–Pontevedra 1,45 donde dice 1,80. También faltaban AP-6/51/61, AP-66, AP-71, AP-53, AP-7 Málaga, AP-8, AP-1, R-2/3/4 y C-32.
+
+## 1. Archivos
+- `C:\Users\Jose Migu
+
+## B. Curador con el prompt original de prompts/T2.4.md (primer mensaje):
+Tarea T2.4 del PLAN — Parte 2, Bloque 3a: `data/processed/peajes_tramos.csv` (estatales, SEITT, forales/autonómicos).
+Rama: parte2-tsp-espana (ya activa). NO hagas commit; el orquestador lo hace.
+Entorno: Windows, Git Bash. Python del proye 
+
+## B1. Frase escrita en data/fuentes.md (tool_use):
+[agent-aeeee1804aa69cf69.jsonl, línea 480, 2026-10-12T10:50:45.656Z, rol assistant]
+rchivos-geometrias-rce) | 2026-10-12 | Crudo `mitma_260306-catalogorce2025.zip` (24,2 MB, `Last-Modified` 18-mar-2026). El Catálogo excluye los tramos transferidos (AP-68 vasco y navarro) y las vías forales/autonómicas. La prueba recalcula cada km desde el zip. Confirma \"Autopista libre\" en AP-1 (Burgos)
+
+## B2. Detección por revisor-spec:
+[agent-a35160cedf3b10388.jsonl, línea 228, 2026-10-12T11:01:21.194Z, rol assistant]
+idegi.
+
+4. **MENOR. Afirmación falsa en `data/fuentes.md:49`**: dice "El Catálogo excluye los tramos transferidos (AP-68 vasco y navarro)". El zip sí incluye la AP-68 en Navarra (p.k. 162,53–166,48 y 201,85–237,0, clase "Autopista de peaje"), y esos km entran en AP68-06 y AP68-07. Es candidato a la cacería.
+
+5. **MENOR. R4-01 (6,25) puede ser una tarifa de 2025** (Spec §7.2: SEITT +2 % e
+
+## B3. Reconocimiento del curador:
+[agent-aeeee1804aa69cf69.jsonl, línea 622, 2026-10-12T11:07:53.011Z, rol assistant]
+literal_en_fuentes_md`.
+
+**3. MENOR — Catálogo y AP-68 navarra**
+- Corregido: el Catálogo excluye el tramo vasco pero **sí incluye el navarro** (p.k. 162,53–166,48 y 201,85–237,0). Lo indico también en la nota de AP68-06.
+- **Candidato a hallazgo (Datos):** esa afirmación falsa fue un error mío de la ronda anterior.
+
+**4. MENOR — R-4: mant
+

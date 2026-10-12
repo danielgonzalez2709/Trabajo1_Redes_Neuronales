@@ -1,0 +1,106 @@
+# T2.4 — verificación del cazador (2026-10-12)
+
+## 0. SHA-256 de los crudos contra MANIFEST.txt
+  coinciden 54, distintos 0
+
+Tabla: 56 filas
+
+## 1. Muestras aleatorias
+  semilla 20261012 (toda la tabla): ['AP9-01', 'AP9-03', 'AP7-AC-02', 'AP4-01', 'C32-02']
+  semilla 20261013 (vías fuera de los pares de validación): ['AP6-03', 'AP66-01', 'AP71-02', 'AP53-01', 'R2-05'] 
+
+## 2. Tarifas de la tabla frente al crudo (pdftotext -raw)
+  AP68-01: tabla 6.85 | esperado 6.85 | OK | crudo: ['BILBAO ALTUBE 6,85 12,60 14,25']
+  AP68-02: tabla 6.00 | esperado 6.00 | OK | crudo: ['ALTUBE AUTOP.BURGOS 6,00 11,00 12,45']
+  AP68-03: tabla 0.90 | esperado 0.90 | OK | crudo: ['AUTOP.BURGOS ZAMBRANA 0,90 1,65 1,90']
+  AP68-04: tabla 1.90 | esperado 1.90 | OK | crudo: ['ZAMBRANA HARO 1,90 3,55 4,10']
+  AP68-05: tabla 4.85 | esperado 4.85 | OK | crudo: ['HARO LOGROÑO 4,85 8,95 10,35']
+  AP68-06: tabla 9.40 | esperado 9.40 | OK | crudo: ['LOGROÑO AUTOP.NAVARRA 9,40 17,50 20,20']
+  AP68-07: tabla 11.60 | esperado 11.60 | OK | crudo: ['AUTOP.NAVARRA ZARAGOZA 11,60 20,35 24,40']
+  AP9-02: tabla 8.80 | esperado 8.80 | OK | crudo: ['A CORUÑA O A BARCALA - SANTIAGO 8,80 7,80 9,60']
+  AP9-04: tabla 7.55 | esperado 7.55 | OK | crudo: ['SANTIAGO - PONTEVEDRA 7,55 6,30 7,95']
+  AP6-03: tabla 4.65 | esperado 4.65 | OK | crudo: ['VILLACASTIN ADANERO 4,65 9,15 10,10']
+  AP66-01: tabla 5.90 | esperado 5.90 | OK | crudo: ['CAMPOMANES-OBLANCA 5,90 4,25 5,45']
+  AP71-02: tabla 2.50 | esperado 2.50 | OK | crudo: ['Villadangos-Hospital de Orbigo 1,00 1,65 2,05 2,50 3,35 4,05']
+  AP53-01: tabla 7.25 | esperado 7.25 | OK | crudo: ['Santiago-Alto de Santo Domingo 7,25 6,10 7,25']
+  AP7-AC-02: tabla 2.85 | esperado 2.85 | OK | crudo: ['TRONCAL DE LA ZENIA 2,85 5,10 6,50']
+  C32-02: tabla 5.03 | esperado 5.03 | OK | crudo: ['Peaje / Peatge troncal de Cubelles 2,42 5,03 8,87 10,88']
+  R2-05 (Meco–Cabanillas, efectivo 1,25), AP-41 R5–Toledo (efectivo 5,95), R4 M-50–Ocaña (efectivo 6,25): verificados a mano en la matriz -layout (la extracción por línea no es fiable en esas matrices).
+  Recorrido completo AP-68: ['BILBAO ZARAGOZA 39,90 72,55 84,15'] | Bilbao–Logroño: ['BILBAO LOGROÑO 19,60 36,15 41,20']
+  Suma de la cadena AP68-01..07: 41.5 
+
+## 3. AP-9, segunda página: tabla general frente a tabla de recurrencia (50 %)
+   ['CALDAS DE REIS - CURRO 1,65 1,45 1,75', 'CALDAS DE REIS - CURRO 0,82']
+   ['CALDAS DE REIS - PONTEVEDRA 2,85 2,40 3,00', 'CALDAS DE REIS - PONTEVEDRA 1,42']
+   ['CURRO - PONTEVEDRA 1,80 1,60 1,95', 'CURRO - PONTEVEDRA 0,90']
+   ['PONTEVEDRA - VILABOA 1,45 1,25 1,55', 'PONTEVEDRA - VILABOA 0,72']
+   ['PONTEVEDRA - MORRAZO 3,65 2,45 3,80', 'PONTEVEDRA - MORRAZO 1,82']
+   ['SANTIAGO - SANTIAGO 4,55 4,05 4,95', 'SANTIAGO - SANTIAGO 2,27']
+
+## 4. Calculadora oficial de Audasa (JSON guardado por el cazador)
+  426 recorridos; SHA-256 a137a7099be3312c7d230c7ea6ebbaf2f06ed8eb4e1dc3e3386b9d16932068cc
+  A Coruña -> Pontevedra: 16.35
+  A Coruña -> Santiago: 8.8
+  Santiago -> Pontevedra: 7.55
+  Santiago -> Santiago: 4.55
+  Sigüeiro -> Santiago: 2.25
+  Santiago -> Padrón: 3.15
+  Sigüeiro -> Padrón: 5.4
+  Ordes -> Santiago: 3.3
+  Ordes -> Padrón: 6.45
+  Caldas -> Curro: 1.65
+  Curro -> Pontevedra: 1.8
+  Caldas -> Pontevedra: 2.85
+  Suma de la tabla AP9-01..04 = 16.35; Audasa A Coruña -> Pontevedra = 16.35
+  Con 'Santiago-Santiago' sumado: 20.90 (no coincide con Audasa)
+  Aditividad al cruzar Santiago: Sigüeiro->Santiago + Santiago->Padrón = 5.40 = Sigüeiro->Padrón 5.40
+
+## 5. Catálogo RCE 2025 (lector .dbf propio)
+  7072 registros
+  AP68-05: tabla 40.060 | Catálogo 40.06
+  AP68-06: tabla 80.240 | Catálogo 80.24
+  AP68-07: tabla 84.260 | Catálogo 84.26
+  AP9-01: tabla 5.214 | Catálogo 5.214
+  AP9-02: tabla 59.700 | Catálogo 59.7
+  AP9-03: tabla 7.700 | Catálogo 7.7
+  AP9-04: tabla 54.300 | Catálogo 54.3
+  AP4-01: tabla 92.623 | Catálogo 92.623
+  AP41-01: tabla 48.600 | Catálogo 48.6
+  AP7-AC-01: tabla 32.800 | Catálogo 32.8
+  AP7-AC-02: tabla 43.800 | Catálogo 43.8
+  M12-01: tabla 2.270 | Catálogo 2.27
+  M12-02: tabla 7.345 | Catálogo 7.345
+  AP-68 en Navarra: 6 tramos, clases ['Autopista de peaje'], 39.66 km
+  AP-68 en Bizkaia/Álava: 0 tramos; p.k. mínimo de la AP-68: 77.597
+  M-12 0.000-2.550 Enl. M-40 -> Enl. M-11 | Autopista de peaje
+  M-12 2.550-3.550 Enl. M-11 -> Enl. M-13 | Autopista de peaje
+  M-12 3.550-4.875 Enl. M-13 -> Enl. Terminal T-4 | Autopista de peaje
+  M-12 4.875-6.450 Enl. Terminal T-4 -> Enl. R-2 | Autopista de peaje
+  M-12 6.450-8.200 Enl. R-2 -> Enl. M-110. La Moraleja | Autopista de peaje
+  M-12 8.200-10.865 Enl. M-110. La Moraleja -> Enl. A-1 | Autopista libre
+  AP-7 p.k. 676,3-706,75 (Circunvalación de Alicante): clases ['Autopista de peaje']
+
+## 6. AP-68 tras el 10-nov-2026
+  BOE-A-2026-19039, título: Real Decreto 730/2026, de 9 de septiembre, por el que se modifican ciertos términos de la concesión de la autopista AP-68, Bilbao-Zaragoza, para la aplicación de medidas de bonificación de peajes a determinados vehículos pesados en el tramo Zambrana-T
+  ¿'19,60' en el BOE? no
+  ¿'6,65' en el BOE? no
+  ¿'[Ll]igeros' en el BOE? no
+  ¿'[Tt]urismos' en el BOE? no
+  ¿'11 de noviembre' en el BOE? no
+  ¿'libre' en el BOE? no
+  Fin de la concesión: das, a su vez, por el Real Decreto 942/2021, de 26 de octubre, y estará vigente hasta el final de la concesión, el 10 de noviembre de 2026
+  Congreso (23-feb-2026): En consecuencia, todos tramos de titularidad estatal, los que discurren por La Rioja y Aragón, pasarán a ser libres de peaje desde el día siguiente al final de la concesión, el resto de los tramos serán las administraciones titulares las que decidan sobre ello. Madrid, 23 de
+  Bizkaia (22-jul-2026):  cuando llegue ese momento, Bizkaia ha decidido aplicar una reducción media del 20% tanto para vehículos ligeros como para pesados. ACTUAL Desde 11 DE NOVIEMBRE Ligeros 6,85 4,20 Pesados 1 12,60 8,65 Pesados 2 14,25 9,75 En el caso del transporte pesado, conviene
+  Variación real ligeros 6,85 -> 4,20: -38.7 %; P1 12,60 -> 8,65: -31.3 %; P2 14,25 -> 9,75: -31.6 %
+
+## 7. M-12 según la web de SEITT
+   Peajes Troncales Barajas Norte: p.k. 3 + 300. Barajas Sur: p.k. 3 + 000. Laterales Alcobendas: p.k. 7 + 000. KMs de autovía gestionados Tramos libres de peaje M-13 a T4: 1,325 Km. T4 a R2: 1,925 Km. R2 a A1: 2,640 Km. Túneles Desde el p.k. 0+700 al p.k. 2+500. Edificios Oficinas y centro de control: p.k. 4 + 000 M-12 (sentido sur). Contacta con
+   La longitud de la M-12 es de 8,40 km, siendo el tramo situado entre la M-40 y la M-11, que discurre en túnel bajo el Parque Juan Carlos I, de peaje en ambos sentidos; de igual forma, en sentido sur M-40, son de peaje el recorrido desde la Salida-7 a la Terminal T4 y desde la Salida-3 a la M-11. Declaración SET Footer Accesibilidad Aviso legal Política de cookies P
+
+## 8. Encabezados de los PDF de tarifas de la R-4 (SEITT)
+  seitt_tarifas_r4_2026_1.pdf: ['Peaje 2026 R4'] | ['En vigor desde el 1 de enero de 2025']
+  seitt_tarifas_r4_2026.pdf: ['Peaje 2026 R4'] | ['En vigor desde el 1 de enero de 2025']
+  seitt_tarifas_r4_2025.pdf: ['Peaje 2025 R4'] | ['En vigor desde el 1 de enero de 2023']
+  seitt_tarifas_r4_2025_0.pdf: ['Peaje 2024 R4'] | ['En vigor desde el 1 de enero de 2025']
+  Enlazado desde la web de la R-4: ['tarifas_r4_2026_1.pdf']
+  BOE-A-2025-25961 (Circunvalación de Alicante): do con el siguiente cuadro, exceptuando las tarifas aplicables a todas las categorías de vehículos en la autopista AP-7 Circunvalación de Alicante, que continuarán siendo de 0 euros

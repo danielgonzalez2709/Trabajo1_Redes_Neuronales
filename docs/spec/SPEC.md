@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.4** — 2026-10-12 (§6.4: EA pasa al esquema de clase, N=50, élite + mutantes + cruce de un punto; propuesta en `docs/spec/propuestas/CAMBIO-EA.md`) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.14** — 2026-10-12 (merge de la Parte 1: §6.4 con el EA en esquema de clase —propuesta en `docs/spec/propuestas/CAMBIO-EA.md`, que antes de este merge la llamaba "1.4"— y §6.3 con la configuración del GD y la condición de Armijo sobre el punto proyectado, ambas [PENDIENTE: aprobación de Daniel]) · 1.13 — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -36,6 +36,34 @@ Entregables (pesos): reporte-blog 25 %, repositorio reproducible 10 %, ejecució
 | Equipo Parte 2 | 2 | §7 |
 | Puente / Integración / Cacería | 1 | §4, §8, §9, §11, revisión de PR, entendimiento de todos |
 
+### 1.2 Enunciado literal — Parte 2 (añadido en v1.6)
+
+Texto del enunciado del curso, copiado sin cambios. Si este Spec lo contradice, gana el enunciado y se corrige el Spec.
+
+> **Parte 2: Optimización combinatoria (¡y olé!)**
+>
+> Un vendedor debe recorrer las 47 capitales de provincia de la España peninsular (se excluyen Palma, Las Palmas de Gran Canaria y Santa Cruz de Tenerife por ser insulares, y Ceuta y Melilla por no ser provincias ni accesibles por carretera desde la península). El recorrido es cerrado: el vendedor vuelve a la ciudad de salida.
+>
+> 1. Encuentren el orden óptimo del recorrido usando colonias de hormigas y algoritmos genéticos.
+> 2. El costo de desplazamiento entre dos ciudades es la suma de:
+>    - el valor de la hora del vendedor multiplicado por el tiempo de viaje. Este valor es un parámetro que deben estudiar: ¿cambia la ruta óptima al variarlo? ¿a partir de qué valor?
+>    - el costo de los peajes en el trayecto por carretera.
+>    - el costo del combustible, según el vehículo que el equipo elija (modelo, consumo homologado y tipo de combustible, con fuente citada).
+> 3. Documenten las fuentes de todos los datos (distancias, tiempos, peajes, precios de combustible) con su fecha de consulta. Tengan en cuenta que la red de autopistas de peaje en España ha cambiado mucho en los últimos años, por lo que la información desactualizada es un riesgo real.
+> 4. Representen con un GIF animado o un video cómo evoluciona la mejor solución, dibujando el recorrido sobre el mapa de España.
+
+### 1.3 Rúbrica literal — "Todo debe correr en vivo" (añadido en v1.6)
+
+Punto de la rúbrica de evaluación, copiado sin cambios. Sus criterios verificables están en §9.
+
+> **Todo debe correr en vivo**
+>
+> Durante la sustentación el equipo ejecutará su código frente al profesor. Por eso:
+> - Cada experimento principal debe lanzarse con un solo comando.
+> - Los parámetros (tasa de aprendizaje, tamaño de población, tasa de evaporación, valor de la hora, etc.) deben poder cambiarse desde la línea de comandos o un archivo de configuración, sin editar el código fuente.
+> - Una corrida de demostración debe tardar menos de dos minutos.
+> - Antes de la sustentación, prueben todo en un clon limpio del repositorio en una máquina distinta a la de desarrollo.
+
 ---
 
 ## 2. Alcance
@@ -60,10 +88,10 @@ Entregables (pesos): reporte-blog 25 %, repositorio reproducible 10 %, ejecució
 | GIF obligatorios | **matplotlib** con hoja de estilo del Design System |
 | Arquitectura | Los algoritmos **no dibujan**: escriben JSON en `results/data/`; las figuras se construyen después |
 | Datos Parte 2 | Cinco bloques (coordenadas, rutas, peajes, combustible, vehículo) — §7.2. Descarga en un **único script con internet**; el experimento solo lee archivos locales |
-| Vehículo | **Toyota Corolla Sedán Hybrid 2026, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina — acabado: [PENDIENTE] |
+| Vehículo | **Toyota Corolla Sedán Hybrid, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina — acabado **Style Plus 140H e-CVT**, año de modelo **MY27** (el que vendía Toyota España en la fecha de corte; v1.7, ver §7.2 Bloque 5) |
 | Fecha de corte de datos | **1-oct-2026** (escenario base) |
 | Dominio de Rosenbrock | **[−2.048, 2.048]ⁿ** (justificación en §6.1.1) |
-| Combustible | **Gasolina 95 E5**, precio medio nacional en la fecha de corte |
+| Combustible | **Gasolina 95 E5**, precio medio **peninsular** en la fecha de corte (v1.6; antes, nacional — ver §7.2 Bloque 4) |
 | Git | Rama por equipo, Pull Request revisado por el puente, commits con la cuenta de cada autor |
 
 ---
@@ -89,13 +117,13 @@ trabajo1/
 │   └── osrm/README.md            # cómo levantar OSRM local (Docker + extracto Geofabrik)
 ├── data/
 │   ├── raw/                      # descargas originales con fecha en el nombre (evidencia)
-│   ├── processed/                # cities.csv, rutas_*.csv/npz, peajes_tramos.csv, combustible.json, vehiculo.yaml
+│   ├── processed/                # cities.csv, rutas_*.csv/npz, peajes_tramos.csv, combustible.json, combustible_resumen.json, vehiculo.yaml
 │   └── fuentes.md                # tabla: dato | fuente | URL | fecha de consulta | notas
 ├── results/  data/  tables/
 ├── media/                        # GIF finales
 ├── tests/
 ├── alucinaciones/  registro.md, evidencias/
-├── blog/  mkdocs.yml, docs/, hooks/figures.py, references.bib, apa.csl
+├── blog/  mkdocs.yml, docs/ (index.md, figures/, stylesheets/), secciones/, hooks/reporte.py, references.bib, apa.csl, README.md
 ├── docs/spec/  SPEC.md, PLAN.md
 └── .claude/agents/               # definiciones de subagentes (§12)
 ```
@@ -190,6 +218,8 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
 ### 5.2 Parte 2
 ```python
 # src/part2/costos.py
+@dataclass(frozen=True, eq=False)  # [DECIDIDO v1.13, Jose Miguel, 12-oct] seis matrices n×n: tiempo_h, dist_km, peaje_eur × {rapida, sin_peaje}
+class Componentes: ...
 def cargar_componentes(path="data/processed") -> Componentes   # tiempos, distancias, peajes de ambas alternativas
 def matriz_costos(comp: Componentes, valor_hora: float, vehiculo: dict, precio_l: float) -> tuple[np.ndarray, np.ndarray]
     # retorna (C[47,47] en €, alternativa_elegida[47,47] ∈ {"rapida", "sin_peaje"})
@@ -206,9 +236,17 @@ def solve(C: np.ndarray, cfg: dict, rng: np.random.Generator) -> dict
 |---|---|
 | `data/processed/cities.csv` | `id, capital, provincia, lat, lon, fuente, fecha_consulta, verificado_manual (bool), nota` |
 | `data/processed/rutas.csv` | `i, j, alternativa (rapida/sin_peaje), dist_km, tiempo_h, km_peaje, peaje_eur, vias_peaje (lista), fuente, fecha_extracto_osm` |
+| `data/processed/rutas_resumen.json` | `{fuente, fecha_extracto_osm, n_pares, n_filas, fecha_consulta_utc {min, max}, pares_sin_peaje {criterio, n, pares}, avisos, control_pasos, simetria}` — pares marcados (§7.2 Bloque 2), controles de la descarga y diferencia máxima de simetría (para el blog) |
+| `data/processed/rutas_pasos_peaje.csv` | `i, j, alternativa, paso, ref, nombre, dist_m, n_intersecciones, n_intersecciones_toll, lon_ini, lat_ini, lon_fin, lat_fin` — una fila por paso de OSRM con al menos una intersección de clase `toll`; entrada de T2.5 (los crudos no se versionan) |
 | `data/processed/peajes_tramos.csv` | `id, via, desde, hasta, operador, ambito (estatal/SEITT/foral/autonomico), provincia, km, tarifa_ligeros_eur, eur_km, vigente_desde, vigente_hasta, fuente_url, fecha_consulta, nota` |
-| `data/processed/combustible.json` | `{producto, precio_medio_eur_l, precio_mediano_eur_l, n_estaciones, fecha, fuente_url, archivo_raw}` |
-| `data/processed/vehiculo.yaml` | `{marca, modelo, version, anio, combustible, consumo_wltp_comb_l100, fuente_url, respaldo_url, fecha_consulta}` |
+| `data/processed/peajes_cadenas.csv` | **[DECIDIDO v1.10, Jose Miguel, 12-oct]** Los cinco archivos auxiliares de T2.5 (esta fila y las cuatro siguientes) se mantienen. `id_tramo, cadena, orden, refs_osrm` (refs separadas por `\|`) — agrupa los tramos contiguos de una autopista |
+| `data/processed/peajes_anclas.csv` | *(v1.10)* `cadena, km_cadena, lon, lat, etiqueta, tipo_coord, origen_km, fuente_coord` — puntos con km y coordenadas conocidos; sitúan un paso de OSRM en una cadena. `peajes_tramos.csv` no tiene coordenadas |
+| `data/processed/rutas_peajes_detalle.csv` | *(v1.10)* `i, j, alternativa, cadena, tramo_id, via, km_cubiertos, fraccion, tarifa_eur, importe_eur` — una fila por ruta y tramo cobrado |
+| `data/processed/peajes_avisos.csv` | *(v1.10)* `i, j, alternativa, paso, ref, motivo, detalle` — pasos `toll` que no se cobraron |
+| `data/processed/peajes_resumen.json` | *(v1.10)* `{generado_por, fecha_corte, parametros, n_filas, n_filas_con_peaje, n_avisos, avisos_por_motivo, pasos_sin_ref, pasos_no_asignados, filas_por_via}` |
+| `data/processed/combustible.json` | `{producto, ambito, precio_medio_eur_l, precio_mediano_eur_l, n_estaciones, fecha, fuente_url, archivo_raw}` — `ambito = "peninsular"` (v1.6) |
+| `data/processed/combustible_resumen.json` | `{producto, id_producto, campo_precio, ambito, fecha, fecha_respuesta, fecha_consulta_utc, fuente_url, archivo_raw, redondeo, n_estaciones_respuesta, n_sin_precio, criterio_sin_precio, nacional {n, media, mediana, min, max}, peninsular {n, media, mediana, min, max}, no_peninsular {<territorio>: {n, media, mediana, min, max}}, ccaa_no_peninsulares, contraste_filtro_producto {url, n_estaciones, coincide}}` — desglose y controles de la descarga; la media nacional queda como sensibilidad para el blog (v1.6) |
+| `data/processed/vehiculo.yaml` | `{marca, modelo, version, anio, anio_modelo, combustible, consumo_wltp_comb_l100, fuente_url, respaldo_url, fecha_consulta}` — `anio` = año de compra (2026), `anio_modelo` = "MY27" (v1.7) |
 | `data/fuentes.md` | Tabla `dato | fuente | URL | fecha de consulta | notas` (exigida por el enunciado) |
 
 ### 5.4 Resultados (para figuras y blog)
@@ -323,7 +361,12 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 
 ### 7.1 Escenario y fecha de corte [PENDIENTE: confirmar]
 - **[DECIDIDO] Fecha de corte 1-oct-2026**, escenario **"base"** = red de peajes vigente en esa fecha (vigente también el día de la entrega y de la sustentación).
-- ⚠️ **AP-68 (Bilbao–Zaragoza):** según el Ministerio de Transportes, deja de ser de peaje el **11-nov-2026** (la concesión vence el 10-nov). **No queda toda gratis:** los tramos de **Álava y Bizkaia seguirán cobrando** (gestionados por las diputaciones forales, con tarifas rebajadas); La Rioja, Navarra y Aragón quedan libres para turismos. Fuente de prensa reportó que Logroño–Bilbao pasaría de 19,60 € a 6,65 € [VERIFICAR con fuente oficial y la resolución del BOE núm. 225 de 11-sep-2026].
+- ⚠️ **AP-68 (Bilbao–Zaragoza):** la concesión estatal vence el **10-nov-2026**. *(v1.9, corregido el 12-oct con fuentes oficiales, T2.4)*
+  - Desde el 11-nov, los tramos estatales de **La Rioja y Aragón** quedan libres (respuesta del Gobierno al Congreso, 23-feb-2026).
+  - **Bizkaia** sigue cobrando con tarifa foral: ligeros 6,85 → **4,20 €** (nota oficial de la Diputación).
+  - **Álava** y **Navarra** deciden sobre sus tramos. Ninguna fuente oficial consultada fija su régimen después del 10-nov; la gratuidad navarra para turismos solo aparece en prensa.
+  - El **BOE núm. 225 de 11-sep-2026** (RD 730/2026, BOE-A-2026-19039) solo regula bonificaciones a vehículos pesados hasta el 10-nov. No respalda la rebaja de Logroño–Bilbao de 19,60 € a 6,65 € que publicó la prensa (candidato H-19).
+  - Nada de esto cambia el escenario base: el 1-oct-2026 toda la AP-68 cobra.
 - **Extensión opcional:** `peajes.escenario: base | post_ap68` en la config → excelente para la modificación en vivo ("¿qué pasa con la ruta después del 11 de noviembre?").
 
 ### 7.2 Recolección de datos — cinco bloques
@@ -340,21 +383,68 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 #### Bloque 2 — Distancias y tiempos (OSRM)
 - **Motor:** OSRM con datos de OpenStreetMap.
 - ⚠️ **El servidor público de demostración NO admite `exclude=toll`**: responde `"Exclude flag combination is not supported."` (verificado el 29-sep-2026). Por tanto:
-  - 🟢 **OSRM local con Docker** + extracto de España de **Geofabrik** (documentar fecha del extracto). El perfil de coche por defecto declara `excludable = {toll}, {motorway}, {ferry}` y la clase `toll` (verificado en `profiles/car.lua`, 1-oct-2026). Instrucciones en `scripts/osrm/README.md`. [PENDIENTE: ¿quién tiene Docker y RAM suficiente?]
-  - **Respaldo:** openrouteservice *Directions* con `avoid_features: ["tollways"]` (API key gratuita; 2 000 peticiones/día, 40/min).
+  - 🟢 **OSRM local con Docker** + extracto de España de **Geofabrik** (documentar fecha del extracto). El perfil de coche por defecto declara `excludable = {toll}, {motorway}, {ferry}` y la clase `toll` (verificado en `profiles/car.lua`, 1-oct-2026). Instrucciones en `scripts/osrm/README.md`. **[DECIDIDO 10-oct-2026, T2.0]**: se monta en la máquina del equipo Parte 2 (Apple M4, 16 GB RAM, ~59 GB libres); Docker aún no está instalado → se instala en T2.2.
+  - **Contingencia (solo si T2.2 falla):** openrouteservice *Directions* con `avoid_features: ["tollways"]` (API key gratuita; 2 000 peticiones/día, 40/min).
 - **Para cada par (i, j), i < j (1 081 pares) y cada alternativa:**
   - `rapida`: ruta sin restricciones.
-  - `sin_peaje`: ruta con `exclude=toll`.
+  - `sin_peaje`: ruta pedida con `exclude=toll`.
+    *(v1.8, corregido el 12-oct)* Con un único proceso `osrm-routed` que recibe consultas `rapida` y `exclude=toll`
+    mezcladas, algunas rutas `sin_peaje` pasan por la clase `toll`. Son 26 en la corrida vigente: 18 por la M-12, 7 por la
+    AP-15 y 1 por la AP-68. Eso ocurre aunque exista una alternativa gratuita.
+    - **Lo observado** (ronda 2 de T2.3; mecanismo interno de OSRM no confirmado):
+      - la respuesta depende del **historial de consultas** del proceso;
+      - con **un proceso por alternativa**, 0 rutas `sin_peaje` tienen `toll` y el resultado no depende del orden.
+    - El diagnóstico previo atribuía el fallo a `exclude=toll`: quedó refutado (ver H-16).
+    - **[DECIDIDO, Jose Miguel, 12-oct]:** por tiempo se usa la corrida de **un solo proceso**. Un proceso por
+      alternativa queda como mejora opcional.
+    - Una ruta `sin_peaje` que pase por la clase `toll` **se reporta** en `rutas_resumen.json` (`avisos.sin_peaje_con_clase_toll`).
+    - Sus pasos con peaje van a `rutas_pasos_peaje.csv`, y **T2.5 cobra ese peaje**, como en cualquier otra fila.
+    - Evidencia en `alucinaciones/evidencias/T2.3_toll_diagnostico/` y `alucinaciones/evidencias/T2.3_historial_osrm/`.
   - Guardar: distancia, duración, pasos (`ref`, distancia, clases, coordenadas) y geometría simplificada.
+- **[DECIDIDO v1.8, Jose Miguel, 12-oct] Determinismo:** `osrm-routed` corre con **`--threads 1`**.
+  - Con 16 hilos, la misma URL devolvía rutas distintas (p. ej., 18/12 en 30 repeticiones), a veces no óptimas.
+  - Con eso, 2 pares quedaron mal marcados como "sin peaje": [3,35] y [21,35] pasaban por la M-12.
+  - Con un hilo, la misma URL repetida da la misma respuesta (20/20).
+  - Aun así, la respuesta depende de las consultas previas. Por eso la corrida se hace **con el servidor recién
+    arrancado y en el orden de `descargar_datos.py`**: así se reproduce exactamente (0/2202 rutas distintas).
+  - Se descartó un segundo grafo con un perfil que prohíba las vías de peaje: contradice §2 ("OSRM con perfiles personalizados" está fuera de alcance).
 - **Simetría:** se asume c_ij = c_ji (se consulta i→j). **Comprobación:** consultar j→i para 20 pares aleatorios y reportar la diferencia máxima en el blog.
 - **Aceptación:** 1 081 × 2 rutas sin errores; si `sin_peaje` coincide con `rapida` (no hay peaje en la ruta), se marca y se reutiliza.
+  *(v1.8)*
+  - Las rutas `sin_peaje` con clase `toll` **no** bloquean la tarea: se cuentan y se listan.
+  - Es obligatorio comprobar el determinismo: varias consultas repetidas deben devolver la misma ruta.
+- **[DECIDIDO 11-oct-2026, T2.3]**
+  - **Criterio de marca:** un par es "sin peaje" si **ninguna intersección** de su ruta `rapida` tiene la clase `toll` (la clase va por intersección, no por paso). Se conservan las dos filas en `rutas.csv` (sin columna nueva): la fila `sin_peaje` reutiliza los valores de la `rapida`. Los pares marcados se listan en `rutas_resumen.json`; si OSRM devolvió para `sin_peaje` una distancia o duración distinta, se emite un aviso.
+  - `vias_peaje`, `km_peaje` y `peaje_eur` quedan vacías en T2.3; *(v1.10)* las rellenó T2.5 a partir de `rutas_pasos_peaje.csv`.
+  - **Crudos:** `data/raw/osrm_<fecha>/{rutas,simetria}/` **no se versionan** (peso). Se versionan `rutas.csv`, `rutas_resumen.json` y `rutas_pasos_peaje.csv`, y la evidencia de T2.2 (`data/raw/osrm_2026-10-10/`).
 
 #### Bloque 3 — Peajes (el bloque más difícil)
 - **Fuentes oficiales:**
   - Estatales en concesión y SEITT: listado y tarifas 2026 del **Ministerio de Transportes y Movilidad Sostenible**. Tarifas 2026: +3,64 % a +4,68 % (concesiones) y +2 % (SEITT: R-2, R-3/R-5, R-4, M-12, AP-7 Cartagena–Vera, AP-36, AP-41).
   - Forales/autonómicos: Bidegi (Gipuzkoa), Interbiak (Bizkaia), Diputación Foral de Álava; Galicia y otros operadores autonómicos [VERIFICAR la lista completa de tramos que afectan rutas entre capitales].
 - **Tabla** `peajes_tramos.csv` (§5.3) con tarifa para **vehículos ligeros**, fuente y fecha.
-- **Cálculo por ruta (aproximación documentada):**
+- **[DECIDIDO v1.9, Jose Miguel, 12-oct] Una tarifa por tramo.** Cuando el operador publica varias tarifas para ligeros, se usa:
+  - AP-51 y AP-61: nivel **normal**, no valle ni punta.
+  - AP-71: tarifa **diurna**.
+  - Autopistas SEITT (R-2, R-3, R-4, M-12, AP-41): pago en **efectivo/tarjeta**, sin telepeaje y sin la franja gratuita de 00:00 a 06:00.
+  - AP-7: **temporada baja**, la vigente el 1-oct.
+  - Los demás niveles quedan anotados en `nota`.
+- **[DECIDIDO v1.9, Jose Miguel, 12-oct] Km sin longitud oficial.** Los tramos forales o autonómicos que el Catálogo RCE no mide se completan con la longitud medida sobre la geometría de OSM. Esos km son una **aproximación documentada** en `nota`.
+- **[DECIDIDO v1.9, Jose Miguel, 12-oct] M-12:** el tramo de pago va de la M-40 a la M-13 e incluye los troncales de Barajas. De la M-13 a la A-1 es libre.
+- *(v1.9)* **Peaje cerrado:** en autopistas de peaje cerrado la suma de tramos no siempre es igual a la tarifa del recorrido completo publicada (Bilbao–Zaragoza: 41,50 € frente a 39,90 €). T2.5 documenta cómo lo trata.
+- **[DECIDIDO v1.10, Jose Miguel, 12-oct] Peaje cerrado = suma de tramos.** No se construye una tabla de tarifas origen–destino. Es una aproximación: Bilbao–Zaragoza 41,50 € frente a 39,90 € publicado (+4,0 %); AP-6 completa 13,50 € frente a 15,70 € (−14 %). Sobre 15 rutas de contraste el sesgo va de −18 % a +4 %, y los tres casos fuera de ±5 % usan la AP-6 (A Coruña–Madrid, Madrid–Valladolid, Madrid–Ávila). Se reporta en el blog.
+- *(v1.9)* El Catálogo RCE 2025 (24 MB, `mitma_260306-catalogorce2025.zip`) **no se versiona**, igual que el `.mdb` del Bloque 1. Su URL está en `data/fuentes.md` y su SHA-256 en el MANIFEST.
+- **Cálculo por ruta (`scripts/asignar_peajes.py`, sin red) — *(v1.10, T2.5)*:**
+  1. Un paso de `rutas_pasos_peaje.csv` sin `ref` es un enlace y no se cobra.
+  2. Un paso con `ref` se asigna a una **cadena** (`peajes_cadenas.csv`) cuya lista `refs_osrm` contenga esa `ref` y que esté más cerca de sus dos extremos; nunca por prefijo del nombre.
+  3. Cada extremo se sitúa en el km de la cadena con `peajes_anclas.csv`: ajuste a un ancla a ≤ 1,5 km; si no, interpolación lineal sobre la poligonal de anclas. No se usa `n_intersecciones_toll / n_intersecciones` para medir km (falla hasta un 25 % en pasos parciales).
+  4. Por ruta y cadena se cobra el recorrido [mín, máx] de sus pasos, porque OSM deja sin `toll` algunos trozos de autopista.
+  5. Peaje = Σ tarifa del tramo × km recorridos / km del tramo; con ≥ 95 % del tramo se cobra la tarifa completa.
+  6. Las filas `sin_peaje` con clase `toll` se cobran igual. Los pasos con `ref` sin cadena (`GI-20`, `N-622`, `PA-34`) no se cobran y se listan en `peajes_avisos.csv` (38 pasos).
+  7. `km_peaje` = suma de km en tramos con tarifa > 0; `peaje_eur` con 2 decimales; `vias_peaje` = vías con importe > 0 separadas por `;`.
+  - **Parámetros elegidos por el curador, sin fuente:** el ajuste a ancla de 1,5 km y el umbral del 95 %. Bajar el 95 % a 90 % cambia 15 rutas hasta 0,25 €.
+  - **Limitación:** 63 de los 77 anclas salen de extremos de pasos de OSRM, no de una fuente externa; verificadas por muestreo contra el Catálogo RCE (5 de 6). Validación en `docs/validacion_peajes_T2.5.md`.
+- **Cálculo por ruta, versión original (v1.0–v1.9, superada por la anterior):**
   1. De los pasos de OSRM, tomar los que tienen clase `toll` [VERIFICAR que el OSRM local la marca] y su `ref` (nombre de vía) y ubicación.
   2. Asignar cada tramo recorrido a una fila de `peajes_tramos.csv` por vía **y** ubicación (provincia/tramo) — **no** por el prefijo del nombre: varias "AP-" ya son gratuitas (AP-1, AP-2, AP-4 y tramos de la AP-7) y conservan el nombre.
   3. Peaje del par = Σ km recorridos en cada tramo × €/km del tramo (o tarifa completa si se recorre el tramo entero).
@@ -362,15 +452,34 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 
 #### Bloque 4 — Precio del combustible
 - **Fuente:** Geoportal de Gasolineras / servicio REST del Ministerio para la Transición Ecológica (`sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/`; tiene endpoint histórico por fecha).
+  *(v1.6, T2.6)* Los datos de la fecha de corte salen del endpoint histórico `…/PreciosCarburantes/EstacionesTerrestresHist/{dd-mm-aaaa}`;
+  `EstacionesTerrestres/` devuelve solo los precios del día de la consulta, y una fecha ISO (`aaaa-mm-dd`) da HTTP 400.
 - **Producto:** Gasolina 95 E5. Descarga única en la fecha de corte; guardar el JSON crudo con la fecha en el nombre.
-- **Modelo [DECIDIDO]:** precio **medio nacional** (reportar también la mediana y el nº de estaciones). Por provincia: fuera de alcance.
+- **Modelo [DECIDIDO v1.6, Jose Miguel, 11-oct]:** precio **medio peninsular**. Se excluyen las estaciones de Baleares,
+  Canarias, Ceuta y Melilla (IDCCAA 04, 05, 18, 19). Hay que reportar también la mediana y el nº de estaciones. Por provincia: fuera de alcance.
+  - **Por qué:** el enunciado (§1.2) excluye esos territorios del recorrido, así que el vehículo nunca reposta allí.
+    Canarias (precio más bajo) sesga la media nacional hacia abajo en la misma dirección siempre.
+  - **Sensibilidad:** la media nacional se conserva en `combustible_resumen.json` para el blog.
+  - *Antes de v1.6* el modelo era la media nacional.
 
 #### Bloque 5 — Vehículo
-- **[DECIDIDO] Toyota Corolla Sedán Hybrid 2026, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina. Acabado [PENDIENTE]:
-  el consumo WLTP cambia por versión. Los valores de 4,4–4,7 l/100 km del documento del equipo Parte 2 corresponden a otras
-  versiones/carrocerías → **tomar el dato de la ficha del Sedán** [VERIFICAR].
+- **[DECIDIDO] Toyota Corolla Sedán Hybrid, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina.
+- **Acabado [DECIDIDO v1.7, Jose Miguel, 11-oct]: Style Plus 140H e-CVT, año de modelo MY27.**
+  - En la fecha de corte es el único acabado del configurador para particulares, y tiene ficha técnica oficial estructurada.
+  - Se descarta el ECO (flotas, taxi y VTC): Toyota publica para él tres cifras WLTP distintas.
+  - Toyota España pasó de MY26 a MY27 entre el 15 y el 23-sep-2026 (Wayback). El consumo combinado es el mismo (4,6 l/100 km); el CO2 pasa de 104 a 105 g/km.
+  - Los 4,4–4,7 l/100 km del documento del equipo Parte 2 corresponden a otra carrocería (5 puertas), lo que confirma el [VERIFICAR] anterior.
 - Consumo **WLTP combinado** (l/100 km) de la **ficha técnica oficial de Toyota España**; **km77** como respaldo; fecha de consulta.
 - **Sensibilidad:** usar también el consumo de la fase WLTP **"extra alta"** (autopista), si la ficha la publica.
+  *(v1.7)* La ficha actual de Toyota España (MY27) y km77 no la publican. El catálogo de Toyota España del Corolla Sedan,
+  edición 09/2023 (`14764_CORS_48_ES_WEB_S.pdf`, pág. PDF 17), sí la da: "Ritmo extra alto (l/100km) 5,6-6,2". Es un
+  rango de la gama de 2023, con el mismo motor 2ZR-FXE.
+  - **[DECIDIDO v1.7, Jose Miguel, 11-oct]:** el valor base sigue siendo 4,6 l/100 km (WLTP combinado MY27).
+  - 5,6 y 6,2 l/100 km son el **escenario de sensibilidad "autopista"** (§7.5), y se declaran como rango del catálogo de 2023.
+  - Toyota publica además un "máximo" WLTP de 4,8 l/100 km (`FUELCOMBINEDWLTPMAX`). Es el **ciclo combinado**, no la fase de autopista, y no se usa.
+    - En el crudo lleva `Type: "vehicleHigh"`, que según el Reglamento (UE) 2017/1151 (subanexo 4, §4.2.1) es el "vehículo H" de la familia de interpolación, el de mayor demanda de energía.
+    - Toyota no documenta qué configuración concreta es (ver H-12).
+  - La sensibilidad de consumo se hace con el parámetro de consumo sobrescribible (`--set`, §7.3 y §9) y se declara como supuesto.
 - Por qué este vehículo (propuesta del equipo Parte 2): consumo homologado bajo, apto para viajes largos, información oficial
   abundante. **Descartados:** eléctricos (los tiempos de recarga distorsionan el costo del tiempo), híbridos enchufables (su
   WLTP supone batería cargada).
@@ -385,7 +494,16 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
   **c_ij(w) = mín( c_ij^rapida(w), c_ij^sin_peaje(w) )**
 
 - w = valor de la hora (€/h). Se guarda qué alternativa se eligió en cada par (para colorear el mapa).
-- **Aceptación** (`tests/test_cost.py`): un par calculado a mano coincide; con w = 0 nunca se elige una alternativa con peaje si existe otra más barata en combustible; c es simétrica y de diagonal 0.
+- **Desempate** **[DECIDIDO v1.12, Jose Miguel, 12-oct]:** si ambas alternativas cuestan exactamente lo mismo, se elige `rapida`
+  (comparación estricta: `sin_peaje` solo gana si cuesta menos). Esto aplica también a la diagonal de `alternativa_elegida`.
+- **Aceptación** (`tests/test_cost.py`) **[DECIDIDO v1.11, Jose Miguel, 12-oct]:**
+  - Un par calculado a mano coincide.
+  - Con w = 0 se elige, en cada par, la alternativa de menor `peaje + combustible`. La redacción anterior ("nunca se elige
+    una alternativa con peaje si existe otra más barata en combustible") no vale para los 26 pares cuya `sin_peaje` también
+    paga peaje (§7.2 Bloque 2, v1.8).
+  - c tiene diagonal 0 y es simétrica. La simetría sale por construcción (`rutas.csv` guarda solo i < j y la matriz se arma
+    por espejo), así que la prueba no se limita a comparar c con su traspuesta: comprueba que cada celda (i, j) y (j, i)
+    toma los valores de la fila correcta de `rutas.csv`.
 
 ### 7.4 Algoritmos
 | Algoritmo | Especificación | Parámetros por defecto |
@@ -401,6 +519,12 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 ### 7.5 Experimentos Parte 2
 - Barrido w ∈ {0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100} €/h (más denso en 0–50, rango sugerido por el equipo Parte 2). Para cada w: exacto + ACO (10 corridas) + GA (10 corridas) → mejor, media, desviación, **gap % vs. óptimo**.
 - **Umbral:** donde el recorrido óptimo cambie entre dos w consecutivos, bisección con el solver exacto hasta resolución de 0,5 €/h → responde "¿a partir de qué valor cambia la ruta?".
+- **Sensibilidad de consumo (v1.7):**
+  - Se repite el barrido de w con el solver exacto, con `consumo` = 5,6 y 6,2 l/100 km (fase "extra alta" del catálogo, §7.2 Bloque 5).
+  - Se cambia solo con `--set`, sin editar código.
+  - Se reporta, frente a la base de 4,6:
+    - el costo total y el de combustible;
+    - si cambian el recorrido óptimo y el umbral de w.
 - Referencias contextuales para w [VERIFICAR]: ganancia media por hora en España (INE) o salario de un comercial; valores del tiempo usados por el Ministerio de Transportes en la evaluación de proyectos de carreteras.
 
 ### 7.6 Figuras Parte 2
@@ -417,8 +541,19 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 
 ## 8. Visualización y blog [DECIDIDO]
 - **Material for MkDocs** (en modo mantenimiento con correcciones hasta 5-nov-2026: suficiente para el proyecto).
-- Ecuaciones: `pymdownx.arithmatex` + KaTeX. Bibliografía: `mkdocs-bibtex` + `apa.csl` (APA 7) [VERIFICAR si requiere pandoc → `pypandoc_binary`].
-- **Hook `blog/hooks/figures.py`:** numera figuras y tablas en orden, resuelve referencias `[[fig:id]]` → "Figura N", y **hace fallar el build** si una figura/tabla no se cita o una cita no existe.
+- Ecuaciones: `pymdownx.arithmatex` + KaTeX.
+- **[DECIDIDO 12-oct, T0.7] Bibliografía APA 7 con pandoc citeproc** (`pypandoc_binary` + `blog/apa.csl`, "APA Style 7th edition",
+  lengua `es-ES`) dentro del hook. Se descartó `mkdocs-bibtex` 4.4: convierte las citas en notas al pie y APA exige citas
+  autor–año en el texto. Solo se listan las obras citadas en el texto publicado (las citas dentro de comentarios no cuentan).
+- **Hook `blog/hooks/reporte.py`** (pruebas en `tests/test_blog.py`; guía de uso en `blog/README.md`): une las secciones de
+  `blog/secciones/` en una sola entrada de blog (`--8<-- "…"`), numera figuras y tablas en formato APA (número en negrita,
+  título en cursiva, *Nota.* con la fuente), resuelve `[[fig:id]]`/`[[tab:id]]` y las citas `[@clave]`/`@clave`, y **hace
+  fallar el build** si una figura/tabla no tiene título o fuente, se repite un id, una referencia no existe, una figura/tabla
+  nunca se cita o una cita no está en `references.bib`.
+- **[DECIDIDO 12-oct] `mkdocs` fijado en 1.6.x:** el equipo de Material for MkDocs advierte que MkDocs 2.0 elimina el sistema
+  de plugins y hooks (y no ofrece migración); actualizar rompería el hook.
+- **Bibliografía verificada:** toda entrada de `references.bib` viene del BibTeX oficial del DOI y se contrasta con Crossref
+  (`alucinaciones/evidencias/H-bib_verificacion_doi.py`); nunca de memoria (H-22).
 - **Design System [DECIDIDO 9-oct-2026]:** skill **`apple-design`** de Emil Kowalski (basada en las charlas de diseño de Apple, WWDC):
   https://github.com/emilkowalski/skills/tree/main/skills/apple-design. **No se copia al repositorio** (no declara licencia):
   cada integrante la instala localmente en Claude Code. Se traduce a `src/viz/theme.py` (Plotly), `src/viz/style.py`
@@ -498,7 +633,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 ## 13. Riesgos y mitigaciones
 | Riesgo | Mitigación |
 |---|---|
-| OSRM local no se logra montar a tiempo | Respaldo ORS (§7.2 bloque 2); decidir a más tardar el **sáb 3-oct** |
+| OSRM local no se logra montar a tiempo | Decidido OSRM local (T2.0, 10-oct); si T2.2 falla, contingencia ORS (§7.2 bloque 2) |
 | Peajes incompletos o mal asignados | Tabla curada + validación de 5 pares + aproximación documentada |
 | Conteo de evaluaciones inconsistente | Contador único + `test_counter.py` |
 | Subagentes que "rellenan" datos o fórmulas | Regla §0.3, verificador matemático, curador de datos, cazador |
@@ -512,7 +647,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 ## 14. Pendientes [PENDIENTE]
 1. ~~Dominio de Rosenbrock~~ → [−2.048, 2.048]ⁿ ✅
 2. ~~Fecha de corte~~ → 1-oct-2026 ✅ · ¿Se hace el escenario opcional `post_ap68`?
-3. Quién monta OSRM local (Docker, RAM suficiente) o si se usa el respaldo ORS (decidir a más tardar sáb 3-oct).
+3. ~~OSRM local vs. ORS~~ → OSRM local con Docker en la máquina del equipo Parte 2 (decidido 10-oct-2026) ✅
 4. ~~Carrocería~~ → Sedán ✅ · Acabado del Corolla Sedán 1.8 L (140H) (el curador lo propone según la ficha oficial).
 5. ~~Design System~~ → skill `apple-design` ✅ (falta la paleta de colores, T4.1).
 6. Fecha/hora confirmada de la sustentación.
@@ -528,7 +663,8 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 - OSRM — API HTTP: https://project-osrm.org/docs/v26.6.1/http · perfil de coche: https://github.com/Project-OSRM/osrm-backend/blob/master/profiles/car.lua
 - datos.gob.es — precio de carburantes: https://datos.gob.es/en/catalogo/e05068001-precio-de-carburantes-en-las-gasolineras-espanolas
 - SciPy — `differential_evolution`: https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html
-- Material for MkDocs (modo mantenimiento): https://github.com/squidfunk/mkdocs-material/issues/8523 · mkdocs-bibtex: https://pypi.org/project/mkdocs-bibtex/2.16.1
+- Material for MkDocs (modo mantenimiento): https://github.com/squidfunk/mkdocs-material/issues/8523 · aviso sobre MkDocs 2.0: https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+- Estilo APA 7 (CSL oficial): https://github.com/citation-style-language/styles/blob/master/apa.csl · Crossref REST API: https://api.crossref.org
 - Propuesta de recolección de datos del equipo Parte 2 y documento "Trabajo 1 – Punto 2 (TSP por España): decisiones y fuentes de datos" (Camila, 1-oct-2026).
 - km77 — Hyundai Tucson HEV 239 CV (citado por el equipo Parte 2 para la comparación de vehículos): https://www.km77.com/coches/hyundai/tucson/2024/estandar/hev/tucson-klass-16-t-gdi-hev-239-cv/datos
 - Menorca.info — subida de peajes 2026 y fecha de la AP-68: https://www.menorca.info/actualidad/nacional/2026/01/11/2546999/subida-llega-2026-para-autopistas-peaje-dependientes-del-gobierno.html

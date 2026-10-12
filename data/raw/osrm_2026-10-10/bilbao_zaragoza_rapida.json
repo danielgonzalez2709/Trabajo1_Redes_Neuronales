@@ -1,0 +1,4249 @@
+{
+ "data_version": "2026-10-01T20:22:06Z",
+ "code": "Ok",
+ "routes": [
+  {
+   "legs": [
+    {
+     "steps": [
+      {
+       "intersections": [
+        {
+         "classes": [
+          "restricted"
+         ],
+         "out": 0,
+         "entry": [
+          true
+         ],
+         "bearings": [
+          114
+         ],
+         "location": [
+          -2.923362,
+          43.264381
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "kaagG~}yPVkADO@G",
+       "maneuver": {
+        "bearing_after": 114,
+        "bearing_before": 0,
+        "location": [
+         -2.923362,
+         43.264381
+        ],
+        "modifier": "right",
+        "type": "depart"
+       },
+       "name": "Bernardino Alonso Udaltzainaren kalea",
+       "mode": "driving",
+       "weight": 17.4,
+       "duration": 17.4,
+       "distance": 44.5
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 2,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          195,
+          300
+         ],
+         "location": [
+          -2.922859,
+          43.264221
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "k`agGzzyPd@L`@XB@@B@@DH",
+       "maneuver": {
+        "bearing_after": 195,
+        "bearing_before": 112,
+        "location": [
+         -2.922859,
+         43.264221
+        ],
+        "modifier": "right",
+        "type": "turn"
+       },
+       "name": "Ernesto Erkoreka plaza",
+       "mode": "driving",
+       "weight": 6,
+       "duration": 6,
+       "distance": 54.3
+      },
+      {
+       "intersections": [
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          45,
+          120,
+          270
+         ],
+         "location": [
+          -2.923154,
+          43.263794
+         ]
+        },
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          90,
+          240,
+          300
+         ],
+         "location": [
+          -2.923262,
+          43.263795
+         ]
+        },
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          180,
+          330
+         ],
+         "location": [
+          -2.923413,
+          43.263656
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "u}`gGt|yPAJ?HBJ@BDDFD@@D?F?FC",
+       "maneuver": {
+        "exit": 2,
+        "bearing_after": 275,
+        "bearing_before": 227,
+        "location": [
+         -2.923154,
+         43.263794
+        ],
+        "modifier": "right",
+        "type": "roundabout"
+       },
+       "name": "Udaletxeko zubia",
+       "mode": "driving",
+       "weight": 3.7,
+       "duration": 3.7,
+       "distance": 38.2
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          210,
+          345
+         ],
+         "location": [
+          -2.923391,
+          43.263584
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          30,
+          75,
+          225
+         ],
+         "location": [
+          -2.923499,
+          43.263452
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          45,
+          225,
+          255
+         ],
+         "location": [
+          -2.924312,
+          43.262972
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          75,
+          165,
+          270,
+          345
+         ],
+         "location": [
+          -2.924519,
+          43.262926
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          90,
+          165,
+          270
+         ],
+         "location": [
+          -2.924732,
+          43.262922
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "k|`gGd~yPFFPL@BJRpAhCBL@F@R@h@?JAH@j@?@?H",
+       "maneuver": {
+        "exit": 2,
+        "bearing_after": 209,
+        "bearing_before": 158,
+        "location": [
+         -2.923391,
+         43.263584
+        ],
+        "modifier": "right",
+        "type": "exit roundabout"
+       },
+       "name": "Udaletxeko zubia",
+       "mode": "driving",
+       "weight": 19.9,
+       "duration": 19.9,
+       "distance": 167.9
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true
+         ],
+         "bearings": [
+          90,
+          255
+         ],
+         "location": [
+          -2.925115,
+          43.262918
+         ]
+        },
+        {
+         "out": 3,
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          90,
+          195,
+          285
+         ],
+         "location": [
+          -2.926269,
+          43.262773
+         ]
+        },
+        {
+         "out": 2,
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          true
+         ],
+         "bearings": [
+          15,
+          105,
+          285
+         ],
+         "location": [
+          -2.926713,
+          43.262879
+         ]
+        },
+        {
+         "out": 2,
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          15,
+          105,
+          285
+         ],
+         "location": [
+          -2.928334,
+          43.263224
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "gx`gG~hzP@PZxD?J?LI`@Kt@e@vDADGf@S|ASvAAFG^",
+       "maneuver": {
+        "bearing_after": 261,
+        "bearing_before": 262,
+        "location": [
+         -2.925115,
+         43.262918
+        ],
+        "modifier": "straight",
+        "type": "new name"
+       },
+       "name": "Ibañez de Bilbao kalea",
+       "mode": "driving",
+       "weight": 60.4,
+       "duration": 60.4,
+       "distance": 324.3
+      },
+      {
+       "intersections": [
+        {
+         "out": 2,
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          105,
+          195,
+          285
+         ],
+         "location": [
+          -2.928969,
+          43.263368
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          105,
+          195,
+          285
+         ],
+         "location": [
+          -2.929165,
+          43.262828
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "a{`gG`a{PzA^NFl@N^LNDnA`@XJ",
+       "maneuver": {
+        "bearing_after": 194,
+        "bearing_before": 286,
+        "location": [
+         -2.928969,
+         43.263368
+        ],
+        "modifier": "left",
+        "type": "turn"
+       },
+       "name": "Mazarredo zumarkalea",
+       "mode": "driving",
+       "weight": 18.1,
+       "duration": 18.1,
+       "distance": 178.1
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true
+         ],
+         "bearings": [
+          15,
+          195
+         ],
+         "location": [
+          -2.929576,
+          43.261828
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": false,
+           "indications": [
+            "left"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight",
+            "left"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          }
+         ],
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          30,
+          120,
+          210
+         ],
+         "location": [
+          -2.929956,
+          43.261218
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          45,
+          105,
+          225,
+          300
+         ],
+         "location": [
+          -2.930443,
+          43.260747
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          60,
+          150,
+          240,
+          330
+         ],
+         "location": [
+          -2.931466,
+          43.260115
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          75,
+          165,
+          255
+         ],
+         "location": [
+          -2.932258,
+          43.259841
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          75,
+          165,
+          270,
+          330
+         ],
+         "location": [
+          -2.933077,
+          43.259686
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "mq`gGzd{PF@TJb@Rh@\\LJl@h@TVX\\TZb@p@NZP\\N^BDL^JXDPHXNl@Jh@Jp@Hn@Dj@@T@XBp@@lAAPAx@IjAAX",
+       "maneuver": {
+        "bearing_after": 195,
+        "bearing_before": 196,
+        "location": [
+         -2.929576,
+         43.261828
+        ],
+        "modifier": "straight",
+        "type": "new name"
+       },
+       "name": "Urkixo zumarkalea",
+       "mode": "driving",
+       "weight": 65.7,
+       "duration": 65.7,
+       "distance": 525
+      },
+      {
+       "intersections": [
+        {
+         "out": 2,
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          105,
+          195,
+          285
+         ],
+         "location": [
+          -2.934736,
+          43.259734
+         ]
+        },
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          195,
+          285
+         ],
+         "location": [
+          -2.934916,
+          43.259284
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          105,
+          195,
+          285
+         ],
+         "location": [
+          -2.935105,
+          43.258812
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          135,
+          195,
+          315
+         ],
+         "location": [
+          -2.935493,
+          43.25791
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "id`gGbe|PNFhAZbAXXJb@Lt@Vb@N\\JVHRHHB\\HTHB@TH",
+       "maneuver": {
+        "bearing_after": 195,
+        "bearing_before": 277,
+        "location": [
+         -2.934736,
+         43.259734
+        ],
+        "modifier": "left",
+        "type": "turn"
+       },
+       "name": "Concha jeneralaren kalea",
+       "mode": "driving",
+       "weight": 36.3,
+       "duration": 36.3,
+       "distance": 274.9
+      },
+      {
+       "intersections": [
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          90,
+          195,
+          270
+         ],
+         "location": [
+          -2.935718,
+          43.257366
+         ]
+        },
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          90,
+          210,
+          270
+         ],
+         "location": [
+          -2.935741,
+          43.257306
+         ]
+        },
+        {
+         "out": 0,
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          90,
+          270
+         ],
+         "location": [
+          -2.93495,
+          43.257266
+         ]
+        },
+        {
+         "out": 1,
+         "in": 3,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          75,
+          105,
+          195,
+          270
+         ],
+         "location": [
+          -2.934705,
+          43.257247
+         ]
+        },
+        {
+         "out": 1,
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          90,
+          105,
+          285
+         ],
+         "location": [
+          -2.934561,
+          43.257231
+         ]
+        },
+        {
+         "out": 0,
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          285
+         ],
+         "location": [
+          -2.934369,
+          43.257198
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "qu_gGfk|PJBBuABu@?Q@S@[B]De@BU",
+       "maneuver": {
+        "bearing_after": 195,
+        "bearing_before": 196,
+        "location": [
+         -2.935718,
+         43.257366
+        ],
+        "modifier": "left",
+        "type": "turn"
+       },
+       "name": "Autonomia kalea",
+       "mode": "driving",
+       "weight": 24.2,
+       "duration": 24.2,
+       "distance": 128
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          90,
+          120,
+          285
+         ],
+         "location": [
+          -2.934262,
+          43.257182
+         ]
+        },
+        {
+         "out": 0,
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          150,
+          300,
+          330
+         ],
+         "location": [
+          -2.934083,
+          43.257091
+         ]
+        },
+        {
+         "out": 0,
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          165,
+          270,
+          330
+         ],
+         "location": [
+          -2.933519,
+          43.256446
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          75,
+          180,
+          270
+         ],
+         "location": [
+          -2.933315,
+          43.255854
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          105,
+          195,
+          285
+         ],
+         "location": [
+          -2.933726,
+          43.254622
+         ]
+        },
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          195,
+          285
+         ],
+         "location": [
+          -2.934112,
+          43.253659
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          60,
+          195,
+          255
+         ],
+         "location": [
+          -2.934827,
+          43.25081
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "kt_gGbb|PHSFOVUBENMHIHIJKVQZS\\OVK^KD?LAL@D?X@J@h@HbCv@@?XJJB`Bf@l@Rb@Jl@Pt@VHBF@RFB@x@Rh@HRBF@D@F@fAHh@@D@@?x@@VBL@TFNBD@VHHFXJRF",
+       "maneuver": {
+        "bearing_after": 123,
+        "bearing_before": 101,
+        "location": [
+         -2.934262,
+         43.257182
+        ],
+        "modifier": "right",
+        "type": "turn"
+       },
+       "name": "Juan de Garay kalea",
+       "mode": "driving",
+       "weight": 72.9,
+       "duration": 72.9,
+       "distance": 781.1
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          15,
+          180,
+          315
+         ],
+         "location": [
+          -2.934966,
+          43.250528
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          150,
+          195
+         ],
+         "location": [
+          -2.93499,
+          43.250325
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          15,
+          180,
+          210
+         ],
+         "location": [
+          -2.93509,
+          43.250105
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          146,
+          315,
+          318
+         ],
+         "location": [
+          -2.932713,
+          43.246084
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "yj~fGpf|PB?R@N@j@RN@D?D@ZL`@Zx@v@nAjAt@f@d@R^Nj@Ld@DZ@X@j@Ch@KZIZOPMRSLQJSJSJYJa@Fg@B[@YA_@Ae@Eg@OoAAWA[?Y@YD[FYHWJOp@eABGl@i@j@g@b@]f@]vBoAp@a@TQXUl@o@PW",
+       "maneuver": {
+        "bearing_after": 184,
+        "bearing_before": 199,
+        "location": [
+         -2.934966,
+         43.250528
+        ],
+        "modifier": "straight",
+        "type": "new name"
+       },
+       "destinations": "BI-10",
+       "name": "",
+       "mode": "driving",
+       "weight": 82.8,
+       "duration": 82.8,
+       "distance": 1052.8
+      },
+      {
+       "intersections": [
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          131,
+          141,
+          323
+         ],
+         "location": [
+          -2.930873,
+          43.243836
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "_a}fG|l{Pb@w@To@Z}@j@mBd@aB",
+       "maneuver": {
+        "bearing_after": 130,
+        "bearing_before": 142,
+        "location": [
+         -2.930873,
+         43.243836
+        ],
+        "modifier": "slight left",
+        "type": "fork"
+       },
+       "destinations": "A-8, Donostia-San Sebastian, AP-68, Vitoria-Gasteiz",
+       "name": "",
+       "mode": "driving",
+       "weight": 13.4,
+       "duration": 13.4,
+       "distance": 178.8
+      },
+      {
+       "intersections": [
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          131,
+          298,
+          304
+         ],
+         "location": [
+          -2.929001,
+          43.242999
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "maneuver": {
+        "bearing_after": 130,
+        "bearing_before": 116,
+        "location": [
+         -2.929001,
+         43.242999
+        ],
+        "modifier": "slight left",
+        "type": "merge"
+       },
+       "geometry": "w{|fGfa{PVi@Tc@^k@X]X[d@c@VQb@[TMd@Ut@Yb@Ov@Q",
+       "ref": "BI-10",
+       "name": "Bilboko hegoaldeko ingurabidea",
+       "mode": "driving",
+       "weight": 16.4,
+       "duration": 16.4,
+       "distance": 288.8
+      },
+      {
+       "intersections": [
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          150,
+          330,
+          345
+         ],
+         "location": [
+          -2.927206,
+          43.240826
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "maneuver": {
+        "bearing_after": 156,
+        "bearing_before": 165,
+        "location": [
+         -2.927206,
+         43.240826
+        ],
+        "modifier": "straight",
+        "type": "new name"
+       },
+       "geometry": "en|fG`vzP`Ac@p@[p@_@t@i@v@m@x@y@d@o@t@qAd@mANq@N{@JqANoDHkBPyAd@mBr@gB|@mAz@u@bEeDt@y@r@cAh@aAn@qA",
+       "ref": "A-8",
+       "name": "Kantauriko autobidea",
+       "mode": "driving",
+       "weight": 57.8,
+       "duration": 57.8,
+       "distance": 1029.8
+      },
+      {
+       "intersections": [
+        {
+         "lanes": [
+          {
+           "valid": false,
+           "indications": [
+            "slight left"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "slight left"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "slight right"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "slight right"
+           ]
+          }
+         ],
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          120,
+          135,
+          315
+         ],
+         "location": [
+          -2.9182,
+          43.235052
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          106,
+          283,
+          291
+         ],
+         "location": [
+          -2.90466,
+          43.217082
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "slight right"
+           ]
+          }
+         ],
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          10,
+          193,
+          197
+         ],
+         "location": [
+          -2.893002,
+          43.202583
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          23,
+          32,
+          207
+         ],
+         "location": [
+          -2.895941,
+          43.198558
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          165,
+          180,
+          345
+         ],
+         "location": [
+          -2.89685,
+          43.193224
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "tunnel",
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          165,
+          345
+         ],
+         "location": [
+          -2.896073,
+          43.191041
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          165,
+          345
+         ],
+         "location": [
+          -2.895967,
+          43.190824
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          165,
+          330,
+          345
+         ],
+         "location": [
+          -2.895483,
+          43.189894
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          60,
+          240,
+          255
+         ],
+         "location": [
+          -2.929943,
+          43.157273
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          45,
+          225,
+          240
+         ],
+         "location": [
+          -2.935854,
+          43.154609
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          0,
+          15,
+          195
+         ],
+         "location": [
+          -2.938277,
+          43.151014
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          165,
+          180,
+          345
+         ],
+         "location": [
+          -2.936628,
+          43.141751
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          150,
+          300,
+          330
+         ],
+         "location": [
+          -2.935113,
+          43.13816
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          330
+         ],
+         "location": [
+          -2.919676,
+          43.038585
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          136,
+          310,
+          317
+         ],
+         "location": [
+          -2.917016,
+          43.0362
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          149,
+          323,
+          333
+         ],
+         "location": [
+          -2.902123,
+          43.010218
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          345
+         ],
+         "location": [
+          -2.877686,
+          42.969952
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          0,
+          15,
+          195
+         ],
+         "location": [
+          -2.869427,
+          42.96063
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          180,
+          210
+         ],
+         "location": [
+          -2.893945,
+          42.879961
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          165,
+          330
+         ],
+         "location": [
+          -2.894017,
+          42.875477
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          180,
+          210
+         ],
+         "location": [
+          -2.893292,
+          42.82154
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          30,
+          45,
+          225
+         ],
+         "location": [
+          -2.894773,
+          42.819188
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          45,
+          240,
+          255
+         ],
+         "location": [
+          -2.910051,
+          42.74413
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          15,
+          30,
+          210
+         ],
+         "location": [
+          -2.916158,
+          42.740215
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "right"
+           ]
+          }
+         ],
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          330
+         ],
+         "location": [
+          -2.904756,
+          42.71289
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          165,
+          330,
+          345
+         ],
+         "location": [
+          -2.901445,
+          42.705146
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          180,
+          210
+         ],
+         "location": [
+          -2.889129,
+          42.679505
+         ]
+        },
+        {
+         "out": 2,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          false,
+          false,
+          true
+         ],
+         "bearings": [
+          0,
+          15,
+          195
+         ],
+         "location": [
+          -2.890243,
+          42.675178
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          15,
+          195,
+          210
+         ],
+         "location": [
+          -2.855156,
+          42.618329
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          180,
+          345
+         ],
+         "location": [
+          -2.85637,
+          42.61538
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          330
+         ],
+         "location": [
+          -2.878211,
+          42.561901
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          124,
+          299,
+          307
+         ],
+         "location": [
+          -2.874963,
+          42.559351
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          330
+         ],
+         "location": [
+          -2.844511,
+          42.545217
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          330
+         ],
+         "location": [
+          -2.844316,
+          42.544984
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          60,
+          75,
+          240
+         ],
+         "location": [
+          -2.821303,
+          42.537244
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          80,
+          253,
+          256
+         ],
+         "location": [
+          -2.814004,
+          42.539317
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          147,
+          156,
+          329
+         ],
+         "location": [
+          -2.648051,
+          42.472795
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          168,
+          345,
+          349
+         ],
+         "location": [
+          -2.646324,
+          42.46906
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          117,
+          125,
+          298
+         ],
+         "location": [
+          -2.564311,
+          42.44698
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          137,
+          315,
+          317
+         ],
+         "location": [
+          -2.557915,
+          42.443172
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          86,
+          96,
+          274
+         ],
+         "location": [
+          -2.496009,
+          42.429659
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          79,
+          252,
+          257
+         ],
+         "location": [
+          -2.4875,
+          42.43143
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          75,
+          90,
+          270
+         ],
+         "location": [
+          -2.468765,
+          42.432453
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          89,
+          265,
+          270
+         ],
+         "location": [
+          -2.46066,
+          42.432636
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          58,
+          59,
+          240
+         ],
+         "location": [
+          -2.424418,
+          42.437884
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "tunnel",
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          45,
+          225
+         ],
+         "location": [
+          -2.418941,
+          42.44117
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          45,
+          225
+         ],
+         "location": [
+          -2.418809,
+          42.441273
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          32,
+          211,
+          211
+         ],
+         "location": [
+          -2.415438,
+          42.444701
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          120,
+          300
+         ],
+         "location": [
+          -2.374576,
+          42.452186
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          105,
+          270,
+          285
+         ],
+         "location": [
+          -2.362899,
+          42.449775
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          90,
+          105,
+          270
+         ],
+         "location": [
+          -2.341435,
+          42.446315
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          65,
+          240,
+          244
+         ],
+         "location": [
+          -2.335449,
+          42.447727
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "slight right"
+           ]
+          }
+         ],
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          135,
+          150,
+          315
+         ],
+         "location": [
+          -2.293683,
+          42.438395
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "slight right"
+           ]
+          }
+         ],
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          135,
+          311,
+          316
+         ],
+         "location": [
+          -2.288773,
+          42.43405
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          120,
+          285
+         ],
+         "location": [
+          -2.188299,
+          42.387749
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          108,
+          283,
+          289
+         ],
+         "location": [
+          -2.180942,
+          42.385824
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          120,
+          135,
+          300
+         ],
+         "location": [
+          -2.080458,
+          42.371129
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          135,
+          311,
+          314
+         ],
+         "location": [
+          -2.074164,
+          42.367171
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          135,
+          150,
+          315
+         ],
+         "location": [
+          -2.070118,
+          42.363933
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          135,
+          300,
+          315
+         ],
+         "location": [
+          -2.064683,
+          42.359315
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          159,
+          167,
+          342
+         ],
+         "location": [
+          -1.983668,
+          42.307873
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          150,
+          330,
+          333
+         ],
+         "location": [
+          -1.980855,
+          42.303061
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          330
+         ],
+         "location": [
+          -1.972642,
+          42.294826
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          180,
+          195
+         ],
+         "location": [
+          -1.901211,
+          42.24
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          165,
+          345
+         ],
+         "location": [
+          -1.901132,
+          42.233126
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          135,
+          150,
+          330
+         ],
+         "location": [
+          -1.828689,
+          42.166711
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          132,
+          311,
+          315
+         ],
+         "location": [
+          -1.822054,
+          42.161247
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          120,
+          135,
+          315
+         ],
+         "location": [
+          -1.775299,
+          42.136542
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          120,
+          285,
+          300
+         ],
+         "location": [
+          -1.769269,
+          42.133573
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          315
+         ],
+         "location": [
+          -1.739951,
+          42.118502
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          135,
+          300,
+          330
+         ],
+         "location": [
+          -1.735512,
+          42.113075
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          150,
+          165,
+          330
+         ],
+         "location": [
+          -1.723597,
+          42.097718
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          150,
+          315,
+          330
+         ],
+         "location": [
+          -1.718883,
+          42.090967
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          165,
+          180,
+          345
+         ],
+         "location": [
+          -1.691301,
+          42.069154
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          176,
+          354,
+          358
+         ],
+         "location": [
+          -1.68996,
+          42.062182
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          116,
+          125,
+          297
+         ],
+         "location": [
+          -1.636583,
+          42.032225
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          124,
+          294,
+          304
+         ],
+         "location": [
+          -1.632841,
+          42.030666
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false
+         ],
+         "bearings": [
+          120,
+          300
+         ],
+         "location": [
+          -1.632498,
+          42.030494
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          120,
+          285
+         ],
+         "location": [
+          -1.605478,
+          42.014463
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          120,
+          285,
+          300
+         ],
+         "location": [
+          -1.595918,
+          42.011621
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          117,
+          121,
+          297
+         ],
+         "location": [
+          -1.464534,
+          41.911922
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          123,
+          301,
+          303
+         ],
+         "location": [
+          -1.45566,
+          41.908154
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "right"
+           ]
+          }
+         ],
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          130,
+          132,
+          311
+         ],
+         "location": [
+          -1.379244,
+          41.853328
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          122,
+          301,
+          304
+         ],
+         "location": [
+          -1.373946,
+          41.850385
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          120,
+          285
+         ],
+         "location": [
+          -1.324791,
+          41.834539
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          109,
+          285,
+          288
+         ],
+         "location": [
+          -1.312718,
+          41.832052
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          162,
+          172,
+          342
+         ],
+         "location": [
+          -1.261787,
+          41.801982
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          153,
+          334,
+          337
+         ],
+         "location": [
+          -1.2585,
+          41.794042
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          90,
+          105,
+          270
+         ],
+         "location": [
+          -1.173702,
+          41.773823
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          95,
+          274,
+          276
+         ],
+         "location": [
+          -1.167285,
+          41.773463
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          75,
+          90,
+          255
+         ],
+         "location": [
+          -1.149927,
+          41.77467
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          75,
+          240,
+          255
+         ],
+         "location": [
+          -1.142501,
+          41.776181
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          113,
+          287,
+          291
+         ],
+         "location": [
+          -1.116168,
+          41.775758
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          120,
+          135,
+          300
+         ],
+         "location": [
+          -1.034374,
+          41.732379
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "toll",
+          "motorway"
+         ],
+         "in": 1,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          124,
+          298,
+          302
+         ],
+         "location": [
+          -1.024665,
+          41.728291
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          120,
+          295,
+          301
+         ],
+         "location": [
+          -0.95614,
+          41.686847
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "maneuver": {
+        "bearing_after": 130,
+        "bearing_before": 129,
+        "location": [
+         -2.9182,
+         43.235052
+        ],
+        "modifier": "slight right",
+        "type": "fork"
+       },
+       "destinations": "AP-68: Vitoria-Gasteiz, Burgos",
+       "geometry": "aj{fGv}xPj@_AZm@pAaCl@y@n@y@pAuA`Ay@ZUt@e@t@c@p@Yp@Yj@OZGb@I`@GZC^Ct@Ad@?b@Bj@F|@Jp@Lj@NtAd@~Bt@x@Vz@Rl@Jp@J~@Hp@@r@?r@At@Gv@Kb@Gn@Ol@On@Ul@Wj@Yf@YTO^Wx@q@n@m@n@m@bAgA`AiAx@aAlAwAz@gAlA_BPWl@y@Za@r@gA^m@b@o@rAyBv@wA^q@Zm@h@cA^{@Tk@\\y@Rg@Nc@^kAV}@Pm@VeATaAZ}AJk@PgAFe@Ho@LiAFa@Fq@LqAHmAZiDHgAJcADa@F_@Hm@Fa@Fc@Jk@Jg@Lk@Tw@H]J_@Pe@L]Pa@b@cA^u@^q@V_@`@i@Za@^a@f@k@l@g@f@_@r@e@\\Uj@Uf@Uj@S^Kb@Of@Kl@Il@Ij@CtAGhAIhAIv@In@KrAYbBk@`@Q^Q`@Sp@a@`@Un@_@z@m@^S\\UbAg@l@Wz@[|@Wh@On@KXEZE`@E^E`@Eb@ARAz@?`AB|@DnEp@tAZnAf@v@ZzBpAjCtBjAfAjBdBnAfAt@l@v@d@~@f@`A^|C~@pA^pARnCL~CE~Fs@nCo@lDw@tBs@j@SxDaB|BeAdCs@v@OdAObAGtBEdBDfCTnCh@~Bx@`CfATLfAt@j@d@hAfAj@n@p@v@l@p@VXb@f@hAjARRhA`A~AlAp@d@tA`Ap@d@v@j@ZTr@l@jAfAXZpAzAnAbB|@xAlAvBfAbCf@vAfB`G`@hB^xB\\|BTvBRnBd@zFRpBXrBZhB^hBj@tBX`A\\bAdAjC`@~@h@lAb@v@d@r@bBzBt@|@hAlAx@t@`At@tChBhChAlBj@|Bf@bEp@f@LfBd@fBp@fHtE|ElF|AfCnBjDjAvBn@fAp@hAz@nAdAtArAzAtAvAhAnA`BnBn@|@`AzAdAnBh@~@`@x@h@tAv@bCj@jBPl@xAhHl@bCZrA^pA^jAZz@d@lAt@|AdAjB~AzB~@fAv@t@b@^d@`@nA~@bAl@nAp@zAn@r@Xp@RfBf@vATtANdBLnADlB?|AGhBO~ASfC_@fCe@lGqArDy@~DeAnD_A~E}An@Ud@Iv@E`@Eh@Gd@Ij@SNEJGt@Wn@a@j@c@RSPOh@c@jAk@nAg@tEuBxAy@~A}@v@i@n@e@~AuAbBcBxAgBh@s@v@oA`AeBb@y@n@qA^_Ax@}BnBoFr@oBl@sAr@}At@sAf@y@d@s@tAkBnByBxDiEt@cAr@aAr@gAl@eArCeF~@}AnAkBt@_Ar@y@jAmAlAeAjA{@jAw@bAk@`Ae@t@[bA_@fA[lAYxAWtAQvBQrBOtAM~@MrAUtA[fGeBlCo@bB[vBY~AMx@GrACzAAxABzAF`E`@`Dj@fDp@`BZvATpANvAHdCFlCCxCCrB@|@DpAJfALlAPhAVlA^tAf@rAj@xBlAxCbBdAh@xAn@vAh@tA^hB`@~B\\jBP~AJxAH`B@xB?xBIdBK`CWzB]xCm@`AU~@YvAe@`CeAnB_A`CmAdE_CzDwBbAe@|@]tAa@pAYvAOpAE`A?`AFnALz@PhAZbGzB~@\\dAZ`Cp@dBf@rAf@zAv@|@l@r@j@n@l@bAjAjBjCdB`Cz@bA~@z@rAdAjCbB|@p@v@l@\\XZ\\f@j@fCfD~AxBx@|@r@r@~@x@`An@nBrApA|@z@p@dA`A~@bAt@bAr@jAr@rAlCtFbAjBv@nAdArAz@|@dAz@pA|@nAp@jA`@rA\\pARhAJ`A@zB@xB?vADvANtAXvAb@xEpB`AZrA\\fARvAJn@Bx@?v@E`AGzAYdAYhAa@lAm@rA{@t@m@t@u@x@}@r@_A|@qAbBqC|AsChBkD`AeBp@iAt@gA~@oAhAmAdAeAtAeApA}@vAw@fAe@jAe@~@YlAWzA[lCc@|AYpBk@lBs@nAm@vAy@rAy@|@k@fBcAjAi@~Ao@fBi@pBm@pBu@bAe@bAk@vA_AHGxAsAfAgAtA_BzAmB~BaDbAyA~@mA`AoAzBgCxBuBhCqBrCkBlDgBpDsAjBi@dB_@tB]zAM|AGdACpABbBHrBR~Dn@`Fn@lBPrADvA@l@Ar@EtAOz@Q`AWt@YjAk@pAw@dByA|AyA|AeBzAiBfDqEbBcCbFiH|BwCrB_CrBqBt@q@rAiAlA{@~A}@lBq@jA]jAc@~BcAfAq@x@m@fAcAz@_Aj@{@j@}@tBuD~@_Bx@iAl@s@h@k@vBgB~A_A`D}ApAs@vAaAlAcApAwA`AoAjAmB|@gBv@iBd@sAh@}AlCyIfBwFhA}C~@_C~AuDnBgEtA_Dp@gBr@wBj@iBv@sCr@mCt@qCh@kBh@eB`@kAb@eAj@kAb@{@h@}@h@y@d@o@z@cAPQf@k@hAgA`EkDnCeCpCwCdB{BpAgBvAwBhBwCTa@|BgDx@eA`AcA~@w@l@c@bAm@r@]z@YxAa@tASt@Gp@CvA?lADrAJ~@NpAXt@TfAd@|@f@f@Zf@`@`Ax@dAjA|AlBnA~AtAzAhB`B~@n@dAn@zG|CdDfBtAfAlAjAxC`DlAdArA~@|Ar@`Bh@tAZtARdBHvAAz@I`AM|A[hA_@rAc@v@m@v@i@p@i@`@_@l@o@r@}@b@o@`@o@~@gBhAwCl@mB~AsFt@sBt@_Bz@yAn@}@X]l@q@VWZYn@i@l@c@z@e@~@c@z@YlA[fAQhAIjAE~@@xAJ|AVt@T~Ah@rAr@fAt@zApAzA|A|AjBjA~AzFnItAjB`BlBvBxBbCrB`CfB~DpCpClBfAx@hA|@~@v@jAfApBxBn@x@x@jAdAdBv@xAtA|Cr@fBr@rBxArE~ApFdBtFhBdF|AxDfBnDnAtB|AvBrA|AzA|AvBdBdC|AfAj@bAb@nC`AlCj@pARv@JjBNhBJtCLnADrBHtCLxAJpALvBVvB^rAVnAZvBj@bBh@~Aj@dDxApAp@fBdAlAx@nA~@fBxAbB~AlApAnArA|EnGxAnB`BnB`A`AtAnAbBnAfAr@fB~@lAf@~Af@pBh@bBZ|APlDP`A@dAAxAIxAM|AUxA]vBo@nAe@tAq@jBeAfCcB`DgCtJyInE{DnB{AxDcCrBcAjBs@~Ae@tAYfAQjAMrCOpC?xCPxC`@xCj@dC\\lBN|AFtA?`BEzAK~AU~@OdAWhA[rAe@tB_A`DiBzEsC~CaBlGmCtBu@pCw@nCm@nASbBWlBWjBOvCOvBEvAAzA@pDJhBLvBRjBV~B`@xH~ApEdAb@Hp@LhDZ~DT~CBzDKxD[bBYrCk@~Cw@hD}@vBa@xAS|AMfBCdB?`CL`BRxB`@pDt@nCh@jC`@x@JdAL~CVtAFrCF|C?tCIzCSzC[jFm@xEe@v@EbBKzAEbBAtB@zBFzBHtCRxCNlCLl@@~@BnCA|ACpBG~E_@tC]zC]pBOlBEzB@bCP~ATrB`@lCt@bAX`AXnAZz@RtATxARrBRh@D|@BbBBfAA~@EF?b@Ez@I|AQvASzAO|@Ex@ChA@jAFvAFN?`@?f@?v@Cv@Gr@Gt@Eh@A`@Ab@@b@F^F`@LZLp@\\dAf@z@h@r@`@v@\\d@Pl@Nd@Fd@Dj@Bl@AxAEzAAz@BhANdCb@tAT|@Dx@@lAKv@O~@[~@e@f@_@l@g@hAkAjAkAr@k@p@c@l@[f@Qf@Q~@Q|@EbA?X@l@HdATt@Zv@^`Ap@z@p@zAdB|@lAh@|@h@bAr@dBt@nBb@fA\\n@Xj@l@bAp@`Aj@p@l@n@n@n@~AvAz@z@r@~@l@|@pC~EnB~CfAvAz@bA`AbAfB~AjAz@pAz@tAr@|Ap@vAf@~Af@\\Hp@NrARxALbBJbB@xACx@EbAIvG{@xAQ|AMz@C|@Av@?fABfBFxAF~@BfA?~@?nBI~@I~@KzBa@~Bo@tBy@bAe@jAo@v@g@x@k@jAaArAmAbEmEv@y@t@q@fA_AtAaAt@e@vAw@jBw@`Bk@bBc@pB[`BQ~AKxBAlADd@BhAH|ARrAVnAZtA`@xAl@pAn@rAt@nA|@jBzAtAvApAzAd@l@hAbBxCbF~@|ArApBnA|Ar@x@r@p@\\Z\\ZjAz@pBnAzAv@rAj@tAf@~Ab@bCd@hBRnAFdABjB@z@EhAIrAOdAQdBg@~Ak@zAs@pAy@tAcAfAcAtA{AfAuA`A{AzCcF`AqAp@{@p@s@v@s@~@w@pBqAjB{@zAk@dAYjB]pAOrAGvAAtADnBNbBZbBb@vAh@zAt@vA|@jA|@lAdAdAjAzAjBzAnBlApArBhB|AbAdB~@dBp@jA\\rAZjBVjBL`B@hBGzAQrB[vEs@|DQ`DLpC`@bErAdFnCtEzEdBpC|@fBj@nAp@fBdB`F~A~Dl@tAvA`C|A~BdBvB|A`B`Ax@dDhCfAz@`A|@|@z@~@bAfAtAxE`Hz@fA`AjAHJlAnA~@x@pAbA|AbAvAv@xB|@nAd@fBb@lATtARfBN~ADdB?lCI~BQxC[pBWzBa@zAa@|Ag@rB_AbB}@~AgAvAiArBoB`AkAv@cAnAkB|@_B`AoBx@mBr@mBn@oBn@kC\\wAZaBjAwFh@yBh@gBp@oBz@uBh@kAr@wAhAoB|AgCjBqCxAqBbBmBjBoBrBqB`CsBjBuAtDaCr@g@lAs@rAm@nBq@~Ac@rBc@zB]|B[rBa@xAa@nBq@fEgBbAe@lDsA`GqBtBq@`C_ApAo@bBcAxAaAn@g@jAiA~AcBjAyAx@kA~@}AbEwHvA{B`AsAh@q@p@w@lAmAbA}@`Au@jAw@jAo@`Ag@lAe@dBm@rA[|AYfBUxAG|AEvA?zAFtAJhCXfCVtAHlBBpA?~AIzAKzAUlBa@nBm@pAg@pDcBhDcB~Am@rA_@ZKrAY|AUj@GhBM~BAhA?vAHdAHlAPlB^jFrAnAX`Ch@xDp@xDd@lBPpBJbCJ|CFtC?dFIrCKpCKhCQdCSfD]rDe@vEu@hFcAtEiAtCw@`DcAvDqAvDyAfDyAhDaBdDcBlDqB~CoB~CuBxCyBvC}BpBcBnBcBtBqBxAyA`BiB|AgBt@cAr@_Ar@cAxAyBrA{BjAwB|A_DnBsEjA{Cv@}Bx@iCp@aCj@{Bf@qBf@aCj@wC^yB\\{Bb@yCz@qFf@oC`@uB\\sAf@iBh@aBp@aBj@oAn@kAfAeBfA{AhAyAjAwAvA{A|BwBhA_ApA_AjAw@tAy@pBeAlCmA`CaAxBu@~Ag@vAa@NEfBc@pB]dBWt@I~@IzBKbAAvA@pBHfBNbD\\jAJrAF`AB~@Ev@Ex@MbAU|@[t@]h@Yd@YpA}@rAeAv@k@p@c@nAo@x@YnA[dAOhAG`AAlADv@Jv@Lt@R`DvA`CbAfBx@~Ah@|@Xl@Nj@Jr@Jv@FpAFpDTv@HdALzAZzAb@tAd@lDvA|Aj@bAZlAZzAXrB\\`BN`BH~ABvBA`AG|BQ|AQzAY|@St@StBq@bCy@v@YrAc@zA_@xA[xAW`BIbBArADx@Hz@JbB\\jBf@dA^pAj@nAn@z@h@dAr@z@r@fA~@|@~@~@bAdArAfAzA~@pAzCnE`ArAjA|ApBzBnApAn@l@t@p@vB`BbAr@bAn@dAl@hAj@nCnAlHnClAd@nAl@dAd@jAn@bC|ApBvAnBbBpBpBn@n@p@v@lA~AdAvAhBpCrCpEZf@hAbBfA|AbAtAvAjBzBlCjBlB`BvAfBxAnA`A`BhA~@h@lAn@jBx@vAj@xAd@vA`@dCl@vCh@pCb@xC\\hCTlCRrAFjBDfB?~AAdCMpBQtB[xAYzBq@t@Wz@a@hB}@vDaCdB_BdBmBv@aAv@gAr@iAn@gA|@gB^w@xAsDtDkJlCeG|A_DzAsCzG}L~A}Cn@yAj@wA`AiCj@eBx@qC|@}Db@sB\\oBp@iElBaOb@_Db@{CnAsHpAwGnAsF~@iDlAyDhAyChAmCvAwC~@aBbCwDnBiC`BmBjBkBzAsAn@e@dBsAtDeCjCeBbCiBdBwA|AyAhBuB|AmBnAcBfAaB`AcBx@}AhAaCbA_C~@eCr@sBx@uCv@yCj@sCj@eD^yCZ_DNyBNcDFaD@}DC_CGcCQkDK}AQgBMkAUiB[qBa@sBa@kBq@wCcAyDoA_FgAyE[{A]kBi@aDc@yC]uC]eDSyCSqEEaD@wBDoBDaBLcCL}AXaC`@wCZaBt@cDbDcMh@sC`@mCVeCPuBJmBVsEJgBLaBNqBT}B\\uC`@gCb@kCf@_Cl@gCd@gBd@}Av@{Bj@wAl@qAt@yAdAeBf@{@r@}@~@gAzA_BlB_BjA{@`Am@p@_@`Bs@tBy@nDoApAi@nAm@pAu@lAw@v@o@hA}@hAiAbAmA~@kApAmBpA}BjAgCp@cBj@aB`@uAb@aB^cBZ}AXkBZ_CTcCNmCJ}CBaC?}BCoCK{F?qB?cBDcCHcBPyCRsBXuB\\}Bh@iCh@qBx@qCp@gBp@_Bt@}AlAwBrAuBbAsAtAeBxAaBbMiMlCqCdBoBzBkC`CyCpDgFhIsMjFuLjFoNbBiFtCoIjEwL`BkEjAkCj@kAxAqDfAiCzA_DpCwFfLmT`BeDhA}BfAcCtBcFx@yBv@uBpA}DpAkElAqE`AyD~@gE~@qEx@mEr@iEdCqNz@wEr@iDr@aDv@_Dz@{Cv@kCx@}B|@eCnA}CpAqC`AkB`AoB`CkEnHmMfDcGfC_FpBgEpA{C`BgEfAwCdA_DnA}DjAiEjAwEjAkFdAiFj@_DpAgInBgMh@aDv@{Dv@mDz@aD`AiDlAmDjAcDbEsKxAcE~@oCdAoD~@yDz@kEt@{Ed@}Db@qET_EH_CHyBFeE?}BAeDKqEQuDSkDm@aHw@wIYaEQmDK}DCgD@yBPqDV_DRuB`@sC`@yBv@kDd@cBbAwCx@oB|A_DhB}CjCaE~@oAdAuAbAmA|BeChAiA|BeBx@q@d@]dAm@bAe@~Aq@nAa@|Aa@rF_A`B[fCk@v@WfDsAdBaAvCqBdEcElCyDtAaChB}DtBsGrAeGz@sGn@yH^cGr@aSPkLByFGuFOuDYuD_@aDo@cEgAwE{AyEiFaNuBmGiAsEo@oDs@oG[kFEmGHqERyD^_Ed@iD`AuEdAyDdCsGrDqGfGaIbGqKlDqKxBeKfAuJVoHD{JWkJUqNTkIt@sG^}B^kB`AwDr@yBdAqCrBgEtAqBbAuArA_B~CwC|DqCrDoCvAsAbBoBt@}@|@sA`CmEvA_DjAqDbBsGxAaGRiAv@aDjBwGp@cCpBuFxBaFzEcJ~F}Hn@}@nJaJ~GcGtDgDrDmDdAiApByBxBoChBmCz@uAzAiCxAwC~@oBp@_BxAyDfAgDp@_CfAkEz@yDl@oDl@aEf@}D\\oDj@yGb@uEd@}DZsBz@qE\\kB`@eBbDyKfBoINy@\\wBXwBVcDHiAFuAD{ADmB?iBAkBEoAEqAGoAKsAKmAMqAQqAQiASoAUkAWiAWkAYkAYkAWkAUmAUmASqAOkAOqAIeAKwAIqAEsAEwAEqACqAEqAEsAEoAIsAMqAKoAOqAOoAOmAQoAOoAMoAKoAMeBGsAEuAEsAAuA@sA@sADwADqAHuAHsALsANqARqAPoATqATmAToAToARoAPqAPqALqALuAHqAFsALsHEuBCqAGwAGsAKqAMsAOoAQsASoAUqAc@uBWmAq@}CWkAWsASmASsAMoAMqAKmAIwAEwAEsAAqA?wA?sABwADsAFqAPsEFuADsADqABuA@uA@}BAyAAsAG{BEuAK}BM{BSqC_@sEk@iHYiDO}BO{BKmBU}HQmDAm@CoACyAAuAAaDAyBAmE?gIAgI?oAAwBCsFCuFG}GE_DE}BGgDOyGKkEMiEIyBIuBc@uKOaDOaDUeEWgESaDSyCU_D[gEQuB]eE]cEa@iE[}C]aDUuB_@_D_@{Ci@_E[wBc@wCg@yCUqA_@oBa@uBi@{Be@oBe@mBq@aCi@kBk@gB_AiCq@gBs@cBs@aBu@{Ae@aAy@{A{@{A}@{A}@sAiBiCSYwBmCOQi@m@y@{@gAgAq@q@kAcAaByAcBsAu@k@eBuAkA_AkA_As@k@q@m@q@k@mAgAeAaAo@q@o@q@q@s@i@q@m@s@k@w@m@u@i@y@k@y@i@y@g@y@g@}@g@{@e@_Ae@_Aa@{@c@aAa@aAa@cAa@aA_@eA]cA]gA]eA[gAYiAYiAYgAWkAWiAUkASkASkAQmAQmAQmAOmAMmAMmAMqAKoAIoAIoAIoAGoAEoAEqAEqAAoAAqA?qA@qABqADoADmAHsALoALmAPmAPmATkATkA\\uBRkANmALoAHoAFqABmA?uAAqACqAGoAIoAMoAMoAMoAKoAKmAGoAGqAEqACoA?oA?qABqABqADoAHoAHmAJqANoALkAPoAPmARkAPkA|@qE~@oERcAn@wCtAgH^sB\\uB\\sBZwB`@}CXcC`@mDRyBT_DT}CRaD\\{GP_DL{BLyBNwBPwBTuBTuBVwBXuB`@yCl@eE`@{CVyBPqBJqAHoAHoAFsADmAJaCHsBDqAFoAFmAHoAHoALsAJiANqANiANoAPmARkA\\wBRkARkAPmALmALsARgEBuB?m@AoACoAGqAIoAMqAOoAQkAUmAWmAYeAw@qC[iA[iAYgAWiAYiAUkAUkASmAg@iDWeCS_DImCEkCBgDTqGH}IQuJMkLVgJ~@sH~AaI|CiJtCsGnFqJpDmGx@cB~DaKv@uCtBgIvAoIfAmKFm@j@{GTwBToBPoARmATkATgAd@mBj@iBl@iB^aA`@aAb@aAv@}Af@cAlAwBT]tAuB~AuBj@o@dAmAfAgAfAiA~@y@z@w@lAmAzAiBfAyAh@w@`AyAnA{Bf@aA`@aAv@kBn@eBnB}F`La_@`JmWpCoHbDsH~CuHvCeGhG_KvDyEbFgFrFyElE{CpJeF~HgE`OyIxEoD~CaCpHuGpHkHlFyFpDeEdHeHbH_G`DeCpMgLfFeGdC{DnCkFpBgFnBmG^uAtAeFfCqIrCwHhDaHnF{KtC_HpBqGdB_H`BmJ`AuHXeEV{FNaG@eGGaFSaE]oF_CcVqA_NaAuNYqL?uPNcD^gHf@qH|@mIrAkKpA{H`DoQtEyUzCkQdFsZJq@xAaKbAcJJmC@WBq@FuE?sEOqDe@{Fs@sEoAcGmA_EyAsDiCaFqEeIwB_Go@}Bi@qBcAwF_AwJy@oMm@qM_@qOMiSDiQ@yBb@oRx@aS~AoRnAsJjBuLrC_NhEsOvGkS~F_RdEyM|D}NpC}KhCyLXuA~AqItBoMxFg_@pBsMj@wDtDqSrCkNfDgNxCyKbDiK|FcPtBoF~AmDz@mBdByD|ByExCyFvCiFbCaE|BqDt@iAdNeRjBwBfLyNpNeQhEiF`FwGbFmH`E_GrIqMxHiMnG{KtEyIfF_KnHmOrGgOzE}MpFyPdEoOvJ_a@~Jw`@nGcTvDmKjDkJ~EeL~EaKhW{c@pIcQrGsO`E_LdEqMpHoV|BuGhD{I`CyEvBaDbGuGdGsEvDgBnDqAxCm@vQaCpCc@xFqA|Cw@dDeAbQoH|JaGtCsB~AqAbCqB`D}CbCeCfBmBlBwBpE}FjCeDxBmCp@s@pAkAhAy@pA}@zFmDdCgBjC{BjCeDnBwCbDgG`BgFpBoJv@kHtA{Y`@oGj@_FnBiMrEwRzEcQhIyRxG{MdF}HnNsR`P_PlIoH|PyLfYyOrn@eZjJ{G`KwLzIoMpF_LhHyQdG{TjCmKnBmGvFcK~AaBj@o@~@cAnD}CfDmB~EoBxEy@tEUrCDjCFdCFdLf@vKQxKm@\\AjHiA`LoBdGiCpK{DpJmFnHmFjEiDhE{DzEkF|E_GbGmI|FaKfEwInD}I~EkNdEaOvFySxFsSlEoNbFcOhBmFhHoRlSsf@rHuOvK}PtNmQvJ}J~IaI|D_D`FmDzHiFnDsBvIuErFeCxCsAlLiEfEwAtHiCtHwClHeDbXaP`KaHdUsSr@y@pLeN~EoG`GuIzBiDrDkGdLoT~DyI|DyJzA_ExBoGpA}DhAqDzAeFbBiG`B}GtAaG|AsHjAiGfCmOpBuLf@qCdAoFvAeG`@_BhAsDpA{DnBaFrAyCfBmDjAwBbBmCfCmDdB{BnCyCdCgCxCmCjCaCpCgChDmDtA_B~ByCnAgB~DsGlD}GlCuF`BsDr@}AjBqEzB{FrB{F~AyElBeGrBcHfDqLbCaI|@sCfA}CpAaD`A{BjBsD|AgCxB}ChFaH|AyBpAsBtAiC`C}EdAoCbAyCfA}DJc@bAmEdCmLz@oDv@oCvBiGj@uAn@uAtAsChB_DbBcCrEqFpAoArD_DlCiBnFgDdBgAnB{AbCsB|A}A\\_@`@a@~BiCzFmGrGmG~EoErEsDdIgG~B_BbAq@|EuCvDwBxEeClEuBRK~OqHbAk@pFoCvC}AxIaF`EoCfGkErAwAlGaFnIyHfJaKtFkHjH{JhKePhLiSvIaRbL}X~AgDhBmDbBsC`BgCtAiBxAgBxBmBrAeAjDoBxHmClJ}BlEo@|Cc@nIk@fIM~Mq@xCe@tCy@fDqAhCyApHcGdCcDlBwC|AmDlA{C~@iDz@{DF]l@aDlEg[rA_IdBeI~DsNlCwHbDyHzDyHlGeLhFuJxDwIN_@Xw@n@aBlAuDdBoGdBmI~AsIrDmQpAwE~AkE`DaH|CmFd@q@vH}KpE_In@gARe@lBkErBqFfAiDTw@La@Rq@Ng@vAeFrA}Er@aC`A}Cv@_Ct@mBb@cAdAiCzAaDd@aAh@eAnAuBlByCn@}@`AsA|AoBbHmIrH}IfEyFxDqFlEaHhDiGrDkHbDcHfEmKvDmKzCcKlFqSpAoGjBoKdCaOhB_Kr@eDjA_FzA_FbA{CxCwHnDgHbDoFhGeIvDwEbC{BrIgGtI{Fz`@{UxIgGjNuLnLyMtE{FbGuIbFgIhH{MzFgLxEqKlFaMpDgJhHyQpBwE`EoIhCqE|AsCxGwJ~AqBpCaDnDyDlG{FdCoBfBaB|GqEbFqCbFaChMsEx\\wItDeB~@i@vCmBpCyBfCaCfDgDzFaGdD{ClCaChCsBhCiBfDyBbCwAlJoFrEkCzAaApCoBhA_AvAgApCmCjAmAfBsBzCaEpEeHvBaEhB}DrBgFtAeEdAkDl@aCp@oCl@wCl@aDd@wCb@_Dd@aEd@mF^mGj@aJRuCR{Bf@gE^eC^oBr@kDh@wBl@uBtAqExAmD`BkDnA}BdBqCdBaCpBaCdI}I|JiLpI}LrEyI`BgDxCiGlL{UfQeZ|BaE~G}MbGeMzFyOxGmRjJc\\v@qCpAyEdB}FbBuFjB_GtBsGfBqFjCyG~@cCtDoI`FuKvMeVpN{UdK_QbJkP`FyJzEaKbAwBhDaHzRmi@bI}VrGmSjDeK`E}KdJmUdDoGvDkHlC{EdDsFjFoIrEgGvN_QhMgM~H}GbCmBlLiIxNaJ`OsI~K_HhFuDbGeF|DwDpGkHtFgHxEmG|CoF|AiCf@_A^q@rAgClBqDbE{IdBkEjAwCRg@hA{Cx@}Bv@cCV{@fB}F`F{QrE{UnD}S`Imd@nA{GzAkHfFcTpAgEtHoVdGuTzI_]vEoWjAeHnAcIfCgRBOh@}El@kFpA_LpA_Lt@iG`@cDVmBv@_GlAgIp@gETsAzAoIdB{IpBaJvE}R|B{IdCeIzE_N~FkM~CsFpHoLrMqTdCeFb@_AvCaHzCeIhFoObPog@rEsKtFqKjCgEtEcGzDsEzC}ClE}DbDeCpEyCxCeB|Aw@p@]zBeAhIkCbCy@bU{FbD_AnBi@|Bu@pCgAfEsB`EcChGqEtFkF`AcAx@cAzBsCvFoInFeJlJkT|H_StBiFtC}G`D_HdDeGlFoI`OcSpBiChIeLrF{I`C}Dp@mAzJqRbCkFvCcHnCsHnCmIrB}IbBgJ~@gHZ}CReCd@}HPuGF{IIwHQkFWmFy@sJqAmJsA_Hq@sCmAyEm@aC[kAU}@iOek@mFaUcBmIyAwI}BsSg@_IOkEEeCC}FCwB?c@BwCNuHv@wSPiIRiHFkMKsLI_FYgGk@mJs@qIg@_FOiAwAiMUgB_BwM_CcRw@iHeAgL{@sMk@qL_@yJK{GE_BMsNBmNVkN?W@OXoHx@sKn@oG~@{Hn@}Dn@iDpB}IbAuDnBcGfCkGnDmHxCcFjWm_@jGoJhFkIvG}LdBoDbByDlJgUnIaVvHqV|IeZjGqRnCkHtCgHhFiL`F}JpHcN~N{X`LyWzGsPfD}HxEiL~EmJtHcOnIaQhEaK~DiKjD_KvCcJnGuU|BuI`FaQ|BkHrIoUnEeLtFwNdJ}WzFoTdCgKxBqKdDuSdAaIx@mGbCiSx@aGpB_MfAkFvAiGnA{EfBsFdA_DpAeDdBqDfBgDjBwCpBoCtBcCvBwBxGeFpHyDnL_E`QiFrKyE`PiK`JwIbIyK`N}UxLuUhFsKxDmIhAkCtB{E`BcElA_Dv@mBjCuHhAaDxAqE`FeQrJm^tD_NnCeIl@gBrAqDlB_FrA_Dj@sAb@eAl@sAbBcEn@eBf@yAd@}Al@_C^aBPaAb@eC",
+       "ref": "AP-68",
+       "name": "",
+       "mode": "driving",
+       "weight": 11074.1,
+       "duration": 11074.1,
+       "distance": 293175.4
+      },
+      {
+       "intersections": [
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "left"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "left",
+            "right"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "right"
+           ]
+          }
+         ],
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          120,
+          285
+         ],
+         "location": [
+          -0.934055,
+          41.67774
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "{dk}FzluD\\gEJiAFiAD_ADeABwA@iA@eAAmACgAEoACs@Ew@GiAKcAGs@Iu@OgAKy@UwAOs@UgAU_AQu@Qo@Uu@a@oA_@aAa@eA}@wBaA{Bw@qBM]UgA",
+       "maneuver": {
+        "bearing_after": 101,
+        "bearing_before": 108,
+        "location": [
+         -0.934055,
+         41.67774
+        ],
+        "modifier": "slight left",
+        "type": "fork"
+       },
+       "exits": "244A",
+       "destinations": "A-23, A-2: Huesca, Barcelona",
+       "name": "",
+       "mode": "driving",
+       "weight": 42.7,
+       "duration": 42.7,
+       "distance": 1132.7
+      },
+      {
+       "intersections": [
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          60,
+          225,
+          255
+         ],
+         "location": [
+          -0.921372,
+          41.680126
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "maneuver": {
+        "bearing_after": 63,
+        "bearing_before": 67,
+        "location": [
+         -0.921372,
+         41.680126
+        ],
+        "modifier": "slight right",
+        "type": "merge"
+       },
+       "geometry": "ysk}Fp}rDm@{BW_AUcA]iBW}AQsAMgAUqBQgBUiCWaDMuBEaAEkAIgDEkCBqENwGNuCl@gKTaETgF",
+       "ref": "Z-40; A-2",
+       "name": "Autovía del Nordeste",
+       "mode": "driving",
+       "weight": 50.8,
+       "duration": 50.8,
+       "distance": 1345.2
+      },
+      {
+       "intersections": [
+        {
+         "lanes": [
+          {
+           "valid": false,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "right"
+           ]
+          }
+         ],
+         "out": 1,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          99,
+          106,
+          278
+         ],
+         "location": [
+          -0.905586,
+          41.681025
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "myk}F|zoD^qCViEDm@D]Fe@Ho@LmALwAlAsTN}B",
+       "maneuver": {
+        "bearing_after": 105,
+        "bearing_before": 97,
+        "location": [
+         -0.905586,
+         41.681025
+        ],
+        "modifier": "slight right",
+        "type": "off ramp"
+       },
+       "exits": "320",
+       "destinations": "Avenida de Ranillas, Campus Río Ebro",
+       "name": "",
+       "mode": "driving",
+       "weight": 39,
+       "duration": 39,
+       "distance": 633.3
+      },
+      {
+       "intersections": [
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          90,
+          105,
+          285
+         ],
+         "location": [
+          -0.898116,
+          41.679991
+         ]
+        },
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          false,
+          false
+         ],
+         "bearings": [
+          92,
+          270,
+          276
+         ],
+         "location": [
+          -0.894036,
+          41.679709
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "}rk}FflnDJmCHuBLgDH_E@cBF_BDgF?sE?kH@mD@oL@mD",
+       "maneuver": {
+        "bearing_after": 95,
+        "bearing_before": 98,
+        "location": [
+         -0.898116,
+         41.679991
+        ],
+        "modifier": "slight left",
+        "type": "fork"
+       },
+       "name": "",
+       "mode": "driving",
+       "weight": 70.5,
+       "duration": 70.5,
+       "distance": 975.2
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          91,
+          96,
+          270
+         ],
+         "location": [
+          -0.886424,
+          41.679654
+         ]
+        },
+        {
+         "out": 1,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          2,
+          176,
+          353
+         ],
+         "location": [
+          -0.88113,
+          41.677635
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "ypk}FbclDDyA@sFFiCFsBD}@FgAFq@Hg@Lg@Pc@Rc@T]XY\\UZM`@K`@Ih@ElAMf@A`G[",
+       "maneuver": {
+        "bearing_after": 95,
+        "bearing_before": 90,
+        "location": [
+         -0.886424,
+         41.679654
+        ],
+        "modifier": "slight right",
+        "type": "fork"
+       },
+       "destinations": "El Pilar",
+       "name": "",
+       "mode": "driving",
+       "weight": 58.9,
+       "duration": 58.9,
+       "distance": 738.6
+      },
+      {
+       "intersections": [
+        {
+         "out": 0,
+         "classes": [
+          "motorway"
+         ],
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          177,
+          185,
+          355
+         ],
+         "location": [
+          -0.880982,
+          41.676153
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "}zj}FbakDfHUpCMzBS",
+       "maneuver": {
+        "bearing_after": 175,
+        "bearing_before": 174,
+        "location": [
+         -0.880982,
+         41.676153
+        ],
+        "modifier": "slight left",
+        "type": "fork"
+       },
+       "destinations": "N-330: Zaragoza, El Pilar",
+       "name": "",
+       "mode": "driving",
+       "weight": 25.3,
+       "duration": 25.3,
+       "distance": 316.2
+      },
+      {
+       "intersections": [
+        {
+         "out": 1,
+         "in": 2,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          174,
+          353
+         ],
+         "location": [
+          -0.880695,
+          41.673315
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "slight right"
+           ]
+          }
+         ],
+         "out": 0,
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          174,
+          181,
+          356
+         ],
+         "location": [
+          -0.880297,
+          41.669369
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "maneuver": {
+        "bearing_after": 174,
+        "bearing_before": 171,
+        "location": [
+         -0.880695,
+         41.673315
+        ],
+        "modifier": "slight left",
+        "type": "merge"
+       },
+       "geometry": "gij}Fj_kDtBOnFU`ESlFUnAKlACtB?nA?D?H@",
+       "ref": "N-330",
+       "name": "Carretera de Huesca",
+       "mode": "driving",
+       "weight": 43.3,
+       "duration": 43.3,
+       "distance": 646.9
+      },
+      {
+       "intersections": [
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          90,
+          180,
+          270
+         ],
+         "location": [
+          -0.880226,
+          41.667505
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          90,
+          180,
+          270
+         ],
+         "location": [
+          -0.880307,
+          41.666731
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          90,
+          180,
+          270
+         ],
+         "location": [
+          -0.880329,
+          41.666602
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          90,
+          180,
+          300
+         ],
+         "location": [
+          -0.880451,
+          41.665834
+         ]
+        },
+        {
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          180,
+          345
+         ],
+         "location": [
+          -0.880521,
+          41.6654
+         ]
+        },
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": false,
+           "indications": [
+            "slight right"
+           ]
+          }
+         ],
+         "out": 1,
+         "in": 0,
+         "entry": [
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          180,
+          195
+         ],
+         "location": [
+          -0.881103,
+          41.661777
+         ]
+        },
+        {
+         "out": 2,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          true,
+          true
+         ],
+         "bearings": [
+          0,
+          90,
+          180,
+          255
+         ],
+         "location": [
+          -0.88115,
+          41.661218
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "}di}Fl|jDjCLN@XBfCTP@PBF?N@j@FpGj@bGh@L@nDZ`@B`@@j@BzBHNAJA",
+       "maneuver": {
+        "bearing_after": 184,
+        "bearing_before": 180,
+        "location": [
+         -0.880226,
+         41.667505
+        ],
+        "modifier": "straight",
+        "type": "new name"
+       },
+       "name": "Avenida de Pirineos",
+       "mode": "driving",
+       "weight": 76.8,
+       "duration": 76.8,
+       "distance": 787.5
+      },
+      {
+       "intersections": [
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "straight"
+           ]
+          }
+         ],
+         "out": 4,
+         "in": 0,
+         "entry": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+         ],
+         "bearings": [
+          0,
+          30,
+          75,
+          105,
+          180,
+          285
+         ],
+         "location": [
+          -0.881182,
+          41.660456
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "{xg}FjbkD|@JF?nANhGh@`AHH?D?@ADABADCDC",
+       "maneuver": {
+        "bearing_after": 187,
+        "bearing_before": 172,
+        "location": [
+         -0.881182,
+         41.660456
+        ],
+        "modifier": "straight",
+        "type": "new name"
+       },
+       "name": "Puente de Santiago",
+       "mode": "driving",
+       "weight": 28.5,
+       "duration": 28.5,
+       "distance": 292.7
+      },
+      {
+       "intersections": [
+        {
+         "lanes": [
+          {
+           "valid": true,
+           "indications": [
+            "left"
+           ]
+          },
+          {
+           "valid": true,
+           "indications": [
+            "left"
+           ]
+          }
+         ],
+         "out": 0,
+         "in": 3,
+         "entry": [
+          true,
+          false,
+          false,
+          false
+         ],
+         "bearings": [
+          105,
+          210,
+          270,
+          330
+         ],
+         "location": [
+          -0.881513,
+          41.657848
+         ]
+        },
+        {
+         "out": 0,
+         "in": 2,
+         "entry": [
+          true,
+          true,
+          false
+         ],
+         "bearings": [
+          105,
+          210,
+          285
+         ],
+         "location": [
+          -0.880732,
+          41.657701
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "qhg}FldkD@M@M@M@IJ{@Hk@TmCXiD@Q@K@GBODKl@qBh@_BVq@BGBGn@{A",
+       "maneuver": {
+        "bearing_after": 104,
+        "bearing_before": 156,
+        "location": [
+         -0.881513,
+         41.657848
+        ],
+        "modifier": "left",
+        "type": "turn"
+       },
+       "name": "Paseo de Echegaray y Caballero",
+       "mode": "driving",
+       "weight": 36.5,
+       "duration": 36.5,
+       "distance": 408.6
+      },
+      {
+       "intersections": [
+        {
+         "in": 0,
+         "entry": [
+          true
+         ],
+         "bearings": [
+          305
+         ],
+         "location": [
+          -0.877004,
+          41.656537
+         ]
+        }
+       ],
+       "driving_side": "right",
+       "geometry": "k`g}FfhjD",
+       "maneuver": {
+        "bearing_after": 0,
+        "bearing_before": 125,
+        "location": [
+         -0.877004,
+         41.656537
+        ],
+        "modifier": "right",
+        "type": "arrive"
+       },
+       "name": "Paseo de Echegaray y Caballero",
+       "mode": "driving",
+       "weight": 0,
+       "duration": 0,
+       "distance": 0
+      }
+     ],
+     "weight": 12041.4,
+     "summary": "AP-68, Autopista del Ebro",
+     "duration": 12041.4,
+     "distance": 305518.8
+    }
+   ],
+   "weight_name": "routability",
+   "weight": 12041.4,
+   "duration": 12041.4,
+   "distance": 305518.8
+  }
+ ],
+ "waypoints": [
+  {
+   "hint": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+   "location": [
+    -2.923362,
+    43.264381
+   ],
+   "name": "Bernardino Alonso Udaltzainaren kalea",
+   "distance": 19.64499143
+  },
+  {
+   "hint": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+   "location": [
+    -0.877004,
+    41.656537
+   ],
+   "name": "Paseo de Echegaray y Caballero",
+   "distance": 44.93236922
+  }
+ ]
+}

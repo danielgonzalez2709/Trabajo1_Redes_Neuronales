@@ -1,0 +1,36 @@
+H-12 — Qué es el vehículo H ("alto") y el L ("bajo") de una familia de interpolación WLTP. Extractos literales.
+Fuente: Reglamento (UE) 2017/1151 de la Comisión, de 1 de junio de 2017, anexo XXI, versión ORIGINAL publicada en el
+DO L 175 de 7-7-2017, reproducida por legislation.gov.uk ("adopted"). EUR-Lex devolvió HTTP 202 sin contenido
+(protección anti-bots), así que no se contrastó con la versión consolidada; las enmiendas posteriores (p. ej. 2017/1347,
+2018/1832) cambian detalles, pero la definición de los vehículos H y L se mantiene en el WLTP (GTR n.º 15).
+Consultado: 2026-10-11 (UTC-5) por el cazador de alucinaciones.
+URLs:
+  anexo XXI:      https://www.legislation.gov.uk/eur/2017/1151/annex/XXI/adopted/data.xht?view=snippet&wrap=true  (SHA-256 976f800c209fbb927e9ab560fe823288389ba422eb2c00b396ba6cbb6c875e49)
+  subanexo 4:     https://www.legislation.gov.uk/eur/2017/1151/annex/59/adopted/data.xht?view=snippet&wrap=true  (SHA-256 36b6d22b4d263d326774508a7475a5b62ab7dc489aebf0afd1f2f5757fdb3420)
+  subanexo 7:     https://www.legislation.gov.uk/eur/2017/1151/annex/65/adopted/data.xht?view=snippet&wrap=true  (SHA-256 7c12877e34d5af4cd68193abd01809c41f829b3ed0a898dda2d55815b3d83968)
+
+--- Anexo XXI, 3.2.8 y 3.2.9 (equipamiento opcional) ---
+3.2.8. ‘ Mass of the optional equipment ’ means maximum mass of the combinations of optional equipment which may be fitted to the vehicle in addition to the standard equipment in accordance with the manufacturer's specifications. 3.2.9. ‘ Optional equipment ’ means all the features not included in the standard equipment which are fitted to a vehicle under the responsibility of the manufacturer, and that can be ordered by the customer.
+
+--- Anexo XXI, 5.6.1 (familia de interpolación: qué debe ser idéntico) ---
+5.6.1. Interpolation family for ICE vehicles Only vehicles that are identical with respect to the following vehicle/powertrain/transmission characteristics may be part of the same interpolation family: (a) Type of internal combustion engine: fuel type, combustion type, engine displacement, full-load characteristics, engine technology, and charging system, and also other engine subsystems or characteristics that have a non-negligible influence on CO 2 mass emission under WLTP conditions; (b) Operation strategy of all CO 2 mass emission influencing components within the powertrain; (c) Transmission type (e.g. manual, automatic, CVT) and transmission model (e.g. torque rating, number of gears, number of clutches, etc.); (d) n/v ratios (engine rotational speed divided by vehicle speed). This requirement shall be considered fulfilled if, for all transmission ratios concerned, the difference with respect to the transmission ratios of the most commonly installed transmission type is within 8 per cent; (e) Number of powered axles; (f) ATCT family. Vehicles may only be part of the same interpolation family if they belong to the same vehicle class as described in paragraph 2 of Sub-Annex 1.
+
+--- Subanexo 4, 4.2.1.1 y 4.2.1.2 (selección de los vehículos H y L) ---
+4.2.1.1. Without using the interpolation method A test vehicle (vehicle H) with the combination of road load relevant characteristics (i.e. mass, aerodynamic drag and tyre rolling resistance) producing the highest cycle energy demand shall be selected from the interpolation family (see paragraph 5.6. of this Annex). If the aerodynamic influence of the different wheel rims within one interpolation family is not known, the selection shall be based on the highest expected aerodynamic drag. As a guideline, the highest aerodynamic drag may be expected for a wheel with a) the largest width, b) the largest diameter, and c) the most open structure design (in that order of importance). The wheel selection shall be executed without prejudice to the requirement of the highest cycle energy demand. 4.2.1.2. Using the interpolation method At the request of the manufacturer, the interpolation method may be applied for individual vehicles in the interpolation family (see paragraph 1.2.3.1. of Sub-Annex 6 and paragraph 3.2.3.2. of Sub-Annex 7). In this case, two test vehicles shall be selected from the interpolation family complying with the requirements of the interpolation method (paragraphs 1.2.3.1. and 1.2.3.2. of Sub-Annex 6). Test vehicle H shall be the vehicle producing the higher, and preferably highest, cycle energy demand of that selection, test vehicle L the one producing the lower, and preferably lowest, cycle energy demand of that selection. All items of optional equipment and/or body shapes that are chosen not to be considered in the interpolation method shall be fitted to both test vehicles H and L
+[...]
+
+--- Subanexo 7, 3.2.3.1 y 3.2.3.2 (valores de cada vehículo individual) ---
+3.2.3.1. Fuel consumption and CO 2 emissions without using the interpolation method The CO 2 value, as calculated in paragraph 3.2.1. of this Sub-Annex and fuel consumption, as calculated according to paragraph 6. of this Sub-Annex, shall be attributed to all individual vehicles in the interpolation family and the interpolation method shall not be applicable. 3.2.3.2. Fuel consumption and CO 2 emissions using the interpolation method The CO 2 emissions and the fuel consumption for each individual vehicle in the interpolation family may be calculated according to the interpolation method outlined in paragraphs
+
+--- Subanexo 7, 3.2.3.2.2.1 y 3.2.3.2.2.2 (entradas de la interpolación) ---
+3.2.3.2.2.1. Mass of an individual vehicle The test masses of vehicles H and L shall be used as input for the interpolation method. TM ind , in kg, shall be the individual test mass of the vehicle according to paragraph 3.2.25. of this Annex. If the same test mass is used for test vehicles L and H, the value of TM ind shall be set to the mass of test vehicle H for the interpolation method. 3.2.3.2.2.2. Rolling resistance of an individual vehicle The actual rolling resistance values for the selected tyres on test vehicle L, RR L , and test vehicle H, RR H , shall be used as input for the interpolation method. See paragraph 4.2.2.1. of Sub-Annex 4.
+
+Conclusión del cazador: el extremo superior de una familia de interpolación es el vehículo H: la combinación de masa,
+resistencia aerodinámica y resistencia a la rodadura de los neumáticos con la mayor demanda de energía del ciclo
+(4.2.1.2: "the higher, and preferably highest"; guía para llantas en 4.2.1.1: la más ancha, la de mayor diámetro y la de
+diseño más abierto). Cada vehículo
+individual recibe un valor interpolado entre L y H según su masa, neumáticos y aerodinámica. El concepto de la
+respuesta de la IA ("versión más equipada, llantas más grandes, extras") coincide con esta definición en lo general.
+Lo que no está documentado es que el 4,8 de Toyota sea ese vehículo H, ni que exista en Toyota España una
+configuración del Style Plus MY27 más equipada: el configurador no tiene opciones ni packs, ofrece un solo acabado y
+una sola motorización.

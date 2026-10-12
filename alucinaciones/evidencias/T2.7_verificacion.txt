@@ -1,0 +1,93 @@
+
+## 0. Integridad (SHA256SUMS)
+  OK  14764_CORS_48_ES_WEB_S.pdf
+  OK  km77_corolla_sedan_140h_eco.html
+  OK  km77_corolla_sedan_140h_style_plus.html
+  OK  km77_corolla_sedan_listado.html
+  OK  toyota_es_corolla_sedan.html
+  OK  toyota_es_corolla_sedan_build.html
+  OK  toyota_es_empresas_corolla_sedan_eco.html
+  OK  toyota_es_manuales_corolla.html
+  OK  toyota_es_promo_corolla_sedan_eco_kinto.html
+  OK  wayback_20260915155745_toyota_es_corolla_sedan.html
+  OK  wayback_20260923175050_toyota_es_corolla_sedan.html
+  OK  texus_corolla_sedan_GetFullConfiguration.json
+  OK  texus_corolla_sedan_getGrades.json
+  OK  texus_corolla_sedan_getMotorizations.json
+  OK  texus_corolla_sedan_GetTechnicalSpecifications.json
+  OK  cabeceras_http.txt
+  archivos con hash distinto: 0
+  captura 2-oct (esta carpeta): T2.7_wayback_20261002070925_corolla-sedan_caracteristicas.html.gz SHA-256 89b3b083bd311580bbc56ec9d08c3599f6926dad4b162180224dbef806fa1cf7
+  cabeceras de esa captura (Wayback, id_): memento-datetime: Fri, 02 Oct 2026 07:09:25 GMT
+
+## 1. Acabados y versiones del Corolla Sedan (vigencia en la fecha de corte)
+  getGrades (11-oct): 1 acabado(s): ['Style Plus']
+  GetFullConfiguration: Car.Name = 'Corolla SD - MY27 Style Plus 140H e-CVT'
+  Motor: Name = 'Hybrid 140', InternalCode = '2ZR-FXE-18H-'
+  Options elegidos: 0
+  Packs elegidos: 0
+  Accessories elegidos: 0
+  AvailableInternalOptions: 0
+  AvailableExternalOptions: 0
+  AvailablePacks: 0
+  AvailableMotorizationsForGradeBodytype: 1
+  AvailableAccessoryWheels: 1
+  AvailableAccessories: 42
+  Llanta de serie: (ver JSON)
+  [15-sep-2026] versiones 'Corolla SD': {'Corolla SD - MY26 Style Plus 140H e-CVT': 22}
+     comb=['4.6'], comb_max=[], co2=[], co2_medio=['104']
+  [23-sep-2026] versiones 'Corolla SD': {'Corolla SD - MY27 Style Plus 140H e-CVT': 25}
+     comb=['4.6'], comb_max=[], co2=[], co2_medio=['105']
+  [02-oct-2026 /caracteristicas] versiones 'Corolla SD': {'Corolla SD - MY27 Style Plus 140H e-CVT': 7}
+     comb=['4,6'], comb_max=['4,8'], co2=['105', '109'], co2_medio=[]
+  [11-oct-2026 actual] versiones 'Corolla SD': {'Corolla SD - MY27 Style Plus 140H e-CVT': 25}
+     comb=['4.6'], comb_max=[], co2=[], co2_medio=['105']
+
+## 2. WLTP de la ficha actual (GetTechnicalSpecifications)
+  FUELCOMBINEDWLTP: ('4.6', 'l/100 km', 'Consumo combinado WLTP (l/100 km)')
+  FUELCOMBINEDWLTPMAX: ('4.8', 'l/100 km', 'Consumo combinado WLTP - Max (l/100 km)')
+  CO2COMBINEDWLTP: ('105', 'g/km', 'CO2 combinado WLTP – medio (g/km)')
+  CO2COMBINEDWLTPMAX: ('109', 'g/km', 'CO2 combinado WLTP - Max (g/km)')
+  KERBWGHT: ('1355-1415', 'kg', 'Peso en orden de marcha (kg)')
+  BORESTROKE: ('80.5 x 88.3', 'mm', 'Diámetro x carrera (mm x mm)')
+  COMPRATIO: ('13.048:1', '', 'Relación de compresión')
+  DINHP: ('140', 'CV', 'Potencia máxima (KW/CV DIN)')
+  HYBATCAP: ('4.08', 'Ah', 'Capacidad de la batería (Ah) (Kwh)')
+
+## 2b. km77 (respaldo)
+  km77_corolla_sedan_140h_style_plus.html: 'Toyota Corolla Sedan Hybrid 140 Style Plus (2022)' -> consumo 4,6, CO2 104
+  km77_corolla_sedan_140h_eco.html: 'Toyota Corolla Sedan Hybrid 140 Eco (2022-)' -> consumo 4,6, CO2 104
+
+## 3. Fase WLTP extra alta: ¿aparece en las fichas actuales de Toyota y km77?
+  km77_corolla_sedan_140h_eco.html: 0
+  km77_corolla_sedan_140h_style_plus.html: 0
+  km77_corolla_sedan_listado.html: 0
+  toyota_es_corolla_sedan.html: 0
+  toyota_es_corolla_sedan_build.html: 0
+  toyota_es_empresas_corolla_sedan_eco.html: 0
+  toyota_es_manuales_corolla.html: 0
+  toyota_es_promo_corolla_sedan_eco_kinto.html: 0
+  wayback_20260915155745_toyota_es_corolla_sedan.html: 0
+  wayback_20260923175050_toyota_es_corolla_sedan.html: 0
+  texus_corolla_sedan_GetFullConfiguration.json: 0
+  texus_corolla_sedan_getGrades.json: 0
+  texus_corolla_sedan_getMotorizations.json: 0
+  texus_corolla_sedan_GetTechnicalSpecifications.json: 0
+
+## 4. Catálogo 09/2023 (pdftotext)
+  páginas con texto: 25
+  'Gasolina de 95 o más octanos': págs. PDF [17]
+  '2ZR-FXE': págs. PDF [17]
+  'Ritmo extra alto (l/100km)': págs. PDF [17]
+  '5,6-6,2': págs. PDF [17]
+  '4,3–4,8': págs. PDF [4]
+  '98–110': págs. PDF [4]
+  '4,4-4,8': págs. PDF [17]
+  '99-109': págs. PDF [17]
+  '80,5 x 88,3': págs. PDF [17]
+  '13,048:1': págs. PDF [17]
+  '4,08': págs. PDF [17]
+  '09/23/CORSEDAN/ES/0000': págs. PDF [25]
+  '© 2023 Toyota España S.L.U.': págs. PDF [25]
+  menciones de RON / E10 / E5 (palabra completa): 0
+  nota de la pág. 17: Los niveles de consumo de combustible, así como de emisiones de CO₂, se miden en un entorno controlado, de acuerdo con los requisitos de la normativa Europea, sobre un vehículo representativo de esta versión de motorización y equipamiento. Para mas información o si está interesado en los valores de un vehículo con distinto acabado, por favor contacte con Toyota Espana, S.L.U. o su concesionario Toyota. El tipo de conducción junto con otros factores (condiciones de carretera, tráfico, conducción del vehículo, equipo instalado después de la matriculación, carga, número de pasajeros, etc.) juega un papel en el consumo de combustible y emisiones de CO₂.

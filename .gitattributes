@@ -2,3 +2,5 @@
 # (the NGMEP CSVs use CRLF and cp1252; core.autocrlf must not rewrite them).
 data/raw/** -text
 data/processed/** -text
+# Hunt evidence is also hashed (SHA-256 in each evidence README): keep it byte for byte.
+alucinaciones/evidencias/** -text

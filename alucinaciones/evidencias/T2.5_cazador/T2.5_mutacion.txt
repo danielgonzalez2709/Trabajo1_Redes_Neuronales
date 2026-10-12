@@ -1,0 +1,6 @@
+base: 56 passed in 0.58s
+M1 recorrido solo del primer paso -> 4 failed, 52 passed in 0.53s
+M2 km_peaje cuenta tramos gratuitos -> 2 failed, 54 passed in 0.51s
+M3 sin prorrata (siempre tarifa completa) -> 7 failed, 49 passed in 0.56s
+M4 intercambia km de San Rafael y Villacastin (AP-6), salidas regeneradas -> 1 failed, 55 passed in 0.53s
+M5 dos anclas intermedias de la AP-68 con km +36/+40, salidas regeneradas -> 56 passed in 0.45s

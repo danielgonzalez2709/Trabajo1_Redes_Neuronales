@@ -18,9 +18,9 @@
 | T0.2 | `src/common/config.py` + `cli.py`: YAML + `--set a.b=c` + `run.py` con subcomandos | T0.1 | `run.py part1/part2/figures` (vacíos) | Test de overrides anidados y tipos (int/float/bool/list) | — | ✅ 2026-10-09 (4 rondas; YAML 1.2, herencia, regla de bloques; 10/10 mutantes detectados) |
 | T0.3 | `src/common/seeds.py` + `results.py` (escritura JSON genérica: UTF-8, sin NaN/inf, atómica; nombres de archivo §5.4) | T0.1 | Utilidades | Test de reproducibilidad con generador dummy | — | ✅ 2026-10-09 (4 rondas; H-09) |
 | T0.4 | `src/common/counter.py` (`CountedProblem`, presupuesto, `eval_equiv`) | T0.1 | Contador | `test_counter.py`, `test_budget.py` | verificador-matematico | ✅ 2026-10-09 (4 rondas; 0 anomalías en ~9 M llamadas; H-08) |
-| T0.5 | Prueba `test_no_network.py` (bloquea `socket` durante experimentos) | T0.2 | Test | Falla si algún experimento intenta conectarse | auditor-reproducibilidad | ⬜ |
+| T0.5 | Prueba `test_no_network.py` (bloquea `socket` durante experimentos) | T0.2 | Test | Falla si algún experimento intenta conectarse | auditor-reproducibilidad | ✅ 2026-10-12 (run.py con red bloqueada + ningún módulo de src/ importa red; mutante detectado) |
 | T0.6 | `alucinaciones/` (registro, evidencias, prompts) | — | Carpetas + plantilla | — | cazador-alucinaciones | ✅ (creado con el Spec) |
-| T0.7 | Esqueleto del blog MkDocs + hook de figuras + bibtex APA | T0.1 | `mkdocs build` funciona | Build falla con figura no citada y con cita inexistente | revisor-calidad | ⬜ |
+| T0.7 | Esqueleto del blog MkDocs + hook de figuras + bibliografía APA | T0.1 | `mkdocs build` funciona | Build falla con figura no citada y con cita inexistente | revisor-calidad | ✅ 2026-10-12 (hook `reporte.py` + pandoc citeproc APA 7; 15 pruebas; 12 referencias verificadas contra Crossref; H-22, H-23) |
 
 ---
 
@@ -34,7 +34,7 @@
 | T1.2 | `gd.py`: GD paso fijo con proyección | T1.1 | `optimize()` | Converge en una cuadrática de prueba; respeta presupuesto; registra frames en 2D | verificador-matematico | ✅ (gd.py fijo; Armijo en T1.3) |
 | T1.3 | `gd.py`: variante Armijo | T1.2 | `optimize()` | Cuenta evaluaciones de f de la búsqueda lineal; condición de Armijo probada | verificador-matematico | ✅ (gd.py armijo; bucle común con fijo) |
 | T1.4 | `ea.py`: EA esquema de clase (élite + mutantes + cruce de un punto, N=50; Spec §6.4 v1.4; bloque `ea:` en `base.yaml`) | T0.4 | `optimize()` + `tests/test_ea.py` | Conteo N + T·(N − n_élite) con élite en caché (N·(T+1) si `reevaluar_elite`); truncado §6.2; dominio; un gen mutado con σ poblacional; punto de cruce ∈ {1,…,d−1}; élite por f actual; reproducible; `esquema` ≠ `clase` falla. Pruebas: ver `docs/spec/propuestas/CAMBIO-EA.md` §12 | verificador-matematico | ✅ |
-| T1.5 | `pso.py`: PSO gbest con inercia y manejo de límites | T0.4 | `optimize()` | `test_counter` N·(T+1); partículas dentro del dominio; v_max respetada | verificador-matematico | ✅ 2026-10-12 (`pso.py` + `tests/test_pso.py`, 163 pruebas; suite 677 passed; revisor-spec ✅, revisor-calidad ✅, verificador ✅ 34/36 mutantes muertos, cazador ✅; H-17, H-18, H-19) |
+| T1.5 | `pso.py`: PSO gbest con inercia y manejo de límites | T0.4 | `optimize()` | `test_counter` N·(T+1); partículas dentro del dominio; v_max respetada | verificador-matematico | ✅ 2026-10-12 (`pso.py` + `tests/test_pso.py`, 163 pruebas; suite 677 passed; revisor-spec ✅, revisor-calidad ✅, verificador ✅ 34/36 mutantes muertos, cazador ✅; H-29, H-30, H-31) |
 | T1.6 | `de.py`: DE/rand/1/bin | T0.4 | `optimize()` | r1≠r2≠r3≠i; j_rand garantiza ≥1 gen del mutante; conteo exacto | verificador-matematico | ⬜ |
 | T1.7 | `experiment.py`: 20 configs × 30 semillas, `summary.json`, tablas (el EA lee su bloque `ea:`; `n_grad = 0`) | T1.2–T1.6 | Resultados | Métricas §6.6; k=2n y k=1; cada JSON de corrida con las claves exactas de §5.4 (`func, dim, method, seed, k, budget, config, result`) usando `run_filename` y la semilla efectiva | **analista-experimentos** | ⬜ |
 | T1.8 | `configs/part1/demo.yaml` + salida en consola | T1.7 | Demo | < 2 min medido | auditor-reproducibilidad | ⬜ |
@@ -48,15 +48,15 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T2.0 | **Decisión** OSRM local vs. respaldo ORS (humanos) | — | Nota en Spec §14 | Decidido a más tardar **sáb 3-oct** | — | ⬜ |
+| T2.0 | **Decisión** OSRM local vs. respaldo ORS (humanos) | — | Nota en Spec §14 | Decidido a más tardar **sáb 3-oct** | — | ✅ 2026-10-10 (OSRM local con Docker; Spec v1.3) |
 | T2.1 | Bloque 1: `cities.csv` desde IGN (+ verificación manual de ambiguos) | — | `data/processed/cities.csv` | 47 filas; mapa de control; columna `verificado_manual` completa | **cazador-alucinaciones** | ✅ 2026-10-09 (NGMEP 202603; 39 pruebas; verificación manual: Jose Miguel) |
-| T2.2 | `scripts/osrm/README.md` + levantar OSRM local con extracto Geofabrik | T2.0 | Servidor local + fecha del extracto | `exclude=toll` responde OK en Madrid→Barcelona | auditor-reproducibilidad | ⬜ |
-| T2.3 | Bloque 2: `descargar_datos.py` rutas (1 081 pares × 2 alternativas) | T2.1, T2.2 | `data/raw/osrm_<fecha>/`, `rutas.csv` | Sin errores; pasos con `ref` y clases; chequeo de simetría en 20 pares | revisor-spec | ⬜ |
-| T2.4 | Bloque 3a: `peajes_tramos.csv` (estatales, SEITT, forales/autonómicos) | — | Tabla con fuente y fecha por fila | Ninguna fila sin `fuente_url` y `fecha_consulta`; vigencias AP-68 correctas | **cazador-alucinaciones** | ⬜ |
-| T2.5 | Bloque 3b: asignación de peajes a rutas | T2.3, T2.4 | `km_peaje`, `peaje_eur` en `rutas.csv` | Validación de 5 pares (Spec §7.2) documentada; Sevilla–Cádiz = 0 € | cazador-alucinaciones | ⬜ |
-| T2.6 | Bloque 4: precio Gasolina 95 E5 (API Ministerio) | — | `combustible.json` + raw con fecha | Media, mediana, nº estaciones | revisor-spec | ⬜ |
-| T2.7 | Bloque 5: `vehiculo.yaml` (Corolla Sedán Hybrid 2026 1.8 L 140H, WLTP) | — | Ficha oficial Toyota España + respaldo km77 | Sedán + acabado exacto, WLTP combinado (no NEDC) + fase extra alta si existe, fecha | cazador-alucinaciones | ⬜ |
-| T2.8 | `data/fuentes.md` completo + `test_data_integrity.py` | T2.1–T2.7 | Tabla de fuentes | Test pasa | revisor-spec | ⬜ |
+| T2.2 | `scripts/osrm/README.md` + levantar OSRM local con extracto Geofabrik | T2.0 | Servidor local + fecha del extracto | `exclude=toll` responde OK en Madrid→Barcelona | auditor-reproducibilidad | ✅ 2026-10-10 (OSRM v26.10.0 arm64, extracto `spain-261001` = datos 1-oct 20:22Z; puerto 5001; auditor ✅ con 8 menores) |
+| T2.3 | Bloque 2: `descargar_datos.py` rutas (1 081 pares × 2 alternativas) | T2.1, T2.2 | `data/raw/osrm_<fecha>/` (no versionado), `rutas.csv`, `rutas_resumen.json`, `rutas_pasos_peaje.csv` (Spec v1.5) | Sin errores; pasos con `ref` y clases; chequeo de simetría en 20 pares | revisor-spec | 🟡 2026-10-11 código listo (revisor-spec ✅, revisor-calidad ✅ en 2.ª ronda; 332 pruebas); ✅ 2026-10-12: ejecutada por Jose Miguel en Windows; corrida vigente `osrm_2026-10-12` con `--threads 1`, arranque limpio y una sola corrida (Spec v1.8). Resultados: 1081/1081 pares, 547 sin peaje y 26 `sin_peaje` con clase `toll` que cobra T2.5; el contraste con T2.2 es exacto. Diagnóstico y H-16 en `alucinaciones/` |
+| T2.4 | Bloque 3a: `peajes_tramos.csv` (estatales, SEITT, forales/autonómicos) | — | Tabla con fuente y fecha por fila | Ninguna fila sin `fuente_url` y `fecha_consulta`; vigencias AP-68 correctas | **cazador-alucinaciones** | ✅ 2026-10-12 (asumida por Jose Miguel; 56 tramos, km del Catálogo RCE + 11 aproximados en OSM; Spec v1.9; revisor-spec ✅, revisor-calidad ✅ (6 rondas), cazador ✅ CONFORME; H-17, H-18; 512 pruebas) |
+| T2.5 | Bloque 3b: asignación de peajes a rutas | T2.3, T2.4 | `vias_peaje`, `km_peaje`, `peaje_eur` en `rutas.csv` (desde `rutas_pasos_peaje.csv`) | Validación de 5 pares (Spec §7.2) documentada; Sevilla–Cádiz = 0 € | cazador-alucinaciones | ✅ 2026-10-12 (asumida por Jose Miguel; suma de tramos [DECIDIDO]; 5 pares validados, Bilbao–Zaragoza 41,50 € frente a 39,90 € publicado; revisor-spec ✅, revisor-calidad ✅, cazador ✅ CONFORME; sin hallazgos factuales nuevos, H-20 débil; Spec v1.10) |
+| T2.6 | Bloque 4: precio Gasolina 95 E5 (API Ministerio) | — | `combustible.json` + raw con fecha | Media, mediana, nº estaciones | revisor-spec | ✅ 2026-10-11 (asumida por Jose Miguel; media **peninsular** 1,8318 €/l, 10 171 estaciones, Spec v1.6; revisor-spec ✅ 2.ª ronda, revisor-calidad ✅ + pulido; 418 pruebas) |
+| T2.7 | Bloque 5: `vehiculo.yaml` (Corolla Sedán Hybrid 2026 1.8 L 140H, WLTP) | — | Ficha oficial Toyota España + respaldo km77 | Sedán + acabado exacto, WLTP combinado (no NEDC) + fase extra alta si existe, fecha | cazador-alucinaciones | ✅ 2026-10-11 (asumida por Jose Miguel; Style Plus 140H e-CVT MY27, 4,6 l/100 km, Gasolina 95 E5 según el catálogo 09/2023; extra alta 5,6–6,2 como sensibilidad; Spec v1.7; revisor-spec ✅, cazador ✅; 425 pruebas) |
+| T2.8 | `data/fuentes.md` completo + `test_data_integrity.py` | T2.1–T2.7 | Tabla de fuentes | Test pasa | revisor-spec | ✅ 2026-10-12 (curador-datos, 3 rondas; revisor-spec ✅ 2.ª ronda, revisor-calidad ✅ 2.ª ronda; 51 pruebas nuevas, 627 en total; `AP68-POST-VI` sin tarifa publicada, pendiente de decisión humana) |
 
 ---
 
@@ -68,12 +68,12 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T3.1 | `costos.py`: `matriz_costos(w)` con dos alternativas | T0.3 | Función §5.2 | `test_cost.py` | **verificador-matematico** | ⬜ |
+| T3.1 | `costos.py`: `matriz_costos(w)` con dos alternativas | T0.3 | Función §5.2 | `test_cost.py` | **verificador-matematico** | ✅ |
 | T3.2 | `exact.py`: DFJ con PuLP + subtours iterativos | T3.1 | `solve()` | `test_exact_small.py` (8 ciudades = fuerza bruta) | verificador-matematico | ⬜ |
 | T3.3 | `aco.py`: Ant System + MMAS | T3.1 | `solve()` | Tours válidos; feromona dentro de [τ_min, τ_max] en MMAS; conteo de recorridos | revisor-spec | ⬜ |
 | T3.4 | `ga.py`: OX + inversión + intercambio + torneo + elitismo | T3.1 | `solve()` | `test_tsp_operators.py` (10 000 operaciones válidas) | revisor-spec | ⬜ |
 | T3.5 | `local_search.py`: 2-opt (opcional) | T3.1 | Función | Nunca empeora el recorrido; recorrido válido | — | ⬜ |
-| T3.6 | `experiment.py`: barrido de w + bisección del umbral + gaps | T3.2–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ⬜ |
+| T3.6 | `experiment.py`: barrido de w + bisección del umbral + gaps. **Pendiente de T3.6:** claves de consumo y precio en `configs/part2/base.yaml` para la sensibilidad de §7.5 con `--set` | T3.2–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ⬜ |
 | T3.7 | `configs/part2/demo.yaml` | T3.6 | Demo | < 2 min medido | auditor-reproducibilidad | ⬜ |
 
 ---
@@ -82,7 +82,7 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ⬜ |
+| T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ✅ 2026-10-12 (src/viz/paleta.py fuente única; tema Plotly + estilo matplotlib; paleta validada con validate_palette.js; 5 pruebas) |
 | T4.2 | Figuras Parte 1 (Spec §6.7) | T1.7, T4.1 | HTML/PNG en `blog/docs/figures/` | `run.py figures` regenera todo | revisor-spec | ⬜ |
 | T4.3 | GIFs Parte 1 (GD, PSO) | T1.7, T4.1 | `media/*.gif` | Regenerables | — | ⬜ |
 | T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ⬜ |

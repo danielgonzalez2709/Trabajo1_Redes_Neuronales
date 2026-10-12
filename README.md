@@ -21,6 +21,7 @@
 | [`CLAUDE.md`](CLAUDE.md) | Reglas del proyecto y protocolo del orquestador |
 | [`.claude/agents/`](.claude/agents/) | Definiciones de los subagentes |
 | [`alucinaciones/`](alucinaciones/) | Registro de la Cacería de la alucinación, prompts y evidencias |
+| [`blog/`](blog/) | Reporte técnico (entrada de blog en MkDocs). **Guía para redactar:** [`blog/README.md`](blog/README.md) |
 
 ## Cómo trabajamos
 - Ramas de equipo: **`parte1-optimizacion-numerica`** y **`parte2-tsp-espana`** (salen de `main`). Cada equipo trabaja en la suya (o en ramas que salgan de ella) y abre **Pull Request** hacia `main`, revisado por el puente.

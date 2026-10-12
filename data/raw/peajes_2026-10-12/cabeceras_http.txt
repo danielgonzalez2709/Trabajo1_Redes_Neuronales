@@ -1,0 +1,1382 @@
+=== boe_A-2026-19039.pdf
+URL: https://www.boe.es/boe/dias/2026/09/11/pdfs/BOE-A-2026-19039.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:15:57Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:08:08 GMT
+Content-Type: application/pdf
+Content-Length: 229319
+Last-Modified: Thu, 10 Sep 2026 17:38:50 GMT
+ETag: "6aa2eb2a-37fc7"
+Content-Security-Policy: default-src afirma://* ; script-src 'unsafe-inline' 'unsafe-eval' 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ ; frame-src 'self' https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/  afirma://* ; connect-src https://www.google.com/recaptcha/ 'self' ; img-src 'self' eur-lex.europa.eu data: ; style-src 'unsafe-inline' 'self' *.boe.es ; font-src 'self' ; child-src 'self'  www.youtube.com afirma://* ; object-src 'self'; media-src 'self' ; frame-ancestors 'self' always
+X-Frame-Options: SAMEORIGIN
+Age: 469
+Accept-Ranges: bytes
+Strict-Transport-Security: max-age=31536000
+
+
+=== congreso_e_0102096_n_000.pdf
+URL: https://www.congreso.es/l15p/e10/e_0102096_n_000.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:15:59Z
+HTTP/1.1 301 Moved Permanently
+Location: https://www.congreso.es/entradap/l15p/e10/e_0102096_n_000.pdf
+Content-Length: 269
+Content-Type: text/html; charset=iso-8859-1
+Date: Mon, 12 Oct 2026 06:15:58 GMT
+Connection: keep-alive
+Set-Cookie: FGMDA3820a653=3850f80e0dc0f6557e2d19e8a080b05d2294e64d60e795742940166bd6e3047846d8476d396be6f9c531144c171a7f9e08c67213d9; Path=/; Domain=.www.congreso.es; Secure; HttpOnly
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=86400
+
+HTTP/1.1 200 OK
+Last-Modified: Wed, 11 Mar 2026 10:51:39 GMT
+ETag: "2c29f-64cbd6bb0a39d"
+Accept-Ranges: bytes
+Content-Length: 180895
+Content-Type: application/pdf
+Date: Mon, 12 Oct 2026 06:15:58 GMT
+Connection: keep-alive
+Set-Cookie: FGMDA3820a653=3850f80e0dafc0cd359e4364305379bf4edfad78128c8ff843af1b8997ff1a74c89a1a597cd5fb75b46cb871ec8019f56beb00c266; Path=/; Domain=.www.congreso.es; Secure; HttpOnly
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=86400
+
+
+=== mitma_np_251230_revision_tarifas_2026.pdf
+URL: https://cdn.transportes.gob.es/portal-web-transportes/recursos-web/transportes/media/press_release/251230-np-nacional-revision-tarifas-autopistas-estatales-y-seitt.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:17:00Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:16:59 GMT
+Content-Type: application/pdf
+Content-Length: 405253
+Connection: keep-alive
+Last-Modified: Tue, 30 Dec 2025 16:51:13 GMT
+ETag: 0x8DE47C3A46B2ED7
+Vary: Origin
+x-ms-request-id: 0b7034df-701e-003b-08d3-59bb73000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T061659Z-17fb65d855f8ks47hC1MIArghg0000001ns000000000321x
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_HIT
+X-Cache-Info: L1_T2
+Accept-Ranges: bytes
+
+
+=== mitma_sala_prensa_mar-30122025-1746.html
+URL: https://www.transportes.gob.es/ministerio/comunicacion/sala-prensa/mar-30122025-1746
+Fecha local de la captura (UTC): 2026-10-12T06:17:01Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 22395
+Connection: keep-alive
+Date: Fri, 09 Oct 2026 12:57:03 GMT
+Cache-Control: max-age=31536000, public
+x-drupal-dynamic-cache: UNCACHEABLE (poor cacheability)
+Link: </themes/custom/frontend/assets/favicons/favicon-96x96.png?tmk2lg>; rel="icon"; type="image/png"; sizes="96x96"
+Link: </themes/custom/frontend/assets/favicons/favicon.svg?tmk2lg>; rel="icon"; type="image/svg+xml"
+Link: </themes/custom/frontend/assets/favicons/favicon.ico?tmk2lg>; rel="shortcut icon"
+Link: </themes/custom/frontend/assets/favicons/apple-touch-icon.png?tmk2lg>; rel="apple-touch-icon"; sizes="180x180"
+Link: </themes/custom/frontend/assets/favicons/site.webmanifest?tmk2lg>; rel="manifest"
+Content-Language: es
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-drupal-cache-tags: CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form block_content:1 block_content_view config:asset_injector.css.global_styles config:block_list config:cookies.config config:cookies.cookies_service config:cookies.cookies_service_group config:cookies.texts config:filter.format.full_html config:google_tag.container.GTM-5S9ZJCFM.68591e5f2d4809.05509045 config:google_tag_container_list config:image.style.media_standard_4_3_200x150 config:image.style.media_standard_4_3_400x300 config:image.style.news_crop_header config:paragraphs.settings config:responsive_image.styles.responsive_image_gallery config:search_api.index.search config:system.menu.footer config:system.menu.main config:system.menu.prefooter config:system.menu.rrss config:system.site config:user.role.anonymous config:views.view.press_release file:240480 file:240483 http_response logo:1 media:102797 media:102798 media_view node:37675 node:37678 node:37681 node:37683 node:37686 node:37687 node:37695 node:37742 node:38146 node:38262 node:45709 node:45726 node:45728 node_list node_view paragraph:8324 paragraph_view rendered search_api_list:search taxonomy_term:197 taxonomy_term:223 user:0
+x-drupal-cache-contexts: languages route theme timezone url user.node_grants:view user.permissions user.roles
+x-drupal-cache-max-age: 0 (Uncacheable)
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Fri, 09 Oct 2026 12:57:03 GMT
+ETag: "1791550623-gzip"
+x-generator: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+purge-cache-tags: config:block_list user:0 block_content:1 config:asset_injector.css.global_styles config:google_tag_container_list config:google_tag.container.GTM-5S9ZJCFM.68591e5f2d4809.05509045 logo:1 node_view node:45728 config:views.view.press_release node_list node:38262 node:45709 node:45726 config:filter.format.full_html paragraph_view paragraph:8324 config:paragraphs.settings media_view media:102798 config:responsive_image.styles.responsive_image_gallery config:image.style.media_standard_4_3_400x300 config:image.style.media_standard_4_3_200x150 file:240483 taxonomy_term:197 taxonomy_term:223 media:102797 file:240480 config:image.style.news_crop_header config:system.site config:cookies.config config:cookies.texts config:cookies.cookies_service config:cookies.cookies_service_group rendered http_response config:user.role.anonymous config:system.menu.rrss config:system.menu.footer config:system.menu.prefooter node:37675 node:37681 node:37683 node:37686 node:37687 node:37742 node:38146 config:search_api.index.search search_api_list:search CACHE_MISS_IF_UNCACHEABLE_HTTP_METHOD:form block_content_view config:system.menu.main node:37678 node:37695
+x-drupal-cache: MISS
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 74207549456b865bb0d85b6ce7dc9562.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E318DFC4C0CCE22047D169CD2D1;Expires=Tue, 12 Oct 2027 06:17:00 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: NnLkaAJ9tODxPLRQdG3EDSHmX67wCueCiSYsHUt0C4ObmYA1seQk3g==
+Age: 235196
+
+
+=== mitma_autopistas_peaje.html
+URL: https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje
+Fecha local de la captura (UTC): 2026-10-12T06:17:37Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 14527
+Connection: keep-alive
+Date: Mon, 12 Oct 2026 06:17:36 GMT
+x-drupal-cache: HIT
+Content-Language: es
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+Link: <https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje>; rel="canonical"
+Cache-Control: public, max-age=0
+Last-Modified: Mon, 12 Oct 2026 06:14:16 GMT
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 80ea9b66fde70fee6b3b4b7b4b9ca022.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+ETag: "1791785656-1"
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: w2-Rf3sL_zHaddQfOXdxXVeppP1tUtn0RuM-VM5KUGCJhK6WuCb1xg==
+Age: 0
+
+
+=== mitma_peajes_dependientes_de_la_age.html
+URL: https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje/peajes-dependientes-de-la-age
+Fecha local de la captura (UTC): 2026-10-12T06:17:38Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 15904
+Connection: keep-alive
+Date: Mon, 12 Oct 2026 06:17:37 GMT
+x-drupal-cache: HIT
+Content-Language: es
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+Link: <https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje/peajes-dependientes-de-la-age>; rel="canonical"
+Cache-Control: public, max-age=0
+Last-Modified: Mon, 12 Oct 2026 06:14:20 GMT
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 070f247c6818b198db4fd325e7af68ba.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E31559348F8347B4BFF211125B7;Expires=Tue, 12 Oct 2027 06:17:37 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+ETag: "1791785660-1"
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: hQnpbqsz-L-kAFylrtOmgXRd81APIGyvxsa5wfc0TgzDEmshS-glqQ==
+Age: 0
+
+
+=== mitma_peajes_actuales.html
+URL: https://www.transportes.gob.es/carreteras/peajes-actuales
+Fecha local de la captura (UTC): 2026-10-12T06:19:56Z
+HTTP/1.1 301 Moved Permanently
+Server: CloudFront
+Content-Type: text/html; charset=UTF-8
+Content-Length: 1
+Connection: keep-alive
+Date: Mon, 12 Oct 2026 06:19:55 GMT
+x-drupal-cache: MISS
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Cache-Control: no-cache, must-revalidate
+x-content-type-options: nosniff
+Location: https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje/peajes-dependientes-de-la-age/peajes-actuales
+x-redirect-id: 132017
+Via: 1.1 varnish (Varnish/6.0), 1.1 25407571e06b712295c6e1230888ab84.cloudfront.net (CloudFront)
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: cookiesession1=678A3E316E8BD76136BF26F3071B0A38;Expires=Tue, 12 Oct 2027 06:19:55 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: CCkVEi9tRjRiDzIcrocmpHX3HNeOba0DwgZJ75I14Sl8oGyUp3U0xg==
+Age: 0
+
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 12691
+Connection: keep-alive
+Date: Mon, 12 Oct 2026 06:19:55 GMT
+x-drupal-cache: HIT
+Content-Language: es
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+Link: <https://www.transportes.gob.es/carreteras/nuestra-red/autopistas-peaje/peajes-dependientes-de-la-age/peajes-actuales>; rel="canonical"
+Cache-Control: public, max-age=0
+Last-Modified: Mon, 12 Oct 2026 05:19:45 GMT
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 25407571e06b712295c6e1230888ab84.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E3168424B3F56CF64325D53FDF5;Expires=Tue, 12 Oct 2027 06:19:55 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+ETag: "1791782385-1"
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: _dBA2_s_19X0WiyOuxXaZ1kRz4H_48JE74lpi2HzG1T5iJBRmg8JAw==
+Age: 0
+
+
+=== mitma_tarifas_2026_ap-9.pdf
+URL: https://cdn.transportes.gob.es/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-9,-ferrol---frontera-portuguesa-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:13Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:20:13 GMT
+Content-Type: application/pdf
+Content-Length: 61979
+Connection: keep-alive
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CB86CDA
+Vary: Origin
+x-ms-request-id: de26cb23-901e-001c-4c11-5aacb7000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T062012Z-17fb65d855fslxvvhC1MIAsy8c00000001v0000000006dha
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== mitma_tarifas_2026_ap-51.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-51,-conexion-ap-6---avila-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:15Z
+HTTP/1.1 200 OK
+Content-Length: 31915
+Content-Type: application/pdf
+Content-MD5: kb6A8o06YxSUzgXh9yl0WQ==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CBCD4B9
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 3b773a00-001e-006c-7c11-5a1540000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:13 GMT
+
+
+=== mitma_tarifas_2026_ap-53.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-53,-santiago---alto-de-santo-domingo-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:15Z
+HTTP/1.1 200 OK
+Content-Length: 49466
+Content-Type: application/pdf
+Content-MD5: neYXtqA/PIw8c/RHwIbEZA==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CA71B5B
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 2759fe61-301e-0067-2b11-5aee2b000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:14 GMT
+
+
+=== mitma_tarifas_2026_ap-6.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-6,-villalba---adanero-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:16Z
+HTTP/1.1 200 OK
+Content-Length: 20946
+Content-Type: application/pdf
+Content-MD5: hDmBKnqsQbqOTRelj/f2sA==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875C9E248D
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 27ce57b1-a01e-0028-7011-5a9f7f000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:15 GMT
+
+
+=== mitma_tarifas_2026_ap-61.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-61,-conexion-ap-6---segovia-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:17Z
+HTTP/1.1 200 OK
+Content-Length: 34428
+Content-Type: application/pdf
+Content-MD5: KK1k6ywkbBxiFKWJ4mRuEw==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875C9E248D
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 50e84885-501e-002c-7f11-5a1278000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:16 GMT
+
+
+=== mitma_tarifas_2026_ap-66.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-66,-campomanes---leon-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:18Z
+HTTP/1.1 200 OK
+Content-Length: 28512
+Content-Type: application/pdf
+Content-MD5: 8xNYDMyR9uIpX/JAzKoEDQ==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CA327FD
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 12812d9c-501e-0003-6011-5a1fb3000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:17 GMT
+
+
+=== mitma_tarifas_2026_ap-68.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-68,-bilbao---zaragoza-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:19Z
+HTTP/1.1 200 OK
+Content-Length: 272343
+Content-Type: application/pdf
+Content-MD5: bdqKoyRBT8Q9IcDryHxChA==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CBCADD5
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 1d11772c-501e-005e-5311-5a1537000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:17 GMT
+
+
+=== mitma_tarifas_2026_ap-7_alicante-cartagena.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-7,-alicante---cartagena-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:20Z
+HTTP/1.1 200 OK
+Content-Length: 83448
+Content-Type: application/pdf
+Content-MD5: 0lhq2qsdxI/anIcqndCmpg==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CB05F95
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 2fcda1bc-c01e-0001-0d11-5aa10b000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:19 GMT
+
+
+=== mitma_tarifas_2026_ap-7_estepona-guadiaro.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-7,-estepona---guadiaro-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:21Z
+HTTP/1.1 200 OK
+Content-Length: 29210
+Content-Type: application/pdf
+Content-MD5: /n3dlunJXQIYgL7PoTr9ZA==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CBE8084
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: adbd0991-c01e-0063-4911-5a632c000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:20 GMT
+
+
+=== mitma_tarifas_2026_ap-7_malaga-estepona.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-7,-malaga---estepona-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:22Z
+HTTP/1.1 200 OK
+Content-Length: 44734
+Content-Type: application/pdf
+Content-MD5: VCRTLtirULdbyo4Q4poCdQ==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CB31B9E
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 0ace2255-b01e-000b-3e11-5a05bc000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:21 GMT
+
+
+=== mitma_tarifas_2026_ap-71.pdf
+URL: https://cdnfomento.blob.core.windows.net/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/peajes-actuales/autopista-ap-71,-leon---astorga-2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:23Z
+HTTP/1.1 200 OK
+Content-Length: 23918
+Content-Type: application/pdf
+Content-MD5: nlSNqUqeY0QnqRRQiWdJLQ==
+Last-Modified: Tue, 30 Dec 2025 09:39:43 GMT
+ETag: 0x8DE47875CC6B4B4
+Vary: Origin
+Server: Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+x-ms-request-id: 50e87085-501e-002c-2011-5a1278000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+Date: Mon, 12 Oct 2026 06:20:22 GMT
+
+
+=== mitma_2024-11-20-concesiones-autopistas-peaje-v2.pdf
+URL: https://cdn.transportes.gob.es/portal-web-transportes/carreteras/nuestrared/autopistaspeaje/2024-11-20-concesiones-autopistas-peaje-v2.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:20:53Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:20:52 GMT
+Content-Type: application/pdf
+Content-Length: 2668052
+Connection: keep-alive
+Last-Modified: Fri, 14 Feb 2025 11:44:22 GMT
+ETag: 0x8DD4CECEC9859AD
+Vary: Origin
+x-ms-request-id: 4dacde34-e01e-0016-7ff1-590800000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T062052Z-17fb65d855fbb9tlhC1MIAtxx00000001nt00000000020xs
+x-fd-int-roxy-purgeid: 0
+X-Cache-Info: L2_T2
+X-Cache: TCP_REMOTE_HIT
+Accept-Ranges: bytes
+
+
+=== seitt_r-2.html
+URL: https://www.seitt.es/areas-negocio/autopistas/r-2
+Fecha local de la captura (UTC): 2026-10-12T06:25:06Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 199661
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 00:21:30 GMT
+Cache-Control: max-age=31536000, public
+x-drupal-dynamic-cache: UNCACHEABLE (poor cacheability)
+Link: </themes/custom/frontend/assets/favicons/favicon-96x96.png?tlpxop>; rel="icon"; type="image/png"; sizes="96x96"
+Link: </themes/custom/frontend/assets/favicons/favicon.svg?tlpxop>; rel="icon"; type="image/svg+xml"
+Link: </themes/custom/frontend/assets/favicons/favicon.ico?tlpxop>; rel="shortcut icon"
+Link: </themes/custom/frontend/assets/favicons/apple-touch-icon.png?tlpxop>; rel="apple-touch-icon"; sizes="180x180"
+Link: </themes/custom/frontend/assets/favicons/site.webmanifest?tlpxop>; rel="manifest"
+Content-Language: es
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-drupal-cache-tags: config:block_list config:cookies.config config:cookies.cookies_service config:cookies.cookies_service_group config:cookies.texts config:filter.format.full_html config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 config:google_tag_container_list config:image.style.1024 config:image.style.1280 config:image.style.1400 config:image.style.1600 config:image.style.1920 config:image.style.360 config:image.style.576 config:image.style.768 config:image.style.992 config:mitma_lateral_menu.config config:paragraphs.settings config:responsive_image.styles.responsive_image_big config:responsive_image.styles.responsive_image_medium config:system.menu.footer config:system.menu.main config:system.menu.menu-legal config:system.menu.menu-search config:system.site config:user.role.anonymous config:workflows.workflow.general file:1598 file:3933 file:4241 file:5310 http_response local_task logo:1 media:180 media:344 media:35 media:412 media:716 media:871 media:880 media:962 media_view node:136 node:137 node:171 node:208 node:231 node:248 node:36 node:38 node:60 node:62 node:67 node:69 node:74 node_view paragraph:1583 paragraph:341 paragraph:367 paragraph:385 paragraph:469 paragraph:471 paragraph:473 paragraph:475 paragraph:477 paragraph:479 paragraph:481 paragraph:483 paragraph:485 paragraph:487 paragraph:489 paragraph:790 paragraph:792 paragraph:794 paragraph:796 paragraph:798 paragraph_view rendered user:0
+x-drupal-cache-contexts: languages route theme url.path url.query_args url.site user.permissions user.roles
+x-drupal-cache-max-age: 0 (Uncacheable)
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Mon, 05 Oct 2026 00:21:30 GMT
+ETag: "1791159690-gzip"
+x-generator: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+content-security-policy-report-only: connect-src 'self' https://demotiles.maplibre.org https://www.ign.es https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://demotiles.maplibre.org https://www.ign.es; frame-src 'self' https://www.google.com https://www.googletagmanager.com; img-src 'self' data: https://cdn.transportes.gob.es https://cdnfomento.blob.core.windows.net https://www.ign.es https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://stats.g.doubleclick.net; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' 'report-sample' https://cdnjs.cloudflare.com https://unpkg.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+purge-cache-tags: config:block_list node:36 user:0 config:google_tag_container_list config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 node_view config:filter.format.full_html paragraph:477 config:paragraphs.settings paragraph:479 paragraph:481 paragraph:792 paragraph:794 paragraph:796 paragraph:798 paragraph:483 paragraph:485 paragraph:487 paragraph:489 paragraph:790 paragraph:1583 paragraph:385 paragraph:341 paragraph:367 paragraph_view paragraph:475 node:208 node:38 paragraph:473 media_view media:344 media:180 file:3933 media:716 file:1598 media:962 file:5310 media:880 file:4241 paragraph:471 media:871 paragraph:469 node:62 node:60 media:412 config:responsive_image.styles.responsive_image_medium config:image.style.576 config:image.style.360 media:35 config:responsive_image.styles.responsive_image_big config:image.style.1920 config:image.style.1600 config:image.style.1400 config:image.style.1280 config:image.style.1024 config:image.style.992 config:image.style.768 config:system.site config:mitma_lateral_menu.config config:system.menu.menu-legal logo:1 config:cookies.config config:cookies.texts config:cookies.cookies_service config:cookies.cookies_service_group rendered http_response config:user.role.anonymous config:system.menu.menu-search node:69 node:171 config:system.menu.main node:67 node:74 local_task config:workflows.workflow.general config:system.menu.footer node:231 node:136 node:137 node:248 config:csp.settings library_info
+x-drupal-cache: MISS
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 ae95183d59dc73c6c599155a3d4c7542.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E4F1B1B5014AE129257F89E6753;Expires=Tue, 12 Oct 2027 06:25:05 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: dMtCRup9-tzHEbhp-R_yTbRqE16lIvYAHzkUTis2pbvrQ7z2Xz4ngA==
+Age: 626612
+
+
+=== seitt_r-3.html
+URL: https://www.seitt.es/areas-negocio/autopistas/r-3
+Fecha local de la captura (UTC): 2026-10-12T06:25:07Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 197302
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 03:29:02 GMT
+Cache-Control: max-age=31536000, public
+x-drupal-dynamic-cache: UNCACHEABLE (poor cacheability)
+Link: </themes/custom/frontend/assets/favicons/favicon-96x96.png?tlpxop>; rel="icon"; type="image/png"; sizes="96x96"
+Link: </themes/custom/frontend/assets/favicons/favicon.svg?tlpxop>; rel="icon"; type="image/svg+xml"
+Link: </themes/custom/frontend/assets/favicons/favicon.ico?tlpxop>; rel="shortcut icon"
+Link: </themes/custom/frontend/assets/favicons/apple-touch-icon.png?tlpxop>; rel="apple-touch-icon"; sizes="180x180"
+Link: </themes/custom/frontend/assets/favicons/site.webmanifest?tlpxop>; rel="manifest"
+Content-Language: es
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-drupal-cache-tags: config:block_list config:cookies.config config:cookies.cookies_service config:cookies.cookies_service_group config:cookies.texts config:filter.format.full_html config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 config:google_tag_container_list config:image.style.1024 config:image.style.1280 config:image.style.1400 config:image.style.1600 config:image.style.1920 config:image.style.360 config:image.style.576 config:image.style.768 config:image.style.992 config:mitma_lateral_menu.config config:paragraphs.settings config:responsive_image.styles.responsive_image_big config:responsive_image.styles.responsive_image_medium config:system.menu.footer config:system.menu.main config:system.menu.menu-legal config:system.menu.menu-search config:system.site config:user.role.anonymous config:workflows.workflow.general file:3553 file:4244 file:5310 http_response local_task logo:1 media:35 media:419 media:851 media:883 media:885 media:962 media_view node:136 node:137 node:171 node:207 node:231 node:248 node:35 node:42 node:60 node:62 node:67 node:69 node:74 node_view paragraph:1201 paragraph:1582 paragraph:1587 paragraph:1589 paragraph:1591 paragraph:1593 paragraph:1595 paragraph:1644 paragraph:414 paragraph:496 paragraph:500 paragraph:502 paragraph:504 paragraph:506 paragraph:508 paragraph:510 paragraph:512 paragraph:514 paragraph:517 paragraph:519 paragraph_view rendered user:0
+x-drupal-cache-contexts: languages route theme url.path url.query_args url.site user.permissions user.roles
+x-drupal-cache-max-age: 0 (Uncacheable)
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Mon, 05 Oct 2026 03:29:02 GMT
+x-generator: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+content-security-policy-report-only: connect-src 'self' https://demotiles.maplibre.org https://www.ign.es https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://demotiles.maplibre.org https://www.ign.es; frame-src 'self' https://www.google.com https://www.googletagmanager.com; img-src 'self' data: https://cdn.transportes.gob.es https://cdnfomento.blob.core.windows.net https://www.ign.es https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://stats.g.doubleclick.net; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' 'report-sample' https://cdnjs.cloudflare.com https://unpkg.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+purge-cache-tags: config:block_list user:0 node:35 config:google_tag_container_list config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 node_view config:filter.format.full_html paragraph:504 config:paragraphs.settings paragraph:506 paragraph:514 paragraph:1587 paragraph:1589 paragraph:1591 paragraph:1593 paragraph:1595 paragraph:508 paragraph:517 paragraph:510 paragraph:512 paragraph:1644 paragraph:414 paragraph:519 paragraph:1201 paragraph_view paragraph:1582 node:207 node:42 paragraph:502 media_view media:851 file:3553 media:962 file:5310 media:883 file:4244 paragraph:500 media:885 paragraph:496 node:62 node:60 media:419 config:responsive_image.styles.responsive_image_medium config:image.style.576 config:image.style.360 media:35 config:responsive_image.styles.responsive_image_big config:image.style.1920 config:image.style.1600 config:image.style.1400 config:image.style.1280 config:image.style.1024 config:image.style.992 config:image.style.768 config:system.site config:mitma_lateral_menu.config config:system.menu.menu-legal logo:1 config:cookies.config config:cookies.texts config:cookies.cookies_service config:cookies.cookies_service_group rendered http_response config:user.role.anonymous config:system.menu.menu-search node:69 node:171 config:system.menu.main node:67 node:74 local_task config:workflows.workflow.general config:system.menu.footer node:231 node:136 node:137 node:248 config:csp.settings library_info
+x-drupal-cache: MISS
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 b6ac40881e078a2c141e388cfcd9923a.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E4F86C6CF03A72A557D6CB26CF9;Expires=Tue, 12 Oct 2027 06:25:06 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+ETag: "1791170942-gzip"
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: KSUDgJIQGa_FgqKLNFk6XLqSRGpiqofRRjoT30JffYACoMp4D024MQ==
+Age: 615361
+
+
+=== seitt_r-4.html
+URL: https://www.seitt.es/areas-negocio/autopistas/r-4
+Fecha local de la captura (UTC): 2026-10-12T06:25:08Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 198917
+Connection: keep-alive
+Date: Sun, 04 Oct 2026 23:42:11 GMT
+Cache-Control: max-age=31536000, public
+x-drupal-dynamic-cache: UNCACHEABLE (poor cacheability)
+Link: </themes/custom/frontend/assets/favicons/favicon-96x96.png?tlpxop>; rel="icon"; type="image/png"; sizes="96x96"
+Link: </themes/custom/frontend/assets/favicons/favicon.svg?tlpxop>; rel="icon"; type="image/svg+xml"
+Link: </themes/custom/frontend/assets/favicons/favicon.ico?tlpxop>; rel="shortcut icon"
+Link: </themes/custom/frontend/assets/favicons/apple-touch-icon.png?tlpxop>; rel="apple-touch-icon"; sizes="180x180"
+Link: </themes/custom/frontend/assets/favicons/site.webmanifest?tlpxop>; rel="manifest"
+Content-Language: es
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-drupal-cache-tags: config:block_list config:cookies.config config:cookies.cookies_service config:cookies.cookies_service_group config:cookies.texts config:filter.format.full_html config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 config:google_tag_container_list config:image.style.1024 config:image.style.1280 config:image.style.1400 config:image.style.1600 config:image.style.1920 config:image.style.360 config:image.style.576 config:image.style.768 config:image.style.992 config:mitma_lateral_menu.config config:paragraphs.settings config:responsive_image.styles.responsive_image_big config:responsive_image.styles.responsive_image_medium config:system.menu.footer config:system.menu.main config:system.menu.menu-legal config:system.menu.menu-search config:system.site config:user.role.anonymous config:workflows.workflow.general file:4321 file:5310 http_response local_task logo:1 media:35 media:409 media:904 media:916 media:962 media_view node:136 node:137 node:171 node:218 node:222 node:231 node:248 node:34 node:60 node:62 node:67 node:69 node:74 node_view paragraph:1202 paragraph:1596 paragraph:1598 paragraph:1600 paragraph:1602 paragraph:1645 paragraph:523 paragraph:538 paragraph:540 paragraph:542 paragraph:547 paragraph:549 paragraph:551 paragraph:556 paragraph:558 paragraph:560 paragraph:562 paragraph:563 paragraph:639 paragraph:673 paragraph_view rendered user:0
+x-drupal-cache-contexts: languages route theme url.path url.query_args url.site user.permissions user.roles
+x-drupal-cache-max-age: 0 (Uncacheable)
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Sun, 04 Oct 2026 23:42:11 GMT
+ETag: "1791157331-gzip"
+x-generator: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+content-security-policy-report-only: connect-src 'self' https://demotiles.maplibre.org https://www.ign.es https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://demotiles.maplibre.org https://www.ign.es; frame-src 'self' https://www.google.com https://www.googletagmanager.com; img-src 'self' data: https://cdn.transportes.gob.es https://cdnfomento.blob.core.windows.net https://www.ign.es https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://stats.g.doubleclick.net; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' 'report-sample' https://cdnjs.cloudflare.com https://unpkg.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+purge-cache-tags: config:block_list node:34 user:0 config:google_tag_container_list config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 node_view config:filter.format.full_html paragraph:547 config:paragraphs.settings paragraph:549 paragraph:551 paragraph:1596 paragraph:1598 paragraph:1600 paragraph:1602 paragraph:673 paragraph:556 paragraph:558 paragraph:560 paragraph:562 paragraph:1645 paragraph:639 paragraph:563 paragraph:1202 paragraph_view paragraph:542 node:222 node:218 paragraph:540 media_view media:962 file:5310 media:904 file:4321 paragraph:538 media:916 paragraph:523 node:62 node:60 media:409 config:responsive_image.styles.responsive_image_medium config:image.style.576 config:image.style.360 media:35 config:responsive_image.styles.responsive_image_big config:image.style.1920 config:image.style.1600 config:image.style.1400 config:image.style.1280 config:image.style.1024 config:image.style.992 config:image.style.768 config:system.site config:mitma_lateral_menu.config config:system.menu.menu-legal logo:1 config:cookies.config config:cookies.texts config:cookies.cookies_service config:cookies.cookies_service_group rendered http_response config:user.role.anonymous config:system.menu.menu-search node:69 node:171 config:system.menu.main node:67 node:74 local_task config:workflows.workflow.general config:system.menu.footer node:231 node:136 node:137 node:248 config:csp.settings library_info
+x-drupal-cache: MISS
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 493d390b4e8b0e7a9d2f70bac4854b6a.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E4F16AFBA9770D71160F6FB0A22;Expires=Tue, 12 Oct 2027 06:25:07 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: ZiXzkM3MMlgIHkW1pMN6GjMKR9lNHqH1NEYKK0vwZD9y_bBNI67FzA==
+Age: 628967
+
+
+=== seitt_m-12.html
+URL: https://www.seitt.es/areas-negocio/autopistas/m-12
+Fecha local de la captura (UTC): 2026-10-12T06:25:09Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 195533
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 07:08:53 GMT
+Cache-Control: max-age=31536000, public
+x-drupal-dynamic-cache: UNCACHEABLE (poor cacheability)
+Link: </themes/custom/frontend/assets/favicons/favicon-96x96.png?tlpxop>; rel="icon"; type="image/png"; sizes="96x96"
+Link: </themes/custom/frontend/assets/favicons/favicon.svg?tlpxop>; rel="icon"; type="image/svg+xml"
+Link: </themes/custom/frontend/assets/favicons/favicon.ico?tlpxop>; rel="shortcut icon"
+Link: </themes/custom/frontend/assets/favicons/apple-touch-icon.png?tlpxop>; rel="apple-touch-icon"; sizes="180x180"
+Link: </themes/custom/frontend/assets/favicons/site.webmanifest?tlpxop>; rel="manifest"
+Content-Language: es
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-drupal-cache-tags: config:block_list config:cookies.config config:cookies.cookies_service config:cookies.cookies_service_group config:cookies.texts config:filter.format.full_html config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 config:google_tag_container_list config:image.style.1024 config:image.style.1280 config:image.style.1400 config:image.style.1600 config:image.style.1920 config:image.style.360 config:image.style.576 config:image.style.768 config:image.style.992 config:mitma_lateral_menu.config config:paragraphs.settings config:responsive_image.styles.responsive_image_big config:responsive_image.styles.responsive_image_medium config:system.menu.footer config:system.menu.main config:system.menu.menu-legal config:system.menu.menu-search config:system.site config:user.role.anonymous config:workflows.workflow.general file:4238 file:5310 http_response local_task logo:1 media:35 media:472 media:875 media:877 media:962 media_view node:136 node:137 node:171 node:231 node:248 node:37 node:60 node:62 node:67 node:69 node:74 node_view paragraph:1584 paragraph:1606 paragraph:1608 paragraph:1610 paragraph:1612 paragraph:1614 paragraph:645 paragraph:647 paragraph:649 paragraph:651 paragraph:653 paragraph:655 paragraph:657 paragraph:659 paragraph:661 paragraph:663 paragraph:665 paragraph:667 paragraph:669 paragraph:671 paragraph_view rendered user:0
+x-drupal-cache-contexts: languages route theme url.path url.query_args url.site user.permissions user.roles
+x-drupal-cache-max-age: 0 (Uncacheable)
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Mon, 05 Oct 2026 07:08:53 GMT
+ETag: "1791184133-gzip"
+x-generator: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+content-security-policy-report-only: connect-src 'self' https://demotiles.maplibre.org https://www.ign.es https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://demotiles.maplibre.org https://www.ign.es; frame-src 'self' https://www.google.com https://www.googletagmanager.com; img-src 'self' data: https://cdn.transportes.gob.es https://cdnfomento.blob.core.windows.net https://www.ign.es https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://stats.g.doubleclick.net; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' 'report-sample' https://cdnjs.cloudflare.com https://unpkg.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+purge-cache-tags: config:block_list node:37 user:0 config:google_tag_container_list config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 node_view config:filter.format.full_html paragraph:653 config:paragraphs.settings paragraph:655 paragraph:657 paragraph:659 paragraph:1606 paragraph:1608 paragraph:1610 paragraph:1612 paragraph:669 paragraph:1614 paragraph:661 paragraph:663 paragraph:665 paragraph:667 paragraph:1584 paragraph:645 paragraph:671 paragraph_view paragraph:651 media_view media:962 file:5310 media:877 file:4238 paragraph:649 media:875 paragraph:647 node:62 node:60 media:472 config:responsive_image.styles.responsive_image_medium config:image.style.576 config:image.style.360 media:35 config:responsive_image.styles.responsive_image_big config:image.style.1920 config:image.style.1600 config:image.style.1400 config:image.style.1280 config:image.style.1024 config:image.style.992 config:image.style.768 config:system.site config:mitma_lateral_menu.config config:system.menu.menu-legal logo:1 config:cookies.config config:cookies.texts config:cookies.cookies_service config:cookies.cookies_service_group rendered http_response config:user.role.anonymous local_task config:workflows.workflow.general config:system.menu.menu-search node:69 node:171 config:system.menu.main node:67 node:74 config:system.menu.footer node:231 node:136 node:137 node:248 config:csp.settings library_info
+x-drupal-cache: MISS
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 52ae716a40a076f1b26575b846ef3f98.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: G_S1RfHmxYsGXTE8CWkKtHYmf6RTXiDrjdB0FVc3LQpCQNu7_pXA2A==
+Age: 602169
+
+
+=== seitt_ap-41.html
+URL: https://www.seitt.es/areas-negocio/autopistas/ap-41
+Fecha local de la captura (UTC): 2026-10-12T06:25:10Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 199610
+Connection: keep-alive
+Date: Mon, 05 Oct 2026 00:12:11 GMT
+Cache-Control: max-age=31536000, public
+x-drupal-dynamic-cache: UNCACHEABLE (poor cacheability)
+Link: </themes/custom/frontend/assets/favicons/favicon-96x96.png?tlpxop>; rel="icon"; type="image/png"; sizes="96x96"
+Link: </themes/custom/frontend/assets/favicons/favicon.svg?tlpxop>; rel="icon"; type="image/svg+xml"
+Link: </themes/custom/frontend/assets/favicons/favicon.ico?tlpxop>; rel="shortcut icon"
+Link: </themes/custom/frontend/assets/favicons/apple-touch-icon.png?tlpxop>; rel="apple-touch-icon"; sizes="180x180"
+Link: </themes/custom/frontend/assets/favicons/site.webmanifest?tlpxop>; rel="manifest"
+Content-Language: es
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-drupal-cache-tags: config:block_list config:cookies.config config:cookies.cookies_service config:cookies.cookies_service_group config:cookies.texts config:filter.format.full_html config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 config:google_tag_container_list config:image.style.1024 config:image.style.1280 config:image.style.1400 config:image.style.1600 config:image.style.1920 config:image.style.360 config:image.style.576 config:image.style.768 config:image.style.992 config:mitma_lateral_menu.config config:paragraphs.settings config:responsive_image.styles.responsive_image_big config:responsive_image.styles.responsive_image_medium config:system.menu.footer config:system.menu.main config:system.menu.menu-legal config:system.menu.menu-search config:system.site config:user.role.anonymous config:workflows.workflow.general file:3553 file:4266 file:5310 http_response local_task logo:1 media:35 media:421 media:851 media:895 media:898 media:962 media_view node:136 node:137 node:171 node:216 node:231 node:248 node:31 node:43 node:60 node:62 node:67 node:69 node:74 node_view paragraph:1198 paragraph:1656 paragraph:412 paragraph:703 paragraph:705 paragraph:707 paragraph:709 paragraph:711 paragraph:713 paragraph:715 paragraph:717 paragraph:718 paragraph:720 paragraph:722 paragraph:724 paragraph:726 paragraph:806 paragraph:808 paragraph:810 paragraph:812 paragraph_view rendered user:0
+x-drupal-cache-contexts: languages route theme url.path url.query_args url.site user.permissions user.roles
+x-drupal-cache-max-age: 0 (Uncacheable)
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Last-Modified: Mon, 05 Oct 2026 00:12:11 GMT
+ETag: "1791159131-gzip"
+x-generator: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX)
+content-security-policy-report-only: connect-src 'self' https://demotiles.maplibre.org https://www.ign.es https://www.google.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://demotiles.maplibre.org https://www.ign.es; frame-src 'self' https://www.google.com https://www.googletagmanager.com; img-src 'self' data: https://cdn.transportes.gob.es https://cdnfomento.blob.core.windows.net https://www.ign.es https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://stats.g.doubleclick.net; object-src 'none'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' 'report-sample' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://ssl.google-analytics.com https://unpkg.com; style-src 'self' 'unsafe-inline' 'report-sample' https://cdnjs.cloudflare.com https://unpkg.com; worker-src 'self' blob:; base-uri 'self'; form-action 'self'; frame-ancestors 'self'
+purge-cache-tags: config:block_list node:31 user:0 config:google_tag_container_list config:google_tag.container.GTM-NB7T5BHJ.6620c6f1b37df9.72360036 node_view config:filter.format.full_html paragraph:711 config:paragraphs.settings paragraph:713 paragraph:715 paragraph:806 paragraph:808 paragraph:810 paragraph:812 paragraph:718 paragraph:717 paragraph:720 paragraph:722 paragraph:724 paragraph:1656 paragraph:412 paragraph:726 paragraph:1198 paragraph_view paragraph:709 node:43 node:216 paragraph:707 media_view media:851 file:3553 media:962 file:5310 media:895 file:4266 paragraph:705 media:898 paragraph:703 node:62 node:60 media:421 config:responsive_image.styles.responsive_image_medium config:image.style.576 config:image.style.360 media:35 config:responsive_image.styles.responsive_image_big config:image.style.1920 config:image.style.1600 config:image.style.1400 config:image.style.1280 config:image.style.1024 config:image.style.992 config:image.style.768 config:system.site config:mitma_lateral_menu.config config:system.menu.menu-legal logo:1 config:cookies.config config:cookies.texts config:cookies.cookies_service config:cookies.cookies_service_group rendered http_response config:user.role.anonymous config:system.menu.menu-search node:69 node:171 config:system.menu.main node:67 node:74 local_task config:workflows.workflow.general config:system.menu.footer node:231 node:136 node:137 node:248 config:csp.settings library_info
+x-drupal-cache: MISS
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 6c4daa03e82b12553d9ee7adb52d7f0c.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E4F1BA2C2717E6C45A49D828BB2;Expires=Tue, 12 Oct 2027 06:25:10 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: _u4crzTW6E6jW2Nn3qgNjCLLyGjx2aNJtNue_6g_VfDobRg46p-_yA==
+Age: 627177
+
+
+=== seitt_tarifas_r2_2026.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/tarifas_r2_2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:25:24Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:25:24 GMT
+Content-Type: application/pdf
+Content-Length: 251021
+Connection: keep-alive
+Last-Modified: Wed, 31 Dec 2025 13:58:27 GMT
+ETag: 0x8DE4874ABFF1D05
+Vary: Origin
+x-ms-request-id: aac5d174-301e-0058-77c4-582688000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T062523Z-17fb65d855f7h4dhhC1MIApxhs0000001mzg00000000bbcb
+x-fd-int-roxy-purgeid: 0
+X-Cache-Info: L2_T2
+X-Cache: TCP_REVALIDATED_HIT
+Accept-Ranges: bytes
+
+
+=== seitt_precios_web_r3_2026.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/precios_web_r3_2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:25:27Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:25:26 GMT
+Content-Type: application/pdf
+Content-Length: 709171
+Connection: keep-alive
+Last-Modified: Wed, 31 Dec 2025 14:01:49 GMT
+ETag: 0x8DE4875249024F7
+Vary: Origin
+x-ms-request-id: 9a50288a-701e-0014-5a12-5ab6b8000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T062525Z-17fb65d855flkt2ghC1MIAqruc0000001nu000000000bfdw
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== seitt_tarifas_r4_2026_1.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/tarifas_r4_2026_1.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:25:28Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:25:28 GMT
+Content-Type: application/pdf
+Content-Length: 323726
+Connection: keep-alive
+Last-Modified: Thu, 08 Jan 2026 15:09:21 GMT
+ETag: 0x8DE4EC7E74DB16E
+Vary: Origin
+x-ms-request-id: 1f784da7-a01e-0007-4a12-5a92b4000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T062527Z-17fb65d855fg9d45hC1MIAqd3n0000001n70000000000097
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== seitt_tarifa_m12_2026.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/tarifa_m12_2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:25:30Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:25:29 GMT
+Content-Type: application/pdf
+Content-Length: 701582
+Connection: keep-alive
+Last-Modified: Wed, 31 Dec 2025 13:56:50 GMT
+ETag: 0x8DE487472888B43
+Vary: Origin
+x-ms-request-id: b6ea8e7b-c01e-002e-6f12-5aacc0000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T062529Z-17fb65d855f7kr66hC1MIAha180000000xug000000000n59
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== bizkaia_nota_2026-07-22_bidesaria_ap68.html
+URL: https://www.bizkaia.eus/es/web/comunicacion/noticias/-/news/detailView/bizkaia-rebaja-a-35-euros-el-pago-maximo-mensual-por-circular-por-las-vias-de-peaje-del-territorio-a-partir-del-1-de-enero-de-2027
+Fecha local de la captura (UTC): 2026-10-12T06:26:42Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:26:41 GMT
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Set-Cookie: COOKIE_SUPPORT=true; path=/; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:26:41 GMT
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; path=/; domain=bizkaia.eus; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:26:41 GMT
+Set-Cookie: JSESSIONID=Lnc-6eVcwMKsAXG9wGm5nhRV9Y1CugP4f5M5asD9.p0vapplfdx3; path=/; HttpOnly
+Pragma: no-cache
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Type: text/html;charset=UTF-8
+Liferay-Portal: Liferay Digital Experience Platform
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Security-Policy: frame-ancestors 'self' https://ataria.ebizkaia.eus
+Set-Cookie: TS018bb47b=0147f0636e07fea8ba1abaa02c2c5ac66f0aa436bc6e192b856b600dbe2437aaab337ac334218cec3fc56ff12fcd29d86550e656c8c345148c117c214a6603648c888476e13bc16d58d401ddf1caa833e9f77ca4e8; Path=/
+Set-Cookie: TS016b4d35=0147f0636ecdac83ed897aadb279ef80847dc4db5d6e192b856b600dbe2437aaab337ac334382fbd5aed24f2beda01b760f67b345b4bde4a2f1cce7e1f024bff19cd2fe24a; path=/; domain=bizkaia.eus
+Set-Cookie: TS89f98b1e027=0816fc993aab20004087ca77f5e4b2ee1463a8466ec578a874606cb1d78e3c0ee4eeef7f75ce136008a1044d3c1130006bc09172ed8158a056d80ec0137715d56ce57ec81b0d497126c7aef04f9af3dd49cabaccc347a60b9808dd3ab2f0d66a; Path=/
+Transfer-Encoding: chunked
+
+
+=== botha_2026_083_02155_C.pdf
+URL: https://www.araba.eus/botha/Boletines/2026/083/2026_083_02155_C.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:27:07Z
+HTTP/1.1 200 OK
+Content-Type: application/pdf
+Last-Modified: Wed, 22 Jul 2026 08:22:49 GMT
+Accept-Ranges: bytes
+ETag: "af362c48b319dd1:0"
+Date: Mon, 12 Oct 2026 06:27:06 GMT
+Content-Length: 173969
+Set-Cookie: TS01ce6d03=01fa6fbb8888607a8539ffb66b5347a5ec20246a855e304257d4825b32148c1ad72b273bf40af4a4c541d1e882d3dd0fe9fc101554; Path=/; Domain=.www.araba.eus
+Set-Cookie: TS9e9f9195027=083ce3f1d5ab20003542398331f68111f762028a1c3d00e89becfd465be40a202a49c3a551e446ce08a7e49c5e113000c0820e7af3fe65f78dd58692ad3a61cc98e34b6a067b7bf7110aa20754cbf2f9d58ee395e6eeb90d8996eb9b384f9534; Path=/
+
+
+=== bidegi_tarifak_es.html
+URL: https://www.bidegi.eus/es/tarifak
+Fecha local de la captura (UTC): 2026-10-12T06:27:49Z
+HTTP/1.1 200 
+Date: Mon, 12 Oct 2026 06:27:47 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Liferay-Portal: Liferay Digital Experience Platform
+Content-Type: text/html;charset=UTF-8
+Set-Cookie: JSESSIONIDLFR=044F445DF136DFF5B95C32F5A09A1393; Path=/; HttpOnly; Secure
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:27:47 GMT; Path=/; HttpOnly; Secure
+Set-Cookie: COOKIE_SUPPORT=true; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:27:47 GMT; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+Transfer-Encoding: chunked
+
+
+=== bidegi_2026_AP-8_AP-1_AP-636_tarifak.pdf
+URL: https://www.bidegi.eus/documents/42696171/0/2026__AP-8_AP-1_AP-636_tarifak.pdf/0c9dbcf3-f3e7-e6f6-709b-8cbb7d9da9d5
+Fecha local de la captura (UTC): 2026-10-12T06:27:51Z
+HTTP/1.1 200 
+Date: Mon, 12 Oct 2026 06:27:49 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Last-Modified: Tue, 24 Feb 2026 09:10:27 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Content-Disposition: inline; filename="2026__AP-8_AP-1_AP-636_tarifak.pdf"
+Content-Type: application/pdf
+Content-Length: 184501
+Set-Cookie: JSESSIONIDLFR=5EE80F462FEAF38D1CE80854C123FC58; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+
+
+=== bidegi_declaracion_SET_AP-1_AP-8_16102021.pdf
+URL: https://www.bidegi.eus/documents/530150/690601/Declaraci%C3%B3n+dominio+SET++AP-1+AP-8+16102021.pdf/5d0e8719-f542-23f9-9534-fa5cae7e3f58?t=1634138674601
+Fecha local de la captura (UTC): 2026-10-12T06:28:20Z
+HTTP/1.1 302 
+Date: Mon, 12 Oct 2026 06:28:16 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Location: https://www.bidegi.eus/eu/documents/530150/690601/Declaraci%C3%B3n+dominio+SET++AP-1+AP-8+16102021.pdf/5d0e8719-f542-23f9-9534-fa5cae7e3f58?t=1634138674601
+Content-Length: 0
+Set-Cookie: JSESSIONIDLFR=D7E0452B41B5E476D857B08A5B1B6B1D; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+
+HTTP/1.1 404 
+Date: Mon, 12 Oct 2026 06:28:18 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Liferay-Portal: Liferay Digital Experience Platform
+Content-Type: text/html;charset=UTF-8
+Set-Cookie: JSESSIONIDLFR=D8A1EE9247C995E2CE8C4F80BD929781; Path=/; HttpOnly; Secure
+Set-Cookie: GUEST_LANGUAGE_ID=eu_ES; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:28:17 GMT; Path=/; HttpOnly; Secure
+Set-Cookie: COOKIE_SUPPORT=true; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:28:17 GMT; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+Transfer-Encoding: chunked
+
+
+=== bidegi_declaracion_SET_AP-1_16102021.pdf
+URL: https://www.bidegi.eus/documents/530150/690601/Declaraci%C3%B3n+dominio+SET++AP-1+16102021.pdf/61224bd1-9444-9280-b1c1-294f2734b99c?t=1634138675273
+Fecha local de la captura (UTC): 2026-10-12T06:28:23Z
+HTTP/1.1 302 
+Date: Mon, 12 Oct 2026 06:28:20 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Location: https://www.bidegi.eus/eu/documents/530150/690601/Declaraci%C3%B3n+dominio+SET++AP-1+16102021.pdf/61224bd1-9444-9280-b1c1-294f2734b99c?t=1634138675273
+Content-Length: 0
+Set-Cookie: JSESSIONIDLFR=87A04AF4A3FA60BE36449FC0C65C8588; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+
+HTTP/1.1 404 
+Date: Mon, 12 Oct 2026 06:28:21 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Liferay-Portal: Liferay Digital Experience Platform
+Content-Type: text/html;charset=UTF-8
+Set-Cookie: JSESSIONIDLFR=A809B960EC11FE9250F5BE5A35EB6753; Path=/; HttpOnly; Secure
+Set-Cookie: GUEST_LANGUAGE_ID=eu_ES; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:28:21 GMT; Path=/; HttpOnly; Secure
+Set-Cookie: COOKIE_SUPPORT=true; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:28:21 GMT; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+Transfer-Encoding: chunked
+
+
+=== bidegi_gure-autobideak_es.html
+URL: https://www.bidegi.eus/es/gure-autobideak
+Fecha local de la captura (UTC): 2026-10-12T06:28:37Z
+HTTP/1.1 200 
+Date: Mon, 12 Oct 2026 06:28:36 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Liferay-Portal: Liferay Digital Experience Platform
+Content-Type: text/html;charset=UTF-8
+Set-Cookie: JSESSIONIDLFR=CFEE744FC07348B72B09A655EB155172; Path=/; HttpOnly; Secure
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:28:35 GMT; Path=/; HttpOnly; Secure
+Set-Cookie: COOKIE_SUPPORT=true; Max-Age=31536000; Expires=Tue, 12 Oct 2027 06:28:35 GMT; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+Transfer-Encoding: chunked
+
+
+=== bidegi_salidas_AP-8.pdf
+URL: https://www.bidegi.eus/documents/42696171/678110/28.+Salidas+y+areas+de+servicio+AP-8.pdf/883055a0-35e8-9a0a-777c-61ef4d1e3b2c?t=1633353936698
+Fecha local de la captura (UTC): 2026-10-12T06:28:46Z
+HTTP/1.1 200 
+Date: Mon, 12 Oct 2026 06:28:43 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Last-Modified: Wed, 13 Mar 2024 11:31:38 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Content-Disposition: inline; filename="28. Salidas y areas de servicio AP-8.pdf"
+Content-Type: application/pdf
+Content-Length: 725692
+Set-Cookie: JSESSIONIDLFR=A237594F7F6E18600AE85EC6ED2F0FF4; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+
+
+=== bidegi_salidas_AP-1.pdf
+URL: https://www.bidegi.eus/documents/42696171/678110/29.+Salidas+y+areas+de+servicio+AP-1.pdf/e270e853-4265-e876-42b5-7c3a459f1df4?t=1633353937414
+Fecha local de la captura (UTC): 2026-10-12T06:28:48Z
+HTTP/1.1 200 
+Date: Mon, 12 Oct 2026 06:28:46 GMT
+Server: -
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+Last-Modified: Wed, 13 Mar 2024 11:31:18 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Content-Disposition: inline; filename="29. Salidas y areas de servicio AP-1.pdf"
+Content-Type: application/pdf
+Content-Length: 295079
+Set-Cookie: JSESSIONIDLFR=7C1A853C8901D174CB6DB47BBAC4F9AC; Path=/; HttpOnly; Secure
+X-UA-Compatible: IE=edge,chrome=1
+
+
+=== interbiak_infraestructuras-tarifas.html
+URL: https://interbiak.bizkaia.eus/es/infraestructuras-tarifas
+Fecha local de la captura (UTC): 2026-10-12T06:29:27Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:29:27 GMT
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Set-Cookie: COOKIE_SUPPORT=true; path=/; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:29:27 GMT
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; path=/; domain=bizkaia.eus; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:29:27 GMT
+Set-Cookie: JSESSIONID=gNLWQcvh7soKbjSkzRIDr5gsk3QONkeUYcsKnHsD.p0vapplfdx4; path=/; HttpOnly
+Pragma: no-cache
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Type: text/html;charset=UTF-8
+Liferay-Portal: Liferay Digital Experience Platform
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Security-Policy: frame-ancestors 'self' https://ataria.ebizkaia.eus
+Set-Cookie: TS018bb47b=0147f0636e55d3b21cb1fcff1ea245816653e660578273123eda1b8e69470aae3024283ed01a66d98d3d8a263725aad9c5a8d42ef7577352ce7ea406b4522196b6638e212f9e337c350721898f7b7a88af69614ff5; Path=/
+Set-Cookie: TS016b4d35=0147f0636e05b3fe6859ba71c08da4dfff22149eb68273123eda1b8e69470aae3024283ed0d0fbc32b18c9fc687adc01b2049e7f80beec190d437e076123314fe8d2c34517; path=/; domain=bizkaia.eus
+Set-Cookie: TS89f98b1e027=0816fc993aab2000ca7ad6f85cd401503eb3b61e499791a9a6e193d6c345733d486e6174f852fb5a087a7e111a11300016cb571e0264dc94ee810141c59d4186c5706715cceb5e8e0c01449a9b46f3a511db011638f6514c1e5af7f812c4861e; Path=/
+Transfer-Encoding: chunked
+
+
+=== interbiak_DF_PEAJES_2026.pdf
+URL: https://interbiak.bizkaia.eus/documents/d/interbiak/DF_PEAJES_2026
+Fecha local de la captura (UTC): 2026-10-12T06:29:36Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:29:34 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Set-Cookie: JSESSIONID=eFYyjdSI2ErBO4W0wKKPTevVKKQhXZjqMqxO2uxB.p0vapplfdx2; path=/; HttpOnly
+X-Frame-Options: SAMEORIGIN
+Content-Disposition: inline; filename="DF_PEAJES_2026.pdf"
+Last-Modified: Mon, 14 Sep 2026 10:59:00 GMT
+X-Content-Type-Options: nosniff
+Content-Type: application/pdf
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Security-Policy: frame-ancestors 'self' https://ataria.ebizkaia.eus
+Set-Cookie: TS018bb47b=0147f0636e87fecc3d6f64acd167f0a4f40f5c5d14b14fcfad83d0e1ebd994eab78b8065ebecb0f358a06392c519faf2e9c9fb2e4f4e96eed460dee251ebfcd647cdad7cee; Path=/
+Set-Cookie: TS89f98b1e027=0816fc993aab200032efe71a2e5ecb4a3d591f6c018b643ab9340dc1501d67ff6332870b2ffff7da0892937b2b113000372eb4d0582dbb239b15171245b38ffc0ebf309105169cb2014644e887be9214e5f2da894cfe89b4a75e799635c308d0; Path=/
+Transfer-Encoding: chunked
+
+
+=== interbiak_autopista-ap-8.html
+URL: https://interbiak.bizkaia.eus/es/-/autopista-ap-8
+Fecha local de la captura (UTC): 2026-10-12T06:29:37Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:29:36 GMT
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Set-Cookie: COOKIE_SUPPORT=true; path=/; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:29:36 GMT
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; path=/; domain=bizkaia.eus; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:29:36 GMT
+Set-Cookie: JSESSIONID=zRgi26m_gpmPHtEKmlVPVhFtNR6HmYd2hBiPFAVK.p0vapplfdx2; path=/; HttpOnly
+Pragma: no-cache
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Type: text/html;charset=UTF-8
+Liferay-Portal: Liferay Digital Experience Platform
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Security-Policy: frame-ancestors 'self' https://ataria.ebizkaia.eus
+Set-Cookie: TS018bb47b=0147f0636e5a129194ab355159075bf391db9cca8f474feef454c181db9030c1973a0a5aa9dd25c1521cba763f5e85dbd7516773bffce4d13450e36adbb0284316b8ba5592d6b2aa36b7a66600899e3ea53b4ee958; Path=/
+Set-Cookie: TS016b4d35=0147f0636ef09493b19050d8d019a3c0c4dcf8a8dc474feef454c181db9030c1973a0a5aa93177f81f11a07d069386ac3366266745f75df77d89df573eca60341f926217ea; path=/; domain=bizkaia.eus
+Set-Cookie: TS89f98b1e027=0816fc993aab20008ee3e2dd4662735d2cd103c6b0bdc2f03bacf46ff9627a2edd59f21a03cbfc18085fe4252b113000914668f8db81f634310b6f3f27f76f51c7308c4eb1ed901078ea424e27bf5a788280d3741e8414698dc70fb7de4b4b2b; Path=/
+Transfer-Encoding: chunked
+
+
+=== interbiak_variante-sur-metropolitana.html
+URL: https://interbiak.bizkaia.eus/es/-/variante-sur-metropolitana
+Fecha local de la captura (UTC): 2026-10-12T06:29:56Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:29:55 GMT
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: private, no-cache, no-store, must-revalidate
+Set-Cookie: COOKIE_SUPPORT=true; path=/; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:29:55 GMT
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; path=/; domain=bizkaia.eus; secure; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:29:55 GMT
+Set-Cookie: JSESSIONID=Et0bhc4ImWgq5VjuAgjkEnNKIWebv9dbTUyJTBtB.p0vapplfdx3; path=/; HttpOnly
+Pragma: no-cache
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Content-Type: text/html;charset=UTF-8
+Liferay-Portal: Liferay Digital Experience Platform
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Content-Security-Policy: frame-ancestors 'self' https://ataria.ebizkaia.eus
+Set-Cookie: TS018bb47b=0147f0636e5d975260df9e9aac6f0ef567c202c6b1de170d677e9d32bf841b94713348b8730bd85a229b1aa43c4255d03244539bdf9cf472a14ec1cef2041b612a6b3919f625664ad8cef0083adad8f8a3b7925d58; Path=/
+Set-Cookie: TS016b4d35=0147f0636e50c6b9eaee007d257dc9c6ec6ca449abde170d677e9d32bf841b94713348b8733c1e6e8b0669dbdcaef29fbf5f1fb11abf909b3008cc1b7db2c7b7522d46f8c7; path=/; domain=bizkaia.eus
+Set-Cookie: TS89f98b1e027=0816fc993aab2000c22223b98dd8ab4588e06e6b1dfeee60a50eefd534d2bf310f44b4e04e19f31d08d32c9d8b1130003e84dff7e2c8cf9e3ca075e5d153d2735f1cab43ca354bc092e0a4caf5920eb6ba0484b28c814391237fd7a839db1556; Path=/
+Transfer-Encoding: chunked
+
+
+=== audenasa_tarifas-y-descuentos.html
+URL: https://www.audenasa.es/la-autopista/tarifas-y-descuentos/
+Fecha local de la captura (UTC): 2026-10-12T06:31:11Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:31:10 GMT
+Server: Apache
+Vary: User-Agent,Accept-Encoding
+Upgrade: h2,h2c
+Connection: Upgrade
+Last-Modified: Tue, 06 Oct 2026 19:12:24 GMT
+Accept-Ranges: bytes
+Content-Encoding: gzip
+Strict-Transport-Security: max-age=15768000;includeSubdomains
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Content-Security-Policy: object-src 'none'
+X-XSS-Protection: 1; mode=block
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Expires: Mon, 29 Oct 1923 20:30:00 GMT
+Content-Length: 20016
+Content-Type: text/html; charset=UTF-8
+
+
+=== audenasa_estaciones-de-peaje.html
+URL: https://www.audenasa.es/la-autopista/estaciones-de-peaje/
+Fecha local de la captura (UTC): 2026-10-12T06:31:12Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:31:11 GMT
+Server: Apache
+Vary: User-Agent,Accept-Encoding
+Upgrade: h2,h2c
+Connection: Upgrade
+Last-Modified: Tue, 06 Oct 2026 22:10:26 GMT
+Accept-Ranges: bytes
+Content-Encoding: gzip
+Strict-Transport-Security: max-age=15768000;includeSubdomains
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Content-Security-Policy: object-src 'none'
+X-XSS-Protection: 1; mode=block
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Expires: Mon, 29 Oct 1923 20:30:00 GMT
+Content-Length: 20835
+Content-Type: text/html; charset=UTF-8
+
+
+=== bon_2025_258_9.html
+URL: https://bon.navarra.es/es/anuncio/-/texto/2025/258/9
+Fecha local de la captura (UTC): 2026-10-12T06:31:18Z
+HTTP/1.1 200 OK
+Set-Cookie: COOKIE_SUPPORT=true; path=/; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:31:17 GMT
+Set-Cookie: GUEST_LANGUAGE_ID=es_ES; path=/; domain=.navarra.es; HttpOnly; Max-Age=31536000; Expires=Tue, 12-Oct-2027 06:31:17 GMT
+Set-Cookie: JSESSIONID=TQkYrk7ul2hUv_T-WCpDZQQPYsq6jZjjGPoM1ZUm.n2; path=/; HttpOnly
+X-XSS-Protection: 1
+X-Frame-Options: SAMEORIGIN
+Date: Mon, 12 Oct 2026 06:31:17 GMT
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+Transfer-Encoding: chunked
+Content-Type: text/html;charset=UTF-8
+Set-Cookie: GN=!3fHpqqEQfn9y7Frq7FlVbggppFadKfj8ffRreD/IQbY8rGPQt2w6zcjgBfPH46lHcYslWJEjsUsIGsM=; path=/; Httponly; Secure
+
+
+=== audenasa_la-autopista-en-cifras.html
+URL: https://www.audenasa.es/la-autopista/la-autopista-en-cifras/
+Fecha local de la captura (UTC): 2026-10-12T06:31:48Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 06:31:48 GMT
+Server: Apache
+Vary: User-Agent,Accept-Encoding
+Upgrade: h2,h2c
+Connection: Upgrade
+Last-Modified: Wed, 07 Oct 2026 10:07:05 GMT
+Accept-Ranges: bytes
+Content-Encoding: gzip
+Strict-Transport-Security: max-age=15768000;includeSubdomains
+Permissions-Policy: accelerometer=(), autoplay=(), camera=(), cross-origin-isolated=(), display-capture=(self), encrypted-media=(), fullscreen=*, geolocation=(self), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=*, picture-in-picture=*, publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=*, usb=(), xr-spatial-tracking=(), gamepad=(), serial=()
+X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+X-Permitted-Cross-Domain-Policies: none
+Cross-Origin-Opener-Policy: unsafe-none
+Cross-Origin-Resource-Policy: cross-origin
+Access-Control-Allow-Methods: GET,POST
+Access-Control-Allow-Headers: Content-Type, Authorization
+Content-Security-Policy: object-src 'none'
+X-XSS-Protection: 1; mode=block
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate
+Pragma: no-cache
+Expires: Mon, 29 Oct 1923 20:30:00 GMT
+Content-Length: 19468
+Content-Type: text/html; charset=UTF-8
+
+
+=== abertis_26_001-Aucat-C32-Castelldefels-Vendrell-T26.pdf
+URL: https://www.autopistas.com/wp-content/uploads/2025/12/26_001-Aucat-C32-Castelldefels-Vendrell-T26.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:32:53Z
+HTTP/1.1 200 OK
+date: Mon, 12 Oct 2026 06:32:52 GMT
+last-modified: Wed, 31 Dec 2025 09:52:22 GMT
+etag: "18380a-6473c6ec1ef3a-gzip"
+accept-ranges: bytes
+vary: Accept-Encoding
+content-encoding: gzip
+cache-control: max-age=31536000
+expires: Tue, 12 Oct 2027 06:32:52 GMT
+content-security-policy: frame-ancestors 'self'; form-action 'self' ov.autopistas.com;
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: geolocation=*
+transfer-encoding: chunked
+content-type: application/pdf
+set-cookie: cookiesession1=678A3E0D8FDB59A40A2DF3767EA5D97E;Expires=Tue, 12 Oct 2027 06:32:52 GMT;Path=/;HttpOnly
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+strict-transport-security: max-age=31536000; includeSubDomains; preload;
+
+
+=== abertis_26_003-Avasa-AP68-Bilbao_Zaragoza-T26.pdf
+URL: https://www.autopistas.com/wp-content/uploads/2025/12/26_003-Avasa-AP68-Bilbao_Zaragoza-T26.pdf
+Fecha local de la captura (UTC): 2026-10-12T06:32:55Z
+HTTP/1.1 200 OK
+date: Mon, 12 Oct 2026 06:32:53 GMT
+last-modified: Wed, 31 Dec 2025 09:55:02 GMT
+etag: "42a15-6473c78558b82-gzip"
+accept-ranges: bytes
+vary: Accept-Encoding
+content-encoding: gzip
+cache-control: max-age=31536000
+expires: Tue, 12 Oct 2027 06:32:53 GMT
+content-security-policy: frame-ancestors 'self'; form-action 'self' ov.autopistas.com;
+x-content-type-options: nosniff
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: geolocation=*
+content-type: application/pdf
+set-cookie: cookiesession1=678A3E0DCDAC24224346142A02B3F465;Expires=Tue, 12 Oct 2027 06:32:53 GMT;Path=/;HttpOnly
+content-length: 238037
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+strict-transport-security: max-age=31536000; includeSubDomains; preload;
+
+
+=== mitma_260306-catalogorce2025.zip
+URL: https://cdn.transportes.gob.es/portal-web-transportes/carreteras/red_carreteras/rce/260306-catalogorce2025.zip
+Fecha local de la captura (UTC): 2026-10-12T10:46:01Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 10:45:55 GMT
+Content-Type: application/x-zip-compressed
+Content-Length: 24210507
+Connection: keep-alive
+Last-Modified: Wed, 18 Mar 2026 15:21:42 GMT
+ETag: 0x8DE85020EF94750
+Vary: Origin
+x-ms-request-id: 5a2b088e-d01e-0032-4236-5afea0000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T104554Z-17fb65d855fbb9tlhC1MIAtxx00000001pt000000000nf66
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== mitma_catalogo-y-evolucion-de-la-red-de-carreteras.html
+URL: https://www.transportes.gob.es/carreteras/catalogo-y-evolucion-de-la-red-de-carreteras
+Fecha local de la captura (UTC): 2026-10-12T10:46:02Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 14397
+Connection: keep-alive
+Date: Mon, 12 Oct 2026 10:46:01 GMT
+x-drupal-cache: HIT
+Content-Language: es
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+Link: <https://www.transportes.gob.es/carreteras/catalogo-y-evolucion-de-la-red-de-carreteras>; rel="canonical"
+Cache-Control: public, max-age=0
+Last-Modified: Mon, 12 Oct 2026 06:13:13 GMT
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 afbefb862cbc68ce1a43b2892cbd35d4.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+Set-Cookie: cookiesession1=678A3E3144B2C2ACCAC12351B385C0AA;Expires=Tue, 12 Oct 2027 10:46:01 GMT;Path=/;Secure;HttpOnly
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+ETag: "1791785593-1"
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: TjO3srs-pkLc_KvMEeARsT4VmLM76laOxb9avs4nDk38IANzbx-woA==
+Age: 0
+
+
+=== mitma_archivos-geometrias-rce.html
+URL: https://www.transportes.gob.es/carreteras/catalogo-y-evolucion-de-la-red-de-carreteras/archivos-geometrias-rce
+Fecha local de la captura (UTC): 2026-10-12T10:46:03Z
+HTTP/1.1 200 OK
+Server: CloudFront
+Content-Type: text/html; charset=utf-8
+Content-Length: 12574
+Connection: keep-alive
+Date: Mon, 12 Oct 2026 10:46:02 GMT
+x-drupal-cache: HIT
+Content-Language: es
+x-frame-options: SAMEORIGIN
+x-content-type-options: nosniff
+Link: <https://www.transportes.gob.es/carreteras/catalogo-y-evolucion-de-la-red-de-carreteras/archivos-geometrias-rce>; rel="canonical"
+Cache-Control: public, max-age=0
+Last-Modified: Mon, 12 Oct 2026 06:22:19 GMT
+Expires: Sun, 19 Nov 1978 05:00:00 GMT
+Content-Encoding: gzip
+Via: 1.1 varnish (Varnish/6.0), 1.1 032e70899d65a5d6a06cd38a0d1ddeac.cloudfront.net (CloudFront)
+Accept-Ranges: bytes
+X-XSS-Protection: 1
+Referrer-Policy: strict-origin-when-cross-origin
+ETag: "1791786139-1"
+Vary: Cookie,Accept-Encoding
+X-Cache: Miss from cloudfront
+X-Amz-Cf-Pop: MIA50-P7
+Alt-Svc: h3=":443"; ma=86400
+X-Amz-Cf-Id: o8-5i70L9XhjUcG6NEq3uolCAfIknhilEqopK-5wHALf_TuXxCYewA==
+Age: 0
+
+
+=== seitt_precios_web_ap41_2026.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/precios_web_ap41_2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T11:01:52Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:01:51 GMT
+Content-Type: application/pdf
+Content-Length: 714119
+Connection: keep-alive
+Last-Modified: Wed, 31 Dec 2025 14:20:27 GMT
+ETag: 0x8DE4877BF0DD954
+Vary: Origin
+x-ms-request-id: f6306280-001e-0031-6d39-5a1fc4000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T110150Z-17fb65d855f8ft55hC1MIAcfqn0000001pm0000000006xdq
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== boe_A-2025-25961.pdf
+URL: https://www.boe.es/boe/dias/2025/12/18/pdfs/BOE-A-2025-25961.pdf
+Fecha local de la captura (UTC): 2026-10-12T11:03:02Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:03:00 GMT
+Content-Type: application/pdf
+Content-Length: 228791
+Last-Modified: Wed, 17 Dec 2025 21:15:50 GMT
+ETag: "69431d86-37db7"
+Content-Security-Policy: default-src afirma://* ; script-src 'unsafe-inline' 'unsafe-eval' 'self' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ ; frame-src 'self' https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/  afirma://* ; connect-src https://www.google.com/recaptcha/ 'self' ; img-src 'self' eur-lex.europa.eu data: ; style-src 'unsafe-inline' 'self' *.boe.es ; font-src 'self' ; child-src 'self'  www.youtube.com afirma://* ; object-src 'self'; media-src 'self' ; frame-ancestors 'self' always
+X-Frame-Options: SAMEORIGIN
+Age: 0
+Accept-Ranges: bytes
+Strict-Transport-Security: max-age=31536000
+
+
+=== seitt_tarifas_r4_2025.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/tarifas_r4_2025.pdf
+Fecha local de la captura (UTC): 2026-10-12T11:03:34Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:03:33 GMT
+Content-Type: application/pdf
+Content-Length: 249619
+Connection: keep-alive
+Last-Modified: Tue, 29 Apr 2025 14:28:28 GMT
+ETag: 0x8DD872A1BF41526
+Vary: Origin
+x-ms-request-id: a17568f4-101e-0002-5a39-5a406f000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T110332Z-17fb65d855f8ks47hC1MIArghg0000001q1000000000fe5c
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== seitt_tarifas_r4_2025_0.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/tarifas_r4_2025_0.pdf
+Fecha local de la captura (UTC): 2026-10-12T11:03:36Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:03:35 GMT
+Content-Type: application/pdf
+Content-Length: 250659
+Connection: keep-alive
+Last-Modified: Tue, 29 Apr 2025 14:28:25 GMT
+ETag: 0x8DD872A1A5F372F
+Vary: Origin
+x-ms-request-id: 30c0e340-901e-0041-1639-5aa633000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T110334Z-17fb65d855fqq2nvhC1MIAy6mc0000000mdg000000009bqp
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
+=== seitt_tarifas_r4_2026.pdf
+URL: https://cdn.transportes.gob.es/portal-web-seitt/media/document/tarifas_r4_2026.pdf
+Fecha local de la captura (UTC): 2026-10-12T11:03:37Z
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 11:03:36 GMT
+Content-Type: application/pdf
+Content-Length: 313180
+Connection: keep-alive
+Last-Modified: Wed, 31 Dec 2025 14:28:06 GMT
+ETag: 0x8DE4878D060945E
+Vary: Origin
+x-ms-request-id: a17582ad-101e-0002-0839-5a406f000000
+x-ms-version: 2009-09-19
+x-ms-lease-status: unlocked
+x-ms-blob-type: BlockBlob
+x-azure-ref: 20261012T110335Z-17fb65d855fqq2nvhC1MIAy6mc0000000mc000000000a9y7
+x-fd-int-roxy-purgeid: 0
+X-Cache: TCP_MISS
+Accept-Ranges: bytes
+
+
