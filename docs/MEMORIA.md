@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.7 blog ✅** (rama `integracion/t07-blog`, falta PR); falta T0.5 · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) |
-| Próxima tarea | Parte 2: **T3.1** costos, **T3.3** ACO, **T3.4** GA (T3.6 desbloqueada en datos). Integración: T0.5 (sin red), T4.1 (paleta y estilo de figuras), secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (rama `integracion/t05-t41`, PR pendiente) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) |
+| Próxima tarea | Parte 2: **T3.1** costos, **T3.3** ACO, **T3.4** GA (T3.6 desbloqueada en datos). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -85,6 +85,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Daniel + Claude | **T0.5 ✅** prueba sin red (run.py con sockets bloqueados + análisis estático de src/; mutante detectado). **T4.1 ✅** `src/viz/paleta.py` (fuente única de colores: método → color fijo; rampa azul), `theme.py` (Plotly) y `style.py` (matplotlib); figuras siempre sobre superficie clara (tarjeta en modo oscuro). 663 pruebas. |
 | 2026-10-12 | Daniel + Claude | **T0.7 ✅** blog: MkDocs Material + hook `reporte.py` (APA con pandoc citeproc; `mkdocs-bibtex` descartado porque cita con notas al pie) + 12 secciones con responsables + 15 pruebas (640 en total). Bibliografía: 12 referencias del BibTeX oficial, 11 contrastadas con Crossref (H-21). H-22 confirmado con PyYAML. `mkdocs` fijado en 1.6.1 por el aviso de MkDocs 2.0. |
 | 2026-10-12 | Jose Miguel + Claude | **T2.8 ✅** (cierra F2): `fuentes.md` completo y `test_data_integrity.py` (51 pruebas; 627 en total). curador-datos 3 rondas; revisor-spec devolvió una aserción de simetría que no podía fallar (la matriz se arma espejando: `rutas.csv` guarda i<j, simetría por construcción, Spec §7.2); revisor-calidad devolvió pruebas tautológicas y duplicadas. La cabecera `Date` de caché (SEITT, Mitma) engañaba: la hora real es la "fecha local de la captura". Zona horaria resuelta. |
 | 2026-10-12 | Jose Miguel + Claude | **T2.5 ✅**: peajes asignados a las 2 162 filas de `rutas.csv` (curador-datos, 2 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅ CONFORME; 568 pruebas). Suma de tramos [DECIDIDO]; `peajes_tramos.csv` no tiene coordenadas → archivos laterales de cadenas y anclas. 5 pares validados (Bilbao–Zaragoza 41,50 €, A Coruña–Pontevedra 16,35 € = Audasa). El cazador refutó la sospecha de tarifa errónea de AP51-01. **Spec v1.10.** |

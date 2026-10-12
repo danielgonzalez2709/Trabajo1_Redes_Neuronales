@@ -1,28 +1,28 @@
 /* Design System del reporte — principios de la skill apple-design (Emil Kowalski; Spec §8).
    Tipografía del sistema, jerarquía por peso + tamaño + interlineado, barra translucida,
    accesibilidad (movimiento, transparencia y contraste reducidos).
-   PALETA PROVISIONAL: la paleta definitiva y la verificación de contraste son la tarea T4.1. */
+   Colores de las figuras: src/viz/paleta.py (fuente única; validación en su docstring). */
 
 :root {
   --ds-fuente: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --ds-fuente-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
-  /* Paleta provisional (T4.1): neutros + un acento. */
+  /* Paleta (T4.1): tinta y acento de src/viz/paleta.py (paleta de referencia validada). */
   --ds-fondo: #ffffff;
-  --ds-texto: #1d1d1f;
-  --ds-texto-suave: #4b4b52;
+  --ds-texto: #0b0b0b;
+  --ds-texto-suave: #52514e;
   --ds-borde: rgba(0, 0, 0, 0.1);
-  --ds-acento: #1f5fbf;
+  --ds-acento: #2a78d6;
   --ds-barra: rgba(255, 255, 255, 0.72);
 }
 
 [data-md-color-scheme="slate"] {
-  --ds-fondo: #121214;
-  --ds-texto: #f2f2f4;
-  --ds-texto-suave: #b8b8c0;
+  --ds-fondo: #1a1a19;
+  --ds-texto: #ffffff;
+  --ds-texto-suave: #c3c2b7;
   --ds-borde: rgba(255, 255, 255, 0.14);
-  --ds-acento: #7aa7ff;
-  --ds-barra: rgba(18, 18, 20, 0.72);
+  --ds-acento: #3987e5;
+  --ds-barra: rgba(26, 26, 25, 0.72);
   --md-default-bg-color: var(--ds-fondo);
 }
 
@@ -112,6 +112,14 @@
   margin-top: 0.6em;
   font-size: 0.85em;
   color: var(--ds-texto-suave);
+}
+
+/* Las figuras se dibujan siempre sobre la superficie clara de la paleta (src/viz/paleta.py): en modo oscuro
+   se muestran dentro de una tarjeta clara para que ejes y etiquetas conserven el contraste. */
+[data-md-color-scheme="slate"] .md-typeset .apa-figura img,
+[data-md-color-scheme="slate"] .md-typeset .apa-figura .plotly-graph-div {
+  background-color: #fcfcfb;
+  padding: 0.5rem;
 }
 
 /* ---------- Referencias APA: sangría francesa ---------- */

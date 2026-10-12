@@ -82,7 +82,7 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ⬜ |
+| T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ✅ 2026-10-12 (src/viz/paleta.py fuente única; tema Plotly + estilo matplotlib; paleta validada con validate_palette.js; 5 pruebas) |
 | T4.2 | Figuras Parte 1 (Spec §6.7) | T1.7, T4.1 | HTML/PNG en `blog/docs/figures/` | `run.py figures` regenera todo | revisor-spec | ⬜ |
 | T4.3 | GIFs Parte 1 (GD, PSO) | T1.7, T4.1 | `media/*.gif` | Regenerables | — | ⬜ |
 | T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ⬜ |
