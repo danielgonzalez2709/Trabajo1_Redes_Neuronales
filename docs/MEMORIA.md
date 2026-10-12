@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.4 ✅, T2.6 ✅, T2.7 ✅; faltan T2.5 y T2.8) |
-| Próxima tarea | Parte 2: **T2.5** (asignar peajes a rutas; camino crítico T2.5 → T2.8 → T3.6) y, en paralelo, T3.1 costos, T3.3 ACO, T3.4 GA. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.7 ✅; falta T2.8) |
+| Próxima tarea | Parte 2: **T2.8** (camino crítico T2.8 → T3.6) y, en paralelo, T3.1 costos, T3.3 ACO, T3.4 GA. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -51,7 +51,8 @@
 
 ## ⏳ Pendientes / bloqueos
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
-- [ ] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → precisar antes de T2.5. Aceptación T2.2 Madrid–Barcelona no tiene peaje.
+- [x] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → resuelto en T2.5 (Spec v1.10: km por anclas, no por proporción de intersecciones).
+- [ ] **T2.5, verificar a mano:** los 63 anclas no-OSM (5 de 6 verificados por muestreo); parámetros 1,5 km y 95 % sin fuente; `GI-20`/`N-622`/`PA-34` sin cobrar (sin tarifa publicada). Ampliación de §5.3 (5 archivos auxiliares): **confirmada por Jose Miguel el 12-oct.**
 - [ ] Zona horaria del equipo: `fuentes.md` dice UTC−5, máquina de Parte 2 en UTC−3.
 - [x] **Acabado** del Corolla: Style Plus 140H e-CVT MY27 (Spec v1.7). Extra alta 5,6–6,2 (catálogo 2023) = sensibilidad.
 - [ ] Puente (Daniel): fijar el estado de H-12 (propuesta: descartar), H-13 (descartar), H-14 (confirmar) y la categoría de H-15.
@@ -59,8 +60,7 @@
   corrida (Spec v1.8). 26 `sin_peaje` con `toll` (M-12, AP-15, AP-68): **T2.5 los cobra**. Opcional si sobra tiempo: un
   proceso por alternativa (probado, 0 con `toll`). **T2.4 debe incluir M-12 y AP-15.**
 - [x] **Design System:** skill `apple-design` (Emil Kowalski). Falta la **paleta de colores** (T4.1); la skill no la define.
-- [ ] **T2.5:** en peaje cerrado la suma de tramos ≠ tarifa del recorrido (Bilbao–Zaragoza 41,50 vs. 39,90 €): usar el recorrido
-  completo cuando se recorre entero. La AP-15 entre Noáin y la variante A-15 no tiene fila (la ruta va por la variante libre).
+- [x] **T2.5:** peaje cerrado = **suma de tramos** [DECIDIDO 12-oct]; se reporta la diferencia (41,50 vs. 39,90 €; AP-6 −14 %; sesgo −18 %…+4 %).
 - [ ] Blog (T4.6): reportar los km aproximados de OSM; el contraste de la AP-8 debe citarse como Urgoiti–Durango (17,506 vs. 17,5 km),
   no Urgoiti–Ermua (parcialmente circular). AP-15 Norte: −12,9 % frente a un contraste derivado, sin explicar.
 - [ ] H-19 (Bibliografía): falta `message.txt` del Prompt C (Daniel o Camila) para confirmar que la cita del BOE vino de la IA.
@@ -70,7 +70,7 @@
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **19** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+Candidatos: **20** (H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
 H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
 confirmados por el puente: **2** (H-04, H-05); por el cazador: **2** (H-17, H-18) — categorías: Datos (10), Matemáticas (1), Código (5),
@@ -80,6 +80,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **T2.5 ✅**: peajes asignados a las 2 162 filas de `rutas.csv` (curador-datos, 2 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅ CONFORME; 568 pruebas). Suma de tramos [DECIDIDO]; `peajes_tramos.csv` no tiene coordenadas → archivos laterales de cadenas y anclas. 5 pares validados (Bilbao–Zaragoza 41,50 €, A Coruña–Pontevedra 16,35 € = Audasa). El cazador refutó la sospecha de tarifa errónea de AP51-01. **Spec v1.10.** |
 | 2026-10-12 | Jose Miguel + Claude | **T2.4 ✅**: tabla de peajes (56 tramos; curador-datos, 6 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅; 512 pruebas). Una ronda previa transcribió matrices origen–destino sin km: se rehízo por tramos con km del Catálogo RCE y de OSM. **Spec v1.9** (AP-68 tras el 10-nov, tarifas, M-12). Cacería: H-17 a H-19. |
 | 2026-10-12 | Jose Miguel + Claude | **T2.3 ✅**. Un diagnóstico mostró que OSRM no excluía peajes y una 2.ª ronda refutó la causa: la respuesta depende del historial de consultas del proceso (H-16). Corrida vigente `osrm_2026-10-12` con `--threads 1`; 26 `sin_peaje` con peaje, que cobra T2.5. **Spec v1.8**. |
 | 2026-10-11 | Jose Miguel + Claude | **T2.7 ✅**: Corolla Style Plus 140H MY27, 4,6 l/100 km; combustible del catálogo de Toyota 09/2023 (descarga manual, verificado). **Spec v1.7**: acabado, `anio_modelo`, sensibilidad de consumo 5,6/6,2 en §7.5. Cacería: H-12 a H-15. |
