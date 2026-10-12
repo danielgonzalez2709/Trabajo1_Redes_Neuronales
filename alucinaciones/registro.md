@@ -7,10 +7,10 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 8 (H-07, H-08, H-09, H-10, H-12, H-13, H-15, H-17) | 0 |
+| Código | 9 (H-07, H-08, H-09, H-10, H-12, H-13, H-15, H-16, H-18) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
-| Bibliografía | 1 (H-16, severidad baja: atribución imprecisa, no cita falsa) | 0 |
-| Conceptos | 2 (H-14, H-18, esta última severidad baja) | 0 |
+| Bibliografía | 1 (H-17, severidad baja: atribución imprecisa, no cita falsa) | 0 |
+| Conceptos | 2 (H-14, H-19, esta última severidad baja) | 0 |
 
 ---
 
@@ -198,7 +198,18 @@
 5. **Corrección:** el código sigue §5.1; el número 714 se prueba en 2D.
 6. **Lección:** un prompt también se revisa contra el contrato antes de enviarlo; un subagente debe reportar la contradicción, no elegir en silencio.
 
-### H-16 — "c₁ = c₂ = 1.49618 [Clerc & Kennedy, 2002]": valores correctos, pero no son los que aparecen en el artículo (atribución imprecisa)
+### H-16 — "Las anclas de la prueba salen de esta misma implementación" (procedencia de los datos afirmada sin evidencia)
+- **Estado:** candidato (severidad baja; el propio subagente lo retiró al corregirle)
+- **Categoría:** Código (también Conceptos: oráculo de prueba independiente vs. prueba de regresión)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `revisor-calidad`, T1.2 ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el orquestador (sesión principal), al contrastar con el encargo
+1. **Prompt (literal):** `prompts/T1.2.md`, bloque "Ronda 1 — `revisor-calidad`".
+2. **Respuesta relevante de la IA:** hallazgo 4: "Los valores (f_best, x_best, n_grad, mediana 0.0019054868310523) son de regresión: salen de esta misma implementación y no son independientes."
+3. **Cómo sospechamos:** el encargo humano de T1.2 (bloque "Ronda 1 — `implementador`", punto k) dice que las anclas "salen de un cálculo independiente" y prohíbe ajustarlas; el revisor no tenía información sobre su origen y aun así lo afirmó como hecho.
+4. **Evidencia:** el `verificador-matematico` reimplementó el GD sin mirar `gd.py` y reprodujo las anclas (diferencia 0 en 30 semillas × 4 configuraciones; mediana 0,001905486831052). En la ronda 2 el `revisor-calidad` retiró el hallazgo ("suponía que los valores salían de esta implementación").
+5. **Corrección:** comentario de procedencia en `tests/test_gd.py` encima de las secciones k) y l) (ronda 2 del implementador).
+6. **Lección:** la procedencia de un dato se afirma solo con evidencia (fuente o comando); si no se conoce, se pregunta o se marca como desconocida.
+
+### H-17 — "c₁ = c₂ = 1.49618 [Clerc & Kennedy, 2002]": valores correctos, pero no son los que aparecen en el artículo (atribución imprecisa)
 - **Estado:** candidato — severidad **baja**. La propia IA lo dejó marcado `[VERIFICAR]`, así que no es una cita inventada; lo que se constata es el alcance de la atribución. Verificación **parcial** (ver punto 4).
 - **Categoría:** Bibliografía (también Matemáticas)
 - **Herramienta y modelo:** Claude Opus 5.5 (redacción del Spec v1.0, 1-oct-2026) · **Fecha:** 1-oct-2026 (afirmación) / 12-oct-2026 (verificación) · **Quién lo cazó:** `cazador-alucinaciones` (T1.5)
@@ -212,7 +223,7 @@
 5. **Corrección:** escribir en el Spec/blog: "constricción de Clerc y Kennedy (2002) con φ = c₁ + c₂ = 4.1 → χ ≈ 0.7298; en forma de inercia, w = χ y c₁ = c₂ = χ·φ/2 ≈ 1.49618 (equivale a c = 2.05 aplicando χ a toda la velocidad)". No decir "el valor de Clerc y Kennedy es c ≈ 1.5". La fórmula de χ se verificó por derivación propia; **que el artículo publicado la dé con esa forma exacta no está verificado** (TODO(dato-faltante): leer el PDF de IEEE o una copia legítima).
 6. **Lección:** distinguir una constante "del artículo" de una constante "derivada de la fórmula del artículo" (aquí cambia por un factor χ); y no dar por verificada una referencia solo porque el DOI resuelva: hay que leer qué dice.
 
-### H-17 — "Línea base de pruebas: 513 passed, 1 skipped (MEMORIA, 12-oct)" (cifra mezclada de dos entradas distintas)
+### H-18 — "Línea base de pruebas: 513 passed, 1 skipped (MEMORIA, 12-oct)" (cifra mezclada de dos entradas distintas)
 - **Estado:** candidato — severidad baja (error de dato del orquestador, ya reconocido en `prompts/T1.5.md`, "Resultado de la ronda 1 de revisor-spec")
 - **Categoría:** Código (conteo de pruebas); la fuente citada es un documento del proyecto
 - **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (T1.5) por contraste con la ejecución; reproducido por `cazador-alucinaciones`
@@ -223,7 +234,7 @@
 5. **Corrección:** línea base real en Linux: 513 passed, 0 skipped (dato ya corregido por el orquestador). El skip depende del sistema operativo: indicar siempre SO junto al conteo.
 6. **Lección:** copiar una cifra de dos entradas distintas de un documento da un valor que ninguna ejecución produjo; una línea base se reejecuta al empezar la tarea, no se cita.
 
-### H-18 — Papel de b_i y de v = 0 descrito de forma imprecisa ("el líder solo se mueve por inercia", "dependa solo de b_i y g", "solo sería atraída por su posición actual")
+### H-19 — Papel de b_i y de v = 0 descrito de forma imprecisa ("el líder solo se mueve por inercia", "dependa solo de b_i y g", "solo sería atraída por su posición actual")
 - **Estado:** candidato — severidad **baja**: ninguna frase es falsa en sentido estricto; son imprecisas y inducirían una explicación errónea en el blog o la sustentación
 - **Categoría:** Conceptos
 - **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador e `implementador`, T1.5) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`
@@ -264,8 +275,8 @@
 | 8-oct-2026 | T2.1: 9 capitales difieren de IGR (códigos 01–06, 08, 09 y 47), máx. 2,350 km (Barcelona); Palma (07) también difiere; ninguna otra de 10–50; Ceuta y Melilla sin IGR; ORIGENCOOR 8 DA + 1 Coordinado_IGR | Correcta | `T2.1_verificacion.txt` §5 |
 | 8-oct-2026 | T2.1: cifras de IGR `nuc` (32 consultas, 4 con datos, 50 registros, 34/14/1/1, NUCL 49/ENSI 1, 14 columnas sin nulos, fechas 2025-10-16..2025-12-05), Nominatim (52 consultas, 17/31/4), límites (53 unidades, 1 193 428 vértices, 13 188 834 bytes, timeStamp 03:36:02Z), INE (52 hojas, 8 132 municipios), rango lat/lon y par más cercano/lejano | Correctas | `evidencias/T2.1_verificacion_fuentes.py` → `.txt`; `T2.1_verificacion.txt` §6 |
 | 8-oct-2026 | T2.1: Memoria NGMEP (31-mar-2026; fuentes REL/INE/boletines/Líneas Límite/IGR/BTN; ETRS89/REGCAN95; centroide "lo más centrado posible en el núcleo poblacional"; Anexo I "Entidad en la que está ubicado el Ayuntamiento") | Correctas (citas literales) | `Memoria_NGMEP_2026.pdf` págs. 3, 5, 7–10, 13, 14 |
-| 12-oct-2026 | T1.5: DOI 10.1109/4235.985692 = Clerc y Kennedy, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", IEEE Trans. Evol. Comput. 6(1), 58-73, 2002 | Correcta (título, autores, revista, volumen, número, páginas, año; el DOI redirige a IEEE Xplore). El texto del artículo publicado no fue accesible (ver H-16) | Crossref `api.crossref.org/works/10.1109/4235.985692` y `doi.org/10.1109/4235.985692`, 12-oct-2026 |
-| 12-oct-2026 | T1.5: w = 0.7298 y c₁ = c₂ = 1.49618 son la constricción con φ = 4.1 en forma de inercia | Correcta numéricamente: χ = 0.72984378…, χφ/2 = 1.49617977… (redondeos con error 4.4e-5 y 2.3e-7); la atribución exacta al artículo es imprecisa (H-16) | `evidencias/T1.5_verificacion.py` → `.txt` §1; `T1.5_verificacion2.py` §A-B |
+| 12-oct-2026 | T1.5: DOI 10.1109/4235.985692 = Clerc y Kennedy, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", IEEE Trans. Evol. Comput. 6(1), 58-73, 2002 | Correcta (título, autores, revista, volumen, número, páginas, año; el DOI redirige a IEEE Xplore). El texto del artículo publicado no fue accesible (ver H-17) | Crossref `api.crossref.org/works/10.1109/4235.985692` y `doi.org/10.1109/4235.985692`, 12-oct-2026 |
+| 12-oct-2026 | T1.5: w = 0.7298 y c₁ = c₂ = 1.49618 son la constricción con φ = 4.1 en forma de inercia | Correcta numéricamente: χ = 0.72984378…, χφ/2 = 1.49617977… (redondeos con error 4.4e-5 y 2.3e-7); la atribución exacta al artículo es imprecisa (H-17) | `evidencias/T1.5_verificacion.py` → `.txt` §1; `T1.5_verificacion2.py` §A-B |
 | 12-oct-2026 | T1.5: conteo n_f = N(T+1); 2D budget 20 000 → 666 enjambres completos + 20 evaluaciones truncadas, 666 frames (iter 0-665); 3D budget 30 000 → 1 000 enjambres exactos, sin frames; n_grad = 0 | Correcta (4 combinaciones función × dimensión) | `T1.5_verificacion.txt` §2 |
 | 12-oct-2026 | T1.5: v_max = 0.2·rango → 0.8192 (Rosenbrock, ancho 4.096) y 2.048 (Rastrigin, ancho 10.24) | Correcta. El 0.2 es una decisión del proyecto sin fuente (el borrador de Clerc y Kennedy cita a Eberhart y Shi recomendando Vmax igual al rango dinámico) | `T1.5_verificacion.txt` §3; `T1.5_clerc_kennedy_borrador_extractos.txt` |
 | 12-oct-2026 | T1.5: tiempo por corrida 0.4-0.6 s (afirmado por revisor) | Correcta en orden de magnitud: 0.34-0.73 s en 4 corridas (una sola máquina) | `T1.5_verificacion.txt` §2 |

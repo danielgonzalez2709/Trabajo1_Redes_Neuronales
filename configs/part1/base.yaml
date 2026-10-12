@@ -1,12 +1,23 @@
 # Parte 1 — experimento completo y valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
-# Solo claves de nivel superior de §4.1. Los bloques de parámetros de cada método (gd:, ea:, pso:, de:; Spec §6.3-§6.4)
-# los añaden T1.2-T1.6 con los valores por defecto del Spec (ya presentes: ea: y pso:).
+# Claves de nivel superior de §4.1 y un bloque de parámetros por método (gd:, ea:, pso:, de:; Spec §6.3-§6.4) con los
+# valores por defecto del Spec. Hecho: gd: (T1.2), ea: (T1.4), pso: (T1.5). Pendiente: de: (T1.6).
 func: [rosenbrock, rastrigin]                 # §6.1 (identificadores de §5.4)
 dim: [2, 3]                                   # §3: 2D y 3D
 methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
 runs: 30                                      # §6.5
 base_seed: 0                                  # §6.5: semillas 0-29, semilla = base_seed + run_id (§4.1)
 record_frames: true                           # §5.1: frames solo si dim == 2; los GIF (§6.7) se regeneran desde results/data (§9)
+# §6.3 Descenso por gradiente. gdfijo y gdarmijo comparten este bloque; la clave "variante" (fijo/armijo) la fija el
+# runner (T1.7), no esta config.
+gd:
+  eta:                  # paso fijo por función (identificadores de §5.4)
+    rosenbrock: 1e-3    # empírico, SIN garantía global (L ≈ 5 971 en 2D -> 1/L ≈ 1.7e-4)
+    rastrigin: 2e-3     # garantía global: η ≤ 1/L con L = 2 + 40π² ≈ 396.8
+  armijo:               # backtracking de Armijo; lo usa la variante armijo de gd.py
+    eta0: 1.0
+    beta: 0.5
+    c: 1e-4
+  tol_grad: 1e-8        # parada: ||∇f|| < tol_grad (o presupuesto agotado)
 
 # Algoritmo evolutivo — esquema de clase (Spec §6.4 v1.4 [DECIDIDO 12-oct]; implementa src/part1/ea.py).
 # Cada generación: élite + mutantes + hijos de cruce, recortada a N. Parada por presupuesto (§6.2).
