@@ -7,9 +7,9 @@ Para cada par (i, j) y cada alternativa a ∈ {rapida, sin_peaje}:
 
 con w = valor de la hora (€/h), t en horas, P = peaje en €, d en km, consumo en l/100 km y precio_l en €/l.
 
-Decisiones sobre huecos del Spec (propuestas, PENDIENTES de confirmación; no son [DECIDIDO]):
-  - `Componentes` es un `dataclass` inmutable con seis matrices, `<columna>_<alternativa>`.
-  - Desempate: si las dos alternativas cuestan exactamente lo mismo, se elige "rapida".
+Decisiones sobre huecos del Spec:
+  - `Componentes` es un `dataclass(frozen=True)` con seis matrices, `<columna>_<alternativa>`. [DECIDIDO v1.13, Spec §5.2].
+  - Desempate: si las dos alternativas cuestan exactamente lo mismo, se elige "rapida". [DECIDIDO v1.12, Spec §7.3].
   - Diagonal de `alternativa_elegida`: "rapida". No es un caso especial: en la diagonal ambas alternativas cuestan 0
     y se aplica el desempate. El contrato solo admite {"rapida", "sin_peaje"}, así que no hay un tercer valor.
 

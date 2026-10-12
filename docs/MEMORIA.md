@@ -50,7 +50,6 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
-- [ ] **T3.1, confirmar:** `Componentes` = dataclass inmutable y desempate hacia `rapida` (huecos del Spec, en el docstring de `costos.py`).
 - [ ] **`base.yaml` sin clave de consumo ni de precio** (solo `costo.valor_hora`): sin ella la sensibilidad de §7.5 con `--set` no funciona. Ninguna tarea la tiene; asignar a T3.6.
 - [ ] T3.6: hay cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)), por debajo de la resolución de 0,5 €/h de la bisección.
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
