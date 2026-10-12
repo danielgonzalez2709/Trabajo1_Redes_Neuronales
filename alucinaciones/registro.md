@@ -7,7 +7,7 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 6 (H-07, H-08, H-09, H-10, H-11, H-20 débil) | 0 |
+| Código | 7 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21) | 0 |
 | Datos del mundo real | 10 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15, H-17, H-18) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) + 2 confirmados por el cazador, pendientes del puente (H-17, H-18, 12-oct-2026) |
 | Bibliografía | 1 (H-19: error de cita confirmado, origen IA pendiente) | 0 |
 | Conceptos | 2 (H-12, H-16) | 0 |
@@ -307,6 +307,17 @@
 4. **Evidencia:** `evidencias/T2.5_cazador/T2.5_mutacion.py` → `T2.5_mutacion.txt` (copia fuera del repo). Mutantes de código (M1 recorrido solo del primer paso, M2 `km_peaje` con tramos gratuitos, M3 sin prorrata): **muertos** (4, 2 y 7 pruebas fallan). M4 (intercambiar el km de San Rafael y Villacastín en la AP-6): muerto por una sola prueba. **M5 sobrevive**: dos anclas intermedias de la AP-68 con km +36 y +40 (139,14 → 175,0 y 219,74 → 260,0), salidas regeneradas: **56 pasan**, 16 rutas cambian hasta 5,55 € y el script emite 16 avisos `km_incoherente` que ninguna prueba exige que sean 0 (los datos reales solo tienen 38 avisos `ref_sin_cadena`).
 5. **Corrección (propuesta; el cazador no edita código):** una prueba sobre los datos reales que exija `avisos_por_motivo == {"ref_sin_cadena": 38}` (sin `km_incoherente`) mataría a M5.
 6. **Lección:** la prueba de regresión que compara `rutas.csv` con lo que recalcula el script solo protege contra cambios no regenerados; el error de un dato de entrada (ancla) pasa si el autor regenera. Hace falta una prueba contra una verdad externa o contra el diagnóstico del propio script.
+
+### H-21 — La prueba del par (0, 44) se llamaba "Logroño", pero la ciudad 0 es Vitoria-Gasteiz
+- **Estado:** candidato (el propio subagente admitió que inventó el nombre; falta la revisión del puente)
+- **Categoría:** Código (propuesta de `revisor-spec`; el puente decide si va en Datos, porque es un nombre de ciudad real)
+- **Herramienta y modelo:** Claude Code → subagente `implementador`, T3.1 (sesión principal en claude-opus-5-5; el modelo del subagente lo fija su definición en `.claude/agents/`) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (hallazgo H4 de su ronda 1)
+1. **Prompt (literal):** `prompts/T3.1.md` (ronda 1: "Par calculado a mano: toma un par real de `rutas.csv`…"). El prompt no nombra ninguna ciudad.
+2. **Respuesta relevante de la IA:** en `tests/test_cost.py` la prueba del par (0, 44) se llamaba `test_par_a_mano_logrono_44_…`. Al preguntarle por el origen del nombre (ronda 2), el subagente respondió: "Lo inventé. En la ronda 1 no leí `cities.csv`: vi `AP-68` en `vias_peaje` del par (0, 44) y supuse que la ciudad 0 era Logroño."
+3. **Cómo sospechamos:** `revisor-spec` contrastó el nombre de la prueba con `data/processed/cities.csv`.
+4. **Evidencia:** `data/processed/cities.csv`: id 0 = Vitoria-Gasteiz, id 44 = Bilbao, id 24 = Logroño. Las cifras de la prueba eran correctas (reproducidas por `verificador-matematico` con aritmética exacta); solo el nombre era falso.
+5. **Corrección:** ronda 2 del implementador: la prueba pasó a `test_par_a_mano_vitoria_bilbao_cambia_de_alternativa_entre_w_bajo_y_w_alto`, con los nombres comprobados contra `cities.csv`.
+6. **Lección:** un nombre de prueba también es una afirmación sobre los datos. La IA dedujo la ciudad a partir de la autopista (la AP-68 pasa por Logroño) en vez de leer el archivo; una prueba que pasa no valida su propio nombre ni sus comentarios.
 
 ---
 

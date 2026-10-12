@@ -68,7 +68,7 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T3.1 | `costos.py`: `matriz_costos(w)` con dos alternativas | T0.3 | Función §5.2 | `test_cost.py` | **verificador-matematico** | ⬜ |
+| T3.1 | `costos.py`: `matriz_costos(w)` con dos alternativas | T0.3 | Función §5.2 | `test_cost.py` | **verificador-matematico** | ✅ |
 | T3.2 | `exact.py`: DFJ con PuLP + subtours iterativos | T3.1 | `solve()` | `test_exact_small.py` (8 ciudades = fuerza bruta) | verificador-matematico | ⬜ |
 | T3.3 | `aco.py`: Ant System + MMAS | T3.1 | `solve()` | Tours válidos; feromona dentro de [τ_min, τ_max] en MMAS; conteo de recorridos | revisor-spec | ⬜ |
 | T3.4 | `ga.py`: OX + inversión + intercambio + torneo + elitismo | T3.1 | `solve()` | `test_tsp_operators.py` (10 000 operaciones válidas) | revisor-spec | ⬜ |
