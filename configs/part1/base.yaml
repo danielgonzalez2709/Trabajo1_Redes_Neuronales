@@ -7,3 +7,14 @@ methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
 runs: 30                                      # §6.5
 base_seed: 0                                  # §6.5: semillas 0-29, semilla = base_seed + run_id (§4.1)
 record_frames: true                           # §5.1: frames solo si dim == 2; los GIF (§6.7) se regeneran desde results/data (§9)
+
+# Algoritmo evolutivo — esquema de clase (Spec §6.4 v1.4 [DECIDIDO 12-oct]; implementa src/part1/ea.py).
+# Cada generación: élite + mutantes + hijos de cruce, recortada a N. Parada por presupuesto (§6.2).
+ea:
+  esquema: clase          # solo "clase"; cualquier otro valor (p. ej. "spec") falla con mensaje claro (Spec v1.4)
+  N: 50                   # tamaño de la población
+  frac_e: 0.15            # fracción de élite: n_elite = round(N * frac_e) = 8
+  frac_m: 0.10            # fracción de mutantes: n_mutantes = int(N * frac_m) = 5
+  frac_c: 0.75            # fracción que se cruza: n_cruzantes = par hacia arriba de int(N * frac_c) = 38
+  reevaluar_elite: false  # false: la élite conserva su aptitud (no cuesta evaluaciones)
+  generaciones: null      # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
