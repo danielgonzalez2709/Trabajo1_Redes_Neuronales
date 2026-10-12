@@ -1,0 +1,44 @@
+[DISCREPANCIA] kennedy1995 doi=10.1109/ICNN.1995.488968
+    recordado: Kennedy, 1995, Proceedings of ICNN'95
+    registrado: Kennedy, Eberhart; None; Proceedings of ICNN'95 - International Conference on Neural Networks
+    título: Particle swarm optimization
+[DISCREPANCIA] shi1998 doi=10.1109/ICEC.1998.699146
+    recordado: Shi, 1998, IEEE World Congress on Computational Intelligence
+    registrado: Shi, Eberhart; None; 1998 IEEE International Conference on Evolutionary Computation Proceedings. IEEE World Congress on Computational Intelligence (Cat. No.98TH8360)
+    título: A modified particle swarm optimizer
+[OK] clerc2002 doi=10.1109/4235.985692
+    recordado: Clerc, 2002, IEEE Transactions on Evolutionary Computation
+    registrado: Clerc, Kennedy; 2002; IEEE Transactions on Evolutionary Computation
+    título: The particle swarm - explosion, stability, and convergence in a multidimensional complex space
+[OK] storn1997 doi=10.1023/A:1008202821328
+    recordado: Storn, 1997, Journal of Global Optimization
+    registrado: Storn, Price; 1997; Journal of Global Optimization
+    título: Differential Evolution – A Simple and Efficient Heuristic for global Optimization over Continuous Spaces
+[OK] dorigo1996 doi=10.1109/3477.484436
+    recordado: Dorigo, 1996, IEEE Transactions on Systems, Man, and Cybernetics, Part B
+    registrado: Dorigo, Maniezzo, Colorni; 1996; IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics)
+    título: Ant system: optimization by a colony of cooperating agents
+[OK] dorigo1997 doi=10.1109/4235.585892
+    recordado: Dorigo, 1997, IEEE Transactions on Evolutionary Computation
+    registrado: Dorigo, Gambardella; 1997; IEEE Transactions on Evolutionary Computation
+    título: Ant colony system: a cooperative learning approach to the traveling salesman problem
+[OK] stutzle2000 doi=10.1016/S0167-739X(00)00043-1
+    recordado: Stützle, 2000, Future Generation Computer Systems
+    registrado: Stützle, Hoos; 2000; Future Generation Computer Systems
+    título: – Ant System
+[OK] rosenbrock1960 doi=10.1093/comjnl/3.3.175
+    recordado: Rosenbrock, 1960, The Computer Journal
+    registrado: Rosenbrock; 1960; The Computer Journal
+    título: An Automatic Method for Finding the Greatest or Least Value of a Function
+[OK] armijo1966 doi=10.2140/pjm.1966.16.1
+    recordado: Armijo, 1966, Pacific Journal of Mathematics
+    registrado: Armijo; 1966; Pacific Journal of Mathematics
+    título: Minimization of functions having Lipschitz continuous first partial derivatives
+[OK] dantzig1954 doi=10.1287/opre.2.4.393
+    recordado: Dantzig, 1954, Operations Research
+    registrado: Dantzig, Fulkerson, Johnson; 1954; Journal of the Operations Research Society of America
+    título: Solution of a Large-Scale Traveling-Salesman Problem
+[DISCREPANCIA] berahas2022 doi=10.1007/s10208-021-09513-z
+    recordado: Berahas, 2022, Foundations of Computational Mathematics
+    registrado: Berahas, Cao, Choromanski, Scheinberg; 2021; Foundations of Computational Mathematics
+    título: A Theoretical and Empirical Comparison of Gradient Approximations in Derivative-Free Optimization
