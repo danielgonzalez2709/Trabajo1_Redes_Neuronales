@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.3** — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.4** — 2026-10-12 (§6.4: EA pasa al esquema de clase, N=50, élite + mutantes + cruce de un punto; propuesta en `docs/spec/propuestas/CAMBIO-EA.md`) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -270,6 +270,7 @@ blog como amenaza a la validez (métodos con recorte a los bordes o inicializaci
 - **Equivalencia:** 1 evaluación de ∇f = **k = 2n** evaluaciones de f (diferencias centrales) — principal. Sensibilidad: repetir la tabla con **k = 1**.
 - **Presupuesto:** **10 000 · n** evaluaciones equivalentes por corrida, igual para todos los métodos [VERIFICAR la convención CEC antes de citarla].
 - Un algoritmo **se detiene** al agotar el presupuesto (nunca lo excede en más de una generación; si la última generación lo excedería, se trunca).
+- **EA (§6.4) [DECIDIDO 12-oct]:** la parada es por presupuesto, no por número fijo de generaciones (`ea.generaciones: null`; un número solo acorta la corrida y rompe la comparación justa). La élite **no se reevalúa** (conserva su aptitud): costo N en la generación 0 y N − n_élite en las siguientes, siempre con `problem.f(x_i)` individuo por individuo.
 
 ### 6.3 Descenso por gradiente
 - **GD paso fijo:** xₖ₊₁ = Π(xₖ − η∇f(xₖ)), Π = proyección al dominio (recorte).
@@ -286,9 +287,16 @@ blog como amenaza a la validez (métodos con recorte a los bordes o inicializaci
 ### 6.4 Metaheurísticas (parámetros por defecto, todos sobrescribibles por config)
 | Algoritmo | Ecuaciones | Parámetros por defecto |
 |---|---|---|
-| **EA** (GA codificación real) | Torneo k=3; cruce BLX-α; mutación gaussiana N(0, σ²) por gen con prob. pm; elitismo | pop=40, pc=0.9, α=0.5, σ=0.1·rango, pm=1/n, élites=2 |
+| **EA** (esquema de clase, codificación real) [DECIDIDO 12-oct] | Población N×d. Cada generación: evaluar los individuos nuevos, ordenar de mejor a peor y formar la siguiente población como élite + mutantes + hijos de cruce, recortada a N. **Élite:** primeras `round(N·frac_e)` filas, copiadas. **Mutación:** `int(N·frac_m)` individuos al azar sin repetir; a cada copia se le suma N(0, σ²) a **un** gen al azar, σ = desv. estándar poblacional (ddof=0) de ese gen en la generación actual; recorte al dominio. **Cruce:** `int(N·frac_c)` individuos (par, hacia arriba) al azar sin repetir y sin considerar la aptitud; dos mitades; cada pareja da 2 hijos por cruce de un punto con punto ∈ {1,…,d−1}. Si la suma de grupos no alcanza N, el cruce sube (par) hasta cubrirlo; si excede, se recorta por el final | N=50, frac_e=0.15, frac_m=0.10, frac_c=0.75, `reevaluar_elite`=false, `generaciones`=null, `esquema`=clase |
 | **PSO** (gbest, inercia) | v ← w·v + c₁r₁(pbest − x) + c₂r₂(gbest − x); x ← x + v | N=30, w=0.7298, c₁=c₂=1.49618 [VERIFICAR Clerc & Kennedy, 2002], v_max=0.2·rango; fuera del dominio: recortar x y poner v=0 en esa componente |
 | **DE/rand/1/bin** | v = x_r1 + F(x_r2 − x_r3); cruce binomial con CR y j_rand; selección codiciosa | NP=30, F=0.7, CR=0.9; fuera del dominio: reinicio aleatorio de la componente |
+
+**Notas del EA (v1.4):**
+- `frac_*` es la fracción de la población (0.15 = 15 %). Fuente del esquema: material de clase IRNA202602, "intro algoritmos evolutivos" (https://colab.research.google.com/drive/1QvaXDJAPgiuQOuKcvZB-lpiRbPGqLHne).
+- `ea.esquema` admite hoy solo `clase`; cualquier otro valor (p. ej. `spec`, el torneo k=3 + BLX-α de la v1.3) falla con mensaje claro hasta que se implemente. Un solo identificador `ea` en §5.4.
+- Defectos del cuaderno que **no** se heredan: ranking con aptitudes de la población inicial; evaluación en bucle con globales; punto de cruce 0; función de prueba no estándar.
+- Comportamiento a discutir en el blog: en 2D el cruce de un punto solo intercambia coordenadas; sin selección por aptitud la única presión es la élite; σ poblacional → 0 apaga la mutación al converger.
+- Validación: `ValueError` si `frac_*` o N son inválidos (negativos, N < 2, `n_élite + n_mutantes > N`).
 
 ### 6.5 Diseño experimental
 - 2 funciones × 2 dimensiones × 5 métodos (GD fijo, GD Armijo, EA, PSO, DE) = 20 configuraciones × **30 corridas** (semillas 0–29, mismas para todos los métodos).
@@ -443,7 +451,7 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 ---
 
 ## 10. Pruebas mínimas
-`test_gradients.py`, `test_counter.py` (PSO con N partículas y T iteraciones reporta exactamente N·(T+1) evaluaciones de f), `test_budget.py`, `test_reproducibility.py`, `test_no_network.py`, `test_cost.py`, `test_tsp_operators.py`, `test_exact_small.py`, `test_data_integrity.py` (47 ciudades, matrices 47×47 simétricas sin NaN, todas las tarifas con fuente y fecha).
+`test_gradients.py`, `test_counter.py` (PSO con N partículas y T iteraciones reporta exactamente N·(T+1) evaluaciones de f), `test_budget.py`, `test_ea.py` (tamaños de grupos, dominio, un gen mutado, punto de cruce ∈ {1,…,d−1}, élite por f actual, conteo N + T·(N − n_élite), truncado, reproducibilidad, frames), `test_reproducibility.py`, `test_no_network.py`, `test_cost.py`, `test_tsp_operators.py`, `test_exact_small.py`, `test_data_integrity.py` (47 ciudades, matrices 47×47 simétricas sin NaN, todas las tarifas con fuente y fecha).
 
 ---
 
@@ -452,7 +460,7 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 - **Obligatorio:** guardar prompts literales — conversaciones con IA, este Spec, y los prompts que el orquestador envía a cada subagente (`alucinaciones/prompts/`).
 - **Cada hallazgo:** prompt literal · respuesta relevante · cómo se sospechó · evidencia (derivación / experimento / fuente primaria) · corrección · lección aprendida.
 - **Meta:** ≥5 hallazgos genuinos en ≥3 categorías (Matemáticas, Código, Datos, Bibliografía, Conceptos). **Nunca inventar.**
-- **Verificaciones planificadas:** gradientes; constantes y dominios; conteo de evaluaciones; variante por defecto de DE en SciPy (`best1bin` + `polish=True`, verificado en su documentación); permutaciones válidas; peajes Bilbao–Zaragoza y Sevilla–Cádiz preguntados a una IA vs. Ministerio; estado AP-68; WLTP vs NEDC; coordenadas ambiguas; DOI de cada referencia; afirmaciones de convergencia ("¿PSO/ACO garantizan el óptimo?", "¿Rosenbrock es convexa?"); gap real vs. "óptimo" declarado.
+- **Verificaciones planificadas:** gradientes; constantes y dominios; conteo de evaluaciones; variante por defecto de DE en SciPy (`best1bin` + `polish=True`, verificado en su documentación); permutaciones válidas; EA: σ poblacional (ddof=0), punto de cruce y conteo con élite en caché (prueba de mutación); peajes Bilbao–Zaragoza y Sevilla–Cádiz preguntados a una IA vs. Ministerio; estado AP-68; WLTP vs NEDC; coordenadas ambiguas; DOI de cada referencia; afirmaciones de convergencia ("¿PSO/ACO garantizan el óptimo?", "¿Rosenbrock es convexa?"); gap real vs. "óptimo" declarado.
 
 ---
 
@@ -494,6 +502,7 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 | Subagentes que "rellenan" datos o fórmulas | Regla §0.3, verificador matemático, curador de datos, cazador |
 | Alguien no entiende un módulo en la sustentación | tutor-sustentacion + explicación de cada PR al puente + simulacro mié 14-oct |
 | Demo > 2 min | Configs `demo.yaml` medidas en otra máquina |
+| EA: suma de grupos ≠ N (N=30 da 29) o convergencia floja en 2D | Regla de relleno del cruce (§6.4) + validación; reportar honestamente, sin ajustar parámetros para "ganar" |
 | Design System llega tarde | Figuras de trabajo con estilo por defecto; tema final se aplica al final (las figuras se regeneran) |
 
 ---
