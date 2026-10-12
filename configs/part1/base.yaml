@@ -1,6 +1,6 @@
 # Parte 1 — experimento completo y valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
 # Claves de nivel superior de §4.1 y un bloque de parámetros por método (gd:, ea:, pso:, de:; Spec §6.3-§6.4) con los
-# valores por defecto del Spec. Hecho: gd: (T1.2). Pendientes: ea: (T1.4), pso: (T1.5), de: (T1.6).
+# valores por defecto del Spec. Hecho: gd: (T1.2), ea: (T1.4). Pendientes: pso: (T1.5), de: (T1.6).
 func: [rosenbrock, rastrigin]                 # §6.1 (identificadores de §5.4)
 dim: [2, 3]                                   # §3: 2D y 3D
 methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
@@ -18,3 +18,14 @@ gd:
     beta: 0.5
     c: 1e-4
   tol_grad: 1e-8        # parada: ||∇f|| < tol_grad (o presupuesto agotado)
+
+# Algoritmo evolutivo — esquema de clase (Spec §6.4 v1.4 [DECIDIDO 12-oct]; implementa src/part1/ea.py).
+# Cada generación: élite + mutantes + hijos de cruce, recortada a N. Parada por presupuesto (§6.2).
+ea:
+  esquema: clase          # solo "clase"; cualquier otro valor (p. ej. "spec") falla con mensaje claro (Spec v1.4)
+  N: 50                   # tamaño de la población
+  frac_e: 0.15            # fracción de élite: n_elite = round(N * frac_e) = 8
+  frac_m: 0.10            # fracción de mutantes: n_mutantes = int(N * frac_m) = 5
+  frac_c: 0.75            # fracción que se cruza: n_cruzantes = par hacia arriba de int(N * frac_c) = 38
+  reevaluar_elite: false  # false: la élite conserva su aptitud (no cuesta evaluaciones)
+  generaciones: null      # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
