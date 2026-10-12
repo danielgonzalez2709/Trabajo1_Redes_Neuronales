@@ -259,10 +259,10 @@ class ParametrosEA:
 # %% [markdown]
 # ## Validaciones compartidas por los componentes
 #
-# Pequeñas funciones privadas para no repetir comprobaciones de forma y tipo.
+# Pequeñas funciones para no repetir comprobaciones de forma y tipo (se reutilizan en `pso.py`).
 
 # %%
-def _validar_limites(limites) -> np.ndarray:
+def validar_limites(limites) -> np.ndarray:
     """Devuelve `limites` como arreglo float (d, 2) con [inferior, superior] por dimensión."""
     limites = np.asarray(limites, dtype=float)
     if limites.ndim != 2 or limites.shape[1] != 2 or limites.shape[0] < 1:
@@ -274,7 +274,7 @@ def _validar_limites(limites) -> np.ndarray:
     return limites
 
 
-def _validar_poblacion(poblacion, nombre: str = "poblacion") -> np.ndarray:
+def validar_poblacion(poblacion, nombre: str = "poblacion") -> np.ndarray:
     """Devuelve `poblacion` como arreglo float (N, d); exige 2 dimensiones y d >= 1."""
     poblacion = np.asarray(poblacion, dtype=float)
     if poblacion.ndim != 2 or poblacion.shape[1] < 1:
@@ -320,7 +320,7 @@ def generar_poblacion_inicial(tamano: int, limites: np.ndarray,
     `rng.uniform(limites_inferiores, limites_superiores, size=(tamano, d))`.
     """
     tamano = validar_entero(tamano, "tamano", minimo=1)
-    limites = _validar_limites(limites)
+    limites = validar_limites(limites)
 
     limites_inferiores = limites[:, 0]   # forma (d,): el mínimo de cada gen
     limites_superiores = limites[:, 1]   # forma (d,): el máximo de cada gen
@@ -363,7 +363,7 @@ def evaluar_poblacion(poblacion: np.ndarray,
     np.ndarray, forma (N,), dtype float64
         `aptitudes[i]` es la aptitud de `poblacion[i]`.
     """
-    poblacion = _validar_poblacion(poblacion)
+    poblacion = validar_poblacion(poblacion)
     numero_de_individuos = poblacion.shape[0]
 
     aptitudes = np.empty(numero_de_individuos, dtype=float)   # forma (N,), se llena abajo
@@ -410,7 +410,7 @@ def seleccionar_elite(poblacion: np.ndarray, aptitudes: np.ndarray,
     aptitudes_elite : np.ndarray, forma (n_elite,)
         Aptitud de cada fila de `elite` (alineada con ella).
     """
-    poblacion = _validar_poblacion(poblacion)
+    poblacion = validar_poblacion(poblacion)
     aptitudes = np.asarray(aptitudes, dtype=float)
     n_elite = validar_entero(n_elite, "n_elite", minimo=0)
     numero_de_individuos = poblacion.shape[0]
@@ -495,8 +495,8 @@ def mutar_individuos(poblacion: np.ndarray, n_mutantes: int, limites: np.ndarray
     (3) `rng.standard_normal(size=n_mutantes)` -> ruido N(0, 1), que se escala por sigma.
     Con `n_mutantes = 0` no se consume azar.
     """
-    poblacion = _validar_poblacion(poblacion)
-    limites = _validar_limites(limites)
+    poblacion = validar_poblacion(poblacion)
+    limites = validar_limites(limites)
     n_mutantes = validar_entero(n_mutantes, "n_mutantes", minimo=0)
     numero_de_individuos, dimension = poblacion.shape
     if limites.shape[0] != dimension:
@@ -599,7 +599,7 @@ def cruzar_individuos(poblacion: np.ndarray, n_cruzantes: int,
     (2) `rng.integers(1, d, size=n_cruzantes // 2)` -> puntos de corte en {1, ..., d-1}.
     Con `n_cruzantes = 0` no se consume azar.
     """
-    poblacion = _validar_poblacion(poblacion)
+    poblacion = validar_poblacion(poblacion)
     n_cruzantes = validar_entero(n_cruzantes, "n_cruzantes", minimo=0)
     numero_de_individuos, dimension = poblacion.shape
     if n_cruzantes % 2 != 0:
@@ -684,9 +684,9 @@ def ensamblar_nueva_generacion(elite: np.ndarray, mutantes: np.ndarray, hijos: n
         Si las dimensiones d no coinciden, si faltan filas (élite + mutantes + hijos < tamano)
         o si élite + mutantes ya superan `tamano`.
     """
-    elite = _validar_poblacion(elite, "elite")
-    mutantes = _validar_poblacion(mutantes, "mutantes")
-    hijos = _validar_poblacion(hijos, "hijos")
+    elite = validar_poblacion(elite, "elite")
+    mutantes = validar_poblacion(mutantes, "mutantes")
+    hijos = validar_poblacion(hijos, "hijos")
     tamano = validar_entero(tamano, "tamano", minimo=1)
     dimensiones = {elite.shape[1], mutantes.shape[1], hijos.shape[1]}
     if len(dimensiones) != 1:
@@ -730,7 +730,7 @@ def _leer_bloque_ea(cfg: Mapping) -> Mapping:
     return cfg["ea"]
 
 
-def _leer_record_frames(cfg: Mapping) -> bool:
+def leer_record_frames(cfg: Mapping) -> bool:
     """Extrae `cfg["record_frames"]` (bool); falta -> ValueError, no bool -> TypeError."""
     if "record_frames" not in cfg:
         raise ValueError("falta la clave 'record_frames' en la configuración")
@@ -741,7 +741,7 @@ def _leer_record_frames(cfg: Mapping) -> bool:
     return bool(valor)
 
 
-def _construir_frame(iteracion: int, poblacion: np.ndarray, mejor_global: np.ndarray) -> dict:
+def construir_frame(iteracion: int, poblacion: np.ndarray, mejor_global: np.ndarray) -> dict:
     """Frame del contrato §5.1: {"iter", "positions" [[x, y], ...], "best" [x, y]}."""
     return {
         "iter": iteracion,
@@ -799,8 +799,8 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
     """
     # Paso 1: validar la configuración y leer el dominio del problema.
     parametros = ParametrosEA.desde_config(_leer_bloque_ea(cfg))
-    guardar_frames = _leer_record_frames(cfg) and problem.func.dim == DIMENSION_CON_FRAMES
-    limites = _validar_limites(problem.func.bounds)                  # forma (d, 2)
+    guardar_frames = leer_record_frames(cfg) and problem.func.dim == DIMENSION_CON_FRAMES
+    limites = validar_limites(problem.func.bounds)                  # forma (d, 2)
     if problem.budget_exhausted():
         raise ValueError(f"el presupuesto ({problem.budget}) no alcanza para ninguna "
                          "evaluación de f")
@@ -816,7 +816,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
         # Paso 3: evaluarla (cuenta N evaluaciones, Spec §6.2) y registrar el frame iter 0.
         aptitudes = evaluar_poblacion(poblacion, problem.f)          # forma (N,)
         if guardar_frames:
-            frames.append(_construir_frame(0, poblacion, problem.best_x))
+            frames.append(construir_frame(0, poblacion, problem.best_x))
 
         generacion = 0
         while parametros.generaciones is None or generacion < parametros.generaciones:
@@ -841,7 +841,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
             # su frame.
             aptitudes = _evaluar_generacion(poblacion, aptitudes_elite, parametros, problem.f)
             if guardar_frames:
-                frames.append(_construir_frame(generacion, poblacion, problem.best_x))
+                frames.append(construir_frame(generacion, poblacion, problem.best_x))
     except BudgetExhausted:
         # Presupuesto agotado: no se hace nada más. La generación incompleta no registra frame y
         # el mejor punto visto está en problem.best_x / problem.best_f.

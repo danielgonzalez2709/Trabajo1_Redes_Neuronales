@@ -249,6 +249,11 @@ def test_base_yaml_contiene_el_bloque_ea_con_los_defaults_del_spec():
     assert (p.n_elite, p.n_mutantes, p.n_cruzantes) == (8, 5, 38)
 
 
+def test_base_yaml_no_cambio_el_bloque_ea():
+    cfg = load_config(RUTA_BASE)
+    assert cfg["ea"]["N"] == 50 and cfg["ea"]["esquema"] == "clase"
+
+
 # ================================================================================================
 # 1. generar_poblacion_inicial
 # ================================================================================================

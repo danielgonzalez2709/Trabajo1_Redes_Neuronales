@@ -7,10 +7,10 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 7 (H-07, H-08, H-09, H-10, H-12, H-13, H-15) | 0 |
+| Código | 8 (H-07, H-08, H-09, H-10, H-12, H-13, H-15, H-17) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
-| Bibliografía | 0 | 0 |
-| Conceptos | 1 (H-14) | 0 |
+| Bibliografía | 1 (H-16, severidad baja: atribución imprecisa, no cita falsa) | 0 |
+| Conceptos | 2 (H-14, H-18, esta última severidad baja) | 0 |
 
 ---
 
@@ -198,6 +198,42 @@
 5. **Corrección:** el código sigue §5.1; el número 714 se prueba en 2D.
 6. **Lección:** un prompt también se revisa contra el contrato antes de enviarlo; un subagente debe reportar la contradicción, no elegir en silencio.
 
+### H-16 — "c₁ = c₂ = 1.49618 [Clerc & Kennedy, 2002]": valores correctos, pero no son los que aparecen en el artículo (atribución imprecisa)
+- **Estado:** candidato — severidad **baja**. La propia IA lo dejó marcado `[VERIFICAR]`, así que no es una cita inventada; lo que se constata es el alcance de la atribución. Verificación **parcial** (ver punto 4).
+- **Categoría:** Bibliografía (también Matemáticas)
+- **Herramienta y modelo:** Claude Opus 5.5 (redacción del Spec v1.0, 1-oct-2026) · **Fecha:** 1-oct-2026 (afirmación) / 12-oct-2026 (verificación) · **Quién lo cazó:** `cazador-alucinaciones` (T1.5)
+1. **Prompt (literal):** `prompts/asesoria_puente_claude.md`, **Prompt C** (1-oct-2026, "armemos el Spec"). El prompt no pide esas constantes: aparecen en la respuesta (Spec v1.0, commit `2cd005b`, §6.4).
+2. **Respuesta relevante de la IA:** `docs/spec/SPEC.md:291`: "N=30, w=0.7298, c₁=c₂=1.49618 [VERIFICAR Clerc & Kennedy, 2002]". Comentario de `configs/part1/base.yaml:23`: "w y c1 = c2 corresponden al coeficiente de constricción con phi = 4.1".
+3. **Cómo sospechamos:** la propia marca [VERIFICAR] más el hecho de que 1.49618 no es un número "de catálogo": parece producto de una operación.
+4. **Evidencia:**
+   - El artículo existe y la referencia candidata es correcta: Crossref (`https://api.crossref.org/works/10.1109/4235.985692`, consultado 12-oct-2026): "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", M. Clerc y J. Kennedy, IEEE Transactions on Evolutionary Computation, vol. 6, n.º 1, pp. 58-73, 2002. `https://doi.org/10.1109/4235.985692` redirige a `ieeexplore.ieee.org/document/985692/` (12-oct-2026).
+   - Texto: el artículo publicado **no fue accesible** (IEEE, ResearchGate y Academia.edu devolvieron 403/vacío). Solo se leyó el **borrador** que Clerc publica en `http://clerc.maurice.free.fr/pso/TEC.zip` (consultado 12-oct-2026; sha256 en `evidencias/T1.5_clerc_kennedy_borrador_extractos.txt`), que la propia página describe como "just the draft". En él: la constricción se aplica a **todos los términos** ("applied the constriction coefficient … to all terms", "applied to the right side of the velocity adjustment"); el parámetro de control se fijó en **4.1** para las versiones con constricción; Vmax queda "unnecessary" (aunque cita a Eberhart y Shi (2000) recomendando un Vmax "liberal" igual al rango dinámico); y "convergence on global optima cannot be proven" salvo una clase especial de funciones. Las ecuaciones (OLE) y las letras griegas no se extrajeron, y una búsqueda en el texto no encontró "0.729", "1.49" ni "2.05" literales.
+   - Cálculo propio (`evidencias/T1.5_verificacion.py` → `.txt` §1, precisión de 40 dígitos): con φ = 4.1, χ = 2/|2 − φ − √(φ² − 4φ)| = **0.72984378…** y χφ/2 = **1.49617977…**. Por tanto w = 0.7298 y c = 1.49618 son esos valores **redondeados** (error 4.4e-5 y 2.3e-7). La forma de inercia es equivalente a la constricción χ·(v + 2.05·R1⊙(b − x) + 2.05·R2⊙(g − x)): diferencia máxima 3.6e-15 (`T1.5_verificacion2.py` §B). Con w = 1 y c = 1.49618 (sin constricción) la diferencia es 1.3, o sea, **c = 1.49618 solo es "de Clerc y Kennedy" junto con w = χ**. El radio espectral del sistema determinista con χ vale exactamente 1 en φ = 4.1 (`§A`), coherente con la fórmula.
+5. **Corrección:** escribir en el Spec/blog: "constricción de Clerc y Kennedy (2002) con φ = c₁ + c₂ = 4.1 → χ ≈ 0.7298; en forma de inercia, w = χ y c₁ = c₂ = χ·φ/2 ≈ 1.49618 (equivale a c = 2.05 aplicando χ a toda la velocidad)". No decir "el valor de Clerc y Kennedy es c ≈ 1.5". La fórmula de χ se verificó por derivación propia; **que el artículo publicado la dé con esa forma exacta no está verificado** (TODO(dato-faltante): leer el PDF de IEEE o una copia legítima).
+6. **Lección:** distinguir una constante "del artículo" de una constante "derivada de la fórmula del artículo" (aquí cambia por un factor χ); y no dar por verificada una referencia solo porque el DOI resuelva: hay que leer qué dice.
+
+### H-17 — "Línea base de pruebas: 513 passed, 1 skipped (MEMORIA, 12-oct)" (cifra mezclada de dos entradas distintas)
+- **Estado:** candidato — severidad baja (error de dato del orquestador, ya reconocido en `prompts/T1.5.md`, "Resultado de la ronda 1 de revisor-spec")
+- **Categoría:** Código (conteo de pruebas); la fuente citada es un documento del proyecto
+- **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (T1.5) por contraste con la ejecución; reproducido por `cazador-alucinaciones`
+1. **Prompt (literal):** `prompts/T1.5.md`, encabezado ("Línea base de pruebas: 513 passed, 1 skipped (MEMORIA, 12-oct)") y prompt de la ronda 1 del `implementador` ("Línea base: 513 passed, 1 skipped; no debe bajar").
+2. **Respuesta relevante de la IA:** "513 passed, 1 skipped (MEMORIA, 12-oct)". La MEMORIA dice para T1.4 "suite 513 passed" y, en otra entrada (T1.1, 12-oct), "347 passed, 1 skipped".
+3. **Cómo sospechamos:** `revisor-spec` ejecutó la suite y no hubo ningún skip.
+4. **Evidencia:** `git archive HEAD` en un directorio limpio y `.venv/bin/python -m pytest tests -q -rs`: **513 passed in 13.9 s, 0 skipped** (12-oct-2026, Linux; salida en `evidencias/T1.5_linea_base.txt`). El único `skipif` del repositorio es `tests/test_reproducibility.py:373` (`os.name == "nt"`: se omite solo en Windows). De dónde salía el skip de la entrada de T1.1 **no se verificó** (TODO(dato-faltante): ¿se ejecutó en Windows?).
+5. **Corrección:** línea base real en Linux: 513 passed, 0 skipped (dato ya corregido por el orquestador). El skip depende del sistema operativo: indicar siempre SO junto al conteo.
+6. **Lección:** copiar una cifra de dos entradas distintas de un documento da un valor que ninguna ejecución produjo; una línea base se reejecuta al empezar la tarea, no se cita.
+
+### H-18 — Papel de b_i y de v = 0 descrito de forma imprecisa ("el líder solo se mueve por inercia", "dependa solo de b_i y g", "solo sería atraída por su posición actual")
+- **Estado:** candidato — severidad **baja**: ninguna frase es falsa en sentido estricto; son imprecisas y inducirían una explicación errónea en el blog o la sustentación
+- **Categoría:** Conceptos
+- **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador e `implementador`, T1.5) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`
+1. **Prompt (literal):** `prompts/T1.5.md`, prompt de la ronda 1 del `verificador-matematico`, punto 11 ("con v = 0 inicial la partícula líder solo se mueve por inercia hasta que g cambie") y el del `cazador-alucinaciones`, tarea 4 (misma frase). El docstring de `generar_enjambre_inicial` es salida del `implementador` (prompt de la ronda 1: "v = 0; b_i = x_i").
+2. **Respuestas relevantes:** (a) `src/part1/pso.py:265-266`: "Las velocidades en cero hacen que el primer movimiento dependa solo de las atracciones hacia $b_i$ y $g$." (b) `src/part1/pso.py:371-372`: "sin él cada partícula solo sería atraída por su posición actual". (c) la frase del prompt sobre el líder.
+3. **Cómo sospechamos:** con b_i = x_i en la iteración 1, el término cognitivo c₁R₁(b − x) es exactamente cero.
+4. **Evidencia:** `evidencias/T1.5_verificacion.py` §4 y `T1.5_verificacion2.py` §C-D (Rastrigin 2D, 30 semillas, configuración de base.yaml): (i) en la iteración 1 el desplazamiento de **todas** las componentes es `c₂·R₂·(g − x)` (0 de 1 800 componentes con paso/(g − x) fuera de [0, c₂]): el primer movimiento es **puramente social**; (ii) el líder (x₀ = g₀) **no se mueve** en la iteración 1 en 30/30 corridas y permanece quieto hasta que g cambia (30/30): no se "mueve por inercia", porque la inercia es w·0 = 0; (iii) sin memoria (b ≡ x) el término cognitivo vale 0: la partícula quedaría atraída solo por g, no "por su posición actual".
+5. **Corrección:** (a) "el primer movimiento es puramente social, porque b_i = x_i anula el término cognitivo"; (b) "sin memoria el término cognitivo sería siempre cero y solo quedaría la atracción hacia g"; (c) "con v = 0, el líder permanece quieto hasta que otra partícula mejora g". Tomar nota: `test_la_particula_que_es_g_y_esta_en_su_memoria_solo_se_mueve_por_inercia` es correcta para un paso con v ≠ 0.
+6. **Lección:** al explicar un algoritmo, evaluar cada término en el estado inicial concreto (b = x, v = 0); una frase didáctica "solo depende de A y B" puede ocultar que A vale cero.
+
 ---
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
@@ -228,4 +264,13 @@
 | 8-oct-2026 | T2.1: 9 capitales difieren de IGR (códigos 01–06, 08, 09 y 47), máx. 2,350 km (Barcelona); Palma (07) también difiere; ninguna otra de 10–50; Ceuta y Melilla sin IGR; ORIGENCOOR 8 DA + 1 Coordinado_IGR | Correcta | `T2.1_verificacion.txt` §5 |
 | 8-oct-2026 | T2.1: cifras de IGR `nuc` (32 consultas, 4 con datos, 50 registros, 34/14/1/1, NUCL 49/ENSI 1, 14 columnas sin nulos, fechas 2025-10-16..2025-12-05), Nominatim (52 consultas, 17/31/4), límites (53 unidades, 1 193 428 vértices, 13 188 834 bytes, timeStamp 03:36:02Z), INE (52 hojas, 8 132 municipios), rango lat/lon y par más cercano/lejano | Correctas | `evidencias/T2.1_verificacion_fuentes.py` → `.txt`; `T2.1_verificacion.txt` §6 |
 | 8-oct-2026 | T2.1: Memoria NGMEP (31-mar-2026; fuentes REL/INE/boletines/Líneas Límite/IGR/BTN; ETRS89/REGCAN95; centroide "lo más centrado posible en el núcleo poblacional"; Anexo I "Entidad en la que está ubicado el Ayuntamiento") | Correctas (citas literales) | `Memoria_NGMEP_2026.pdf` págs. 3, 5, 7–10, 13, 14 |
+| 12-oct-2026 | T1.5: DOI 10.1109/4235.985692 = Clerc y Kennedy, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", IEEE Trans. Evol. Comput. 6(1), 58-73, 2002 | Correcta (título, autores, revista, volumen, número, páginas, año; el DOI redirige a IEEE Xplore). El texto del artículo publicado no fue accesible (ver H-16) | Crossref `api.crossref.org/works/10.1109/4235.985692` y `doi.org/10.1109/4235.985692`, 12-oct-2026 |
+| 12-oct-2026 | T1.5: w = 0.7298 y c₁ = c₂ = 1.49618 son la constricción con φ = 4.1 en forma de inercia | Correcta numéricamente: χ = 0.72984378…, χφ/2 = 1.49617977… (redondeos con error 4.4e-5 y 2.3e-7); la atribución exacta al artículo es imprecisa (H-16) | `evidencias/T1.5_verificacion.py` → `.txt` §1; `T1.5_verificacion2.py` §A-B |
+| 12-oct-2026 | T1.5: conteo n_f = N(T+1); 2D budget 20 000 → 666 enjambres completos + 20 evaluaciones truncadas, 666 frames (iter 0-665); 3D budget 30 000 → 1 000 enjambres exactos, sin frames; n_grad = 0 | Correcta (4 combinaciones función × dimensión) | `T1.5_verificacion.txt` §2 |
+| 12-oct-2026 | T1.5: v_max = 0.2·rango → 0.8192 (Rosenbrock, ancho 4.096) y 2.048 (Rastrigin, ancho 10.24) | Correcta. El 0.2 es una decisión del proyecto sin fuente (el borrador de Clerc y Kennedy cita a Eberhart y Shi recomendando Vmax igual al rango dinámico) | `T1.5_verificacion.txt` §3; `T1.5_clerc_kennedy_borrador_extractos.txt` |
+| 12-oct-2026 | T1.5: tiempo por corrida 0.4-0.6 s (afirmado por revisor) | Correcta en orden de magnitud: 0.34-0.73 s en 4 corridas (una sola máquina) | `T1.5_verificacion.txt` §2 |
+| 12-oct-2026 | T1.5: aviso "w ≥ 1: la inercia no amortigua la velocidad y el enjambre puede no converger" | Correcta (formulación prudente): en el sistema determinista v' = w·v + c(p − x), x' = x + v', det = w, así que con w ≥ 1 no hay estabilidad estricta (álgebra propia; sin fuente citada) | derivación propia, `T1.5_verificacion2.py` §A es el caso w = χ |
+| 12-oct-2026 | Afirmaciones para el blog: "PSO sin gradientes sirve para funciones no derivables" | Correcta en el código (optimize solo llama a f; n_grad = 0): Σ|x| sin gradiente → f_best 4.1e-6 con 3 000 evaluaciones | `T1.5_verificacion.txt` §6 |
+| 12-oct-2026 | Afirmación para el blog: "PSO garantiza el óptimo global" | **Falsa**: Rastrigin 3D, 30 corridas con presupuesto 30 000: 26/30 éxitos (f_best máx 0.995); el borrador de Clerc y Kennedy dice "convergence on global optima cannot be proven" salvo una clase especial | `T1.5_verificacion.txt` §5; extractos del borrador |
+| 12-oct-2026 | "Inercia alta explora, baja explota" | **Sin cita verificada**: el experimento es compatible (Rastrigin 2D: w=0.4 → 27/30 éxitos, w=0.7298 y 0.9 → 30/30), pero un solo caso no lo demuestra. Referencia candidata: Shi y Eberhart (1998), DOI 10.1109/ICEC.1998.699146 (existe en Crossref; su contenido no se leyó) | `T1.5_verificacion.txt` §7 |
 | 8-oct-2026 | T2.1: URL de `fuentes.md` responden; CSW `dateStamp` 2026-01-19; identificador IGR-PO `20251216_…_v2024`; §3.8 "Se permiten combinaciones"; 26codmun.xlsx idéntico al crudo; IGR-PO usa el centroide de áreas residenciales cuando no hay coordenada de un organismo (respalda en parte "centro de la zona residencial") | Correctas (7/7 HTTP 200). "No hay versión NGMEP posterior a 202603": **no verificable** (la lista de ficheros del CNIG se carga dinámicamente; la página muestra "(2026)") | `evidencias/T2.1_urls_http.txt` |
