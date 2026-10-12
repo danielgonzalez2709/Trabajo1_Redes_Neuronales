@@ -8,6 +8,12 @@
 set -euo pipefail
 
 RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+# Git Bash (Windows): ruta de la raíz en forma C:/... (la entienden docker, python y curl nativos) y sin conversión
+# automática de rutas POSIX, que convertiría "-v ...:/data" en una lista de rutas de Windows y "/data/..." en
+# "C:/Program Files/Git/data/...". En macOS y Linux no cambia nada.
+case "$(uname -s)" in
+  MINGW*|MSYS*) RAIZ="$(cd "${RAIZ}" && pwd -W)"; export MSYS_NO_PATHCONV=1 ;;
+esac
 DATOS="${RAIZ}/osrm-data"
 
 # Imagen oficial del proyecto OSRM en GHCR, fijada por etiqueta Y digest (índice multi-arquitectura,
