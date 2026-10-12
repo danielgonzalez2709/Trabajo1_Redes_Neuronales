@@ -50,7 +50,7 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
-- [ ] **`base.yaml` sin clave de consumo ni de precio** (solo `costo.valor_hora`): sin ella la sensibilidad de §7.5 con `--set` no funciona. Ninguna tarea la tiene; asignar a T3.6.
+- [ ] **`base.yaml` sin clave de consumo ni de precio** (solo `costo.valor_hora`): sin ella la sensibilidad de §7.5 con `--set` no funciona. Asignado a **T3.6**. Punto de partida (no decidido): claves opcionales `consumo_l100` y `precio_l`; vacías = valores de `vehiculo.yaml` y `combustible.json`.
 - [ ] T3.6: hay cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)), por debajo de la resolución de 0,5 €/h de la bisección.
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
 - [x] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → resuelto en T2.5 (Spec v1.10: km por anclas, no por proporción de intersecciones).
