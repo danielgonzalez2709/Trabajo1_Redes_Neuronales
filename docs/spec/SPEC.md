@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.5** — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.6** — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -36,6 +36,34 @@ Entregables (pesos): reporte-blog 25 %, repositorio reproducible 10 %, ejecució
 | Equipo Parte 2 | 2 | §7 |
 | Puente / Integración / Cacería | 1 | §4, §8, §9, §11, revisión de PR, entendimiento de todos |
 
+### 1.2 Enunciado literal — Parte 2 (añadido en v1.6)
+
+Texto del enunciado del curso, copiado sin cambios. Si este Spec lo contradice, gana el enunciado y se corrige el Spec.
+
+> **Parte 2: Optimización combinatoria (¡y olé!)**
+>
+> Un vendedor debe recorrer las 47 capitales de provincia de la España peninsular (se excluyen Palma, Las Palmas de Gran Canaria y Santa Cruz de Tenerife por ser insulares, y Ceuta y Melilla por no ser provincias ni accesibles por carretera desde la península). El recorrido es cerrado: el vendedor vuelve a la ciudad de salida.
+>
+> 1. Encuentren el orden óptimo del recorrido usando colonias de hormigas y algoritmos genéticos.
+> 2. El costo de desplazamiento entre dos ciudades es la suma de:
+>    - el valor de la hora del vendedor multiplicado por el tiempo de viaje. Este valor es un parámetro que deben estudiar: ¿cambia la ruta óptima al variarlo? ¿a partir de qué valor?
+>    - el costo de los peajes en el trayecto por carretera.
+>    - el costo del combustible, según el vehículo que el equipo elija (modelo, consumo homologado y tipo de combustible, con fuente citada).
+> 3. Documenten las fuentes de todos los datos (distancias, tiempos, peajes, precios de combustible) con su fecha de consulta. Tengan en cuenta que la red de autopistas de peaje en España ha cambiado mucho en los últimos años, por lo que la información desactualizada es un riesgo real.
+> 4. Representen con un GIF animado o un video cómo evoluciona la mejor solución, dibujando el recorrido sobre el mapa de España.
+
+### 1.3 Rúbrica literal — "Todo debe correr en vivo" (añadido en v1.6)
+
+Punto de la rúbrica de evaluación, copiado sin cambios. Sus criterios verificables están en §9.
+
+> **Todo debe correr en vivo**
+>
+> Durante la sustentación el equipo ejecutará su código frente al profesor. Por eso:
+> - Cada experimento principal debe lanzarse con un solo comando.
+> - Los parámetros (tasa de aprendizaje, tamaño de población, tasa de evaporación, valor de la hora, etc.) deben poder cambiarse desde la línea de comandos o un archivo de configuración, sin editar el código fuente.
+> - Una corrida de demostración debe tardar menos de dos minutos.
+> - Antes de la sustentación, prueben todo en un clon limpio del repositorio en una máquina distinta a la de desarrollo.
+
 ---
 
 ## 2. Alcance
@@ -63,7 +91,7 @@ Entregables (pesos): reporte-blog 25 %, repositorio reproducible 10 %, ejecució
 | Vehículo | **Toyota Corolla Sedán Hybrid 2026, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina — acabado: [PENDIENTE] |
 | Fecha de corte de datos | **1-oct-2026** (escenario base) |
 | Dominio de Rosenbrock | **[−2.048, 2.048]ⁿ** (justificación en §6.1.1) |
-| Combustible | **Gasolina 95 E5**, precio medio nacional en la fecha de corte |
+| Combustible | **Gasolina 95 E5**, precio medio **peninsular** en la fecha de corte (v1.6; antes, nacional — ver §7.2 Bloque 4) |
 | Git | Rama por equipo, Pull Request revisado por el puente, commits con la cuenta de cada autor |
 
 ---
@@ -89,7 +117,7 @@ trabajo1/
 │   └── osrm/README.md            # cómo levantar OSRM local (Docker + extracto Geofabrik)
 ├── data/
 │   ├── raw/                      # descargas originales con fecha en el nombre (evidencia)
-│   ├── processed/                # cities.csv, rutas_*.csv/npz, peajes_tramos.csv, combustible.json, vehiculo.yaml
+│   ├── processed/                # cities.csv, rutas_*.csv/npz, peajes_tramos.csv, combustible.json, combustible_resumen.json, vehiculo.yaml
 │   └── fuentes.md                # tabla: dato | fuente | URL | fecha de consulta | notas
 ├── results/  data/  tables/
 ├── media/                        # GIF finales
@@ -208,7 +236,8 @@ def solve(C: np.ndarray, cfg: dict, rng: np.random.Generator) -> dict
 | `data/processed/rutas_resumen.json` | `{fuente, fecha_extracto_osm, n_pares, n_filas, fecha_consulta_utc {min, max}, pares_sin_peaje {criterio, n, pares}, avisos, control_pasos, simetria}` — pares marcados (§7.2 Bloque 2), controles de la descarga y diferencia máxima de simetría (para el blog) |
 | `data/processed/rutas_pasos_peaje.csv` | `i, j, alternativa, paso, ref, nombre, dist_m, n_intersecciones, n_intersecciones_toll, lon_ini, lat_ini, lon_fin, lat_fin` — una fila por paso de OSRM con al menos una intersección de clase `toll`; entrada de T2.5 (los crudos no se versionan) |
 | `data/processed/peajes_tramos.csv` | `id, via, desde, hasta, operador, ambito (estatal/SEITT/foral/autonomico), provincia, km, tarifa_ligeros_eur, eur_km, vigente_desde, vigente_hasta, fuente_url, fecha_consulta, nota` |
-| `data/processed/combustible.json` | `{producto, precio_medio_eur_l, precio_mediano_eur_l, n_estaciones, fecha, fuente_url, archivo_raw}` |
+| `data/processed/combustible.json` | `{producto, ambito, precio_medio_eur_l, precio_mediano_eur_l, n_estaciones, fecha, fuente_url, archivo_raw}` — `ambito = "peninsular"` (v1.6) |
+| `data/processed/combustible_resumen.json` | `{producto, id_producto, campo_precio, ambito, fecha, fecha_respuesta, fecha_consulta_utc, fuente_url, archivo_raw, redondeo, n_estaciones_respuesta, n_sin_precio, criterio_sin_precio, nacional {n, media, mediana, min, max}, peninsular {n, media, mediana, min, max}, no_peninsular {<territorio>: {n, media, mediana, min, max}}, ccaa_no_peninsulares, contraste_filtro_producto {url, n_estaciones, coincide}}` — desglose y controles de la descarga; la media nacional queda como sensibilidad para el blog (v1.6) |
 | `data/processed/vehiculo.yaml` | `{marca, modelo, version, anio, combustible, consumo_wltp_comb_l100, fuente_url, respaldo_url, fecha_consulta}` |
 | `data/fuentes.md` | Tabla `dato | fuente | URL | fecha de consulta | notas` (exigida por el enunciado) |
 
@@ -357,8 +386,15 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 
 #### Bloque 4 — Precio del combustible
 - **Fuente:** Geoportal de Gasolineras / servicio REST del Ministerio para la Transición Ecológica (`sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/`; tiene endpoint histórico por fecha).
+  *(v1.6, T2.6)* Los datos de la fecha de corte salen del endpoint histórico `…/PreciosCarburantes/EstacionesTerrestresHist/{dd-mm-aaaa}`;
+  `EstacionesTerrestres/` devuelve solo los precios del día de la consulta, y una fecha ISO (`aaaa-mm-dd`) da HTTP 400.
 - **Producto:** Gasolina 95 E5. Descarga única en la fecha de corte; guardar el JSON crudo con la fecha en el nombre.
-- **Modelo [DECIDIDO]:** precio **medio nacional** (reportar también la mediana y el nº de estaciones). Por provincia: fuera de alcance.
+- **Modelo [DECIDIDO v1.6, Jose Miguel, 11-oct]:** precio **medio peninsular**. Se excluyen las estaciones de Baleares,
+  Canarias, Ceuta y Melilla (IDCCAA 04, 05, 18, 19). Hay que reportar también la mediana y el nº de estaciones. Por provincia: fuera de alcance.
+  - **Por qué:** el enunciado (§1.2) excluye esos territorios del recorrido, así que el vehículo nunca reposta allí.
+    Canarias (precio más bajo) sesga la media nacional hacia abajo en la misma dirección siempre.
+  - **Sensibilidad:** la media nacional se conserva en `combustible_resumen.json` para el blog.
+  - *Antes de v1.6* el modelo era la media nacional.
 
 #### Bloque 5 — Vehículo
 - **[DECIDIDO] Toyota Corolla Sedán Hybrid 2026, motor 1.8 L (140H)**, híbrido autorrecargable de gasolina. Acabado [PENDIENTE]:
