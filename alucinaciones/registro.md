@@ -8,9 +8,9 @@
 |---|---|---|
 | Matemáticas | 1 | 0 |
 | Código | 5 (H-07, H-08, H-09, H-10, H-11) | 0 |
-| Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
+| Datos del mundo real | 8 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 0 | 0 |
-| Conceptos | 0 | 0 |
+| Conceptos | 1 (H-12) | 0 |
 
 ---
 
@@ -164,6 +164,76 @@
 4. **Evidencia:** PENDIENTE (cazador): contrastar con `osmformat.proto` de OSM-binary (https://github.com/openstreetmap/OSM-binary/blob/master/osmpbf/osmformat.proto) y con la fecha 2026-10-01T20:22:06Z que dan `state.txt` de Geofabrik y `osrm-extract` (`data/raw/osrm_2026-10-10/`).
 5. **Corrección:** campos 32/33/34 en `scripts/osrm/cabecera_pbf.py`; la fecha coincide con las otras dos fuentes.
 6. **Lección:** números de campo de un `.proto` se copian de la definición, no de memoria; validar el lector contra una segunda fuente de la misma fecha.
+
+### H-12 — "El máximo WLTP de 4,8 es la configuración más equipada" (explicación plausible sin fuente que acabó en el Spec)
+- **Estado:** candidato — verificado por el cazador (11-oct); **propuesta: descartar** (pasar a "Verificaciones" como imprecisa). Decide el puente.
+- **Categoría:** Conceptos (aplicación sin verificar de un concepto de homologación a un caso concreto)
+- **Herramienta y modelo:** Claude Opus 5.5 (orquestador, sesión principal) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** subagente `curador-datos` (T2.7, ronda 2), al contrastarlo con los crudos
+1. **Prompt (literal):** `alucinaciones/prompts/asesoria_T2.7_claude.md` (pregunta de Jose Miguel sobre la fase extra alta y la rúbrica).
+2. **Respuesta relevante de la IA:** "Es el WLTP del **mismo** ciclo con la versión más equipada (llantas más grandes, extras)". El orquestador la copió en el Spec v1.7 §7.2 Bloque 5: "es el combinado de la configuración más equipada".
+3. **Cómo sospechamos:** el curador revisó la configuración completa del configurador y no encontró nada que pudiera "equipar más" el coche.
+4. **Evidencia:** `data/raw/vehiculo_2026-10-11/texus_corolla_sedan_GetFullConfiguration.json`. El Style Plus MY27 tiene 0 opciones internas, 0 externas, 0 packs y una única llanta de 17". Toyota publica `FUELCOMBINEDWLTPMAX` = 4,8 sin explicar su origen (`…GetTechnicalSpecifications.json`).
+   **Completado por el cazador (11-oct-2026, `evidencias/T2.7_verificacion.py` → `.txt` §1–2 y `evidencias/H-12_reglamento_2017_1151_extractos.txt`):**
+   - Fuente primaria: Reglamento (UE) 2017/1151, anexo XXI (texto original del DO L 175 de 7-7-2017, vía legislation.gov.uk; EUR-Lex no respondió). Subanexo 4, 4.2.1.2: "Test vehicle H shall be the vehicle producing the higher, and preferably highest, cycle energy demand of that selection, test vehicle L the one producing the lower, and preferably lowest". Según 4.2.1.1, esa demanda depende de la "mass, aerodynamic drag and tyre rolling resistance", y para las llantas la guía es "a) the largest width, b) the largest diameter, and c) the most open structure design". Subanexo 7, 3.2.3.2: cada vehículo individual recibe un valor interpolado entre L y H.
+   - Lo que confirma: la idea general de la IA ("versión más equipada: llantas más grandes, extras") coincide con la definición del vehículo H. Además, "mismo ciclo" es correcto: Toyota lo llama "Consumo combinado WLTP - Max" (no es una fase).
+   - Lo que no confirma: Toyota no dice que su "Max" sea el vehículo H, y en Toyota España no hay ninguna configuración del Style Plus MY27 más equipada (un solo acabado y una sola motorización; 0 opciones y 0 packs). Matiz sobre el texto anterior: el configurador sí ofrece 1 llanta como accesorio (`AvailableAccessoryWheels` = 1) y 42 accesorios. Son accesorios del concesionario, no opciones homologadas (anexo XXI, 3.2.9).
+   - Indicios, sin demostrar: Toyota publica un peso en orden de marcha de 1355–1415 kg (`KERBWGHT`) y llama "medio" al CO₂ de 105 ("CO2 combinado WLTP – medio"). El catálogo de 2023 da para la gama 4,4–4,8 l/100 km y 99–109 g/km, el mismo máximo actual (4,8 / 109). Encaja con un rango L–H de la familia, pero la fuente no lo dice.
+   - **Propuesta del cazador: descartar como alucinación.** El concepto está respaldado por la normativa, y aplicarlo a este caso no se puede refutar. Se propone pasarlo a "Verificaciones" como *imprecisa / no verificable en el caso concreto* (decide el puente). La corrección del Spec ("su origen no está documentado […] no se usa") sigue siendo correcta.
+5. **Corrección:** Spec §7.2 Bloque 5, redactado de nuevo tras la verificación: es el ciclo combinado, no la fase de autopista, y no se usa. En el crudo lleva `Type: "vehicleHigh"`, que es el "vehículo H" del Reglamento (UE) 2017/1151, y Toyota no documenta qué configuración concreta es. El 4,8 no entra en ningún cálculo.
+6. **Lección:** una explicación genérica ("el máximo corresponde a la versión más equipada") se comprueba contra los datos del caso antes de escribirla en el Spec. Aquí bastaba con mirar las opciones del configurador, que ya estaban descargadas.
+
+### H-13 — "No existe ficha oficial de Toyota España del Corolla Sedán 140H" (resumen del buscador web)
+- **Estado:** candidato — verificado por el cazador (11-oct), con la cita literal recuperada; **propuesta: descartar** como error del buscador (ver H-15). Decide el puente.
+- **Categoría:** Datos
+- **Herramienta y modelo:** herramienta de búsqueda web usada por el subagente `curador-datos` (Claude Opus 5.5) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** el propio subagente
+1. **Prompt (literal):** consulta de búsqueda "Toyota España Corolla Sedán 140H ficha técnica consumo WLTP" (encargo en `alucinaciones/prompts/T2.7.md`, ronda 1).
+2. **Respuesta relevante de la IA:** según el informe del subagente, el resumen automático afirmó tres cosas: que no existía ficha oficial de Toyota España, que el ECO daba "4,6, igual que el Style Plus", y un valor de 4,70 que mezclaba el Touring Sports. **Cita textual recuperada por el cazador** (`evidencias/H-13_H-14_transcripcion_extractos.txt`; transcripción `agent-ad02ff449667aa29b.jsonl`, líneas 29 y 31, 2026-10-12T01:47:59Z/01:48:05Z; consulta literal confirmada):
+   - "No encontré la ficha oficial de Toyota España para el Sedán 140H. Las cifras disponibles proceden de sitios de terceros y no coinciden del todo."
+   - "**KM77, Sedán 140H Eco (2022):** aparecen los mismos datos de consumo combinado (4,6 l/100 km) y de CO₂ (104 g/km) que en la versión Style Plus."
+   - "**Motor.es, 140H Style Touring Sport:** da 4,70 l/100 km y 106 g/km de CO₂. Esta versión aparece en un listado que no especifica carrocería, así que no es seguro que sea el Sedán."
+   - Cierre: "conviene confirmarlo en la web de Toyota España o en la ficha de homologación antes de darlo por definitivo."
+3. **Cómo sospechamos:** el configurador de toyota.es sí publica la ficha.
+4. **Evidencia:** `data/raw/vehiculo_2026-10-11/texus_corolla_sedan_GetTechnicalSpecifications.json` y `toyota_es_corolla_sedan_build.html` (Style Plus, `FUELCOMBINEDWLTP` = 4,6). Para el ECO, Toyota da 4,4–4,6 / 4,4 / 4,5 (`toyota_es_promo_corolla_sedan_eco_kinto.html`, `toyota_es_empresas_corolla_sedan_eco.html`).
+   **Contraste del cazador con la cita literal (11-oct-2026):**
+   - (a) La herramienta dijo "No encontré", no "no existe". Es cierto para esa búsqueda: entre los 9 resultados no hay ninguna URL de toyota.es. Además, recomendó confirmarlo en la web de Toyota España.
+   - (b) El 4,6 / 104 del ECO lo atribuye a km77, y km77 lo dice así: `km77_corolla_sedan_140h_eco.html`, "Consumo WLTP Combinado 4,6 l/100 km Emisiones de CO₂ WLTP 104 gr/km" (`evidencias/T2.7_verificacion.txt` §2b). No dice que sea el dato de Toyota.
+   - (c) El 4,70 del Touring Sports no se mezcla con el Sedán: la herramienta avisa de que "no es seguro que sea el Sedán". La frase "un listado que no especifica carrocería" es imprecisa, porque el nombre ya dice "Touring Sport".
+   - Conclusión: las tres afirmaciones que el registro atribuye al buscador no están en su respuesta. Salen del **informe del subagente `curador-datos`** (línea 308, 2026-10-12T02:01:17Z): "afirmó que no existía ficha oficial de Toyota España. También dio el ECO como "4,6, igual que el Style Plus" y mezcló un Touring Sports de 4,70". Esa frase convierte "no encontré" en "no existía", quita la atribución a km77 y omite el aviso sobre el Touring Sports.
+   - **Propuesta del cazador: descartar H-13 como alucinación del buscador.** Se propone abrir un candidato nuevo: "paráfrasis infiel de la salida de una herramienta" por el `curador-datos` (Claude Opus 5.5). El prompt literal es `prompts/T2.7.md`, ronda 1, y la evidencia es el mismo archivo de extractos. La categoría la decide el puente: Datos, o Bibliografía si se trata como cita falsa de una fuente.
+5. **Corrección:** la ficha se tomó directamente del configurador oficial.
+6. **Lección:** el resumen de un buscador no es una fuente. Hay que ir a la página primaria y guardar su copia.
+
+### H-14 — "Ni Toyota España ni km77 publican la fase WLTP extra alta" (generalización a partir de las fuentes consultadas)
+- **Estado:** candidato — verificado por el cazador (11-oct); **propuesta: confirmar** (gravedad baja). Decide el puente.
+- **Categoría:** Datos
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.7 ronda 1; el orquestador lo copió en el Spec v1.7) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** el mismo subagente, en la ronda 3, al leer el catálogo
+1. **Prompt (literal):** `alucinaciones/prompts/T2.7.md`, ronda 1 ("usar también el consumo de la fase WLTP "extra alta" (autopista), si la ficha la publica").
+2. **Respuesta relevante de la IA:** informe de la ronda 1: "**Fase extra alta:** no la publican ni Toyota España ni km77". El orquestador escribió en el Spec v1.7: "Ni Toyota España ni km77 la publican".
+3. **Cómo sospechamos:** el catálogo oficial de Toyota España que descargó Jose Miguel la trae.
+4. **Evidencia:** `data/raw/vehiculo_2026-10-11/14764_CORS_48_ES_WEB_S.pdf`, pág. PDF 17: "Ritmo extra alto (l/100km) 5,6-6,2" (SHA-256 a59be953…2463ad).
+   **Completado por el cazador (11-oct-2026):**
+   - Cita literal del informe de la ronda 1 (transcripción `agent-ad02ff449667aa29b.jsonl`, línea 308, 2026-10-12T02:01:17Z; `evidencias/H-13_H-14_transcripcion_extractos.txt`): "- **Fase extra alta:** no la publican ni Toyota España ni km77, así que no he añadido `consumo_wltp_extra_alta_l100`."
+   - Lo que es cierto: ninguna de las 14 fuentes HTML/JSON de Toyota y km77 guardadas menciona la fase extra alta (0 coincidencias de "extra alt"/"extra high"; `evidencias/T2.7_verificacion.txt` §3). Tampoco la menciona la captura de Wayback del 2-oct-2026.
+   - Lo que es falso: el catálogo "Corolla Sedan" de Toyota España ("© 2023 Toyota España S.L.U.", "09/23/CORSEDAN/ES/0000", pág. PDF 25) trae "Ritmo extra alto (l/100km) 5,6-6,2" y "Ritmo extra alto (g/km) 126-139" (pág. PDF 17; §4).
+   - Límites: el catálogo es de 2023 y da rangos de la gama de entonces. Además, no está documentada la URL desde la que Toyota España lo sirve hoy: es un `TODO` de `fuentes.md`, y la página de manuales guardada no lo enlaza. Por eso lo refutado es "Toyota España no la publica"; "la ficha actual no la publica" es correcto.
+   - **Propuesta del cazador: confirmar** (gravedad baja). Es una generalización de "no está en las fuentes que revisé" a "Toyota España no la publica", refutada por un documento oficial de Toyota España. Antes de cerrarlo, conviene documentar la URL del catálogo.
+5. **Corrección:** Spec §7.2 Bloque 5: "La ficha actual de Toyota España (MY27) y km77 no la publican. El catálogo […] 09/2023 […] sí la da".
+   - **URL del catálogo ya documentada** (11-oct, después de la verificación): https://www.toyota.es/content/dam/toyota/nmsc/spain/cross-model/new-cars/catalogos-precios/pdf/14764_CORS_48_ES_WEB_S.pdf. Comprobada por el orquestador: HTTP 200, mismo SHA-256 y `Last-Modified` 05-oct-2023. Ver `data/fuentes.md`, Bloque 5.
+6. **Lección:** "no lo publican" solo vale para las fuentes revisadas. Se escribe "no aparece en X e Y", nunca "no existe".
+
+### H-15 — Paráfrasis infiel de la salida de una herramienta ("no encontré" → "no existía")
+- **Estado:** candidato — propuesto por el cazador al verificar H-13; falta que el puente fije la categoría
+- **Categoría:** Datos (o Bibliografía, si se trata como cita falsa de una fuente; decide el puente)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.7 ronda 1) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`, al recuperar la cita literal de H-13
+1. **Prompt (literal):** `alucinaciones/prompts/T2.7.md`, ronda 1.
+2. **Respuesta relevante de la IA:** informe final del curador (transcripción `agent-ad02ff449667aa29b.jsonl`, línea 308, 2026-10-12T02:01:17Z): el resumen automático "afirmó que no existía ficha oficial de Toyota España. También dio el ECO como "4,6, igual que el Style Plus" y mezcló un Touring Sports de 4,70".
+3. **Cómo sospechamos:** al recuperar la salida literal del buscador para H-13, no coincidía con lo que el curador decía que había dicho.
+4. **Evidencia:** `alucinaciones/evidencias/H-13_H-14_transcripcion_extractos.txt`. El buscador dijo:
+   - "No encontré la ficha oficial…", no "no existe";
+   - atribuyó el 4,6 / 104 del ECO a km77, que lo dice así;
+   - avisó de que el Touring Sports "no es seguro que sea el Sedán".
+5. **Corrección:** H-13 se reescribe con la cita literal; la ficha oficial se tomó del configurador.
+6. **Lección:** cuando un agente resume lo que dijo otra herramienta, se cita literal y se enlaza la transcripción; la paráfrasis puede convertir una ausencia de resultados en una afirmación de inexistencia.
 
 ---
 
