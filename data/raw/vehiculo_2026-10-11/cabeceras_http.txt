@@ -1,0 +1,63 @@
+### toyota_es_corolla_sedan.html <- https://www.toyota.es/coches/corolla-sedan
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:47 GMT
+
+### toyota_es_corolla_sedan_build.html <- https://www.toyota.es/coches/corolla-sedan/build
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:47 GMT
+
+### toyota_es_empresas_corolla_sedan_eco.html <- https://www.toyota.es/empresas/coches/corolla-sedan-eco
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:47 GMT
+
+### toyota_es_promo_corolla_sedan_eco_kinto.html <- https://www.toyota.es/empresas/promociones/corolla-sedan-hybrid-140h-eco-kinto-one
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:47 GMT
+
+### texus_corolla_sedan_getGrades.json <- https://texus.toyota-europe.com/v2/car/getGrades/toyota/es/es/d9fc29c1-cf31-46ed-9d05-5c48fef45efd/promotiontimeframe/bc71cf06-ccc2-4678-9069-97f3b4da265b
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:48 GMT
+
+### texus_corolla_sedan_getMotorizations.json <- https://texus.toyota-europe.com/v2/car/getMotorizations/toyota/es/es/d9fc29c1-cf31-46ed-9d05-5c48fef45efd/promotiontimeframe/bc71cf06-ccc2-4678-9069-97f3b4da265b/grade/4c742346-57f3-48b7-8e9f-7a831d28c790/bodytype/74469257-47ae-46eb-859d-2c693e6726ca
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:48 GMT
+
+### texus_corolla_sedan_GetTechnicalSpecifications.json <- https://texus.toyota-europe.com/v2/car/GetTechnicalSpecifications/toyota/es/es/d9fc29c1-cf31-46ed-9d05-5c48fef45efd/promotiontimeframe/bc71cf06-ccc2-4678-9069-97f3b4da265b/car/27d07a83-6957-4115-8b33-a817436c5b7f
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:49 GMT
+
+### texus_corolla_sedan_GetFullConfiguration.json <- https://texus.toyota-europe.com/v2/car/GetFullConfiguration/toyota/es/es/d9fc29c1-cf31-46ed-9d05-5c48fef45efd/promotiontimeframe/bc71cf06-ccc2-4678-9069-97f3b4da265b/car/27d07a83-6957-4115-8b33-a817436c5b7f/tfsenabled/false/getfinance/false/getinsurance/false
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Date: Mon, 12 Oct 2026 01:56:50 GMT
+
+### km77_corolla_sedan_140h_style_plus.html <- https://www.km77.com/coches/toyota/corolla/2023/sedan/estandar/corolla-sedan-140h-style/datos
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 01:56:51 GMT
+Content-Type: text/html; charset=UTF-8
+Age: 0
+
+### km77_corolla_sedan_140h_eco.html <- https://www.km77.com/coches/toyota/corolla/2023/sedan/estandar/corolla-sedan-140h/datos
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 01:56:53 GMT
+Content-Type: text/html; charset=UTF-8
+Age: 0
+
+### km77_corolla_sedan_listado.html <- https://www.km77.com/coches/toyota/corolla/2023/sedan
+HTTP/1.1 200 OK
+Date: Mon, 12 Oct 2026 01:56:54 GMT
+Content-Type: text/html; charset=UTF-8
+Age: 0
+
+### toyota_es_manuales_corolla.html <- https://www.toyota.es/service-and-accessories/my-toyota/manuales/corolla
+HTTP/1.1 200 OK
+Content-Type: text/html;charset=utf-8
+Date: Mon, 12 Oct 2026 04:00:31 GMT
+

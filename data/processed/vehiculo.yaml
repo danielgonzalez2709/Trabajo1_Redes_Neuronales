@@ -1,0 +1,26 @@
+# Bloque 5 — Vehículo (Spec §7.2; contrato v1.7 en §5.3). Tarea T2.7. Archivo escrito a mano por el curador de datos.
+# Evidencia cruda y SHA-256: data/raw/vehiculo_2026-10-11/ (SHA256SUMS, cabeceras_http.txt). Detalle: data/fuentes.md.
+#
+# Acabado decidido en el Spec v1.7 (Jose Miguel, 2026-10-11): Style Plus 140H e-CVT, año de modelo MY27, el que vendía
+# Toyota España en la fecha de corte. La comparación con el acabado ECO está en data/fuentes.md.
+#
+# Consumo: "Consumo combinado WLTP (l/100 km)" = 4,6 (código FUELCOMBINEDWLTP) de la ficha actual del configurador.
+#
+# Combustible: catálogo oficial "Corolla Sedan" de Toyota España, edición 09/2023 ("09/23/CORSEDAN/ES/0000",
+# 14764_CORS_48_ES_WEB_S.pdf), pág. PDF 17 (impresas 32-33), bloque "CONSUMO Y EMISIONES":
+#   "Combustible  Gasolina de 95 o más octanos".
+# El motor es el mismo que el del MY27 por código: catálogo "Código de motor 2ZR-FXE"; configurador actual
+# Engine.Name "Hybrid 140", InternalCode "2ZR-FXE-18H-" (texus_corolla_sedan_GetFullConfiguration.json).
+# El catálogo no dice "RON" ni menciona el E10; no hace falta resolverlo porque el precio usado es el de la
+# Gasolina 95 E5 (data/processed/combustible.json). El catálogo (2023) solo se usa para el combustible.
+
+marca: Toyota
+modelo: Corolla Sedan Hybrid
+version: Style Plus 140H e-CVT
+anio: 2026
+anio_modelo: MY27
+combustible: Gasolina 95 E5
+consumo_wltp_comb_l100: 4.6
+fuente_url: https://www.toyota.es/coches/corolla-sedan/build
+respaldo_url: https://www.km77.com/coches/toyota/corolla/2023/sedan/estandar/corolla-sedan-140h-style/datos
+fecha_consulta: "2026-10-11"
