@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
-| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.2 GD de paso fijo**, luego **T1.3 Armijo**. Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅, T1.4 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
+| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.2 GD de paso fijo**, luego **T1.3 Armijo**, T1.5 PSO, T1.6 DE (adoptar la misma validación que `ea.py`: clave desconocida y presupuesto < 1 → error claro). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -36,6 +36,9 @@
   (rápida / sin peaje); peajes oficiales + forales; Gasolina 95 E5 media nacional; **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
+- **EA de la Parte 1 (Spec v1.4, 12-oct):** esquema de clase (IRNA202602), N=50, frac_e=0.15 / frac_m=0.10 / frac_c=0.75; mutación de un gen
+  con σ poblacional; cruce de un punto ∈ {1,…,d−1}; élite **no se reevalúa** (50 + 42 por generación); parada por presupuesto §6.2;
+  `ea.esquema` solo `clase` (torneo/BLX-α queda reservado, no implementado).
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
 - Front: **Material for MkDocs** + Plotly (interactivas) + matplotlib con estilo DS (GIF). Todo Python.
 - Desarrollo con **Subagent Driven Development**: 10 agentes en `.claude/agents/`, protocolo en `CLAUDE.md`.
@@ -52,17 +55,25 @@
 - [ ] ¿Escenario opcional `post_ap68`?
 - [ ] Confirmar fecha/hora de la sustentación.
 - [ ] Prompts literales para la cacería: ~~H-01, H-03 (Daniel)~~ ✅ en `alucinaciones/prompts/asesoria_puente_claude.md`; H-02 (Camila) pendiente.
+- [ ] **T1.4 — cambios al Spec que decide Daniel (el Spec lo edita el equipo):** (a) "round de Python (mitades al par)" en §6.4; (b) añadir a la validación
+  `n_cruzantes > N` → error (N=3 con defaults); (c) corregir "σ → 0 al converger" por "colapso prematuro" (H-14); (d) aclarar que `frac_c` bajo no reduce el cruce
+  si el relleno lo anula; (e) comentario de cabecera de `base.yaml` desactualizado. Y la **revisión de Daniel al Spec v1.4** sigue pendiente.
+- [ ] **T1.4 — 7 mejoras opcionales de revisor-calidad** (`alucinaciones/prompts/T1.4.md`, sección D) sin aplicar; no bloquean.
 - [ ] `revisor-spec` y `revisor-calidad` no cargaban como tipo de agente en la sesión de la Parte 2: reiniciar Claude Code desde la raíz del repo (en la sesión del puente sí cargan).
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **10** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
-H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla) — confirmados: **2** (H-04, H-05) —
-categorías: Datos (5), Matemáticas (1), **Código (4)**. Faltan Bibliografía/Conceptos para tener margen. Técnica útil: **prueba de mutación**.
+Candidatos: **14** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-12 .pyc obsoleto · H-13 TestFunction ·
+**H-14** "σ→0 al converger" · **H-15** prompt 714 frames en 3D) — confirmados: **2** (H-04, H-05) —
+categorías: Datos (5), Matemáticas (1), Código (6), **Conceptos (1)**. Faltan Bibliografía/Conceptos para tener margen. Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Andrés (Parte 1) + Claude (SDD) | **T1.4 ✅** (`ea.py` + `tests/test_ea.py`, 165 pruebas; suite 513 passed): `optimize` orquestador + componentes puros (SRP/DIP), celdas `# %%` con LaTeX; revisor-spec ✅ ronda 1, revisor-calidad ✅ ronda 2 (B1 celdas), verificador-matematico ✅ (EA independiente bit a bit, 20 mutantes muertos). Candidatos **H-14** (Conceptos) y **H-15** (prompt). Pendiente: PR y revisión de Daniel. |
+| 2026-10-12 | Andrés (Parte 1) + Claude | **T1.4 planeada** (aún sin código): `optimize` como orquestador + componentes puros (`ParametrosEA`, población inicial, evaluar, élite, mutación, cruce, ensamblar) con `rng` y evaluador inyectados (SRP/DIP), `ea.py` en celdas `# %%` con LaTeX y docstrings numpy; `frames` según §5.1 sin campos extra; `ea.generaciones` se conserva (null = presupuesto). Planeación y mensajes literales en `alucinaciones/prompts/T1.4.md`. Pendiente: revisión de Daniel del Spec v1.4 antes de despachar al implementador. |
+| 2026-10-12 | Andrés (Parte 1) + Claude | **Spec v1.4**: EA pasa al esquema de clase (§6.2 y §6.4, notas, §10, §11, §13); PLAN T1.4 y T1.7 ajustados. Propuesta en `docs/spec/propuestas/CAMBIO-EA.md`; prompt en `alucinaciones/prompts/CAMBIO-EA.md`. Excepción única autorizada a "Claude no edita Spec/PLAN". Falta que Daniel (puente) revise el cambio. |
 | 2026-10-12 | Parte 1 + Claude (SDD) | **T1.1 ✅** (`functions.py`, 73 pruebas; suite 347 passed, 1 skipped): revisor-spec, revisor-calidad y verificador-matematico aprueban en ronda 1; fórmulas, x*, f* y dominio de Rastrigin verificados contra SFU (12-oct). Candidatos **H-12** y **H-13** (Código). |
 | 2026-10-09 | Daniel + Claude (SDD) | **T0.2, T0.3, T0.4 ✅** con subagentes: implementador → revisor-spec → revisor-calidad (+ verificador-matemático en T0.4), 2–4 rondas cada una; 274 pruebas en total. Spec §4.1/§5.1/§5.4 ampliado (YAML 1.2, herencia, regla de bloques, identificadores, semilla efectiva, BudgetExhausted). Hallazgos **H-08**, **H-09**, **H-10** (Código). |
 | 2026-10-09 | Daniel + Claude | PR #1 revisado (39/39 pruebas, regeneración byte a byte) y fusionado (merge commit). **T0.1 ✅**: `requirements.txt` (Python 3.12.6, `pip freeze`), esqueleto `src/`, `configs/`, `results/`, `media/`. Hallazgos nuevos **H-06** (Mérida) y **H-07** (PuLP 4 sin CBC y API nueva). Design System = skill `apple-design`. Spec v1.3. |

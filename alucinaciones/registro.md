@@ -7,10 +7,10 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 6 (H-07, H-08, H-09, H-10, H-12, H-13) | 0 |
+| Código | 7 (H-07, H-08, H-09, H-10, H-12, H-13, H-15) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 0 | 0 |
-| Conceptos | 0 | 0 |
+| Conceptos | 1 (H-14) | 0 |
 
 ---
 
@@ -175,6 +175,28 @@
 4. **Evidencia:** pendiente de guardar en `evidencias/`. Reproducible con `python -c "from src.part1.functions import TestFunction; TestFunction(2)"`. Los `raise NotImplementedError` de `src/part1/functions.py:63-67` son inalcanzables desde la base.
 5. **Corrección:** propuesta de `revisor-calidad` (no aplicada, no bloqueante): `TestFunction(abc.ABC)` con `@abc.abstractmethod` en `_f`/`_grad` y una prueba `pytest.raises(TypeError)`.
 6. **Lección:** una afirmación sobre el comportamiento ante errores se verifica ejecutando el caso, no leyendo el código.
+
+### H-14 — "σ poblacional → 0 apaga la mutación **al converger**" (el colapso ocurre antes y lejos del óptimo)
+- **Estado:** candidato (evidencia numérica del verificador-matematico; falta guardar el script en `evidencias/`)
+- **Categoría:** Conceptos (también Matemáticas)
+- **Herramienta y modelo:** Claude (redacción del Spec v1.4 y de la nota en `ea.py`; sesión de planeación del 12-oct) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `verificador-matematico` (T1.4)
+1. **Prompt (literal):** `prompts/CAMBIO-EA.md` (propuesta del cambio, §10 "σ poblacional → 0 al converger: la mutación se apaga") y `prompts/T1.4.md`, sección D "Ronda 1 — verificador-matematico", punto 8.
+2. **Respuesta relevante de la IA:** Spec §6.4 "Notas del EA": "σ poblacional → 0 apaga la mutación al converger".
+3. **Cómo sospechamos:** sin selección por aptitud, la diversidad cae por deriva; nada garantiza que el colapso ocurra en un óptimo.
+4. **Evidencia (verificador-matematico, 12-oct):** 30 corridas con presupuesto 10 000·n: Rosenbrock 2D σ final mediana ≈ [2.3e-5, 5.8e-5], ‖∇f(x_best)‖ entre 0.07 y 0.23 en 8 de 10 semillas, 3/30 éxitos; Rosenbrock 3D 0/30 éxitos con σ ≈ 1e-6; Rastrigin N=5 y N=7 queda congelada en f = 24.218 con std 0 y no es mínimo local.
+5. **Corrección propuesta (no aplicada: el Spec lo edita el equipo):** "colapso prematuro de la población (σ → 0) que apaga la mutación y detiene la búsqueda, aunque no se haya llegado a un óptimo".
+6. **Lección:** una explicación de comportamiento ("al converger") se contrasta con corridas reales, no se hereda de la intuición.
+
+### H-15 — Prompt del orquestador pedía 714 frames en 3D, contradiciendo "frames solo si dim == 2" (§5.1)
+- **Estado:** candidato (error de la IA orquestadora, detectado por el implementador y confirmado por revisor-spec y verificador-matematico)
+- **Categoría:** Código (contrato)
+- **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `implementador` (T1.4, ronda 1)
+1. **Prompt (literal):** `prompts/T1.4.md`, sección C, ENTREGABLE 1, punto 7 ("3D, budget 30 000 -> n_f == 30 000 ..., len(frames) == 714") junto al punto "frames: solo si problem.func.dim == 2".
+2. **Respuesta relevante de la IA:** el prompt exigía a la vez una cosa y su contraria; 714 = T + 1 solo aplica si se grabaran frames.
+3. **Cómo sospechamos:** el implementador lo reportó como contradicción y prevaleció §5.1.
+4. **Evidencia:** `tests/test_ea.py::test_presupuesto_3d_30000_cuenta_exacto_y_no_hay_frames` y la prueba 2D con budget 30 000 que sí comprueba 714 frames.
+5. **Corrección:** el código sigue §5.1; el número 714 se prueba en 2D.
+6. **Lección:** un prompt también se revisa contra el contrato antes de enviarlo; un subagente debe reportar la contradicción, no elegir en silencio.
 
 ---
 
