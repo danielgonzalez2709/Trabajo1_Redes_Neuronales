@@ -28,6 +28,9 @@ MD5_ESPERADO="27c3c06719ce8045421b34b530687063"
 
 CONTENEDOR="osrm-espana"
 PUERTO="${OSRM_PUERTO:-5001}"  # 5000 lo ocupa macOS (ControlCenter/AirPlay)
+# --threads 1 (Spec v1.8 §7.2 Bloque 2): con los hilos por defecto (16) la misma URL devolvía rutas distintas, a veces
+# no óptimas. Ver alucinaciones/evidencias/T2.3_toll_diagnostico/README.md.
+ROUTED_CMD=(osrm-routed --algorithm mld --threads 1 "/data/${EXTRACTO}.osrm")
 
 log() { printf '[%s] %s\n' "$(date -u +%FT%TZ)" "$*"; }
 
@@ -108,14 +111,17 @@ comprobar_datos() {
 arrancar() {
   comprobar_datos
   if docker ps -a --format '{{.Names}}' | grep -qx "${CONTENEDOR}"; then
-    # docker start reutiliza el puerto y la imagen con que se creó el contenedor: si no coinciden con lo pedido, se
-    # aborta (no se recrea en silencio).
-    local publicado imagen_actual
+    # docker start reutiliza el puerto, la imagen y el comando con que se creó el contenedor: si no coinciden con lo
+    # pedido, se aborta (no se recrea en silencio).
+    local publicado imagen_actual cmd_actual
     publicado="$(docker inspect "${CONTENEDOR}" --format '{{range (index .HostConfig.PortBindings "5000/tcp")}}{{.HostIp}}:{{.HostPort}}{{end}}')"
     imagen_actual="$(docker inspect "${CONTENEDOR}" --format '{{.Config.Image}}')"
-    if [[ "${publicado}" != "127.0.0.1:${PUERTO}" || "${imagen_actual}" != "${IMAGEN}" ]]; then
-      log "ERROR: el contenedor ${CONTENEDOR} ya existe con puerto '${publicado}' e imagen '${imagen_actual}',"
-      log "       pero se pidió 127.0.0.1:${PUERTO} e imagen ${IMAGEN}."
+    cmd_actual="$(docker inspect "${CONTENEDOR}" --format '{{join .Config.Cmd " "}}')"
+    if [[ "${publicado}" != "127.0.0.1:${PUERTO}" || "${imagen_actual}" != "${IMAGEN}" \
+          || "${cmd_actual}" != "${ROUTED_CMD[*]}" ]]; then
+      log "ERROR: el contenedor ${CONTENEDOR} ya existe con puerto '${publicado}', imagen '${imagen_actual}'"
+      log "       y comando '${cmd_actual}',"
+      log "       pero se pidió 127.0.0.1:${PUERTO}, imagen ${IMAGEN} y comando '${ROUTED_CMD[*]}'."
       log "       Recréelo con: $0 parar && OSRM_PUERTO=${PUERTO} $0 arrancar"
       exit 1
     fi
@@ -123,7 +129,7 @@ arrancar() {
     docker start "${CONTENEDOR}" >/dev/null
   else
     docker run -d --name "${CONTENEDOR}" -p "127.0.0.1:${PUERTO}:5000" -v "${DATOS}:/data" "${IMAGEN}" \
-      osrm-routed --algorithm mld "/data/${EXTRACTO}.osrm" >/dev/null
+      "${ROUTED_CMD[@]}" >/dev/null
   fi
   log "Esperando a que responda http://127.0.0.1:${PUERTO} ..."
   for _ in $(seq 1 120); do

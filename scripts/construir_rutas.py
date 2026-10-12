@@ -50,8 +50,10 @@ AVISOS = {
                             "weight (routability), no exactamente la duración",
     "par_sin_peaje_con_valores_distintos": "par marcado (rapida sin 'toll') en el que OSRM devolvió para sin_peaje "
                                            "otra distancia o duración; rutas.csv reutiliza la rapida",
-    "sin_peaje_con_clase_toll": "la ruta exclude=toll pasa por intersecciones 'toll'; no debería ocurrir. Sus pasos "
-                                "están en rutas_pasos_peaje.csv. Revisar y escalar",
+    "sin_peaje_con_clase_toll": "la ruta exclude=toll pasa por intersecciones 'toll'. Se observó que depende del "
+                                "historial de consultas del proceso osrm-routed cuando recibe consultas rapida y "
+                                "exclude=toll mezcladas (mecanismo no confirmado). Según el Spec v1.8 §7.2 Bloque 2 se "
+                                "reporta aquí; sus pasos están en rutas_pasos_peaje.csv y T2.5 cobra ese peaje",
 }
 
 
@@ -320,7 +322,8 @@ def _imprimir(r: dict, salida: Path) -> None:
         print(f"simetría {alt} ({len(r['simetria']['pares'])} pares): máx |dif| {s['max_abs_km']} km "
               f"(rel {s['max_rel_km']}), {s['max_abs_h']} h (rel {s['max_rel_h']})")
     if cp["sin_peaje_con_clase_toll"]:
-        print("AVISO: hay rutas sin_peaje con la clase 'toll' (ver avisos en rutas_resumen.json); escalar.")
+        print("AVISO: hay rutas sin_peaje con la clase 'toll' (ver avisos en rutas_resumen.json). Según el Spec v1.8 "
+              "§7.2 Bloque 2 se reportan y T2.5 cobra su peaje (pasos en rutas_pasos_peaje.csv).")
 
 
 def main(argv: list[str] | None = None) -> int:

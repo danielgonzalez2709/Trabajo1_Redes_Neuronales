@@ -43,8 +43,10 @@ Montado y probado el **2026-10-10** (hora local UTC−3; 2026-10-11 02:26–02:4
   contenedores pesados durante `preparar`. Con menos memoria, `osrm-extract` probablemente muera por falta de memoria
   (OOM). No se ha probado.
   - **Docker Desktop (macOS/Windows):** Settings → Resources → Memory **≥ 12 GiB** (la VM de Docker Desktop es el techo
-    del contenedor, igual que en Colima). No se ha probado en esta máquina; la cifra sale del pico medido de
-    `osrm-extract` (10,9 GiB).
+    del contenedor, igual que en Colima). La cifra sale del pico medido de `osrm-extract` (10,9 GiB). Probado en
+    Windows 11 (Docker Desktop, WSL2, linux/amd64, 15,6 GiB y 16 CPU) el 2026-10-12 UTC: `osrm-extract` 410 s,
+    11 871 776 768 B según OSRM (`memory.peak` 11 903 062 016 B); `osrm-partition` 86 s; `osrm-customize` 23 s;
+    50 avisos `[warn]`.
   - **Linux nativo:** no hay VM; el contenedor ve la RAM del host. Hacen falta **≥ 12 GiB libres** en el host durante
     `preparar` (mismo pico medido, 10,9 GiB). No se ha probado en Linux.
 - **Disco:** 4,8 GB en `osrm-data/` (1,49 GB del PBF y el resto de archivos `.osrm*`). Además, la imagen ocupa unos 129 MB.
@@ -78,8 +80,13 @@ docker run --rm -v "$PWD/osrm-data:/data" $IMG osrm-extract -p /opt/car.lua --da
 docker run --rm -v "$PWD/osrm-data:/data" $IMG osrm-partition /data/spain-261001.osrm
 docker run --rm -v "$PWD/osrm-data:/data" $IMG osrm-customize /data/spain-261001.osrm
 docker run -d --name osrm-espana -p 127.0.0.1:5001:5000 -v "$PWD/osrm-data:/data" $IMG \
-  osrm-routed --algorithm mld /data/spain-261001.osrm
+  osrm-routed --algorithm mld --threads 1 /data/spain-261001.osrm
 ```
+
+En Git Bash (Windows), `osrm.sh` usa la raíz del repositorio en forma `C:/...` y exporta `MSYS_NO_PATHCONV=1`. Sin eso,
+Git Bash convierte `-v ".../osrm-data:/data"` en una lista de rutas de Windows y `/data/...` en
+`C:/Program Files/Git/data/...` (comprobado el 11-oct-2026). En macOS y Linux no cambia nada. Si ejecuta a mano los
+equivalentes de arriba en Git Bash, anteponga `MSYS_NO_PATHCONV=1`.
 
 Con `--data_version osmosis`, cada respuesta del servidor incluye `"data_version": "2026-10-01T20:22:06Z"`. Así, cada
 JSON que descargue T2.3 queda ligado a la fecha del extracto.
@@ -91,8 +98,32 @@ Comportamiento de `arrancar`:
   `osrm-routed --algorithm mld`: los "required" de `--list-inputs` más `cells`, `cell_metrics`, `mldgr` y `partition`.
   Si falta alguno, falla al instante con la lista de los que faltan y pide ejecutar `descargar` y `preparar`.
 - Si el contenedor `osrm-espana` ya existe, solo lo reutiliza (`docker start`) cuando su puerto publicado es
-  `127.0.0.1:${OSRM_PUERTO:-5001}` y su imagen es la fijada en el script. Si no coincide, **no lo recrea**: sale con
-  error y propone `scripts/osrm/osrm.sh parar && OSRM_PUERTO=<puerto> scripts/osrm/osrm.sh arrancar`.
+  `127.0.0.1:${OSRM_PUERTO:-5001}`, su imagen es la fijada en el script y su comando es exactamente
+  `osrm-routed --algorithm mld --threads 1 /data/spain-261001.osrm`. Si algo no coincide (por ejemplo, un contenedor
+  creado antes sin `--threads 1`), **no lo recrea**: sale con error y propone
+  `scripts/osrm/osrm.sh parar && OSRM_PUERTO=<puerto> scripts/osrm/osrm.sh arrancar`.
+
+### Por qué `--threads 1` (Spec v1.8 §7.2 Bloque 2)
+
+Con los hilos por defecto de `osrm-routed` (16 en la máquina de T2.3), la misma URL devolvía rutas distintas de una
+consulta a otra, a veces no óptimas (p. ej., 18/12 en 30 repeticiones). En la corrida de T2.3 del 2026-10-11, eso dejó
+mal marcados como "sin peaje" los pares [3,35] y [21,35]: en realidad pasan por la M-12. Con `--threads 1`, la misma URL
+repetida da siempre la misma respuesta. Diagnóstico y evidencia: `alucinaciones/evidencias/T2.3_toll_diagnostico/README.md`.
+
+**Limitación comprobada el 2026-10-12.** Decisión del Spec v1.8 (Jose Miguel, 12-oct): por tiempo se usa la corrida de
+**un solo proceso**. Las rutas `sin_peaje` que pasan por la clase `toll` se reportan y T2.5 cobra su peaje. Usar **un proceso
+por alternativa** queda como mejora opcional. Incluso con `--threads 1`, la respuesta depende de **qué consultas recibió antes el mismo proceso** `osrm-routed`:
+- Con un arranque limpio y el orden de `descargar_datos.py`, la corrida se reproduce exactamente: 0 de 2 202 rutas
+  distintas.
+- Con un arranque limpio y el orden inverso, cambian 50 rutas. En todas cambia el número de intersecciones `toll`: en 6 (pares que pasan por la M-12), en 8
+  (AP-15) o en 16 (Vitoria → Soria, AP-68).
+- Con un proceso que solo recibe consultas `rapida` y otro que solo recibe `exclude=toll`, el resultado es idéntico en
+  los dos órdenes. En ese caso ninguna ruta `sin_peaje` pasa por la clase `toll`, y la `rapida` coincide con la de la
+  corrida del 2026-10-12.
+
+Por eso, la corrida debe hacerse con un **arranque limpio** (`parar && arrancar`) justo antes y sin otras consultas
+de por medio. Reanudar una corrida cortada cambia el historial de consultas: la parte que se descargue al reanudar
+puede no coincidir con la que se habría obtenido sin el corte.
 
 ### Si Geofabrik retira `spain-261001`
 
@@ -172,9 +203,10 @@ UTC de la tabla. Las 6 respuestas de ruta salieron idénticas en las dos corrida
 
 ## T2.3 — descargar las 1 081 rutas
 
-Esta sección es para quien tiene el servidor OSRM (la Mac de la Parte 2). El código se escribió y se probó **sin
-servidor real** (con dobles y con las 6 respuestas reales de T2.2; `tests/test_rutas.py`), así que esta es su primera
-ejecución contra OSRM.
+Esta sección es para quien tiene el servidor OSRM. El código se escribió y se probó **sin servidor real** (con dobles y
+con las 6 respuestas reales de T2.2; `tests/test_rutas.py`). Se ejecutó por primera vez el 2026-10-11 con 16 hilos
+(carpeta `osrm_2026-10-11`, descartada por falta de determinismo) y de nuevo el 2026-10-12 con `--threads 1` (carpeta
+`osrm_2026-10-12`, la vigente). Las dos corridas se hicieron en Windows 11 con Docker Desktop.
 
 ### Qué hace
 
@@ -185,7 +217,7 @@ ejecución contra OSRM.
 - Guarda **un archivo por petición** (JSON compacto comprimido con gzip) en `data/raw/osrm_<FECHA>/rutas/` y
   `data/raw/osrm_<FECHA>/simetria/`, con nombre `<origen>_<destino>_<alternativa>.json.gz`; los números son el `id`
   de `cities.csv`. Cada archivo contiene `{url, fecha_consulta_utc, origen, destino, alternativa, respuesta}`.
-  **Estos crudos no se versionan** (Spec §7.2 Bloque 2, v1.5; `.gitignore`): se quedan en la Mac de quien ejecuta.
+  **Estos crudos no se versionan** (Spec §7.2 Bloque 2, v1.5; `.gitignore`): se quedan en la máquina de quien ejecuta (la corrida vigente, en Windows 11).
 - **`--fecha` es obligatoria.** Fija el nombre de la carpeta; si se omitiera, retomar otro día descargaría todo de
   nuevo en otra carpeta.
 - **Es reanudable:** si se corta (Ctrl+C, apagón, servidor caído), relanzar **el mismo comando con la misma
@@ -207,7 +239,9 @@ ejecución contra OSRM.
   - `rutas.csv` (2 162 filas). Un par es **sin peaje** si ninguna intersección de su ruta `rapida` tiene la clase
     `toll`; en ese par la fila `sin_peaje` reutiliza los valores de la `rapida`.
   - `rutas_resumen.json`: pares sin peaje, avisos, control de pasos y simetría.
-  - `rutas_pasos_peaje.csv`: una fila por paso de OSRM con alguna intersección `toll` (entrada de T2.5).
+  - `rutas_pasos_peaje.csv`: una fila por paso de OSRM con alguna intersección `toll` (entrada de T2.5). Incluye los
+    pasos `toll` de las rutas `sin_peaje` que OSRM no logró evitar: según el Spec v1.8, esas rutas se reportan en
+    `rutas_resumen.json` (`avisos.sin_peaje_con_clase_toll`) y **T2.5 cobra su peaje**.
 
   Si falta un crudo o alguno no es válido, se detiene sin escribir nada.
 
@@ -229,7 +263,8 @@ python3.12 -m venv .venv
 #   (si alguna dependencia no instalara en macOS, lo imprescindible es:
 #    .venv/bin/python -m pip install numpy==2.5.3 pytest==9.1.1)
 
-# Servidor (T2.2) y su prueba de aceptación: debe terminar en "Aceptación: OK"
+# Servidor (T2.2, con --threads 1) y su prueba de aceptación: debe terminar en "Aceptación: OK".
+# Si el contenedor se creó antes sin --threads 1, "arrancar" falla y pide recrearlo con "parar".
 scripts/osrm/osrm.sh arrancar
 scripts/osrm/osrm.sh prueba
 
@@ -241,7 +276,10 @@ FECHA=$(date +%F); echo "$FECHA"
 .venv/bin/python scripts/construir_rutas.py --fecha "$FECHA" --parcial --salida /tmp/rutas_prueba
 head -5 /tmp/rutas_prueba/rutas.csv /tmp/rutas_prueba/rutas_pasos_peaje.csv
 
-# 2) Corrida completa (reutiliza las 18 peticiones de la prueba)
+# 2) Corrida completa, con un arranque limpio justo antes y sin otras consultas de por medio (ver "Por qué
+#    --threads 1"). Hágala en una carpeta nueva (otra FECHA) si ya hizo la prueba rápida en esta: las 18 peticiones
+#    reutilizadas se habrían pedido con otro historial de consultas.
+scripts/osrm/osrm.sh parar && scripts/osrm/osrm.sh arrancar
 .venv/bin/python scripts/descargar_datos.py --bloque 2 --fecha "$FECHA"; echo "código de salida: $?"
 .venv/bin/python scripts/construir_rutas.py --fecha "$FECHA"
 
@@ -252,8 +290,10 @@ head -5 /tmp/rutas_prueba/rutas.csv /tmp/rutas_prueba/rutas_pasos_peaje.csv
 Si el servidor no está en el puerto 5001, añada `--osrm-url http://127.0.0.1:<puerto>` (los crudos ya descargados
 siguen valiendo). `--parcial` nunca escribe en `data/processed/` (lo impide el script).
 
-**Duración:** no se ha medido (no había servidor al escribir el código). El script imprime el tiempo total y un
-progreso cada 100 peticiones.
+En Windows (Git Bash) use `.venv/Scripts/python.exe` en lugar de `.venv/bin/python`.
+
+**Duración (Windows 11, Docker Desktop):** la corrida completa tardó 44,5 s el 2026-10-11 (16 hilos) y 39,1 s el
+2026-10-12 (`--threads 1`). El script imprime el tiempo total y un progreso cada 100 peticiones.
 
 ### Qué revisar
 
@@ -264,8 +304,9 @@ progreso cada 100 peticiones.
    - `rutas.csv: 2162 filas (1081 pares)`;
    - **`rutas con ref: N/2162`**: anote N. Si es muy bajo, los pasos no traen `ref` y T2.5 no podrá asignar vías;
      escale;
-   - **control de la clase `toll`**: `sin_peaje con clase toll: 0` (si no es 0, escale) y `rapida con clase toll`
-     mayor que 0 (debe incluir al menos los pares de control de abajo);
+   - **control de la clase `toll`**: anote `sin_peaje con clase toll: K`. Desde el Spec v1.8 **no tiene que ser 0**:
+     esas rutas se reportan y T2.5 cobra su peaje (el script lo recuerda con una línea `AVISO:`). Además,
+     `rapida con clase toll` debe ser mayor que 0 (debe incluir al menos los pares de control de abajo);
    - `rutas_pasos_peaje.csv: M pasos con clase toll`;
    - la línea `avisos:` con los tres contadores (ver el punto 4).
 3. **Contraste con T2.2** (mismo sentido de consulta; si no coincide, escale). En `data/processed/rutas.csv`:
@@ -285,22 +326,43 @@ progreso cada 100 peticiones.
 4. **`data/processed/rutas_resumen.json`:**
    - `pares_sin_peaje.pares` **no** debe incluir `[44, 46]` ni `[13, 33]`, y debería incluir `[6, 26]` si
      Barcelona → Madrid, igual que Madrid → Barcelona, no pasa por ninguna intersección `toll`;
-   - `avisos.sin_peaje_con_clase_toll.n` debe ser 0; si no, escale;
+   - `avisos.sin_peaje_con_clase_toll`: anote `n` y la lista de pares. No bloquea la tarea (Spec v1.8): sus pasos
+     `toll` están en `rutas_pasos_peaje.csv` y T2.5 cobra ese peaje;
    - `avisos.par_sin_peaje_con_valores_distintos`: pares sin peaje en los que OSRM dio otra ruta para `sin_peaje`
      (en `rutas.csv` se reutiliza la `rapida`). No es un error, pero anote cuántos hay;
    - `avisos.sin_peaje_mas_rapida`: no es un error (OSRM minimiza `weight`, no la duración), pero anote cuántos hay;
    - `simetria`: diferencia máxima absoluta y relativa (km y h) por alternativa; va al blog (Spec §7.2).
+
+### Resultado de la corrida vigente (2026-10-12, `--threads 1`, carpeta `osrm_2026-10-12`)
+
+Consultas entre 2026-10-12T05:18:33Z y 05:19:11Z, con arranque limpio del contenedor justo antes.
+
+| Comprobación | 2026-10-11 (16 hilos, descartada) | 2026-10-12 (`--threads 1`) |
+|---|---|---|
+| Pares con las 2 alternativas Ok | 1081 / 1081, 0 fallos | 1081 / 1081, 0 fallos |
+| Pares sin peaje | 549 | 547 (salen [3,35] y [21,35]) |
+| `rapida con clase toll` | 532 | 534 |
+| `sin_peaje con clase toll` | 5 | 26 |
+| Filas de `rutas_pasos_peaje.csv` | 2 286 | 2 339 |
+| Filas de `rutas.csv` que cambian | — | 25 (4 `rapida` y 21 `sin_peaje`) |
+
+- Los valores de contraste de T2.2 (pares 44,46 y 13,33) y los pasos AP-68 y AP-9 **no cambian**. Barcelona → Madrid
+  (6, 26): 619.5612 km y 6.829417 h en las dos corridas; [6, 26] sigue entre los pares sin peaje.
+- Las 2 162 respuestas coinciden en distancia y `weight` con el replay de 1 hilo del diagnóstico (0 diferencias).
+- De las 26 rutas `sin_peaje` con la clase `toll`, 18 pasan por la M-12, 7 por la AP-15 y 1 por la AP-68 (Vitoria →
+  Soria, [0,38]). Ver la limitación descrita en "Por qué `--threads 1`".
 
 ### Tamaño
 
 - **Crudos (no se suben):** sobre las 6 respuestas de T2.2, recomprimidas como JSON compacto con gzip, se midieron
   entre 8,2 y 29,3 KB por respuesta (de 46 a 174 B por km de ruta). Para 2 202 rutas, la estimación queda entre 50 y
   200 MB. Es solo una estimación: la muestra tiene 6 rutas, y las respuestas de T2.2 no traían la geometría
-  simplificada (`overview=false`). El script imprime el tamaño real al terminar.
+  simplificada (`overview=false`). El script imprime el tamaño real al terminar. **Medido:** 62,6 MB
+  (62 644 840 B) en la corrida del 2026-10-12.
 - **`rutas_pasos_peaje.csv` (se sube):** sobre las fixtures de T2.2 salen 3 filas (1 en Bilbao → Zaragoza, 2 en
   A Coruña → Pontevedra, 0 en Madrid → Barcelona y en las tres `sin_peaje`), unos 91 B por fila más 110 B de cabecera.
   No se sabe cuántas de las 1 081 rutas rápidas pasan por peaje; aun si todas tuvieran 5 pasos `toll`, serían unas
-  5 400 filas, menos de 0,5 MB.
+  5 400 filas, menos de 0,5 MB. **Medido (2026-10-12):** 2 339 filas.
 - `rutas.csv` y `rutas_resumen.json` son pequeños (texto; 2 162 filas y un resumen).
 
 ### Qué subir a git
