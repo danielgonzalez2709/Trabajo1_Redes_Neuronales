@@ -18,7 +18,7 @@
 | T0.2 | `src/common/config.py` + `cli.py`: YAML + `--set a.b=c` + `run.py` con subcomandos | T0.1 | `run.py part1/part2/figures` (vacíos) | Test de overrides anidados y tipos (int/float/bool/list) | — | ✅ 2026-10-09 (4 rondas; YAML 1.2, herencia, regla de bloques; 10/10 mutantes detectados) |
 | T0.3 | `src/common/seeds.py` + `results.py` (escritura JSON genérica: UTF-8, sin NaN/inf, atómica; nombres de archivo §5.4) | T0.1 | Utilidades | Test de reproducibilidad con generador dummy | — | ✅ 2026-10-09 (4 rondas; H-09) |
 | T0.4 | `src/common/counter.py` (`CountedProblem`, presupuesto, `eval_equiv`) | T0.1 | Contador | `test_counter.py`, `test_budget.py` | verificador-matematico | ✅ 2026-10-09 (4 rondas; 0 anomalías en ~9 M llamadas; H-08) |
-| T0.5 | Prueba `test_no_network.py` (bloquea `socket` durante experimentos) | T0.2 | Test | Falla si algún experimento intenta conectarse | auditor-reproducibilidad | ⬜ |
+| T0.5 | Prueba `test_no_network.py` (bloquea `socket` durante experimentos) | T0.2 | Test | Falla si algún experimento intenta conectarse | auditor-reproducibilidad | ✅ 2026-10-12 (run.py con red bloqueada + ningún módulo de src/ importa red; mutante detectado) |
 | T0.6 | `alucinaciones/` (registro, evidencias, prompts) | — | Carpetas + plantilla | — | cazador-alucinaciones | ✅ (creado con el Spec) |
 | T0.7 | Esqueleto del blog MkDocs + hook de figuras + bibliografía APA | T0.1 | `mkdocs build` funciona | Build falla con figura no citada y con cita inexistente | revisor-calidad | ✅ 2026-10-12 (hook `reporte.py` + pandoc citeproc APA 7; 15 pruebas; 12 referencias verificadas contra Crossref; H-21, H-22) |
 
