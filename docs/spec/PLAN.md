@@ -32,7 +32,7 @@
 |---|---|---|---|---|---|---|
 | T1.1 | `functions.py`: Rosenbrock y Rastrigin (f, grad, dominio, x*, f*) | T0.4 | Clases §5.1 | `test_gradients.py` (error rel. < 1e-6 en ≥100 puntos), f(x*) = f* | **verificador-matematico** | ✅ |
 | T1.2 | `gd.py`: GD paso fijo con proyección | T1.1 | `optimize()` | Converge en una cuadrática de prueba; respeta presupuesto; registra frames en 2D | verificador-matematico | ✅ (gd.py fijo; Armijo en T1.3) |
-| T1.3 | `gd.py`: variante Armijo | T1.2 | `optimize()` | Cuenta evaluaciones de f de la búsqueda lineal; condición de Armijo probada | verificador-matematico | ⬜ |
+| T1.3 | `gd.py`: variante Armijo | T1.2 | `optimize()` | Cuenta evaluaciones de f de la búsqueda lineal; condición de Armijo probada | verificador-matematico | ✅ (gd.py armijo; bucle común con fijo) |
 | T1.4 | `ea.py`: EA esquema de clase (élite + mutantes + cruce de un punto, N=50; Spec §6.4 v1.4; bloque `ea:` en `base.yaml`) | T0.4 | `optimize()` + `tests/test_ea.py` | Conteo N + T·(N − n_élite) con élite en caché (N·(T+1) si `reevaluar_elite`); truncado §6.2; dominio; un gen mutado con σ poblacional; punto de cruce ∈ {1,…,d−1}; élite por f actual; reproducible; `esquema` ≠ `clase` falla. Pruebas: ver `docs/spec/propuestas/CAMBIO-EA.md` §12 | verificador-matematico | ✅ |
 | T1.5 | `pso.py`: PSO gbest con inercia y manejo de límites | T0.4 | `optimize()` | `test_counter` N·(T+1); partículas dentro del dominio; v_max respetada | verificador-matematico | ⬜ |
 | T1.6 | `de.py`: DE/rand/1/bin | T0.4 | `optimize()` | r1≠r2≠r3≠i; j_rand garantiza ≥1 gen del mutante; conteo exacto | verificador-matematico | ⬜ |

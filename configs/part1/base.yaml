@@ -13,7 +13,7 @@ gd:
   eta:                  # paso fijo por función (identificadores de §5.4)
     rosenbrock: 1e-3    # empírico, SIN garantía global (L ≈ 5 971 en 2D -> 1/L ≈ 1.7e-4)
     rastrigin: 2e-3     # garantía global: η ≤ 1/L con L = 2 + 40π² ≈ 396.8
-  armijo:               # backtracking de Armijo; lo usa T1.3
+  armijo:               # backtracking de Armijo; lo usa la variante armijo de gd.py
     eta0: 1.0
     beta: 0.5
     c: 1e-4

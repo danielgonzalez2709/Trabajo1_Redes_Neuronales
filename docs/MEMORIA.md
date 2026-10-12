@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅, T1.2 ✅, T1.4 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
-| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.3 Armijo** (generalizar `_descenso_paso_fijo` con el paso como parámetro, sin copiar el bucle), luego **T1.5 PSO**, **T1.6 DE** (adoptar la misma validación que `ea.py`: clave desconocida y presupuesto < 1 → error claro) y **T1.7**. Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅, T1.2 ✅, T1.3 ✅, T1.4 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
+| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.5 PSO** y **T1.6 DE** (compañero; adoptar la misma validación que `ea.py`: clave desconocida y presupuesto < 1 → error claro) y luego **T1.7**. Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -62,15 +62,16 @@
 - [ ] `revisor-spec` y `revisor-calidad` no cargaban como tipo de agente en la sesión de la Parte 2: reiniciar Claude Code desde la raíz del repo (en la sesión del puente sí cargan).
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **14** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+Candidatos (rama Parte 1): **15** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-12 .pyc obsoleto · H-13 TestFunction ·
-**H-14** "σ→0 al converger" · **H-15** prompt 714 frames en 3D) — confirmados: **2** (H-04, H-05) —
-categorías: Datos (5), Matemáticas (1), Código (6), **Conceptos (1)**. Faltan Bibliografía/Conceptos para tener margen. Técnica útil: **prueba de mutación**.
+**H-14** "σ→0 al converger" · **H-15** prompt 714 frames en 3D · **H-16** anclas "de esta implementación") — confirmados: **2** (H-04, H-05) —
+categorías: Datos (5), Matemáticas (1), Código (8), **Conceptos (1)**. ⚠️ `main` y las ramas Parte 2/integración usan H-14–H-22 para otros hallazgos: hay que renumerar al integrar. Faltan Bibliografía/Conceptos para tener margen. Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Parte 1 + Claude (SDD) | **T1.3 ✅** (variante `armijo` de `gd.py` con bucle común `_descenso` + reglas `_PasoFijo`/`_PasoArmijo`; condición sobre el punto proyectado; suite 697 passed, 1 skipped; 35 mutantes muertos): revisor-spec ✅ (1 ronda), revisor-calidad ✅ (2 rondas, forma y una aserción tautológica del oráculo), verificador-matematico ✅ (reimplementación idéntica bit a bit; ~10 f/iteración en Rosenbrock = 9 retrocesos ≈ log2(λ_max/2); Rastrigin 3D no llega a ‖g‖ < 1e-8 por la resolución de f). Spec §6.3: línea [PENDIENTE] de Armijo proyectado. Sin candidatos nuevos. |
 | 2026-10-12 | Parte 1 + Claude (SDD) | **T1.2 ✅** (`gd.py` paso fijo con proyección + bloque `gd:` en `base.yaml`; 69 pruebas; suite 416 passed, 1 skipped; 15/15 mutantes muertos): revisor-spec ✅ (1 ronda), revisor-calidad ✅ (2 rondas, correcciones de forma), verificador-matematico ✅ (reimplementación independiente idéntica en 30 semillas × 4 configs). Spec §6.3: línea [PENDIENTE] de la config del GD. Escalar: el ejemplo `--set gd.armijo=true` de §4.1 ya no aplica. Candidato **H-16** (Código). |
 | 2026-10-12 | Andrés (Parte 1) + Claude (SDD) | **T1.4 ✅** (`ea.py` + `tests/test_ea.py`, 165 pruebas; suite 513 passed): `optimize` orquestador + componentes puros (SRP/DIP), celdas `# %%` con LaTeX; revisor-spec ✅ ronda 1, revisor-calidad ✅ ronda 2 (B1 celdas), verificador-matematico ✅ (EA independiente bit a bit, 20 mutantes muertos). Candidatos **H-14** (Conceptos) y **H-15** (prompt). Pendiente: PR y revisión de Daniel. |
 | 2026-10-12 | Andrés (Parte 1) + Claude | **T1.4 planeada** (aún sin código): `optimize` como orquestador + componentes puros (`ParametrosEA`, población inicial, evaluar, élite, mutación, cruce, ensamblar) con `rng` y evaluador inyectados (SRP/DIP), `ea.py` en celdas `# %%` con LaTeX y docstrings numpy; `frames` según §5.1 sin campos extra; `ea.generaciones` se conserva (null = presupuesto). Planeación y mensajes literales en `alucinaciones/prompts/T1.4.md`. Pendiente: revisión de Daniel del Spec v1.4 antes de despachar al implementador. |
