@@ -8,8 +8,8 @@
 |---|---|---|
 | Matemáticas | 1 | 0 |
 | Código | 5 (H-07, H-08, H-09, H-10, H-11) | 0 |
-| Datos del mundo real | 8 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
-| Bibliografía | 0 | 0 |
+| Datos del mundo real | 10 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15, H-17, H-18) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) + 2 confirmados por el cazador, pendientes del puente (H-17, H-18, 12-oct-2026) |
+| Bibliografía | 1 (H-19: error de cita confirmado, origen IA pendiente) | 0 |
 | Conceptos | 2 (H-12, H-16) | 0 |
 
 ---
@@ -52,6 +52,11 @@
    - Claude (chat, 29-sep): "la AP-68 deja de cobrar el 10 de noviembre" — la concesión vence el 10, pero el Ministerio fija el fin del peaje el **11**.
 3. **Cómo sospechamos:** contraste entre varias fuentes de prensa con fechas distintas.
 4. **Evidencia:** PENDIENTE — fuente oficial del Ministerio / BOE núm. 225 (11-sep-2026), diputaciones forales.
+   **Completado por el cazador (12-oct-2026, T2.4; `evidencias/T2.4_verificacion.txt` §6, crudos en `data/raw/peajes_2026-10-12/`):**
+   - Respuesta del Gobierno al Congreso (23-feb-2026, `congreso_e_0102096_n_000.pdf`): la concesión dura "hasta el 10 de noviembre de 2026"; los tramos estatales "los que discurren por La Rioja y Aragón, pasarán a ser libres de peaje desde el día siguiente al final de la concesión, el resto de los tramos serán las administraciones titulares las que decidan". Por tanto, "11-nov" (Camila) es correcto para los tramos estatales, y "deja de cobrar el 10 de noviembre" (Claude) es impreciso: el 10 es el último día de cobro.
+   - Bizkaia sí seguirá cobrando: nota oficial de la Diputación (22-jul-2026), ligeros 6,85 → 4,20 € desde el 11-nov. Álava: ninguna fuente oficial fija tarifa; el BOTHA núm. 83 (22-jul-2026) solo subvenciona el peaje de Avasa hasta el 10-nov. Navarra decide y no se encontró decisión oficial.
+   - El BOE núm. 225 (RD 730/2026) regula bonificaciones a "Pesados 2" en Zambrana–Tudela; no dice nada del régimen de los ligeros tras el 10-nov (ver H-19).
+   - Sigue faltando el prompt de Camila; sin él, la parte de su documento no cuenta.
 5. **Corrección:** escenario base con fecha de corte 1-oct-2026 (AP-68 con peaje); escenario `post_ap68` con tramos de Álava y Bizkaia aún de pago.
 6. **Lección:** para datos con vigencia, siempre preguntar "¿desde cuándo, hasta cuándo y en qué tramos?".
 
@@ -252,6 +257,46 @@
 5. **Corrección:** Spec §7.2 Bloque 2 (v1.8, corregido el 12-oct): "la respuesta depende del **historial de consultas** del proceso; con **un proceso por alternativa**, 0 rutas `sin_peaje` tienen `toll`".
 6. **Lección:** antes de atribuir un fallo a una función de la herramienta, se varían las condiciones del experimento (orden, proceso, estado inicial). Un resultado estable no es lo mismo que un resultado correcto, ni que una causa demostrada.
 
+### H-17 — Tarifas de la AP-9 transcritas una fila más abajo (Caldas–Curro 2,85 en vez de 1,65)
+- **Estado:** confirmado por el cazador (12-oct-2026, evidencia literal y fuente oficial) — pendiente de revisión del puente. Ya corregido: la tabla final no contiene esos importes.
+- **Categoría:** Datos
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.4) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el `curador-datos` que rehízo la tabla; confirmado por el cazador
+1. **Prompt (literal):** `alucinaciones/prompts/T2.4.md`, "Ronda 2 — Prompt literal" (regla 1: "Si una tarifa no aparece en un crudo oficial, pon `TODO(dato-faltante)` … NUNCA la deduzcas"). Nota: el orquestador lo llamó "primera ronda"; fue el agente que recibió el prompt de la ronda 2.
+2. **Respuesta relevante de la IA (literal):** `scripts/construir_peajes.py` escrito a las 2026-10-12T10:38:46Z (`evidencias/T2.4_extractos.txt`, A1): `("Caldas de Reis", "Curro", 2.85), ("Caldas de Reis", "Pontevedra", 1.80), ("Curro", "Pontevedra", 1.45), ("Pontevedra", "Vilaboa", 3.65), ("Pontevedra", "Morrazo", 5.05), ("Pontevedra", "Vigo / Puxeiros", None)`.
+3. **Cómo sospechamos:** el curador siguiente releyó el PDF y vio que los importes no cuadraban (`T2.4_extractos.txt`, A2).
+4. **Evidencia:** `evidencias/T2.4_verificacion.py` → `.txt` §3–4.
+   - PDF del Ministerio (`mitma_tarifas_2026_ap-9.pdf`, `pdftotext -raw`): Caldas–Curro 1,65; Caldas–Pontevedra 2,85; Curro–Pontevedra 1,80; Pontevedra–Vilaboa 1,45; Pontevedra–Morrazo 3,65. La tabla de recurrencia del mismo PDF (50 %) da 0,82 / 1,42 / 0,90 / 0,72 / 1,82, que confirma la alineación.
+   - Calculadora oficial de Audasa (consultada el 12-oct-2026, `evidencias/T2.4_audasa_calculadora_2026-10-12.json`): Caldas→Curro 1,65; Curro→Pontevedra 1,80; Caldas→Pontevedra 2,85.
+   - Cada importe se desplazó una fila hacia arriba a partir de Caldas de Reis, y el último quedó en `None`. En la extracción `-layout`, los nombres y los importes de esa página aparecen en líneas distintas; el agente los emparejó sin comprobarlos.
+5. **Corrección:** el curador siguiente rehízo la tabla; las filas AP-9 finales usan A Coruña/A Barcala–Santiago 8,80 y Santiago–Pontevedra 7,55, verificadas por el cazador.
+6. **Lección:** en tablas extraídas de PDF, comprobar la alineación con una segunda columna o tabla relacionada (aquí, la de descuento del 50 %) o con `pdftotext -raw`. Un desplazamiento de una fila produce importes plausibles y es invisible a simple vista.
+
+### H-18 — "El Catálogo excluye los tramos transferidos (AP-68 vasco y navarro)": el tramo navarro sí está
+- **Estado:** confirmado por el cazador (12-oct-2026) — pendiente de revisión del puente. Ya corregido en `data/fuentes.md`. Gravedad baja: los km de AP68-06/07 ya incluían el tramo navarro.
+- **Categoría:** Datos (afirmación falsa sobre el contenido de una fuente; el puente puede preferir Bibliografía)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.4) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec`; confirmado por el cazador con un lector propio del Catálogo
+1. **Prompt (literal):** `alucinaciones/prompts/T2.4.md`, prompt original (primer bloque). Pide "Cada tarifa, km y vigencia sale de una página/PDF oficial que hayas leído".
+2. **Respuesta relevante de la IA (literal):** escrito en `data/fuentes.md` a las 2026-10-12T10:50:45Z (`evidencias/T2.4_extractos.txt`, B1): "El Catálogo excluye los tramos transferidos (AP-68 vasco y navarro) y las vías forales/autonómicas."
+3. **Cómo sospechamos:** `revisor-spec` vio que las filas AP68-06/07 sumaban km de Navarra sacados del mismo Catálogo (B2). El curador lo reconoció (B3).
+4. **Evidencia:** `evidencias/T2.4_verificacion.txt` §5, con un lector `.dbf` independiente del script del curador: el Catálogo RCE 2025 (`260306-catalogorce2025.zip`) tiene 6 tramos de la AP-68 en Navarra (39,66 km, p.k. 162,53–166,48 y 201,85–237,0), todos "Autopista de peaje", y ninguno en Bizkaia ni Álava (empieza en el p.k. 77,597, L.P. Álava-Burgos). La mitad vasca de la frase es cierta. La navarra es una inferencia ("transferido por el RD 1230/2025 → fuera del Catálogo") que no se comprobó contra el zip, aunque el zip ya estaba descargado.
+5. **Corrección:** `fuentes.md`: "excluye el tramo vasco de la AP-68 […] pero **sí incluye el tramo navarro**".
+6. **Lección:** una deducción legal ("si se transfirió, no está en el Catálogo estatal") no sustituye a mirar el dato. El Catálogo 2025 (marzo de 2026) aún no refleja un traspaso de diciembre de 2025.
+
+### H-19 — BOE núm. 225 (RD 730/2026) citado como fuente para la rebaja Logroño–Bilbao 19,60 → 6,65 € (no la contiene)
+- **Estado:** candidato — **el error de cita está confirmado; el origen IA, no**. No cuenta hasta resolver el origen. Atenuante: el propio Spec lo marcó "[VERIFICAR]".
+- **Categoría:** Bibliografía
+- **Herramienta y modelo:** Claude Opus 5.5 (asesoría al puente; Spec v1.0, commit `2cd005b`) · **Fecha:** 1-oct-2026 · **Quién lo cazó:** subagente `curador-datos` (T2.4, al leer el BOE); confirmado por el cazador
+1. **Prompt (literal):** `prompts/asesoria_puente_claude.md`, **Prompt C** (1-oct-2026). Falta su entrada, `message.txt` (propuesta del equipo Parte 2), para descartar que la cita viniera de ahí. **Pedírsela a Daniel o a Camila.**
+2. **Respuesta relevante de la IA (literal, Spec v1.0 §7.1, igual en la versión vigente):** "Fuente de prensa reportó que Logroño–Bilbao pasaría de 19,60 € a 6,65 € [VERIFICAR con fuente oficial y la resolución del BOE núm. 225 de 11-sep-2026]". En §15: "BOE núm. 225, 11-sep-2026, disposición 19039 (Ministerio de Transportes) [VERIFICAR contenido]".
+3. **Cómo sospechamos:** el curador de T2.4 descargó el BOE para fijar las vigencias y no encontró nada sobre ligeros.
+4. **Evidencia:** `evidencias/T2.4_verificacion.txt` §6 (crudo `data/raw/peajes_2026-10-12/boe_A-2026-19039.pdf`, SHA-256 en su `MANIFEST.txt`):
+   - Título: "Real Decreto 730/2026 … para la aplicación de medidas de bonificación de peajes a determinados vehículos pesados en el tramo Zambrana-Tudela".
+   - Ni "19,60", ni "6,65", ni "ligeros", ni "turismos" aparecen en el texto. Solo menciona el fin de la concesión ("el 10 de noviembre de 2026").
+   - Lo que es verdad: 19,60 € es la tarifa oficial vigente Bilbao–Logroño (PDF del Ministerio, "BILBAO LOGROÑO 19,60"). El 6,65 no aparece en ninguna fuente oficial descargada. Las dos notas de prensa citadas en el Spec §15 (Motorpasión, 5-ene-2026; Xataka, 7-ago-2026, consultadas el 12-oct) tampoco mencionan el BOE ni las cifras 19,60 / 6,65.
+   - El mismo párrafo atribuye al Ministerio que "La Rioja, Navarra y Aragón quedan libres". La respuesta oficial del Gobierno al Congreso (23-feb-2026) solo libera La Rioja y Aragón; Navarra "decide". Xataka sí dice que en Navarra "los turismos viajarán gratis", pero es prensa, no el Ministerio. No se cuenta como hallazgo aparte (no está refutado).
+5. **Corrección (propuesta; el cazador no edita el Spec):** en §7.1, citar la respuesta al Congreso para el régimen posterior, retirar el BOE núm. 225 como fuente de la rebaja y marcar el 6,65 como dato de prensa sin fuente oficial.
+6. **Lección:** una referencia "[VERIFICAR contenido]" que se cita para respaldar una cifra concreta ya es una afirmación sobre la fuente. Si no se leyó, se escribe "pendiente de localizar la fuente oficial", sin número de BOE.
+
 ---
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
@@ -270,6 +315,17 @@
 
 ---
 
+## Discrepancias en fuentes humanas (T2.4, 12-oct-2026) — no son alucinaciones de IA
+Se documentan para el blog y para T2.5. Evidencia: `evidencias/T2.4_verificacion.txt` (§ indicado).
+- **OpenStreetMap, `ref` erróneas en vías de peaje reales:** "A-66" en la AP-66 Campomanes–León (26 de 27 intersecciones `toll`; tarifa oficial en el PDF del Ministerio de la AP-66); "A-8" en la AP-8 de Bizkaia (Interbiak, Decreto Foral 147/2025); "DO" en la AP-8 de Gipuzkoa (Bidegi). El peaje es real y lo cubren AP66-*, AP8-01 y AP8-03.
+- **OSM, cruces `toll` en N-622, GI-20 y PA-34:** las intersecciones `toll` están en el extremo del paso donde enlaza una autopista de peaje: N-622, 2 de 21, en (−2,859; 42,963) y (−2,863; 42,963), junto al enlace de Altube de la AP-68; GI-20, 2 de 2 al inicio del paso, que continúa por la AP-8 (Bidegi dice que la GI-20 es "antiguo tramo de la AP-8"); PA-34, 1 de 4, en (−1,683; 42,840). Es coherente con que sean las plazas o ramales de la autopista adyacente, pero **no verificable** con los crudos: no hay fuente oficial descargada que localice esas plazas a ese nivel de detalle.
+- **Catálogo RCE 2025:** clasifica la AP-7 p.k. 676,3–706,75 (Circunvalación de Alicante) como "Autopista de peaje". El BOE-A-2025-25961 fija para ella una tarifa de "0 euros" para todas las categorías (§8). No es un error en sentido estricto: el BOE mantiene la vía en el régimen de peaje con tarifa 0, a la espera de la liberación formal. Es una **imprecisión** para quien lea la clase como "se paga".
+- **SEITT, encabezados de los PDF de la R-4** (§8): `tarifas_r4_2026_1.pdf` (el enlazado) dice "Peaje 2026 R4" y "En vigor desde el 1 de enero de 2025"; `tarifas_r4_2025.pdf` dice "Peaje 2025" y "2023"; `tarifas_r4_2025_0.pdf` dice "Peaje 2024" y "2025". Los PDF de R-2, R-3 y AP-41 dicen "2026" de forma coherente. Error de la fuente.
+- **Diputación Foral de Bizkaia, nota de 22-jul-2026** (§6): anuncia "una reducción media del 20% tanto para vehículos ligeros como para pesados", pero su tabla da −38,7 % (ligeros 6,85 → 4,20), −31,3 % (P1) y −31,6 % (P2). Incoherencia interna de la fuente oficial.
+- **Ministerio, AP-9:** el PDF publica "SANTIAGO - SANTIAGO 4,55" sin explicar el recorrido; la web de Audasa tampoco (su lista de estaciones no tiene ninguna llamada "Santiago"). La calculadora oficial de Audasa muestra que el tráfico que cruza Santiago no lo paga (§4).
+
+---
+
 ## Verificaciones que resultaron correctas (se documentan también)
 | Fecha | Afirmación | Resultado | Evidencia |
 |---|---|---|---|
@@ -284,4 +340,9 @@
 | 8-oct-2026 | T2.1: 9 capitales difieren de IGR (códigos 01–06, 08, 09 y 47), máx. 2,350 km (Barcelona); Palma (07) también difiere; ninguna otra de 10–50; Ceuta y Melilla sin IGR; ORIGENCOOR 8 DA + 1 Coordinado_IGR | Correcta | `T2.1_verificacion.txt` §5 |
 | 8-oct-2026 | T2.1: cifras de IGR `nuc` (32 consultas, 4 con datos, 50 registros, 34/14/1/1, NUCL 49/ENSI 1, 14 columnas sin nulos, fechas 2025-10-16..2025-12-05), Nominatim (52 consultas, 17/31/4), límites (53 unidades, 1 193 428 vértices, 13 188 834 bytes, timeStamp 03:36:02Z), INE (52 hojas, 8 132 municipios), rango lat/lon y par más cercano/lejano | Correctas | `evidencias/T2.1_verificacion_fuentes.py` → `.txt`; `T2.1_verificacion.txt` §6 |
 | 8-oct-2026 | T2.1: Memoria NGMEP (31-mar-2026; fuentes REL/INE/boletines/Líneas Límite/IGR/BTN; ETRS89/REGCAN95; centroide "lo más centrado posible en el núcleo poblacional"; Anexo I "Entidad en la que está ubicado el Ayuntamiento") | Correctas (citas literales) | `Memoria_NGMEP_2026.pdf` págs. 3, 5, 7–10, 13, 14 |
+| 12-oct-2026 | T2.4: 15 tarifas de `peajes_tramos.csv` (dos muestras aleatorias, semillas 20261012 y 20261013, más la cadena AP-68 y la AP-9) frente al PDF oficial, con `pdftotext -raw`; R2-05, AP41-01 y R4-01 a mano en la matriz | Correctas todas. Haro–Logroño 4,85: el modo `-layout` lo desalinea y `-raw` lo confirma | `evidencias/T2.4_verificacion.txt` §1–2 |
+| 12-oct-2026 | T2.4: km de las filas de los 5 pares de validación (AP-68, AP-9, AP-4, AP-41, AP-7, M-12) = suma de `longitud` del Catálogo RCE 2025 | Correctas (lector `.dbf` independiente) | `T2.4_verificacion.txt` §5 |
+| 12-oct-2026 | T2.4: A Coruña–Pontevedra = AP9-01..04 = 16,35 € (AP9-03 a 0 €) | Correcta: la calculadora oficial de Audasa da 16,35 €. Con "Santiago-Santiago" serían 20,90 € | `T2.4_verificacion.txt` §4; `T2.4_audasa_calculadora_2026-10-12.json` |
+| 12-oct-2026 | T2.4: AP-4 Sevilla–Cádiz "Autopista libre" (0 €); vigencias de la AP-68 hasta el 10-nov-2026 y La Rioja/Aragón libres desde el día siguiente; el BOE núm. 225 solo trata de pesados; Bizkaia 6,85 → 4,20 | Correctas | `T2.4_verificacion.txt` §5–6 |
+| 12-oct-2026 | T2.4: los 54 SHA-256 de `data/raw/peajes_2026-10-12/MANIFEST.txt` | Correctos | `T2.4_verificacion.txt` §0 |
 | 8-oct-2026 | T2.1: URL de `fuentes.md` responden; CSW `dateStamp` 2026-01-19; identificador IGR-PO `20251216_…_v2024`; §3.8 "Se permiten combinaciones"; 26codmun.xlsx idéntico al crudo; IGR-PO usa el centroide de áreas residenciales cuando no hay coordenada de un organismo (respalda en parte "centro de la zona residencial") | Correctas (7/7 HTTP 200). "No hay versión NGMEP posterior a 202603": **no verificable** (la lista de ficheros del CNIG se carga dinámicamente; la página muestra "(2026)") | `evidencias/T2.1_urls_http.txt` |
