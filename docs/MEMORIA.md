@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-11 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.2 ✅, T2.3 🟡 ejecutada, T2.6 ✅, T2.7 ✅) |
-| Próxima tarea | Parte 2: **T2.3** (decidir los 5 pares `sin_peaje` con clase `toll`) · T3.1 costos, T3.3 ACO, T3.4 GA · T2.4 peajes. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.3 ✅, T2.6 ✅, T2.7 ✅) |
+| Próxima tarea | Parte 2: T3.1 costos, T3.3 ACO, T3.4 GA · T2.4 peajes. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 2) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -52,7 +52,9 @@
 - [ ] Zona horaria del equipo: `fuentes.md` dice UTC−5, máquina de Parte 2 en UTC−3.
 - [x] **Acabado** del Corolla: Style Plus 140H e-CVT MY27 (Spec v1.7). Extra alta 5,6–6,2 (catálogo 2023) = sensibilidad.
 - [ ] Puente (Daniel): fijar el estado de H-12 (propuesta: descartar), H-13 (descartar), H-14 (confirmar) y la categoría de H-15.
-- [ ] **T2.3:** 5 pares `sin_peaje` pasan por intersecciones `toll` pese a `exclude=toll` ([16,18], [16,35], [16,44], [27,35] por M-12; [26,29] por AP-15). Decidir tratamiento antes de T2.5.
+- [x] **T2.3 (12-oct):** OSRM depende del historial de consultas del proceso → `--threads 1`, arranque limpio y una
+  corrida (Spec v1.8). 26 `sin_peaje` con `toll` (M-12, AP-15, AP-68): **T2.5 los cobra**. Opcional si sobra tiempo: un
+  proceso por alternativa (probado, 0 con `toll`). **T2.4 debe incluir M-12 y AP-15.**
 - [x] **Design System:** skill `apple-design` (Emil Kowalski). Falta la **paleta de colores** (T4.1); la skill no la define.
 - [ ] ¿Escenario opcional `post_ap68`?
 - [ ] Confirmar fecha/hora de la sustentación.
@@ -60,15 +62,17 @@
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **15** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+Candidatos: **16** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
-H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel) — confirmados: **2** (H-04, H-05) —
-categorías: Datos (8), Matemáticas (1), Código (5), Conceptos (1, H-12, propuesta para descartar). Falta Bibliografía. Técnica útil: **prueba de mutación**.
+H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida) —
+confirmados: **2** (H-04, H-05) — categorías: Datos (8), Matemáticas (1), Código (5), Conceptos (2: H-12 con propuesta de
+descarte, y H-16). Falta Bibliografía. Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **T2.3 ✅**. Un diagnóstico mostró que OSRM no excluía peajes y una 2.ª ronda refutó la causa: la respuesta depende del historial de consultas del proceso (H-16). Corrida vigente `osrm_2026-10-12` con `--threads 1`; 26 `sin_peaje` con peaje, que cobra T2.5. **Spec v1.8**. |
 | 2026-10-11 | Jose Miguel + Claude | **T2.7 ✅**: Corolla Style Plus 140H MY27, 4,6 l/100 km; combustible del catálogo de Toyota 09/2023 (descarga manual, verificado). **Spec v1.7**: acabado, `anio_modelo`, sensibilidad de consumo 5,6/6,2 en §7.5. Cacería: H-12 a H-15. |
 | 2026-10-11 | Jose Miguel + Claude | Asumimos las tareas de Camila. **T2.6 ✅** (media peninsular 1,8318 €/l; 3 rondas; 418 pruebas). **T2.3 ejecutada** en Windows (Docker Desktop, `.wslconfig` 16 GB; 1081/1081 pares; `osrm.sh` admite Git Bash). **Spec v1.6**: enunciado y rúbrica literales (§1.2–1.3), combustible peninsular. T2.7 a la espera del acabado. |
 | 2026-10-11 | Jose Miguel + Claude | **T2.3 código listo** (curador-datos, 2 rondas): `descargar_datos.py --bloque 2`, `construir_rutas.py`, 58 pruebas nuevas (332 en total). revisor-spec ✅, revisor-calidad ✅. Spec v1.5: criterio de par sin peaje, `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3, crudos de rutas sin versionar. Falta que Camila lo ejecute. |

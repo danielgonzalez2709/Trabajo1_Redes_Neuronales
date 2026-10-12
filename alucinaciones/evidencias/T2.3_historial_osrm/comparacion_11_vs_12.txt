@@ -1,0 +1,39 @@
+filas rutas.csv que cambian (dist_km o tiempo_h): 25 de 2162
+  por alternativa: {'rapida': 4, 'sin_peaje': 21}
+   0,38,sin_peaje 174.4262 2.492389 -> 177.4528 2.413722
+   3,7,sin_peaje 783.9155 8.997722 -> 785.4313 8.989417
+   3,32,sin_peaje 785.4621 9.333917 -> 786.9778 9.325611
+   3,35,rapida 934.3720 11.074222 -> 935.8878 11.065917
+   3,35,sin_peaje 934.3720 11.074222 -> 935.8878 11.065917
+   3,44,sin_peaje 959.8904 11.213306 -> 961.4061 11.205000
+   11,29,sin_peaje 584.4968 7.193861 -> 584.3346 7.102750
+   12,18,sin_peaje 854.2624 9.608778 -> 855.7782 9.600472
+   12,29,sin_peaje 773.9093 9.166500 -> 773.7471 9.075389
+   12,32,sin_peaje 635.2931 7.536167 -> 636.8089 7.527861
+   12,35,sin_peaje 784.2030 9.276472 -> 785.7188 9.268167
+   12,44,rapida 786.1959 8.786889 -> 787.7116 8.778583
+   12,44,sin_peaje 809.7214 9.415556 -> 811.2372 9.407250
+   16,29,sin_peaje 798.6557 9.446861 -> 798.4934 9.355750
+   16,32,sin_peaje 660.0395 7.816528 -> 661.5552 7.808222
+   17,29,sin_peaje 332.7651 4.303611 -> 332.6029 4.212500
+   21,29,sin_peaje 714.8522 8.544556 -> 714.6900 8.453444
+   21,32,sin_peaje 576.2360 6.914222 -> 577.7517 6.905917
+   21,35,rapida 725.1459 8.654528 -> 726.6616 8.646222
+   21,35,sin_peaje 725.1459 8.654528 -> 726.6616 8.646222
+   21,44,rapida 727.1387 8.164944 -> 728.6544 8.156639
+   21,44,sin_peaje 750.6643 8.793611 -> 752.1800 8.785306
+   27,29,sin_peaje 910.0445 10.770972 -> 909.8823 10.679861
+   27,32,sin_peaje 771.4283 9.140639 -> 772.9440 9.132333
+   27,44,sin_peaje 945.8566 11.020028 -> 947.3723 11.011722
+pares sin peaje: 11-oct 549 | 12-oct 547
+  salen: [(3, 35), (21, 35)]  entran: []
+   [3, 35] sin peaje 11-oct: True | 12-oct: False
+   [21, 35] sin peaje 11-oct: True | 12-oct: False
+   [6, 26] sin peaje 11-oct: True | 12-oct: True
+   [44, 46] sin peaje 11-oct: False | 12-oct: False
+   [13, 33] sin peaje 11-oct: False | 12-oct: False
+11-oct avisos: {'sin_peaje_mas_rapida': 0, 'par_sin_peaje_con_valores_distintos': 0, 'sin_peaje_con_clase_toll': 5} | control_pasos: {'rutas': 2162, 'rutas_con_ref': 2162, 'rapida_con_clase_toll': 532, 'sin_peaje_con_clase_toll': 5, 'filas_rutas_pasos_peaje': 2286}
+12-oct avisos: {'sin_peaje_mas_rapida': 0, 'par_sin_peaje_con_valores_distintos': 0, 'sin_peaje_con_clase_toll': 26} | control_pasos: {'rutas': 2162, 'rutas_con_ref': 2162, 'rapida_con_clase_toll': 534, 'sin_peaje_con_clase_toll': 26, 'filas_rutas_pasos_peaje': 2339}
+sin_peaje con toll 12-oct: [[0, 38], [3, 7], [3, 32], [3, 35], [3, 44], [11, 29], [12, 18], [12, 29], [12, 32], [12, 35], [12, 44], [16, 18], [16, 29], [16, 32], [16, 35], [16, 44], [17, 29], [21, 29], [21, 32], [21, 35], [21, 44], [26, 29], [27, 29], [27, 32], [27, 35], [27, 44]]
+fecha_consulta_utc 12-oct: {'min': '2026-10-12T05:18:33Z', 'max': '2026-10-12T05:19:11Z'}
+crudos 12-oct distintos del replay 1 hilo del diagnóstico (dist, weight): 0 de 2162

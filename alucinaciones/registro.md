@@ -10,7 +10,7 @@
 | Código | 5 (H-07, H-08, H-09, H-10, H-11) | 0 |
 | Datos del mundo real | 8 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 0 | 0 |
-| Conceptos | 1 (H-12) | 0 |
+| Conceptos | 2 (H-12, H-16) | 0 |
 
 ---
 
@@ -234,6 +234,23 @@
    - avisó de que el Touring Sports "no es seguro que sea el Sedán".
 5. **Corrección:** H-13 se reescribe con la cita literal; la ficha oficial se tomó del configurador.
 6. **Lección:** cuando un agente resume lo que dijo otra herramienta, se cita literal y se enlaza la transcripción; la paráfrasis puede convertir una ausencia de resultados en una afirmación de inexistencia.
+
+### H-16 — "`exclude=toll` no evita las vías de peaje" (causa mal atribuida por un diagnóstico; el orquestador la copió en el Spec v1.8)
+- **Estado:** candidato — falta la verificación del cazador
+- **Categoría:** Conceptos (conclusión causal sobre el comportamiento de una herramienta; el puente puede preferir Código)
+- **Herramienta y modelo:** Claude Opus 5.5. Subagente `curador-datos` (diagnóstico) y orquestador, que lo escribió en el Spec v1.8 como hecho verificado · **Fecha:** 11/12-oct-2026 · **Quién lo cazó:** otro `curador-datos`, en la ronda 2 de T2.3
+1. **Prompt (literal):** `alucinaciones/prompts/T2.3-diagnostico-toll.md` (pregunta 2: "¿Por qué `exclude=toll` no las evita?").
+2. **Respuesta relevante de la IA:**
+   - Diagnóstico: "The cause is **(B), a problem in OSRM itself**: `exclude=toll` does not reliably avoid those roads". Añadía: "With one thread the result is stable but wrong […] 26 `sin_peaje` routes have the `toll` class".
+   - Spec v1.8, primera redacción: "OSRM v26.10.0 **no garantiza** que evite todas las vías con la clase `toll`. Verificado el 11-oct-2026".
+3. **Cómo sospechamos:** al repetir la corrida con `--threads 1`, la respuesta cambiaba según la primera consulta después de arrancar el servidor.
+4. **Evidencia:** `alucinaciones/evidencias/T2.3_historial_osrm/` (README).
+   - En el mismo proceso, el orden inverso de consultas cambia 50 de 2202 rutas.
+   - Con un proceso por alternativa hay 0 rutas `sin_peaje` con `toll` en los dos órdenes.
+   - El "stable but wrong" del diagnóstico era el efecto de un historial concreto, no una limitación de `exclude`.
+   - El mecanismo interno no está confirmado.
+5. **Corrección:** Spec §7.2 Bloque 2 (v1.8, corregido el 12-oct): "la respuesta depende del **historial de consultas** del proceso; con **un proceso por alternativa**, 0 rutas `sin_peaje` tienen `toll`".
+6. **Lección:** antes de atribuir un fallo a una función de la herramienta, se varían las condiciones del experimento (orden, proceso, estado inicial). Un resultado estable no es lo mismo que un resultado correcto, ni que una causa demostrada.
 
 ---
 

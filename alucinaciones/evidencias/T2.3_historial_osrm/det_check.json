@@ -1,0 +1,82 @@
+{
+ "26_29_sin_peaje": {
+  "url": "http://127.0.0.1:5001/route/v1/driving/-3.691978,40.419026;-1.644406,42.818565?alternatives=false&steps=true&geometries=polyline&overview=simplified&exclude=toll",
+  "respuestas_distintas": 1,
+  "conteos": {
+   "503ecd8b0ee8": 2
+  },
+  "detalle(dist_m,weight,dur_s,intersecciones_toll,data_version)": {
+   "503ecd8b0ee8": [
+    387453,
+    17688.6,
+    17675.3,
+    0,
+    "2026-10-01T20:22:06Z"
+   ]
+  },
+  "nodos_distintos": 1,
+  "conteos_nodos": {
+   "916fa3242383": 2
+  }
+ },
+ "16_18_sin_peaje": {
+  "url": "http://127.0.0.1:5001/route/v1/driving/-3.598691,37.174289;-1.985721,43.321523?alternatives=false&steps=true&geometries=polyline&overview=simplified&exclude=toll",
+  "respuestas_distintas": 1,
+  "conteos": {
+   "087b4bf110a8": 2
+  },
+  "detalle(dist_m,weight,dur_s,intersecciones_toll,data_version)": {
+   "087b4bf110a8": [
+    879008.8,
+    35605.5,
+    35600.9,
+    0,
+    "2026-10-01T20:22:06Z"
+   ]
+  },
+  "nodos_distintos": 1,
+  "conteos_nodos": {
+   "60b95a0db3ac": 2
+  }
+ },
+ "03_35_rapida": {
+  "url": "http://127.0.0.1:5001/route/v1/driving/-2.467672,36.840113;-3.809990,43.462343?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+  "respuestas_distintas": 1,
+  "conteos": {
+   "2fe42e6ad5f1": 2
+  },
+  "detalle(dist_m,weight,dur_s,intersecciones_toll,data_version)": {
+   "2fe42e6ad5f1": [
+    934372,
+    39867.2,
+    39867.2,
+    0,
+    "2026-10-01T20:22:06Z"
+   ]
+  },
+  "nodos_distintos": 1,
+  "conteos_nodos": {
+   "4ffbd6ff9374": 2
+  }
+ },
+ "21_35_rapida": {
+  "url": "http://127.0.0.1:5001/route/v1/driving/-3.790869,37.764576;-3.809990,43.462343?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+  "respuestas_distintas": 1,
+  "conteos": {
+   "d872d237401c": 2
+  },
+  "detalle(dist_m,weight,dur_s,intersecciones_toll,data_version)": {
+   "d872d237401c": [
+    725145.9,
+    31156.3,
+    31156.3,
+    0,
+    "2026-10-01T20:22:06Z"
+   ]
+  },
+  "nodos_distintos": 1,
+  "conteos_nodos": {
+   "f7ab568da414": 2
+  }
+ }
+}
