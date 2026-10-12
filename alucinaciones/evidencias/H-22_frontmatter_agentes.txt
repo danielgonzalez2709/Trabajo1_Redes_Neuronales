@@ -1,0 +1,6 @@
+Reproducción H-22 (12-oct-2026): encabezado YAML de los agentes tal como se crearon en el commit 2cd005b (1-oct-2026)
+
+revisor-spec             INVÁLIDO  ScannerError: mapping values are not allowed here
+revisor-calidad          INVÁLIDO  ScannerError: mapping values are not allowed here
+implementador            OK      name=implementador
+verificador-matematico   OK      name=verificador-matematico

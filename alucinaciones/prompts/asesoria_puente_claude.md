@@ -41,3 +41,14 @@ Los compañeros encargados de la parte 2 propusieron  esta solucion, me parece m
 ```
 
 Respuesta: Spec v1.0, PLAN, `CLAUDE.md` y agentes (commit `2cd005b`).
+
+---
+
+## Prompt D — 12-oct-2026 (esqueleto del blog, T0.7)
+
+```text
+Avancemos con el esqueleto del blog
+```
+
+Respuesta: rama `integracion/t07-blog` (blog MkDocs, hook del reporte, bibliografía verificada contra Crossref). Hallazgo asociado: H-21.
+
