@@ -56,7 +56,7 @@
 | T2.5 | Bloque 3b: asignación de peajes a rutas | T2.3, T2.4 | `vias_peaje`, `km_peaje`, `peaje_eur` en `rutas.csv` (desde `rutas_pasos_peaje.csv`) | Validación de 5 pares (Spec §7.2) documentada; Sevilla–Cádiz = 0 € | cazador-alucinaciones | ✅ 2026-10-12 (asumida por Jose Miguel; suma de tramos [DECIDIDO]; 5 pares validados, Bilbao–Zaragoza 41,50 € frente a 39,90 € publicado; revisor-spec ✅, revisor-calidad ✅, cazador ✅ CONFORME; sin hallazgos factuales nuevos, H-20 débil; Spec v1.10) |
 | T2.6 | Bloque 4: precio Gasolina 95 E5 (API Ministerio) | — | `combustible.json` + raw con fecha | Media, mediana, nº estaciones | revisor-spec | ✅ 2026-10-11 (asumida por Jose Miguel; media **peninsular** 1,8318 €/l, 10 171 estaciones, Spec v1.6; revisor-spec ✅ 2.ª ronda, revisor-calidad ✅ + pulido; 418 pruebas) |
 | T2.7 | Bloque 5: `vehiculo.yaml` (Corolla Sedán Hybrid 2026 1.8 L 140H, WLTP) | — | Ficha oficial Toyota España + respaldo km77 | Sedán + acabado exacto, WLTP combinado (no NEDC) + fase extra alta si existe, fecha | cazador-alucinaciones | ✅ 2026-10-11 (asumida por Jose Miguel; Style Plus 140H e-CVT MY27, 4,6 l/100 km, Gasolina 95 E5 según el catálogo 09/2023; extra alta 5,6–6,2 como sensibilidad; Spec v1.7; revisor-spec ✅, cazador ✅; 425 pruebas) |
-| T2.8 | `data/fuentes.md` completo + `test_data_integrity.py` | T2.1–T2.7 | Tabla de fuentes | Test pasa | revisor-spec | ⬜ |
+| T2.8 | `data/fuentes.md` completo + `test_data_integrity.py` | T2.1–T2.7 | Tabla de fuentes | Test pasa | revisor-spec | ✅ 2026-10-12 (curador-datos, 3 rondas; revisor-spec ✅ 2.ª ronda, revisor-calidad ✅ 2.ª ronda; 51 pruebas nuevas, 627 en total; `AP68-POST-VI` sin tarifa publicada, pendiente de decisión humana) |
 
 ---
 
