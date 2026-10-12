@@ -14,10 +14,10 @@
 ## 📍 Estado actual
 | | |
 |---|---|
-| Última actualización | 2026-10-11 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.3 ✅, T2.6 ✅, T2.7 ✅) |
-| Próxima tarea | Parte 2: T3.1 costos, T3.3 ACO, T3.4 GA · T2.4 peajes. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
-| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 2) |
+| Última actualización | 2026-10-12 |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.4 ✅, T2.6 ✅, T2.7 ✅; faltan T2.5 y T2.8) |
+| Próxima tarea | Parte 2: **T2.5** (asignar peajes a rutas; camino crítico T2.5 → T2.8 → T3.6) y, en paralelo, T3.1 costos, T3.3 ACO, T3.4 GA. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
 ## 👥 Equipo
@@ -35,6 +35,9 @@
 - Parte 2: fecha de corte **1-oct-2026**; OSRM **local con Docker** (T2.0, 10-oct; el servidor público no admite `exclude=toll`; ORS solo contingencia); dos alternativas por par
   (rápida / sin peaje); par sin peaje = la rápida no pasa por ninguna intersección `toll` (Spec v1.5); crudos de rutas NO se versionan,
   T2.5 usa `rutas_pasos_peaje.csv`; peajes oficiales + forales; Gasolina 95 E5 **media peninsular** (v1.6; la nacional queda como sensibilidad); **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
+- Bloque 3 (Spec v1.9, T2.4): `peajes_tramos.csv` con 56 tramos encadenados; km del **Catálogo RCE 2025** (zip de 24 MB sin versionar)
+  y 11 km forales/autonómicos **medidos en OSM** (aproximación, `scripts/medir_km_osm.py`); una tarifa por tramo (AP-51/61 normal,
+  AP-71 diurna, SEITT efectivo, AP-7 temporada baja); **M-12 paga de la M-40 a la M-13**; AP9-03 = 0 € (calculadora de Audasa).
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
@@ -56,22 +59,28 @@
   corrida (Spec v1.8). 26 `sin_peaje` con `toll` (M-12, AP-15, AP-68): **T2.5 los cobra**. Opcional si sobra tiempo: un
   proceso por alternativa (probado, 0 con `toll`). **T2.4 debe incluir M-12 y AP-15.**
 - [x] **Design System:** skill `apple-design` (Emil Kowalski). Falta la **paleta de colores** (T4.1); la skill no la define.
-- [ ] ¿Escenario opcional `post_ap68`?
+- [ ] **T2.5:** en peaje cerrado la suma de tramos ≠ tarifa del recorrido (Bilbao–Zaragoza 41,50 vs. 39,90 €): usar el recorrido
+  completo cuando se recorre entero. La AP-15 entre Noáin y la variante A-15 no tiene fila (la ruta va por la variante libre).
+- [ ] Blog (T4.6): reportar los km aproximados de OSM; el contraste de la AP-8 debe citarse como Urgoiti–Durango (17,506 vs. 17,5 km),
+  no Urgoiti–Ermua (parcialmente circular). AP-15 Norte: −12,9 % frente a un contraste derivado, sin explicar.
+- [ ] H-19 (Bibliografía): falta `message.txt` del Prompt C (Daniel o Camila) para confirmar que la cita del BOE vino de la IA.
+- [ ] ¿Escenario opcional `post_ap68`? Tras el 10-nov: La Rioja y Aragón libres, Bizkaia 4,20 €; Álava y Navarra sin tarifa oficial.
 - [ ] Confirmar fecha/hora de la sustentación.
 - [ ] Prompts literales para la cacería: ~~H-01, H-03 (Daniel)~~ ✅ en `alucinaciones/prompts/asesoria_puente_claude.md`; H-02 (Camila) pendiente.
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **16** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+Candidatos: **19** (H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
-H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida) —
-confirmados: **2** (H-04, H-05) — categorías: Datos (8), Matemáticas (1), Código (5), Conceptos (2: H-12 con propuesta de
-descarte, y H-16). Falta Bibliografía. Técnica útil: **prueba de mutación**.
+H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
+confirmados por el puente: **2** (H-04, H-05); por el cazador: **2** (H-17, H-18) — categorías: Datos (10), Matemáticas (1), Código (5),
+Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (1: H-19, origen pendiente). Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **T2.4 ✅**: tabla de peajes (56 tramos; curador-datos, 6 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅; 512 pruebas). Una ronda previa transcribió matrices origen–destino sin km: se rehízo por tramos con km del Catálogo RCE y de OSM. **Spec v1.9** (AP-68 tras el 10-nov, tarifas, M-12). Cacería: H-17 a H-19. |
 | 2026-10-12 | Jose Miguel + Claude | **T2.3 ✅**. Un diagnóstico mostró que OSRM no excluía peajes y una 2.ª ronda refutó la causa: la respuesta depende del historial de consultas del proceso (H-16). Corrida vigente `osrm_2026-10-12` con `--threads 1`; 26 `sin_peaje` con peaje, que cobra T2.5. **Spec v1.8**. |
 | 2026-10-11 | Jose Miguel + Claude | **T2.7 ✅**: Corolla Style Plus 140H MY27, 4,6 l/100 km; combustible del catálogo de Toyota 09/2023 (descarga manual, verificado). **Spec v1.7**: acabado, `anio_modelo`, sensibilidad de consumo 5,6/6,2 en §7.5. Cacería: H-12 a H-15. |
 | 2026-10-11 | Jose Miguel + Claude | Asumimos las tareas de Camila. **T2.6 ✅** (media peninsular 1,8318 €/l; 3 rondas; 418 pruebas). **T2.3 ejecutada** en Windows (Docker Desktop, `.wslconfig` 16 GB; 1081/1081 pares; `osrm.sh` admite Git Bash). **Spec v1.6**: enunciado y rúbrica literales (§1.2–1.3), combustible peninsular. T2.7 a la espera del acabado. |
