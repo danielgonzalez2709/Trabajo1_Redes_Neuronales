@@ -6,11 +6,13 @@
 ## Cobertura actual
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
-| Matemáticas | 1 | 0 |
-| Código | 8 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23) | 0 |
-| Datos del mundo real | 10 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15, H-17, H-18) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) + 2 confirmados por el cazador, pendientes del puente (H-17, H-18, 12-oct-2026) |
-| Bibliografía | 2 (H-19: error de cita confirmado, origen IA pendiente; H-22) | 0 |
-| Conceptos | 2 (H-12, H-16) | 0 |
+| Matemáticas | 1 (H-03) | 1 (H-03, puente) |
+| Código | 8 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23) | 3 (H-07, H-08, H-10, puente) |
+| Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
+| Bibliografía | 2 (H-19: error de cita confirmado, origen IA pendiente; H-22) | 1 (H-22, puente) |
+| Conceptos | 1 (H-16) — H-12 descartado | 0 |
+
+**Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
 
 ---
 
@@ -61,7 +63,7 @@
 6. **Lección:** para datos con vigencia, siempre preguntar "¿desde cuándo, hasta cuándo y en qué tramos?".
 
 ### H-03 — Paso de GD "justificado" con la curvatura en el mínimo (garantía solo local)
-- **Estado:** candidato — prompt literal disponible (9-oct-2026)
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: candidato — prompt literal disponible (9-oct-2026)
 - **Categoría:** Matemáticas / Conceptos
 - **Herramienta y modelo:** Claude Opus 5.5 (asesoría al puente, 29-sep-2026)
 1. **Prompt (literal):** `prompts/asesoria_puente_claude.md`, **Prompt B** (29-sep-2026).
@@ -74,7 +76,7 @@
 6. **Lección:** una cota de estabilidad local (en el óptimo) no justifica un paso fijo desde inicios aleatorios lejanos; calcular L en todo el dominio.
 
 ### H-04 — "Las 9 capitales que difieren tienen ORIGENCOOR = Detección automática" (generalización sin verificar)
-- **Estado:** confirmado por el cazador (8-oct-2026, evidencia independiente desde el crudo) — pendiente de revisión del puente
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: confirmado por el cazador (8-oct-2026, evidencia independiente desde el crudo) — pendiente de revisión del puente
 - **Categoría:** Datos del mundo real
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos` y orquestador de Claude Code, T2.1) · **Fecha:** 7/8-oct-2026 · **Quién lo cazó:** subagente `curador-datos` al ejecutar la tarea; confirmado por el orquestador y por el cazador
 1. **Prompt (literal):** `alucinaciones/prompts/T2.1.md`, **Prompt 2** (pide "Señala cualquier diferencia > 0,5 km y explícala"): es el prompt al que responde el informe del subagente donde nace la generalización. El orquestador la amplificó ante el equipo y la copió en el **Prompt 3**, punto 4 ("incluida la observación de que 9 capitales tienen ORIGENCOOR = "Detección automática" en el NGMEP"); el Prompt 3 es, por tanto, salida de la IA, no su entrada.
@@ -87,7 +89,7 @@
 6. **Lección:** una afirmación del tipo "todos los casos X tienen la propiedad Y" exige contar también Y en los casos que no son X; un resumen de un resumen pierde los recuentos.
 
 ### H-05 — "En estos casos, el NGMEP coincide con sus coordenadas del municipio" como explicación de las 9 diferencias (propiedad que tienen las 47)
-- **Estado:** confirmado por el cazador (8-oct-2026) — pendiente de revisión del puente. Es la **otra mitad** de la frase que originó H-04; el equipo puede decidir fusionarlos, pero se trata de una afirmación distinta, con evidencia distinta. **Corregido** el 8-oct-2026 en `data/caracterizacion_bloque1.md` §4 (cifras 8 078/8 132 y 47/47, sin atribuir causa).
+- **Estado:** **confirmado por el puente** (Daniel, aprobado en el PR #1, 9-oct-2026). Antes: confirmado por el cazador (8-oct-2026) — pendiente de revisión del puente. Es la **otra mitad** de la frase que originó H-04; el equipo puede decidir fusionarlos, pero se trata de una afirmación distinta, con evidencia distinta. **Corregido** el 8-oct-2026 en `data/caracterizacion_bloque1.md` §4 (cifras 8 078/8 132 y 47/47, sin atribuir causa).
 - **Categoría:** Datos del mundo real (explicación espuria)
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.1) · **Fecha:** 7/8-oct-2026 · **Quién lo cazó:** cazador de alucinaciones (verificación adversarial de T2.1)
 1. **Prompt (literal):** `alucinaciones/prompts/T2.1.md`, Prompt 2, punto 1: "Señala cualquier diferencia > 0,5 km y explícala". La frase se mantiene en la caracterización escrita tras el Prompt 3 (punto 4: limitaciones).
@@ -114,7 +116,7 @@
 6. **Lección:** una lista de "casos a verificar" debe derivarse de la lista oficial (las 47 capitales), no de asociaciones de memoria ("ciudades españolas con homónimos famosos"); confundir capital autonómica con capital de provincia es un error típico.
 
 ### H-07 — "PuLP trae CBC": falso desde PuLP 4.0 (además cambió la API de variables)
-- **Estado:** candidato (prompt literal disponible; evidencia reproducible)
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: candidato (prompt literal disponible; evidencia reproducible)
 - **Categoría:** Código
 - **Herramienta y modelo:** Claude Opus 5.5 (asesoría al puente) · **Fecha:** 29-sep-2026 (afirmación) / 9-oct-2026 (detección) · **Quién lo cazó:** Claude como orquestador al ejecutar T0.1, al construir el entorno con versiones fijas
 1. **Prompt (literal):** `prompts/asesoria_puente_claude.md`, **Prompt B** (29-sep-2026); repetido en la respuesta al Prompt C (Spec v1.0).
@@ -127,7 +129,7 @@
 6. **Lección:** las afirmaciones sobre librerías caducan con cada versión mayor; fijar versiones y comprobar la instalación real antes de diseñar sobre ellas. **Riesgo para el resto del proyecto:** cualquier subagente que escriba código PuLP "clásico" fallará → el Spec ya lo advierte.
 
 ### H-08 — "El contador nunca supera el presupuesto" (falso con k no entero; con k = ∞ el presupuesto se anula)
-- **Estado:** candidato (prompt literal disponible; evidencia reproducible; severidad baja: no afecta al experimento, que usa enteros)
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: candidato (prompt literal disponible; evidencia reproducible; severidad baja: no afecta al experimento, que usa enteros)
 - **Categoría:** Código
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, T0.4) · **Fecha:** 9-oct-2026 · **Quién lo cazó:** subagente `verificador-matematico` (revisión de T0.4), reproducido de forma independiente por el orquestador
 1. **Prompt (literal):** `prompts/T0.4.md`, prompt original de la tarea (pide "BudgetExhausted se lanza ANTES de exceder: el contador nunca supera el presupuesto, incluso con grad de costo k").
@@ -149,7 +151,7 @@
 6. **Lección:** `==` no prueba tipos; si un contrato habla de "tipos nativos", la prueba debe usar `type(x) is …`. Y en numpy, `float64 ⊂ float` (pero `float32` no): el orden de los `isinstance` importa.
 
 ### H-10 — Una prueba llamada "no comparte objetos" que no puede fallar
-- **Estado:** candidato (prompt literal disponible; evidencia reproducible por prueba de mutación)
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: candidato (prompt literal disponible; evidencia reproducible por prueba de mutación)
 - **Categoría:** Código
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, T0.2 ronda 3) · **Fecha:** 9-oct-2026 · **Quién lo cazó:** subagente `revisor-calidad`; confirmado por el orquestador con una prueba de mutación
 1. **Prompt (literal):** `prompts/T0.2.md`, ronda 3, punto 2 ("fusiona en profundidad … Pruebas: herencia simple y encadenada, la hija gana, listas reemplazadas, ciclo → error…").
@@ -171,7 +173,7 @@
 6. **Lección:** números de campo de un `.proto` se copian de la definición, no de memoria; validar el lector contra una segunda fuente de la misma fecha.
 
 ### H-12 — "El máximo WLTP de 4,8 es la configuración más equipada" (explicación plausible sin fuente que acabó en el Spec)
-- **Estado:** candidato — verificado por el cazador (11-oct); **propuesta: descartar** (pasar a "Verificaciones" como imprecisa). Decide el puente.
+- **Estado:** **descartado por el puente** (Daniel, 12-oct-2026, según la propuesta del equipo Parte 2): se documenta en Verificaciones como afirmación imprecisa. Antes: candidato — verificado por el cazador (11-oct); **propuesta: descartar** (pasar a "Verificaciones" como imprecisa). Decide el puente.
 - **Categoría:** Conceptos (aplicación sin verificar de un concepto de homologación a un caso concreto)
 - **Herramienta y modelo:** Claude Opus 5.5 (orquestador, sesión principal) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** subagente `curador-datos` (T2.7, ronda 2), al contrastarlo con los crudos
 1. **Prompt (literal):** `alucinaciones/prompts/asesoria_T2.7_claude.md` (pregunta de Jose Miguel sobre la fase extra alta y la rúbrica).
@@ -188,7 +190,7 @@
 6. **Lección:** una explicación genérica ("el máximo corresponde a la versión más equipada") se comprueba contra los datos del caso antes de escribirla en el Spec. Aquí bastaba con mirar las opciones del configurador, que ya estaban descargadas.
 
 ### H-13 — "No existe ficha oficial de Toyota España del Corolla Sedán 140H" (resumen del buscador web)
-- **Estado:** candidato — verificado por el cazador (11-oct), con la cita literal recuperada; **propuesta: descartar** como error del buscador (ver H-15). Decide el puente.
+- **Estado:** **descartado por el puente** (Daniel, 12-oct-2026, según la propuesta del equipo Parte 2): error del buscador web, no de la IA (ver H-15). Antes: candidato — verificado por el cazador (11-oct), con la cita literal recuperada; **propuesta: descartar** como error del buscador (ver H-15). Decide el puente.
 - **Categoría:** Datos
 - **Herramienta y modelo:** herramienta de búsqueda web usada por el subagente `curador-datos` (Claude Opus 5.5) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** el propio subagente
 1. **Prompt (literal):** consulta de búsqueda "Toyota España Corolla Sedán 140H ficha técnica consumo WLTP" (encargo en `alucinaciones/prompts/T2.7.md`, ronda 1).
@@ -209,7 +211,7 @@
 6. **Lección:** el resumen de un buscador no es una fuente. Hay que ir a la página primaria y guardar su copia.
 
 ### H-14 — "Ni Toyota España ni km77 publican la fase WLTP extra alta" (generalización a partir de las fuentes consultadas)
-- **Estado:** candidato — verificado por el cazador (11-oct); **propuesta: confirmar** (gravedad baja). Decide el puente.
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026, según la propuesta del equipo Parte 2; gravedad baja). Antes: candidato — verificado por el cazador (11-oct); **propuesta: confirmar** (gravedad baja). Decide el puente.
 - **Categoría:** Datos
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.7 ronda 1; el orquestador lo copió en el Spec v1.7) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** el mismo subagente, en la ronda 3, al leer el catálogo
 1. **Prompt (literal):** `alucinaciones/prompts/T2.7.md`, ronda 1 ("usar también el consumo de la fase WLTP "extra alta" (autopista), si la ficha la publica").
@@ -227,8 +229,8 @@
 6. **Lección:** "no lo publican" solo vale para las fuentes revisadas. Se escribe "no aparece en X e Y", nunca "no existe".
 
 ### H-15 — Paráfrasis infiel de la salida de una herramienta ("no encontré" → "no existía")
-- **Estado:** candidato — propuesto por el cazador al verificar H-13; falta que el puente fije la categoría
-- **Categoría:** Datos (o Bibliografía, si se trata como cita falsa de una fuente; decide el puente)
+- **Estado:** candidato — propuesto por el cazador al verificar H-13; falta que el puente fije la categoría · **Categoría fijada por el puente: Datos** (12-oct-2026, según la propuesta del cazador).
+- **Categoría:** Datos (fijada por el puente el 12-oct-2026)
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.7 ronda 1) · **Fecha:** 11-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`, al recuperar la cita literal de H-13
 1. **Prompt (literal):** `alucinaciones/prompts/T2.7.md`, ronda 1.
 2. **Respuesta relevante de la IA:** informe final del curador (transcripción `agent-ad02ff449667aa29b.jsonl`, línea 308, 2026-10-12T02:01:17Z): el resumen automático "afirmó que no existía ficha oficial de Toyota España. También dio el ECO como "4,6, igual que el Style Plus" y mezcló un Touring Sports de 4,70".
@@ -258,7 +260,7 @@
 6. **Lección:** antes de atribuir un fallo a una función de la herramienta, se varían las condiciones del experimento (orden, proceso, estado inicial). Un resultado estable no es lo mismo que un resultado correcto, ni que una causa demostrada.
 
 ### H-17 — Tarifas de la AP-9 transcritas una fila más abajo (Caldas–Curro 2,85 en vez de 1,65)
-- **Estado:** confirmado por el cazador (12-oct-2026, evidencia literal y fuente oficial) — pendiente de revisión del puente. Ya corregido: la tabla final no contiene esos importes.
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: confirmado por el cazador (12-oct-2026, evidencia literal y fuente oficial) — pendiente de revisión del puente. Ya corregido: la tabla final no contiene esos importes.
 - **Categoría:** Datos
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `curador-datos`, T2.4) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el `curador-datos` que rehízo la tabla; confirmado por el cazador
 1. **Prompt (literal):** `alucinaciones/prompts/T2.4.md`, "Ronda 2 — Prompt literal" (regla 1: "Si una tarifa no aparece en un crudo oficial, pon `TODO(dato-faltante)` … NUNCA la deduzcas"). Nota: el orquestador lo llamó "primera ronda"; fue el agente que recibió el prompt de la ronda 2.
@@ -320,7 +322,7 @@
 6. **Lección:** un nombre de prueba también es una afirmación sobre los datos. La IA dedujo la ciudad a partir de la autopista (la AP-68 pasa por Logroño) en vez de leer el archivo; una prueba que pasa no valida su propio nombre ni sus comentarios.
 
 ### H-22 — Dantzig, Fulkerson y Johnson (1954) citado en "Operations Research" (en 1954 la revista tenía otro nombre)
-- **Estado:** candidato (prompt literal disponible; evidencia reproducible contra Crossref; severidad baja, pero muy sutil)
+- **Estado:** **confirmado por el puente** (Daniel, 12-oct-2026; incluido en la sección Cacería del blog). Antes: candidato (prompt literal disponible; evidencia reproducible contra Crossref; severidad baja, pero muy sutil)
 - **Categoría:** Bibliografía
 - **Herramienta y modelo:** Claude Opus 5.5 (orquestador, T0.7) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el orquestador, al verificar contra Crossref la lista que había escrito de memoria
 1. **Prompt (literal):** "Avancemos con el esqueleto del blog" (Daniel, 12-oct-2026, sesión de asesoría del puente; se añade a `prompts/asesoria_puente_claude.md`).
@@ -402,3 +404,4 @@ Se documentan para el blog y para T2.5. Evidencia: `evidencias/T2.4_verificacion
 | 12-oct-2026 | T2.5: `GI-20`, `N-622`, `PA-34` no son de pago | `N-622`: libre según prensa (Gasteizhoy) y no figura en el Catálogo como autopista; `GI-20`: antigua AP-8, hoy autovía foral, Bidegi no publica tarifa para ella (Wikipedia + `bidegi_gure-autobideak_es.html`); `PA-34`: **no verificable** con fuente primaria. El efecto en `peaje_eur` es nulo por construcción (no se cobran) | `data/raw/peajes_2026-10-12/bidegi_gure-autobideak_es.html`; búsqueda web 12-oct |
 | 12-oct-2026 | T2.5: "AP-15 sin barreras prorrateado hasta −17 %" (afirmación del curador, no está en el informe) | Verificada en la aritmética: 9,494 € frente a 11,40 € (tramo AP15-01 con fracción 0,8328; 31 filas, entre 0,83 y 1). Si la ruta paga o no una barrera (Tiebas/Marcilla) no es verificable sin los p.k. de las estaciones | `rutas_peajes_detalle.csv` |
 | 12-oct-2026 | Bibliografía del blog (T0.7): 11 referencias escritas de memoria (DOI, primer autor, año, revista) contrastadas con Crossref | 10 de 11 coinciden en autor y año (Kennedy 1995 y Shi 1998: Crossref no registra el año de las actas; Berahas: en línea 2021, número 2022 → APA usa 2022). Discrepancia real: revista de Dantzig 1954 (H-22). Además, Crossref trae dañado el título de Stützle y Hoos ("– Ant System" en vez de "MAX–MIN Ant System"): copiar del registro a ciegas también introduce errores | `evidencias/H-bib_verificacion_doi.py` → `.txt` |
+| 12-oct-2026 | H-12 (descartado por el puente): "El máximo WLTP de 4,8 es la configuración más equipada" | Imprecisa: explicación plausible sin fuente; se retiró del Spec. Se documenta aquí en lugar de como hallazgo | Entrada H-12 de este registro |

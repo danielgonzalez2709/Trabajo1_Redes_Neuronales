@@ -62,7 +62,7 @@
 - [x] Zona horaria (T2.8, 12-oct): la 1.ª iteración de OSRM salió del equipo de Camila (UTC−3, Brasil); el resto, del PC de Jose Miguel (UTC−5). Documentado en el encabezado de `fuentes.md`; la atribución a UTC−3 se apoya en `scripts/osrm/README.md`, no en los crudos.
 - [ ] **`AP68-POST-VI`** (Álava, tras el 10-nov): `tarifa_ligeros_eur` en `TODO(dato-faltante)`, sin tarifa oficial. Pendiente de decisión humana; el test lo admite solo fuera de la vigencia del corte y documentado por id.
 - [x] **Acabado** del Corolla: Style Plus 140H e-CVT MY27 (Spec v1.7). Extra alta 5,6–6,2 (catálogo 2023) = sensibilidad.
-- [ ] Puente (Daniel): fijar el estado de H-12 (propuesta: descartar), H-13 (descartar), H-14 (confirmar) y la categoría de H-15.
+- [x] Puente (Daniel, 12-oct): H-12 y H-13 descartados, H-14 confirmado, H-15 en Datos (propuestas del equipo Parte 2). Confirmados además H-03, H-04, H-07, H-08, H-10, H-17, H-22 → **9 confirmados en 4 categorías**.
 - [x] **T2.3 (12-oct):** OSRM depende del historial de consultas del proceso → `--threads 1`, arranque limpio y una
   corrida (Spec v1.8). 26 `sin_peaje` con `toll` (M-12, AP-15, AP-68): **T2.5 los cobra**. Opcional si sobra tiempo: un
   proceso por alternativa (probado, 0 con `toll`). **T2.4 debe incluir M-12 y AP-15.**
@@ -80,7 +80,7 @@
 Candidatos: **23** (H-21 "Logroño" inventado en T3.1 · H-22 Dantzig 1954: revista con el nombre actual · H-23 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
 H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
-confirmados por el puente: **2** (H-04, H-05); por el cazador: **2** (H-17, H-18) — categorías: Datos (10), Matemáticas (1), Código (7: incl. H-23),
+confirmados por el puente: **9** (H-03, H-04, H-05, H-07, H-08, H-10, H-14, H-17, H-22; 4 categorías); por el cazador, pendiente del puente: H-18; descartados: H-12, H-13 — categorías: Datos (10), Matemáticas (1), Código (7: incl. H-23),
 Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (2: H-19 origen pendiente, H-22). Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
