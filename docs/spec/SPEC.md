@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.8** — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.9** — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -343,7 +343,12 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
 
 ### 7.1 Escenario y fecha de corte [PENDIENTE: confirmar]
 - **[DECIDIDO] Fecha de corte 1-oct-2026**, escenario **"base"** = red de peajes vigente en esa fecha (vigente también el día de la entrega y de la sustentación).
-- ⚠️ **AP-68 (Bilbao–Zaragoza):** según el Ministerio de Transportes, deja de ser de peaje el **11-nov-2026** (la concesión vence el 10-nov). **No queda toda gratis:** los tramos de **Álava y Bizkaia seguirán cobrando** (gestionados por las diputaciones forales, con tarifas rebajadas); La Rioja, Navarra y Aragón quedan libres para turismos. Fuente de prensa reportó que Logroño–Bilbao pasaría de 19,60 € a 6,65 € [VERIFICAR con fuente oficial y la resolución del BOE núm. 225 de 11-sep-2026].
+- ⚠️ **AP-68 (Bilbao–Zaragoza):** la concesión estatal vence el **10-nov-2026**. *(v1.9, corregido el 12-oct con fuentes oficiales, T2.4)*
+  - Desde el 11-nov, los tramos estatales de **La Rioja y Aragón** quedan libres (respuesta del Gobierno al Congreso, 23-feb-2026).
+  - **Bizkaia** sigue cobrando con tarifa foral: ligeros 6,85 → **4,20 €** (nota oficial de la Diputación).
+  - **Álava** y **Navarra** deciden sobre sus tramos. Ninguna fuente oficial consultada fija su régimen después del 10-nov; la gratuidad navarra para turismos solo aparece en prensa.
+  - El **BOE núm. 225 de 11-sep-2026** (RD 730/2026, BOE-A-2026-19039) solo regula bonificaciones a vehículos pesados hasta el 10-nov. No respalda la rebaja de Logroño–Bilbao de 19,60 € a 6,65 € que publicó la prensa (candidato H-19).
+  - Nada de esto cambia el escenario base: el 1-oct-2026 toda la AP-68 cobra.
 - **Extensión opcional:** `peajes.escenario: base | post_ap68` en la config → excelente para la modificación en vivo ("¿qué pasa con la ruta después del 11 de noviembre?").
 
 ### 7.2 Recolección de datos — cinco bloques
@@ -400,6 +405,16 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
   - Estatales en concesión y SEITT: listado y tarifas 2026 del **Ministerio de Transportes y Movilidad Sostenible**. Tarifas 2026: +3,64 % a +4,68 % (concesiones) y +2 % (SEITT: R-2, R-3/R-5, R-4, M-12, AP-7 Cartagena–Vera, AP-36, AP-41).
   - Forales/autonómicos: Bidegi (Gipuzkoa), Interbiak (Bizkaia), Diputación Foral de Álava; Galicia y otros operadores autonómicos [VERIFICAR la lista completa de tramos que afectan rutas entre capitales].
 - **Tabla** `peajes_tramos.csv` (§5.3) con tarifa para **vehículos ligeros**, fuente y fecha.
+- **[DECIDIDO v1.9, Jose Miguel, 12-oct] Una tarifa por tramo.** Cuando el operador publica varias tarifas para ligeros, se usa:
+  - AP-51 y AP-61: nivel **normal**, no valle ni punta.
+  - AP-71: tarifa **diurna**.
+  - Autopistas SEITT (R-2, R-3, R-4, M-12, AP-41): pago en **efectivo/tarjeta**, sin telepeaje y sin la franja gratuita de 00:00 a 06:00.
+  - AP-7: **temporada baja**, la vigente el 1-oct.
+  - Los demás niveles quedan anotados en `nota`.
+- **[DECIDIDO v1.9, Jose Miguel, 12-oct] Km sin longitud oficial.** Los tramos forales o autonómicos que el Catálogo RCE no mide se completan con la longitud medida sobre la geometría de OSM. Esos km son una **aproximación documentada** en `nota`.
+- **[DECIDIDO v1.9, Jose Miguel, 12-oct] M-12:** el tramo de pago va de la M-40 a la M-13 e incluye los troncales de Barajas. De la M-13 a la A-1 es libre.
+- *(v1.9)* **Peaje cerrado:** en autopistas de peaje cerrado la suma de tramos no siempre es igual a la tarifa del recorrido completo publicada (Bilbao–Zaragoza: 41,50 € frente a 39,90 €). T2.5 documenta cómo lo trata.
+- *(v1.9)* El Catálogo RCE 2025 (24 MB, `mitma_260306-catalogorce2025.zip`) **no se versiona**, igual que el `.mdb` del Bloque 1. Su URL está en `data/fuentes.md` y su SHA-256 en el MANIFEST.
 - **Cálculo por ruta (aproximación documentada):**
   1. De los pasos de OSRM, tomar los que tienen clase `toll` [VERIFICAR que el OSRM local la marca] y su `ref` (nombre de vía) y ubicación.
   2. Asignar cada tramo recorrido a una fila de `peajes_tramos.csv` por vía **y** ubicación (provincia/tramo) — **no** por el prefijo del nombre: varias "AP-" ya son gratuitas (AP-1, AP-2, AP-4 y tramos de la AP-7) y conservan el nombre.
