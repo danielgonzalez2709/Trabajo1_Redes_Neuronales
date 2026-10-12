@@ -7,9 +7,9 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 7 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-22) | 0 |
+| Código | 8 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23) | 0 |
 | Datos del mundo real | 10 (H-01, H-02, H-04, H-05, H-06, H-13, H-14, H-15, H-17, H-18) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) + 2 confirmados por el cazador, pendientes del puente (H-17, H-18, 12-oct-2026) |
-| Bibliografía | 2 (H-19: error de cita confirmado, origen IA pendiente; H-21) | 0 |
+| Bibliografía | 2 (H-19: error de cita confirmado, origen IA pendiente; H-22) | 0 |
 | Conceptos | 2 (H-12, H-16) | 0 |
 
 ---
@@ -308,7 +308,18 @@
 5. **Corrección (propuesta; el cazador no edita código):** una prueba sobre los datos reales que exija `avisos_por_motivo == {"ref_sin_cadena": 38}` (sin `km_incoherente`) mataría a M5.
 6. **Lección:** la prueba de regresión que compara `rutas.csv` con lo que recalcula el script solo protege contra cambios no regenerados; el error de un dato de entrada (ancla) pasa si el autor regenera. Hace falta una prueba contra una verdad externa o contra el diagnóstico del propio script.
 
-### H-21 — Dantzig, Fulkerson y Johnson (1954) citado en "Operations Research" (en 1954 la revista tenía otro nombre)
+### H-21 — La prueba del par (0, 44) se llamaba "Logroño", pero la ciudad 0 es Vitoria-Gasteiz
+- **Estado:** candidato (el propio subagente admitió que inventó el nombre; falta la revisión del puente)
+- **Categoría:** Código (propuesta de `revisor-spec`; el puente decide si va en Datos, porque es un nombre de ciudad real)
+- **Herramienta y modelo:** Claude Code → subagente `implementador`, T3.1 (sesión principal en claude-opus-5-5; el modelo del subagente lo fija su definición en `.claude/agents/`) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (hallazgo H4 de su ronda 1)
+1. **Prompt (literal):** `prompts/T3.1.md` (ronda 1: "Par calculado a mano: toma un par real de `rutas.csv`…"). El prompt no nombra ninguna ciudad.
+2. **Respuesta relevante de la IA:** en `tests/test_cost.py` la prueba del par (0, 44) se llamaba `test_par_a_mano_logrono_44_…`. Al preguntarle por el origen del nombre (ronda 2), el subagente respondió: "Lo inventé. En la ronda 1 no leí `cities.csv`: vi `AP-68` en `vias_peaje` del par (0, 44) y supuse que la ciudad 0 era Logroño."
+3. **Cómo sospechamos:** `revisor-spec` contrastó el nombre de la prueba con `data/processed/cities.csv`.
+4. **Evidencia:** `data/processed/cities.csv`: id 0 = Vitoria-Gasteiz, id 44 = Bilbao, id 24 = Logroño. Las cifras de la prueba eran correctas (reproducidas por `verificador-matematico` con aritmética exacta); solo el nombre era falso.
+5. **Corrección:** ronda 2 del implementador: la prueba pasó a `test_par_a_mano_vitoria_bilbao_cambia_de_alternativa_entre_w_bajo_y_w_alto`, con los nombres comprobados contra `cities.csv`.
+6. **Lección:** un nombre de prueba también es una afirmación sobre los datos. La IA dedujo la ciudad a partir de la autopista (la AP-68 pasa por Logroño) en vez de leer el archivo; una prueba que pasa no valida su propio nombre ni sus comentarios.
+
+### H-22 — Dantzig, Fulkerson y Johnson (1954) citado en "Operations Research" (en 1954 la revista tenía otro nombre)
 - **Estado:** candidato (prompt literal disponible; evidencia reproducible contra Crossref; severidad baja, pero muy sutil)
 - **Categoría:** Bibliografía
 - **Herramienta y modelo:** Claude Opus 5.5 (orquestador, T0.7) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el orquestador, al verificar contra Crossref la lista que había escrito de memoria
@@ -319,14 +330,14 @@
 5. **Corrección:** `blog/references.bib` usa el nombre registrado en 1954.
 6. **Lección:** APA cita la revista con el nombre que tenía al publicarse el artículo; el DOI no sirve para deducirlo. Las otras 10 referencias recordadas coincidieron en autor y año (también se documenta: ver la tabla de verificaciones).
 
-### H-22 — Encabezados YAML de dos agentes inválidos desde su creación (`:` sin comillas): `revisor-spec` y `revisor-calidad` no cargaban
+### H-23 — Encabezados YAML de dos agentes inválidos desde su creación (`:` sin comillas): `revisor-spec` y `revisor-calidad` no cargaban
 - **Estado:** candidato (prompt literal disponible; evidencia reproducible)
 - **Categoría:** Código
 - **Herramienta y modelo:** Claude Opus 5.5 (asesoría al puente) · **Fecha:** 1-oct-2026 (creación) / 12-oct-2026 (corrección integrada en el PR #3 por el equipo Parte 2; registro por el puente)
 1. **Prompt (literal):** `prompts/asesoria_puente_claude.md`, **Prompt C** (1-oct-2026: "…que tipo de agentes crees que sean necesarios…").
 2. **Respuesta relevante de la IA:** `.claude/agents/revisor-spec.md` y `revisor-calidad.md` (commit `2cd005b`) con `description: Revisa que la implementación … (ni más ni menos): contratos, …` — un `: ` dentro de un valor YAML sin comillas.
 3. **Cómo sospechamos:** en la sesión del equipo Parte 2 esos dos tipos de agente no cargaban (anotado en MEMORIA el 9-oct); el equipo puso las descripciones entre comillas en el PR #3.
-4. **Evidencia:** `evidencias/H-22_frontmatter_agentes.txt`: `yaml.safe_load` del encabezado original → `ScannerError: mapping values are not allowed here` en ambos; los otros agentes (sin `: ` en la descripción) cargan bien. Los 10 agentes actuales validan.
+4. **Evidencia:** `evidencias/H-23_frontmatter_agentes.txt`: `yaml.safe_load` del encabezado original → `ScannerError: mapping values are not allowed here` en ambos; los otros agentes (sin `: ` en la descripción) cargan bien. Los 10 agentes actuales validan.
 5. **Corrección:** comillas en las dos descripciones (PR #3).
 6. **Lección:** un archivo de configuración generado también se prueba (aquí bastaba cargar cada encabezado con `yaml.safe_load`); que "funcionara" en una sesión no garantiza que funcione en otra.
 
@@ -390,4 +401,4 @@ Se documentan para el blog y para T2.5. Evidencia: `evidencias/T2.4_verificacion
 | 12-oct-2026 | T2.5: 6 anclas no-OSM al azar (semilla 20261012: 1, 8, 9, 32, 56, 72). Contraste con la geometría del Catálogo RCE en el p.k. correspondiente: AP-68 km 139,14 (0,17 km), AP-68 Enlace AP-15 (0,05 km), AP-9 Santiago sur (1,07 km), R-4 Ocaña (0,13 km); AP-1 Etxabarri-Ibiña (0,04 km de la salida 107 de OSM; km 38,094 frente a 145,8 − 107 = 38,8 de Bidegi, −1,8 %) | Coherentes (4 + 1). **No verificable:** ancla 1 (Basauri, "equivalente al inicio" de la AP-68): el Catálogo excluye el tramo vasco | `T2.5_cazador/T2.5_anclas_vs_rce.py` → `.txt` |
 | 12-oct-2026 | T2.5: `GI-20`, `N-622`, `PA-34` no son de pago | `N-622`: libre según prensa (Gasteizhoy) y no figura en el Catálogo como autopista; `GI-20`: antigua AP-8, hoy autovía foral, Bidegi no publica tarifa para ella (Wikipedia + `bidegi_gure-autobideak_es.html`); `PA-34`: **no verificable** con fuente primaria. El efecto en `peaje_eur` es nulo por construcción (no se cobran) | `data/raw/peajes_2026-10-12/bidegi_gure-autobideak_es.html`; búsqueda web 12-oct |
 | 12-oct-2026 | T2.5: "AP-15 sin barreras prorrateado hasta −17 %" (afirmación del curador, no está en el informe) | Verificada en la aritmética: 9,494 € frente a 11,40 € (tramo AP15-01 con fracción 0,8328; 31 filas, entre 0,83 y 1). Si la ruta paga o no una barrera (Tiebas/Marcilla) no es verificable sin los p.k. de las estaciones | `rutas_peajes_detalle.csv` |
-| 12-oct-2026 | Bibliografía del blog (T0.7): 11 referencias escritas de memoria (DOI, primer autor, año, revista) contrastadas con Crossref | 10 de 11 coinciden en autor y año (Kennedy 1995 y Shi 1998: Crossref no registra el año de las actas; Berahas: en línea 2021, número 2022 → APA usa 2022). Discrepancia real: revista de Dantzig 1954 (H-21). Además, Crossref trae dañado el título de Stützle y Hoos ("– Ant System" en vez de "MAX–MIN Ant System"): copiar del registro a ciegas también introduce errores | `evidencias/H-bib_verificacion_doi.py` → `.txt` |
+| 12-oct-2026 | Bibliografía del blog (T0.7): 11 referencias escritas de memoria (DOI, primer autor, año, revista) contrastadas con Crossref | 10 de 11 coinciden en autor y año (Kennedy 1995 y Shi 1998: Crossref no registra el año de las actas; Berahas: en línea 2021, número 2022 → APA usa 2022). Discrepancia real: revista de Dantzig 1954 (H-22). Además, Crossref trae dañado el título de Stützle y Hoos ("– Ant System" en vez de "MAX–MIN Ant System"): copiar del registro a ciegas también introduce errores | `evidencias/H-bib_verificacion_doi.py` → `.txt` |

@@ -50,5 +50,5 @@ Respuesta: Spec v1.0, PLAN, `CLAUDE.md` y agentes (commit `2cd005b`).
 Avancemos con el esqueleto del blog
 ```
 
-Respuesta: rama `integracion/t07-blog` (blog MkDocs, hook del reporte, bibliografía verificada contra Crossref). Hallazgo asociado: H-21.
+Respuesta: rama `integracion/t07-blog` (blog MkDocs, hook del reporte, bibliografía verificada contra Crossref). Hallazgo asociado: H-22.
 

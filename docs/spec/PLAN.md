@@ -20,7 +20,7 @@
 | T0.4 | `src/common/counter.py` (`CountedProblem`, presupuesto, `eval_equiv`) | T0.1 | Contador | `test_counter.py`, `test_budget.py` | verificador-matematico | ✅ 2026-10-09 (4 rondas; 0 anomalías en ~9 M llamadas; H-08) |
 | T0.5 | Prueba `test_no_network.py` (bloquea `socket` durante experimentos) | T0.2 | Test | Falla si algún experimento intenta conectarse | auditor-reproducibilidad | ✅ 2026-10-12 (run.py con red bloqueada + ningún módulo de src/ importa red; mutante detectado) |
 | T0.6 | `alucinaciones/` (registro, evidencias, prompts) | — | Carpetas + plantilla | — | cazador-alucinaciones | ✅ (creado con el Spec) |
-| T0.7 | Esqueleto del blog MkDocs + hook de figuras + bibliografía APA | T0.1 | `mkdocs build` funciona | Build falla con figura no citada y con cita inexistente | revisor-calidad | ✅ 2026-10-12 (hook `reporte.py` + pandoc citeproc APA 7; 15 pruebas; 12 referencias verificadas contra Crossref; H-21, H-22) |
+| T0.7 | Esqueleto del blog MkDocs + hook de figuras + bibliografía APA | T0.1 | `mkdocs build` funciona | Build falla con figura no citada y con cita inexistente | revisor-calidad | ✅ 2026-10-12 (hook `reporte.py` + pandoc citeproc APA 7; 15 pruebas; 12 referencias verificadas contra Crossref; H-22, H-23) |
 
 ---
 
@@ -68,12 +68,12 @@
 
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
-| T3.1 | `costos.py`: `matriz_costos(w)` con dos alternativas | T0.3 | Función §5.2 | `test_cost.py` | **verificador-matematico** | ⬜ |
+| T3.1 | `costos.py`: `matriz_costos(w)` con dos alternativas | T0.3 | Función §5.2 | `test_cost.py` | **verificador-matematico** | ✅ |
 | T3.2 | `exact.py`: DFJ con PuLP + subtours iterativos | T3.1 | `solve()` | `test_exact_small.py` (8 ciudades = fuerza bruta) | verificador-matematico | ⬜ |
 | T3.3 | `aco.py`: Ant System + MMAS | T3.1 | `solve()` | Tours válidos; feromona dentro de [τ_min, τ_max] en MMAS; conteo de recorridos | revisor-spec | ⬜ |
 | T3.4 | `ga.py`: OX + inversión + intercambio + torneo + elitismo | T3.1 | `solve()` | `test_tsp_operators.py` (10 000 operaciones válidas) | revisor-spec | ⬜ |
 | T3.5 | `local_search.py`: 2-opt (opcional) | T3.1 | Función | Nunca empeora el recorrido; recorrido válido | — | ⬜ |
-| T3.6 | `experiment.py`: barrido de w + bisección del umbral + gaps | T3.2–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ⬜ |
+| T3.6 | `experiment.py`: barrido de w + bisección del umbral + gaps. **Pendiente de T3.6:** claves de consumo y precio en `configs/part2/base.yaml` para la sensibilidad de §7.5 con `--set` | T3.2–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ⬜ |
 | T3.7 | `configs/part2/demo.yaml` | T3.6 | Demo | < 2 min medido | auditor-reproducibilidad | ⬜ |
 
 ---

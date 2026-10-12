@@ -51,11 +51,11 @@ Fuente: Elaboración propia a partir de results/data/part1/summary.json.
 ## Bibliografía (`references.bib`)
 - **Nunca** escribir una referencia de memoria (ni pedírsela a una IA y copiarla): obtener el BibTeX del DOI
   (`https://doi.org/<doi>` con `Accept: application/x-bibtex`) y verificarlo con
-  `alucinaciones/evidencias/H-bib_verificacion_doi.py` (agregar la referencia a su lista). Ver H-21.
+  `alucinaciones/evidencias/H-bib_verificacion_doi.py` (agregar la referencia a su lista). Ver H-22.
 - Clave = apellido del primer autor + año, en minúsculas (`kennedy1995`). Toda entrada lleva `doi`.
 - Una cita inventada o mal atribuida se penaliza: cualquier sospecha va al registro de la cacería.
 
 ## Notas técnicas
 - `mkdocs` está fijado en **1.6.x**: MkDocs 2.0 elimina los plugins y hooks y rompería `hooks/reporte.py`.
 - El hook (`hooks/reporte.py`) tiene pruebas en `tests/test_blog.py`.
-- Paleta provisional en `docs/stylesheets/ds.css` (Design System: skill `apple-design`); la definitiva es la tarea T4.1.
+- Paleta: `src/viz/paleta.py` es la fuente única de colores (validada para daltonismo); `docs/stylesheets/ds.css` la sigue. Design System: skill `apple-design`.
