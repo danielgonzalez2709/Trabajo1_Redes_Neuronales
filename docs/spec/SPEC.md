@@ -123,7 +123,7 @@ trabajo1/
 ├── media/                        # GIF finales
 ├── tests/
 ├── alucinaciones/  registro.md, evidencias/
-├── blog/  mkdocs.yml, docs/, hooks/figures.py, references.bib, apa.csl
+├── blog/  mkdocs.yml, docs/ (index.md, figures/, stylesheets/), secciones/, hooks/reporte.py, references.bib, apa.csl, README.md
 ├── docs/spec/  SPEC.md, PLAN.md
 └── .claude/agents/               # definiciones de subagentes (§12)
 ```
@@ -519,8 +519,19 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 
 ## 8. Visualización y blog [DECIDIDO]
 - **Material for MkDocs** (en modo mantenimiento con correcciones hasta 5-nov-2026: suficiente para el proyecto).
-- Ecuaciones: `pymdownx.arithmatex` + KaTeX. Bibliografía: `mkdocs-bibtex` + `apa.csl` (APA 7) [VERIFICAR si requiere pandoc → `pypandoc_binary`].
-- **Hook `blog/hooks/figures.py`:** numera figuras y tablas en orden, resuelve referencias `[[fig:id]]` → "Figura N", y **hace fallar el build** si una figura/tabla no se cita o una cita no existe.
+- Ecuaciones: `pymdownx.arithmatex` + KaTeX.
+- **[DECIDIDO 12-oct, T0.7] Bibliografía APA 7 con pandoc citeproc** (`pypandoc_binary` + `blog/apa.csl`, "APA Style 7th edition",
+  lengua `es-ES`) dentro del hook. Se descartó `mkdocs-bibtex` 4.4: convierte las citas en notas al pie y APA exige citas
+  autor–año en el texto. Solo se listan las obras citadas en el texto publicado (las citas dentro de comentarios no cuentan).
+- **Hook `blog/hooks/reporte.py`** (pruebas en `tests/test_blog.py`; guía de uso en `blog/README.md`): une las secciones de
+  `blog/secciones/` en una sola entrada de blog (`--8<-- "…"`), numera figuras y tablas en formato APA (número en negrita,
+  título en cursiva, *Nota.* con la fuente), resuelve `[[fig:id]]`/`[[tab:id]]` y las citas `[@clave]`/`@clave`, y **hace
+  fallar el build** si una figura/tabla no tiene título o fuente, se repite un id, una referencia no existe, una figura/tabla
+  nunca se cita o una cita no está en `references.bib`.
+- **[DECIDIDO 12-oct] `mkdocs` fijado en 1.6.x:** el equipo de Material for MkDocs advierte que MkDocs 2.0 elimina el sistema
+  de plugins y hooks (y no ofrece migración); actualizar rompería el hook.
+- **Bibliografía verificada:** toda entrada de `references.bib` viene del BibTeX oficial del DOI y se contrasta con Crossref
+  (`alucinaciones/evidencias/H-bib_verificacion_doi.py`); nunca de memoria (H-21).
 - **Design System [DECIDIDO 9-oct-2026]:** skill **`apple-design`** de Emil Kowalski (basada en las charlas de diseño de Apple, WWDC):
   https://github.com/emilkowalski/skills/tree/main/skills/apple-design. **No se copia al repositorio** (no declara licencia):
   cada integrante la instala localmente en Claude Code. Se traduce a `src/viz/theme.py` (Plotly), `src/viz/style.py`
@@ -629,7 +640,8 @@ Orquestador ──► Implementador ──► Revisor de cumplimiento del Spec �
 - OSRM — API HTTP: https://project-osrm.org/docs/v26.6.1/http · perfil de coche: https://github.com/Project-OSRM/osrm-backend/blob/master/profiles/car.lua
 - datos.gob.es — precio de carburantes: https://datos.gob.es/en/catalogo/e05068001-precio-de-carburantes-en-las-gasolineras-espanolas
 - SciPy — `differential_evolution`: https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html
-- Material for MkDocs (modo mantenimiento): https://github.com/squidfunk/mkdocs-material/issues/8523 · mkdocs-bibtex: https://pypi.org/project/mkdocs-bibtex/2.16.1
+- Material for MkDocs (modo mantenimiento): https://github.com/squidfunk/mkdocs-material/issues/8523 · aviso sobre MkDocs 2.0: https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+- Estilo APA 7 (CSL oficial): https://github.com/citation-style-language/styles/blob/master/apa.csl · Crossref REST API: https://api.crossref.org
 - Propuesta de recolección de datos del equipo Parte 2 y documento "Trabajo 1 – Punto 2 (TSP por España): decisiones y fuentes de datos" (Camila, 1-oct-2026).
 - km77 — Hyundai Tucson HEV 239 CV (citado por el equipo Parte 2 para la comparación de vehículos): https://www.km77.com/coches/hyundai/tucson/2024/estandar/hev/tucson-klass-16-t-gdi-hev-239-cv/datos
 - Menorca.info — subida de peajes 2026 y fecha de la AP-68: https://www.menorca.info/actualidad/nacional/2026/01/11/2546999/subida-llega-2026-para-autopistas-peaje-dependientes-del-gobierno.html

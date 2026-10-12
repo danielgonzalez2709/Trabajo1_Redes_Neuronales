@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) |
-| Próxima tarea | Parte 2: **T3.1** costos, **T3.3** ACO, **T3.4** GA (T3.6 desbloqueada en datos). Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.7 blog ✅** (rama `integracion/t07-blog`, falta PR); falta T0.5 · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) |
+| Próxima tarea | Parte 2: **T3.1** costos, **T3.3** ACO, **T3.4** GA (T3.6 desbloqueada en datos). Integración: T0.5 (sin red), T4.1 (paleta y estilo de figuras), secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -42,6 +42,10 @@
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
 - Front: **Material for MkDocs** + Plotly (interactivas) + matplotlib con estilo DS (GIF). Todo Python.
+- **Blog (T0.7):** una entrada (`blog/docs/index.md`) que une `blog/secciones/*.md`; hook `blog/hooks/reporte.py` numera figuras/tablas APA
+  (`::: figura id` … `:::`), resuelve `[[fig:id]]` y citas `[@clave]` con pandoc + APA 7, y **falla** si falta título/fuente, una figura no
+  se cita o una cita no está en `references.bib`. Bibliografía SOLO desde el BibTeX oficial del DOI (nunca de memoria). `mkdocs` fijado en 1.6.x
+  (MkDocs 2.0 elimina los hooks). Comando: `mkdocs build --strict -f blog/mkdocs.yml`.
 - Desarrollo con **Subagent Driven Development**: 10 agentes en `.claude/agents/`, protocolo en `CLAUDE.md`.
 - **F0 disponible para los equipos** (Spec §4.1, §5.1, §5.4): `run.py part1|part2|figures --config … --set clave=valor`;
   configs con herencia (`hereda: base.yaml`; **cada método añade su bloque completo a `base.yaml`**); YAML 1.2 (`1e-3` es número,
@@ -71,16 +75,17 @@
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **20** (H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+Candidatos: **22** (H-21 Dantzig 1954: revista con el nombre actual · H-22 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
 H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
 confirmados por el puente: **2** (H-04, H-05); por el cazador: **2** (H-17, H-18) — categorías: Datos (10), Matemáticas (1), Código (5),
-Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (1: H-19, origen pendiente). Técnica útil: **prueba de mutación**.
+Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (2: H-19 origen pendiente, H-21). Código +1 (H-22). Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Daniel + Claude | **T0.7 ✅** blog: MkDocs Material + hook `reporte.py` (APA con pandoc citeproc; `mkdocs-bibtex` descartado porque cita con notas al pie) + 12 secciones con responsables + 15 pruebas (640 en total). Bibliografía: 12 referencias del BibTeX oficial, 11 contrastadas con Crossref (H-21). H-22 confirmado con PyYAML. `mkdocs` fijado en 1.6.1 por el aviso de MkDocs 2.0. |
 | 2026-10-12 | Jose Miguel + Claude | **T2.8 ✅** (cierra F2): `fuentes.md` completo y `test_data_integrity.py` (51 pruebas; 627 en total). curador-datos 3 rondas; revisor-spec devolvió una aserción de simetría que no podía fallar (la matriz se arma espejando: `rutas.csv` guarda i<j, simetría por construcción, Spec §7.2); revisor-calidad devolvió pruebas tautológicas y duplicadas. La cabecera `Date` de caché (SEITT, Mitma) engañaba: la hora real es la "fecha local de la captura". Zona horaria resuelta. |
 | 2026-10-12 | Jose Miguel + Claude | **T2.5 ✅**: peajes asignados a las 2 162 filas de `rutas.csv` (curador-datos, 2 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅ CONFORME; 568 pruebas). Suma de tramos [DECIDIDO]; `peajes_tramos.csv` no tiene coordenadas → archivos laterales de cadenas y anclas. 5 pares validados (Bilbao–Zaragoza 41,50 €, A Coruña–Pontevedra 16,35 € = Audasa). El cazador refutó la sospecha de tarifa errónea de AP51-01. **Spec v1.10.** |
 | 2026-10-12 | Jose Miguel + Claude | **T2.4 ✅**: tabla de peajes (56 tramos; curador-datos, 6 rondas; revisor-spec ✅, revisor-calidad ✅, cazador ✅; 512 pruebas). Una ronda previa transcribió matrices origen–destino sin km: se rehízo por tramos con km del Catálogo RCE y de OSM. **Spec v1.9** (AP-68 tras el 10-nov, tarifas, M-12). Cacería: H-17 a H-19. |
