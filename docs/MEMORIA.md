@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-11 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0 ✅, T2.1 ✅, T2.2 ✅, T2.3 🟡 código listo) |
-| Próxima tarea | Parte 2: **T2.3 ejecución** (Camila: comandos en `scripts/osrm/README.md` §T2.3; sube `rutas.csv`, `rutas_resumen.json`, `rutas_pasos_peaje.csv`) · T3.1 costos, T3.3 ACO, T3.4 GA con matriz sintética · T2.4 peajes · T2.6/T2.7 combustible y vehículo (Camila). Integración: T0.5, T0.7 |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (en `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.0–T2.2 ✅, T2.3 🟡 ejecutada, T2.6 ✅, T2.7 🟡 falta acabado) |
+| Próxima tarea | Parte 2: **T2.7** (elegir acabado) · **T2.3** (decidir los 5 pares `sin_peaje` con clase `toll`) · T3.1 costos, T3.3 ACO, T3.4 GA · T2.4 peajes. Integración: T0.5, T0.7. **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 2) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -34,7 +34,7 @@
 - η: Rastrigin 2e-3 (garantía global, L ≈ 396.8); Rosenbrock 1e-3 (empírico, sin garantía global; L ≈ 5 971 en 2D).
 - Parte 2: fecha de corte **1-oct-2026**; OSRM **local con Docker** (T2.0, 10-oct; el servidor público no admite `exclude=toll`; ORS solo contingencia); dos alternativas por par
   (rápida / sin peaje); par sin peaje = la rápida no pasa por ninguna intersección `toll` (Spec v1.5); crudos de rutas NO se versionan,
-  T2.5 usa `rutas_pasos_peaje.csv`; peajes oficiales + forales; Gasolina 95 E5 media nacional; **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
+  T2.5 usa `rutas_pasos_peaje.csv`; peajes oficiales + forales; Gasolina 95 E5 **media peninsular** (v1.6; la nacional queda como sensibilidad); **Toyota Corolla Sedán Hybrid 2026 1.8 L (140H)**.
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
@@ -50,7 +50,8 @@
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
 - [ ] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → precisar antes de T2.5. Aceptación T2.2 Madrid–Barcelona no tiene peaje.
 - [ ] Zona horaria del equipo: `fuentes.md` dice UTC−5, máquina de Parte 2 en UTC−3.
-- [ ] **Acabado** del Corolla Sedán 140H (de la ficha oficial de Toyota España).
+- [ ] **Acabado** del Corolla Sedán 140H: Toyota España tiene Style Plus (particulares, 4,6 l/100 km) y ECO (flotas, cifras contradictorias). Sin fase WLTP extra alta publicada.
+- [ ] **T2.3:** 5 pares `sin_peaje` pasan por intersecciones `toll` pese a `exclude=toll` ([16,18], [16,35], [16,44], [27,35] por M-12; [26,29] por AP-15). Decidir tratamiento antes de T2.5.
 - [x] **Design System:** skill `apple-design` (Emil Kowalski). Falta la **paleta de colores** (T4.1); la skill no la define.
 - [ ] ¿Escenario opcional `post_ap68`?
 - [ ] Confirmar fecha/hora de la sustentación.
@@ -66,6 +67,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-11 | Jose Miguel + Claude | Asumimos las tareas de Camila. **T2.6 ✅** (media peninsular 1,8318 €/l; 3 rondas; 418 pruebas). **T2.3 ejecutada** en Windows (Docker Desktop, `.wslconfig` 16 GB; 1081/1081 pares; `osrm.sh` admite Git Bash). **Spec v1.6**: enunciado y rúbrica literales (§1.2–1.3), combustible peninsular. T2.7 a la espera del acabado. |
 | 2026-10-11 | Jose Miguel + Claude | **T2.3 código listo** (curador-datos, 2 rondas): `descargar_datos.py --bloque 2`, `construir_rutas.py`, 58 pruebas nuevas (332 en total). revisor-spec ✅, revisor-calidad ✅. Spec v1.5: criterio de par sin peaje, `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3, crudos de rutas sin versionar. Falta que Camila lo ejecute. |
 | 2026-10-11 | Daniel + Claude | Integración de la rama de Parte 2 (T2.0/T2.2 de Camila) con `main` (F0). Conflictos resueltos: Spec → v1.4; el H-06 de Camila (campos PBF) pasa a **H-11** porque H-06 ya era Mérida. Reparto: nosotros escribimos T2.3, T3.1, T3.3, T3.4, T2.4; Camila ejecuta T2.3 y hace T2.6 y T2.7. |
 | 2026-10-10 | Equipo Parte 2 + Claude | **T2.2 ✅**: Colima + Docker; OSRM v26.10.0 (arm64, digest fijo), extracto `spain-261001` (datos 1-oct 20:22Z, md5 ok); `toll` verificado (AP-68, AP-9). Auditor ✅ (8 menores). H-11 (Código) candidato. |

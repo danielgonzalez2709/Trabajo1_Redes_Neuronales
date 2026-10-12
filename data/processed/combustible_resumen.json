@@ -1,0 +1,70 @@
+{
+  "producto": "Gasolina 95 E5",
+  "id_producto": "1",
+  "campo_precio": "Precio Gasolina 95 E5",
+  "ambito": "peninsular",
+  "fecha": "2026-10-01",
+  "fecha_respuesta": "01/10/2026 0:00:00",
+  "fecha_consulta_utc": "2026-10-12T01:55:03Z",
+  "fuente_url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/01-10-2026",
+  "archivo_raw": "data/raw/carburantes_minetur_hist_2026-10-01.json.gz",
+  "redondeo": "media y mediana con aritmética decimal exacta y redondeo final a 4 decimales (mitad al par)",
+  "n_estaciones_respuesta": 11484,
+  "n_sin_precio": 579,
+  "criterio_sin_precio": "estaciones con el campo 'Precio Gasolina 95 E5' vacío (o solo espacios): no venden el producto o no comunicaron precio ese día; se excluyen",
+  "nacional": {
+    "n": 10905,
+    "media": 1.82,
+    "mediana": 1.829,
+    "min": 1.289,
+    "max": 2.299
+  },
+  "peninsular": {
+    "n": 10171,
+    "media": 1.8318,
+    "mediana": 1.829,
+    "min": 1.465,
+    "max": 2.299
+  },
+  "no_peninsular": {
+    "Baleares": {
+      "n": 215,
+      "media": 1.9193,
+      "mediana": 1.899,
+      "min": 1.719,
+      "max": 2.299
+    },
+    "Canarias": {
+      "n": 497,
+      "media": 1.5451,
+      "mediana": 1.544,
+      "min": 1.289,
+      "max": 1.823
+    },
+    "Ceuta": {
+      "n": 10,
+      "media": 1.6335,
+      "mediana": 1.623,
+      "min": 1.604,
+      "max": 1.694
+    },
+    "Melilla": {
+      "n": 12,
+      "media": 1.5816,
+      "mediana": 1.584,
+      "min": 1.574,
+      "max": 1.584
+    }
+  },
+  "ccaa_no_peninsulares": {
+    "04": "Baleares",
+    "05": "Canarias",
+    "18": "Ceuta",
+    "19": "Melilla"
+  },
+  "contraste_filtro_producto": {
+    "url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestresHist/FiltroProducto/01-10-2026/1",
+    "n_estaciones": 10905,
+    "coincide": true
+  }
+}

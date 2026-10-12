@@ -1,14 +1,17 @@
 """ÚNICO script del proyecto que accede a internet (Spec §3, §7.2).
 
-Paso 1 del pipeline del Bloque 1 (orden completo en scripts/comun_bloque1.py) y del Bloque 2
-(orden completo en scripts/comun_bloque2.py).
+Paso 1 del pipeline del Bloque 1 (orden completo en scripts/comun_bloque1.py), del Bloque 2
+(orden completo en scripts/comun_bloque2.py) y del Bloque 4 (orden completo en scripts/comun_bloque4.py).
 
-Descarga los datos crudos de la Parte 2 a data/raw/ con la fecha de descarga en el nombre.
+Descarga los datos crudos de la Parte 2 a data/raw/ con una fecha en el nombre del archivo o de la carpeta: la de
+descarga en el Bloque 1, la indicada con --fecha en el Bloque 2 y la de los DATOS pedidos al histórico en el Bloque 4
+(la fecha y hora de consulta van dentro del crudo en los Bloques 2 y 4).
 Los experimentos y el procesamiento leen solo de data/raw/.
 
 Uso:
     python scripts/descargar_datos.py --bloque 1
     python scripts/descargar_datos.py --bloque 2 --fecha AAAA-MM-DD [--osrm-url URL] [--limite N]
+    python scripts/descargar_datos.py --bloque 4 [--fecha AAAA-MM-DD]
 
 Bloque 1 (coordenadas de las capitales de provincia), fuentes:
   1. IGN, API OGC Features, colección `nuc` (IGR Poblaciones: núcleos de población).
@@ -32,6 +35,15 @@ Bloque 2 (rutas por carretera, Spec §7.2), fuente: OSRM LOCAL (T2.2, scripts/os
     responde tras 3 intentos. Las respuestas con code != "Ok" se guardan y se listan al final, la corrida sigue
     y el código de salida es 1.
   - Los crudos de data/raw/osrm_<fecha>/{rutas,simetria}/ NO se versionan (Spec §7.2 Bloque 2, v1.5).
+
+Bloque 4 (precio de la Gasolina 95 E5, Spec §7.2), fuente: servicio REST del Ministerio para la Transición Ecológica
+(Geoportal de Gasolineras), endpoint HISTÓRICO por fecha.
+  - --fecha opcional; por defecto la fecha de corte (comun_bloque4.FECHA_CORTE, Spec §7.1).
+  - 4 consultas (comun_bloque4.urls_consultas): histórico completo, histórico filtrado por producto 1 (contraste) y
+    los listados de productos y de CC. AA. Se guardan juntas en data/raw/carburantes_minetur_hist_<fecha>.json.gz
+    (JSON + gzip) con {fecha_datos, fecha_consulta_utc, consultas: [{nombre, url, fecha_consulta_utc, respuesta}]}.
+  - Si el histórico no devuelve OK o devuelve otro día, aborta SIN guardar nada: nunca se sustituye por el precio de
+    hoy. No sobrescribe un crudo existente (bórrelo a mano si de verdad hay que repetir la descarga).
 """
 
 from __future__ import annotations
@@ -43,6 +55,7 @@ import http.client
 import itertools
 import json
 import os
+import ssl
 import sys
 import time
 import urllib.error
@@ -53,6 +66,7 @@ from pathlib import Path
 from typing import Callable, NamedTuple
 
 import comun_bloque2 as cb2
+import comun_bloque4 as cb4
 from comun_bloque1 import CPRO_EXCLUIDAS, RAW
 from comun_bloque2 import CITIES_CSV
 
@@ -341,6 +355,87 @@ def bloque2(fecha: str, osrm_url: str, limite: int | None) -> int:
     return 0 if not res.fallos else 1
 
 
+# ============================================================================================ Bloque 4 (combustible)
+
+
+# El servidor del Ministerio (IIS) solo negocia TLS 1.2 con AES256-GCM-SHA384 (intercambio de claves RSA, sin secreto
+# perfecto hacia adelante), que la lista de cifrados por defecto de Python excluye: el servidor corta la conexión
+# (WinError 10054) en vez de responder con una alerta TLS. Comprobado el 2026-10-11 (curl/Schannel sí conecta).
+# El prefijo de CIFRADOS_MINETUR (hasta "!AESCCM") es copia literal de la cadena de cifrados por defecto de CPython,
+# la que aplica ssl.create_default_context() (comprobado en Python 3.12.10: misma lista y mismo orden); se le añade
+# SOLO AES256-GCM-SHA384.
+# La verificación del certificado y del nombre se mantiene (tests/test_combustible.py lo comprueba).
+CIFRADOS_MINETUR = ("@SECLEVEL=2:ECDH+AESGCM:ECDH+CHACHA20:ECDH+AES:DHE+AES:!aNULL:!eNULL:!aDSS:!SHA1:!AESCCM:"
+                    "AES256-GCM-SHA384")
+
+
+def contexto_tls_minetur() -> ssl.SSLContext:
+    ctx = ssl.create_default_context()
+    ctx.set_ciphers(CIFRADOS_MINETUR)
+    return ctx
+
+
+def _get_json(url: str, timeout: int = 600) -> object:
+    """GET de una URL del Ministerio -> JSON (la respuesta trae BOM UTF-8). Un HTTP 400 del histórico (fecha mal
+    formada o futura) es DescargaError."""
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout, context=contexto_tls_minetur()) as resp:
+            cuerpo = resp.read()
+    except urllib.error.HTTPError as exc:
+        detalle = exc.read()[:300].decode("utf-8-sig", "replace")
+        raise DescargaError(f"HTTP {exc.code} ({exc.reason}) al descargar {url}: {detalle}") from exc
+    except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException) as exc:
+        raise DescargaError(f"Sin conexión o URL no accesible ({exc}) al descargar {url}") from exc
+    try:
+        return json.loads(cuerpo.decode("utf-8-sig"))
+    except ValueError as exc:
+        raise DescargaError(f"respuesta no JSON en {url}: {exc}") from exc
+
+
+def descargar_carburantes(fecha: str, destino_dir: Path, consultar: Callable[[str], object] | None = None) -> Path:
+    """Bloque 4: las 4 consultas de comun_bloque4.urls_consultas(fecha) en un único crudo .json.gz.
+
+    Comprueba ANTES de escribir que las dos respuestas de estaciones son OK y del día pedido (no se sustituye por otro
+    día) y que los listados son coherentes (comun_bloque4.validar_listados). `consultar` permite inyectar un doble del
+    servidor en las pruebas.
+    """
+    consultar = consultar or _get_json
+    destino = destino_dir / cb4.nombre_crudo(fecha)
+    if destino.exists():
+        raise DescargaError(f"{destino} ya existe; no se sobrescribe un crudo. Bórrelo a mano si hay que repetir.")
+    consultas = []
+    for nombre, url in cb4.urls_consultas(fecha).items():
+        fecha_consulta = _ahora_utc()
+        respuesta = consultar(url)
+        if nombre.startswith("historico"):
+            try:
+                cb4.validar_estaciones(respuesta, fecha, nombre)
+            except cb4.DatoFaltanteError as exc:
+                raise DescargaError(f"{exc}. URL: {url}. No se guarda nada.") from exc
+        consultas.append({"nombre": nombre, "url": url, "fecha_consulta_utc": fecha_consulta, "respuesta": respuesta})
+    respuestas = {c["nombre"]: c["respuesta"] for c in consultas}
+    try:
+        cb4.validar_listados(respuestas["productos"], respuestas["ccaa"])
+    except cb4.DatoFaltanteError as exc:
+        raise DescargaError(f"{exc}. No se guarda nada.") from exc
+    destino_dir.mkdir(parents=True, exist_ok=True)
+    _guardar_crudo(destino, {"fecha_datos": fecha, "fecha_consulta_utc": consultas[0]["fecha_consulta_utc"],
+                             "consultas": consultas})
+    return destino
+
+
+def fecha_bloque4(args: argparse.Namespace) -> str:
+    return args.fecha or cb4.FECHA_CORTE
+
+
+def bloque4(fecha: str) -> int:
+    destino = descargar_carburantes(fecha, RAW)
+    print(f"Bloque 4 — {cb4.PRODUCTO}, histórico del {fecha} -> {destino} ({destino.stat().st_size} B)")
+    print(f"Siguiente paso (sin red): python scripts/construir_combustible.py --fecha {fecha}")
+    return 0
+
+
 def _entero_positivo(texto: str) -> int:
     valor = int(texto)
     if valor < 1:
@@ -357,10 +452,11 @@ def _fecha_iso(texto: str) -> str:
 
 def construir_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--bloque", type=int, choices=[1, 2], required=True)
+    parser.add_argument("--bloque", type=int, choices=[1, 2, 4], required=True)
     parser.add_argument("--fecha", type=_fecha_iso, default=None,
                         help="Bloque 2 (OBLIGATORIA): fecha AAAA-MM-DD de la carpeta data/raw/osrm_<fecha>/. Para "
-                             "reanudar, también otro día, repetir la MISMA fecha")
+                             "reanudar, también otro día, repetir la MISMA fecha. Bloque 4 (opcional): día pedido al "
+                             f"histórico de precios (por defecto la fecha de corte, {cb4.FECHA_CORTE})")
     parser.add_argument("--osrm-url", default=None,
                         help=f"Bloque 2: URL base del OSRM local (por defecto {cb2.OSRM_URL_LOCAL})")
     parser.add_argument("--limite", type=_entero_positivo, default=None,
@@ -369,11 +465,13 @@ def construir_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _avisar_opciones_ignoradas(args: argparse.Namespace) -> None:
-    ignoradas = [op for op, valor in (("--osrm-url", args.osrm_url), ("--limite", args.limite),
-                                      ("--fecha", args.fecha)) if valor is not None]
+def _avisar_opciones_ignoradas(args: argparse.Namespace, con_fecha: bool = True) -> None:
+    opciones = [("--osrm-url", args.osrm_url), ("--limite", args.limite)]
+    if con_fecha:
+        opciones.append(("--fecha", args.fecha))
+    ignoradas = [op for op, valor in opciones if valor is not None]
     if ignoradas:
-        print(f"AVISO: {', '.join(ignoradas)}: solo se usa(n) con --bloque 2; se ignora(n).", file=sys.stderr)
+        print(f"AVISO: {', '.join(ignoradas)}: no se usa(n) con --bloque {args.bloque}; se ignora(n).", file=sys.stderr)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -387,6 +485,9 @@ def main(argv: list[str] | None = None) -> int:
             _avisar_opciones_ignoradas(args)
             bloque1(dt.date.today().isoformat())
             return 0
+        if args.bloque == 4:
+            _avisar_opciones_ignoradas(args, con_fecha=False)
+            return bloque4(fecha_bloque4(args))
         return bloque2(args.fecha, args.osrm_url or cb2.OSRM_URL_LOCAL, args.limite)
     except DescargaError as exc:
         raise SystemExit(f"ERROR de descarga: {exc}") from exc
