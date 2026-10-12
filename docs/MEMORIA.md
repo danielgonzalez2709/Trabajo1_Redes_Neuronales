@@ -14,16 +14,16 @@
 ## 📍 Estado actual
 | | |
 |---|---|
-| Última actualización | 2026-10-09 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
-| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **arrancar T1.1** (rama sin commits). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
-| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 4) |
+| Última actualización | 2026-10-12 |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
+| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.2 GD de paso fijo**, luego **T1.3 Armijo**. Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
+| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
 ## 👥 Equipo
 | Rol | Quién |
 |---|---|
-| Parte 1 — Optimización numérica | 2 integrantes (nombres: por completar) |
+| Parte 1 — Optimización numérica | 2 integrantes (nombres: Edinson y Juan Jose) |
 | Parte 2 — TSP por España | 2 integrantes, incluida Camila |
 | Puente: integración, repositorio, cacería de alucinaciones | Daniel |
 
@@ -63,6 +63,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Parte 1 + Claude (SDD) | **T1.1 ✅** (`functions.py`, 73 pruebas; suite 347 passed, 1 skipped): revisor-spec, revisor-calidad y verificador-matematico aprueban en ronda 1; fórmulas, x*, f* y dominio de Rastrigin verificados contra SFU (12-oct). Candidatos **H-12** y **H-13** (Código). |
 | 2026-10-09 | Daniel + Claude (SDD) | **T0.2, T0.3, T0.4 ✅** con subagentes: implementador → revisor-spec → revisor-calidad (+ verificador-matemático en T0.4), 2–4 rondas cada una; 274 pruebas en total. Spec §4.1/§5.1/§5.4 ampliado (YAML 1.2, herencia, regla de bloques, identificadores, semilla efectiva, BudgetExhausted). Hallazgos **H-08**, **H-09**, **H-10** (Código). |
 | 2026-10-09 | Daniel + Claude | PR #1 revisado (39/39 pruebas, regeneración byte a byte) y fusionado (merge commit). **T0.1 ✅**: `requirements.txt` (Python 3.12.6, `pip freeze`), esqueleto `src/`, `configs/`, `results/`, `media/`. Hallazgos nuevos **H-06** (Mérida) y **H-07** (PuLP 4 sin CBC y API nueva). Design System = skill `apple-design`. Spec v1.3. |
 | 2026-10-09 | Jose Miguel + Claude | **T2.1 ✅**: `cities.csv` (47 capitales, NGMEP 202603), 39 pruebas, mapa de control; revisor-spec ✅, revisor-calidad ✅ (2.ª ronda), cazador ✅. Verificación manual: Jose Miguel (8-oct). Spec v1.2. H-04 y H-05 confirmados. |

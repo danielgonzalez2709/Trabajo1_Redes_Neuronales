@@ -185,6 +185,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
   "history": [{"eval_equiv": float, "f_best": float}],
   "frames":  [{"iter": int, "positions": [[x, y], ...], "best": [x, y]}] }   # solo si dim == 2 y cfg.record_frames
 ```
+[PENDIENTE: aprobación de Daniel, propuesto en T1.1] src/part1/functions.py expone además la fábrica get_function(name, dim) y el diccionario FUNCIONES; name coincide con los identificadores de la sección 5.4.
 
 ### 5.2 Parte 2
 ```python

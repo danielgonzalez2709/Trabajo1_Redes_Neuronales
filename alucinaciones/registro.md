@@ -7,7 +7,7 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 4 (H-07, H-08, H-09, H-10) | 0 |
+| Código | 6 (H-07, H-08, H-09, H-10, H-12, H-13) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 0 | 0 |
 | Conceptos | 0 | 0 |
@@ -153,6 +153,28 @@
 4. **Evidencia:** `evidencias/H-10_prueba_que_no_falla.py` → `.txt`: con `_fusionar` reemplazada por una versión defectuosa (muta la base y comparte objetos), **las 14 pruebas de herencia pasan** (14 passed).
 5. **Corrección:** ronda 4 de T0.2 — la fusión se declara in-place sobre diccionarios recién leídos (documentado) y se elimina la prueba que no podía fallar.
 6. **Lección:** una prueba sin la posibilidad de fallar es una afirmación disfrazada. Técnica útil para el resto del proyecto: **prueba de mutación** — romper a propósito el código y comprobar que alguna prueba se pone roja.
+
+### H-12 — Resultado falso en una prueba de mutación por bytecode (`.pyc`) obsoleto
+- **Estado:** candidato (prompt literal disponible; falta evidencia reproducible guardada en `evidencias/`)
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `revisor-spec`, T1.1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el propio subagente `revisor-spec` (autocorrección), reportado al orquestador
+1. **Prompt (literal):** `prompts/T1.1.md`, bloque "Sesión del 12-oct-2026 — Ronda 1 — `revisor-spec`", punto d) (aplicar M1–M13 uno a uno sobre `src/part1/functions.py`).
+2. **Respuesta relevante de la IA:** informe del revisor: "En mi primera pasada M11 pareció fallar en `test_atributos[rosenbrock-*]`. Era un falso resultado: un `.pyc` obsoleto. M10 y M11 producen archivos del mismo tamaño escritos en el mismo segundo, así que Python reutilizó el bytecode de M10."
+3. **Cómo sospechamos:** M11 cambia el dominio de **Rastrigin**, pero falló una prueba de **Rosenbrock**: el mutante "muerto" no era el mutante aplicado.
+4. **Evidencia:** pendiente de reproducir y guardar. Mecanismo: la validación por defecto de `.pyc` compara fecha de modificación (resolución de 1 s) y tamaño del fuente; dos mutantes del mismo tamaño escritos en el mismo segundo comparten bytecode. Según el revisor, `-B` no basta porque sigue leyendo los `.pyc` existentes.
+5. **Corrección:** el revisor repitió todo con `PYTHONPYCACHEPREFIX` aislado por mutante; M11 falla en `test_atributos[rastrigin-*]`. La tabla del implementador (ronda 1 del 10-oct) pudo sufrir el mismo efecto; la tabla vigente es la del revisor.
+6. **Lección:** en pruebas de mutación, aislar la caché de bytecode por mutante (o borrar `__pycache__`) y comprobar que la prueba que falla corresponde a lo que se mutó.
+
+### H-13 — "TestFunction no se instancia directamente porque `_f`/`_grad` lanzan NotImplementedError" (el mecanismo descrito no es el real)
+- **Estado:** candidato (severidad baja)
+- **Categoría:** Código (también Conceptos: clases abstractas en Python)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, T1.1 ronda 1) · **Fecha:** 10-oct-2026 · **Quién lo cazó:** subagente `revisor-spec` (12-oct), confirmado por `revisor-calidad`
+1. **Prompt (literal):** `prompts/T1.1.md`, bloque "Ronda 1 — `implementador`" (ENTREGABLE 1: clase base `TestFunction`).
+2. **Respuesta relevante de la IA:** supuesto declarado por el implementador (transcrito en el bloque de `revisor-spec` de `prompts/T1.1.md`): "_f/_grad de la base lanzan NotImplementedError y TestFunction no se instancia directamente".
+3. **Cómo sospechamos:** al ejecutar `TestFunction(2)` no sale `NotImplementedError` sino `AttributeError: 'TestFunction' object has no attribute 'dim_min'`; con `TestFunction(2.0)`, `AttributeError: ... 'name'` (al construir el mensaje del TypeError).
+4. **Evidencia:** pendiente de guardar en `evidencias/`. Reproducible con `python -c "from src.part1.functions import TestFunction; TestFunction(2)"`. Los `raise NotImplementedError` de `src/part1/functions.py:63-67` son inalcanzables desde la base.
+5. **Corrección:** propuesta de `revisor-calidad` (no aplicada, no bloqueante): `TestFunction(abc.ABC)` con `@abc.abstractmethod` en `_f`/`_grad` y una prueba `pytest.raises(TypeError)`.
+6. **Lección:** una afirmación sobre el comportamiento ante errores se verifica ejecutando el caso, no leyendo el código.
 
 ---
 

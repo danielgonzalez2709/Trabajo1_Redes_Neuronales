@@ -1,6 +1,6 @@
 ---
 name: revisor-spec
-description: Revisa que la implementación de una tarea cumpla EXACTAMENTE el Spec (ni más ni menos): contratos, reglas de conteo, parámetros por defecto, criterios de aceptación. Usar después de cada implementador.
+description: "Revisa que la implementación de una tarea cumpla EXACTAMENTE el Spec (ni más ni menos): contratos, reglas de conteo, parámetros por defecto, criterios de aceptación. Usar después de cada implementador."
 tools: Read, Glob, Grep, Bash
 ---
 
