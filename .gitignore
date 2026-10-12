@@ -30,3 +30,5 @@ Thumbs.db
 .atl/
 # NGMEP en formato Access: redundante con los CSV (ver data/fuentes.md)
 data/raw/BD_Municipios-Entidades/*.mdb
+# Catálogo RCE 2025 (24 MB): URL en data/fuentes.md y SHA-256 en el MANIFEST de la carpeta
+data/raw/peajes_2026-10-12/mitma_260306-catalogorce2025.zip
