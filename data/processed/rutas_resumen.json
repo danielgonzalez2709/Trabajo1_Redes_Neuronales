@@ -2,17 +2,17 @@
  "generado_por": "scripts/construir_rutas.py",
  "fuente": "OSRM v26.10.0 (perfil car.lua, MLD) sobre OSM Geofabrik spain-261001",
  "fecha_extracto_osm": "2026-10-01T20:22:06Z",
- "crudos": "data/raw/osrm_2026-10-11",
+ "crudos": "data/raw/osrm_2026-10-12",
  "parcial": false,
  "n_pares": 1081,
  "n_filas": 2162,
  "fecha_consulta_utc": {
-  "min": "2026-10-12T02:18:07Z",
-  "max": "2026-10-12T02:18:55Z"
+  "min": "2026-10-12T05:18:33Z",
+  "max": "2026-10-12T05:19:11Z"
  },
  "pares_sin_peaje": {
   "criterio": "ninguna intersección (steps[].intersections[].classes) de la ruta rapida tiene la clase 'toll' (Spec §7.2 Bloque 2); en rutas.csv la fila sin_peaje reutiliza la rapida",
-  "n": 549,
+  "n": 547,
   "pares": [
    [
     0,
@@ -369,10 +369,6 @@
    [
     3,
     34
-   ],
-   [
-    3,
-    35
    ],
    [
     3,
@@ -1668,10 +1664,6 @@
    ],
    [
     21,
-    35
-   ],
-   [
-    21,
     37
    ],
    [
@@ -2224,12 +2216,64 @@
    "pares": []
   },
   "sin_peaje_con_clase_toll": {
-   "nota": "la ruta exclude=toll pasa por intersecciones 'toll'; no debería ocurrir. Sus pasos están en rutas_pasos_peaje.csv. Revisar y escalar",
-   "n": 5,
+   "nota": "la ruta exclude=toll pasa por intersecciones 'toll'. Se observó que depende del historial de consultas del proceso osrm-routed cuando recibe consultas rapida y exclude=toll mezcladas (mecanismo no confirmado). Según el Spec v1.8 §7.2 Bloque 2 se reporta aquí; sus pasos están en rutas_pasos_peaje.csv y T2.5 cobra ese peaje",
+   "n": 26,
    "pares": [
+    [
+     0,
+     38
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     32
+    ],
+    [
+     3,
+     35
+    ],
+    [
+     3,
+     44
+    ],
+    [
+     11,
+     29
+    ],
+    [
+     12,
+     18
+    ],
+    [
+     12,
+     29
+    ],
+    [
+     12,
+     32
+    ],
+    [
+     12,
+     35
+    ],
+    [
+     12,
+     44
+    ],
     [
      16,
      18
+    ],
+    [
+     16,
+     29
+    ],
+    [
+     16,
+     32
     ],
     [
      16,
@@ -2240,12 +2284,44 @@
      44
     ],
     [
+     17,
+     29
+    ],
+    [
+     21,
+     29
+    ],
+    [
+     21,
+     32
+    ],
+    [
+     21,
+     35
+    ],
+    [
+     21,
+     44
+    ],
+    [
      26,
      29
     ],
     [
      27,
+     29
+    ],
+    [
+     27,
+     32
+    ],
+    [
+     27,
      35
+    ],
+    [
+     27,
+     44
     ]
    ]
   }
@@ -2253,9 +2329,9 @@
  "control_pasos": {
   "rutas": 2162,
   "rutas_con_ref": 2162,
-  "rapida_con_clase_toll": 532,
-  "sin_peaje_con_clase_toll": 5,
-  "filas_rutas_pasos_peaje": 2286,
+  "rapida_con_clase_toll": 534,
+  "sin_peaje_con_clase_toll": 26,
+  "filas_rutas_pasos_peaje": 2339,
   "nota": "respuestas de OSRM de rutas/ (las dos alternativas de cada par, antes de reutilizar)"
  },
  "simetria": {
@@ -2484,13 +2560,13 @@
      "i": 18,
      "j": 21,
      "dist_km_ij": 780.5776999999999,
-     "dist_km_ji": 782.2864000000001,
+     "dist_km_ji": 783.8021,
      "tiempo_h_ij": 8.751305555555556,
-     "tiempo_h_ji": 8.829166666666667,
-     "abs_km": 1.7087000000000698,
-     "abs_h": 0.07786111111111091,
-     "rel_km": 0.002189019747809949,
-     "rel_h": 0.008897085196811882
+     "tiempo_h_ji": 8.82086111111111,
+     "abs_km": 3.2244000000000232,
+     "abs_h": 0.06955555555555495,
+     "rel_km": 0.004130786723730416,
+     "rel_h": 0.007948020454090907
     },
     {
      "i": 18,
