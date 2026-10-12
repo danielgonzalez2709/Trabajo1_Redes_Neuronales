@@ -1,0 +1,138 @@
+% Bibliografía del reporte (APA 7.ª edición vía pandoc citeproc + blog/apa.csl).
+% REGLA: toda entrada se obtiene del registro oficial (BibTeX de doi.org / Crossref) y se verifica con
+%   alucinaciones/evidencias/H-bib_verificacion_doi.py antes de citarla. NUNCA escribir una referencia "de memoria".
+% Correcciones manuales sobre el BibTeX de Crossref (consultado 12-oct-2026), documentadas:
+%   - kennedy1995, shi1998: Crossref no registra el año de las actas; se toma el del congreso (ICNN'95, ICEC'98).
+%   - stutzle2000: Crossref trae el título dañado ("– Ant System"); el título publicado es "MAX–MIN Ant System".
+%   - berahas2022: publicado en línea en 2021 y asignado al vol. 22, n.º 2 (2022); APA 7 usa el año del número.
+%   - nocedal2006: la serie va en "series" (Crossref la pone en "journal").
+%   - dantzig1954: la revista se llamaba "Journal of the Operations Research Society of America" en 1954 (ver H-21).
+
+@inproceedings{kennedy1995,
+  title     = {Particle swarm optimization},
+  author    = {Kennedy, J. and Eberhart, R.},
+  booktitle = {Proceedings of ICNN'95 - International Conference on Neural Networks},
+  volume    = {4},
+  pages     = {1942--1948},
+  year      = {1995},
+  publisher = {IEEE},
+  doi       = {10.1109/ICNN.1995.488968}
+}
+
+@inproceedings{shi1998,
+  title     = {A modified particle swarm optimizer},
+  author    = {Shi, Y. and Eberhart, R.},
+  booktitle = {1998 IEEE International Conference on Evolutionary Computation Proceedings. IEEE World Congress on Computational Intelligence},
+  pages     = {69--73},
+  year      = {1998},
+  publisher = {IEEE},
+  doi       = {10.1109/ICEC.1998.699146}
+}
+
+@article{clerc2002,
+  title     = {The particle swarm - explosion, stability, and convergence in a multidimensional complex space},
+  author    = {Clerc, M. and Kennedy, J.},
+  journal   = {IEEE Transactions on Evolutionary Computation},
+  volume    = {6},
+  number    = {1},
+  pages     = {58--73},
+  year      = {2002},
+  doi       = {10.1109/4235.985692}
+}
+
+@article{storn1997,
+  title     = {Differential Evolution -- A Simple and Efficient Heuristic for global Optimization over Continuous Spaces},
+  author    = {Storn, Rainer and Price, Kenneth},
+  journal   = {Journal of Global Optimization},
+  volume    = {11},
+  number    = {4},
+  pages     = {341--359},
+  year      = {1997},
+  doi       = {10.1023/A:1008202821328}
+}
+
+@article{dorigo1996,
+  title     = {Ant system: optimization by a colony of cooperating agents},
+  author    = {Dorigo, M. and Maniezzo, V. and Colorni, A.},
+  journal   = {IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics)},
+  volume    = {26},
+  number    = {1},
+  pages     = {29--41},
+  year      = {1996},
+  doi       = {10.1109/3477.484436}
+}
+
+@article{dorigo1997,
+  title     = {Ant colony system: a cooperative learning approach to the traveling salesman problem},
+  author    = {Dorigo, M. and Gambardella, L. M.},
+  journal   = {IEEE Transactions on Evolutionary Computation},
+  volume    = {1},
+  number    = {1},
+  pages     = {53--66},
+  year      = {1997},
+  doi       = {10.1109/4235.585892}
+}
+
+@article{stutzle2000,
+  title     = {{MAX--MIN} Ant System},
+  author    = {St{\"u}tzle, Thomas and Hoos, Holger H.},
+  journal   = {Future Generation Computer Systems},
+  volume    = {16},
+  number    = {8},
+  pages     = {889--914},
+  year      = {2000},
+  doi       = {10.1016/S0167-739X(00)00043-1}
+}
+
+@article{rosenbrock1960,
+  title     = {An Automatic Method for Finding the Greatest or Least Value of a Function},
+  author    = {Rosenbrock, H. H.},
+  journal   = {The Computer Journal},
+  volume    = {3},
+  number    = {3},
+  pages     = {175--184},
+  year      = {1960},
+  doi       = {10.1093/comjnl/3.3.175}
+}
+
+@article{armijo1966,
+  title     = {Minimization of functions having Lipschitz continuous first partial derivatives},
+  author    = {Armijo, Larry},
+  journal   = {Pacific Journal of Mathematics},
+  volume    = {16},
+  number    = {1},
+  pages     = {1--3},
+  year      = {1966},
+  doi       = {10.2140/pjm.1966.16.1}
+}
+
+@article{dantzig1954,
+  title     = {Solution of a Large-Scale Traveling-Salesman Problem},
+  author    = {Dantzig, G. and Fulkerson, R. and Johnson, S.},
+  journal   = {Journal of the Operations Research Society of America},
+  volume    = {2},
+  number    = {4},
+  pages     = {393--410},
+  year      = {1954},
+  doi       = {10.1287/opre.2.4.393}
+}
+
+@article{berahas2022,
+  title     = {A Theoretical and Empirical Comparison of Gradient Approximations in Derivative-Free Optimization},
+  author    = {Berahas, Albert S. and Cao, Liyuan and Choromanski, Krzysztof and Scheinberg, Katya},
+  journal   = {Foundations of Computational Mathematics},
+  volume    = {22},
+  number    = {2},
+  pages     = {507--560},
+  year      = {2022},
+  doi       = {10.1007/s10208-021-09513-z}
+}
+
+@book{nocedal2006,
+  title     = {Numerical Optimization},
+  author    = {Nocedal, Jorge and Wright, Stephen J.},
+  series    = {Springer Series in Operations Research and Financial Engineering},
+  publisher = {Springer New York},
+  year      = {2006},
+  doi       = {10.1007/978-0-387-40065-5}
+}
