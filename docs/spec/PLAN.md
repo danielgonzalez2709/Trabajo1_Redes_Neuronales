@@ -31,7 +31,7 @@
 | ID | Tarea | Depende | Entregable | Aceptación | + Verificador | Estado |
 |---|---|---|---|---|---|---|
 | T1.1 | `functions.py`: Rosenbrock y Rastrigin (f, grad, dominio, x*, f*) | T0.4 | Clases §5.1 | `test_gradients.py` (error rel. < 1e-6 en ≥100 puntos), f(x*) = f* | **verificador-matematico** | ✅ |
-| T1.2 | `gd.py`: GD paso fijo con proyección | T1.1 | `optimize()` | Converge en una cuadrática de prueba; respeta presupuesto; registra frames en 2D | verificador-matematico | ⬜ |
+| T1.2 | `gd.py`: GD paso fijo con proyección | T1.1 | `optimize()` | Converge en una cuadrática de prueba; respeta presupuesto; registra frames en 2D | verificador-matematico | ✅ (gd.py fijo; Armijo en T1.3) |
 | T1.3 | `gd.py`: variante Armijo | T1.2 | `optimize()` | Cuenta evaluaciones de f de la búsqueda lineal; condición de Armijo probada | verificador-matematico | ⬜ |
 | T1.4 | `ea.py`: GA real (torneo, BLX-α, mutación gaussiana, elitismo) | T0.4 | `optimize()` | Conteo exacto por generación; individuos dentro del dominio | — | ⬜ |
 | T1.5 | `pso.py`: PSO gbest con inercia y manejo de límites | T0.4 | `optimize()` | `test_counter` N·(T+1); partículas dentro del dominio; v_max respetada | verificador-matematico | ⬜ |

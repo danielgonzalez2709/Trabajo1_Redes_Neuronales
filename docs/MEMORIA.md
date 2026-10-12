@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
-| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.2 GD de paso fijo**, luego **T1.3 Armijo**. Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ (PR de `integracion/f0-fundaciones` → `main`; faltan T0.5 sin-red y T0.7 blog) · **F1 — Parte 1** en curso (T1.1 ✅, T1.2 ✅) · **F2 — Datos Parte 2** en curso (T2.1 ✅, PR #1) |
+| Próxima tarea | Ambos equipos: **traer `main` a su rama** tras fusionar el PR de F0. Parte 1: **T1.3 Armijo** (generalizar `_descenso_paso_fijo` con el paso como parámetro, sin copiar el bucle); luego **T1.7** cuando el compañero termine EA/PSO/DE (T1.4–T1.6). Parte 2: **T2.0 OSRM (bloqueo crítico)** → T2.2; en paralelo T2.4 peajes, T2.6 combustible, T2.7 vehículo. Integración: T0.5 (prueba sin red), T0.7 (blog MkDocs) |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -63,6 +63,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Parte 1 + Claude (SDD) | **T1.2 ✅** (`gd.py` paso fijo con proyección + bloque `gd:` en `base.yaml`; 69 pruebas; suite 416 passed, 1 skipped; 15/15 mutantes muertos): revisor-spec ✅ (1 ronda), revisor-calidad ✅ (2 rondas, correcciones de forma), verificador-matematico ✅ (reimplementación independiente idéntica en 30 semillas × 4 configs). Spec §6.3: línea [PENDIENTE] de la config del GD. Escalar: el ejemplo `--set gd.armijo=true` de §4.1 ya no aplica. Candidato **H-14** (Código). |
 | 2026-10-12 | Parte 1 + Claude (SDD) | **T1.1 ✅** (`functions.py`, 73 pruebas; suite 347 passed, 1 skipped): revisor-spec, revisor-calidad y verificador-matematico aprueban en ronda 1; fórmulas, x*, f* y dominio de Rastrigin verificados contra SFU (12-oct). Candidatos **H-12** y **H-13** (Código). |
 | 2026-10-09 | Daniel + Claude (SDD) | **T0.2, T0.3, T0.4 ✅** con subagentes: implementador → revisor-spec → revisor-calidad (+ verificador-matemático en T0.4), 2–4 rondas cada una; 274 pruebas en total. Spec §4.1/§5.1/§5.4 ampliado (YAML 1.2, herencia, regla de bloques, identificadores, semilla efectiva, BudgetExhausted). Hallazgos **H-08**, **H-09**, **H-10** (Código). |
 | 2026-10-09 | Daniel + Claude | PR #1 revisado (39/39 pruebas, regeneración byte a byte) y fusionado (merge commit). **T0.1 ✅**: `requirements.txt` (Python 3.12.6, `pip freeze`), esqueleto `src/`, `configs/`, `results/`, `media/`. Hallazgos nuevos **H-06** (Mérida) y **H-07** (PuLP 4 sin CBC y API nueva). Design System = skill `apple-design`. Spec v1.3. |

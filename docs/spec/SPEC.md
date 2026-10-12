@@ -282,6 +282,7 @@ blog como amenaza a la validez (métodos con recorte a los bordes o inicializaci
     porque la trayectoria entra rápido al valle, donde la curvatura es menor. **Se usa η = 1e-3 declarando que no hay garantía
     global** y se reporta η = 1/L como análisis de sensibilidad. La variante Armijo resuelve la elección automáticamente.
 - Punto inicial: uniforme en el dominio. Parada: ‖∇f‖ < 1e-8 o presupuesto agotado.
+[PENDIENTE: aprobación de Daniel, propuesto en T1.2] Configuración del GD: bloque `gd:` compartido por gdfijo y gdarmijo con `gd.eta.<función>` (rosenbrock 1e-3, rastrigin 2e-3), `gd.armijo.{eta0,beta,c}` (1.0, 0.5, 1e-4) y `gd.tol_grad` (1e-8); optimize recibe `cfg["variante"]` en {"fijo","armijo"} (lo fija el runner de T1.7) y elige eta con `problem.func.name`; el GD de paso fijo registra el punto inicial y cada iterado con `observe` (sin costo, n_f = 0) y un frame por iterado con una sola posición.
 
 ### 6.4 Metaheurísticas (parámetros por defecto, todos sobrescribibles por config)
 | Algoritmo | Ecuaciones | Parámetros por defecto |

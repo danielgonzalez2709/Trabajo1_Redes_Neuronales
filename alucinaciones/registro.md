@@ -7,7 +7,7 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 | 0 |
-| Código | 6 (H-07, H-08, H-09, H-10, H-12, H-13) | 0 |
+| Código | 7 (H-07, H-08, H-09, H-10, H-12, H-13, H-14) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 0 | 0 |
 | Conceptos | 0 | 0 |
@@ -175,6 +175,17 @@
 4. **Evidencia:** pendiente de guardar en `evidencias/`. Reproducible con `python -c "from src.part1.functions import TestFunction; TestFunction(2)"`. Los `raise NotImplementedError` de `src/part1/functions.py:63-67` son inalcanzables desde la base.
 5. **Corrección:** propuesta de `revisor-calidad` (no aplicada, no bloqueante): `TestFunction(abc.ABC)` con `@abc.abstractmethod` en `_f`/`_grad` y una prueba `pytest.raises(TypeError)`.
 6. **Lección:** una afirmación sobre el comportamiento ante errores se verifica ejecutando el caso, no leyendo el código.
+
+### H-14 — "Las anclas de la prueba salen de esta misma implementación" (procedencia de los datos afirmada sin evidencia)
+- **Estado:** candidato (severidad baja; el propio subagente lo retiró al corregirle)
+- **Categoría:** Código (también Conceptos: oráculo de prueba independiente vs. prueba de regresión)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `revisor-calidad`, T1.2 ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el orquestador (sesión principal), al contrastar con el encargo
+1. **Prompt (literal):** `prompts/T1.2.md`, bloque "Ronda 1 — `revisor-calidad`".
+2. **Respuesta relevante de la IA:** hallazgo 4: "Los valores (f_best, x_best, n_grad, mediana 0.0019054868310523) son de regresión: salen de esta misma implementación y no son independientes."
+3. **Cómo sospechamos:** el encargo humano de T1.2 (bloque "Ronda 1 — `implementador`", punto k) dice que las anclas "salen de un cálculo independiente" y prohíbe ajustarlas; el revisor no tenía información sobre su origen y aun así lo afirmó como hecho.
+4. **Evidencia:** el `verificador-matematico` reimplementó el GD sin mirar `gd.py` y reprodujo las anclas (diferencia 0 en 30 semillas × 4 configuraciones; mediana 0,001905486831052). En la ronda 2 el `revisor-calidad` retiró el hallazgo ("suponía que los valores salían de esta implementación").
+5. **Corrección:** comentario de procedencia en `tests/test_gd.py` encima de las secciones k) y l) (ronda 2 del implementador).
+6. **Lección:** la procedencia de un dato se afirma solo con evidencia (fuente o comando); si no se conoce, se pregunta o se marca como desconocida.
 
 ---
 
