@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.7** — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.8** — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -364,10 +364,32 @@ Por configuración: media, desviación estándar, mediana, mejor, peor de f_fina
   - **Contingencia (solo si T2.2 falla):** openrouteservice *Directions* con `avoid_features: ["tollways"]` (API key gratuita; 2 000 peticiones/día, 40/min).
 - **Para cada par (i, j), i < j (1 081 pares) y cada alternativa:**
   - `rapida`: ruta sin restricciones.
-  - `sin_peaje`: ruta con `exclude=toll`.
+  - `sin_peaje`: ruta pedida con `exclude=toll`.
+    *(v1.8, corregido el 12-oct)* Con un único proceso `osrm-routed` que recibe consultas `rapida` y `exclude=toll`
+    mezcladas, algunas rutas `sin_peaje` pasan por la clase `toll`. Son 26 en la corrida vigente: 18 por la M-12, 7 por la
+    AP-15 y 1 por la AP-68. Eso ocurre aunque exista una alternativa gratuita.
+    - **Lo observado** (ronda 2 de T2.3; mecanismo interno de OSRM no confirmado):
+      - la respuesta depende del **historial de consultas** del proceso;
+      - con **un proceso por alternativa**, 0 rutas `sin_peaje` tienen `toll` y el resultado no depende del orden.
+    - El diagnóstico previo atribuía el fallo a `exclude=toll`: quedó refutado (ver H-16).
+    - **[DECIDIDO, Jose Miguel, 12-oct]:** por tiempo se usa la corrida de **un solo proceso**. Un proceso por
+      alternativa queda como mejora opcional.
+    - Una ruta `sin_peaje` que pase por la clase `toll` **se reporta** en `rutas_resumen.json` (`avisos.sin_peaje_con_clase_toll`).
+    - Sus pasos con peaje van a `rutas_pasos_peaje.csv`, y **T2.5 cobra ese peaje**, como en cualquier otra fila.
+    - Evidencia en `alucinaciones/evidencias/T2.3_toll_diagnostico/` y `alucinaciones/evidencias/T2.3_historial_osrm/`.
   - Guardar: distancia, duración, pasos (`ref`, distancia, clases, coordenadas) y geometría simplificada.
+- **[DECIDIDO v1.8, Jose Miguel, 12-oct] Determinismo:** `osrm-routed` corre con **`--threads 1`**.
+  - Con 16 hilos, la misma URL devolvía rutas distintas (p. ej., 18/12 en 30 repeticiones), a veces no óptimas.
+  - Con eso, 2 pares quedaron mal marcados como "sin peaje": [3,35] y [21,35] pasaban por la M-12.
+  - Con un hilo, la misma URL repetida da la misma respuesta (20/20).
+  - Aun así, la respuesta depende de las consultas previas. Por eso la corrida se hace **con el servidor recién
+    arrancado y en el orden de `descargar_datos.py`**: así se reproduce exactamente (0/2202 rutas distintas).
+  - Se descartó un segundo grafo con un perfil que prohíba las vías de peaje: contradice §2 ("OSRM con perfiles personalizados" está fuera de alcance).
 - **Simetría:** se asume c_ij = c_ji (se consulta i→j). **Comprobación:** consultar j→i para 20 pares aleatorios y reportar la diferencia máxima en el blog.
 - **Aceptación:** 1 081 × 2 rutas sin errores; si `sin_peaje` coincide con `rapida` (no hay peaje en la ruta), se marca y se reutiliza.
+  *(v1.8)*
+  - Las rutas `sin_peaje` con clase `toll` **no** bloquean la tarea: se cuentan y se listan.
+  - Es obligatorio comprobar el determinismo: varias consultas repetidas deben devolver la misma ruta.
 - **[DECIDIDO 11-oct-2026, T2.3]**
   - **Criterio de marca:** un par es "sin peaje" si **ninguna intersección** de su ruta `rapida` tiene la clase `toll` (la clase va por intersección, no por paso). Se conservan las dos filas en `rutas.csv` (sin columna nueva): la fila `sin_peaje` reutiliza los valores de la `rapida`. Los pares marcados se listan en `rutas_resumen.json`; si OSRM devolvió para `sin_peaje` una distancia o duración distinta, se emite un aviso.
   - `vias_peaje`, `km_peaje` y `peaje_eur` quedan vacías en T2.3; las rellena T2.5 a partir de `rutas_pasos_peaje.csv`.
