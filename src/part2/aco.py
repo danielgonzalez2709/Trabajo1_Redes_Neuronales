@@ -39,42 +39,26 @@ Decisiones de implementación (no fijadas por el Spec):
 
 from __future__ import annotations
 
-import math
-
 import numpy as np
 
 from src.common.seeds import validar_entero
+from src.part2.recorridos import costos_recorridos as _costos
+from src.part2.recorridos import N_MINIMO  # noqa: F401  (superficie pública de T3.3)
+from src.part2.recorridos import leer_clave, validar_generador
+from src.part2.recorridos import validar_matriz as _validar_matriz
+from src.part2.recorridos import validar_real as _real
+from src.part2.recorridos import vecino_mas_cercano as _vecino_mas_cercano
 
 VARIANTES = ("mmas", "as")  # Spec §7.4.1: MMAS principal, AS comparación
-N_MINIMO = 3  # con menos de 3 ciudades no hay ciclo hamiltoniano con arcos distintos
 
 
 # ---------------------------------------------------------------------------------------- validación
-
-
-def _real(valor, nombre: str, minimo: float, maximo: float | None = None, *, min_abierto=False, max_abierto=False):
-    """`valor` como float finito dentro del intervalo; TypeError si no es número, ValueError si está fuera."""
-    if isinstance(valor, (bool, np.bool_)) or not isinstance(valor, (int, float, np.integer, np.floating)):
-        raise TypeError(f"{nombre} debe ser un número; se recibió {valor!r} ({type(valor).__name__})")
-    x = float(valor)
-    fuera = (
-        not math.isfinite(x)
-        or (x <= minimo if min_abierto else x < minimo)
-        or (maximo is not None and (x >= maximo if max_abierto else x > maximo))
-    )
-    if fuera:
-        izq = "(" if min_abierto else "["
-        der = ")" if max_abierto else "]"
-        rango = f"{izq}{minimo}, {maximo if maximo is not None else '∞'}{der}"
-        raise ValueError(f"{nombre} debe estar en {rango}; se recibió {valor!r}")
-    return x
+# Validación de C, costo de recorridos, vecino más cercano y `_real` viven en `recorridos.py` (compartidos con
+# `ga.py`, Spec §7.4.2); se importan con sus nombres de T3.3 para no cambiar el comportamiento ni las pruebas.
 
 
 def _clave(bloque: dict, clave: str, ruta: str):
-    try:
-        return bloque[clave]
-    except (KeyError, TypeError):
-        raise KeyError(f"falta la clave {ruta} en la configuración (Spec §7.4.1)") from None
+    return leer_clave(bloque, clave, ruta, "§7.4.1")
 
 
 def _leer_parametros(cfg: dict) -> dict:
@@ -105,47 +89,7 @@ def _leer_parametros(cfg: dict) -> dict:
     }
 
 
-def _validar_matriz(C) -> np.ndarray:
-    """C como float64: cuadrada, n ≥ 3, finita, simétrica y con c_ij > 0 fuera de la diagonal (η = 1/c)."""
-    C = np.asarray(C)
-    if C.dtype.kind not in "iuf":
-        raise ValueError(f"C debe ser numérica; se recibió dtype {C.dtype}")
-    if C.ndim != 2 or C.shape[0] != C.shape[1]:
-        raise ValueError(f"C debe ser una matriz cuadrada; se recibió forma {C.shape}")
-    n = C.shape[0]
-    if n < N_MINIMO:
-        raise ValueError(f"C debe tener n >= {N_MINIMO} ciudades; se recibió n = {n}")
-    C = C.astype(float)
-    if not np.isfinite(C).all():
-        raise ValueError("C debe ser finita (sin NaN ni inf)")
-    if not np.array_equal(C, C.T):
-        raise ValueError("C debe ser simétrica (TSP simétrico, Spec §7.3)")
-    if not (C[~np.eye(n, dtype=bool)] > 0).all():
-        raise ValueError("C debe tener costos > 0 fuera de la diagonal (η = 1/c, notas Def. 13)")
-    return C
-
-
 # ----------------------------------------------------------------------------------- piezas del algoritmo
-
-
-def _costos(C: np.ndarray, tours: np.ndarray) -> np.ndarray:
-    """Costo de cada fila de `tours` (k × n), incluido el arco de cierre (última ciudad → primera)."""
-    return C[tours, np.roll(tours, -1, axis=1)].sum(axis=1)
-
-
-def _vecino_mas_cercano(C: np.ndarray) -> tuple[np.ndarray, float]:
-    """Recorrido del vecino más cercano desde la ciudad 0 y su costo C^nn (notas, Def. 8). Empates: menor índice."""
-    n = C.shape[0]
-    tour = [0]
-    disponible = np.ones(n, dtype=bool)
-    disponible[0] = False
-    for _ in range(n - 1):
-        candidatos = np.where(disponible, C[tour[-1]], np.inf)
-        siguiente = int(np.argmin(candidatos))
-        tour.append(siguiente)
-        disponible[siguiente] = False
-    tour = np.array(tour)
-    return tour, float(_costos(C, tour[None, :])[0])
 
 
 def _limites_mmas(L_bs: float, rho: float, n: int, p_best: float) -> tuple[float, float]:
@@ -247,8 +191,7 @@ def iterar(C: np.ndarray, cfg: dict, rng: np.random.Generator):
     """
     params = _leer_parametros(cfg)
     C = _validar_matriz(C)
-    if not isinstance(rng, np.random.Generator):
-        raise TypeError(f"rng debe ser un np.random.Generator (Spec §4.1); se recibió {type(rng).__name__}")
+    validar_generador(rng)
     vecino = _vecino_mas_cercano(C)  # T^bs inicial: L^bs = C^nn (Spec §7.4.1)
     if params["variante"] == "mmas":
         _limites_mmas(vecino[1], params["rho_mmas"], C.shape[0], params["p_best"])  # τ_min ≥ τ_max → ValueError aquí

@@ -1,5 +1,5 @@
 # Parte 2 — valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
-# Solo claves de nivel superior de §4.1. Los bloques ga: y peajes: (Spec §7.1, §7.4) los añaden T3.x; aco: es de T3.3.
+# Solo claves de nivel superior de §4.1. El bloque peajes: (Spec §7.1) lo añade su tarea; aco: es de T3.3 y ga: de T3.4.
 methods: [aco, ga, exacto]    # §7.5: exacto + ACO + GA
 runs: 10                      # §7.5: ACO (10 corridas) + GA (10 corridas)
 base_seed: 0                  # §4.1 [DECIDIDO 9-oct]: base_seed 0 en ambas partes
@@ -16,3 +16,10 @@ aco:                          # T3.3 — Spec §7.4 y §7.4.1 [DECIDIDO v1.14]; 
   mmas:
     rho: 0.02                 # §7.4.1: ρ de MMAS (notas Tabla 3)
     p_best: 0.05              # §7.4: p_best = 0.05 (notas §7.2, Prop. 2 y §9)
+ga:                           # T3.4 — Spec §7.4 (tabla, fila GA) y §7.4.2 [DECIDIDO v1.15]
+  poblacion: 150              # §7.4: pop = 150 (§7.4.2: entero >= 2)
+  generaciones: 1000          # §7.4: gen = 1 000 (§7.4.2: entero >= 1); T3.6 fija el presupuesto común de recorridos
+  pc: 0.9                     # §7.4: probabilidad de cruce OX (§7.4.2: real en [0, 1])
+  pm: 0.2                     # §7.4: probabilidad de mutación, inversión o intercambio 50/50 (§7.4.2: real en [0, 1])
+  torneo_k: 4                 # §7.4: torneo k = 4 (§7.4.2: entero en [1, poblacion])
+  elites: 2                   # §7.4: élites = 2 (§7.4.2: entero en [0, poblacion))
