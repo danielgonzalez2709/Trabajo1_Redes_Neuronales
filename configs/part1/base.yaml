@@ -55,3 +55,42 @@ de:
   F: 0.7                  # factor de mutación diferencial (real finito > 0)
   CR: 0.9                 # probabilidad de cruce binomial (real en [0, 1])
   generaciones: null      # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
+
+# Optimización de hiperparámetros (T1.10; src/part1/hpo.py). La usa `python run.py hpo`;
+# `run.py part1` no lee este bloque. El ensayo 0 de cada unidad son los valores de arriba.
+hpo:
+  ensayos: 30                             # ensayos por unidad de búsqueda (el 0 = por defecto)
+  semillas: 5                             # semillas por ensayo, con el presupuesto del experimento
+  base_seed: 1000                         # semillas de ajuste 1000-1004, disjuntas de 0-29 (reporte)
+  semilla_busqueda: 1                     # muestreo de la unidad i: make_rng(semilla_busqueda, i)
+  reanudar: false                         # bool; lo interpreta la orquestación (T1.10-B)
+  salida: results/data/part1_hpo          # carpeta de los resultados de los ensayos
+  salida_afinada: results/data/part1_tuned       # `salida` de la config afinada
+  tablas_afinada: results/tables/part1_tuned     # `tablas` de la config afinada
+  config_salida: configs/part1/tuned.yaml        # archivo de la config afinada
+  # Espacios: método -> nombre corto -> {ruta, tipo, min, max}; intervalos cerrados.
+  # tipo: uniforme, log (uniforme en el logaritmo; min > 0) o entero (min y max enteros).
+  # "{func}" en la ruta: una unidad por (método, función). No se afinan generaciones,
+  # iteraciones, esquema, reevaluar_elite ni tol_grad.
+  espacios:
+    gdfijo:
+      eta: {ruta: "gd.eta.{func}", tipo: log, min: 1e-5, max: 1e-2}
+    gdarmijo:
+      eta0: {ruta: gd.armijo.eta0, tipo: log, min: 0.1, max: 10.0}
+      beta: {ruta: gd.armijo.beta, tipo: uniforme, min: 0.1, max: 0.9}
+      c: {ruta: gd.armijo.c, tipo: log, min: 1e-5, max: 1e-1}
+    ea:
+      N: {ruta: ea.N, tipo: entero, min: 20, max: 200}
+      frac_e: {ruta: ea.frac_e, tipo: uniforme, min: 0.05, max: 0.30}
+      frac_m: {ruta: ea.frac_m, tipo: uniforme, min: 0.05, max: 0.40}
+      frac_c: {ruta: ea.frac_c, tipo: uniforme, min: 0.40, max: 0.90}
+    pso:
+      N: {ruta: pso.N, tipo: entero, min: 10, max: 100}
+      w: {ruta: pso.w, tipo: uniforme, min: 0.3, max: 0.95}
+      c1: {ruta: pso.c1, tipo: uniforme, min: 0.5, max: 2.5}
+      c2: {ruta: pso.c2, tipo: uniforme, min: 0.5, max: 2.5}
+      vmax_frac: {ruta: pso.vmax_frac, tipo: uniforme, min: 0.05, max: 0.5}
+    de:
+      NP: {ruta: de.NP, tipo: entero, min: 10, max: 100}
+      F: {ruta: de.F, tipo: uniforme, min: 0.3, max: 1.2}
+      CR: {ruta: de.CR, tipo: uniforme, min: 0.1, max: 1.0}

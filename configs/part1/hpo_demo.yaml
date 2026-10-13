@@ -1,0 +1,19 @@
+# Demo de la HPO de la Parte 1 (T1.10): Rastrigin 2D, PSO y GD de paso fijo, 6 ensayos, 3 semillas.
+# Hereda todo de base.yaml (§4.1 [DECIDIDO 9-oct]) y solo escribe lo que cambia.
+# Comando: python run.py hpo --config configs/part1/hpo_demo.yaml
+# Todas sus carpetas están bajo *_hpo_demo: no escribe en las del experimento completo ni en
+# configs/part1/tuned.yaml. Si falta su resumen por defecto (<salida>/summary.json), lo genera.
+hereda: base.yaml
+func: [rastrigin]
+dim: [2]
+methods: [pso, gdfijo]
+runs: 5
+salida: results/data/part1_hpo_demo/experimento   # resumen por defecto del demo
+tablas: results/tables/part1_hpo_demo             # CSV por defecto del demo
+hpo:
+  ensayos: 6                                      # ensayos por unidad (el 0 = por defecto)
+  semillas: 3                                     # semillas de ajuste 1000-1002
+  salida: results/data/part1_hpo_demo             # ensayos_<unidad>.json y seleccion.json
+  salida_afinada: results/data/part1_hpo_demo/afinado     # experimento final del demo
+  tablas_afinada: results/tables/part1_hpo_demo/afinado   # sus CSV y comparacion.csv
+  config_salida: results/data/part1_hpo_demo/tuned.yaml   # config afinada del demo

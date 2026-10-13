@@ -15,6 +15,9 @@
 # | 3 | `ejecutar_experimento` | corre, guarda y resume el experimento | `str` |
 # | 4 | `manejador_part1` | manejador del subcomando `part1` de `run.py` | `int` |
 #
+# Entre las auxiliares, `mapeador` (corre tareas en serie o en un grupo de procesos) también es
+# pública: la usa `hpo_experimento.py`.
+#
 # **Archivos que escribe** (`salida` y `tablas` son claves de la config):
 #
 # | Ruta | Contenido |
@@ -285,8 +288,11 @@ def _correr_tarea(tarea: tuple) -> dict:
 
 
 @contextlib.contextmanager
-def _mapeador(workers: int) -> Iterator[Callable]:
-    """Entrega una función `map(funcion, tareas)`: la de Python o la de un grupo de procesos."""
+def mapeador(workers: int) -> Iterator[Callable]:
+    """Entrega una función `map(funcion, tareas)`: la de Python o la de un grupo de procesos.
+
+    Es pública porque también la usa `hpo_experimento.py`.
+    """
     if workers == WORKERS_EN_SERIE:
         yield map
     else:
@@ -324,7 +330,7 @@ def _correr_tabla(mapear: Callable, cfg: Mapping, configuraciones: Sequence[tupl
 
     Parameters
     ----------
-    mapear : función `map(funcion, tareas)` de `_mapeador`.
+    mapear : función `map(funcion, tareas)` de `mapeador`.
     k : costo del gradiente que recibe `ejecutar_corrida` (None = 2·dim).
     con_frames : si es False, ninguna corrida de esta tabla pide frames.
     carpeta : carpeta de los JSON de corridas.
@@ -457,7 +463,7 @@ def ejecutar_experimento(cfg: dict, informar: Informar = print) -> str:
     configuraciones_gd = [configuracion for configuracion in configuraciones
                           if configuracion[2] in METODOS_GD]
 
-    with _mapeador(cfg[CLAVE_WORKERS]) as mapear:
+    with mapeador(cfg[CLAVE_WORKERS]) as mapear:
         principales, avisos_principal = _correr_tabla(
             mapear, cfg, configuraciones, k=None, con_frames=True,
             carpeta=salida / CARPETA_CORRIDAS, etiqueta=ETIQUETA_PRINCIPAL, informar=informar)
