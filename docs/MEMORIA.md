@@ -16,7 +16,7 @@
 |---|---|
 | Última actualización | 2026-10-13 |
 | Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4, T3.6, T3.7 ✅ |
-| Próxima tarea | Parte 2: figuras **T4.4/T4.5** desde `results/data/part2/`; **T3.2 exacto y T3.5 2-opt = opcionales** (Spec v1.14; 2-opt no está en el enunciado, decidido 12-oct). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Próxima tarea | Parte 2: **revisar el borrador del blog (05, 06, 07 y TSP de 02)** y pasar redactor-tecnico/cazador si da tiempo; **T3.2 exacto y T3.5 2-opt = opcionales** (Spec v1.14; 2-opt no está en el enunciado, decidido 12-oct). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 0) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -88,6 +88,7 @@
 - [ ] Confirmar fecha/hora de la sustentación.
 - [ ] Prompts literales para la cacería: ~~H-01, H-03 (Daniel)~~ ✅ en `alucinaciones/prompts/asesoria_puente_claude.md`; H-02 (Camila) pendiente.
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
+- [ ] **Prueba en rojo previa:** `test_rutas_csv_real_coincide_con_lo_que_calcula_el_script` falla en macOS/Linux porque `peajes_resumen.json` (y otros 5 de `data/processed/`) se versionaron con CRLF desde Windows. Regenerar con LF o comparar sin fin de línea.
 
 ## 🎯 Cacería de alucinaciones
 Candidatos: **24** (H-24 GA: prueba que no distinguía el orden de los padres, débil · H-21 "Logroño" inventado en T3.1 · H-22 Dantzig 1954: revista con el nombre actual · H-23 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
@@ -100,6 +101,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-13 | Equipo Parte 2 + Claude | **T4.6 Parte 2 (borrador, sin commit):** secciones 05 (fuentes, simetría, peajes, combustible, vehículo), 06 (algoritmos, presupuesto común, envolvente) y 07 (umbrales 10,75/13,81/42,19 con márgenes ≤ 1,42 € hasta w = 42; MMAS vs AS vs GA; sensibilidad; demo) + TSP de 02 (se quitó «el óptimo se obtiene con Dantzig»; ecuaciones MMAS). `run.py figures` copia los GIF a `blog/docs/figures/`. `mkdocs --strict` ✅. Sin subagentes. |
 | 2026-10-13 | Equipo Parte 2 + Claude | **T4.5 ✅** (sin commit): `src/viz/gifs.py` → `media/tsp_{mmas,ga}_w25.gif` (mejor corrida de cada uno en w = 25, fotograma por mejora, contorno provincial IGN, tramos con peaje en naranja); en `run.py figures`; 6 pruebas. Sin subagentes. |
 | 2026-10-13 | Equipo Parte 2 + Claude | **T4.4 ✅** (sin commit): mapa con deslizador de w (12 pasos, cruza umbrales 10,75 / 13,81 / 42,19 €/h), desglose vs w, convergencia MMAS/AS/GA (gap vs mejor conocido, eje = recorridos evaluados); `run.py figures`. Proceso simplificado: solo implementador, revisión inline. |
 | 2026-10-13 | Jose Miguel + Claude | **T3.7 ✅** demo Parte 2 (**Spec v1.17**): MMAS, w = 25, 100 iter., 10 corridas; gap frente al **mejor conocido** de `sweep_w.json` (2 544,76 €; el exacto no existe), clave `experimento.referencia_gap`, figura `recorrido_w25.png`; salida `results/data/part2/demo/` sin versionar. Resultado: 2 772,91 € (+8,97 % mejor, +15,71 % media: esperable con 100 iter. y ρ = 0,02, explicarlo en la sustentación). ~2,6 s, sin red, reproducible (auditor ✅). implementador 2 rondas, revisor-spec 2 rondas ✅, revisor-calidad ✅; 969 pruebas. Falta medir en otra máquina (§9). Sin candidatos nuevos a la cacería. |

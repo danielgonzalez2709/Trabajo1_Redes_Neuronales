@@ -2,13 +2,19 @@
 
 - Parte 2 (T4.4): `part2_interactivas.generar_part2()` → blog/docs/figures/part2_*.html.
 - Parte 1 (T4.2): pendiente. Punto de extensión: añadir su generador a `GENERADORES` cuando exista.
-- GIF Parte 2 (T4.5): `gifs.generar_gifs()` → media/tsp_{mmas|ga}_w25.gif.
+- GIF Parte 2 (T4.5): `gifs.generar_gifs()` → media/tsp_{mmas|ga}_w25.gif, copiados a blog/docs/figures/ (MkDocs solo
+  publica lo que está dentro de blog/docs/).
 - GIF Parte 1 (T4.3): pendiente; mismo punto de extensión.
 """
 
 from __future__ import annotations
 
+import shutil
+from pathlib import Path
+
 from src.viz import gifs, part2_interactivas
+
+FIGURAS_BLOG = Path(__file__).resolve().parents[2] / "blog" / "docs" / "figures"
 
 PENDIENTES = {"Parte 1": "T4.2", "GIF Parte 1": "T4.3"}  # se quitan de aquí al añadir su generador
 
@@ -18,7 +24,9 @@ def _parte2() -> list:
 
 
 def _gif_parte2() -> list:
-    return gifs.generar_gifs()
+    rutas = gifs.generar_gifs()
+    FIGURAS_BLOG.mkdir(parents=True, exist_ok=True)
+    return rutas + [Path(shutil.copy2(r, FIGURAS_BLOG / r.name)) for r in rutas]
 
 
 GENERADORES = {"Parte 2": _parte2, "GIF Parte 2": _gif_parte2}

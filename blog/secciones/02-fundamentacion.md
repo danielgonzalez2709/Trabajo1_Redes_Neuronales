@@ -59,8 +59,6 @@ cruce binomial con probabilidad $CR$ (con al menos una componente del mutante) y
 
 ### Problema del viajero (Parte 2)
 
-<!-- TODO equipo Parte 2: revisar contra src/part2/ cuando exista. -->
-
 Dado el conjunto $V$ de las 47 capitales, se busca la permutación $\pi$ que minimiza el costo del recorrido cerrado
 $C(\pi) = \sum_{k=1}^{46} c_{\pi_k \pi_{k+1}} + c_{\pi_{47} \pi_1}$. El costo de cada tramo combina el valor de la hora $w$,
 el tiempo $t$, los peajes $P$ y el combustible:
@@ -71,11 +69,26 @@ c^{a}_{ij}(w) = w\,t^{a}_{ij} + P^{a}_{ij} + d^{a}_{ij}\,\frac{\text{consumo}}{1
 c_{ij}(w) = \min\left(c^{\text{rápida}}_{ij}(w),\; c^{\text{sin peaje}}_{ij}(w)\right).
 $$
 
-El óptimo de referencia se obtiene con la formulación de @dantzig1954.
+Con 47 ciudades hay $46!/2 \approx 2{,}8 \times 10^{57}$ recorridos distintos, así que la búsqueda exhaustiva es
+imposible. La formulación entera de @dantzig1954 daría el óptimo, pero quedó como tarea opcional y no se implementó: los
+resultados se comparan contra el mejor recorrido encontrado.
 
-**Colonia de hormigas.** Cada hormiga elige la siguiente ciudad con probabilidad
-$p_{ij} \propto \tau_{ij}^{\alpha}\,\eta_{ij}^{\beta}$, con $\eta_{ij} = 1/c_{ij}$, y la feromona se actualiza como
-$\tau_{ij} \leftarrow (1-\rho)\,\tau_{ij} + \Delta\tau_{ij}$ [@dorigo1996].
+**Colonia de hormigas.** Cada hormiga parte de una ciudad al azar y elige la siguiente, entre las no visitadas, con
+probabilidad $p_{ij} \propto \tau_{ij}^{\alpha}\,\eta_{ij}^{\beta}$, con $\eta_{ij} = 1/c_{ij}$. Después de cada iteración
+la feromona se actualiza como $\tau_{ij} \leftarrow (1-\rho)\,\tau_{ij} + \Delta\tau_{ij}$. En Ant System depositan
+todas las hormigas, $\Delta\tau_{ij} = \sum_k 1/L_k$ sobre los arcos de cada recorrido $k$ de costo $L_k$ [@dorigo1996].
+En MAX–MIN Ant System deposita una sola, $\Delta\tau_{ij} = 1/L^{\text{best}}$, y la feromona se recorta al intervalo
+$[\tau_{\min}, \tau_{\max}]$ [@stutzle2000]:
 
-**Algoritmo genético para permutaciones:** cruce de orden (OX), mutación por inversión e intercambio, torneo y elitismo.
-<!-- TODO equipo Parte 2: ecuaciones y parámetros finales. -->
+$$
+\tau_{\max} = \frac{1}{\rho\,L^{\text{bs}}},
+\qquad
+\tau_{\min} = \frac{\tau_{\max}\left(1 - p_{\text{best}}^{1/n}\right)}{\left(n/2 - 1\right)\,p_{\text{best}}^{1/n}},
+$$
+
+donde $L^{\text{bs}}$ es el costo del mejor recorrido encontrado hasta el momento y $n = 47$.
+
+**Algoritmo genético para permutaciones.** Cada individuo es un orden de visita $\pi$ y se minimiza directamente
+$C(\pi)$. Los padres se eligen por torneo, se cruzan con el cruce de orden (OX: el hijo copia un tramo de un padre y
+completa el resto en el orden en que las ciudades aparecen en el otro), y los hijos mutan por inversión de un tramo o
+intercambio de dos ciudades. Los mejores individuos pasan sin cambios a la generación siguiente (elitismo).

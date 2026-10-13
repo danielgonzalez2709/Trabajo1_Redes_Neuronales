@@ -89,3 +89,18 @@ def test_generar_gifs_reales(tmp_path):
     # determinista: regenerar da los mismos bytes
     otra = gifs.generar_gifs(salida=tmp_path / "b")
     assert {r.name: r.read_bytes() for r in rutas} == {r.name: r.read_bytes() for r in otra}
+
+
+def test_run_figures_copia_los_gif_al_blog(tmp_path, monkeypatch):
+    # El blog (MkDocs) solo publica lo que está en blog/docs/: los GIF de media/ se copian a blog/docs/figures/.
+    from src.viz import figuras
+
+    origen = tmp_path / "media" / "tsp_mmas_w25.gif"
+    origen.parent.mkdir()
+    origen.write_bytes(b"GIF89a-prueba")
+    monkeypatch.setattr(gifs, "generar_gifs", lambda: [origen])
+    monkeypatch.setattr(figuras, "FIGURAS_BLOG", tmp_path / "blog")
+    rutas = figuras._gif_parte2()
+    copia = tmp_path / "blog" / "tsp_mmas_w25.gif"
+    assert rutas == [origen, copia]
+    assert copia.read_bytes() == origen.read_bytes()
