@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 14 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33) | 3 (H-07, H-08, H-10, puente) |
+| Código | 15 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
 | Conceptos | 5 (H-16; Parte 1: H-26, H-31, H-32, H-34; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 34** (H-01–H-34; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 32 activos y 2 descartados (H-12, H-13).
+**Total registrados: 35** (H-01–H-35; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 33 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -469,6 +469,17 @@
 6. **Lección:** una cota del término exigido no es una cota de la diferencia medida; antes de afirmar cuándo decide el ruido, comparar la decisión en coma flotante con la exacta.
 
 ---
+
+### H-35 — Las pruebas del GA no distinguían OX(P1, P2) + OX(P2, P1) de dos hijos OX(P1, P2), ni [P1, P2] de [P1, P1]
+- **Estado:** candidato **débil** (deficiencia de pruebas, mismo tipo que H-10 y H-20). Cuenta solo si el puente lo acepta como Código.
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Code → subagente `implementador` (claude-opus-5-5), T3.4 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (claude-sonnet-5-5), prueba de mutación sobre una copia fuera del repo
+1. **Prompt (literal):** `prompts/T3.4.md` ("Escribe primero las pruebas y confirma que cada aserción puede fallar"; punto 7: "`pc = 0` y `pm = 0`: los hijos son copias de los padres").
+2. **Respuesta relevante de la IA:** el informe declara 28 mutantes probados y 27 detectados de entrada (el restante corregido), con 94 pruebas nuevas en verde. Ninguno de esos mutantes tocaba el orden de los padres en el segundo hijo.
+3. **Cómo sospechamos:** `revisor-spec` mutó `src/part2/ga.py:174` (segundo hijo `_ox(p1, p2, rng)`) y `:176` (segunda copia `p1.copy()`).
+4. **Evidencia:** los dos mutantes sobreviven a `tests/test_ga.py` y `tests/test_tsp_operators.py`: `test_sin_cruce_ni_mutacion_los_hijos_son_copias` solo exige que cada fila sea alguna fila previa y `test_con_cruce_aparecen_individuos_nuevos` solo que aparezca algún individuo nuevo.
+5. **Corrección:** ronda 2 del implementador (prueba directa de los hijos con cortes conocidos y orden [P1, P2]).
+6. **Lección:** "probé N mutantes" no dice nada de los mutantes que no se probaron; un revisor independiente elige otros.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**
