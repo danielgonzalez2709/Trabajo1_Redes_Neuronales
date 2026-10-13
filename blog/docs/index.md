@@ -1,12 +1,13 @@
 ---
-title: Optimización numérica, metaheurística y combinatoria
+title: Redes neuronales y algoritmos bioinspirados. Trabajo 1
 ---
 
-# Optimización numérica, metaheurística y combinatoria
+# Redes neuronales y algoritmos bioinspirados. Trabajo 1
 
-*Trabajo 1 · Redes neuronales y algoritmos bioinspirados · Universidad Nacional de Colombia, Facultad de Minas · 2026-02*
+*Optimización numérica, metaheurística y combinatoria · Universidad Nacional de Colombia, Facultad de Minas · 2026-02*
 
-**Autores:** <!-- TODO: nombres completos de los 5 integrantes --> por completar ·
+**Autores:** Jose Miguel Pulgarin Agudelo, Maria Camila Agudelo Espinosa, Daniel Gonzalez Henao, -- y --. 
+<!-- TODO equipo Parte 1: agregar aquí sus nombres completos (2 integrantes). --> ·
 **Repositorio:** [github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales)
 
 --8<-- "secciones/00-resumen.md"

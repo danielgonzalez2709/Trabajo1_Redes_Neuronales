@@ -23,6 +23,7 @@ from src.common.seeds import validar_entero
 
 _CODIFICACION = "utf-8"
 _INDENTACION = 2
+_SEPARADORES_COMPACTOS = (",", ":")  # save_json(..., sangria=None)
 _PERMISOS_ARCHIVO = 0o644
 _IDENTIFICADOR = re.compile(r"[a-z0-9]+")  # Spec §5.4: func y method, sin "_" (separa campos)
 
@@ -83,18 +84,20 @@ def _ruta_no_finita(obj: Any, ruta: str = "$") -> str | None:
     return None
 
 
-def save_json(path: str | os.PathLike, obj: Any) -> Path:
+def save_json(path: str | os.PathLike, obj: Any, sangria: int | None = _INDENTACION) -> Path:
     """Escribe ``obj`` en ``path`` de forma atómica y devuelve la ruta escrita.
 
     Crea las carpetas que falten. Un NaN o inf produce ``ValueError`` indicando dónde está,
-    sin crear ni modificar el archivo destino.
+    sin crear ni modificar el archivo destino. ``sangria=None`` escribe JSON compacto en una
+    sola línea (sin espacios tras ``,`` y ``:``); lo usan los historiales de la Parte 2 (T3.6).
     """
     destino = Path(path)
     datos = to_jsonable(obj)
     no_finito = _ruta_no_finita(datos)
     if no_finito is not None:
         raise ValueError(f"Valor no finito (NaN o inf) en {no_finito}: JSON no admite NaN/inf; no se escribió {destino}")
-    texto = json.dumps(datos, indent=_INDENTACION, ensure_ascii=False, allow_nan=False) + "\n"
+    separadores = _SEPARADORES_COMPACTOS if sangria is None else None
+    texto = json.dumps(datos, indent=sangria, separators=separadores, ensure_ascii=False, allow_nan=False) + "\n"
     _escribir_atomico(destino, texto)
     return destino
 

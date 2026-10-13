@@ -378,11 +378,13 @@ def test_cli_ayuda_de_set_trae_ejemplo_para_powershell(capsys):
     assert '--set "methods=[pso, gdfijo]"' in capsys.readouterr().out
 
 
-def test_run_py_humo():
-    """Humo: comando literal de §4.1 en otro proceso (salida UTF-8 aunque se redirija)."""
+def test_run_py_humo(tmp_path: Path):
+    """Humo: comando literal de §4.1 en otro proceso (salida UTF-8 aunque se redirija). Desde T3.6 corre el
+    experimento real: la salida va a un directorio temporal para no tocar results/. Desde T3.7 es la demo (§7.7):
+    escribe su resumen y la figura del recorrido, no el sweep_w.json del barrido."""
     res = subprocess.run(
         [sys.executable, "run.py", "part2", "--config", "configs/part2/demo.yaml",
-         "--set", "costo.valor_hora=25"],
+         "--set", "costo.valor_hora=25", "--set", f"experimento.salida={tmp_path.as_posix()}"],
         cwd=ROOT,
         capture_output=True,
         encoding="utf-8",
@@ -390,6 +392,9 @@ def test_run_py_humo():
     )
     assert res.returncode == 0, res.stderr
     assert "Configuración final resuelta" in res.stdout
+    assert (tmp_path / "demo.json").is_file() and (tmp_path / "recorrido_w25.png").is_file()
+    assert not (tmp_path / "sweep_w.json").exists()
+    assert "Gap frente al mejor conocido" in res.stdout
 
 
 # --------------------------------------------------------- configs del repo
@@ -408,7 +413,7 @@ def test_base_part1_valores_del_spec():
 def test_base_part2_valores_del_spec():
     base = load_config(BASE_PART2)
     assert {"methods", "runs", "base_seed", "costo"} <= set(base)
-    assert base["methods"] == ["aco", "ga", "exacto"]  # §7.5
+    assert base["methods"] == ["aco", "ga"]  # §7.5; el exacto es opcional desde Spec v1.14 (T3.2) y no existe
     assert base["runs"] == 10  # §7.5: ACO y GA con 10 corridas
     assert base["base_seed"] == 0  # §4.1 [DECIDIDO 9-oct]
     assert base["costo"]["valor_hora"] == 25  # §4.1 [DECIDIDO 9-oct]
