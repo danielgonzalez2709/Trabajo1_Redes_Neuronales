@@ -345,6 +345,17 @@
 
 ---
 
+### H-24 — Las pruebas del GA no distinguían OX(P1, P2) + OX(P2, P1) de dos hijos OX(P1, P2), ni [P1, P2] de [P1, P1]
+- **Estado:** candidato **débil** (deficiencia de pruebas, mismo tipo que H-10 y H-20). Cuenta solo si el puente lo acepta como Código.
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Code → subagente `implementador` (claude-opus-5-5), T3.4 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (claude-sonnet-5-5), prueba de mutación sobre una copia fuera del repo
+1. **Prompt (literal):** `prompts/T3.4.md` ("Escribe primero las pruebas y confirma que cada aserción puede fallar"; punto 7: "`pc = 0` y `pm = 0`: los hijos son copias de los padres").
+2. **Respuesta relevante de la IA:** el informe declara 28 mutantes probados y 27 detectados de entrada (el restante corregido), con 94 pruebas nuevas en verde. Ninguno de esos mutantes tocaba el orden de los padres en el segundo hijo.
+3. **Cómo sospechamos:** `revisor-spec` mutó `src/part2/ga.py:174` (segundo hijo `_ox(p1, p2, rng)`) y `:176` (segunda copia `p1.copy()`).
+4. **Evidencia:** los dos mutantes sobreviven a `tests/test_ga.py` y `tests/test_tsp_operators.py`: `test_sin_cruce_ni_mutacion_los_hijos_son_copias` solo exige que cada fila sea alguna fila previa y `test_con_cruce_aparecen_individuos_nuevos` solo que aparezca algún individuo nuevo.
+5. **Corrección:** ronda 2 del implementador (prueba directa de los hijos con cortes conocidos y orden [P1, P2]).
+6. **Lección:** "probé N mutantes" no dice nada de los mutantes que no se probaron; un revisor independiente elige otros.
+
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**
 - **Spec §7.2 Bloque 3, paso 1** ("pasos que tienen clase `toll`"): la clase está por intersección, no por paso; un paso de 293 km de la AP-68 tiene 94/96 intersecciones `toll` y uno de 11,4 km de la AP-9, 3/12. Sumar pasos completos sobreestima km de peaje (relevante en T2.5). Evidencia: `data/raw/osrm_2026-10-10/`. Origen del texto sin prompt. **SIN PROMPT.**
