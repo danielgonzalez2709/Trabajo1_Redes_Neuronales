@@ -1,4 +1,4 @@
-# Demo Parte 2 (< 2 min) — Spec §7.7: ACO, w = 25, 100 iteraciones -> costo, gap frente al mejor conocido
+# Demo Parte 2 (< 2 min) — Spec §7.7: ACO, w = 25, 1 000 iteraciones -> costo, gap frente al mejor conocido
 # ([DECIDIDO v1.17]: el mejor costo de w = 25 en el barrido de T3.6, no un óptimo probado), figura del recorrido.
 #   python run.py part2 --config configs/part2/demo.yaml
 # Hereda todo de base.yaml (§4.1 [DECIDIDO 9-oct]) y solo escribe lo que cambia.
@@ -7,7 +7,7 @@ methods: [aco]
 costo:
   valor_hora: 25      # §7.7 fija w = 25 para la demo (explícito aunque hoy coincida con la base)
 aco:
-  iteraciones: 100    # §7.7
+  iteraciones: 1000   # §7.7
 experimento:
   variantes_aco: [mmas]                             # §7.4.1: MMAS es la variante principal (AS es solo comparación)
   salida: results/data/part2/demo                   # salida propia: demo.json y recorrido_w25.png (no toca el barrido)

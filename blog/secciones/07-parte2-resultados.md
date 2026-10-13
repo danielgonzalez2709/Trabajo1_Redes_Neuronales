@@ -133,7 +133,8 @@ Fuente: Elaboración propia a partir de results/data/part2/sensibilidad/consumo{
 
 ### Demo
 
-La demo (`configs/part2/demo.yaml`: MMAS, $w = 25$ €/h, 100 iteraciones, 10 corridas) tarda menos de un segundo en esta
-máquina. Su mejor recorrido cuesta 2 772,91 €, un 8,97 % por encima del mejor conocido (15,71 % en media). Es lo
-esperable: con 100 iteraciones evalúa 4 701 recorridos por corrida, menos del 10 % del presupuesto del barrido, y
-con $\rho = 0{,}02$ la feromona apenas se ha concentrado.
+La demo (`configs/part2/demo.yaml`: MMAS, $w = 25$ €/h, 1 000 iteraciones, 10 corridas) tarda unos 18 segundos en esta
+máquina. Su mejor recorrido cuesta 2 544,76 €, igual al mejor conocido (0,00 %); la media de las 10 corridas
+queda un 0,36 % por encima. Con 100 iteraciones, la versión previa de la demo quedaba un 8,97 % (mejor) y un 15,71 %
+(media) por encima, porque con $\rho = 0{,}02$ la feromona apenas empieza a concentrarse. Con 1 000 iteraciones evalúa
+47 001 recorridos por corrida, el 91 % de los 51 654 del barrido.
