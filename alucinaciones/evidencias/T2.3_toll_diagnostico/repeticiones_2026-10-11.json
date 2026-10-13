@@ -1,0 +1,34 @@
+{
+ "inicio_utc": "2026-10-12T04:55:09+00:00",
+ "26_29": {
+  "url": "http://127.0.0.1:5001/route/v1/driving/-3.691978,40.419026;-1.644406,42.818565?alternatives=false&steps=true&geometries=polyline&overview=simplified&exclude=toll",
+  "repetidas_30": {
+   "(387453, 0)": 18,
+   "(387290.8, 8)": 12
+  },
+  "tras_rapida_15": {
+   "(387290.8, 8)": 6,
+   "(387453, 0)": 9
+  },
+  "rapida_5": {
+   "(387592.7, 8)": 3,
+   "(387430.5, 16)": 2
+  }
+ },
+ "16_18": {
+  "url": "http://127.0.0.1:5001/route/v1/driving/-3.598691,37.174289;-1.985721,43.321523?alternatives=false&steps=true&geometries=polyline&overview=simplified&exclude=toll",
+  "repetidas_30": {
+   "(879008.8, 0)": 17,
+   "(880524.5, 6)": 13
+  },
+  "tras_rapida_15": {
+   "(880524.5, 6)": 6,
+   "(879008.8, 0)": 9
+  },
+  "rapida_5": {
+   "(867605.6, 78)": 1,
+   "(866089.9, 72)": 4
+  }
+ },
+ "fin_utc": "2026-10-12T04:55:11+00:00"
+}

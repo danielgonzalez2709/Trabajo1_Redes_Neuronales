@@ -1,0 +1,259 @@
+{
+ "extracto": "Geofabrik spain-261001 (datos OSM del 2026-10-01T20:22:06Z)",
+ "metodo": "Sin red. Método: la longitud se mide A LO LARGO de la ruta de un crudo OSRM local de T2.3 (data/raw/osrm_2026-10-12/rutas/<i>_<j>_rapida.json.gz, extracto Geofabrik spain-261001, datos del 2026-10-01T20:22:06Z). Cada paso se decodifica (polyline, precisión 5) y su longitud geodésica se escala a la `distance` que da OSRM para ese paso; cada extremo del tramo se proyecta sobre esa línea y el km es la diferencia de distancias acumuladas. Los extremos son:   - nodos `highway=motorway_junction` (con su `ref` de salida) del extracto spain-261001, leídos del PBF con     pyosmium (fragmento y salida en data/raw/peajes_2026-10-12/extraer_nodos_osm_pyosmium.py y     osm_motorway_junction_spain-261001.csv);   - la `maneuver.location` de un paso del propio crudo (inicio de la autopista, cambio de vía), o   - un p.k. oficial proyectado sobre la ruta desde un nodo de salida con p.k. oficial conocido (EXTREMOS_PK). Para el tramo alavés de la AP-68 se mide la longitud de la ruta dentro del polígono provincial del IGN (data/raw/ign_provincias_2026-10-07.geojson.gz).",
+ "filas": {
+  "AP68-01": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 Bilbao: inicio del paso AP-68 (bifurcación desde la A-8), nodo osm 99107204",
+   "hasta": "AP-68 salida 5 (Altube), nodo osm 2449767107",
+   "km_acumulado_desde": 5.066,
+   "km_acumulado_hasta": 40.661,
+   "separacion_m": [
+    0.2,
+    0.4
+   ],
+   "km": 35.594
+  },
+  "AP68-02": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 salida 5 (Altube), nodo osm 2449767107",
+   "hasta": "AP-68 salida 7 (enlace AP-1), nodo osm 1240215333",
+   "km_acumulado_desde": 40.661,
+   "km_acumulado_hasta": 73.151,
+   "separacion_m": [
+    0.4,
+    0.3
+   ],
+   "km": 32.49
+  },
+  "AP68-03": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 salida 7 (enlace AP-1), nodo osm 1240215333",
+   "hasta": "AP-68 salida 8 (Zambrana; 'salida 8' según el RD 730/2026), nodo osm 700911558",
+   "km_acumulado_desde": 73.151,
+   "km_acumulado_hasta": 77.207,
+   "separacion_m": [
+    0.3,
+    0.1
+   ],
+   "km": 4.056
+  },
+  "AP68-04": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 salida 8 (Zambrana; 'salida 8' según el RD 730/2026), nodo osm 700911558",
+   "hasta": "AP-68 salida 9 (Haro), nodo osm 252456387",
+   "km_acumulado_desde": 77.207,
+   "km_acumulado_hasta": 92.204,
+   "separacion_m": [
+    0.1,
+    0.0
+   ],
+   "km": 14.997
+  },
+  "AP15-01": {
+   "crudo": "osrm_2026-10-12/rutas/18_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-1.985721,43.321523;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-15 reincorporación en Noáin tras la variante oeste A-15 (paso del crudo)",
+   "hasta": "AP-15 fin: incorporación a la AP-68 (paso del crudo)",
+   "km_acumulado_desde": 90.789,
+   "km_acumulado_hasta": 173.767,
+   "separacion_m": [
+    0.1,
+    0.4
+   ],
+   "km": 82.978
+  },
+  "AP15-02": {
+   "crudo": "osrm_2026-10-12/rutas/18_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-1.985721,43.321523;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-15 inicio en Irurtzun (paso A-15 -> AP-15 del crudo)",
+   "hasta": "AP-15 fin en Pamplona: paso a la variante oeste A-15 (libre) del crudo",
+   "km_acumulado_desde": 62.554,
+   "km_acumulado_hasta": 78.259,
+   "separacion_m": [
+    0.1,
+    0.5
+   ],
+   "km": 15.705
+  },
+  "AP8-02": {
+   "crudo": "osrm_2026-10-12/rutas/18_44_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-1.985721,43.321523;-2.923459,43.264219?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-8 salida 71 (Eibar), nodo osm 26491757",
+   "hasta": "AP-8 Bizkaia Ermua, p.k. 75+580 de Interbiak proyectado sobre la ruta desde la salida 88 (Durango, p.k. 88+300)",
+   "km_acumulado_desde": 51.038,
+   "km_acumulado_hasta": 56.047,
+   "separacion_m": [
+    0.1,
+    0.2
+   ],
+   "km": 5.009
+  },
+  "AP1-02": {
+   "crudo": "osrm_2026-10-12/rutas/00_18_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.672340,42.846824;-1.985721,43.321523?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-1 Vitoria-Gasteiz (Etxabarri-Ibiña): incorporación a la AP-1 tras el peaje (paso del crudo)",
+   "hasta": "AP-1 salida 123 (Eskoriatza), nodo osm 5168771925",
+   "km_acumulado_desde": 12.719,
+   "km_acumulado_hasta": 28.512,
+   "separacion_m": [
+    0.5,
+    0.4
+   ],
+   "km": 15.794
+  },
+  "C32-01": {
+   "crudo": "osrm_2026-10-12/rutas/06_39_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/2.177440,41.382290;1.254162,41.117453?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "C-32 salida 44 (Castelldefels Sud), nodo osm 211175134",
+   "hasta": "C-32 salida 31 (Sitges), nodo osm 279746498",
+   "km_acumulado_desde": 24.308,
+   "km_acumulado_hasta": 37.781,
+   "separacion_m": [
+    0.1,
+    0.4
+   ],
+   "km": 13.474
+  },
+  "C32-02": {
+   "crudo": "osrm_2026-10-12/rutas/06_39_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/2.177440,41.382290;1.254162,41.117453?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "C-32 salida 31 (Sitges), nodo osm 279746498",
+   "hasta": "C-32 salida 2 (El Vendrell), nodo osm 279746562",
+   "km_acumulado_desde": 37.781,
+   "km_acumulado_hasta": 66.835,
+   "separacion_m": [
+    0.4,
+    0.3
+   ],
+   "km": 29.054
+  },
+  "AP68-POST-VI": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 Bilbao: inicio del paso AP-68 (bifurcación desde la A-8), nodo osm 99107204",
+   "hasta": "AP-68 salida 9 (Haro), nodo osm 252456387",
+   "provincia_ign": "Araba/Álava",
+   "km": 55.416
+  }
+ },
+ "contrastes": {
+  "AP-68 Haro-Logroño": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 salida 9 (Haro), nodo osm 252456387",
+   "hasta": "AP-68 salida 12A (Logroño), nodo osm 30754525",
+   "km_acumulado_desde": 92.204,
+   "km_acumulado_hasta": 132.03,
+   "separacion_m": [
+    0.0,
+    0.3
+   ],
+   "km": 39.826,
+   "km_oficial": 40.06,
+   "fuente_oficial": "Catálogo RCE 2025, p.k. 87,0-126,9",
+   "diferencia_pct": -0.58
+  },
+  "AP-68 Bilbao-Haro (suma AP68-01..04)": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 Bilbao: inicio del paso AP-68 (bifurcación desde la A-8), nodo osm 99107204",
+   "hasta": "AP-68 salida 9 (Haro), nodo osm 252456387",
+   "km_acumulado_desde": 5.066,
+   "km_acumulado_hasta": 92.204,
+   "separacion_m": [
+    0.2,
+    0.0
+   ],
+   "km": 87.138,
+   "km_oficial": 87.0,
+   "fuente_oficial": "Catálogo RCE 2025: Haro = p.k. 87+000 (origen del p.k. en Bilbao)",
+   "diferencia_pct": 0.16
+  },
+  "AP-8 Urgoiti-Ermua (fila AP8-01)": {
+   "crudo": "osrm_2026-10-12/rutas/18_44_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-1.985721,43.321523;-2.923459,43.264219?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-8 Bizkaia Ermua, p.k. 75+580 de Interbiak proyectado sobre la ruta desde la salida 88 (Durango, p.k. 88+300)",
+   "hasta": "AP-8 Bizkaia salida 105 (Urgoiti), nodo osm 30753673",
+   "km_acumulado_desde": 56.047,
+   "km_acumulado_hasta": 86.274,
+   "separacion_m": [
+    0.2,
+    0.2
+   ],
+   "km": 30.226,
+   "km_oficial": 30.22,
+   "fuente_oficial": "Interbiak: p.k. 105+800 y 75+580",
+   "diferencia_pct": 0.02
+  },
+  "AP-8 Eibar-Donostia (fila AP8-03)": {
+   "crudo": "osrm_2026-10-12/rutas/18_44_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-1.985721,43.321523;-2.923459,43.264219?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-8 salida 27 (Donostia/Lasarte), nodo osm 1836402406",
+   "hasta": "AP-8 salida 71 (Eibar), nodo osm 26491757",
+   "km_acumulado_desde": 8.465,
+   "km_acumulado_hasta": 51.038,
+   "separacion_m": [
+    13.6,
+    0.1
+   ],
+   "km": 42.573,
+   "km_oficial": 43.3,
+   "fuente_oficial": "Bidegi: p.k. 71 y 27,7",
+   "diferencia_pct": -1.68
+  },
+  "AP-1 enlace AP-8-Eskoriatza (fila AP1-01)": {
+   "crudo": "osrm_2026-10-12/rutas/00_18_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.672340,42.846824;-1.985721,43.321523?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-1 salida 123 (Eskoriatza), nodo osm 5168771925",
+   "hasta": "AP-1 salida 145 (enlace AP-8), nodo osm 26491535",
+   "km_acumulado_desde": 28.512,
+   "km_acumulado_hasta": 50.843,
+   "separacion_m": [
+    0.4,
+    0.2
+   ],
+   "km": 22.33,
+   "km_oficial": 22.3,
+   "fuente_oficial": "Bidegi: p.k. 145,8 y 123,5",
+   "diferencia_pct": 0.13
+  },
+  "AP-68 tramo vizcaíno": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 Bilbao: inicio del paso AP-68 (bifurcación desde la A-8), nodo osm 99107204",
+   "hasta": "AP-68 salida 9 (Haro), nodo osm 252456387",
+   "provincia_ign": "Bizkaia",
+   "km": 22.343,
+   "km_oficial": 22.3,
+   "fuente_oficial": "Diputación Foral de Bizkaia, 22,3 km",
+   "diferencia_pct": 0.19
+  },
+  "AP-68 tramo alavés (fila AP68-POST-VI)": {
+   "crudo": "osrm_2026-10-12/rutas/44_46_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.923459,43.264219;-0.877318,41.656208?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-68 Bilbao: inicio del paso AP-68 (bifurcación desde la A-8), nodo osm 99107204",
+   "hasta": "AP-68 salida 9 (Haro), nodo osm 252456387",
+   "provincia_ign": "Araba/Álava",
+   "km": 55.416,
+   "km_oficial": 55.297,
+   "fuente_oficial": "Catálogo RCE p.k. 77+597 (L.P. Álava-Burgos) - 22,3 km de Bizkaia",
+   "diferencia_pct": 0.22
+  },
+  "AP-1 tramo guipuzcoano": {
+   "crudo": "osrm_2026-10-12/rutas/00_18_rapida.json.gz",
+   "url": "http://127.0.0.1:5001/route/v1/driving/-2.672340,42.846824;-1.985721,43.321523?alternatives=false&steps=true&geometries=polyline&overview=simplified",
+   "desde": "AP-1 Vitoria-Gasteiz (Etxabarri-Ibiña): incorporación a la AP-1 tras el peaje (paso del crudo)",
+   "hasta": "AP-1 salida 145 (enlace AP-8), nodo osm 26491535",
+   "provincia_ign": "Gipuzkoa",
+   "km": 31.297,
+   "km_oficial": 31.9,
+   "fuente_oficial": "Bidegi: 31,9 km",
+   "diferencia_pct": -1.89
+  }
+ }
+}

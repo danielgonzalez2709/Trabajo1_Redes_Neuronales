@@ -1,0 +1,13 @@
+{
+  "required_features": [
+    "OsmSchema-V0.6",
+    "DenseNodes"
+  ],
+  "optional_features": [
+    "Sort.Type_then_ID"
+  ],
+  "writingprogram": "osmium/1.16.0",
+  "osmosis_replication_timestamp": "2026-10-01T20:22:06Z",
+  "osmosis_replication_sequence_number": 4926,
+  "osmosis_replication_base_url": "https://download.geofabrik.de/europe/spain-updates"
+}
