@@ -7,7 +7,7 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 8 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23) | 3 (H-07, H-08, H-10, puente) |
+| Código | 9 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23, H-25) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 2 (H-19: error de cita confirmado, origen IA pendiente; H-22) | 1 (H-22, puente) |
 | Conceptos | 1 (H-16) — H-12 descartado | 0 |
@@ -355,6 +355,17 @@
 4. **Evidencia:** los dos mutantes sobreviven a `tests/test_ga.py` y `tests/test_tsp_operators.py`: `test_sin_cruce_ni_mutacion_los_hijos_son_copias` solo exige que cada fila sea alguna fila previa y `test_con_cruce_aparecen_individuos_nuevos` solo que aparezca algún individuo nuevo.
 5. **Corrección:** ronda 2 del implementador (prueba directa de los hijos con cortes conocidos y orden [P1, P2]).
 6. **Lección:** "probé N mutantes" no dice nada de los mutantes que no se probaron; un revisor independiente elige otros.
+
+### H-25 — `pulp.LpStatus[modelo.status]`: la API de estado de PuLP 3 escrita de nuevo en PuLP 4 (después de H-07)
+- **Estado:** candidato (prompt literal disponible; evidencia reproducible; severidad baja: falló en la primera prueba)
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Opus 5.5 (orquestador, verificación exacta de T3.6) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** la primera ejecución de `tests/test_exact.py`
+1. **Prompt (literal):** "Listo, ya lo fusioné, integra la verificación exacta" (Daniel, 13-oct-2026, sesión de asesoría del puente).
+2. **Respuesta relevante de la IA:** la primera versión de `src/part2/exact.py` comprobaba el resultado con `if pulp.LpStatus[modelo.status] != "Optimal":`, la forma de PuLP 3.
+3. **Cómo sospechamos:** 8 de las 9 pruebas fallaron con `AttributeError: module 'pulp' has no attribute 'LpStatus'`.
+4. **Evidencia:** `evidencias/H-25_pulp4_lpstatus.py` → `.txt` (PuLP 4.0.0): no existen `pulp.LpStatus` ni `modelo.status`; en PuLP 4, `solve()` devuelve un `LpSolveStats` cuyo campo `status` es un `LpSolveStatus`.
+5. **Corrección:** `stats = modelo.solve(...)` y `stats.status != pulp.LpSolveStatus.Optimal`.
+6. **Lección:** documentar un cambio de API (H-07: `LpVariable(cat=…)` y CBC) no impide repetir otra parte de la API vieja en la siguiente sesión: cuando una librería cambió de versión mayor, hay que comprobar contra la instalación **cada** llamada, no solo la que ya falló una vez. La prueba escrita antes de usar el código lo atrapó en segundos.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**

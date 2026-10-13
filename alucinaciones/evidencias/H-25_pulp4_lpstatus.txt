@@ -1,0 +1,4 @@
+PuLP 4.0.0
+¿existe pulp.LpStatus? False
+¿existe modelo.status? False
+forma de PuLP 4: solve() devuelve LpSolveStats con status = <LpSolveStatus.Optimal: 1>
