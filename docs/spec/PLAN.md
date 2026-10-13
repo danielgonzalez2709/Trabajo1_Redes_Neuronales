@@ -85,7 +85,7 @@
 | T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ✅ 2026-10-12 (src/viz/paleta.py fuente única; tema Plotly + estilo matplotlib; paleta validada con validate_palette.js; 5 pruebas) |
 | T4.2 | Figuras Parte 1 (Spec §6.7) | T1.7, T4.1 | HTML/PNG en `blog/docs/figures/` | `run.py figures` regenera todo | revisor-spec | ⬜ |
 | T4.3 | GIFs Parte 1 (GD, PSO) | T1.7, T4.1 | `media/*.gif` | Regenerables | — | ⬜ |
-| T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ⬜ |
+| T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ✅ 2026-10-13 (3 HTML en `blog/docs/figures/part2_*.html`; deslizador 11 w + w≈12,28 cruza los 3 umbrales; `run.py figures`; revisión hecha por el orquestador, sin revisor-spec, a pedido del equipo) |
 | T4.5 | GIF Parte 2 (evolución sobre el mapa) | T3.6, T4.1 | `media/tsp_*.gif` | Regenerable | — | ⬜ |
 | T4.6 | Redacción de secciones del blog (cada equipo la suya) | T4.2–T4.5 | `blog/docs/*.md` | Hook sin errores; cifras = `summary.json` | **redactor-tecnico** + cazador | ⬜ |
 | T4.7 | Bibliografía `references.bib` (cada DOI verificado) | — | `.bib` | Todo DOI resuelve en doi.org; todas citadas | **cazador-alucinaciones** | ⬜ |

@@ -47,6 +47,16 @@ COLOR_RECORRIDO = CATEGORICA[0]
 COLOR_PEAJE = CATEGORICA[1]
 COLOR_CIUDAD = TINTA
 
+# Parte 2 — variantes del barrido (convergencia, T4.4). MMAS y AS son ACO: MMAS lleva el color de ACO y AS otro tono
+# (además se dibuja con trazo discontinuo para no depender solo del color).
+COLOR_SOLVER = {"mmas": COLOR_ALGORITMO["aco"], "as": CATEGORICA[6], "ga": COLOR_ALGORITMO["ga"]}
+NOMBRE_SOLVER = {"mmas": "MMAS (colonia de hormigas)", "as": "AS (colonia de hormigas)", "ga": "Algoritmo genético"}
+
+# Parte 2 — componentes del costo (Spec §7.3): los tres primeros tonos de la categórica, en su orden validado;
+# peajes coincide con COLOR_PEAJE del mapa.
+COLOR_COMPONENTE = {"tiempo": CATEGORICA[0], "peajes": COLOR_PEAJE, "combustible": CATEGORICA[2]}
+NOMBRE_COMPONENTE = {"tiempo": "Tiempo (w · horas)", "peajes": "Peajes", "combustible": "Combustible"}
+
 # Secuencial (magnitud: curvas de nivel, mapas de calor): un solo tono, claro → oscuro.
 SECUENCIAL_AZUL = ["#cde2fb", "#b7d3f6", "#9ec5f4", "#86b6ef", "#6da7ec", "#5598e7", "#3987e5",
                    "#2a78d6", "#256abf", "#1c5cab", "#184f95", "#104281", "#0d366b"]

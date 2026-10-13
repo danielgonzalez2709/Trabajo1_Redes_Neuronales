@@ -54,6 +54,10 @@ def test_comandos_de_run_py_corren_sin_red(sin_red, monkeypatch, tmp_path, argv)
     monkeypatch.chdir(RAIZ)
     if argv[0] == "part2":  # desde T3.6 escribe resultados: a un directorio temporal, nunca a results/
         argv = [*argv, "--set", f"experimento.salida={tmp_path.as_posix()}"]
+    if argv[0] == "figures":  # desde T4.4 escribe en blog/docs/figures: a un directorio temporal en la prueba
+        from src.viz import part2_interactivas
+
+        monkeypatch.setattr(part2_interactivas, "SALIDA", tmp_path)
     assert cli.main(argv) == 0
 
 
