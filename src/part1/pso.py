@@ -18,7 +18,7 @@
 # | 0 | `ParametrosPSO` | valida el bloque `pso:` de la configuración | dataclass |
 # | 1 | `generar_enjambre_inicial` | sortea $N$ posiciones; velocidades en 0 | `EnjambreInicial` |
 # | 2 | `calcular_velocidad_maxima` | $v_{\max}$ por dimensión desde el dominio | `(d,)` o `None` |
-# | 3 | `evaluar_poblacion` | (de `ea.py`) aplica `f` a cada fila | `(N,)` |
+# | 3 | `evaluar_poblacion` | (de `_comun.py`) aplica `f` a cada fila | `(N,)` |
 # | 4 | `actualizar_memoria_personal` | $b_i \leftarrow x_i$ si mejora | `ResultadoMemoria` |
 # | 5 | `actualizar_mejor_global` | elige $g$ entre los $b_i$ | `MejorGlobal` |
 # | 6 | `calcular_velocidades` | ecuación de velocidad con inercia (sin limitar) | `(N, d)` |
@@ -32,13 +32,15 @@
 # **Orden de consumo del rng** (fijo): (1) `rng.uniform` de las posiciones $(N, d)$ (las
 # velocidades iniciales son 0 y no consumen azar); luego, en cada iteración, (2) $R_1$ y
 # (3) $R_2$, ambas de forma $(N, d)$ y en ese orden, ANTES de mover el enjambre.
+#
+# Las validaciones, la población inicial, la evaluación, los frames y el retorno §5.1 son
+# iguales en EA, PSO y DE: viven en `_comun.py` y aquí solo se importan.
 
 # %%
 """PSO gbest con inercia de la Parte 1 (Spec §6.4): componentes y orquestador."""
 
 from __future__ import annotations
 
-import math
 import warnings
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -48,14 +50,19 @@ import numpy as np
 
 from src.common.counter import BudgetExhausted, CountedProblem
 from src.common.seeds import validar_entero
-from src.part1.ea import (
+from src.part1._comun import (
     DIMENSION_CON_FRAMES,
     construir_frame,
+    construir_resultado,
+    evaluar_poblacion,
+    exigir_forma,
+    generar_poblacion_inicial,
+    leer_bloque,
     leer_record_frames,
+    validar_claves_exactas,
     validar_limites,
     validar_poblacion,
-    evaluar_poblacion,
-    generar_poblacion_inicial,
+    validar_real,
 )
 
 # %% [markdown]
@@ -65,6 +72,7 @@ from src.part1.ea import (
 # `configs/part1/base.yaml` (Spec §4.1). Aquí solo hay definiciones estructurales.
 
 # %%
+NOMBRE_BLOQUE_PSO = "pso"            # clave del bloque en la configuración
 CLAVES_BLOQUE_PSO = ("N", "w", "c1", "c2", "vmax_frac", "iteraciones")
 ENJAMBRE_MINIMO = 2                  # con N < 2 no hay enjambre (Spec §6.4)
 UMBRAL_AVISO_INERCIA = 1.0           # w >= 1: la velocidad no se amortigua; solo se avisa
@@ -84,21 +92,6 @@ UMBRAL_AVISO_INERCIA = 1.0           # w >= 1: la velocidad no se amortigua; sol
 #   $c_1 + c_2$ (no hay fuente verificada).
 
 # %%
-def _validar_real(valor, nombre: str, estrictamente_positivo: bool = False) -> float:
-    """Exige un real finito >= 0 (o > 0); rechaza bool, NaN e infinitos (estilo counter.py)."""
-    es_numero = isinstance(valor, (int, float, np.integer, np.floating))
-    if isinstance(valor, (bool, np.bool_)) or not es_numero:
-        raise TypeError(f"{nombre} debe ser un número real; se recibió {valor!r} "
-                        f"({type(valor).__name__})")
-    numero = float(valor)
-    # NaN no es mayor ni igual a nada: ambas comparaciones lo rechazan.
-    cumple_minimo = numero > 0.0 if estrictamente_positivo else numero >= 0.0
-    if not (cumple_minimo and numero < math.inf):
-        requisito = "finito y > 0" if estrictamente_positivo else "finito y >= 0"
-        raise ValueError(f"{nombre} debe ser {requisito}; se recibió {valor!r}")
-    return numero
-
-
 def _avisar_si_inercia_no_amortigua(inercia: float) -> None:
     """Emite un UserWarning si w >= 1 (la velocidad anterior no se amortigua); no rechaza.
 
@@ -111,22 +104,6 @@ def _avisar_si_inercia_no_amortigua(inercia: float) -> None:
             "velocidad y el enjambre puede no converger",
             UserWarning,
             stacklevel=3,
-        )
-
-
-def _validar_claves_del_bloque(cfg_pso: Mapping) -> None:
-    """Exige que el bloque `pso:` sea un mapeo con EXACTAMENTE las claves de CLAVES_BLOQUE_PSO."""
-    if not isinstance(cfg_pso, Mapping):
-        raise TypeError(f"el bloque 'pso' debe ser un mapeo; se recibió "
-                        f"{type(cfg_pso).__name__}")
-    faltantes = [clave for clave in CLAVES_BLOQUE_PSO if clave not in cfg_pso]
-    sobrantes = [clave for clave in cfg_pso if clave not in CLAVES_BLOQUE_PSO]
-    if faltantes:
-        raise ValueError(f"faltan claves en el bloque 'pso': {', '.join(faltantes)}")
-    if sobrantes:
-        raise ValueError(
-            f"claves desconocidas en el bloque 'pso': {', '.join(map(str, sobrantes))}; "
-            f"válidas: {', '.join(CLAVES_BLOQUE_PSO)}"
         )
 
 
@@ -190,17 +167,18 @@ class ParametrosPSO:
         UserWarning
             Si `w >= 1` (la inercia no amortigua la velocidad); no se rechaza.
         """
-        _validar_claves_del_bloque(cfg_pso)
+        validar_claves_exactas(cfg_pso, CLAVES_BLOQUE_PSO, NOMBRE_BLOQUE_PSO)
 
         tamano = validar_entero(cfg_pso["N"], "pso.N", minimo=ENJAMBRE_MINIMO)
-        inercia = _validar_real(cfg_pso["w"], "pso.w")
-        coef_cognitivo = _validar_real(cfg_pso["c1"], "pso.c1")
-        coef_social = _validar_real(cfg_pso["c2"], "pso.c2")
+        # El mínimo se pasa como entero: así el mensaje de error dice ">= 0" y "> 0".
+        inercia = validar_real(cfg_pso["w"], "pso.w", minimo=0, minimo_incluido=True)
+        coef_cognitivo = validar_real(cfg_pso["c1"], "pso.c1", minimo=0, minimo_incluido=True)
+        coef_social = validar_real(cfg_pso["c2"], "pso.c2", minimo=0, minimo_incluido=True)
 
         fraccion_vmax = cfg_pso["vmax_frac"]
         if fraccion_vmax is not None:
-            fraccion_vmax = _validar_real(fraccion_vmax, "pso.vmax_frac",
-                                          estrictamente_positivo=True)
+            fraccion_vmax = validar_real(fraccion_vmax, "pso.vmax_frac", minimo=0,
+                                         minimo_incluido=False)
 
         iteraciones = cfg_pso["iteraciones"]
         if iteraciones is not None:
@@ -216,21 +194,6 @@ class ParametrosPSO:
             fraccion_vmax=fraccion_vmax,
             iteraciones=iteraciones,
         )
-
-
-# %% [markdown]
-# ## Validaciones compartidas por los componentes
-#
-# Pequeña función privada para no repetir comprobaciones de forma.
-
-# %%
-def _exigir_forma(arreglo, forma: tuple, nombre: str) -> np.ndarray:
-    """Devuelve `arreglo` como float64 y exige que tenga exactamente `forma`."""
-    # np.asarray NO copia si ya es float64 (devuelve el mismo objeto): valida pero no modifica.
-    arreglo = np.asarray(arreglo, dtype=float)
-    if arreglo.shape != forma:
-        raise ValueError(f"{nombre} debe tener forma {forma}; se recibió {arreglo.shape}")
-    return arreglo
 
 
 # %% [markdown]
@@ -285,9 +248,9 @@ def generar_enjambre_inicial(tamano: int, limites: np.ndarray,
     Notas
     -----
     Orden de consumo del rng: UNA sola llamada `rng.uniform(...)` (vía
-    `generar_poblacion_inicial` de `ea.py`); las velocidades en cero no consumen azar.
+    `generar_poblacion_inicial` de `_comun.py`); las velocidades en cero no consumen azar.
     """
-    # Las posiciones se sortean con el mismo componente que usa el EA (forma (N, d)).
+    # Las posiciones se sortean con el componente común a EA, PSO y DE (forma (N, d)).
     posiciones = generar_poblacion_inicial(tamano, limites, rng)
     # Velocidades en reposo, misma forma (N, d); arreglo propio, sin compartir memoria.
     velocidades = np.zeros_like(posiciones)
@@ -336,7 +299,7 @@ def calcular_velocidad_maxima(limites: np.ndarray,
 # %% [markdown]
 # ## 3. Evaluación del enjambre
 #
-# Se usa `evaluar_poblacion` de `ea.py` (no se duplica): aplica `f` a cada fila y guarda la
+# Se usa `evaluar_poblacion` de `_comun.py` (no se duplica): aplica `f` a cada fila y guarda la
 # aptitud $a_i = f(x_i)$. Cada llamada es UNA evaluación del presupuesto; `optimize` le pasa
 # `problem.f`, que es quien cuenta y quien lanza `BudgetExhausted`.
 
@@ -397,11 +360,11 @@ def actualizar_memoria_personal(posiciones: np.ndarray, aptitudes: np.ndarray,
     """
     posiciones = validar_poblacion(posiciones, "posiciones")
     numero_de_particulas, dimension = posiciones.shape
-    aptitudes = _exigir_forma(aptitudes, (numero_de_particulas,), "aptitudes")
-    mejores_personales = _exigir_forma(mejores_personales, (numero_de_particulas, dimension),
-                                       "mejores_personales")
-    aptitudes_personales = _exigir_forma(aptitudes_personales, (numero_de_particulas,),
-                                         "aptitudes_personales")
+    aptitudes = exigir_forma(aptitudes, (numero_de_particulas,), "aptitudes")
+    mejores_personales = exigir_forma(mejores_personales, (numero_de_particulas, dimension),
+                                      "mejores_personales")
+    aptitudes_personales = exigir_forma(aptitudes_personales, (numero_de_particulas,),
+                                        "aptitudes_personales")
 
     # Máscara booleana (N,): True donde la posición actual es ESTRICTAMENTE mejor.
     mejoraron = aptitudes < aptitudes_personales
@@ -461,8 +424,8 @@ def actualizar_mejor_global(mejores_personales: np.ndarray,
     """
     mejores_personales = validar_poblacion(mejores_personales, "mejores_personales")
     numero_de_particulas = mejores_personales.shape[0]
-    aptitudes_personales = _exigir_forma(aptitudes_personales, (numero_de_particulas,),
-                                         "aptitudes_personales")
+    aptitudes_personales = exigir_forma(aptitudes_personales, (numero_de_particulas,),
+                                        "aptitudes_personales")
 
     # np.argmin devuelve el PRIMER índice del mínimo: el desempate es el índice menor.
     indice = int(np.argmin(aptitudes_personales))
@@ -527,11 +490,11 @@ def calcular_velocidades(posiciones: np.ndarray, velocidades: np.ndarray,
     """
     posiciones = validar_poblacion(posiciones, "posiciones")
     forma = posiciones.shape                                         # (N, d)
-    velocidades = _exigir_forma(velocidades, forma, "velocidades")
-    mejores_personales = _exigir_forma(mejores_personales, forma, "mejores_personales")
-    mejor_global = _exigir_forma(mejor_global, (forma[1],), "mejor_global")
-    aleatorios_cognitivos = _exigir_forma(aleatorios_cognitivos, forma, "aleatorios_cognitivos")
-    aleatorios_sociales = _exigir_forma(aleatorios_sociales, forma, "aleatorios_sociales")
+    velocidades = exigir_forma(velocidades, forma, "velocidades")
+    mejores_personales = exigir_forma(mejores_personales, forma, "mejores_personales")
+    mejor_global = exigir_forma(mejor_global, (forma[1],), "mejor_global")
+    aleatorios_cognitivos = exigir_forma(aleatorios_cognitivos, forma, "aleatorios_cognitivos")
+    aleatorios_sociales = exigir_forma(aleatorios_sociales, forma, "aleatorios_sociales")
 
     # Término de inercia: parte de la velocidad anterior; forma (N, d).
     termino_inercia = inercia * velocidades
@@ -586,8 +549,8 @@ def limitar_velocidades(velocidades: np.ndarray,
     if velocidad_maxima is None:
         return velocidades.copy()
 
-    velocidad_maxima = _exigir_forma(velocidad_maxima, (velocidades.shape[1],),
-                                     "velocidad_maxima")
+    velocidad_maxima = exigir_forma(velocidad_maxima, (velocidades.shape[1],),
+                                    "velocidad_maxima")
     limite_inferior_velocidad = -velocidad_maxima                    # forma (d,)
     limite_superior_velocidad = velocidad_maxima                     # forma (d,)
     # np.clip con cotas de forma (d,) las aplica por columna (broadcasting sobre las N filas).
@@ -644,7 +607,7 @@ def aplicar_frontera(posiciones_tentativas: np.ndarray, velocidades: np.ndarray,
     """
     limites = validar_limites(limites)
     posiciones_tentativas = validar_poblacion(posiciones_tentativas, "posiciones_tentativas")
-    velocidades = _exigir_forma(velocidades, posiciones_tentativas.shape, "velocidades")
+    velocidades = exigir_forma(velocidades, posiciones_tentativas.shape, "velocidades")
     if posiciones_tentativas.shape[1] != limites.shape[0]:
         raise ValueError(f"limites describe {limites.shape[0]} dimensiones pero las posiciones "
                          f"tienen {posiciones_tentativas.shape[1]}")
@@ -679,14 +642,6 @@ def aplicar_frontera(posiciones_tentativas: np.ndarray, velocidades: np.ndarray,
 # evaluaciones de la iteración truncada (665 iteraciones completas, frames `iter` 0 a 665).
 
 # %%
-def _leer_bloque_pso(cfg: Mapping) -> Mapping:
-    """Extrae `cfg["pso"]`; si falta el bloque lanza ValueError con mensaje claro."""
-    if "pso" not in cfg:
-        raise ValueError("falta el bloque 'pso' en la configuración (definido en "
-                         "configs/part1/base.yaml)")
-    return cfg["pso"]
-
-
 def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> dict:
     """Ejecuta el PSO gbest sobre `problem` hasta agotar el presupuesto (o `iteraciones`).
 
@@ -730,7 +685,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
     ser finito; `CountedProblem` ya rechaza un presupuesto infinito en su constructor.
     """
     # Paso 1: validar la configuración y leer el dominio del problema.
-    parametros = ParametrosPSO.desde_config(_leer_bloque_pso(cfg))
+    parametros = ParametrosPSO.desde_config(leer_bloque(cfg, NOMBRE_BLOQUE_PSO))
     guardar_frames = leer_record_frames(cfg) and problem.func.dim == DIMENSION_CON_FRAMES
     limites = validar_limites(problem.func.bounds)                  # forma (d, 2)
     if problem.budget_exhausted():
@@ -801,14 +756,4 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
         pass
 
     # Paso 9: armar el retorno del contrato §5.1 con tipos nativos de Python.
-    resultado = {
-        "x_best": problem.best_x.tolist(),
-        "f_best": float(problem.best_f),
-        "n_f": int(problem.n_f),
-        "n_grad": int(problem.n_grad),
-        "eval_equiv": float(problem.eval_equiv()),
-        "history": [dict(punto) for punto in problem.history],
-    }
-    if guardar_frames:
-        resultado["frames"] = frames
-    return resultado
+    return construir_resultado(problem, frames, guardar_frames)

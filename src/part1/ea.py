@@ -14,8 +14,8 @@
 # | # | Componente | Qué hace | Retorna |
 # |---|---|---|---|
 # | 0 | `ParametrosEA` | valida el bloque `ea:` y calcula los tamaños de los grupos | dataclass |
-# | 1 | `generar_poblacion_inicial` | sortea $N$ puntos uniformes en el dominio | `(N, d)` |
-# | 2 | `evaluar_poblacion` | aplica `f` a cada fila | `(N,)` |
+# | 1 | `generar_poblacion_inicial` | (de `_comun.py`) sortea $N$ puntos uniformes | `(N, d)` |
+# | 2 | `evaluar_poblacion` | (de `_comun.py`) aplica `f` a cada fila | `(N,)` |
 # | 3 | `seleccionar_elite` | copia los $n_e$ mejores | `(elite, aptitudes_elite)` |
 # | 4 | `mutar_individuos` | perturba UN gen de copias de individuos al azar | `ResultadoMutacion` |
 # | 5 | `cruzar_individuos` | cruce de un punto entre parejas al azar | `ResultadoCruce` |
@@ -27,13 +27,15 @@
 #
 # **Todo el azar** sale del `rng` que recibe `optimize` y que se inyecta a los componentes
 # (Spec §4.1: un generador por corrida, con semilla `base_seed + run_id`). Nada global.
+#
+# Las validaciones, la población inicial, la evaluación, los frames y el retorno §5.1 son
+# iguales en EA, PSO y DE: viven en `_comun.py` y aquí solo se importan.
 
 # %%
 """Algoritmo evolutivo de la Parte 1 (esquema de clase, Spec §6.4): componentes y orquestador."""
 
 from __future__ import annotations
 
-import math
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import NamedTuple
@@ -42,6 +44,19 @@ import numpy as np
 
 from src.common.counter import BudgetExhausted, CountedProblem
 from src.common.seeds import validar_entero
+from src.part1._comun import (
+    DIMENSION_CON_FRAMES,
+    construir_frame,
+    construir_resultado,
+    evaluar_poblacion,
+    generar_poblacion_inicial,
+    leer_bloque,
+    leer_record_frames,
+    validar_claves_exactas,
+    validar_limites,
+    validar_poblacion,
+    validar_real,
+)
 
 # %% [markdown]
 # ## Constantes del módulo (no son parámetros del experimento)
@@ -50,11 +65,11 @@ from src.common.seeds import validar_entero
 # `configs/part1/base.yaml` (Spec §4.1). Aquí solo hay definiciones estructurales.
 
 # %%
+NOMBRE_BLOQUE_EA = "ea"              # clave del bloque en la configuración
 ESQUEMA_CLASE = "clase"              # único esquema implementado (Spec v1.4)
 CLAVES_BLOQUE_EA = ("esquema", "N", "frac_e", "frac_m", "frac_c", "reevaluar_elite", "generaciones")
 POBLACION_MINIMA = 2                 # con N < 2 no hay con quién cruzar (Spec §6.4, validación)
 TAMANO_PAREJA = 2                    # cada pareja de padres produce 2 hijos
-DIMENSION_CON_FRAMES = 2             # §5.1: los frames solo se guardan si dim == 2
 
 
 # %% [markdown]
@@ -77,39 +92,14 @@ DIMENSION_CON_FRAMES = 2             # §5.1: los frames solo se guardan si dim 
 
 # %%
 def _validar_fraccion(valor, nombre: str) -> float:
-    """Exige un número real finito y >= 0; rechaza bool, NaN e infinitos (estilo counter.py)."""
-    es_numero = isinstance(valor, (int, float, np.integer, np.floating))
-    if isinstance(valor, (bool, np.bool_)) or not es_numero:
-        raise TypeError(f"{nombre} debe ser un número real; se recibió {valor!r} "
-                        f"({type(valor).__name__})")
-    fraccion = float(valor)
-    if not (0.0 <= fraccion < math.inf):  # la comparación también rechaza NaN
-        raise ValueError(f"{nombre} debe ser finito y >= 0; se recibió {valor!r}")
-    return fraccion
+    """Exige un número real finito y >= 0; rechaza bool, NaN e infinitos (`validar_real`)."""
+    # El mínimo se pasa como entero: así el mensaje de error dice "finito y >= 0".
+    return validar_real(valor, nombre, minimo=0, minimo_incluido=True)
 
 
 def _siguiente_par(cantidad: int) -> int:
     """Menor número par que es >= cantidad (par hacia arriba)."""
     return cantidad + cantidad % 2
-
-
-def _validar_claves_del_bloque(cfg_ea: Mapping) -> None:
-    """Exige que el bloque `ea:` sea un mapeo con EXACTAMENTE las claves de CLAVES_BLOQUE_EA.
-
-    Falta de claves -> ValueError que las nombra; claves de más (typos) -> ValueError.
-    """
-    if not isinstance(cfg_ea, Mapping):
-        raise TypeError(f"el bloque 'ea' debe ser un mapeo; se recibió "
-                        f"{type(cfg_ea).__name__}")
-    faltantes = [clave for clave in CLAVES_BLOQUE_EA if clave not in cfg_ea]
-    sobrantes = [clave for clave in cfg_ea if clave not in CLAVES_BLOQUE_EA]
-    if faltantes:
-        raise ValueError(f"faltan claves en el bloque 'ea': {', '.join(faltantes)}")
-    if sobrantes:
-        raise ValueError(
-            f"claves desconocidas en el bloque 'ea': {', '.join(map(str, sobrantes))}; "
-            f"válidas: {', '.join(CLAVES_BLOQUE_EA)}"
-        )
 
 
 def _validar_valores_del_bloque(cfg_ea: Mapping) -> tuple:
@@ -237,7 +227,7 @@ class ParametrosEA:
             fracción es negativa/NaN/inf, si `n_elite + n_mutantes > N`, si `n_cruzantes > N` o
             si toda la población es élite sin reevaluación (ninguna generación evaluaría nada).
         """
-        _validar_claves_del_bloque(cfg_ea)
+        validar_claves_exactas(cfg_ea, CLAVES_BLOQUE_EA, NOMBRE_BLOQUE_EA)
         (tamano, fraccion_elite, fraccion_mutantes, fraccion_cruce, reevaluar_elite,
          generaciones) = _validar_valores_del_bloque(cfg_ea)
         n_elite, n_mutantes, n_cruzantes = _calcular_tamanos_de_grupos(
@@ -257,121 +247,12 @@ class ParametrosEA:
 
 
 # %% [markdown]
-# ## Validaciones compartidas por los componentes
+# ## 1 y 2. Población inicial y evaluación
 #
-# Pequeñas funciones para no repetir comprobaciones de forma y tipo (se reutilizan en `pso.py`).
-
-# %%
-def validar_limites(limites) -> np.ndarray:
-    """Devuelve `limites` como arreglo float (d, 2) con [inferior, superior] por dimensión."""
-    limites = np.asarray(limites, dtype=float)
-    if limites.ndim != 2 or limites.shape[1] != 2 or limites.shape[0] < 1:
-        raise ValueError(f"limites debe tener forma (d, 2); se recibió {limites.shape}")
-    if not np.all(np.isfinite(limites)):
-        raise ValueError("limites debe ser finito (sin NaN ni inf)")
-    if np.any(limites[:, 0] > limites[:, 1]):
-        raise ValueError("limites: el límite inferior no puede superar al superior")
-    return limites
-
-
-def validar_poblacion(poblacion, nombre: str = "poblacion") -> np.ndarray:
-    """Devuelve `poblacion` como arreglo float (N, d); exige 2 dimensiones y d >= 1."""
-    poblacion = np.asarray(poblacion, dtype=float)
-    if poblacion.ndim != 2 or poblacion.shape[1] < 1:
-        raise ValueError(f"{nombre} debe tener forma (N, d); se recibió {poblacion.shape}")
-    return poblacion
-
-
-# %% [markdown]
-# ## 1. `generar_poblacion_inicial`
-#
-# Cada gen $j$ de cada individuo $i$ se sortea uniforme en el dominio de esa dimensión:
-#
-# $$x_{ij} \sim \mathcal{U}(l_j,\, u_j), \qquad i = 1,\dots,N,\quad j = 1,\dots,d$$
-#
-# donde $l_j, u_j$ son las columnas 0 y 1 de `limites` (forma $(d, 2)$).
-
-# %%
-def generar_poblacion_inicial(tamano: int, limites: np.ndarray,
-                              rng: np.random.Generator) -> np.ndarray:
-    """Sortea la población inicial: `tamano` puntos uniformes dentro del dominio.
-
-    Es el punto de partida de la búsqueda: cuantos más puntos repartidos por todo el dominio,
-    más regiones se exploran desde el principio (Spec §6.2: esta población CUENTA en el
-    presupuesto cuando se evalúa).
-
-    Parameters
-    ----------
-    tamano : int
-        Número de individuos N (>= 1).
-    limites : np.ndarray, forma (d, 2)
-        Dominio: `limites[j] = [mínimo, máximo]` del gen j (como `problem.func.bounds`).
-    rng : np.random.Generator
-        Generador de azar inyectado por el llamador.
-
-    Returns
-    -------
-    np.ndarray, forma (tamano, d), dtype float64
-        Cada fila es un individuo; todos sus genes están dentro de `limites`.
-
-    Notas
-    -----
-    Orden de consumo del rng: UNA sola llamada,
-    `rng.uniform(limites_inferiores, limites_superiores, size=(tamano, d))`.
-    """
-    tamano = validar_entero(tamano, "tamano", minimo=1)
-    limites = validar_limites(limites)
-
-    limites_inferiores = limites[:, 0]   # forma (d,): el mínimo de cada gen
-    limites_superiores = limites[:, 1]   # forma (d,): el máximo de cada gen
-    dimension = limites.shape[0]
-
-    # rng.uniform con límites de forma (d,) y size=(N, d): cada columna usa SU rango.
-    poblacion = rng.uniform(limites_inferiores, limites_superiores, size=(tamano, dimension))
-    return poblacion
-
-
-# %% [markdown]
-# ## 2. `evaluar_poblacion`
-#
-# Aplica la función objetivo a cada individuo (fila) y guarda su **aptitud**:
-#
-# $$a_i = f(x_i), \qquad i = 1,\dots,N \quad (\text{menor aptitud} = \text{mejor})$$
-#
-# Cada llamada a `evaluar_individuo` es UNA evaluación del presupuesto: `optimize` le pasa
-# `problem.f`, que es quien cuenta y quien lanza `BudgetExhausted`.
-
-# %%
-def evaluar_poblacion(poblacion: np.ndarray,
-                      evaluar_individuo: Callable[[np.ndarray], float]) -> np.ndarray:
-    """Evalúa los individuos uno por uno, en orden de fila.
-
-    Evaluar fila por fila (y no con una operación vectorizada) es lo que permite que
-    `CountedProblem` cuente exactamente una evaluación por individuo y corte la generación
-    en el punto exacto en que se agota el presupuesto (Spec §6.2).
-
-    Parameters
-    ----------
-    poblacion : np.ndarray, forma (N, d)
-        Individuos a evaluar; no se modifica.
-    evaluar_individuo : Callable[[np.ndarray], float]
-        Recibe una fila 1D de forma (d,) y devuelve su aptitud (p. ej. `problem.f`).
-        Si lanza una excepción (p. ej. `BudgetExhausted`) se propaga tal cual.
-
-    Returns
-    -------
-    np.ndarray, forma (N,), dtype float64
-        `aptitudes[i]` es la aptitud de `poblacion[i]`.
-    """
-    poblacion = validar_poblacion(poblacion)
-    numero_de_individuos = poblacion.shape[0]
-
-    aptitudes = np.empty(numero_de_individuos, dtype=float)   # forma (N,), se llena abajo
-    for fila in range(numero_de_individuos):
-        individuo = poblacion[fila]                           # forma (d,): una fila
-        aptitudes[fila] = evaluar_individuo(individuo)
-    return aptitudes
-
+# Se usan `generar_poblacion_inicial` y `evaluar_poblacion` de `_comun.py` (las comparten PSO
+# y DE): la primera sortea $x_{ij} \sim \mathcal{U}(l_j,\, u_j)$ y la segunda calcula la
+# aptitud $a_i = f(x_i)$ fila por fila. Cada llamada a `f` es UNA evaluación del presupuesto:
+# `optimize` le pasa `problem.f`, que es quien cuenta y quien lanza `BudgetExhausted`.
 
 # %% [markdown]
 # ## 3. `seleccionar_elite`
@@ -722,34 +603,6 @@ def ensamblar_nueva_generacion(elite: np.ndarray, mutantes: np.ndarray, hijos: n
 # Con $B = 20\,000$ en 2D: $50 + 42 \cdot 475 = 20\,000$ (475 generaciones, exacto).
 
 # %%
-def _leer_bloque_ea(cfg: Mapping) -> Mapping:
-    """Extrae `cfg["ea"]`; si falta el bloque lanza ValueError con mensaje claro."""
-    if "ea" not in cfg:
-        raise ValueError("falta el bloque 'ea' en la configuración (definido en "
-                         "configs/part1/base.yaml)")
-    return cfg["ea"]
-
-
-def leer_record_frames(cfg: Mapping) -> bool:
-    """Extrae `cfg["record_frames"]` (bool); falta -> ValueError, no bool -> TypeError."""
-    if "record_frames" not in cfg:
-        raise ValueError("falta la clave 'record_frames' en la configuración")
-    valor = cfg["record_frames"]
-    if not isinstance(valor, (bool, np.bool_)):
-        raise TypeError(f"record_frames debe ser bool; se recibió {valor!r} "
-                        f"({type(valor).__name__})")
-    return bool(valor)
-
-
-def construir_frame(iteracion: int, poblacion: np.ndarray, mejor_global: np.ndarray) -> dict:
-    """Frame del contrato §5.1: {"iter", "positions" [[x, y], ...], "best" [x, y]}."""
-    return {
-        "iter": iteracion,
-        "positions": poblacion.tolist(),
-        "best": mejor_global.tolist(),
-    }
-
-
 def _evaluar_generacion(nueva_poblacion: np.ndarray, aptitudes_elite: np.ndarray,
                         parametros: ParametrosEA,
                         evaluar_individuo: Callable[[np.ndarray], float]) -> np.ndarray:
@@ -798,7 +651,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
         `record_frames`, o presupuesto que no alcanza para ninguna evaluación.
     """
     # Paso 1: validar la configuración y leer el dominio del problema.
-    parametros = ParametrosEA.desde_config(_leer_bloque_ea(cfg))
+    parametros = ParametrosEA.desde_config(leer_bloque(cfg, NOMBRE_BLOQUE_EA))
     guardar_frames = leer_record_frames(cfg) and problem.func.dim == DIMENSION_CON_FRAMES
     limites = validar_limites(problem.func.bounds)                  # forma (d, 2)
     if problem.budget_exhausted():
@@ -848,14 +701,4 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
         pass
 
     # Paso 9: armar el retorno del contrato §5.1 con tipos nativos de Python.
-    resultado = {
-        "x_best": problem.best_x.tolist(),
-        "f_best": float(problem.best_f),
-        "n_f": int(problem.n_f),
-        "n_grad": int(problem.n_grad),
-        "eval_equiv": float(problem.eval_equiv()),
-        "history": [dict(punto) for punto in problem.history],
-    }
-    if guardar_frames:
-        resultado["frames"] = frames
-    return resultado
+    return construir_resultado(problem, frames, guardar_frames)

@@ -20,8 +20,8 @@
 # | # | Componente | Qué hace | Retorna |
 # |---|---|---|---|
 # | 0 | `ParametrosDE` | valida el bloque `de:` de la configuración | dataclass |
-# | 1 | `generar_poblacion_inicial` | (de `ea.py`) sortea $NP$ puntos uniformes | `(NP, d)` |
-# | 2 | `evaluar_poblacion` | (de `ea.py`) aplica `f` a cada fila | `(NP,)` |
+# | 1 | `generar_poblacion_inicial` | (de `_comun.py`) sortea $NP$ puntos uniformes | `(NP, d)` |
+# | 2 | `evaluar_poblacion` | (de `_comun.py`) aplica `f` a cada fila | `(NP,)` |
 # | 3 | `sortear_padres` | tres padres $r_1, r_2, r_3$ distintos entre sí y de $i$ | `(NP, 3)` |
 # | 4 | `mutar_diferencial` | $v_i = x_{r_1} + F\,(x_{r_2} - x_{r_3})$ | `(NP, d)` |
 # | 5 | `reiniciar_fuera_de_dominio` | re-sortea lo que sale de $[l_j, u_j]$ | `ResultadoReinicio` |
@@ -36,13 +36,15 @@
 # una vez; luego, en cada generación, (2) `rng.random((NP, NP))` de los padres, (3)
 # `rng.uniform(lb, ub, size=(NP, d))` del reinicio, (4) `rng.random((NP, d))` del cruce y
 # (5) `rng.integers(0, d, size=NP)` de $j_{\text{rand}}$. El consumo no depende de los datos.
+#
+# Las validaciones, la población inicial, la evaluación, los frames y el retorno §5.1 son
+# iguales en EA, PSO y DE: viven en `_comun.py` y aquí solo se importan.
 
 # %%
 """Evolución diferencial DE/rand/1/bin de la Parte 1 (Spec §6.4): componentes y orquestador."""
 
 from __future__ import annotations
 
-import math
 from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import NamedTuple
@@ -51,14 +53,19 @@ import numpy as np
 
 from src.common.counter import BudgetExhausted, CountedProblem
 from src.common.seeds import validar_entero
-from src.part1.ea import (
+from src.part1._comun import (
     DIMENSION_CON_FRAMES,
     construir_frame,
+    construir_resultado,
     evaluar_poblacion,
+    exigir_forma,
     generar_poblacion_inicial,
+    leer_bloque,
     leer_record_frames,
+    validar_claves_exactas,
     validar_limites,
     validar_poblacion,
+    validar_real,
 )
 
 # %% [markdown]
@@ -68,6 +75,7 @@ from src.part1.ea import (
 # `configs/part1/base.yaml` (Spec §4.1). Aquí solo hay definiciones estructurales.
 
 # %%
+NOMBRE_BLOQUE_DE = "de"              # clave del bloque en la configuración
 CLAVES_BLOQUE_DE = ("NP", "F", "CR", "generaciones")
 PADRES_POR_INDIVIDUO = 3             # r1, r2, r3 (DE/rand/1)
 POBLACION_MINIMA = PADRES_POR_INDIVIDUO + 1   # 3 padres distintos entre sí y distintos de i
@@ -86,51 +94,6 @@ POBLACION_MINIMA = PADRES_POR_INDIVIDUO + 1   # 3 padres distintos entre sí y d
 # - `generaciones` entero $\ge 0$ o `None` (= parar solo por presupuesto, Spec §6.2).
 
 # %%
-def _validar_real(valor, nombre: str, minimo: float, minimo_incluido: bool,
-                  maximo: float | None = None) -> float:
-    """Exige un real finito en el intervalo pedido; rechaza bool, texto, NaN e infinitos.
-
-    `minimo_incluido=False` exige `valor > minimo`; `maximo`, si no es None, es inclusivo.
-    Tipo incorrecto -> TypeError; no finito o fuera de rango -> ValueError (estilo counter.py).
-    """
-    # 1) Tipo: bool y texto no son reales aunque float() los acepte.
-    es_numero = isinstance(valor, (int, float, np.integer, np.floating))
-    if isinstance(valor, (bool, np.bool_)) or not es_numero:
-        raise TypeError(f"{nombre} debe ser un número real; se recibió {valor!r} "
-                        f"({type(valor).__name__})")
-    numero = float(valor)
-
-    # 2) Finito: descarta NaN, +inf y -inf antes de comparar con el rango.
-    requisito = f"finito y {'>=' if minimo_incluido else '>'} {minimo}"
-    if maximo is not None:
-        requisito += f" y <= {maximo}"
-    if not math.isfinite(numero):
-        raise ValueError(f"{nombre} debe ser {requisito}; se recibió {valor!r}")
-
-    # 3) Rango: mínimo (inclusivo o exclusivo) y, si se pidió, máximo inclusivo.
-    por_debajo = numero < minimo if minimo_incluido else numero <= minimo
-    por_encima = maximo is not None and numero > maximo
-    if por_debajo or por_encima:
-        raise ValueError(f"{nombre} debe ser {requisito}; se recibió {valor!r}")
-    return numero
-
-
-def _validar_claves_del_bloque(cfg_de: Mapping) -> None:
-    """Exige que el bloque `de:` sea un mapeo con EXACTAMENTE las claves de CLAVES_BLOQUE_DE."""
-    if not isinstance(cfg_de, Mapping):
-        raise TypeError(f"el bloque 'de' debe ser un mapeo; se recibió "
-                        f"{type(cfg_de).__name__}")
-    faltantes = [clave for clave in CLAVES_BLOQUE_DE if clave not in cfg_de]
-    sobrantes = [clave for clave in cfg_de if clave not in CLAVES_BLOQUE_DE]
-    if faltantes:
-        raise ValueError(f"faltan claves en el bloque 'de': {', '.join(faltantes)}")
-    if sobrantes:
-        raise ValueError(
-            f"claves desconocidas en el bloque 'de': {', '.join(map(str, sobrantes))}; "
-            f"válidas: {', '.join(CLAVES_BLOQUE_DE)}"
-        )
-
-
 @dataclass(frozen=True)
 class ParametrosDE:
     """Parámetros validados de la evolución diferencial (Spec §6.4).
@@ -180,12 +143,12 @@ class ParametrosDE:
             Si faltan claves o sobran (typos), si NP < 4, si F no es finito y > 0, si CR no
             está en [0, 1] o si `generaciones` es negativo.
         """
-        _validar_claves_del_bloque(cfg_de)
+        validar_claves_exactas(cfg_de, CLAVES_BLOQUE_DE, NOMBRE_BLOQUE_DE)
 
         tamano = validar_entero(cfg_de["NP"], "de.NP", minimo=POBLACION_MINIMA)
-        factor_f = _validar_real(cfg_de["F"], "de.F", minimo=0.0, minimo_incluido=False)
-        prob_cruce = _validar_real(cfg_de["CR"], "de.CR", minimo=0.0, minimo_incluido=True,
-                                   maximo=1.0)
+        factor_f = validar_real(cfg_de["F"], "de.F", minimo=0.0, minimo_incluido=False)
+        prob_cruce = validar_real(cfg_de["CR"], "de.CR", minimo=0.0, minimo_incluido=True,
+                                  maximo=1.0)
 
         generaciones = cfg_de["generaciones"]
         if generaciones is not None:
@@ -196,20 +159,12 @@ class ParametrosDE:
 
 
 # %% [markdown]
-# ## Validaciones compartidas por los componentes
+# ## 1 y 2. Población inicial y evaluación
 #
-# Pequeña función privada para no repetir comprobaciones de forma. La población, los límites y
-# la evaluación se reutilizan de `ea.py` (no se duplican).
-
-# %%
-def _exigir_forma(arreglo, forma: tuple, nombre: str) -> np.ndarray:
-    """Devuelve `arreglo` como float64 y exige que tenga exactamente `forma`."""
-    # np.asarray NO copia si ya es float64 (devuelve el mismo objeto): valida pero no modifica.
-    arreglo = np.asarray(arreglo, dtype=float)
-    if arreglo.shape != forma:
-        raise ValueError(f"{nombre} debe tener forma {forma}; se recibió {arreglo.shape}")
-    return arreglo
-
+# Se usan `generar_poblacion_inicial` y `evaluar_poblacion` de `_comun.py` (no se duplican):
+# la primera sortea $x_{ij} \sim \mathcal{U}(l_j,\, u_j)$ y la segunda calcula $f(x_i)$ fila
+# por fila. Cada llamada a `f` es UNA evaluación del presupuesto: `optimize` le pasa
+# `problem.f`, que es quien cuenta y quien lanza `BudgetExhausted`.
 
 # %% [markdown]
 # ## 3. `sortear_padres`
@@ -468,7 +423,7 @@ def cruzar_binomial(poblacion: np.ndarray, mutantes: np.ndarray, prob_cruce: flo
     (2) `rng.integers(0, d, size=NP)` para $j_{\\text{rand}}$.
     """
     poblacion = validar_poblacion(poblacion, "poblacion")
-    mutantes = _exigir_forma(mutantes, poblacion.shape, "mutantes")
+    mutantes = exigir_forma(mutantes, poblacion.shape, "mutantes")
     tamano, dimension = poblacion.shape
 
     # Un uniforme por gen; forma (NP, d). Se sortea ANTES que j_rand (orden fijo).
@@ -546,9 +501,9 @@ def seleccionar_codiciosa(poblacion: np.ndarray, aptitudes: np.ndarray, hijos: n
     """
     poblacion = validar_poblacion(poblacion, "poblacion")
     tamano, dimension = poblacion.shape
-    aptitudes = _exigir_forma(aptitudes, (tamano,), "aptitudes")
-    hijos = _exigir_forma(hijos, (tamano, dimension), "hijos")
-    aptitudes_hijos = _exigir_forma(aptitudes_hijos, (tamano,), "aptitudes_hijos")
+    aptitudes = exigir_forma(aptitudes, (tamano,), "aptitudes")
+    hijos = exigir_forma(hijos, (tamano, dimension), "hijos")
+    aptitudes_hijos = exigir_forma(aptitudes_hijos, (tamano,), "aptitudes_hijos")
 
     # Máscara (NP,): True donde el hijo NO es peor (empate incluido).
     reemplazaron = aptitudes_hijos <= aptitudes
@@ -576,14 +531,6 @@ def seleccionar_codiciosa(poblacion: np.ndarray, aptitudes: np.ndarray, hijos: n
 # completas, frames `iter` 0 a 665).
 
 # %%
-def _leer_bloque_de(cfg: Mapping) -> Mapping:
-    """Extrae `cfg["de"]`; si falta el bloque lanza ValueError con mensaje claro."""
-    if "de" not in cfg:
-        raise ValueError("falta el bloque 'de' en la configuración (definido en "
-                         "configs/part1/base.yaml)")
-    return cfg["de"]
-
-
 def _registrar_frame(frames: list[dict], iteracion: int, poblacion: np.ndarray,
                      aptitudes: np.ndarray) -> None:
     """Agrega a `frames` el frame de `iteracion` con el mejor individuo de la población.
@@ -639,7 +586,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
     ser finito; `CountedProblem` ya rechaza un presupuesto infinito en su constructor.
     """
     # `ParametrosDE.desde_config`: validar la configuración y leer el dominio del problema.
-    parametros = ParametrosDE.desde_config(_leer_bloque_de(cfg))
+    parametros = ParametrosDE.desde_config(leer_bloque(cfg, NOMBRE_BLOQUE_DE))
     guardar_frames = leer_record_frames(cfg) and problem.func.dim == DIMENSION_CON_FRAMES
     limites = validar_limites(problem.func.bounds)                  # forma (d, 2)
     if problem.budget_exhausted():
@@ -689,14 +636,4 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
         pass
 
     # Retorno del contrato §5.1 con tipos nativos de Python.
-    resultado = {
-        "x_best": problem.best_x.tolist(),
-        "f_best": float(problem.best_f),
-        "n_f": int(problem.n_f),
-        "n_grad": int(problem.n_grad),
-        "eval_equiv": float(problem.eval_equiv()),
-        "history": [dict(punto) for punto in problem.history],
-    }
-    if guardar_frames:
-        resultado["frames"] = frames
-    return resultado
+    return construir_resultado(problem, frames, guardar_frames)

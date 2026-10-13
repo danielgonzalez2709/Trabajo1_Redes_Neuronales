@@ -127,7 +127,7 @@ trabajo1/
 ├── docs/spec/  SPEC.md, PLAN.md
 └── .claude/agents/               # definiciones de subagentes (§12)
 ```
-[PENDIENTE: aprobación de Daniel, propuesto en REFACTOR-PARTE1-COMUN — Parte 1, refactor de T1.4/T1.5/T1.6] `src/part1/` añade `_comun.py`: utilidades compartidas **solo** por las tres metaheurísticas de la Parte 1, `ea.py` (T1.4), `pso.py` (T1.5) y `de.py` (T1.6); no es `src/common/` ni afecta a la Parte 2 (validaciones de forma, tipo y claves del bloque, población inicial y su evaluación, frames y retorno de §5.1), para que PSO y DE no importen de `ea.py` ni dupliquen código. Es un refactor sin cambio de comportamiento ni de contratos; `gd.py` no se toca. Detalle y criterios de aceptación en `docs/spec/propuestas/REFACTOR-PARTE1-COMUN.md` (tarea T1.6b del PLAN). Aún **no implementado**.
+[PENDIENTE: aprobación de Daniel, propuesto en REFACTOR-PARTE1-COMUN — Parte 1, refactor de T1.4/T1.5/T1.6] `src/part1/` añade `_comun.py`: utilidades compartidas **solo** por las tres metaheurísticas de la Parte 1, `ea.py` (T1.4), `pso.py` (T1.5) y `de.py` (T1.6); no es `src/common/` ni afecta a la Parte 2 (validaciones de forma, tipo y claves del bloque, población inicial y su evaluación, frames y retorno de §5.1), para que PSO y DE no importen de `ea.py` ni dupliquen código. Es un refactor sin cambio de comportamiento ni de contratos; `gd.py` no se toca. Detalle y criterios de aceptación en `docs/spec/propuestas/REFACTOR-PARTE1-COMUN.md` (tarea T1.6b del PLAN). **Implementado el 12-oct** (salidas idénticas bit a bit; revisor-spec, revisor-calidad y verificador-matematico aprueban); sigue pendiente la aprobación de Daniel a esta línea y a la de §5.1.
 
 ### 4.1 Comandos (contrato con el usuario final)
 ```bash

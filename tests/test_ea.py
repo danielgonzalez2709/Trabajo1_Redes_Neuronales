@@ -3,8 +3,8 @@
 Un grupo de pruebas por componente de `src/part1/ea.py`, de lo más pequeño a lo más grande:
 
     0. ParametrosEA        -> tamaños de los grupos y validación de la configuración
-    1. generar_poblacion_inicial
-    2. evaluar_poblacion
+    1-2. generar_poblacion_inicial y evaluar_poblacion: comunes a EA, PSO y DE; sus pruebas
+         están en tests/test_comun.py (T1.6b)
     3. seleccionar_elite
     4. mutar_individuos    -> se reconstruye el ruido con una copia del rng (misma semilla)
     5. cruzar_individuos   -> se deducen los padres de cada hijo
@@ -38,8 +38,6 @@ from src.part1.ea import (
     ResultadoMutacion,
     cruzar_individuos,
     ensamblar_nueva_generacion,
-    evaluar_poblacion,
-    generar_poblacion_inicial,
     mutar_individuos,
     optimize,
     seleccionar_elite,
@@ -252,115 +250,6 @@ def test_base_yaml_contiene_el_bloque_ea_con_los_defaults_del_spec():
 def test_base_yaml_no_cambio_el_bloque_ea():
     cfg = load_config(RUTA_BASE)
     assert cfg["ea"]["N"] == 50 and cfg["ea"]["esquema"] == "clase"
-
-
-# ================================================================================================
-# 1. generar_poblacion_inicial
-# ================================================================================================
-
-@pytest.mark.parametrize("tamano,dim", [(50, 2), (50, 3), (7, 5)])
-def test_poblacion_inicial_forma_dtype_y_rango(tamano, dim):
-    limites = limites_cuadrados(dim, 2.048)
-    poblacion = generar_poblacion_inicial(tamano, limites, np.random.default_rng(1))
-    assert poblacion.shape == (tamano, dim)
-    assert poblacion.dtype == np.float64
-    assert np.all(poblacion >= limites[:, 0]) and np.all(poblacion <= limites[:, 1])
-
-
-def test_poblacion_inicial_respeta_limites_distintos_por_dimension():
-    limites = np.array([[-1.0, 3.0], [0.0, 10.0], [-5.0, -2.0]])
-    poblacion = generar_poblacion_inicial(2000, limites, np.random.default_rng(2))
-    assert np.all(poblacion >= limites[:, 0]) and np.all(poblacion <= limites[:, 1])
-    # y cada columna llena su propio rango (no un rango común)
-    assert poblacion[:, 0].max() > 2.5 and poblacion[:, 0].min() < -0.5
-    assert poblacion[:, 1].max() > 9.0 and poblacion[:, 1].min() < 1.0
-    assert poblacion[:, 2].max() < -2.0 + 1e-12 and poblacion[:, 2].min() < -4.5
-
-
-def test_poblacion_inicial_misma_semilla_misma_poblacion_y_semillas_distintas_no():
-    limites = limites_cuadrados(2, 5.12)
-    a = generar_poblacion_inicial(50, limites, np.random.default_rng(3))
-    b = generar_poblacion_inicial(50, limites, np.random.default_rng(3))
-    c = generar_poblacion_inicial(50, limites, np.random.default_rng(4))
-    assert np.array_equal(a, b)
-    assert not np.array_equal(a, c)
-
-
-LIMITES_INVALIDOS = [
-    pytest.param(np.array([-1.0, 1.0]), id="forma_1d"),
-    pytest.param(np.array([[-1.0, 0.0, 1.0]]), id="forma_d_por_3"),
-    pytest.param(np.empty((0, 2)), id="sin_dimensiones"),
-    pytest.param(np.array([[-1.0, np.nan]]), id="con_nan"),
-    pytest.param(np.array([[-np.inf, 1.0]]), id="con_inf"),
-    pytest.param(np.array([[2.0, -2.0]]), id="inferior_mayor_que_superior"),
-]
-
-
-@pytest.mark.parametrize("limites", LIMITES_INVALIDOS)
-def test_poblacion_inicial_rechaza_limites_invalidos(limites):
-    with pytest.raises(ValueError):
-        generar_poblacion_inicial(5, limites, np.random.default_rng(0))
-
-
-def test_poblacion_inicial_rechaza_tamano_invalido():
-    limites = limites_cuadrados(2)
-    with pytest.raises(ValueError):
-        generar_poblacion_inicial(0, limites, np.random.default_rng(0))
-    with pytest.raises(TypeError):
-        generar_poblacion_inicial(5.0, limites, np.random.default_rng(0))
-
-
-def test_poblacion_inicial_consume_una_sola_llamada_uniform():
-    """Orden de consumo del rng documentado: rng.uniform(lim_inf, lim_sup, size=(N, d))."""
-    limites = np.array([[-1.0, 3.0], [0.0, 10.0]])
-    poblacion = generar_poblacion_inicial(10, limites, np.random.default_rng(8))
-    esperado = np.random.default_rng(8).uniform(limites[:, 0], limites[:, 1], size=(10, 2))
-    assert np.array_equal(poblacion, esperado)
-
-
-# ================================================================================================
-# 2. evaluar_poblacion
-# ================================================================================================
-
-def test_evaluar_llama_una_vez_por_fila_en_orden_y_con_filas_1d():
-    poblacion = poblacion_aleatoria(6, 3)
-    recibidos = []
-
-    def evaluar(x):
-        recibidos.append(np.array(x, copy=True))
-        return float(np.sum(x ** 2))
-
-    aptitudes = evaluar_poblacion(poblacion, evaluar)
-    assert len(recibidos) == 6
-    for i, x in enumerate(recibidos):
-        assert x.shape == (3,)
-        assert np.array_equal(x, poblacion[i])
-    assert aptitudes.dtype == np.float64
-    assert aptitudes.shape == (6,)
-    assert np.allclose(aptitudes, np.sum(poblacion ** 2, axis=1))
-
-
-def test_evaluar_no_modifica_la_poblacion():
-    poblacion = poblacion_aleatoria(5, 2)
-    copia = poblacion.copy()
-    evaluar_poblacion(poblacion, lambda x: float(np.sum(x)))
-    assert np.array_equal(poblacion, copia)
-
-
-def test_evaluar_rechaza_poblacion_que_no_es_2d():
-    with pytest.raises(ValueError):
-        evaluar_poblacion(np.array([1.0, 2.0, 3.0]), lambda x: 0.0)
-
-
-def test_evaluar_propaga_la_excepcion_del_callable():
-    class Corte(Exception):
-        pass
-
-    def evaluar(x):
-        raise Corte
-
-    with pytest.raises(Corte):
-        evaluar_poblacion(poblacion_aleatoria(3, 2), evaluar)
 
 
 # ================================================================================================
