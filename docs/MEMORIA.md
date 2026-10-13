@@ -16,7 +16,7 @@
 |---|---|
 | Última actualización | 2026-10-12 |
 | Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4 ✅ |
-| Próxima tarea | Parte 2: **T3.6** experimentos (presupuesto común ACO vs GA), T3.5 2-opt (recomendado: el MMAS deja cruces visibles); **T3.2 exacto = opcional** (Spec v1.14). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Próxima tarea | Parte 2: **T3.6** experimentos (presupuesto común ACO vs GA); **T3.2 exacto y T3.5 2-opt = opcionales** (Spec v1.14; 2-opt no está en el enunciado, decidido 12-oct). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -46,7 +46,7 @@
   Población inicial con el vecino más cercano (mismo arranque que MMAS). Piezas comunes en `src/part2/recorridos.py`.
 - **ACO (Spec v1.14 §7.4.1):** las **notas del profesor** (`data/raw/ACO/notas_aco.html`) priman sobre el Spec y todo cambio
   se trae al Spec. MMAS principal (ρ 0.02, p_best 0.05, alterna ib/bs), AS comparación (ρ 0.5). Berroa solo como referencia
-  de estructura (repo sin licencia: no se copia código). Presupuesto común de recorridos ACO vs GA: lo fija T3.6.
+  de estructura (repo sin licencia: no se copia código). Presupuesto común ACO vs GA: **51 654 recorridos** (v1.16).
 - Front: **Material for MkDocs** + Plotly (interactivas) + matplotlib con estilo DS (GIF). Todo Python.
 - **Blog (T0.7):** una entrada (`blog/docs/index.md`) que une `blog/secciones/*.md`; hook `blog/hooks/reporte.py` numera figuras/tablas APA
   (`::: figura id` … `:::`), resuelve `[[fig:id]]` y citas `[@clave]` con pandoc + APA 7, y **falla** si falta título/fuente, una figura no
@@ -60,13 +60,15 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
-- [ ] **T3.6, presupuesto común** ACO vs GA (hoy 14 101 vs 148 150 recorridos). El GA pierde diversidad (~30 recorridos
-  distintos de 150 desde la gen. ~100, con o sin vecino más cercano); con 3 semillas, final 2 565–2 702 €. `scripts/ver_ga_temporal.py`. Con ρ = 0.02 y 300 iteraciones MMAS
-  sigue mejorando al final y τ_min casi no actúa (~289 iteraciones para llegar). ACO tarda ~29 µs/recorrido (n = 47).
+- [x] **T3.6, presupuesto común [DECIDIDO 12-oct, Spec v1.16]:** 51 654 recorridos (ACO 1 099 iter. / GA 348 gen.).
+  Prueba w = 25, semillas 0–4: MMAS media 2 556,81 € (sigue mejorando), AS 2 640,36 €, GA 2 636,69 € (desv. 78,9; colapsa
+  a 27–35 recorridos distintos, igual que con 1 000 gen.). ~5,4 s por (w, corrida). 30 786 descartado (castiga a MMAS).
+- [x] **T3.6, umbral [DECIDIDO v1.16]:** envolvente inferior de recorridos candidatos (costo lineal a trozos en w), sin bisección.
 - [ ] Hallazgo para el blog: aun con w = 500 solo ~12 de 47 tramos pagan peaje; es el techo (tramos cuya rápida tiene
   peaje: ~23 % de los pares vecinos), no un error. `scripts/ver_aco_temporal.py --barrido` lo grafica.
-- [ ] **`base.yaml` sin clave de consumo ni de precio** (solo `costo.valor_hora`): sin ella la sensibilidad de §7.5 con `--set` no funciona. Asignado a **T3.6**. Punto de partida (no decidido): claves opcionales `consumo_l100` y `precio_l`; vacías = valores de `vehiculo.yaml` y `combustible.json`.
-- [ ] T3.6: hay cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)), por debajo de la resolución de 0,5 €/h de la bisección.
+- [ ] **`base.yaml`: claves `consumo_l100` y `precio_l`** [DECIDIDO v1.16]: opcionales, vacías = `vehiculo.yaml` / `combustible.json`. Las implementa **T3.6**.
+- [x] **T3.6 (13-oct):** implementador 4 rondas (948 pruebas), revisor-spec ✅, revisor-calidad ✅. [DECIDIDO v1.16] gap = media; sensibilidad con unión de candidatos base + nuevos; historiales sin sangría (~6,4 MB) y versionados. **Falta:** commit, correr el barrido real (analista-experimentos, ~10 min + 2 × ~3,7 min), confirmar las decisiones "implementado, pendiente" del Spec §7.5/§5.4.
+- [x] T3.6: cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)): los capta la envolvente (sin resolución fija).
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
 - [x] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → resuelto en T2.5 (Spec v1.10: km por anclas, no por proporción de intersecciones).
 - [ ] **T2.5, verificar a mano:** los 63 anclas no-OSM (5 de 6 verificados por muestreo); parámetros 1,5 km y 95 % sin fuente; `GI-20`/`N-622`/`PA-34` sin cobrar (sin tarifa publicada). Ampliación de §5.3 (5 archivos auxiliares): **confirmada por Jose Miguel el 12-oct.**
@@ -98,6 +100,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **Spec v1.16** (T3.6): presupuesto común 51 654 recorridos (ACO 1 099 / GA 348), probado con 5 semillas (analista-experimentos); umbral por envolvente de candidatos; claves opcionales de consumo y precio. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.4 ✅**: `ga.py` + `recorridos.py` (piezas comunes con ACO) + 103 pruebas (874 en total). implementador 3 rondas (Opus); revisor-spec devolvió una prueba que no distinguía OX(P1,P2)/OX(P2,P1) (**H-24**, débil) y luego ✅; revisor-calidad ✅ (Sonnet). **Spec v1.15** (§7.4.2). w = 25, semilla 0: GA 2 701,56 € con 148 150 recorridos (semillas 1–2: 2 565,53 €). Gráficos temporales en `scripts/ver_ga_temporal.py`. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.3 ✅**: `aco.py` (AS + MMAS, `solve` + `iterar`) y `test_aco.py` (60 pruebas; 769 en total). implementador 3 rondas (Opus); revisor-spec ✅, verificador-matematico ✅ (demostró que con el orden aprobado el recorte superior nunca se activa), revisor-calidad ✅ (Sonnet). w = 25: MMAS 2 589,55 €, AS 2 659,76 €, vecino más cercano 3 173,83 €. Sin candidatos nuevos a la cacería. |
 | 2026-10-12 | Jose Miguel + Claude | **Spec v1.14**: T3.2 opcional; ACO según las notas del profesor (§7.4.1). Hallado: los valores por defecto daban 14 100 recorridos a ACO y ~150 000 a GA (comparación injusta) → presupuesto común en T3.6. Despachada T3.3. |
