@@ -2,21 +2,26 @@
 
 - Parte 2 (T4.4): `part2_interactivas.generar_part2()` → blog/docs/figures/part2_*.html.
 - Parte 1 (T4.2): pendiente. Punto de extensión: añadir su generador a `GENERADORES` cuando exista.
-- GIF (T4.5): pendiente; mismo punto de extensión.
+- GIF Parte 2 (T4.5): `gifs.generar_gifs()` → media/tsp_{mmas|ga}_w25.gif.
+- GIF Parte 1 (T4.3): pendiente; mismo punto de extensión.
 """
 
 from __future__ import annotations
 
-from src.viz import part2_interactivas
+from src.viz import gifs, part2_interactivas
 
-PENDIENTES = {"Parte 1": "T4.2", "GIF": "T4.5"}  # se quitan de aquí al añadir su generador
+PENDIENTES = {"Parte 1": "T4.2", "GIF Parte 1": "T4.3"}  # se quitan de aquí al añadir su generador
 
 
 def _parte2() -> list:
     return part2_interactivas.generar_part2()
 
 
-GENERADORES = {"Parte 2": _parte2}
+def _gif_parte2() -> list:
+    return gifs.generar_gifs()
+
+
+GENERADORES = {"Parte 2": _parte2, "GIF Parte 2": _gif_parte2}
 
 
 def main(cfg: dict | None = None) -> int:  # noqa: ARG001 - firma de los manejadores de la CLI
