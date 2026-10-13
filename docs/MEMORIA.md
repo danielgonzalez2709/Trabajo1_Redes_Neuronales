@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-13 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4, T3.6 ✅ |
-| Próxima tarea | Parte 2: **T3.7** demo (< 2 min; el `demo.yaml` ya tiene su propia salida); figuras **T4.4/T4.5** desde `results/data/part2/`; **T3.2 exacto y T3.5 2-opt = opcionales** (Spec v1.14; 2-opt no está en el enunciado, decidido 12-oct). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4, T3.6, T3.7 ✅ |
+| Próxima tarea | Parte 2: figuras **T4.4/T4.5** desde `results/data/part2/`; **T3.2 exacto y T3.5 2-opt = opcionales** (Spec v1.14; 2-opt no está en el enunciado, decidido 12-oct). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 0) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -100,6 +100,7 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-13 | Jose Miguel + Claude | **T3.7 ✅** demo Parte 2 (**Spec v1.17**): MMAS, w = 25, 100 iter., 10 corridas; gap frente al **mejor conocido** de `sweep_w.json` (2 544,76 €; el exacto no existe), clave `experimento.referencia_gap`, figura `recorrido_w25.png`; salida `results/data/part2/demo/` sin versionar. Resultado: 2 772,91 € (+8,97 % mejor, +15,71 % media: esperable con 100 iter. y ρ = 0,02, explicarlo en la sustentación). ~2,6 s, sin red, reproducible (auditor ✅). implementador 2 rondas, revisor-spec 2 rondas ✅, revisor-calidad ✅; 969 pruebas. Falta medir en otra máquina (§9). Sin candidatos nuevos a la cacería. |
 | 2026-10-13 | Jose Miguel + Claude | **T3.6 ✅**: `experiment.py` + `envolvente.py` + 948 pruebas (implementador 4 rondas, revisor-spec ✅, revisor-calidad ✅). Barrido real (analista-experimentos, 18 min; 330 corridas con 51 654 recorridos): MMAS gap de la media 0,24–0,75 %, GA 2,3–4,1 %. Umbrales de w: **10,75 / 13,81 / 42,19 €/h** (los dos primeros casi indiferentes en euros: 0,002–0,13 €). Sensibilidad 5,6/6,2 l/100 km: umbrales se mueven; con 5,6 cambia una ruta. Verificado de forma independiente por el cazador (CONFORME, 0 candidatos). Historiales compactos (12,5 MB versionados). |
 | 2026-10-12 | Jose Miguel + Claude | **Spec v1.16** (T3.6): presupuesto común 51 654 recorridos (ACO 1 099 / GA 348), probado con 5 semillas (analista-experimentos); umbral por envolvente de candidatos; claves opcionales de consumo y precio. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.4 ✅**: `ga.py` + `recorridos.py` (piezas comunes con ACO) + 103 pruebas (874 en total). implementador 3 rondas (Opus); revisor-spec devolvió una prueba que no distinguía OX(P1,P2)/OX(P2,P1) (**H-24**, débil) y luego ✅; revisor-calidad ✅ (Sonnet). **Spec v1.15** (§7.4.2). w = 25, semilla 0: GA 2 701,56 € con 148 150 recorridos (semillas 1–2: 2 565,53 €). Gráficos temporales en `scripts/ver_ga_temporal.py`. |
