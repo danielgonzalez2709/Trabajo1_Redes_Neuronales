@@ -533,7 +533,7 @@ def test_rng_debe_ser_generator():
 
 def test_bloque_aco_en_base_yaml():
     """Spec §7.4 y §7.4.1 [DECIDIDO]: MMAS principal; m = 47, α = 1, β = 3; ρ AS 0.5 y MMAS 0.02; p_best 0.05.
-    `iteraciones` es provisional (§7.4: T3.6 fija el presupuesto común): solo se exige entero positivo."""
+    `iteraciones` = 1 099 (presupuesto común, §7.4 v1.16) lo comprueba tests/test_experiment_part2.py."""
     bloque = load_config(BASE_PART2)["aco"]
     assert set(bloque) == {"variante", "hormigas", "alpha", "beta", "iteraciones", "as", "mmas"}
     assert bloque["variante"] == "mmas"

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.16** — 2026-10-12 (merge de la Parte 1: §6.4 con el EA en esquema de clase —propuesta en `docs/spec/propuestas/CAMBIO-EA.md`, que la llamaba "1.4"; en la rama de la Parte 1 figuró como "1.14" hasta integrar `main`, que ya usaba 1.14 y 1.15— y §6.3 con la configuración del GD y la condición de Armijo sobre el punto proyectado, ambas [PENDIENTE: aprobación de Daniel]; más las líneas [PENDIENTE] de §4 y §5.1 del refactor T1.6b) · 1.15 — 2026-10-12 (T3.4: GA con el esquema clásico de §7.4 [DECIDIDO], §7.4.2: mutación 50/50, conteo de recorridos, población inicial con el vecino más cercano; notebooks del profesor solo como referencia) · 1.14 — 2026-10-12 (T3.3: ACO según las notas del profesor [DECIDIDO], §7.4; T3.2 exacto pasa a opcional) · 1.13 — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.18** — 2026-10-13 (merge de la Parte 1: §6.4 con el EA en esquema de clase —propuesta en `docs/spec/propuestas/CAMBIO-EA.md`, que la llamaba "1.4"; en la rama de la Parte 1 figuró como "1.14" y luego "1.16"; `main` ya usaba 1.14 a 1.17— y §6.3 con la configuración del GD y la condición de Armijo sobre el punto proyectado, ambas [PENDIENTE: aprobación de Daniel]; más las líneas [PENDIENTE] de §4 y §5.1 del refactor T1.6b) · 1.17 — 2026-10-13 (T3.7 [DECIDIDO, Jose Miguel]: el gap de la demo se mide contra el **mejor costo conocido** en w = 25 del barrido de T3.6, no contra un óptimo probado; clave `experimento.referencia_gap`; MMAS con 10 corridas; salida `demo.json` + figura sin versionar, §7.7 y §5.4) · 1.16 — 2026-10-12 (T3.6 [DECIDIDO, Jose Miguel]: presupuesto común de 51 654 recorridos, ACO 1 099 iteraciones y GA 348 generaciones, §7.4; umbral de w por envolvente de recorridos candidatos en lugar de bisección con el exacto, §7.5; claves opcionales `consumo_l100` y `precio_l` en `base.yaml`, §7.5) · 1.15 — 2026-10-12 (T3.4: GA con el esquema clásico de §7.4 [DECIDIDO], §7.4.2: mutación 50/50, conteo de recorridos, población inicial con el vecino más cercano; notebooks del profesor solo como referencia) · 1.14 — 2026-10-12 (T3.3: ACO según las notas del profesor [DECIDIDO], §7.4; T3.2 exacto pasa a opcional) · 1.13 — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -78,7 +78,7 @@ Punto de la rúbrica de evaluación, copiado sin cambios. Sus criterios verifica
 
 | Tema | Decisión |
 |---|---|
-| Lenguaje y entorno | Python 3.12, un solo `requirements.txt` con versiones fijas (generado con `pip freeze`, incluye dependencias transitivas). Incluye también las dependencias para **reconstruir datos y figuras** (`openpyxl`, `matplotlib`), aunque la demo no las necesite |
+| Lenguaje y entorno | Python 3.12, un solo `requirements.txt` con versiones fijas (generado con `pip freeze`, incluye dependencias transitivas). Incluye también las dependencias para **reconstruir datos y figuras** (`openpyxl`, `matplotlib`); la demo de la Parte 2 usa `matplotlib` para la figura del recorrido (§7.7) |
 | Solver exacto | **PuLP 4.0 + HiGHS** (`pulp[highs]`). PuLP 4.0 **ya no incluye CBC** y cambió la API: las variables se crean con `problema.add_variable(nombre, cat="Binary")`, no con `LpVariable(..., cat=...)` (ver H-07) |
 | Design System | Skill **`apple-design`** (https://github.com/emilkowalski/skills/tree/main/skills/apple-design) — ver §8 |
 | Implementación | Algoritmos **desde cero con numpy**. Librerías de optimización (SciPy, pyswarms, DEAP, OR-Tools) **solo para contrastar**, nunca como solución |
@@ -258,7 +258,11 @@ def solve(C: np.ndarray, cfg: dict, rng: np.random.Generator) -> dict
 results/data/part1/runs/{func}_{dim}d_{method}_seed{k}.json   # retorno de optimize() + config
 results/data/part1/summary.json                               # estadísticas por configuración (§6.6)
 results/data/part2/sweep_w.json     # [{w, tour, cost, desglose:{tiempo,peajes,combustible}, km_peaje, cambio_vs_anterior, gap_aco, gap_ga}]
-results/data/part2/history_{aco|ga}_w{w}.json
+results/data/part2/history_{aco|ga}_w{w}.json   # JSON compacto, sin sangría, versionado [DECIDIDO v1.16]: ~6,4 MB los 11 w (con sangría, ~16,3 MB)
+results/data/part2/umbrales_w.json      # [implementado en T3.6, pendiente de confirmación] candidatos canónicos, intervalos y umbrales de la envolvente
+results/data/part2/sensibilidad/<etiqueta>/   # [ídem] sweep_w.json, umbrales_w.json y comparacion_base.json de cada consumo/precio alternativo
+results/data/part2/demo/demo.json         # [DECIDIDO v1.17] demo §7.7: {w, solvers, tour, cost, desglose, km_peaje, arcos_con_peaje, referencia, gap_mejor_conocido, metodos, n_tour_evals, figura, nota, semillas, config}; NO se versiona
+results/data/part2/demo/recorrido_w{w}.png   # [DECIDIDO v1.17] figura del mejor recorrido de la demo; NO se versiona (se regenera en segundos)
 results/data/part2/route_geometry.json   # opcional: geometría simplificada por par y alternativa
 ```
 **[DECIDIDO 9-oct, T0.3] Identificadores y forma del JSON de cada corrida (Parte 1):**
@@ -540,16 +544,21 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 ### 7.4 Algoritmos
 | Algoritmo | Especificación | Parámetros por defecto |
 |---|---|---|
-| **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max (detalle en §7.4.1) | MMAS (principal): m=47, α=1, β=3, ρ=0.02, p_best=0.05 · AS (comparación): m=47, α=1, β=3, ρ=0.5 · 300 iteraciones [provisional] |
-| **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** o intercambio (50/50); elitismo (detalle en §7.4.2) | pop=150, gen=1 000, pc=0.9, pm=0.2, torneo k=4, élites=2 |
+| **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max (detalle en §7.4.1) | MMAS (principal): m=47, α=1, β=3, ρ=0.02, p_best=0.05 · AS (comparación): m=47, α=1, β=3, ρ=0.5 · 1 099 iteraciones (presupuesto común, v1.16) |
+| **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** o intercambio (50/50); elitismo (detalle en §7.4.2) | pop=150, gen=348 (presupuesto común, v1.16), pc=0.9, pm=0.2, torneo k=4, élites=2 |
 | **2-opt** (opcional) | Mejora local sobre la mejor solución; reportar con y sin | — |
 | **Exacto (referencia)** | Formulación DFJ con **PuLP 4.0 + HiGHS**, eliminación iterativa de subtours. **Opcional desde v1.14** (T3.2 solo si sobra tiempo; sin él, el gap de §7.5 se mide contra la mejor solución encontrada y se dice así en el blog) | — |
 
 - **Aceptación:** `tests/test_tsp_operators.py` — 10 000 cruces/mutaciones aleatorias producen siempre permutaciones válidas; `tests/test_exact_small.py` — con 8 ciudades, el exacto coincide con fuerza bruta.
-- **Comparación justa ACO vs GA:** mismo número de **recorridos evaluados**. Con los valores por defecto no se cumple
-  (ACO 1 + 47 × 300 = 14 101; GA 150 + 148 × 1 000 = 148 150): T3.6 fija un **presupuesto común** de recorridos evaluados
-  [PENDIENTE, valor tras medir tiempos en T3.3/T3.4] y de él salen las iteraciones de cada método. El enunciado no fija
-  iteraciones.
+- **Comparación justa ACO vs GA [DECIDIDO v1.16, Jose Miguel, 12-oct]:** mismo número de **recorridos evaluados**:
+  **51 654** = ACO 1 + 47 × 1 099 = GA 150 + 148 × 348 (igualdad exacta más cercana a 50 000; las soluciones son
+  iteraciones = 63 + 148k). Antes: ACO 14 101 vs. GA 148 150. El enunciado no fija iteraciones. T3.6 actualiza `base.yaml`.
+  - Prueba previa (w = 25, semillas 0–4, `alucinaciones/prompts/T3.6-presupuesto.md`): MMAS 2 544,76–2 560,10 €
+    (media 2 556,81, sigue mejorando tras el 67 % del presupuesto en 4 de 5 semillas); AS media 2 640,36 €; GA media
+    2 636,69 € con desviación 78,9: con 348 generaciones da los mismos costos que con 1 000 (semillas 0–2) porque la
+    población colapsa a 27–35 recorridos distintos. ~5,4 s por (w, corrida) para los tres métodos.
+  - Se descartó 30 786 recorridos (655 iteraciones / 207 generaciones): 4 de 5 semillas de MMAS mejoraban después de
+    30 000 y el GA casi no perdía, así que la comparación se habría corrido a favor del GA para ahorrar ~4 min.
 
 #### 7.4.1 ACO (T3.3) [DECIDIDO v1.14, Jose Miguel, 12-oct]
 **Fuente principal:** notas del profesor, `data/raw/ACO/notas_aco.html` (Ospina y Zapata, 2026-01), §4, §6, §7.2 y Tabla 3.
@@ -617,7 +626,7 @@ de selección sería el elitismo.
 - **Inversión:** dos posiciones distintas i < j al azar; invierte el tramo [i..j]. **Intercambio:** dos posiciones
   distintas al azar; intercambia sus ciudades.
 - **Mejor global:** empieza en el mejor de la población inicial y cambia solo con mejora estricta.
-- **Conteo:** `n_tour_evals = poblacion + (poblacion − elites) · generaciones` (148 150 con los valores por defecto).
+- **Conteo:** `n_tour_evals = poblacion + (poblacion − elites) · generaciones` (51 654 con los valores por defecto de v1.16).
   Cada candidato generado cuenta 1, aunque sea una copia sin cruce ni mutación (como las hormigas que repiten recorrido en
   ACO); los élites que pasan no se vuelven a contar.
 - **`history`:** una entrada por generación con el mejor global hasta ella (`iter` = número de generación, desde 0). La
@@ -633,10 +642,30 @@ de selección sería el elitismo.
 
 ### 7.5 Experimentos Parte 2
 - Barrido w ∈ {0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100} €/h (más denso en 0–50, rango sugerido por el equipo Parte 2). Para cada w: exacto + ACO (10 corridas) + GA (10 corridas) → mejor, media, desviación, **gap % vs. óptimo**.
-- **Umbral:** donde el recorrido óptimo cambie entre dos w consecutivos, bisección con el solver exacto hasta resolución de 0,5 €/h → responde "¿a partir de qué valor cambia la ruta?".
+- **Umbral [DECIDIDO v1.16, Jose Miguel, 12-oct]:** responde "¿a partir de qué valor cambia la ruta?" con la
+  **envolvente inferior de recorridos candidatos**, no con bisección (el exacto es opcional desde v1.14 y la bisección
+  con una heurística mezcla el azar con el efecto de w):
+  - Candidatos: los mejores recorridos encontrados en todo el barrido (todos los w, métodos y corridas).
+  - Para un recorrido fijo, el costo es función conocida de w: cada arco cuesta el mínimo entre dos rectas
+    (rápida y sin peaje, `costos.py`), así que el costo del recorrido es lineal a trozos en w y se evalúa sin optimizar.
+  - El umbral es el w donde cambia el recorrido de menor costo de la envolvente; se calcula de forma exacta (cruces entre
+    funciones lineales a trozos), sin resolución fija (no depende de una bisección de 0,5 €/h). Los cruces de alternativa dentro de un arco (p. ej. pares (34,40) y (34,42) cerca de w = 30) entran en el cálculo del costo, pero solo producen un umbral si cambian el recorrido ganador; en el barrido real no lo hicieron.
+  - Se reporta como "umbral entre las mejores rutas encontradas", no como umbral del óptimo probado (igual que el gap).
+- **Gap [DECIDIDO v1.16, Jose Miguel, 12-oct]:** `gap_aco` (MMAS) y `gap_ga` de `sweep_w.json` son el gap de la **media** de las
+  10 corridas frente al mejor costo encontrado en ese w; el gap del mejor y la desviación (n − 1) van en el detalle por método.
+- **Unión de candidatos en la sensibilidad [DECIDIDO v1.16, Jose Miguel, 12-oct]:** la envolvente de cada consumo alternativo se
+  calcula con los candidatos del barrido base (MMAS, AS y GA) **más** los nuevos de MMAS, todos evaluados con el consumo nuevo; así
+  base y sensibilidad se comparan contra el mismo conjunto de rutas y la diferencia viene del consumo, no del azar de los algoritmos.
+- **Implementado en T3.6, pendiente de confirmación humana:** `costo.valor_hora` como número o lista creciente (rejilla de w);
+  bloque `experimento: {variantes_aco, datos, salida}` en `base.yaml`; `run_id = (i_w · n_solvers + i_solver) · runs + r` (la
+  sensibilidad reutiliza los de MMAS base); presupuesto común exigido solo si corren ACO y GA juntos; archivos `umbrales_w.json` y
+  `comparacion_base.json`; salida de la demo en `results/data/part2/demo`.
 - **Sensibilidad de consumo (v1.7):**
-  - Se repite el barrido de w con el solver exacto, con `consumo` = 5,6 y 6,2 l/100 km (fase "extra alta" del catálogo, §7.2 Bloque 5).
-  - Se cambia solo con `--set`, sin editar código.
+  - Se repite el barrido de w **con MMAS** (10 corridas; [DECIDIDO v1.16, Jose Miguel]: el exacto es opcional) y se
+    recalcula la envolvente del umbral, con `consumo` = 5,6 y 6,2 l/100 km (fase "extra alta" del catálogo, §7.2 Bloque 5).
+  - Se cambia solo con `--set`, sin editar código. Claves opcionales en `base.yaml` [DECIDIDO v1.16]: `consumo_l100`
+    y `precio_l`; vacías = valores de `vehiculo.yaml` y `combustible.json` (una sola fuente de verdad); si se dan,
+    deben ser números finitos > 0.
   - Se reporta, frente a la base de 4,6:
     - el costo total y el de combustible;
     - si cambian el recorrido óptimo y el umbral de w.
@@ -651,6 +680,16 @@ de selección sería el elitismo.
 
 ### 7.7 Demo Parte 2 (< 2 min)
 `configs/part2/demo.yaml`: ACO, w=25, 100 iteraciones → costo, gap vs. óptimo precalculado, figura del recorrido.
+- **Referencia del gap [DECIDIDO v1.17, Jose Miguel, 12-oct]:** como el exacto (T3.2) es opcional, el "óptimo precalculado" es el
+  **mejor costo conocido** en w = 25: el mejor encontrado en ese w por el barrido de T3.6 (`results/data/part2/sweep_w.json`).
+  Se reporta como "gap frente al mejor conocido", no como gap frente al óptimo probado (igual que §7.5).
+- **Configuración [DECIDIDO v1.17, Jose Miguel, 13-oct]:**
+  - ACO = **MMAS** (variante principal, §7.4.1), `runs: 10` heredado de la base (igual que el barrido §7.5); se reporta el
+    mejor de las 10 corridas con su desglose y el gap de la mejor y de la media.
+  - Clave `experimento.referencia_gap` (ruta a `sweep_w.json`; `null` en `base.yaml`): si no es nula activa el modo demo
+    (un solo w, sin envolvente ni historiales, salida solo en `experimento.salida`). Falla con código 2 si falta el archivo,
+    la entrada de ese w o si el costo del recorrido de referencia recalculado con los datos actuales no coincide.
+  - La salida (`results/data/part2/demo/`) **no se versiona** (`.gitignore`): se regenera en vivo en segundos.
 
 ---
 

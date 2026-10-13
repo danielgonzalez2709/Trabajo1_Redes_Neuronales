@@ -187,7 +187,7 @@ fuente, y los rangos, puntajes y conteos de éxitos de la HPO se reprodujeron co
 - La sección 03 presenta R1-R8 como reglas del Spec sin decir que la Spec §6.9 sigue `[PENDIENTE: aprobación de Daniel]`.
 - Spec §6.3 l. 327 (no es texto del blog): "mediana 1.8e-3 vs 1.3e-1 en 2D". Las medidas actuales con las semillas 0-29
   son 1.905e-3 y 1.471e-1. La Spec queda desactualizada o redondeada frente al resultado medido; y su "η ≤ 1.7e-4 /
-  1.5e-4" está redondeada hacia arriba en 3D (H-41). Para Daniel; no se edita.
+  1.5e-4" está redondeada hacia arriba en 3D (H-42). Para Daniel; no se edita.
 
 **No verificables localmente:**
 
@@ -205,8 +205,8 @@ fuente, y los rangos, puntajes y conteos de éxitos de la HPO se reprodujeron co
 
 | Imprecisión | Corrección en el blog |
 |---|---|
-| 1. "1,5e-4 es el 1/L redondeado de la Spec" | Es la cota redondeada que la Spec (6.3) da para 3D (para 2D da 1,7e-4); mismo valor en las dos dimensiones (secciones 03 y 08). Variante de H-41. |
-| 2. frac_c = "fracción de N que se cruza" | "Fracción mínima de N que se cruza"; la sección 04 explica con `H-T1.11_cifras.txt` §13 que por defecto se cruzan 38 de 50 (0,760) y con los afinados 78 de 117 (0,667), por el relleno. H-42. |
+| 1. "1,5e-4 es el 1/L redondeado de la Spec" | Es la cota redondeada que la Spec (6.3) da para 3D (para 2D da 1,7e-4); mismo valor en las dos dimensiones (secciones 03 y 08). Variante de H-42. |
+| 2. frac_c = "fracción de N que se cruza" | "Fracción mínima de N que se cruza"; la sección 04 explica con `H-T1.11_cifras.txt` §13 que por defecto se cruzan 38 de 50 (0,760) y con los afinados 78 de 117 (0,667), por el relleno. H-43. |
 | 3. "tuned.yaml solo trae los valores que cambiaron" | Trae `hereda`, `salida`, `tablas` y los hiperparámetros que cambiaron (sección 11). |
 | 4. "por debajo de 1e-6 las diferencias son ruido numérico" (como hecho) | Presentado como decisión de diseño: se tratan como empate (sección 03). |
 | Observación: redondeo de medias al par (8702, 984, 2174) | El script usa redondeo convencional: 8703, 985, 2175 (tablas de la sección 04). |

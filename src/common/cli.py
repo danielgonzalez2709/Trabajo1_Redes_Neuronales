@@ -63,6 +63,20 @@ def _part1(cfg: dict | None) -> int:
     return manejador_part1(cfg)
 
 
+def _part2(cfg: dict | None) -> int:
+    """Manejador de part2 (T3.6). Import perezoso: cargar la CLI no importa numpy ni el experimento."""
+    from src.part2 import experiment
+
+    return experiment.main(cfg)
+
+
+def _figures(cfg: dict | None) -> int:
+    """Manejador de figures (T4.4: Parte 2). Import perezoso: cargar la CLI no importa plotly."""
+    from src.viz import figuras
+
+    return figuras.main(cfg)
+
+
 def _hpo(cfg: dict, ruta_config: str, overrides: list[str]) -> int:
     """Manejador de `hpo` (T1.10). Importa `src.part1.hpo_experimento` al llamarse, como `_part1`.
 
@@ -75,17 +89,17 @@ def _hpo(cfg: dict, ruta_config: str, overrides: list[str]) -> int:
 
 
 # Registro único nombre -> (ayuda, usa_config, manejador, con_origen).
-# part1 (T1.7) y hpo (T1.10) ya están conectados. Completar al cerrar T3.6 (part2) y T4.x (figures).
+# part1 conectado en T1.7, hpo en T1.10, part2 en T3.6 y figures en T4.4 (Parte 1 pendiente: src/viz/figuras.py).
 SUBCOMANDOS: dict[str, Subcomando] = {
     "part1": Subcomando("Parte 1: optimización numérica (GD, EA, PSO, DE)", True, _part1),
     "hpo": Subcomando("Parte 1: optimización de hiperparámetros", True, _hpo, con_origen=True),
     "part2": Subcomando(
-        "Parte 2: TSP por España (ACO, GA, exacto)", True, _pendiente("part2", "T3.6")
+        "Parte 2: TSP por España (ACO, GA, exacto)", True, _part2
     ),
     "figures": Subcomando(
         "Regenera las figuras interactivas y los GIF desde results/data/",
         False,
-        _pendiente("figures", "T4.x"),
+        _figures,
     ),
 }
 
