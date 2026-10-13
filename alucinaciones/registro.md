@@ -10,7 +10,7 @@
 | Código | 9 (H-07, H-08, H-09, H-10, H-12, H-13, H-15, H-16, H-18) | 0 |
 | Datos del mundo real | 5 (H-01, H-02, H-04, H-05, H-06) | 2 (H-04, H-05; revisados y aprobados por el puente en el PR #1, 9-oct-2026) |
 | Bibliografía | 1 (H-17, severidad baja: atribución imprecisa, no cita falsa) | 0 |
-| Conceptos | 2 (H-14, H-19, esta última severidad baja) | 0 |
+| Conceptos | 3 (H-14, H-19, H-20; las dos últimas de severidad baja) | 0 |
 
 ---
 
@@ -245,6 +245,17 @@
 5. **Corrección:** (a) "el primer movimiento es puramente social, porque b_i = x_i anula el término cognitivo"; (b) "sin memoria el término cognitivo sería siempre cero y solo quedaría la atracción hacia g"; (c) "con v = 0, el líder permanece quieto hasta que otra partícula mejora g". Tomar nota: `test_la_particula_que_es_g_y_esta_en_su_memoria_solo_se_mueve_por_inercia` es correcta para un paso con v ≠ 0.
 6. **Lección:** al explicar un algoritmo, evaluar cada término en el estado inicial concreto (b = x, v = 0); una frase didáctica "solo depende de A y B" puede ocultar que A vale cero.
 
+### H-20 — Docstrings del DE: "la diferencia se encoge al converger", "el mejor individuo nunca se pierde", "la aptitud de cada puesto nunca empeora"
+- **Estado:** candidato — severidad **baja**: son tendencias o garantías algo más fuertes que lo cierto; ya corregidas en `de.py` (12-oct-2026) y sin efecto en los resultados
+- **Categoría:** Conceptos
+- **Herramienta y modelo:** Claude Sonnet 5.5 (`implementador`, T1.6) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `verificador-matematico`
+1. **Prompt (literal):** `prompts/T1.6.md`, ronda 1 del `implementador` (describe la selección codiciosa y la mutación, pero **no** contiene estas frases: el texto de los docstrings y de las celdas markdown es redacción del modelo).
+2. **Respuestas relevantes:** (a) `src/part1/de.py:279`, celda de la mutación: "La diferencia x_r2 − x_r3 [...] se encoge al converger"; (b) `de.py:521`, docstring de `seleccionar_codiciosa`: "el mejor individuo nunca se pierde"; (c) `de.py:498`: "la aptitud de cada puesto de la población nunca empeora".
+3. **Cómo sospechamos:** misma familia que H-14 ("σ → 0 al converger"): "converger" se usa como si la población siempre llegara al óptimo; y una selección con `<=` conserva el **valor**, no necesariamente el **individuo**.
+4. **Evidencia:** `evidencias/T1.6_verificacion_B_propiedades.py` y `T1.6_exitos.py`: (i) Rastrigin 3D con los defaults, semillas 0–29: 28/30 éxitos; las 2 corridas fallidas terminan en f = 0.995 (mínimo local con un gen en ±1), es decir, la población puede colapsar lejos del óptimo; (ii) con `<=` un hijo que empata reemplaza al padre: se conserva el mejor valor de f, no la identidad del individuo; (iii) con f = NaN la comparación `NaN <= x` es falsa y ese puesto queda congelado (no ocurre con Rosenbrock ni Rastrigin).
+5. **Corrección:** (a) "tiende a encogerse cuando la población se concentra; si colapsa en un mínimo local el paso se anula"; (b) "el mejor valor de f de la población nunca empeora (el individuo puede cambiar si un hijo empata)"; (c) "con f finita". Aplicadas en `de.py` (E1–E3).
+6. **Lección:** "converge" y "nunca se pierde" son afirmaciones de garantía: antes de escribirlas, decir si hablan del valor o del individuo, y si hay un caso (Rastrigin 3D) que las contradiga.
+
 ---
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
@@ -285,3 +296,6 @@
 | 12-oct-2026 | Afirmación para el blog: "PSO garantiza el óptimo global" | **Falsa**: Rastrigin 3D, 30 corridas con presupuesto 30 000: 26/30 éxitos (f_best máx 0.995); el borrador de Clerc y Kennedy dice "convergence on global optima cannot be proven" salvo una clase especial | `T1.5_verificacion.txt` §5; extractos del borrador |
 | 12-oct-2026 | "Inercia alta explora, baja explota" | **Sin cita verificada**: el experimento es compatible (Rastrigin 2D: w=0.4 → 27/30 éxitos, w=0.7298 y 0.9 → 30/30), pero un solo caso no lo demuestra. Referencia candidata: Shi y Eberhart (1998), DOI 10.1109/ICEC.1998.699146 (existe en Crossref; su contenido no se leyó) | `T1.5_verificacion.txt` §7 |
 | 8-oct-2026 | T2.1: URL de `fuentes.md` responden; CSW `dateStamp` 2026-01-19; identificador IGR-PO `20251216_…_v2024`; §3.8 "Se permiten combinaciones"; 26codmun.xlsx idéntico al crudo; IGR-PO usa el centroide de áreas residenciales cuando no hay coordenada de un organismo (respalda en parte "centro de la zona residencial") | Correctas (7/7 HTTP 200). "No hay versión NGMEP posterior a 202603": **no verificable** (la lista de ficheros del CNIG se carga dinámicamente; la página muestra "(2026)") | `evidencias/T2.1_urls_http.txt` |
+| 12-oct-2026 | T1.6: `scipy.optimize.differential_evolution` usa por defecto `strategy='best1bin'` y `polish=True` (Spec §10) | Correcta (SciPy v1.18.0; además: `updating='immediate'`, `init='latinhypercube'`, `mutation=(0.5, 1)`, `recombination=0.7`). SciPy re-sortea la componente fuera del dominio sobre el mutante, antes del cruce, y selecciona con `<=`, como `de.py` | documentación oficial y `_differentialevolution.py` (consultados el 12-oct-2026) |
+| 12-oct-2026 | T1.6: éxitos de DE (f − f* ≤ 1e-4, defaults, presupuesto 10 000·n, semillas 0–29): Rosenbrock 2D 30/30, 3D 30/30, Rastrigin 2D 30/30, 3D 28/30 | Correctas: las reprodujo el `verificador-matematico` de forma independiente; la reimplementación coincide bit a bit con `optimize` en las 4 configuraciones × 30 semillas | `evidencias/T1.6_verificacion_A_bit_a_bit.py`, `T1.6_exitos.py` |
+| 12-oct-2026 | T1.6: 26 mutantes del DE; 25 muertos, M11 (`U<=CR`→`U<CR`) sobrevive | Correcta: M11 es equivalente en la práctica (difiere solo si U == CR exacto, prob. ~2⁻⁵³); SciPy usa `<` estricto. Se deja documentado, sin prueba adicional | `evidencias/T1.6_mutantes.py`, `T1.6_mutantes_salida.txt` |
