@@ -1,0 +1,6285 @@
+{
+  "meta": {
+    "unidad": "ea",
+    "metodo": "ea",
+    "func": null,
+    "indice": 3,
+    "celdas": [
+      [
+        "rosenbrock",
+        2
+      ],
+      [
+        "rosenbrock",
+        3
+      ],
+      [
+        "rastrigin",
+        2
+      ],
+      [
+        "rastrigin",
+        3
+      ]
+    ],
+    "ensayos": 30,
+    "semillas": 5,
+    "semillas_de_ajuste": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "presupuesto_por_dim": 10000,
+    "k_regla": "2n",
+    "espacio": {
+      "N": {
+        "ruta": "ea.N",
+        "tipo": "entero",
+        "min": 20,
+        "max": 200
+      },
+      "frac_e": {
+        "ruta": "ea.frac_e",
+        "tipo": "uniforme",
+        "min": 0.05,
+        "max": 0.3
+      },
+      "frac_m": {
+        "ruta": "ea.frac_m",
+        "tipo": "uniforme",
+        "min": 0.05,
+        "max": 0.4
+      },
+      "frac_c": {
+        "ruta": "ea.frac_c",
+        "tipo": "uniforme",
+        "min": 0.4,
+        "max": 0.9
+      }
+    },
+    "bloque_base": {
+      "esquema": "clase",
+      "N": 50,
+      "frac_e": 0.15,
+      "frac_m": 0.1,
+      "frac_c": 0.75,
+      "reevaluar_elite": false,
+      "generaciones": null
+    },
+    "semilla_busqueda": 1
+  },
+  "ensayos": [
+    {
+      "indice": 0,
+      "parametros": {
+        "ea.N": 50,
+        "ea.frac_e": 0.15,
+        "ea.frac_m": 0.1,
+        "ea.frac_c": 0.75
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.00011998154067217376,
+            0.007068824553533102,
+            0.0035234696471639847,
+            0.0012552759140873713,
+            0.00023642998120199885
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.4230329019672492,
+            0.2777098446289399,
+            0.5880268695450197,
+            0.743993262564993,
+            0.21305063042865183
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0,
+            0.9949590570932898,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            5179.0,
+            null,
+            4335.0,
+            4377.0,
+            3601.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.9949590570932898,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            4735.0,
+            4419.0,
+            5135.0,
+            null,
+            4510.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 0,
+        "rango_medio": 18.0,
+        "tasa_exito_1e-06": 0.4,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0012552759140873713,
+          "rosenbrock_3d": 0.4230329019672492,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 26.0,
+          "rosenbrock_3d": 28.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.8,
+          "rastrigin_3d": 0.8
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 4373.0,
+          "rastrigin_3d": 4699.75
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 4,
+          "rastrigin_3d": 4
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 17492,
+          "rastrigin_3d": 18799
+        }
+      }
+    },
+    {
+      "indice": 1,
+      "parametros": {
+        "ea.N": 151,
+        "ea.frac_e": 0.17783188820359042,
+        "ea.frac_m": 0.39168529699769644,
+        "ea.frac_c": 0.4404180119478011
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.0004337931450031101,
+            2.8106160320771732e-05,
+            0.0008866619302225396,
+            0.00015208278336510352,
+            5.717416862469609e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.0003779879541539233,
+            0.09014307558313792,
+            0.009718286355051654,
+            0.00107148004612677,
+            0.011611601485262161
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            8.210767776972716e-05,
+            8.852687838611928e-05,
+            9.86625024488319e-05,
+            0.0010017882757260566,
+            0.0002283293233489303
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            2.2567640911574927e-07,
+            4.6149750687618507e-10,
+            7.3488877205818426e-09,
+            1.0951389128877054e-07,
+            8.553366370733784e-08
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            21359.0,
+            19658.0,
+            21061.0,
+            24456.0,
+            26099.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 1,
+        "rango_medio": 12.25,
+        "tasa_exito_1e-06": 0.25,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.00015208278336510352,
+          "rosenbrock_3d": 0.009718286355051654,
+          "rastrigin_2d": 9.86625024488319e-05,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 16.0,
+          "rosenbrock_3d": 2.0,
+          "rastrigin_2d": 20.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 22526.6
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 112633
+        }
+      }
+    },
+    {
+      "indice": 2,
+      "parametros": {
+        "ea.N": 190,
+        "ea.frac_e": 0.2018389579987574,
+        "ea.frac_m": 0.1817703045320454,
+        "ea.frac_c": 0.8009506034929037
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            4.1832561943651326e-06,
+            2.068383119848036e-07,
+            4.406337934455358e-05,
+            0.002575897578602854,
+            9.021276637368887e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            18132.0,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.016334052320473958,
+            0.2343625017684092,
+            0.053009525320324685,
+            0.0010622988565663998,
+            0.6637094567086004
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            8.489067226946645e-10,
+            4.147833720935523e-08,
+            1.4264617931303292e-08,
+            9.32796240249445e-09,
+            1.2365610757569812e-09
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            17521.0,
+            13379.0,
+            13292.0,
+            12081.0,
+            14942.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            1.4210854715202004e-14,
+            1.4210854715202004e-14,
+            2.2026824808563106e-13,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            15375.0,
+            15934.0,
+            16445.0,
+            13893.0,
+            14761.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 2,
+        "rango_medio": 9.5,
+        "tasa_exito_1e-06": 0.55,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 4.406337934455358e-05,
+          "rosenbrock_3d": 0.053009525320324685,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 10.0,
+          "rosenbrock_3d": 10.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 18132.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 14243.0,
+          "rastrigin_3d": 15281.6
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 18132,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 71215,
+          "rastrigin_3d": 76408
+        }
+      }
+    },
+    {
+      "indice": 3,
+      "parametros": {
+        "ea.N": 125,
+        "ea.frac_e": 0.2679088185469141,
+        "ea.frac_m": 0.24037949026722438,
+        "ea.frac_c": 0.8511075398579941
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            4.326569948212647e-05,
+            1.445018310525039e-10,
+            2.8428574171412414e-06,
+            0.00043662750987225,
+            3.34139219932323e-06
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            14776.0,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.16811860064652667,
+            0.13890902150582463,
+            0.03272825201735588,
+            0.009314720769809244,
+            0.36378967358943665
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            8096.0,
+            8353.0,
+            7559.0,
+            7704.0,
+            6324.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            6413.0,
+            8345.0,
+            8794.0,
+            7635.0,
+            6984.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 3,
+        "rango_medio": 10.75,
+        "tasa_exito_1e-06": 0.55,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 3.34139219932323e-06,
+          "rosenbrock_3d": 0.13890902150582463,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 7.0,
+          "rosenbrock_3d": 18.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14776.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 7607.2,
+          "rastrigin_3d": 7634.2
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14776,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 38036,
+          "rastrigin_3d": 38171
+        }
+      }
+    },
+    {
+      "indice": 4,
+      "parametros": {
+        "ea.N": 51,
+        "ea.frac_e": 0.1692883809598016,
+        "ea.frac_m": 0.2006736972052946,
+        "ea.frac_c": 0.7944733587721647
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            3.761563701214998e-05,
+            0.013311946327100302,
+            0.0009680834356729278,
+            1.8355396990280586e-07,
+            0.017692201841761047
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            3372.0,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.19827970718378832,
+            0.4127869712588632,
+            0.44990948825348004,
+            0.3652058621852998,
+            0.18925049834605412
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            4659.0,
+            5683.0,
+            5515.0,
+            5037.0,
+            5765.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.9949590570932898,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            5640.0,
+            5647.0,
+            4355.0,
+            null,
+            5431.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 4,
+        "rango_medio": 17.5,
+        "tasa_exito_1e-06": 0.5,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0009680834356729278,
+          "rosenbrock_3d": 0.3652058621852998,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 25.0,
+          "rosenbrock_3d": 27.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 0.8
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 3372.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 5331.8,
+          "rastrigin_3d": 5268.25
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 4
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 3372,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 26659,
+          "rastrigin_3d": 21073
+        }
+      }
+    },
+    {
+      "indice": 5,
+      "parametros": {
+        "ea.N": 194,
+        "ea.frac_e": 0.1424314481631072,
+        "ea.frac_m": 0.38912650426068224,
+        "ea.frac_c": 0.8645131938827098
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            6.499258890280683e-05,
+            0.000152811933112833,
+            0.0005635299942424298,
+            0.0012555934777689778,
+            0.00014258739656406713
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.015508941358360652,
+            0.013820808726539319,
+            0.1223089393221567,
+            0.020617183633592124,
+            0.04228135590572557
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0010670787830022732,
+            0.0003076348361652492,
+            0.0005572832669784589,
+            4.887181409429786e-05,
+            0.0004561953508854799
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            1.3307415233754227e-05,
+            0.0005974379374755756,
+            2.439636887885399e-05,
+            0.00012121077935489666,
+            0.00014903363313933937
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 5,
+        "rango_medio": 17.75,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.000152811933112833,
+          "rosenbrock_3d": 0.020617183633592124,
+          "rastrigin_2d": 0.0004561953508854799,
+          "rastrigin_3d": 0.00012121077935489666
+        },
+        "rango": {
+          "rosenbrock_2d": 17.0,
+          "rosenbrock_3d": 4.0,
+          "rastrigin_2d": 25.0,
+          "rastrigin_3d": 25.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 6,
+      "parametros": {
+        "ea.N": 198,
+        "ea.frac_e": 0.09442314644049528,
+        "ea.frac_m": 0.2630980658955917,
+        "ea.frac_c": 0.7524323727823713
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.0019186411598511991,
+            0.0015658223197834863,
+            0.0024737822606186047,
+            7.740815390155193e-05,
+            2.209788687847312e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.14911811442066647,
+            0.029935325819585544,
+            0.04187325919661952,
+            0.13673130559958813,
+            0.10393724822603867
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0006603909810394271,
+            0.0025819400951938576,
+            0.0049685923929985165,
+            0.00014598982733460275,
+            1.4585952179402284e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0019487262355681878,
+            0.00016274454813824946,
+            0.0004941826175723918,
+            3.892248716397262e-05,
+            3.199011876731106e-05
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 6,
+        "rango_medio": 24.25,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0015658223197834863,
+          "rosenbrock_3d": 0.10393724822603867,
+          "rastrigin_2d": 0.0006603909810394271,
+          "rastrigin_3d": 0.00016274454813824946
+        },
+        "rango": {
+          "rosenbrock_2d": 27.0,
+          "rosenbrock_3d": 16.0,
+          "rastrigin_2d": 27.0,
+          "rastrigin_3d": 27.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 7,
+      "parametros": {
+        "ea.N": 93,
+        "ea.frac_e": 0.21641435424143834,
+        "ea.frac_m": 0.0966885144080926,
+        "ea.frac_c": 0.6489337993926872
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.0029978896184301414,
+            0.0017292672158624597,
+            0.00018140680357524124,
+            0.06033413486216313,
+            3.9113833459788486e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.4059305114148866,
+            0.24312903706191868,
+            0.13821072559843742,
+            0.11032261646106453,
+            0.31159748401279064
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            4628.0,
+            5060.0,
+            5792.0,
+            6962.0,
+            5356.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            9.947598300641403e-14,
+            0.0,
+            0.9949590570932898,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            6594.0,
+            8020.0,
+            null,
+            6190.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 7,
+        "rango_medio": 17.75,
+        "tasa_exito_1e-06": 0.4,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0017292672158624597,
+          "rosenbrock_3d": 0.24312903706191868,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 28.0,
+          "rosenbrock_3d": 25.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 0.6
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 5559.6,
+          "rastrigin_3d": 6934.666666666667
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 3
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 27798,
+          "rastrigin_3d": 20804
+        }
+      }
+    },
+    {
+      "indice": 8,
+      "parametros": {
+        "ea.N": 190,
+        "ea.frac_e": 0.1734049584890287,
+        "ea.frac_m": 0.2250791662720611,
+        "ea.frac_c": 0.8792911430546236
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            8.856200752808675e-05,
+            7.990535531829272e-07,
+            2.0446959151133993e-06,
+            7.069448892207321e-06,
+            2.2597100966060806e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            14712.0,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.058916704973922346,
+            0.09716458384939923,
+            0.11187838268509326,
+            0.002182028303439845,
+            0.24958065906339352
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            2.186681193450113e-05,
+            1.8053037820209283e-07,
+            5.304584526300005e-06,
+            2.9237481840027613e-06,
+            1.0813569915057997e-06
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            13550.0,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            5.414975134954148e-10,
+            1.176729824692302e-10,
+            5.881517495254229e-11,
+            3.1822366963751847e-10,
+            1.7713830402499298e-10
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            21108.0,
+            17807.0,
+            16783.0,
+            21497.0,
+            18085.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 8,
+        "rango_medio": 12.25,
+        "tasa_exito_1e-06": 0.35,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 7.069448892207321e-06,
+          "rosenbrock_3d": 0.09716458384939923,
+          "rastrigin_2d": 2.9237481840027613e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 9.0,
+          "rosenbrock_3d": 14.0,
+          "rastrigin_2d": 15.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.2,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14712.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 13550.0,
+          "rastrigin_3d": 19056.0
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 1,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14712,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 13550,
+          "rastrigin_3d": 95280
+        }
+      }
+    },
+    {
+      "indice": 9,
+      "parametros": {
+        "ea.N": 179,
+        "ea.frac_e": 0.105942786694554,
+        "ea.frac_m": 0.23273045077400673,
+        "ea.frac_c": 0.720585461982514
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.002917370814549163,
+            0.000378312102480028,
+            5.9210364842613156e-05,
+            0.0006645437587155678,
+            0.00044569668313221967
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.0487730900003372,
+            0.030367709121966846,
+            0.05014506546206761,
+            0.07902328325924392,
+            0.0003307593928337138
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0002371454608436352,
+            0.0008294856807822271,
+            0.00042403292151504957,
+            1.83578060948264e-05,
+            0.0044351790130434665
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            7.018963678717682e-06,
+            1.0746663150484892e-06,
+            1.6072694307922575e-05,
+            0.00017538079159251652,
+            1.030888796549334e-06
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 9,
+        "rango_medio": 19.25,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.00044569668313221967,
+          "rosenbrock_3d": 0.0487730900003372,
+          "rastrigin_2d": 0.00042403292151504957,
+          "rastrigin_3d": 7.018963678717682e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 22.0,
+          "rosenbrock_3d": 8.0,
+          "rastrigin_2d": 24.0,
+          "rastrigin_3d": 23.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 10,
+      "parametros": {
+        "ea.N": 83,
+        "ea.frac_e": 0.2847767633560022,
+        "ea.frac_m": 0.2537055302264661,
+        "ea.frac_c": 0.5339166951457943
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.004972549179698272,
+            0.0006274522947312472,
+            0.0005068254594304968,
+            5.952657141657521e-07,
+            0.007645798822332287
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            11473.0,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.17882826900122195,
+            0.03188232930526287,
+            0.5372443359286012,
+            0.002432652752727089,
+            0.42035641002258284
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            5631.0,
+            3394.0,
+            4536.0,
+            5491.0,
+            5519.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            4529.0,
+            4466.0,
+            4706.0,
+            4393.0,
+            4055.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 10,
+        "rango_medio": 16.25,
+        "tasa_exito_1e-06": 0.55,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0006274522947312472,
+          "rosenbrock_3d": 0.17882826900122195,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 24.0,
+          "rosenbrock_3d": 23.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 11473.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 4914.2,
+          "rastrigin_3d": 4429.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 11473,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 24571,
+          "rastrigin_3d": 22149
+        }
+      }
+    },
+    {
+      "indice": 11,
+      "parametros": {
+        "ea.N": 200,
+        "ea.frac_e": 0.17293132115311916,
+        "ea.frac_m": 0.2865303027267341,
+        "ea.frac_c": 0.638019455237701
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            3.891580422161498e-05,
+            5.6260975848340685e-05,
+            0.00014135932994850997,
+            6.659027952982203e-05,
+            1.5227689534227264e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.04864094711082323,
+            0.0836417751425664,
+            0.008580572946119462,
+            0.09339840528051147,
+            0.1096432286666423
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            3.3513953443531364e-05,
+            1.569417771563053e-05,
+            3.356548162969375e-06,
+            2.359185810263398e-06,
+            3.410442986506723e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            3.4492373401917575e-09,
+            7.590230666210118e-10,
+            1.3353762540191383e-09,
+            2.3882407163000607e-10,
+            1.615850067082647e-07
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            24450.0,
+            23671.0,
+            18587.0,
+            21572.0,
+            23647.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 11,
+        "rango_medio": 13.5,
+        "tasa_exito_1e-06": 0.25,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 5.6260975848340685e-05,
+          "rosenbrock_3d": 0.0836417751425664,
+          "rastrigin_2d": 1.569417771563053e-05,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 13.0,
+          "rosenbrock_3d": 13.0,
+          "rastrigin_2d": 17.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 22385.4
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 111927
+        }
+      }
+    },
+    {
+      "indice": 12,
+      "parametros": {
+        "ea.N": 188,
+        "ea.frac_e": 0.10424500660549878,
+        "ea.frac_m": 0.29239321564869625,
+        "ea.frac_c": 0.785315241545872
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.00048614346768489447,
+            7.185266644191415e-05,
+            9.587496648517719e-05,
+            0.0010709165674723897,
+            0.0001770995354925137
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.14831834308261782,
+            0.004293666791592305,
+            0.028092513686454677,
+            0.023313013495240953,
+            0.04825744907721609
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0002965574569842033,
+            0.00014188365054934593,
+            0.00022759503421099225,
+            0.008855454796236728,
+            0.0003546748194693805
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            3.719422279857554e-05,
+            0.00033822785213288853,
+            4.8849979659593146e-05,
+            3.1722392726862836e-05,
+            1.2678785687114669e-05
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 12,
+        "rango_medio": 17.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0001770995354925137,
+          "rosenbrock_3d": 0.028092513686454677,
+          "rastrigin_2d": 0.0002965574569842033,
+          "rastrigin_3d": 3.719422279857554e-05
+        },
+        "rango": {
+          "rosenbrock_2d": 19.0,
+          "rosenbrock_3d": 5.0,
+          "rastrigin_2d": 22.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 13,
+      "parametros": {
+        "ea.N": 117,
+        "ea.frac_e": 0.1649790031871204,
+        "ea.frac_m": 0.17663527096566822,
+        "ea.frac_c": 0.48536490972313745
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            3.0202702104392635e-08,
+            1.1472708311473681e-07,
+            5.8589257039196005e-06,
+            2.949531848877293e-07,
+            3.678700224649701e-08
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            12877.0,
+            17739.0,
+            null,
+            18570.0,
+            15795.0
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.2448810378011853,
+            0.09872594170430546,
+            0.003661186529635722,
+            0.08233752967635673,
+            0.25006631939913254
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            1.2952128258802986e-10,
+            2.4705570922378683e-11,
+            1.352872658344495e-08,
+            1.6697754290362354e-13,
+            4.7123194235609844e-11
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            10985.0,
+            13456.0,
+            15317.0,
+            11293.0,
+            13570.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            7823.0,
+            12010.0,
+            13267.0,
+            11500.0,
+            11144.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 13,
+        "rango_medio": 8.875,
+        "tasa_exito_1e-06": 0.7,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 0.09872594170430546,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 2.5,
+          "rosenbrock_3d": 15.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.8,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 16245.25,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 12924.2,
+          "rastrigin_3d": 11148.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 4,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 64981,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 64621,
+          "rastrigin_3d": 55744
+        }
+      }
+    },
+    {
+      "indice": 14,
+      "parametros": {
+        "ea.N": 54,
+        "ea.frac_e": 0.1053379149639468,
+        "ea.frac_m": 0.38687759396423244,
+        "ea.frac_c": 0.8421115258158907
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            5.749642721825996e-05,
+            0.0005314748470189707,
+            0.0004840598443193681,
+            0.0008714833261126283,
+            0.0006017783937421019
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.09119599450011723,
+            0.0013929681863987706,
+            0.08795450871325623,
+            0.020368888416743777,
+            0.0008811509362137139
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.00021027430877040842,
+            0.002960906025336385,
+            0.0016870900514085463,
+            0.0009854376475217919,
+            0.0003860068311709597
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            1.2093117618405813e-09,
+            7.459526329967048e-09,
+            5.218169008003315e-09,
+            1.3919709829224303e-09,
+            2.231762401549986e-07
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            23579.0,
+            27101.0,
+            16176.0,
+            19525.0,
+            22736.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 14,
+        "rango_medio": 16.25,
+        "tasa_exito_1e-06": 0.25,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0005314748470189707,
+          "rosenbrock_3d": 0.020368888416743777,
+          "rastrigin_2d": 0.0009854376475217919,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 23.0,
+          "rosenbrock_3d": 3.0,
+          "rastrigin_2d": 28.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 21823.4
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 109117
+        }
+      }
+    },
+    {
+      "indice": 15,
+      "parametros": {
+        "ea.N": 26,
+        "ea.frac_e": 0.23486831078376097,
+        "ea.frac_m": 0.06468881301344469,
+        "ea.frac_c": 0.8575286006200862
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.06897250572611802,
+            4.306120524815349,
+            0.00020220984248838403,
+            0.026110116384784023,
+            0.2229111660254485
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.7271761033385858,
+            0.21042161585286034,
+            3.249667728159125,
+            1.474181494994557,
+            0.9233887631167229
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            2.907907457093195,
+            2.126695123748881,
+            0.9957486783106475,
+            1.580517892732658,
+            2.579616944548441
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            3.3480350269367563,
+            5.885372610794715,
+            3.172231678533464,
+            1.8434335801460193,
+            2.032511892840269
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 15,
+        "rango_medio": 29.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.06897250572611802,
+          "rosenbrock_3d": 0.9233887631167229,
+          "rastrigin_2d": 2.126695123748881,
+          "rastrigin_3d": 3.172231678533464
+        },
+        "rango": {
+          "rosenbrock_2d": 30.0,
+          "rosenbrock_3d": 29.0,
+          "rastrigin_2d": 30.0,
+          "rastrigin_3d": 29.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 16,
+      "parametros": {
+        "ea.N": 89,
+        "ea.frac_e": 0.18429271280352555,
+        "ea.frac_m": 0.33709373123128034,
+        "ea.frac_c": 0.5379691287825867
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            2.0477882726386688e-08,
+            2.0302319863329904e-07,
+            6.3795604874112245e-06,
+            9.41156320165749e-11,
+            9.688731822199021e-07
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            15467.0,
+            18924.0,
+            null,
+            9239.0,
+            18635.0
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.1911263701947103,
+            0.22686162306166505,
+            0.07330960809008827,
+            0.1445647834427284,
+            0.16679586985230177
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            1.833370788517641e-09,
+            3.469060696303927e-05,
+            6.1502646531153e-07,
+            4.75378563180584e-08,
+            1.0516053805531556e-08
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            15946.0,
+            null,
+            16398.0,
+            4910.0,
+            13838.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            10083.0,
+            11413.0,
+            12575.0,
+            10913.0,
+            12678.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 16,
+        "rango_medio": 10.375,
+        "tasa_exito_1e-06": 0.65,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 0.16679586985230177,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 2.5,
+          "rosenbrock_3d": 21.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.8,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.8,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 15566.25,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 12773.0,
+          "rastrigin_3d": 11532.4
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 4,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 4,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 62265,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 51092,
+          "rastrigin_3d": 57662
+        }
+      }
+    },
+    {
+      "indice": 17,
+      "parametros": {
+        "ea.N": 174,
+        "ea.frac_e": 0.13701092972795764,
+        "ea.frac_m": 0.3903538836989396,
+        "ea.frac_c": 0.614729941461367
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.0009275554679333528,
+            0.0033090428503032973,
+            0.00015754381962031973,
+            0.00039354063740931,
+            4.7185184782937896e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.06299936754845298,
+            0.001409093585166303,
+            0.06337156165852528,
+            0.1724290932623577,
+            0.0930899717228943
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.00033334493760861506,
+            0.00020829306826186667,
+            0.0015236932094069289,
+            4.6372494715285484e-05,
+            0.0006897761728623664
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.00012192323430326724,
+            8.433574780752906e-05,
+            0.000137105375095814,
+            0.0002072287644523385,
+            1.4798762677514787e-06
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 17,
+        "rango_medio": 20.25,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.00039354063740931,
+          "rosenbrock_3d": 0.06337156165852528,
+          "rastrigin_2d": 0.00033334493760861506,
+          "rastrigin_3d": 0.00012192323430326724
+        },
+        "rango": {
+          "rosenbrock_2d": 21.0,
+          "rosenbrock_3d": 11.0,
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 26.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 18,
+      "parametros": {
+        "ea.N": 88,
+        "ea.frac_e": 0.17492318513299915,
+        "ea.frac_m": 0.3845926255065542,
+        "ea.frac_c": 0.8515977941753691
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            6.751223883443758e-05,
+            2.8570536251719736e-07,
+            4.8845994629428363e-05,
+            1.6397078825652547e-05,
+            0.00014472813670253636
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            8202.0,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.05201089087059362,
+            0.008341710529751798,
+            0.14676554665875158,
+            0.0022494916566174394,
+            0.17404870966657218
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            4.627691085090646e-05,
+            1.0618575654319784e-05,
+            2.9510610701777296e-06,
+            4.474175862156926e-05,
+            5.5790590266724394e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            4.263256414560601e-14,
+            6.034639454810531e-11,
+            2.6290081223123707e-13,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            12599.0,
+            16199.0,
+            15993.0,
+            11677.0,
+            12728.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 18,
+        "rango_medio": 12.25,
+        "tasa_exito_1e-06": 0.3,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 4.8845994629428363e-05,
+          "rosenbrock_3d": 0.05201089087059362,
+          "rastrigin_2d": 4.474175862156926e-05,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 11.0,
+          "rosenbrock_3d": 9.0,
+          "rastrigin_2d": 18.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 8202.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 13839.2
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 8202,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 69196
+        }
+      }
+    },
+    {
+      "indice": 19,
+      "parametros": {
+        "ea.N": 45,
+        "ea.frac_e": 0.12683947993225891,
+        "ea.frac_m": 0.33246677764726335,
+        "ea.frac_c": 0.4537357949346408
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            2.1130413580533493e-07,
+            7.767236061265686e-06,
+            2.8983668696464696e-06,
+            1.2931130289749131e-08,
+            5.144234394117604e-06
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            7810.0,
+            null,
+            null,
+            16627.0,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.18662878363021848,
+            0.18911524010123928,
+            0.1515002571546461,
+            0.11671254019850631,
+            0.14712320037436183
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            2.8891845715861564e-07,
+            2.2989859260746925e-07,
+            1.532234961132417e-08,
+            2.1775971319470955e-06,
+            7.179252747846476e-10
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            4934.0,
+            18376.0,
+            14974.0,
+            null,
+            6958.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            6976.0,
+            9936.0,
+            6820.0,
+            7401.0,
+            8440.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 19,
+        "rango_medio": 10.75,
+        "tasa_exito_1e-06": 0.55,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 2.8983668696464696e-06,
+          "rosenbrock_3d": 0.1515002571546461,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 6.0,
+          "rosenbrock_3d": 19.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.4,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.8,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 12218.5,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 11310.5,
+          "rastrigin_3d": 7914.6
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 2,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 4,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 24437,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 45242,
+          "rastrigin_3d": 39573
+        }
+      }
+    },
+    {
+      "indice": 20,
+      "parametros": {
+        "ea.N": 91,
+        "ea.frac_e": 0.14804722842415502,
+        "ea.frac_m": 0.3567518360141463,
+        "ea.frac_c": 0.8588212074163266
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            5.709083659357617e-05,
+            1.7090366114426228e-05,
+            0.0008132771090602054,
+            5.555693983169127e-05,
+            8.251913841003396e-07
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            9382.0
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.07400646510093886,
+            0.0021342800986616766,
+            0.04803240091516217,
+            0.036123968711047234,
+            0.12687663248082265
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.00010715306508402023,
+            0.0011315080017340051,
+            0.0002876293391302909,
+            0.00034755124262630943,
+            7.053451583516335e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            1.4355094890561304e-10,
+            1.8011334645962052e-09,
+            1.511466507508885e-10,
+            1.275921590604412e-10,
+            1.1643663810900762e-10
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            20810.0,
+            20302.0,
+            18838.0,
+            23268.0,
+            20912.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 20,
+        "rango_medio": 12.75,
+        "tasa_exito_1e-06": 0.3,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 5.555693983169127e-05,
+          "rosenbrock_3d": 0.04803240091516217,
+          "rastrigin_2d": 0.0002876293391302909,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 12.0,
+          "rosenbrock_3d": 7.0,
+          "rastrigin_2d": 21.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 9382.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 20826.0
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 9382,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 104130
+        }
+      }
+    },
+    {
+      "indice": 21,
+      "parametros": {
+        "ea.N": 73,
+        "ea.frac_e": 0.06968003762766371,
+        "ea.frac_m": 0.3257046244603718,
+        "ea.frac_c": 0.7108890326980118
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.003438769964179493,
+            0.0005831961797690668,
+            5.4547541105738556e-05,
+            0.00012488712742598135,
+            0.00016308880944212984
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.009093703879035128,
+            0.0006403798622754873,
+            0.0016380060060605932,
+            0.0027233374078834624,
+            0.015877516227261843
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.0005374577535448566,
+            0.0005135221586556327,
+            0.00011444902472135254,
+            0.009285102752841112,
+            0.03305453162994354
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.005163776930860564,
+            0.0008968290999860073,
+            0.0056907181062157974,
+            0.0007071807887335524,
+            0.005480556456149088
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 21,
+        "rango_medio": 18.25,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.00016308880944212984,
+          "rosenbrock_3d": 0.0027233374078834624,
+          "rastrigin_2d": 0.0005374577535448566,
+          "rastrigin_3d": 0.005163776930860564
+        },
+        "rango": {
+          "rosenbrock_2d": 18.0,
+          "rosenbrock_3d": 1.0,
+          "rastrigin_2d": 26.0,
+          "rastrigin_3d": 28.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 22,
+      "parametros": {
+        "ea.N": 62,
+        "ea.frac_e": 0.10937620440595931,
+        "ea.frac_m": 0.22706261797385224,
+        "ea.frac_c": 0.4357091110376083
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            2.2181636052767723e-05,
+            7.801008663941979e-09,
+            1.1890780167966298e-09,
+            3.6193881054185416e-05,
+            6.18370725980581e-07
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            18060.0,
+            12092.0,
+            null,
+            12769.0
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.08337026530650835,
+            0.026473826066210144,
+            0.10195447734392443,
+            0.06047253880700347,
+            0.12745222546225363
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            1.884408511187985e-05,
+            2.901809637023689e-07,
+            4.676863341046555e-10,
+            4.343712411980505e-06,
+            1.931372448638058e-06
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            18389.0,
+            13847.0,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            9090.0,
+            12704.0,
+            11770.0,
+            10855.0,
+            12561.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 22,
+        "rango_medio": 9.875,
+        "tasa_exito_1e-06": 0.5,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 0.08337026530650835,
+          "rastrigin_2d": 1.931372448638058e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 2.5,
+          "rosenbrock_3d": 12.0,
+          "rastrigin_2d": 14.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.6,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.4,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14307.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 16118.0,
+          "rastrigin_3d": 11396.0
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 3,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 2,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 42921,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 32236,
+          "rastrigin_3d": 56980
+        }
+      }
+    },
+    {
+      "indice": 23,
+      "parametros": {
+        "ea.N": 199,
+        "ea.frac_e": 0.18168136399151408,
+        "ea.frac_m": 0.29662675255400545,
+        "ea.frac_c": 0.44408468650478955
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            7.869110177323639e-05,
+            5.57430165339283e-05,
+            9.206054831602825e-05,
+            5.896108924028833e-05,
+            4.018292454247038e-07
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            13763.0
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.01842123612606488,
+            0.00442360440222546,
+            0.235394853777867,
+            0.032886797835618986,
+            0.1332508522404491
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            0.00014160419350872644,
+            6.593442464009058e-06,
+            1.6825637025874585e-05,
+            2.317181461819473e-06,
+            6.421835088588068e-06
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            2.83737477957402e-09,
+            4.045574542033137e-09,
+            7.06165792507818e-10,
+            7.514984190493124e-09,
+            2.7062377228048717e-08
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            21123.0,
+            22696.0,
+            21583.0,
+            20281.0,
+            25033.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 23,
+        "rango_medio": 11.75,
+        "tasa_exito_1e-06": 0.3,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 5.896108924028833e-05,
+          "rosenbrock_3d": 0.032886797835618986,
+          "rastrigin_2d": 6.593442464009058e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 14.0,
+          "rosenbrock_3d": 6.0,
+          "rastrigin_2d": 16.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 13763.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 22143.2
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 13763,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 110716
+        }
+      }
+    },
+    {
+      "indice": 24,
+      "parametros": {
+        "ea.N": 146,
+        "ea.frac_e": 0.21120375582531342,
+        "ea.frac_m": 0.1796175591006669,
+        "ea.frac_c": 0.6496542829968041
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            4.9405720732294595e-08,
+            6.004783764720167e-06,
+            6.58716932946304e-09,
+            1.104606531038561e-06,
+            2.616033825005334e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            19323.0,
+            null,
+            12607.0,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.27829885486172606,
+            0.13766635404915653,
+            0.16250073021023517,
+            0.3530261676407078,
+            0.16857619472002167
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            5.826450433232822e-13,
+            2.4868995751603507e-14,
+            7.460698725481052e-14,
+            1.4210854715202004e-14,
+            5.144329406903125e-12
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            8895.0,
+            8903.0,
+            10890.0,
+            11880.0,
+            10699.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            10856.0,
+            10813.0,
+            12890.0,
+            11618.0,
+            11003.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 24,
+        "rango_medio": 11.25,
+        "tasa_exito_1e-06": 0.6,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1.104606531038561e-06,
+          "rosenbrock_3d": 0.16857619472002167,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 5.0,
+          "rosenbrock_3d": 22.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.4,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 15965.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 10253.4,
+          "rastrigin_3d": 11436.0
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 2,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 31930,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 51267,
+          "rastrigin_3d": 57180
+        }
+      }
+    },
+    {
+      "indice": 25,
+      "parametros": {
+        "ea.N": 172,
+        "ea.frac_e": 0.20852163158969234,
+        "ea.frac_m": 0.2488913272752024,
+        "ea.frac_c": 0.7085573785456111
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.00010131682590207997,
+            1.4542855433375677e-08,
+            4.656265792587078e-05,
+            5.307235876051019e-06,
+            8.844052646499138e-07
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            16981.0,
+            null,
+            null,
+            19577.0
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.11233384299271083,
+            0.0880665849948093,
+            0.010050472370644868,
+            0.14127558979308227,
+            0.10502316422787028
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            2.601559359050043e-07,
+            1.5210019910227857e-09,
+            1.3801836473703588e-07,
+            4.552056509510294e-10,
+            1.766053969731729e-10
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            17733.0,
+            15105.0,
+            16968.0,
+            13260.0,
+            13923.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            7.105427357601002e-15,
+            0.0,
+            7.105427357601002e-15,
+            4.263256414560601e-14,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            14617.0,
+            11527.0,
+            15298.0,
+            15728.0,
+            13164.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 25,
+        "rango_medio": 10.75,
+        "tasa_exito_1e-06": 0.6,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 5.307235876051019e-06,
+          "rosenbrock_3d": 0.10502316422787028,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 8.0,
+          "rosenbrock_3d": 17.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.4,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 18279.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 15397.8,
+          "rastrigin_3d": 14066.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 2,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 36558,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 76989,
+          "rastrigin_3d": 70334
+        }
+      }
+    },
+    {
+      "indice": 26,
+      "parametros": {
+        "ea.N": 80,
+        "ea.frac_e": 0.06584490516946441,
+        "ea.frac_m": 0.12879956035393175,
+        "ea.frac_c": 0.43595228038569506
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            3.95133107165838e-07,
+            7.10874791955748e-05,
+            0.0010167050305085685,
+            0.00010223810318903012,
+            8.104703781917474e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            14919.0,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.20699907290257158,
+            0.0934557941301983,
+            0.23028980381597855,
+            0.08711381430245374,
+            0.28356118280827186
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            8.918378808431271e-05,
+            0.0005332511959892372,
+            2.6887232309036335e-05,
+            8.86777502060454e-05,
+            0.005954950914578205
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            5.445584836394346e-06,
+            2.5215011589807546e-07,
+            4.881242087861892e-06,
+            2.6145678724276422e-05,
+            4.11016785051288e-08
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            24927.0,
+            null,
+            null,
+            28734.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 26,
+        "rango_medio": 20.0,
+        "tasa_exito_1e-06": 0.15,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 8.104703781917474e-05,
+          "rosenbrock_3d": 0.20699907290257158,
+          "rastrigin_2d": 8.918378808431271e-05,
+          "rastrigin_3d": 4.881242087861892e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 15.0,
+          "rosenbrock_3d": 24.0,
+          "rastrigin_2d": 19.0,
+          "rastrigin_3d": 22.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.2,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.4
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14919.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": 26830.5
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 1,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 2
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14919,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 53661
+        }
+      }
+    },
+    {
+      "indice": 27,
+      "parametros": {
+        "ea.N": 124,
+        "ea.frac_e": 0.17025212344392032,
+        "ea.frac_m": 0.08931967996688848,
+        "ea.frac_c": 0.7337945424463328
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.000305566716083666,
+            0.0018776997653067182,
+            0.000649423453565148,
+            1.7760500488472246e-05,
+            1.9499072951370758e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.22518332761560875,
+            0.08395880517848618,
+            0.5178112084145075,
+            0.36311687450165775,
+            0.31722718129343846
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            5.506706202140776e-13,
+            3.552713678800501e-15,
+            2.1316282072803006e-14,
+            0.0,
+            8.526512829121202e-14
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            10340.0,
+            9088.0,
+            9840.0,
+            7092.0,
+            11341.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            10739.0,
+            11620.0,
+            9962.0,
+            12202.0,
+            8546.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 27,
+        "rango_medio": 16.0,
+        "tasa_exito_1e-06": 0.5,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.000305566716083666,
+          "rosenbrock_3d": 0.31722718129343846,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 20.0,
+          "rosenbrock_3d": 26.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 9540.2,
+          "rastrigin_3d": 10613.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 47701,
+          "rastrigin_3d": 53069
+        }
+      }
+    },
+    {
+      "indice": 28,
+      "parametros": {
+        "ea.N": 89,
+        "ea.frac_e": 0.1718391890732595,
+        "ea.frac_m": 0.22511539922270146,
+        "ea.frac_c": 0.6987329205014087
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            1.8940344403521358e-10,
+            2.0669946674543276e-07,
+            9.585457116708613e-10,
+            5.335641982433968e-09,
+            1.4864281828112612e-05
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            10610.0,
+            18556.0,
+            15467.0,
+            15051.0,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            0.13045506763427436,
+            0.11171669444866288,
+            0.16053510424055362,
+            0.2722779320948906,
+            0.30939696964092334
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            2.6219026949547697e-12,
+            7.09228231698944e-11,
+            3.8617997688561445e-12,
+            1.2789769243681803e-13,
+            4.831690603168681e-13
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            11114.0,
+            14314.0,
+            9423.0,
+            9416.0,
+            9488.0
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            9639.0,
+            7970.0,
+            8612.0,
+            9859.0,
+            8025.0
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 28,
+        "rango_medio": 10.125,
+        "tasa_exito_1e-06": 0.7,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 0.16053510424055362,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 2.5,
+          "rosenbrock_3d": 20.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.8,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 14921.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 10751.0,
+          "rastrigin_3d": 8821.0
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 4,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 59684,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 53755,
+          "rastrigin_3d": 44105
+        }
+      }
+    },
+    {
+      "indice": 29,
+      "parametros": {
+        "ea.N": 20,
+        "ea.frac_e": 0.19721624166459967,
+        "ea.frac_m": 0.08271889720773165,
+        "ea.frac_c": 0.47323461359237234
+      },
+      "por_celda": {
+        "rosenbrock_2d": {
+          "f_best": [
+            0.16350424697723523,
+            5.298138160564336,
+            4.557500438107265e-05,
+            0.026033449056251046,
+            0.02352688078308177
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rosenbrock_3d": {
+          "f_best": [
+            2.958595459202083,
+            1.1912997643815808,
+            4.9766998147573,
+            0.614597051892166,
+            4.033987727206194
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_2d": {
+          "f_best": [
+            4.974815442731291,
+            1.0226320149698438,
+            1.9903027998100384,
+            0.6881656883292138,
+            1.1933539494259549
+          ],
+          "n_f": [
+            20000,
+            20000,
+            20000,
+            20000,
+            20000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            4.387055537986875,
+            1.9227152471417028,
+            4.521174366625736,
+            3.2785329250192774,
+            1.9998030483907883
+          ],
+          "n_f": [
+            30000,
+            30000,
+            30000,
+            30000,
+            30000
+          ],
+          "n_grad": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 29,
+        "rango_medio": 29.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.026033449056251046,
+          "rosenbrock_3d": 2.958595459202083,
+          "rastrigin_2d": 1.1933539494259549,
+          "rastrigin_3d": 3.2785329250192774
+        },
+        "rango": {
+          "rosenbrock_2d": 29.0,
+          "rosenbrock_3d": 30.0,
+          "rastrigin_2d": 29.0,
+          "rastrigin_3d": 30.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    }
+  ]
+}

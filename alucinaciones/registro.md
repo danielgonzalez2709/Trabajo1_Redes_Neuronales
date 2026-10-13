@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 17 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
+| Código | 18 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
-| Conceptos | 5 (H-16; Parte 1: H-26, H-31, H-32, H-34; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
+| Conceptos | 6 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 37** (H-01–H-37; H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 35 activos y 2 descartados (H-12, H-13).
+**Total registrados: 40** (H-01–H-40; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 38 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -502,6 +502,42 @@
 4. **Evidencia:** `run.py part1 --config configs/part1/base.yaml --set de.NP=2 --set "methods=[pso, de]" --set "func=[rastrigin]" --set "dim=[2]" --set runs=2 --set presupuesto_por_dim=300 --set salida=<tmp>/d --set tablas=<tmp>/t` termina con `ValueError: de.NP debe ser un entero >= 4`, código 1 (no 2) y 2 JSON de `pso` ya escritos. `validar_config` solo revisa las claves de nivel superior y los floats no finitos; cada bloque de método lo valida su optimizador al ejecutarse. La misma línea omitía que se rechazan repetidos, y la de §6.6 omitía el aviso `n_f > 0` en `gdfijo` y que las filas de `ea`/`pso`/`de` de la sensibilidad conservan `k` = 2·dim.
 5. **Corrección:** líneas `[PENDIENTE]` de Spec §4.1, §5.4 y §6.6 reescritas con el alcance exacto de la validación y lo que faltaba. Queda para decisión humana si se validan los bloques de método antes de correr.
 6. **Lección:** "no escribe ningún archivo" es una afirmación universal: se comprueba con un caso que falle tarde, no solo con los que la validación ya rechaza.
+
+---
+### H-38 — Desempate "exacto" con `Fraction` construidas desde floats ya redondeados (selección de la HPO, T1.10)
+- **Estado:** candidato, severidad media (rompía la regla R3/R6 en empates reales; latente en los datos reales); corregido antes de integrarse.
+- **Categoría:** Código (con raíz en un error de aritmética de punto flotante)
+- **Herramienta y modelo:** Claude Code, sesión principal (orquestador, claude-opus-5-5) al redactar el prompt del implementador A, y `implementador`, que lo siguió · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `revisor-calidad` y `revisor-spec`, por separado, reproduciéndolo con datos sintéticos
+1. **Prompt (literal):** `prompts/T1.10.md`, prompt del implementador A, regla R6: "Compara las claves con aritmética exacta (fractions.Fraction a partir de los float) para que el resultado no dependa del orden de las sumas."
+2. **Respuesta relevante de la IA:** `src/part1/hpo.py` (ronda 1) guardaba la tasa de éxito por celda como `float(k/S)` y `_clave_de_orden` la reconstruía con `Fraction(float)`; el markdown afirmaba que así "el resultado no depende del orden de las sumas".
+3. **Cómo sospechamos:** los revisores probaron empates que se alcanzan con celdas distintas (no con registros idénticos, que era lo único que cubrían las pruebas).
+4. **Evidencia:** con 5 semillas y 2 celdas, `Fraction(0.6) + Fraction(1.0) ≠ Fraction(0.8) + Fraction(0.8)` (0,6 y 0,8 no son exactos en binario): ensayo 0 con tasas (0,6; 1,0) y ensayo 1 con (0,8; 0,8), mismas medianas y evaluaciones → `elegir_ganador` devolvía 1, cuando R3/R6 exigen 0. Segundo caso (revisor-spec): éxitos (1, 4) con 900 evaluaciones frente a (2, 3) con 100 → devolvía 0, R6 exige 1 (`Fraction(0.2) + Fraction(0.8) = 1 + 2⁻⁵⁴`). En la HPO real los ganadores de las unidades ya corridas coincidieron con una reimplementación por conteos enteros (el error era latente).
+5. **Corrección:** el puntaje guarda por celda conteos enteros (semillas, éxitos y suma de evaluaciones hasta el éxito) y la clave se calcula con `Fraction(éxitos, semillas)` y `Fraction(suma, éxitos)`; pruebas con los dos casos (también tras pasar por JSON) y un mutante M8 que reintroduce `Fraction(float)` y muere. Spec §6.9 R6 dice ahora que la comparación parte de conteos enteros.
+6. **Lección:** `Fraction` no repara un redondeo que ya ocurrió: la aritmética exacta tiene que empezar en los datos exactos (conteos), no en floats derivados de ellos.
+
+---
+### H-39 — "Solo reemplaza al defecto si es estrictamente mejor" implementado como "mejor en la clave lexicográfica completa" (selección de la HPO)
+- **Estado:** candidato, severidad media (cambió los valores afinados de dos métodos y empeoró sus resultados de reporte); corregido en T1.10b.
+- **Categoría:** Conceptos (criterio de decisión estadístico mal planteado)
+- **Herramienta y modelo:** prompt de T1.10 redactado por el humano con ayuda de IA; implementado tal cual por Claude Code (orquestador e `implementador`, claude-opus-5-5) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el humano, al revisar los resultados reales (la observación ya aparecía en los informes de `analista-experimentos` y `verificador-matematico` de T1.10)
+1. **Prompt (literal):** `prompts/T1.10.md`, R3: "El ganador solo reemplaza al defecto si es estrictamente mejor según el criterio de selección; en empate gana el ensayo de menor índice"; R6: puntaje 1 y desempates 2, 3 y final como una sola ordenación.
+2. **Respuesta relevante de la IA:** `elegir_ganador` (T1.10) tomaba el mínimo de la clave (rango medio, −tasa, evaluaciones, índice): un desempate bastaba para desplazar al ensayo 0.
+3. **Cómo sospechamos:** en `seleccion.json`, pso y de tenían el mismo puntaje principal que el defecto (10,5 = 10,5 y 14,625 = 14,625) y ganaban por un éxito más de 20 a 1e-6 y menos evaluaciones.
+4. **Evidencia:** `results/data/part1_hpo/regla_v1/` (seleccion.json, tuned.yaml, comparacion.csv, summary_afinado.json): con las 30 semillas de reporte, PSO Rastrigin 3D 26/30 → 15/30 a 1e-4; DE Rastrigin 2D 30/30 → 26/30 y 3D 28/30 → 24/30.
+5. **Corrección:** T1.10b. El ensayo 0 solo se reemplaza si el mejor puntaje principal es estrictamente menor; los desempates solo ordenan a los retadores empatados en ese puntaje. Pruebas (a)–(d) y mutantes M9 y M10 muertos. Reanudación sin repetir corridas: pso y de vuelven al ensayo 0. Spec §6.9 R3/R6 actualizados.
+6. **Lección:** una regla de "mejora estricta" tiene que decir sobre qué cantidad es estricta; con 5 semillas, un desempate de una corrida es ruido y no debe poder cambiar el defecto.
+
+---
+### H-40 — Revisor que afirma "archivos nuevos en CRLF en disco" cuando están en LF (medición mal hecha)
+- **Estado:** candidato **débil**, severidad baja (observación no bloqueante; no se cambió nada por ella).
+- **Categoría:** Código (verificación con una herramienta mal usada)
+- **Herramienta y modelo:** Claude Code, subagente `revisor-spec` (claude-opus-5-5), T1.10b · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el orquestador, al comprobarlo antes de actuar
+1. **Prompt (literal):** `prompts/T1.10b.md`, encargo de revisión: "que `git diff --stat` coincide con `--ignore-cr-at-eol`" y reglas de finales de línea.
+2. **Respuesta relevante de la IA:** "Esos cuatro archivos están enteros en CRLF en disco (CR = número de líneas: 1031, 959, 1028 y 1234) … cualquier afirmación de que 'los archivos nuevos están en LF' es falsa en disco."
+3. **Cómo sospechamos:** contradecía la revisión de T1.10 ("LF puro, 0 CRLF, leído por bytes").
+4. **Evidencia:** `Path(f).read_bytes().count(b'\r\n')` = 0 en `src/part1/hpo.py`, `hpo_experimento.py`, `tests/test_hpo.py`, `tests/test_hpo_experimento.py`, `configs/part1/hpo_demo.yaml` y `tuned.yaml` (y 203/203 en `corrida.py`, que sí está en CRLF). El orquestador reprodujo un conteo igual al número de líneas con `grep -c $'\r'` dentro de `"$(...)"`; en un archivo LF de prueba, el mismo patrón fuera de esa construcción da 0 (causa probable: el patrón no se expande como CR; no verificado más).
+5. **Corrección:** ninguna en el código; se descarta la observación.
+6. **Lección:** una afirmación sobre bytes se comprueba leyendo bytes (Python), no con un patrón de shell cuyo citado depende del contexto.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**

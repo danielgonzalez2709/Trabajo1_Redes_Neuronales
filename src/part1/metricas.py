@@ -91,7 +91,8 @@ def clave_umbral(umbral: float) -> str:
 #
 # (la igualdad cuenta como éxito). **Evaluaciones hasta el éxito:** `history` guarda un punto
 # cada vez que mejora el mejor valor visto (Spec §5.1), en orden; se toma el `eval_equiv` del
-# PRIMER punto que cumple la condición.
+# PRIMER punto que cumple la condición. `es_exito` y `evals_hasta_exito` son públicas: también
+# las usa `hpo_experimento.py`.
 
 # %%
 def _finito_o_none(valor) -> float | None:
@@ -119,19 +120,19 @@ def _valor_comun(corridas: Sequence[Mapping], campo: str):
     return valores[0]
 
 
-def _es_exito(f_best: float, f_star: float, umbral: float) -> bool:
+def es_exito(f_best: float, f_star: float, umbral: float) -> bool:
     """Condición de éxito de §6.5: f_best − f* <= umbral (la igualdad cuenta)."""
     return f_best - f_star <= umbral
 
 
-def _evals_hasta_exito(corrida: Mapping, f_star: float, umbral: float) -> float:
+def evals_hasta_exito(corrida: Mapping, f_star: float, umbral: float) -> float:
     """`eval_equiv` del primer punto de `history` con f_best − f* <= umbral.
 
     Se llama solo con corridas exitosas para `umbral`. Si ningún punto de la historia cumple
     (historia que no coincide con el `f_best` final), lanza ValueError.
     """
     for punto in corrida["result"]["history"]:
-        if _es_exito(punto["f_best"], f_star, umbral):
+        if es_exito(punto["f_best"], f_star, umbral):
             return float(punto["eval_equiv"])
     raise ValueError(
         f"corrida {corrida['func']} {corrida['dim']}D {corrida['method']} semilla "
@@ -223,12 +224,12 @@ def resumir_configuracion(corridas: Sequence[Mapping]) -> dict:
     evals_hasta_exito_medio = {}
     for umbral in UMBRALES:
         exitosas = [corrida for corrida in corridas
-                    if _es_exito(corrida["result"]["f_best"], f_star, umbral)]
+                    if es_exito(corrida["result"]["f_best"], f_star, umbral)]
         clave = clave_umbral(umbral)
         tasa_exito[clave] = len(exitosas) / len(corridas)
         # _media devuelve None si ninguna corrida fue exitosa (lista vacía).
         evals_hasta_exito_medio[clave] = _media(
-            [_evals_hasta_exito(corrida, f_star, umbral) for corrida in exitosas])
+            [evals_hasta_exito(corrida, f_star, umbral) for corrida in exitosas])
 
     return {
         "func": str(func),
