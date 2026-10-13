@@ -11,7 +11,7 @@ corrección y lección. Un hallazgo inventado o sin evidencia se penaliza más q
 Durante todo el trabajo se llevó un registro de las afirmaciones de la IA que resultaron incorrectas, imprecisas,
 desactualizadas o subóptimas: el [registro de la cacería](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/registro.md).
 Cada entrada guarda el prompt literal que la originó (en `alucinaciones/prompts/`), la respuesta, cómo se sospechó, la
-evidencia reproducible (en `alucinaciones/evidencias/`), la corrección y la lección. El registro reúne 38 candidatos;
+evidencia reproducible (en `alucinaciones/evidencias/`), la corrección y la lección. El registro reúne 44 candidatos;
 aquí se presentan siete, elegidos porque cubren cuatro categorías y cada uno tiene prompt literal y evidencia que
 cualquiera puede volver a ejecutar ([[tab:caceria]]). El registro también documenta las verificaciones que resultaron
 correctas, porque comprobar y no encontrar un error también es información.

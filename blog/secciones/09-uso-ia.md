@@ -57,7 +57,7 @@ común del código (con varios cientos de pruebas automáticas) o el conjunto de
 oficiales, 2 162 rutas calculadas con OSRM, una tabla de tramos de peaje con tarifas oficiales y el precio del combustible,
 cada dato con su fuente y su fecha de consulta.
 
-**Qué errores introdujo.** El registro de la cacería reunió 38 candidatos, de los que se confirmaron nueve en cuatro
+**Qué errores introdujo.** El registro de la cacería reunió 44 candidatos, de los que se confirmaron nueve en cuatro
 categorías (sección *Cacería de la alucinación*). Ninguno era absurdo: todos eran afirmaciones plausibles, como una
 librería que «trae» un solucionador que ya no incluye, un contador que «nunca» se pasa del presupuesto o una prueba que
 «verifica» algo que en realidad no puede fallar. También se observaron patrones repetidos:
