@@ -1,0 +1,6 @@
+# Barrido del valor de la hora — Spec §7.5 (T3.6): python run.py part2 --config configs/part2/sweep_w.yaml
+# Hereda todo de base.yaml (§4.1 [DECIDIDO 9-oct]) y solo escribe lo que cambia.
+hereda: base.yaml
+methods: [aco, ga]    # §7.5: ACO (MMAS y AS) + GA, 10 corridas; el exacto es opcional (§7.4, v1.14) y no está implementado
+costo:
+  valor_hora: [0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100]   # §7.5: w en €/h, más denso en 0–50

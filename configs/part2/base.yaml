@@ -1,16 +1,22 @@
 # Parte 2 — valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
-# Solo claves de nivel superior de §4.1. El bloque peajes: (Spec §7.1) lo añade su tarea; aco: es de T3.3 y ga: de T3.4.
-methods: [aco, ga, exacto]    # §7.5: exacto + ACO + GA
+# Solo claves de nivel superior de §4.1. El bloque peajes: (Spec §7.1) lo añade su tarea; aco: es de T3.3, ga: de T3.4
+# y experimento: de T3.6.
+methods: [aco, ga]            # §7.5: ACO + GA; el exacto es opcional desde Spec v1.14 (T3.2) y no está implementado
 runs: 10                      # §7.5: ACO (10 corridas) + GA (10 corridas)
 base_seed: 0                  # §4.1 [DECIDIDO 9-oct]: base_seed 0 en ambas partes
 costo:
   valor_hora: 25              # w en €/h (§7.3); §4.1 [DECIDIDO 9-oct]: valor del demo §7.7 (el barrido usa sweep_w.yaml)
+                              # T3.6: número (un solo w) o lista estrictamente creciente (barrido, §7.5)
+  consumo_l100: null          # §7.5 [DECIDIDO v1.16]: null = consumo_wltp_comb_l100 de data/processed/vehiculo.yaml;
+                              # si se da, número finito > 0 (sensibilidad: 5.6 y 6.2)
+  precio_l: null              # §7.5 [DECIDIDO v1.16]: null = precio_medio_eur_l de data/processed/combustible.json;
+                              # si se da, número finito > 0. consumo_l100 o precio_l no nulos = corrida de sensibilidad
 aco:                          # T3.3 — Spec §7.4 y §7.4.1 [DECIDIDO v1.14]; valores de referencia de las notas, Tabla 3
   variante: mmas              # §7.4.1: mmas (principal) | as (comparación)
   hormigas: 47                # §7.4: m = 47 (= n; notas Tabla 3: m = n en AS y MMAS)
   alpha: 1                    # §7.4: α = 1 (notas Tabla 3)
   beta: 3                     # §7.4: β = 3 (notas Tabla 3: 2 a 5)
-  iteraciones: 300            # §7.4: 300 [provisional]; T3.6 fija el presupuesto común de recorridos
+  iteraciones: 1099           # §7.4 [DECIDIDO v1.16]: presupuesto común 51 654 = 1 + 47 · 1 099 recorridos
   as:
     rho: 0.5                  # §7.4.1: ρ de AS (notas Tabla 3)
   mmas:
@@ -18,8 +24,13 @@ aco:                          # T3.3 — Spec §7.4 y §7.4.1 [DECIDIDO v1.14]; 
     p_best: 0.05              # §7.4: p_best = 0.05 (notas §7.2, Prop. 2 y §9)
 ga:                           # T3.4 — Spec §7.4 (tabla, fila GA) y §7.4.2 [DECIDIDO v1.15]
   poblacion: 150              # §7.4: pop = 150 (§7.4.2: entero >= 2)
-  generaciones: 1000          # §7.4: gen = 1 000 (§7.4.2: entero >= 1); T3.6 fija el presupuesto común de recorridos
+  generaciones: 348           # §7.4 [DECIDIDO v1.16]: presupuesto común 51 654 = 150 + 148 · 348 (§7.4.2: entero >= 1)
   pc: 0.9                     # §7.4: probabilidad de cruce OX (§7.4.2: real en [0, 1])
   pm: 0.2                     # §7.4: probabilidad de mutación, inversión o intercambio 50/50 (§7.4.2: real en [0, 1])
   torneo_k: 4                 # §7.4: torneo k = 4 (§7.4.2: entero en [1, poblacion])
   elites: 2                   # §7.4: élites = 2 (§7.4.2: entero en [0, poblacion))
+experimento:                  # T3.6 — Spec §7.5 (barrido de w, envolvente del umbral y sensibilidad)
+  variantes_aco: [mmas, as]   # §7.5 y §7.4.1: variantes de ACO que corre el experimento cuando methods incluye aco
+  datos: data/processed       # §5.3: rutas.csv, vehiculo.yaml y combustible.json (relativa a la raíz del repositorio)
+  salida: results/data/part2  # §5.4: sweep_w.json, umbrales_w.json e historiales; la sensibilidad escribe en
+                              # <salida>/sensibilidad/<etiqueta>/ y nunca sobrescribe la salida base

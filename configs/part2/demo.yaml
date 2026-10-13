@@ -6,3 +6,5 @@ costo:
   valor_hora: 25      # §7.7 fija w = 25 para la demo (explícito aunque hoy coincida con la base)
 aco:
   iteraciones: 100    # §7.7
+experimento:
+  salida: results/data/part2/demo   # T3.6: salida propia; con la de base.yaml sobrescribiría el barrido (sweep_w.json)
