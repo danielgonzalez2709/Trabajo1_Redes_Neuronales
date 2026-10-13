@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.14** — 2026-10-12 (T3.3: ACO según las notas del profesor [DECIDIDO], §7.4; T3.2 exacto pasa a opcional) · 1.13 — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.15** — 2026-10-12 (T3.4: GA con el esquema clásico de §7.4 [DECIDIDO], §7.4.2: mutación 50/50, conteo de recorridos, población inicial con el vecino más cercano; notebooks del profesor solo como referencia) · 1.14 — 2026-10-12 (T3.3: ACO según las notas del profesor [DECIDIDO], §7.4; T3.2 exacto pasa a opcional) · 1.13 — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -498,13 +498,13 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 | Algoritmo | Especificación | Parámetros por defecto |
 |---|---|---|
 | **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max (detalle en §7.4.1) | MMAS (principal): m=47, α=1, β=3, ρ=0.02, p_best=0.05 · AS (comparación): m=47, α=1, β=3, ρ=0.5 · 300 iteraciones [provisional] |
-| **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** + intercambio; elitismo | pop=150, gen=1 000, pc=0.9, pm=0.2, torneo k=4, élites=2 |
+| **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** o intercambio (50/50); elitismo (detalle en §7.4.2) | pop=150, gen=1 000, pc=0.9, pm=0.2, torneo k=4, élites=2 |
 | **2-opt** (opcional) | Mejora local sobre la mejor solución; reportar con y sin | — |
 | **Exacto (referencia)** | Formulación DFJ con **PuLP 4.0 + HiGHS**, eliminación iterativa de subtours. **Opcional desde v1.14** (T3.2 solo si sobra tiempo; sin él, el gap de §7.5 se mide contra la mejor solución encontrada y se dice así en el blog) | — |
 
 - **Aceptación:** `tests/test_tsp_operators.py` — 10 000 cruces/mutaciones aleatorias producen siempre permutaciones válidas; `tests/test_exact_small.py` — con 8 ciudades, el exacto coincide con fuerza bruta.
 - **Comparación justa ACO vs GA:** mismo número de **recorridos evaluados**. Con los valores por defecto no se cumple
-  (ACO 47 × 300 ≈ 14 100; GA 150 × 1 000 ≈ 150 000): T3.6 fija un **presupuesto común** de recorridos evaluados
+  (ACO 1 + 47 × 300 = 14 101; GA 150 + 148 × 1 000 = 148 150): T3.6 fija un **presupuesto común** de recorridos evaluados
   [PENDIENTE, valor tras medir tiempos en T3.3/T3.4] y de él salen las iteraciones de cada método. El enunciado no fija
   iteraciones.
 
@@ -545,6 +545,48 @@ regla tipo ACS sin actualización local); de él solo se toma calcular τ^α·η
 - **Configuración** (`base.yaml`): `aco: {variante, hormigas, alpha, beta, iteraciones, as: {rho}, mmas: {rho, p_best}}`.
 - **Justificación de ρ:** se toman los valores de referencia de las notas (Tabla 3: AS 0.5, MMAS 0.02) en lugar del 0.2
   de v1.13. Las notas advierten (§10) que con ρ = 0.02 MMAS necesita más iteraciones: lo resuelve el presupuesto común.
+
+#### 7.4.2 GA (T3.4) [DECIDIDO v1.15, Jose Miguel, 12-oct]
+**Esquema:** el clásico de la tabla de §7.4 (torneo + OX + inversión/intercambio + elitismo). **Referencia general (sin
+copiar código):** notebooks del profesor `data/raw/GA/IRNA202601_prep_Algoritmos_Evolutivos.ipynb` e
+`IRNA202602_intro_algoritmos_evolutivos.ipynb` (Ospina y Zapata, 2026; versionados sin salidas). Trabajan con codificación
+real (Rastrigin, mochila con PyGAD) y no cubren permutaciones; de ellos se toma el ciclo evaluar → ordenar → élites →
+cruce → mutación. No se adopta su esquema por fracciones (padres al azar, sin torneo), porque sin torneo la única presión
+de selección sería el elitismo.
+
+- **Individuo:** permutación de 0..n−1. **Aptitud:** el costo del recorrido cerrado C(π) = Σ c[π_k, π_{k+1}] + c[π_n, π_1]
+  sobre la misma matriz que ACO (se minimiza directamente; torneo y elitismo solo comparan, así que no se transforma a
+  1/C ni a −C).
+- **Matriz C:** mismas reglas de validación que ACO (§7.4.1). Las piezas comunes (validación, costo de recorridos,
+  vecino más cercano) se reutilizan sin duplicar código y sin cambiar el comportamiento de `aco.py`.
+- **Población inicial:** el recorrido del vecino más cercano desde la ciudad 0 (el mismo C^nn de §7.4.1) + `poblacion − 1`
+  permutaciones uniformes al azar (`rng`). Así ACO y GA parten del mismo punto en la curva de convergencia de §7.5.
+- **Generación:**
+  1. Élites: los `elites` individuos de menor costo pasan sin cambios (empates: primer índice).
+  2. Hasta completar `poblacion − elites` hijos: dos torneos eligen dos padres (cada torneo: `torneo_k` individuos
+     distintos al azar, gana el de menor costo; empates: primero del sorteo). Con probabilidad `pc` se cruzan con OX y
+     nacen dos hijos (OX(P1, P2) y OX(P2, P1)); si no, los hijos son copias de los padres. Si solo falta un hijo, el segundo
+     se descarta sin evaluarlo.
+  3. Mutación: cada hijo, de forma independiente, muta con probabilidad `pm`; si muta, recibe **un solo** operador,
+     inversión o intercambio, elegido 50/50.
+- **OX (Order Crossover):** dos posiciones distintas a < b al azar; el hijo copia el tramo P1[a..b] en las mismas
+  posiciones y llena las libres, de izquierda a derecha, con las ciudades que faltan en el orden en que aparecen en P2.
+- **Inversión:** dos posiciones distintas i < j al azar; invierte el tramo [i..j]. **Intercambio:** dos posiciones
+  distintas al azar; intercambia sus ciudades.
+- **Mejor global:** empieza en el mejor de la población inicial y cambia solo con mejora estricta.
+- **Conteo:** `n_tour_evals = poblacion + (poblacion − elites) · generaciones` (148 150 con los valores por defecto).
+  Cada candidato generado cuenta 1, aunque sea una copia sin cruce ni mutación (como las hormigas que repiten recorrido en
+  ACO); los élites que pasan no se vuelven a contar.
+- **`history`:** una entrada por generación con el mejor global hasta ella (`iter` = número de generación, desde 0). La
+  población inicial no tiene entrada propia (como en ACO, `generaciones` entradas).
+- **Detalles fijados en T3.4** (conformes según revisor-spec): cada llamada a OX sortea sus propios cortes; los dos
+  torneos son independientes (P1 puede ser igual a P2); el hijo sobrante no se genera; la nueva población guarda primero
+  los élites y luego los hijos en orden de nacimiento; el 50/50 es u < 0,5 → inversión.
+- **API adicional:** como `aco.py`, `ga.py` expone `iterar(C, cfg, rng)`, que cede el estado de cada generación
+  (población, costos, mejor global); `solve` se apoya en ella.
+- **Configuración** (`base.yaml`): `ga: {poblacion, generaciones, pc, pm, torneo_k, elites}` con los valores de §7.4.
+  Validación: enteros `poblacion ≥ 2`, `generaciones ≥ 1`, `1 ≤ torneo_k ≤ poblacion`, `0 ≤ elites < poblacion`;
+  reales `pc` y `pm` en [0, 1].
 
 ### 7.5 Experimentos Parte 2
 - Barrido w ∈ {0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100} €/h (más denso en 0–50, rango sugerido por el equipo Parte 2). Para cada w: exacto + ACO (10 corridas) + GA (10 corridas) → mejor, media, desviación, **gap % vs. óptimo**.
