@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3 ✅ |
-| Próxima tarea | Parte 2: **T3.4** GA, T3.5 2-opt (recomendado: el MMAS deja cruces visibles); **T3.2 exacto = opcional** (Spec v1.14). T3.3 y T3.4 editan `base.yaml`: integrar de a una. Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4 ✅ |
+| Próxima tarea | Parte 2: **T3.6** experimentos (presupuesto común ACO vs GA), T3.5 2-opt (recomendado: el MMAS deja cruces visibles); **T3.2 exacto = opcional** (Spec v1.14). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -41,6 +41,9 @@
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
 - Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional; exacto con PuLP **opcional** (v1.14).
+- **GA (Spec v1.15 §7.4.2):** esquema clásico (torneo k=4, OX con dos hijos, mutación con **un** operador 50/50 inversión/intercambio,
+  2 élites); notebooks del profesor (`data/raw/GA/`, sin salidas) solo como referencia. Conteo `150 + 148·gen` (cada candidato = 1).
+  Población inicial con el vecino más cercano (mismo arranque que MMAS). Piezas comunes en `src/part2/recorridos.py`.
 - **ACO (Spec v1.14 §7.4.1):** las **notas del profesor** (`data/raw/ACO/notas_aco.html`) priman sobre el Spec y todo cambio
   se trae al Spec. MMAS principal (ρ 0.02, p_best 0.05, alterna ib/bs), AS comparación (ρ 0.5). Berroa solo como referencia
   de estructura (repo sin licencia: no se copia código). Presupuesto común de recorridos ACO vs GA: lo fija T3.6.
@@ -57,7 +60,8 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
-- [ ] **T3.6, presupuesto común** ACO vs GA (hoy 14 101 vs ~150 000 recorridos). Con ρ = 0.02 y 300 iteraciones MMAS
+- [ ] **T3.6, presupuesto común** ACO vs GA (hoy 14 101 vs 148 150 recorridos). El GA pierde diversidad (~30 recorridos
+  distintos de 150 desde la gen. ~100, con o sin vecino más cercano); con 3 semillas, final 2 565–2 702 €. `scripts/ver_ga_temporal.py`. Con ρ = 0.02 y 300 iteraciones MMAS
   sigue mejorando al final y τ_min casi no actúa (~289 iteraciones para llegar). ACO tarda ~29 µs/recorrido (n = 47).
 - [ ] Hallazgo para el blog: aun con w = 500 solo ~12 de 47 tramos pagan peaje; es el techo (tramos cuya rápida tiene
   peaje: ~23 % de los pares vecinos), no un error. `scripts/ver_aco_temporal.py --barrido` lo grafica.
@@ -84,16 +88,17 @@
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
 
 ## 🎯 Cacería de alucinaciones
-Candidatos: **23** (H-21 "Logroño" inventado en T3.1 · H-22 Dantzig 1954: revista con el nombre actual · H-23 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
+Candidatos: **24** (H-24 GA: prueba que no distinguía el orden de los padres, débil · H-21 "Logroño" inventado en T3.1 · H-22 Dantzig 1954: revista con el nombre actual · H-23 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
 H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
-confirmados por el puente: **9** (H-03, H-04, H-05, H-07, H-08, H-10, H-14, H-17, H-22; 4 categorías); por el cazador, pendiente del puente: H-18; descartados: H-12, H-13 — categorías: Datos (10), Matemáticas (1), Código (7: incl. H-23),
+confirmados por el puente: **9** (H-03, H-04, H-05, H-07, H-08, H-10, H-14, H-17, H-22; 4 categorías); por el cazador, pendiente del puente: H-18; descartados: H-12, H-13 — categorías: Datos (10), Matemáticas (1), Código (8: incl. H-23 y H-24),
 Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (2: H-19 origen pendiente, H-22). Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **T3.4 ✅**: `ga.py` + `recorridos.py` (piezas comunes con ACO) + 103 pruebas (874 en total). implementador 3 rondas (Opus); revisor-spec devolvió una prueba que no distinguía OX(P1,P2)/OX(P2,P1) (**H-24**, débil) y luego ✅; revisor-calidad ✅ (Sonnet). **Spec v1.15** (§7.4.2). w = 25, semilla 0: GA 2 701,56 € con 148 150 recorridos (semillas 1–2: 2 565,53 €). Gráficos temporales en `scripts/ver_ga_temporal.py`. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.3 ✅**: `aco.py` (AS + MMAS, `solve` + `iterar`) y `test_aco.py` (60 pruebas; 769 en total). implementador 3 rondas (Opus); revisor-spec ✅, verificador-matematico ✅ (demostró que con el orden aprobado el recorte superior nunca se activa), revisor-calidad ✅ (Sonnet). w = 25: MMAS 2 589,55 €, AS 2 659,76 €, vecino más cercano 3 173,83 €. Sin candidatos nuevos a la cacería. |
 | 2026-10-12 | Jose Miguel + Claude | **Spec v1.14**: T3.2 opcional; ACO según las notas del profesor (§7.4.1). Hallado: los valores por defecto daban 14 100 recorridos a ACO y ~150 000 a GA (comparación injusta) → presupuesto común en T3.6. Despachada T3.3. |
 | 2026-10-12 | Daniel + Claude | Sección **Uso de IA** del blog (`blog/secciones/09-uso-ia.md`): metodología SDD, tabla de prompts principales con enlace al archivo literal (Tabla 3) e impacto (qué aceleró, qué errores introdujo, cómo se controlaron, qué no se delegó). **Pendiente equipo Parte 1:** agregar sus filas T1.x a la tabla al fusionar. |

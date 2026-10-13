@@ -39,42 +39,23 @@ Decisiones de implementación (no fijadas por el Spec):
 
 from __future__ import annotations
 
-import math
-
 import numpy as np
 
 from src.common.seeds import validar_entero
+from src.part2 import recorridos  # piezas comunes con ga.py (Spec §7.4.2)
 
 VARIANTES = ("mmas", "as")  # Spec §7.4.1: MMAS principal, AS comparación
-N_MINIMO = 3  # con menos de 3 ciudades no hay ciclo hamiltoniano con arcos distintos
+
+# Nombres de T3.3 que usan las pruebas de tests/test_aco.py; la implementación vive en `recorridos.py`.
+_costos = recorridos.costos_recorridos
+_vecino_mas_cercano = recorridos.vecino_mas_cercano
 
 
 # ---------------------------------------------------------------------------------------- validación
 
 
-def _real(valor, nombre: str, minimo: float, maximo: float | None = None, *, min_abierto=False, max_abierto=False):
-    """`valor` como float finito dentro del intervalo; TypeError si no es número, ValueError si está fuera."""
-    if isinstance(valor, (bool, np.bool_)) or not isinstance(valor, (int, float, np.integer, np.floating)):
-        raise TypeError(f"{nombre} debe ser un número; se recibió {valor!r} ({type(valor).__name__})")
-    x = float(valor)
-    fuera = (
-        not math.isfinite(x)
-        or (x <= minimo if min_abierto else x < minimo)
-        or (maximo is not None and (x >= maximo if max_abierto else x > maximo))
-    )
-    if fuera:
-        izq = "(" if min_abierto else "["
-        der = ")" if max_abierto else "]"
-        rango = f"{izq}{minimo}, {maximo if maximo is not None else '∞'}{der}"
-        raise ValueError(f"{nombre} debe estar en {rango}; se recibió {valor!r}")
-    return x
-
-
 def _clave(bloque: dict, clave: str, ruta: str):
-    try:
-        return bloque[clave]
-    except (KeyError, TypeError):
-        raise KeyError(f"falta la clave {ruta} en la configuración (Spec §7.4.1)") from None
+    return recorridos.leer_clave(bloque, clave, ruta, "§7.4.1")
 
 
 def _leer_parametros(cfg: dict) -> dict:
@@ -89,12 +70,16 @@ def _leer_parametros(cfg: dict) -> dict:
         "variante": variante,
         "hormigas": validar_entero(_clave(bloque, "hormigas", "aco.hormigas"), "aco.hormigas", minimo=1),
         "iteraciones": validar_entero(_clave(bloque, "iteraciones", "aco.iteraciones"), "aco.iteraciones", minimo=1),
-        "alpha": _real(_clave(bloque, "alpha", "aco.alpha"), "aco.alpha", 0.0),
-        "beta": _real(_clave(bloque, "beta", "aco.beta"), "aco.beta", 0.0),
+        "alpha": recorridos.validar_real(_clave(bloque, "alpha", "aco.alpha"), "aco.alpha", 0.0),
+        "beta": recorridos.validar_real(_clave(bloque, "beta", "aco.beta"), "aco.beta", 0.0),
         # 0 < ρ ≤ 1 (notas §4.2); 0 < p_best < 1 (notas Prop. 2)
-        "rho_as": _real(_clave(sub_as, "rho", "aco.as.rho"), "aco.as.rho", 0.0, 1.0, min_abierto=True),
-        "rho_mmas": _real(_clave(sub_mmas, "rho", "aco.mmas.rho"), "aco.mmas.rho", 0.0, 1.0, min_abierto=True),
-        "p_best": _real(
+        "rho_as": recorridos.validar_real(
+            _clave(sub_as, "rho", "aco.as.rho"), "aco.as.rho", 0.0, 1.0, min_abierto=True
+        ),
+        "rho_mmas": recorridos.validar_real(
+            _clave(sub_mmas, "rho", "aco.mmas.rho"), "aco.mmas.rho", 0.0, 1.0, min_abierto=True
+        ),
+        "p_best": recorridos.validar_real(
             _clave(sub_mmas, "p_best", "aco.mmas.p_best"),
             "aco.mmas.p_best",
             0.0,
@@ -105,47 +90,7 @@ def _leer_parametros(cfg: dict) -> dict:
     }
 
 
-def _validar_matriz(C) -> np.ndarray:
-    """C como float64: cuadrada, n ≥ 3, finita, simétrica y con c_ij > 0 fuera de la diagonal (η = 1/c)."""
-    C = np.asarray(C)
-    if C.dtype.kind not in "iuf":
-        raise ValueError(f"C debe ser numérica; se recibió dtype {C.dtype}")
-    if C.ndim != 2 or C.shape[0] != C.shape[1]:
-        raise ValueError(f"C debe ser una matriz cuadrada; se recibió forma {C.shape}")
-    n = C.shape[0]
-    if n < N_MINIMO:
-        raise ValueError(f"C debe tener n >= {N_MINIMO} ciudades; se recibió n = {n}")
-    C = C.astype(float)
-    if not np.isfinite(C).all():
-        raise ValueError("C debe ser finita (sin NaN ni inf)")
-    if not np.array_equal(C, C.T):
-        raise ValueError("C debe ser simétrica (TSP simétrico, Spec §7.3)")
-    if not (C[~np.eye(n, dtype=bool)] > 0).all():
-        raise ValueError("C debe tener costos > 0 fuera de la diagonal (η = 1/c, notas Def. 13)")
-    return C
-
-
 # ----------------------------------------------------------------------------------- piezas del algoritmo
-
-
-def _costos(C: np.ndarray, tours: np.ndarray) -> np.ndarray:
-    """Costo de cada fila de `tours` (k × n), incluido el arco de cierre (última ciudad → primera)."""
-    return C[tours, np.roll(tours, -1, axis=1)].sum(axis=1)
-
-
-def _vecino_mas_cercano(C: np.ndarray) -> tuple[np.ndarray, float]:
-    """Recorrido del vecino más cercano desde la ciudad 0 y su costo C^nn (notas, Def. 8). Empates: menor índice."""
-    n = C.shape[0]
-    tour = [0]
-    disponible = np.ones(n, dtype=bool)
-    disponible[0] = False
-    for _ in range(n - 1):
-        candidatos = np.where(disponible, C[tour[-1]], np.inf)
-        siguiente = int(np.argmin(candidatos))
-        tour.append(siguiente)
-        disponible[siguiente] = False
-    tour = np.array(tour)
-    return tour, float(_costos(C, tour[None, :])[0])
 
 
 def _limites_mmas(L_bs: float, rho: float, n: int, p_best: float) -> tuple[float, float]:
@@ -246,10 +191,9 @@ def iterar(C: np.ndarray, cfg: dict, rng: np.random.Generator):
     `solve` consume este generador; las pruebas lo usan para revisar cada actualización.
     """
     params = _leer_parametros(cfg)
-    C = _validar_matriz(C)
-    if not isinstance(rng, np.random.Generator):
-        raise TypeError(f"rng debe ser un np.random.Generator (Spec §4.1); se recibió {type(rng).__name__}")
-    vecino = _vecino_mas_cercano(C)  # T^bs inicial: L^bs = C^nn (Spec §7.4.1)
+    C = recorridos.validar_matriz(C)
+    recorridos.validar_generador(rng)
+    vecino = recorridos.vecino_mas_cercano(C)  # T^bs inicial: L^bs = C^nn (Spec §7.4.1)
     if params["variante"] == "mmas":
         _limites_mmas(vecino[1], params["rho_mmas"], C.shape[0], params["p_best"])  # τ_min ≥ τ_max → ValueError aquí
     return _generar(C, params, rng, vecino)
@@ -281,7 +225,7 @@ def _generar(C: np.ndarray, params: dict, rng: np.random.Generator, vecino: tupl
     for t in range(params["iteraciones"]):
         W = _pesos(tau, eta_beta, alpha)
         tours = _construir_recorridos(W, m, rng)
-        costos = _costos(C, tours)
+        costos = recorridos.costos_recorridos(C, tours)
         # Orden de §7.4.1: T^ib, T^bs y límites antes de evaporar y depositar.
         k_ib = int(np.argmin(costos))
         ib_tour, ib_cost = tours[k_ib], float(costos[k_ib])
@@ -303,7 +247,7 @@ def _generar(C: np.ndarray, params: dict, rng: np.random.Generator, vecino: tupl
             "tau": tau,
             "tau_min": tau_min,
             "tau_max": tau_max,
-            "best_tour": best_tour,
+            "best_tour": best_tour.copy(),  # copia: T^bs persiste entre iteraciones y MMAS la deposita
             "best_cost": best_cost,
         }
 
