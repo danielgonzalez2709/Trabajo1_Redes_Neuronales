@@ -1,7 +1,18 @@
 # Parte 2 — valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
-# Solo claves de nivel superior de §4.1. Los bloques aco:, ga: y peajes: (Spec §7.1, §7.4) los añaden T3.x.
+# Solo claves de nivel superior de §4.1. Los bloques ga: y peajes: (Spec §7.1, §7.4) los añaden T3.x; aco: es de T3.3.
 methods: [aco, ga, exacto]    # §7.5: exacto + ACO + GA
 runs: 10                      # §7.5: ACO (10 corridas) + GA (10 corridas)
 base_seed: 0                  # §4.1 [DECIDIDO 9-oct]: base_seed 0 en ambas partes
 costo:
   valor_hora: 25              # w en €/h (§7.3); §4.1 [DECIDIDO 9-oct]: valor del demo §7.7 (el barrido usa sweep_w.yaml)
+aco:                          # T3.3 — Spec §7.4 y §7.4.1 [DECIDIDO v1.14]; valores de referencia de las notas, Tabla 3
+  variante: mmas              # §7.4.1: mmas (principal) | as (comparación)
+  hormigas: 47                # §7.4: m = 47 (= n; notas Tabla 3: m = n en AS y MMAS)
+  alpha: 1                    # §7.4: α = 1 (notas Tabla 3)
+  beta: 3                     # §7.4: β = 3 (notas Tabla 3: 2 a 5)
+  iteraciones: 300            # §7.4: 300 [provisional]; T3.6 fija el presupuesto común de recorridos
+  as:
+    rho: 0.5                  # §7.4.1: ρ de AS (notas Tabla 3)
+  mmas:
+    rho: 0.02                 # §7.4.1: ρ de MMAS (notas Tabla 3)
+    p_best: 0.05              # §7.4: p_best = 0.05 (notas §7.2, Prop. 2 y §9)

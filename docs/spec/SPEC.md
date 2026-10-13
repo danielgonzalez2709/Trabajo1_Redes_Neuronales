@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Curso | Redes neuronales y algoritmos bioinspirados — UNAL, Facultad de Minas, 2026-02 |
-| Versión | **1.13** — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
+| Versión | **1.14** — 2026-10-12 (T3.3: ACO según las notas del profesor [DECIDIDO], §7.4; T3.2 exacto pasa a opcional) · 1.13 — 2026-10-12 (T3.1: `Componentes` = dataclass `frozen` de seis matrices [DECIDIDO], §5.2) · 1.12 — 2026-10-12 (T3.1: desempate de §7.3 fijado en `rapida` [DECIDIDO]) · 1.11 — 2026-10-12 (T3.1: criterios de aceptación de §7.3 reformulados; con w = 0 se elige la alternativa de menor peaje + combustible, y la simetría se comprueba contra `rutas.csv` porque la matriz se arma por espejo) · 1.10 — 2026-10-12 (T2.5: asignación de peajes por suma de tramos [DECIDIDO]; cadenas y anclas como archivos laterales de `peajes_tramos.csv`; 5 archivos nuevos en §5.3) · 1.9 — 2026-10-12 (T2.4: AP-68 después del 10-nov corregida con fuentes oficiales y BOE núm. 225 recolocado en §7.1; en §7.2 Bloque 3: una tarifa por tramo, km de OSM como aproximación, peaje cerrado y Catálogo RCE sin versionar) · 1.8 — 2026-10-12 (OSRM con `--threads 1` por determinismo; `exclude=toll` no garantiza una ruta sin peaje: las `sin_peaje` con clase `toll` se reportan y T2.5 cobra el peaje; nueva corrida de T2.3) · 1.7 — 2026-10-11 (vehículo: acabado **Style Plus 140H e-CVT, año de modelo MY27** vigente en la fecha de corte; `anio_modelo` en el contrato de `vehiculo.yaml`) · 1.6 — 2026-10-11 (enunciado literal de la Parte 2 y punto "Todo debe correr en vivo" de la rúbrica en §1.2–§1.3; combustible: media **peninsular** en lugar de nacional, clave `ambito` y `combustible_resumen.json` en §5.3; endpoint histórico del Ministerio en §7.2 Bloque 4) · 1.5 — 2026-10-11 (T2.3: criterio de par sin peaje; `rutas_resumen.json` y `rutas_pasos_peaje.csv` en §5.3; los crudos de rutas OSRM no se versionan) · 1.4 — 2026-10-11 (integración de T2.0/T2.2: OSRM local con Docker [DECIDIDO]; ORS queda solo como contingencia) · 1.3 — 2026-10-09 (T0.1: `requirements.txt` con Python 3.12; solver exacto PuLP 4.0 + HiGHS; Design System = skill `apple-design`) · 1.2 — 2026-10-09 (§7.2 Bloque 1: NGMEP 202603 como fuente primaria con descarga manual, IGR como contraste, Mérida fuera de la lista de verificación) · 1.1 — 2026-10-01 (decisiones del equipo: fecha de corte, vehículo, dominio de Rosenbrock; propuesta de datos de Camila) |
 | Repositorio | https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales |
 | Entrega | **Martes 13-oct-2026, 23:59** · Sustentación (probable): jueves 15-oct-2026, 6 p. m. |
 | Metodología | Subagent Driven Development (SDD) — ver §12 y `docs/spec/PLAN.md` |
@@ -497,13 +497,54 @@ Para cada par y alternativa a ∈ {rapida, sin_peaje}:
 ### 7.4 Algoritmos
 | Algoritmo | Especificación | Parámetros por defecto |
 |---|---|---|
-| **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max | m=47, α=1, β=3, ρ=0.2, 300 iteraciones |
+| **Ant System → MMAS** | p_ij ∝ τ_ij^α · η_ij^β, η = 1/c; evaporación τ ← (1−ρ)τ + Δτ; MMAS: solo la mejor hormiga deposita, límites τ_min/τ_max (detalle en §7.4.1) | MMAS (principal): m=47, α=1, β=3, ρ=0.02, p_best=0.05 · AS (comparación): m=47, α=1, β=3, ρ=0.5 · 300 iteraciones [provisional] |
 | **GA** | Permutación; torneo; cruce **OX**; mutación por **inversión** + intercambio; elitismo | pop=150, gen=1 000, pc=0.9, pm=0.2, torneo k=4, élites=2 |
 | **2-opt** (opcional) | Mejora local sobre la mejor solución; reportar con y sin | — |
-| **Exacto (referencia)** | Formulación DFJ con **PuLP 4.0 + HiGHS**, eliminación iterativa de subtours | — |
+| **Exacto (referencia)** | Formulación DFJ con **PuLP 4.0 + HiGHS**, eliminación iterativa de subtours. **Opcional desde v1.14** (T3.2 solo si sobra tiempo; sin él, el gap de §7.5 se mide contra la mejor solución encontrada y se dice así en el blog) | — |
 
 - **Aceptación:** `tests/test_tsp_operators.py` — 10 000 cruces/mutaciones aleatorias producen siempre permutaciones válidas; `tests/test_exact_small.py` — con 8 ciudades, el exacto coincide con fuerza bruta.
-- **Comparación justa ACO vs GA:** mismo número de **recorridos evaluados**.
+- **Comparación justa ACO vs GA:** mismo número de **recorridos evaluados**. Con los valores por defecto no se cumple
+  (ACO 47 × 300 ≈ 14 100; GA 150 × 1 000 ≈ 150 000): T3.6 fija un **presupuesto común** de recorridos evaluados
+  [PENDIENTE, valor tras medir tiempos en T3.3/T3.4] y de él salen las iteraciones de cada método. El enunciado no fija
+  iteraciones.
+
+#### 7.4.1 ACO (T3.3) [DECIDIDO v1.14, Jose Miguel, 12-oct]
+**Fuente principal:** notas del profesor, `data/raw/ACO/notas_aco.html` (Ospina y Zapata, 2026-01), §4, §6, §7.2 y Tabla 3.
+Ante una diferencia con este Spec priman las notas, y el cambio se trae aquí. **Referencia de estructura (sin copiar
+código):** Berroa, J., *AntColonyOptimizer.py*, https://github.com/johnberroa/Ant-Colony-Optimization (repositorio sin
+licencia, consultado el 12-oct-2026). Su algoritmo no es AS ni MMAS de las notas (depósito fijo, τ₀ = 1, arcos dirigidos,
+regla tipo ACS sin actualización local); de él solo se toma calcular τ^α·η^β una vez por iteración y cerrar el recorrido.
+
+- **Variantes:** `aco.variante ∈ {mmas, as}`; MMAS es la principal y AS la comparación.
+- **Construcción (ambas):** cada hormiga arranca en una ciudad uniforme al azar (`rng`); elige la siguiente entre las no
+  visitadas por ruleta con p_ij ∝ τ_ij^α · η_ij^β, η_ij = 1/c_ij (notas §4.1). El costo incluye el arco de cierre.
+- **C^nn:** costo del recorrido del vecino más cercano desde la ciudad 0 (notas, Def. 8). Cuenta como 1 recorrido evaluado.
+- **AS** (notas §4.2): τ₀ = m / C^nn; evaporación en todos los arcos; depositan las m hormigas Δτ = 1/L_k (Q = 1), en
+  τ_ij y τ_ji.
+- **MMAS** (notas §6, §6.1, Prop. 2):
+  - τ_max = 1/(ρ · L^bs), recalculado cuando mejora L^bs (al inicio L^bs = C^nn).
+  - τ_min = τ_max · (1 − p_best^(1/n)) / ((ā − 1) · p_best^(1/n)), con ā = n/2.
+  - Inicialización τ = τ_max.
+  - Actualización τ ← [(1−ρ)τ + Δτ^best] recortada a [τ_min, τ_max], simétrica. Deposita una sola hormiga, Δτ = 1/L^best:
+    en la iteración t (desde 0) par, la mejor de la iteración (T^ib); en impar, la mejor global (T^bs). Las notas dicen que
+    su código alterna sin fijar la frecuencia; la alternancia 1:1 es decisión del equipo.
+  - Sin reinicio por estancamiento.
+  - Si τ_min ≥ τ_max (con p_best = 0.05 ocurre para n ≤ 4), MMAS lanza `ValueError`; las notas exigen 0 < τ_min < τ_max.
+- **Orden dentro de cada iteración** [DECIDIDO v1.14, Jose Miguel, 12-oct]: construir → evaluar → actualizar T^ib, T^bs y
+  (en MMAS) τ_max/τ_min → evaporar y depositar. El esqueleto general de las notas (§3) actualiza s^bs después de la
+  feromona; aquí va antes porque así lo pide §6.1 ("τ_max se actualiza cada vez que mejora T^bs"): en t impar deposita la
+  mejor global incluida la iteración actual y τ queda en [τ_min, τ_max] sin que el recorte superior llegue a activarse
+  (demostrado por verificador-matematico). Es el orden de ACOTSP (López-Ibáñez y Stützle, `aco.c`).
+- **Recorrido inicial:** T^bs empieza en el recorrido del vecino más cercano (ambas variantes); si ninguna hormiga lo
+  mejora, `solve` lo devuelve. En empates, T^ib es la primera hormiga de costo mínimo y T^bs cambia solo con mejora estricta.
+- **Conteo:** `n_tour_evals = 1 + m · iteraciones` (C^nn + recorridos de las hormigas).
+- **`history`:** una entrada por iteración con el mejor global hasta esa iteración.
+- **API adicional:** además de `solve` (§5.2), `aco.py` expone `iterar(C, cfg, rng)`, que cede el estado de cada iteración
+  (feromona, pesos W, límites de MMAS, mejores recorridos). La usan las pruebas y podrán usarla las figuras de F4;
+  `solve` se apoya en ella (recomendación de revisor-calidad, ronda 3).
+- **Configuración** (`base.yaml`): `aco: {variante, hormigas, alpha, beta, iteraciones, as: {rho}, mmas: {rho, p_best}}`.
+- **Justificación de ρ:** se toman los valores de referencia de las notas (Tabla 3: AS 0.5, MMAS 0.02) en lugar del 0.2
+  de v1.13. Las notas advierten (§10) que con ρ = 0.02 MMAS necesita más iteraciones: lo resuelve el presupuesto común.
 
 ### 7.5 Experimentos Parte 2
 - Barrido w ∈ {0, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100} €/h (más denso en 0–50, rango sugerido por el equipo Parte 2). Para cada w: exacto + ACO (10 corridas) + GA (10 corridas) → mejor, media, desviación, **gap % vs. óptimo**.

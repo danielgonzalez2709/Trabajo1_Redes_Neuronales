@@ -15,8 +15,8 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (rama `integracion/t05-t41`, PR pendiente) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1 ✅ |
-| Próxima tarea | Parte 2: **T3.2** exacto, **T3.3** ACO, **T3.4** GA, T3.5 2-opt (todas paralelizables tras T3.1; T3.3 y T3.4 editan `base.yaml`: integrar de a una). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3 ✅ |
+| Próxima tarea | Parte 2: **T3.4** GA, T3.5 2-opt (recomendado: el MMAS deja cruces visibles); **T3.2 exacto = opcional** (Spec v1.14). T3.3 y T3.4 editan `base.yaml`: integrar de a una. Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
@@ -40,7 +40,10 @@
   AP-71 diurna, SEITT efectivo, AP-7 temporada baja); **M-12 paga de la M-40 a la M-13**; AP9-03 = 0 € (calculadora de Audasa).
 - Bloque 1 (Spec v1.2): coordenadas del **NGMEP 202603** (fila "Capital de municipio", descarga manual por reCAPTCHA);
   IGR Poblaciones = contraste (≤ 2,5 km); Nominatim solo control. Crudos versionados salvo el `.mdb`.
-- Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional, óptimo exacto con PuLP como referencia.
+- Algoritmos Parte 2: AS → MMAS, GA (OX + inversión), 2-opt opcional; exacto con PuLP **opcional** (v1.14).
+- **ACO (Spec v1.14 §7.4.1):** las **notas del profesor** (`data/raw/ACO/notas_aco.html`) priman sobre el Spec y todo cambio
+  se trae al Spec. MMAS principal (ρ 0.02, p_best 0.05, alterna ib/bs), AS comparación (ρ 0.5). Berroa solo como referencia
+  de estructura (repo sin licencia: no se copia código). Presupuesto común de recorridos ACO vs GA: lo fija T3.6.
 - Front: **Material for MkDocs** + Plotly (interactivas) + matplotlib con estilo DS (GIF). Todo Python.
 - **Blog (T0.7):** una entrada (`blog/docs/index.md`) que une `blog/secciones/*.md`; hook `blog/hooks/reporte.py` numera figuras/tablas APA
   (`::: figura id` … `:::`), resuelve `[[fig:id]]` y citas `[@clave]` con pandoc + APA 7, y **falla** si falta título/fuente, una figura no
@@ -54,6 +57,10 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
+- [ ] **T3.6, presupuesto común** ACO vs GA (hoy 14 101 vs ~150 000 recorridos). Con ρ = 0.02 y 300 iteraciones MMAS
+  sigue mejorando al final y τ_min casi no actúa (~289 iteraciones para llegar). ACO tarda ~29 µs/recorrido (n = 47).
+- [ ] Hallazgo para el blog: aun con w = 500 solo ~12 de 47 tramos pagan peaje; es el techo (tramos cuya rápida tiene
+  peaje: ~23 % de los pares vecinos), no un error. `scripts/ver_aco_temporal.py --barrido` lo grafica.
 - [ ] **`base.yaml` sin clave de consumo ni de precio** (solo `costo.valor_hora`): sin ella la sensibilidad de §7.5 con `--set` no funciona. Asignado a **T3.6**. Punto de partida (no decidido): claves opcionales `consumo_l100` y `precio_l`; vacías = valores de `vehiculo.yaml` y `combustible.json`.
 - [ ] T3.6: hay cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)), por debajo de la resolución de 0,5 €/h de la bisección.
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
@@ -87,6 +94,8 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-12 | Jose Miguel + Claude | **T3.3 ✅**: `aco.py` (AS + MMAS, `solve` + `iterar`) y `test_aco.py` (60 pruebas; 769 en total). implementador 3 rondas (Opus); revisor-spec ✅, verificador-matematico ✅ (demostró que con el orden aprobado el recorte superior nunca se activa), revisor-calidad ✅ (Sonnet). w = 25: MMAS 2 589,55 €, AS 2 659,76 €, vecino más cercano 3 173,83 €. Sin candidatos nuevos a la cacería. |
+| 2026-10-12 | Jose Miguel + Claude | **Spec v1.14**: T3.2 opcional; ACO según las notas del profesor (§7.4.1). Hallado: los valores por defecto daban 14 100 recorridos a ACO y ~150 000 a GA (comparación injusta) → presupuesto común en T3.6. Despachada T3.3. |
 | 2026-10-12 | Daniel + Claude | Sección **Uso de IA** del blog (`blog/secciones/09-uso-ia.md`): metodología SDD, tabla de prompts principales con enlace al archivo literal (Tabla 3) e impacto (qué aceleró, qué errores introdujo, cómo se controlaron, qué no se delegó). **Pendiente equipo Parte 1:** agregar sus filas T1.x a la tabla al fusionar. |
 | 2026-10-12 | Daniel + Claude | Sección **Cacería** del blog redactada (`blog/secciones/10-caceria.md`): 7 hallazgos en 4 categorías con prompt literal (citas verificadas contra los archivos) y evidencia enlazada (H-03, H-07, H-08, H-10, H-04, H-17, H-22) + tabla resumen. **Pendiente: que el puente confirme los 7** para marcarlos como confirmados en el registro. |
 | 2026-10-12 | Daniel + Claude | **T0.5 ✅** prueba sin red (run.py con sockets bloqueados + análisis estático de src/; mutante detectado). **T4.1 ✅** `src/viz/paleta.py` (fuente única de colores: método → color fijo; rampa azul), `theme.py` (Plotly) y `style.py` (matplotlib); figuras siempre sobre superficie clara (tarjeta en modo oscuro). 663 pruebas. |
