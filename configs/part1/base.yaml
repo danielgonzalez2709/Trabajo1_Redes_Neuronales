@@ -1,9 +1,96 @@
 # Parte 1 — experimento completo y valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
-# Solo claves de nivel superior de §4.1. Los bloques de parámetros de cada método (gd:, ea:, pso:, de:; Spec §6.3-§6.4)
-# los añaden T1.2-T1.6 con los valores por defecto del Spec.
+# Claves de nivel superior de §4.1 y un bloque de parámetros por método (gd:, ea:, pso:, de:; Spec §6.3-§6.4) con los
+# valores por defecto del Spec. Hecho: gd: (T1.2), ea: (T1.4), pso: (T1.5), de: (T1.6).
 func: [rosenbrock, rastrigin]                 # §6.1 (identificadores de §5.4)
 dim: [2, 3]                                   # §3: 2D y 3D
 methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
 runs: 30                                      # §6.5
 base_seed: 0                                  # §6.5: semillas 0-29, semilla = base_seed + run_id (§4.1)
 record_frames: true                           # §5.1: frames solo si dim == 2; los GIF (§6.7) se regeneran desde results/data (§9)
+presupuesto_por_dim: 10000                    # §6.2: presupuesto por corrida = presupuesto_por_dim · dim evaluaciones equivalentes
+workers: 1                                    # procesos en paralelo del experimento (>= 1); el resultado no depende de este valor
+salida: results/data/part1                    # carpeta de los JSON de corridas (runs/, k1/runs/) y de summary.json (§5.4)
+tablas: results/tables/part1                  # carpeta de los CSV de la tabla principal y de la sensibilidad k = 1 (§6.6)
+# §6.3 Descenso por gradiente. gdfijo y gdarmijo comparten este bloque; la clave "variante" (fijo/armijo) la fija el
+# runner (T1.7), no esta config.
+gd:
+  eta:                  # paso fijo por función (identificadores de §5.4)
+    rosenbrock: 1e-3    # empírico, SIN garantía global (L ≈ 5 971 en 2D -> 1/L ≈ 1.7e-4)
+    rastrigin: 2e-3     # garantía global: η ≤ 1/L con L = 2 + 40π² ≈ 396.8
+  armijo:               # backtracking de Armijo; lo usa la variante armijo de gd.py
+    eta0: 1.0
+    beta: 0.5
+    c: 1e-4
+  tol_grad: 1e-8        # parada: ||∇f|| < tol_grad (o presupuesto agotado)
+
+# Algoritmo evolutivo — esquema de clase (Spec §6.4 v1.4 [DECIDIDO 12-oct]; implementa src/part1/ea.py).
+# Cada generación: élite + mutantes + hijos de cruce, recortada a N. Parada por presupuesto (§6.2).
+ea:
+  esquema: clase          # solo "clase"; cualquier otro valor (p. ej. "spec") falla con mensaje claro (Spec v1.4)
+  N: 50                   # tamaño de la población
+  frac_e: 0.15            # fracción de élite: n_elite = round(N * frac_e) = 8
+  frac_m: 0.10            # fracción de mutantes: n_mutantes = int(N * frac_m) = 5
+  frac_c: 0.75            # fracción que se cruza: n_cruzantes = par hacia arriba de int(N * frac_c) = 38
+  reevaluar_elite: false  # false: la élite conserva su aptitud (no cuesta evaluaciones)
+  generaciones: null      # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
+
+# PSO gbest con inercia (Spec §6.4; implementa src/part1/pso.py). Valores por defecto del Spec:
+# w y c1 = c2 son las cifras redondeadas de la constricción con phi = 4.1: chi ≈ 0.7298 y, en
+# forma de inercia, w = chi y c = chi*phi/2 ≈ 1.49618 (derivación propia; cita primaria sin
+# verificar: [VERIFICAR], Spec §6.4).
+# Parada por presupuesto (§6.2); n_f = N * (T + 1) con T iteraciones completas.
+pso:
+  N: 30                   # tamaño del enjambre (>= 2)
+  w: 0.7298               # inercia (>= 0); w >= 1 emite un aviso
+  c1: 1.49618             # coeficiente cognitivo (>= 0)
+  c2: 1.49618             # coeficiente social (>= 0)
+  vmax_frac: 0.2          # v_max = vmax_frac * (ub - lb) por dimensión; null = sin límite
+  iteraciones: null       # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
+
+# Evolución diferencial DE/rand/1/bin (Spec §6.4; implementa src/part1/de.py). Valores por defecto del Spec.
+# Fuera del dominio: la componente del mutante se reinicia con un sorteo uniforme (antes del cruce).
+# Parada por presupuesto (§6.2); n_f = NP * (T + 1) con T generaciones completas.
+de:
+  NP: 30                  # tamaño de la población (>= 4: se necesitan 3 padres distintos de i)
+  F: 0.7                  # factor de mutación diferencial (real finito > 0)
+  CR: 0.9                 # probabilidad de cruce binomial (real en [0, 1])
+  generaciones: null      # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
+
+# Optimización de hiperparámetros (T1.10; src/part1/hpo.py). La usa `python run.py hpo`;
+# `run.py part1` no lee este bloque. El ensayo 0 de cada unidad son los valores de arriba.
+hpo:
+  ensayos: 30                             # ensayos por unidad de búsqueda (el 0 = por defecto)
+  semillas: 5                             # semillas por ensayo, con el presupuesto del experimento
+  base_seed: 1000                         # semillas de ajuste 1000-1004, disjuntas de 0-29 (reporte)
+  semilla_busqueda: 1                     # muestreo de la unidad i: make_rng(semilla_busqueda, i)
+  reanudar: false                         # bool; lo interpreta la orquestación (T1.10-B)
+  salida: results/data/part1_hpo          # carpeta de los resultados de los ensayos
+  salida_afinada: results/data/part1_tuned       # `salida` de la config afinada
+  tablas_afinada: results/tables/part1_tuned     # `tablas` de la config afinada
+  config_salida: configs/part1/tuned.yaml        # archivo de la config afinada
+  # Espacios: método -> nombre corto -> {ruta, tipo, min, max}; intervalos cerrados.
+  # tipo: uniforme, log (uniforme en el logaritmo; min > 0) o entero (min y max enteros).
+  # "{func}" en la ruta: una unidad por (método, función). No se afinan generaciones,
+  # iteraciones, esquema, reevaluar_elite ni tol_grad.
+  espacios:
+    gdfijo:
+      eta: {ruta: "gd.eta.{func}", tipo: log, min: 1e-5, max: 1e-2}
+    gdarmijo:
+      eta0: {ruta: gd.armijo.eta0, tipo: log, min: 0.1, max: 10.0}
+      beta: {ruta: gd.armijo.beta, tipo: uniforme, min: 0.1, max: 0.9}
+      c: {ruta: gd.armijo.c, tipo: log, min: 1e-5, max: 1e-1}
+    ea:
+      N: {ruta: ea.N, tipo: entero, min: 20, max: 200}
+      frac_e: {ruta: ea.frac_e, tipo: uniforme, min: 0.05, max: 0.30}
+      frac_m: {ruta: ea.frac_m, tipo: uniforme, min: 0.05, max: 0.40}
+      frac_c: {ruta: ea.frac_c, tipo: uniforme, min: 0.40, max: 0.90}
+    pso:
+      N: {ruta: pso.N, tipo: entero, min: 10, max: 100}
+      w: {ruta: pso.w, tipo: uniforme, min: 0.3, max: 0.95}
+      c1: {ruta: pso.c1, tipo: uniforme, min: 0.5, max: 2.5}
+      c2: {ruta: pso.c2, tipo: uniforme, min: 0.5, max: 2.5}
+      vmax_frac: {ruta: pso.vmax_frac, tipo: uniforme, min: 0.05, max: 0.5}
+    de:
+      NP: {ruta: de.NP, tipo: entero, min: 10, max: 100}
+      F: {ruta: de.F, tipo: uniforme, min: 0.3, max: 1.2}
+      CR: {ruta: de.CR, tipo: uniforme, min: 0.1, max: 1.0}

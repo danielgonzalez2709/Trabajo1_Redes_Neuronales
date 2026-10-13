@@ -36,10 +36,20 @@ $$
 
 <!-- TODO equipo Parte 1: revisar contra el código final (nombres de parámetros y valores por defecto de configs/part1/base.yaml). -->
 
-**Descenso por gradiente.** Con tasa de aprendizaje $\eta$ y proyección $\Pi$ sobre el dominio:
+**Descenso por gradiente.** Con tasa de aprendizaje $\eta$ y $\Pi$ la proyección sobre el dominio (recorte de cada
+coordenada a sus límites), la iteración de paso fijo es
 $\mathbf{x}_{k+1} = \Pi\!\left(\mathbf{x}_k - \eta\,\nabla f(\mathbf{x}_k)\right)$.
-La variante opcional con búsqueda lineal de Armijo [@armijo1966] reduce $\eta$ a la mitad hasta que
-$f(\mathbf{x}-\eta\nabla f) \le f(\mathbf{x}) - c\,\eta\,\lVert\nabla f\rVert^2$.
+La variante con búsqueda lineal de Armijo [@armijo1966], uno de los cinco métodos comparados, elige $\eta$ en cada
+iteración por retroceso: parte de $\eta_0 = 1$ y aplica $\eta \leftarrow \beta\,\eta$ con $\beta = 0.5$ hasta que el punto
+proyectado $\mathbf{x}_\eta = \Pi\!\left(\mathbf{x} - \eta\,\nabla f(\mathbf{x})\right)$ cumple
+
+$$
+f(\mathbf{x}_\eta) \le f(\mathbf{x}) - c\,\langle \nabla f(\mathbf{x}),\, \mathbf{x} - \mathbf{x}_\eta \rangle,
+\qquad c = 10^{-4}.
+$$
+
+Cuando el recorte no actúa, $\mathbf{x} - \mathbf{x}_\eta = \eta\,\nabla f(\mathbf{x})$ y la condición se reduce a la forma
+clásica $f(\mathbf{x}-\eta\nabla f) \le f(\mathbf{x}) - c\,\eta\,\lVert\nabla f\rVert^2$.
 
 **Optimización por enjambre de partículas** [@kennedy1995], con peso de inercia $w$ [@shi1998]:
 

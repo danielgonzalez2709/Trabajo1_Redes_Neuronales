@@ -1,0 +1,3532 @@
+{
+  "meta": {
+    "unidad": "gdfijo_rastrigin",
+    "metodo": "gdfijo",
+    "func": "rastrigin",
+    "indice": 1,
+    "celdas": [
+      [
+        "rastrigin",
+        2
+      ],
+      [
+        "rastrigin",
+        3
+      ]
+    ],
+    "ensayos": 30,
+    "semillas": 5,
+    "semillas_de_ajuste": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "presupuesto_por_dim": 10000,
+    "k_regla": "2n",
+    "espacio": {
+      "eta": {
+        "ruta": "gd.eta.{func}",
+        "tipo": "log",
+        "min": 1e-05,
+        "max": 0.01
+      }
+    },
+    "bloque_base": {
+      "eta": {
+        "rosenbrock": 0.001,
+        "rastrigin": 0.002
+      },
+      "armijo": {
+        "eta0": 1.0,
+        "beta": 0.5,
+        "c": 0.0001
+      },
+      "tol_grad": 1e-08
+    },
+    "semilla_busqueda": 1
+  },
+  "ensayos": [
+    {
+      "indice": 0,
+      "parametros": {
+        "gd.eta.{func}": 0.002
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635516,
+            1.9899181141865832,
+            12.934432432041095,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            17,
+            16,
+            20,
+            21,
+            17
+          ],
+          "eval_equiv": [
+            68.0,
+            64.0,
+            80.0,
+            84.0,
+            68.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            17,
+            17,
+            21,
+            21,
+            18
+          ],
+          "eval_equiv": [
+            102.0,
+            102.0,
+            126.0,
+            126.0,
+            108.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 0,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 1,
+      "parametros": {
+        "gd.eta.{func}": 6.093073300084782e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            945,
+            927,
+            1035,
+            1068,
+            955
+          ],
+          "eval_equiv": [
+            3780.0,
+            3708.0,
+            4140.0,
+            4272.0,
+            3820.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            971,
+            951,
+            1071,
+            1068,
+            981
+          ],
+          "eval_equiv": [
+            5826.0,
+            5706.0,
+            6426.0,
+            6408.0,
+            5886.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 1,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 2,
+      "parametros": {
+        "gd.eta.{func}": 7.860920972480579e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            731,
+            716,
+            800,
+            826,
+            738
+          ],
+          "eval_equiv": [
+            2924.0,
+            2864.0,
+            3200.0,
+            3304.0,
+            2952.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            751,
+            735,
+            828,
+            826,
+            758
+          ],
+          "eval_equiv": [
+            4506.0,
+            4410.0,
+            4968.0,
+            4956.0,
+            4548.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 2,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 3,
+      "parametros": {
+        "gd.eta.{func}": 0.002771259671504247
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635516,
+            1.9899181141865832,
+            12.934432432041099,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            12,
+            11,
+            14,
+            15,
+            11
+          ],
+          "eval_equiv": [
+            48.0,
+            44.0,
+            56.0,
+            60.0,
+            44.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            12,
+            11,
+            15,
+            15,
+            12
+          ],
+          "eval_equiv": [
+            72.0,
+            66.0,
+            90.0,
+            90.0,
+            72.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 3,
+        "rango_medio": 25.75,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041099,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 27.5,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 4,
+      "parametros": {
+        "gd.eta.{func}": 1.8868954029413184e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            3075,
+            3015,
+            3363,
+            3469,
+            3105
+          ],
+          "eval_equiv": [
+            12300.0,
+            12060.0,
+            13452.0,
+            13876.0,
+            12420.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            3159,
+            3094,
+            3479,
+            3469,
+            3189
+          ],
+          "eval_equiv": [
+            18954.0,
+            18564.0,
+            20874.0,
+            20814.0,
+            19134.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 4,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 5,
+      "parametros": {
+        "gd.eta.{func}": 0.0006313956389537976
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041097,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            82,
+            80,
+            91,
+            95,
+            83
+          ],
+          "eval_equiv": [
+            328.0,
+            320.0,
+            364.0,
+            380.0,
+            332.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            84,
+            82,
+            95,
+            95,
+            85
+          ],
+          "eval_equiv": [
+            504.0,
+            492.0,
+            570.0,
+            570.0,
+            510.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 5,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 6,
+      "parametros": {
+        "gd.eta.{func}": 0.0015334922322010486
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.86868199163552,
+            1.9899181141865796,
+            12.934432432041099,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            27,
+            26,
+            31,
+            32,
+            27
+          ],
+          "eval_equiv": [
+            108.0,
+            104.0,
+            124.0,
+            128.0,
+            108.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            27,
+            27,
+            32,
+            32,
+            28
+          ],
+          "eval_equiv": [
+            162.0,
+            162.0,
+            192.0,
+            192.0,
+            168.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 6,
+        "rango_medio": 25.75,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041099,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 27.5,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 7,
+      "parametros": {
+        "gd.eta.{func}": 3.6618725105031364e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            1580,
+            1549,
+            1729,
+            1783,
+            1595
+          ],
+          "eval_equiv": [
+            6320.0,
+            6196.0,
+            6916.0,
+            7132.0,
+            6380.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            1623,
+            1589,
+            1788,
+            1783,
+            1638
+          ],
+          "eval_equiv": [
+            9738.0,
+            9534.0,
+            10728.0,
+            10698.0,
+            9828.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 7,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 8,
+      "parametros": {
+        "gd.eta.{func}": 1.463658913888699e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            3967,
+            3890,
+            4338,
+            4475,
+            4006
+          ],
+          "eval_equiv": [
+            15868.0,
+            15560.0,
+            17352.0,
+            17900.0,
+            16024.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            4076,
+            3991,
+            4488,
+            4475,
+            4114
+          ],
+          "eval_equiv": [
+            24456.0,
+            23946.0,
+            26928.0,
+            26850.0,
+            24684.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 8,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 9,
+      "parametros": {
+        "gd.eta.{func}": 6.682025116193461e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            861,
+            844,
+            943,
+            973,
+            870
+          ],
+          "eval_equiv": [
+            3444.0,
+            3376.0,
+            3772.0,
+            3892.0,
+            3480.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            885,
+            866,
+            976,
+            973,
+            893
+          ],
+          "eval_equiv": [
+            5310.0,
+            5196.0,
+            5856.0,
+            5838.0,
+            5358.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 9,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 10,
+      "parametros": {
+        "gd.eta.{func}": 0.0009382078116580723
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635516,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            51,
+            50,
+            58,
+            60,
+            52
+          ],
+          "eval_equiv": [
+            204.0,
+            200.0,
+            232.0,
+            240.0,
+            208.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            53,
+            52,
+            60,
+            60,
+            54
+          ],
+          "eval_equiv": [
+            318.0,
+            312.0,
+            360.0,
+            360.0,
+            324.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 10,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 11,
+      "parametros": {
+        "gd.eta.{func}": 0.0004861798869900239
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            110,
+            107,
+            121,
+            126,
+            111
+          ],
+          "eval_equiv": [
+            440.0,
+            428.0,
+            484.0,
+            504.0,
+            444.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            113,
+            110,
+            126,
+            126,
+            114
+          ],
+          "eval_equiv": [
+            678.0,
+            660.0,
+            756.0,
+            756.0,
+            684.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 11,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 12,
+      "parametros": {
+        "gd.eta.{func}": 2.8195953775680695e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            2055,
+            2015,
+            2248,
+            2319,
+            2075
+          ],
+          "eval_equiv": [
+            8220.0,
+            8060.0,
+            8992.0,
+            9276.0,
+            8300.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            2111,
+            2067,
+            2325,
+            2319,
+            2131
+          ],
+          "eval_equiv": [
+            12666.0,
+            12402.0,
+            13950.0,
+            13914.0,
+            12786.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 12,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 13,
+      "parametros": {
+        "gd.eta.{func}": 0.00019856027809732118
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            283,
+            278,
+            311,
+            322,
+            286
+          ],
+          "eval_equiv": [
+            1132.0,
+            1112.0,
+            1244.0,
+            1288.0,
+            1144.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            291,
+            285,
+            322,
+            322,
+            294
+          ],
+          "eval_equiv": [
+            1746.0,
+            1710.0,
+            1932.0,
+            1932.0,
+            1764.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 13,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 14,
+      "parametros": {
+        "gd.eta.{func}": 0.0010183378725572422
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635516,
+            1.9899181141865796,
+            12.934432432041097,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            46,
+            45,
+            52,
+            55,
+            47
+          ],
+          "eval_equiv": [
+            184.0,
+            180.0,
+            208.0,
+            220.0,
+            188.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            48,
+            47,
+            55,
+            55,
+            49
+          ],
+          "eval_equiv": [
+            288.0,
+            282.0,
+            330.0,
+            330.0,
+            294.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 14,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 15,
+      "parametros": {
+        "gd.eta.{func}": 0.0001855043165612111
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            304,
+            298,
+            334,
+            345,
+            307
+          ],
+          "eval_equiv": [
+            1216.0,
+            1192.0,
+            1336.0,
+            1380.0,
+            1228.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            312,
+            306,
+            346,
+            345,
+            315
+          ],
+          "eval_equiv": [
+            1872.0,
+            1836.0,
+            2076.0,
+            2070.0,
+            1890.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 15,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 16,
+      "parametros": {
+        "gd.eta.{func}": 0.0007935114500356682
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865832,
+            12.934432432041097,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            63,
+            62,
+            70,
+            73,
+            64
+          ],
+          "eval_equiv": [
+            252.0,
+            248.0,
+            280.0,
+            292.0,
+            256.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            65,
+            63,
+            73,
+            73,
+            66
+          ],
+          "eval_equiv": [
+            390.0,
+            378.0,
+            438.0,
+            438.0,
+            396.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 16,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 17,
+      "parametros": {
+        "gd.eta.{func}": 0.007985605607442436
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            10.024079190226551,
+            30.52387680749615,
+            12.096176096312668,
+            18.280896026542962,
+            44.468620635141875
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            5000,
+            5000,
+            5000,
+            5000,
+            5000
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            22.66444622838519,
+            44.96164184306009,
+            23.287580161729405,
+            27.057381302758667,
+            61.421203552184956
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            5000,
+            5000,
+            5000,
+            5000,
+            5000
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 17,
+        "rango_medio": 29.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 18.280896026542962,
+          "rastrigin_3d": 27.057381302758667
+        },
+        "rango": {
+          "rastrigin_2d": 29.0,
+          "rastrigin_3d": 30.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 18,
+      "parametros": {
+        "gd.eta.{func}": 0.0011199392538567843
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635516,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            41,
+            40,
+            47,
+            49,
+            42
+          ],
+          "eval_equiv": [
+            164.0,
+            160.0,
+            188.0,
+            196.0,
+            168.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            42,
+            41,
+            49,
+            49,
+            43
+          ],
+          "eval_equiv": [
+            252.0,
+            246.0,
+            294.0,
+            294.0,
+            258.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 18,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 19,
+      "parametros": {
+        "gd.eta.{func}": 0.00014958033420989512
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041097,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            379,
+            372,
+            416,
+            430,
+            383
+          ],
+          "eval_equiv": [
+            1516.0,
+            1488.0,
+            1664.0,
+            1720.0,
+            1532.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            390,
+            381,
+            431,
+            430,
+            394
+          ],
+          "eval_equiv": [
+            2340.0,
+            2286.0,
+            2586.0,
+            2580.0,
+            2364.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 19,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 20,
+      "parametros": {
+        "gd.eta.{func}": 3.645505091755905e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            1587,
+            1556,
+            1736,
+            1791,
+            1603
+          ],
+          "eval_equiv": [
+            6348.0,
+            6224.0,
+            6944.0,
+            7164.0,
+            6412.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            1630,
+            1596,
+            1796,
+            1791,
+            1646
+          ],
+          "eval_equiv": [
+            9780.0,
+            9576.0,
+            10776.0,
+            10746.0,
+            9876.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 20,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 21,
+      "parametros": {
+        "gd.eta.{func}": 0.0001091143818637915
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            524,
+            513,
+            574,
+            593,
+            529
+          ],
+          "eval_equiv": [
+            2096.0,
+            2052.0,
+            2296.0,
+            2372.0,
+            2116.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            538,
+            527,
+            594,
+            593,
+            543
+          ],
+          "eval_equiv": [
+            3228.0,
+            3162.0,
+            3564.0,
+            3558.0,
+            3258.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 21,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 22,
+      "parametros": {
+        "gd.eta.{func}": 0.00034134843865609127
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            160,
+            157,
+            177,
+            183,
+            162
+          ],
+          "eval_equiv": [
+            640.0,
+            628.0,
+            708.0,
+            732.0,
+            648.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            165,
+            161,
+            184,
+            183,
+            167
+          ],
+          "eval_equiv": [
+            990.0,
+            966.0,
+            1104.0,
+            1098.0,
+            1002.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 22,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 23,
+      "parametros": {
+        "gd.eta.{func}": 0.004716591114511557
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041097,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            161,
+            159,
+            162,
+            157,
+            141
+          ],
+          "eval_equiv": [
+            644.0,
+            636.0,
+            648.0,
+            628.0,
+            564.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            161,
+            159,
+            162,
+            159,
+            142
+          ],
+          "eval_equiv": [
+            966.0,
+            954.0,
+            972.0,
+            954.0,
+            852.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 23,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 24,
+      "parametros": {
+        "gd.eta.{func}": 0.002121738355757999
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041097,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            15,
+            14,
+            18,
+            19,
+            15
+          ],
+          "eval_equiv": [
+            60.0,
+            56.0,
+            72.0,
+            76.0,
+            60.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            15,
+            15,
+            19,
+            19,
+            16
+          ],
+          "eval_equiv": [
+            90.0,
+            90.0,
+            114.0,
+            114.0,
+            96.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 24,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 25,
+      "parametros": {
+        "gd.eta.{func}": 9.004089471811208e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            637,
+            624,
+            697,
+            720,
+            643
+          ],
+          "eval_equiv": [
+            2548.0,
+            2496.0,
+            2788.0,
+            2880.0,
+            2572.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            654,
+            640,
+            722,
+            720,
+            660
+          ],
+          "eval_equiv": [
+            3924.0,
+            3840.0,
+            4332.0,
+            4320.0,
+            3960.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 25,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 26,
+      "parametros": {
+        "gd.eta.{func}": 0.005924486163386416
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            6.583032633732113,
+            30.231550848997987,
+            6.778768335909433,
+            19.26404047009992,
+            47.80066055295592
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            5000,
+            5000,
+            5000,
+            5000,
+            5000
+          ],
+          "eval_equiv": [
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0,
+            20000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            7.329444777898253,
+            42.79832077672689,
+            18.744228621808748,
+            21.73665532633479,
+            64.11907359450774
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            5000,
+            5000,
+            5000,
+            5000,
+            5000
+          ],
+          "eval_equiv": [
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0,
+            30000.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 26,
+        "rango_medio": 29.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 19.26404047009992,
+          "rastrigin_3d": 21.73665532633479
+        },
+        "rango": {
+          "rastrigin_2d": 30.0,
+          "rastrigin_3d": 29.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 27,
+      "parametros": {
+        "gd.eta.{func}": 0.00025866022811559295
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700376
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            215,
+            211,
+            237,
+            245,
+            217
+          ],
+          "eval_equiv": [
+            860.0,
+            844.0,
+            948.0,
+            980.0,
+            868.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041095,
+            56.71221051946529
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            221,
+            216,
+            245,
+            245,
+            223
+          ],
+          "eval_equiv": [
+            1326.0,
+            1296.0,
+            1470.0,
+            1470.0,
+            1338.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 27,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 28,
+      "parametros": {
+        "gd.eta.{func}": 0.0012058034624617582
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635516,
+            1.9899181141865796,
+            12.934432432041097,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            37,
+            36,
+            42,
+            44,
+            38
+          ],
+          "eval_equiv": [
+            148.0,
+            144.0,
+            168.0,
+            176.0,
+            152.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673592,
+            12.934432432041099,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            39,
+            37,
+            44,
+            44,
+            39
+          ],
+          "eval_equiv": [
+            234.0,
+            222.0,
+            264.0,
+            264.0,
+            234.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 28,
+        "rango_medio": 23.5,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041097,
+          "rastrigin_3d": 12.934432432041099
+        },
+        "rango": {
+          "rastrigin_2d": 23.0,
+          "rastrigin_3d": 24.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    },
+    {
+      "indice": 29,
+      "parametros": {
+        "gd.eta.{func}": 2.097113448663222e-05
+      },
+      "por_celda": {
+        "rastrigin_2d": {
+          "f_best": [
+            0.9949590570932898,
+            25.868681991635512,
+            1.9899181141865796,
+            12.934432432041095,
+            40.79296672700375
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            2766,
+            2712,
+            3025,
+            3121,
+            2793
+          ],
+          "eval_equiv": [
+            11064.0,
+            10848.0,
+            12100.0,
+            12484.0,
+            11172.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        },
+        "rastrigin_3d": {
+          "f_best": [
+            0.9949590570932898,
+            34.823283233122524,
+            10.944519355673588,
+            12.934432432041095,
+            56.71221051946528
+          ],
+          "n_f": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "n_grad": [
+            2841,
+            2783,
+            3129,
+            3121,
+            2868
+          ],
+          "eval_equiv": [
+            17046.0,
+            16698.0,
+            18774.0,
+            18726.0,
+            17208.0
+          ],
+          "evals_hasta_exito_1e-06": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        }
+      },
+      "puntaje": {
+        "indice": 29,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      }
+    }
+  ]
+}

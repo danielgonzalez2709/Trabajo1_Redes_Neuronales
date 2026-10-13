@@ -1,0 +1,11 @@
+# T1.5 - extractos del BORRADOR de Clerc y Kennedy (no es la version publicada)
+Fuente: http://clerc.maurice.free.fr/pso/TEC.zip (pagina del autor http://clerc.maurice.free.fr/pso/ ; la pagina dice 'Published by IEEE in 2002, so I can give you here just the draft').
+Consultado: 2026-10-12. SHA-256 del zip: 2fdaa134067825c70f0fbc28552aa70e95b5b2c91124e707c26c01c9baaf3847
+Archivos: 'Particle Swarm Analysis Part 1.doc' (resumen/introduccion) y 'Part 2.doc' (secciones 4-7), extraidos con 'strings' (las ecuaciones OLE y las letras griegas NO se extraen: aparecen como 'INCORPORER Equation' o '(').
+
+[Part1:78] velocities and positional coordinates careen toward infinity.  The explosion has traditionally been contained through implementation of a Vmax parameter, which limits step-size, or velocity.  The current paper however demonstrates that the implementation of properly defined constriction coefficients can prevent explosion; further, these coefficients can induce particles to converge on local optima.
+[Part2:186] s explosion can be controlled, without resorting to the definition of any arbitrary or problem-specific parameters.  Not only can explosion be prevented, but the model can be parameterized in such a way that the particle system consistently converges on local optima.  (Except for a special class of functions, convergence on global optima cannot be proven.)
+[Part2:224] The coefficient is then applied to the right side of the velocity adjustment:
+[Part2:243] .  The constriction coefficient makes it unnecessary.  Eberhart and Shi (2000) have recommended, based on their experiments, that a liberal
+[Part2:274] Type 1.  The first version applied the constriction coefficient
+[Part2:314] Functions were implemented in 30 dimensions except for f2, f5, and f6, which are given for two dimensions.  In all cases except f5, the globally optimal function result is 0.0.  For f5 the best known result is 0.998004.  The limit of the control parameter ( was set to 4.1 for the constricted versions, and 4.0 for the

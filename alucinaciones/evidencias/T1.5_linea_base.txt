@@ -1,0 +1,9 @@
+# T1.5 linea base: git archive HEAD (659d657) en directorio limpio, 2026-10-12T21:26:16Z, Linux 7.2.9-100.fc43.x86_64
+# comando: .venv/bin/python -m pytest tests -q -rs
+........................................................................ [ 84%]
+........................................................................ [ 98%]
+.........                                                                [100%]
+513 passed in 13.92s
+
+# skipif en el repo:
+tests/test_reproducibility.py:373:@pytest.mark.skipif(os.name == "nt", reason="los permisos POSIX no aplican en Windows")

@@ -7,12 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 8 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23) | 3 (H-07, H-08, H-10, puente) |
+| Código | 18 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
-| Bibliografía | 2 (H-19: error de cita confirmado, origen IA pendiente; H-22) | 1 (H-22, puente) |
-| Conceptos | 1 (H-16) — H-12 descartado | 0 |
+| Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
+| Conceptos | 6 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
+**Total registrados: 40** (H-01–H-40; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 38 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -343,9 +344,133 @@
 5. **Corrección:** comillas en las dos descripciones (PR #3).
 6. **Lección:** un archivo de configuración generado también se prueba (aquí bastaba cargar cada encabezado con `yaml.safe_load`); que "funcionara" en una sesión no garantiza que funcione en otra.
 
+### H-24 — Resultado falso en una prueba de mutación por bytecode (`.pyc`) obsoleto
+- **Estado:** candidato (prompt literal disponible; falta evidencia reproducible guardada en `evidencias/`)
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `revisor-spec`, T1.1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el propio subagente `revisor-spec` (autocorrección), reportado al orquestador
+1. **Prompt (literal):** `prompts/T1.1.md`, bloque "Sesión del 12-oct-2026 — Ronda 1 — `revisor-spec`", punto d) (aplicar M1–M13 uno a uno sobre `src/part1/functions.py`).
+2. **Respuesta relevante de la IA:** informe del revisor: "En mi primera pasada M11 pareció fallar en `test_atributos[rosenbrock-*]`. Era un falso resultado: un `.pyc` obsoleto. M10 y M11 producen archivos del mismo tamaño escritos en el mismo segundo, así que Python reutilizó el bytecode de M10."
+3. **Cómo sospechamos:** M11 cambia el dominio de **Rastrigin**, pero falló una prueba de **Rosenbrock**: el mutante "muerto" no era el mutante aplicado.
+4. **Evidencia:** pendiente de reproducir y guardar. Mecanismo: la validación por defecto de `.pyc` compara fecha de modificación (resolución de 1 s) y tamaño del fuente; dos mutantes del mismo tamaño escritos en el mismo segundo comparten bytecode. Según el revisor, `-B` no basta porque sigue leyendo los `.pyc` existentes.
+5. **Corrección:** el revisor repitió todo con `PYTHONPYCACHEPREFIX` aislado por mutante; M11 falla en `test_atributos[rastrigin-*]`. La tabla del implementador (ronda 1 del 10-oct) pudo sufrir el mismo efecto; la tabla vigente es la del revisor.
+6. **Lección:** en pruebas de mutación, aislar la caché de bytecode por mutante (o borrar `__pycache__`) y comprobar que la prueba que falla corresponde a lo que se mutó.
+
+### H-25 — "TestFunction no se instancia directamente porque `_f`/`_grad` lanzan NotImplementedError" (el mecanismo descrito no es el real)
+- **Estado:** candidato (severidad baja)
+- **Categoría:** Código (también Conceptos: clases abstractas en Python)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, T1.1 ronda 1) · **Fecha:** 10-oct-2026 · **Quién lo cazó:** subagente `revisor-spec` (12-oct), confirmado por `revisor-calidad`
+1. **Prompt (literal):** `prompts/T1.1.md`, bloque "Ronda 1 — `implementador`" (ENTREGABLE 1: clase base `TestFunction`).
+2. **Respuesta relevante de la IA:** supuesto declarado por el implementador (transcrito en el bloque de `revisor-spec` de `prompts/T1.1.md`): "_f/_grad de la base lanzan NotImplementedError y TestFunction no se instancia directamente".
+3. **Cómo sospechamos:** al ejecutar `TestFunction(2)` no sale `NotImplementedError` sino `AttributeError: 'TestFunction' object has no attribute 'dim_min'`; con `TestFunction(2.0)`, `AttributeError: ... 'name'` (al construir el mensaje del TypeError).
+4. **Evidencia:** pendiente de guardar en `evidencias/`. Reproducible con `python -c "from src.part1.functions import TestFunction; TestFunction(2)"`. Los `raise NotImplementedError` de `src/part1/functions.py:63-67` son inalcanzables desde la base.
+5. **Corrección:** propuesta de `revisor-calidad` (no aplicada, no bloqueante): `TestFunction(abc.ABC)` con `@abc.abstractmethod` en `_f`/`_grad` y una prueba `pytest.raises(TypeError)`.
+6. **Lección:** una afirmación sobre el comportamiento ante errores se verifica ejecutando el caso, no leyendo el código.
+
+### H-26 — "σ poblacional → 0 apaga la mutación **al converger**" (el colapso ocurre antes y lejos del óptimo)
+- **Estado:** candidato (evidencia numérica del verificador-matematico; falta guardar el script en `evidencias/`)
+- **Categoría:** Conceptos (también Matemáticas)
+- **Herramienta y modelo:** Claude (redacción del Spec v1.4 y de la nota en `ea.py`; sesión de planeación del 12-oct) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `verificador-matematico` (T1.4)
+1. **Prompt (literal):** `prompts/CAMBIO-EA.md` (propuesta del cambio, §10 "σ poblacional → 0 al converger: la mutación se apaga") y `prompts/T1.4.md`, sección D "Ronda 1 — verificador-matematico", punto 8.
+2. **Respuesta relevante de la IA:** Spec §6.4 "Notas del EA": "σ poblacional → 0 apaga la mutación al converger".
+3. **Cómo sospechamos:** sin selección por aptitud, la diversidad cae por deriva; nada garantiza que el colapso ocurra en un óptimo.
+4. **Evidencia (verificador-matematico, 12-oct):** 30 corridas con presupuesto 10 000·n: Rosenbrock 2D σ final mediana ≈ [2.3e-5, 5.8e-5], ‖∇f(x_best)‖ entre 0.07 y 0.23 en 8 de 10 semillas, 3/30 éxitos; Rosenbrock 3D 0/30 éxitos con σ ≈ 1e-6; Rastrigin N=5 y N=7 queda congelada en f = 24.218 con std 0 y no es mínimo local.
+5. **Corrección propuesta (no aplicada: el Spec lo edita el equipo):** "colapso prematuro de la población (σ → 0) que apaga la mutación y detiene la búsqueda, aunque no se haya llegado a un óptimo".
+6. **Lección:** una explicación de comportamiento ("al converger") se contrasta con corridas reales, no se hereda de la intuición.
+
+### H-27 — Prompt del orquestador pedía 714 frames en 3D, contradiciendo "frames solo si dim == 2" (§5.1)
+- **Estado:** candidato (error de la IA orquestadora, detectado por el implementador y confirmado por revisor-spec y verificador-matematico)
+- **Categoría:** Código (contrato)
+- **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `implementador` (T1.4, ronda 1)
+1. **Prompt (literal):** `prompts/T1.4.md`, sección C, ENTREGABLE 1, punto 7 ("3D, budget 30 000 -> n_f == 30 000 ..., len(frames) == 714") junto al punto "frames: solo si problem.func.dim == 2".
+2. **Respuesta relevante de la IA:** el prompt exigía a la vez una cosa y su contraria; 714 = T + 1 solo aplica si se grabaran frames.
+3. **Cómo sospechamos:** el implementador lo reportó como contradicción y prevaleció §5.1.
+4. **Evidencia:** `tests/test_ea.py::test_presupuesto_3d_30000_cuenta_exacto_y_no_hay_frames` y la prueba 2D con budget 30 000 que sí comprueba 714 frames.
+5. **Corrección:** el código sigue §5.1; el número 714 se prueba en 2D.
+6. **Lección:** un prompt también se revisa contra el contrato antes de enviarlo; un subagente debe reportar la contradicción, no elegir en silencio.
+
+### H-28 — "Las anclas de la prueba salen de esta misma implementación" (procedencia de los datos afirmada sin evidencia)
+- **Estado:** candidato (severidad baja; el propio subagente lo retiró al corregirle)
+- **Categoría:** Código (también Conceptos: oráculo de prueba independiente vs. prueba de regresión)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `revisor-calidad`, T1.2 ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** el orquestador (sesión principal), al contrastar con el encargo
+1. **Prompt (literal):** `prompts/T1.2.md`, bloque "Ronda 1 — `revisor-calidad`".
+2. **Respuesta relevante de la IA:** hallazgo 4: "Los valores (f_best, x_best, n_grad, mediana 0.0019054868310523) son de regresión: salen de esta misma implementación y no son independientes."
+3. **Cómo sospechamos:** el encargo humano de T1.2 (bloque "Ronda 1 — `implementador`", punto k) dice que las anclas "salen de un cálculo independiente" y prohíbe ajustarlas; el revisor no tenía información sobre su origen y aun así lo afirmó como hecho.
+4. **Evidencia:** el `verificador-matematico` reimplementó el GD sin mirar `gd.py` y reprodujo las anclas (diferencia 0 en 30 semillas × 4 configuraciones; mediana 0,001905486831052). En la ronda 2 el `revisor-calidad` retiró el hallazgo ("suponía que los valores salían de esta implementación").
+5. **Corrección:** comentario de procedencia en `tests/test_gd.py` encima de las secciones k) y l) (ronda 2 del implementador).
+6. **Lección:** la procedencia de un dato se afirma solo con evidencia (fuente o comando); si no se conoce, se pregunta o se marca como desconocida.
+
+### H-29 — "c₁ = c₂ = 1.49618 [Clerc & Kennedy, 2002]": valores correctos, pero no son los que aparecen en el artículo (atribución imprecisa)
+- **Estado:** candidato — severidad **baja**. La propia IA lo dejó marcado `[VERIFICAR]`, así que no es una cita inventada; lo que se constata es el alcance de la atribución. Verificación **parcial** (ver punto 4).
+- **Categoría:** Bibliografía (también Matemáticas)
+- **Herramienta y modelo:** Claude Opus 5.5 (redacción del Spec v1.0, 1-oct-2026) · **Fecha:** 1-oct-2026 (afirmación) / 12-oct-2026 (verificación) · **Quién lo cazó:** `cazador-alucinaciones` (T1.5)
+1. **Prompt (literal):** `prompts/asesoria_puente_claude.md`, **Prompt C** (1-oct-2026, "armemos el Spec"). El prompt no pide esas constantes: aparecen en la respuesta (Spec v1.0, commit `2cd005b`, §6.4).
+2. **Respuesta relevante de la IA:** `docs/spec/SPEC.md:291`: "N=30, w=0.7298, c₁=c₂=1.49618 [VERIFICAR Clerc & Kennedy, 2002]". Comentario de `configs/part1/base.yaml:23`: "w y c1 = c2 corresponden al coeficiente de constricción con phi = 4.1".
+3. **Cómo sospechamos:** la propia marca [VERIFICAR] más el hecho de que 1.49618 no es un número "de catálogo": parece producto de una operación.
+4. **Evidencia:**
+   - El artículo existe y la referencia candidata es correcta: Crossref (`https://api.crossref.org/works/10.1109/4235.985692`, consultado 12-oct-2026): "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", M. Clerc y J. Kennedy, IEEE Transactions on Evolutionary Computation, vol. 6, n.º 1, pp. 58-73, 2002. `https://doi.org/10.1109/4235.985692` redirige a `ieeexplore.ieee.org/document/985692/` (12-oct-2026).
+   - Texto: el artículo publicado **no fue accesible** (IEEE, ResearchGate y Academia.edu devolvieron 403/vacío). Solo se leyó el **borrador** que Clerc publica en `http://clerc.maurice.free.fr/pso/TEC.zip` (consultado 12-oct-2026; sha256 en `evidencias/T1.5_clerc_kennedy_borrador_extractos.txt`), que la propia página describe como "just the draft". En él: la constricción se aplica a **todos los términos** ("applied the constriction coefficient … to all terms", "applied to the right side of the velocity adjustment"); el parámetro de control se fijó en **4.1** para las versiones con constricción; Vmax queda "unnecessary" (aunque cita a Eberhart y Shi (2000) recomendando un Vmax "liberal" igual al rango dinámico); y "convergence on global optima cannot be proven" salvo una clase especial de funciones. Las ecuaciones (OLE) y las letras griegas no se extrajeron, y una búsqueda en el texto no encontró "0.729", "1.49" ni "2.05" literales.
+   - Cálculo propio (`evidencias/T1.5_verificacion.py` → `.txt` §1, precisión de 40 dígitos): con φ = 4.1, χ = 2/|2 − φ − √(φ² − 4φ)| = **0.72984378…** y χφ/2 = **1.49617977…**. Por tanto w = 0.7298 y c = 1.49618 son esos valores **redondeados** (error 4.4e-5 y 2.3e-7). La forma de inercia es equivalente a la constricción χ·(v + 2.05·R1⊙(b − x) + 2.05·R2⊙(g − x)): diferencia máxima 3.6e-15 (`T1.5_verificacion2.py` §B). Con w = 1 y c = 1.49618 (sin constricción) la diferencia es 1.3, o sea, **c = 1.49618 solo es "de Clerc y Kennedy" junto con w = χ**. El radio espectral del sistema determinista con χ vale exactamente 1 en φ = 4.1 (`§A`), coherente con la fórmula.
+5. **Corrección:** escribir en el Spec/blog: "constricción de Clerc y Kennedy (2002) con φ = c₁ + c₂ = 4.1 → χ ≈ 0.7298; en forma de inercia, w = χ y c₁ = c₂ = χ·φ/2 ≈ 1.49618 (equivale a c = 2.05 aplicando χ a toda la velocidad)". No decir "el valor de Clerc y Kennedy es c ≈ 1.5". La fórmula de χ se verificó por derivación propia; **que el artículo publicado la dé con esa forma exacta no está verificado** (TODO(dato-faltante): leer el PDF de IEEE o una copia legítima).
+6. **Lección:** distinguir una constante "del artículo" de una constante "derivada de la fórmula del artículo" (aquí cambia por un factor χ); y no dar por verificada una referencia solo porque el DOI resuelva: hay que leer qué dice.
+
+### H-30 — "Línea base de pruebas: 513 passed, 1 skipped (MEMORIA, 12-oct)" (cifra mezclada de dos entradas distintas)
+- **Estado:** candidato — severidad baja (error de dato del orquestador, ya reconocido en `prompts/T1.5.md`, "Resultado de la ronda 1 de revisor-spec")
+- **Categoría:** Código (conteo de pruebas); la fuente citada es un documento del proyecto
+- **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (T1.5) por contraste con la ejecución; reproducido por `cazador-alucinaciones`
+1. **Prompt (literal):** `prompts/T1.5.md`, encabezado ("Línea base de pruebas: 513 passed, 1 skipped (MEMORIA, 12-oct)") y prompt de la ronda 1 del `implementador` ("Línea base: 513 passed, 1 skipped; no debe bajar").
+2. **Respuesta relevante de la IA:** "513 passed, 1 skipped (MEMORIA, 12-oct)". La MEMORIA dice para T1.4 "suite 513 passed" y, en otra entrada (T1.1, 12-oct), "347 passed, 1 skipped".
+3. **Cómo sospechamos:** `revisor-spec` ejecutó la suite y no hubo ningún skip.
+4. **Evidencia:** `git archive HEAD` en un directorio limpio y `.venv/bin/python -m pytest tests -q -rs`: **513 passed in 13.9 s, 0 skipped** (12-oct-2026, Linux; salida en `evidencias/T1.5_linea_base.txt`). El único `skipif` del repositorio es `tests/test_reproducibility.py:373` (`os.name == "nt"`: se omite solo en Windows). De dónde salía el skip de la entrada de T1.1 **no se verificó** (TODO(dato-faltante): ¿se ejecutó en Windows?).
+5. **Corrección:** línea base real en Linux: 513 passed, 0 skipped (dato ya corregido por el orquestador). El skip depende del sistema operativo: indicar siempre SO junto al conteo.
+6. **Lección:** copiar una cifra de dos entradas distintas de un documento da un valor que ninguna ejecución produjo; una línea base se reejecuta al empezar la tarea, no se cita.
+
+### H-31 — Papel de b_i y de v = 0 descrito de forma imprecisa ("el líder solo se mueve por inercia", "dependa solo de b_i y g", "solo sería atraída por su posición actual")
+- **Estado:** candidato — severidad **baja**: ninguna frase es falsa en sentido estricto; son imprecisas y inducirían una explicación errónea en el blog o la sustentación
+- **Categoría:** Conceptos
+- **Herramienta y modelo:** Claude Sonnet 5.5 (orquestador e `implementador`, T1.5) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`
+1. **Prompt (literal):** `prompts/T1.5.md`, prompt de la ronda 1 del `verificador-matematico`, punto 11 ("con v = 0 inicial la partícula líder solo se mueve por inercia hasta que g cambie") y el del `cazador-alucinaciones`, tarea 4 (misma frase). El docstring de `generar_enjambre_inicial` es salida del `implementador` (prompt de la ronda 1: "v = 0; b_i = x_i").
+2. **Respuestas relevantes:** (a) `src/part1/pso.py:265-266`: "Las velocidades en cero hacen que el primer movimiento dependa solo de las atracciones hacia $b_i$ y $g$." (b) `src/part1/pso.py:371-372`: "sin él cada partícula solo sería atraída por su posición actual". (c) la frase del prompt sobre el líder.
+3. **Cómo sospechamos:** con b_i = x_i en la iteración 1, el término cognitivo c₁R₁(b − x) es exactamente cero.
+4. **Evidencia:** `evidencias/T1.5_verificacion.py` §4 y `T1.5_verificacion2.py` §C-D (Rastrigin 2D, 30 semillas, configuración de base.yaml): (i) en la iteración 1 el desplazamiento de **todas** las componentes es `c₂·R₂·(g − x)` (0 de 1 800 componentes con paso/(g − x) fuera de [0, c₂]): el primer movimiento es **puramente social**; (ii) el líder (x₀ = g₀) **no se mueve** en la iteración 1 en 30/30 corridas y permanece quieto hasta que g cambia (30/30): no se "mueve por inercia", porque la inercia es w·0 = 0; (iii) sin memoria (b ≡ x) el término cognitivo vale 0: la partícula quedaría atraída solo por g, no "por su posición actual".
+5. **Corrección:** (a) "el primer movimiento es puramente social, porque b_i = x_i anula el término cognitivo"; (b) "sin memoria el término cognitivo sería siempre cero y solo quedaría la atracción hacia g"; (c) "con v = 0, el líder permanece quieto hasta que otra partícula mejora g". Tomar nota: `test_la_particula_que_es_g_y_esta_en_su_memoria_solo_se_mueve_por_inercia` es correcta para un paso con v ≠ 0.
+6. **Lección:** al explicar un algoritmo, evaluar cada término en el estado inicial concreto (b = x, v = 0); una frase didáctica "solo depende de A y B" puede ocultar que A vale cero.
+
+### H-32 — Docstrings del DE: "la diferencia se encoge al converger", "el mejor individuo nunca se pierde", "la aptitud de cada puesto nunca empeora"
+- **Estado:** candidato — severidad **baja**: son tendencias o garantías algo más fuertes que lo cierto; ya corregidas en `de.py` (12-oct-2026) y sin efecto en los resultados
+- **Categoría:** Conceptos
+- **Herramienta y modelo:** Claude Sonnet 5.5 (`implementador`, T1.6) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `verificador-matematico`
+1. **Prompt (literal):** `prompts/T1.6.md`, ronda 1 del `implementador` (describe la selección codiciosa y la mutación, pero **no** contiene estas frases: el texto de los docstrings y de las celdas markdown es redacción del modelo).
+2. **Respuestas relevantes:** (a) `src/part1/de.py:279`, celda de la mutación: "La diferencia x_r2 − x_r3 [...] se encoge al converger"; (b) `de.py:521`, docstring de `seleccionar_codiciosa`: "el mejor individuo nunca se pierde"; (c) `de.py:498`: "la aptitud de cada puesto de la población nunca empeora".
+3. **Cómo sospechamos:** misma familia que H-26 ("σ → 0 al converger"): "converger" se usa como si la población siempre llegara al óptimo; y una selección con `<=` conserva el **valor**, no necesariamente el **individuo**.
+4. **Evidencia:** `evidencias/T1.6_verificacion_B_propiedades.py` y `T1.6_exitos.py`: (i) Rastrigin 3D con los defaults, semillas 0–29: 28/30 éxitos; las 2 corridas fallidas terminan en f = 0.995 (mínimo local con un gen en ±1), es decir, la población puede colapsar lejos del óptimo; (ii) con `<=` un hijo que empata reemplaza al padre: se conserva el mejor valor de f, no la identidad del individuo; (iii) con f = NaN la comparación `NaN <= x` es falsa y ese puesto queda congelado (no ocurre con Rosenbrock ni Rastrigin).
+5. **Corrección:** (a) "tiende a encogerse cuando la población se concentra; si colapsa en un mínimo local el paso se anula"; (b) "el mejor valor de f de la población nunca empeora (el individuo puede cambiar si un hijo empata)"; (c) "con f finita". Aplicadas en `de.py` (E1–E3).
+6. **Lección:** "converge" y "nunca se pierde" son afirmaciones de garantía: antes de escribirlas, decir si hablan del valor o del individuo, y si hay un caso (Rastrigin 3D) que las contradiga.
+
+### H-33 — Comentarios de prueba que afirman más de lo que la prueba comprueba ("el conteo coincide con las llamadas reales", "ninguna otra prueba lo notaría", "+1 frame si para por presupuesto")
+- **Estado:** candidato — severidad baja (comentarios, no código; corregidos antes de integrarse)
+- **Categoría:** Código (documentación de pruebas)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, tarea de comentarios T1.1–T1.3, ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `revisor-calidad` (ronda 1); el `verificador-matematico` señaló de forma independiente el tercero
+1. **Prompt (literal):** `prompts/comentarios-T1.1-T1.3.md`, bloque "Ronda 1 — `implementador`" (regla 4: "Cada comentario debe ser verdad según el código y el Spec").
+2. **Respuesta relevante de la IA:** (a) `tests/test_gd.py:130-131`: "…; el conteo coincide con las llamadas reales a la función."; (b) `tests/test_gradients.py:46-47`: "un gradiente mal derivado arruinaría el GD sin que ninguna otra prueba lo notara."; (c) `tests/test_gd.py:185-186`: "Frames: forma de §5.1, uno por punto aceptado (+1 si para por presupuesto)".
+3. **Cómo sospechamos:** contraste de cada comentario con las aserciones de su prueba.
+4. **Evidencia:** (a) la prueba exige `n_f == 0` y `func.llamadas_f > 0` (observe evalúa f sin cobrarla): para f el conteo NO coincide con las llamadas reales; solo `llamadas_grad == n_grad`. (b) `test_anclas_calculadas_a_mano` también compara ∇f con valores calculados a mano y `test_f_en_x_star_es_f_star_y_gradiente_nulo` exige ∇f(x*) = 0. (c) siempre hay un frame por punto aceptado, x0 incluido; el "+1" es respecto de `n_grad` (`len(frames) == n_grad + 1` si para por presupuesto, `== n_grad` si para por gradiente; medido: 101 frames con n_grad = 100). Informes de `revisor-calidad` y `verificador-matematico` (ronda 1) transcritos en `prompts/comentarios-T1.1-T1.3.md`.
+5. **Corrección:** ronda 2 del `implementador` con los textos propuestos por los revisores; `revisor-calidad` aprueba la ronda 2. El AST de los archivos no cambió en ningún momento (solo comentarios).
+6. **Lección:** un comentario sobre una prueba se escribe leyendo sus aserciones, no su nombre ni la intención general; "ninguna otra", "siempre" y "coincide" son afirmaciones que se comprueban.
+
+### H-34 — "El redondeo decide la condición de Armijo desde ‖∇f‖ ≈ √(10nε/c) ≈ 10⁻⁵" (cota del término exigido tomada como cota de la diferencia medida)
+- **Estado:** candidato — confirmado con experimento por el `cazador-alucinaciones`; severidad baja a media (la conclusión cualitativa se sostiene; fallan el mecanismo y la magnitud); corregido en el blog antes de integrarse
+- **Categoría:** Conceptos (análisis numérico; también Matemáticas)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `redactor-tecnico`, T4.6 parcial Parte 1, ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`, a partir de la sospecha del orquestador
+1. **Prompt (literal):** `prompts/T4.6-parte1-gd.md`, bloque "Ronda 1 — `redactor-tecnico`", punto B.3. El prompt pide explicar que "la condición se decide por redondeo", pero no da ninguna estimación: la cifra y la derivación son de la redactora.
+2. **Respuesta relevante de la IA:** `blog/secciones/03-parte1-metodologia.md` (ronda 1, líneas 153-155): "En cuanto $10^{-4}\lVert\nabla f\rVert^2$ cae por debajo de esa resolución, lo que ocurre para $\lVert\nabla f\rVert$ del orden de $\sqrt{10n\,\varepsilon/c}$, unos $10^{-5}$, la comparación queda en la práctica como $f(\mathbf{x}_\eta) \le f(\mathbf{x})$ y la decide el redondeo."
+3. **Cómo sospechamos:** el orquestador la marcó como "estimación propia" y la contrastó con la verificación de T1.3, que había medido un piso de ‖∇f‖ de unos 10⁻⁶. Que el término de Armijo sea despreciable no implica que la diferencia de f sea irresoluble.
+4. **Evidencia:** scripts del cazador (pendientes de guardar en `evidencias/`; esta tarea no autorizaba escribir allí): `armijo_traza.py` → `salida_traza.txt` compara la decisión en coma flotante con la de la diferencia de f sin cancelación, (y−x)(y+x) + 20 sin(π(y+x)) sin(π(y−x)). El término c·⟨g, x − x_η⟩ ya es menor que 10nε con ‖g‖ = 6.4e-5 / 7.8e-5 / 1.1e-4, pero entonces la diferencia de f es ≈ 1e-11 y las decisiones coinciden con la aritmética exacta; la primera decisión distinta llega con ‖g‖ = 9.6e-7 / 6.3e-7 / 8.3e-7 (Rastrigin 2D semillas 1 y 2, 3D semilla 1). El umbral correcto, ‖∇f‖ ~ √(2λ·10nε) ≈ 2e-6 con λ ≈ 2 + 40π², es un orden de magnitud menor que el del texto.
+5. **Corrección:** ronda 2 del `redactor-tecnico` con la derivación √(2λ·10nε) ≈ 10⁻⁶ propuesta por el cazador.
+6. **Lección:** una cota del término exigido no es una cota de la diferencia medida; antes de afirmar cuándo decide el ruido, comparar la decisión en coma flotante con la exacta.
+
 ---
 
-### H-24 — Las pruebas del GA no distinguían OX(P1, P2) + OX(P2, P1) de dos hijos OX(P1, P2), ni [P1, P2] de [P1, P1]
+### H-35 — Las pruebas del GA no distinguían OX(P1, P2) + OX(P2, P1) de dos hijos OX(P1, P2), ni [P1, P2] de [P1, P1]
 - **Estado:** candidato **débil** (deficiencia de pruebas, mismo tipo que H-10 y H-20). Cuenta solo si el puente lo acepta como Código.
 - **Categoría:** Código
 - **Herramienta y modelo:** Claude Code → subagente `implementador` (claude-opus-5-5), T3.4 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec` (claude-sonnet-5-5), prueba de mutación sobre una copia fuera del repo
@@ -355,6 +480,64 @@
 4. **Evidencia:** los dos mutantes sobreviven a `tests/test_ga.py` y `tests/test_tsp_operators.py`: `test_sin_cruce_ni_mutacion_los_hijos_son_copias` solo exige que cada fila sea alguna fila previa y `test_con_cruce_aparecen_individuos_nuevos` solo que aparezca algún individuo nuevo.
 5. **Corrección:** ronda 2 del implementador (prueba directa de los hijos con cortes conocidos y orden [P1, P2]).
 6. **Lección:** "probé N mutantes" no dice nada de los mutantes que no se probaron; un revisor independiente elige otros.
+
+### H-36 — Pruebas del experimento de la Parte 1 que no podían fallar (avisos sobre una lista vacía; identidad `workers=1`/`workers=2` sobre una carpeta sin vaciar)
+- **Estado:** candidato **débil** (deficiencia de pruebas, mismo tipo que H-10, H-20 y H-35); corregido antes de integrarse.
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Code → subagente `implementador` (claude-opus-5-5), T1.7-C, ronda 1 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-calidad`, con tres mutantes en memoria sobre una copia fuera del repo
+1. **Prompt (literal):** `prompts/T1.7.md`, bloque "Implementador C" ("workers=1 y workers=2 dan archivos idénticos byte a byte"; "imprime la tabla de consola y los avisos"; prueba de mutación manual M1–M6).
+2. **Respuesta relevante de la IA:** el informe de la ronda 1 declara 132 pruebas en verde y "6 de 6 mutantes muertos". Ninguno de esos mutantes tocaba los avisos ni la escritura en paralelo.
+3. **Cómo sospechamos:** `revisor-calidad` comprobó que el experimento de la fixture `exp` produce `avisos == []` y que la fixture `exp_paralelo` corría sobre la misma carpeta que la ejecución en serie, sin vaciarla.
+4. **Evidencia:** tres mutantes sobreviven con 132 passed: (A) `_correr_tabla` devuelve siempre `[]` como avisos; (C) `manejador_part1` ignora los avisos del summary; (B) con `workers > 1` no se llama a `save_json` ni a `_escribir_csv`. Los `all(...)` y los `for` recorrían una lista vacía, y la "foto" de la ejecución paralela incluía los archivos de la ejecución en serie. Informe de `revisor-calidad` (ronda 1) en la sesión de T1.7.
+5. **Corrección:** ronda 2 del implementador: fixture `exp_con_avisos` (contadores alterados en corridas reales; el summary se compara con la lista exacta de tres avisos y la consola con sus líneas), `exp_paralelo` borra `salida` y `tablas` antes de correr y los lectores usan la foto en memoria. Los mutantes A, B y C mueren; `revisor-calidad` aprueba la ronda 2.
+6. **Lección:** una aserción dentro de un bucle no afirma nada si la colección está vacía; una comparación de carpetas no prueba una escritura si la carpeta ya traía los archivos.
+
+### H-37 — "Una config inválida no escribe ningún archivo" (afirmación del Spec más amplia que lo que hace `validar_config`)
+- **Estado:** candidato **débil**, severidad baja (texto de documentación que no coincidía con el código; el código era correcto y lo documentaba bien); corregido antes de integrarse.
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Code, sesión principal (orquestador, claude-opus-5-5), T1.7 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec`, ejecutando el comando
+1. **Prompt (literal):** `prompts/T1.7.md`, prompt del humano, punto C.1 y PRUEBAS ("una config inválida no escribe NINGÚN archivo") y bloque CONFIGURACIÓN ("añade … líneas `[PENDIENTE: …]` que describan …").
+2. **Respuesta relevante de la IA:** primera versión de la línea `[PENDIENTE]` de Spec §4.1: "`run.py part1` valida la config antes de correr (tipos, listas no vacías, identificadores conocidos, ningún float no finito) y una config inválida no escribe ningún archivo."
+3. **Cómo sospechamos:** `revisor-spec` contrastó cada línea `[PENDIENTE]` con el comportamiento del comando.
+4. **Evidencia:** `run.py part1 --config configs/part1/base.yaml --set de.NP=2 --set "methods=[pso, de]" --set "func=[rastrigin]" --set "dim=[2]" --set runs=2 --set presupuesto_por_dim=300 --set salida=<tmp>/d --set tablas=<tmp>/t` termina con `ValueError: de.NP debe ser un entero >= 4`, código 1 (no 2) y 2 JSON de `pso` ya escritos. `validar_config` solo revisa las claves de nivel superior y los floats no finitos; cada bloque de método lo valida su optimizador al ejecutarse. La misma línea omitía que se rechazan repetidos, y la de §6.6 omitía el aviso `n_f > 0` en `gdfijo` y que las filas de `ea`/`pso`/`de` de la sensibilidad conservan `k` = 2·dim.
+5. **Corrección:** líneas `[PENDIENTE]` de Spec §4.1, §5.4 y §6.6 reescritas con el alcance exacto de la validación y lo que faltaba. Queda para decisión humana si se validan los bloques de método antes de correr.
+6. **Lección:** "no escribe ningún archivo" es una afirmación universal: se comprueba con un caso que falle tarde, no solo con los que la validación ya rechaza.
+
+---
+### H-38 — Desempate "exacto" con `Fraction` construidas desde floats ya redondeados (selección de la HPO, T1.10)
+- **Estado:** candidato, severidad media (rompía la regla R3/R6 en empates reales; latente en los datos reales); corregido antes de integrarse.
+- **Categoría:** Código (con raíz en un error de aritmética de punto flotante)
+- **Herramienta y modelo:** Claude Code, sesión principal (orquestador, claude-opus-5-5) al redactar el prompt del implementador A, y `implementador`, que lo siguió · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `revisor-calidad` y `revisor-spec`, por separado, reproduciéndolo con datos sintéticos
+1. **Prompt (literal):** `prompts/T1.10.md`, prompt del implementador A, regla R6: "Compara las claves con aritmética exacta (fractions.Fraction a partir de los float) para que el resultado no dependa del orden de las sumas."
+2. **Respuesta relevante de la IA:** `src/part1/hpo.py` (ronda 1) guardaba la tasa de éxito por celda como `float(k/S)` y `_clave_de_orden` la reconstruía con `Fraction(float)`; el markdown afirmaba que así "el resultado no depende del orden de las sumas".
+3. **Cómo sospechamos:** los revisores probaron empates que se alcanzan con celdas distintas (no con registros idénticos, que era lo único que cubrían las pruebas).
+4. **Evidencia:** con 5 semillas y 2 celdas, `Fraction(0.6) + Fraction(1.0) ≠ Fraction(0.8) + Fraction(0.8)` (0,6 y 0,8 no son exactos en binario): ensayo 0 con tasas (0,6; 1,0) y ensayo 1 con (0,8; 0,8), mismas medianas y evaluaciones → `elegir_ganador` devolvía 1, cuando R3/R6 exigen 0. Segundo caso (revisor-spec): éxitos (1, 4) con 900 evaluaciones frente a (2, 3) con 100 → devolvía 0, R6 exige 1 (`Fraction(0.2) + Fraction(0.8) = 1 + 2⁻⁵⁴`). En la HPO real los ganadores de las unidades ya corridas coincidieron con una reimplementación por conteos enteros (el error era latente).
+5. **Corrección:** el puntaje guarda por celda conteos enteros (semillas, éxitos y suma de evaluaciones hasta el éxito) y la clave se calcula con `Fraction(éxitos, semillas)` y `Fraction(suma, éxitos)`; pruebas con los dos casos (también tras pasar por JSON) y un mutante M8 que reintroduce `Fraction(float)` y muere. Spec §6.9 R6 dice ahora que la comparación parte de conteos enteros.
+6. **Lección:** `Fraction` no repara un redondeo que ya ocurrió: la aritmética exacta tiene que empezar en los datos exactos (conteos), no en floats derivados de ellos.
+
+---
+### H-39 — "Solo reemplaza al defecto si es estrictamente mejor" implementado como "mejor en la clave lexicográfica completa" (selección de la HPO)
+- **Estado:** candidato, severidad media (cambió los valores afinados de dos métodos y empeoró sus resultados de reporte); corregido en T1.10b.
+- **Categoría:** Conceptos (criterio de decisión estadístico mal planteado)
+- **Herramienta y modelo:** prompt de T1.10 redactado por el humano con ayuda de IA; implementado tal cual por Claude Code (orquestador e `implementador`, claude-opus-5-5) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el humano, al revisar los resultados reales (la observación ya aparecía en los informes de `analista-experimentos` y `verificador-matematico` de T1.10)
+1. **Prompt (literal):** `prompts/T1.10.md`, R3: "El ganador solo reemplaza al defecto si es estrictamente mejor según el criterio de selección; en empate gana el ensayo de menor índice"; R6: puntaje 1 y desempates 2, 3 y final como una sola ordenación.
+2. **Respuesta relevante de la IA:** `elegir_ganador` (T1.10) tomaba el mínimo de la clave (rango medio, −tasa, evaluaciones, índice): un desempate bastaba para desplazar al ensayo 0.
+3. **Cómo sospechamos:** en `seleccion.json`, pso y de tenían el mismo puntaje principal que el defecto (10,5 = 10,5 y 14,625 = 14,625) y ganaban por un éxito más de 20 a 1e-6 y menos evaluaciones.
+4. **Evidencia:** `results/data/part1_hpo/regla_v1/` (seleccion.json, tuned.yaml, comparacion.csv, summary_afinado.json): con las 30 semillas de reporte, PSO Rastrigin 3D 26/30 → 15/30 a 1e-4; DE Rastrigin 2D 30/30 → 26/30 y 3D 28/30 → 24/30.
+5. **Corrección:** T1.10b. El ensayo 0 solo se reemplaza si el mejor puntaje principal es estrictamente menor; los desempates solo ordenan a los retadores empatados en ese puntaje. Pruebas (a)–(d) y mutantes M9 y M10 muertos. Reanudación sin repetir corridas: pso y de vuelven al ensayo 0. Spec §6.9 R3/R6 actualizados.
+6. **Lección:** una regla de "mejora estricta" tiene que decir sobre qué cantidad es estricta; con 5 semillas, un desempate de una corrida es ruido y no debe poder cambiar el defecto.
+
+---
+### H-40 — Revisor que afirma "archivos nuevos en CRLF en disco" cuando están en LF (medición mal hecha)
+- **Estado:** candidato **débil**, severidad baja (observación no bloqueante; no se cambió nada por ella).
+- **Categoría:** Código (verificación con una herramienta mal usada)
+- **Herramienta y modelo:** Claude Code, subagente `revisor-spec` (claude-opus-5-5), T1.10b · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el orquestador, al comprobarlo antes de actuar
+1. **Prompt (literal):** `prompts/T1.10b.md`, encargo de revisión: "que `git diff --stat` coincide con `--ignore-cr-at-eol`" y reglas de finales de línea.
+2. **Respuesta relevante de la IA:** "Esos cuatro archivos están enteros en CRLF en disco (CR = número de líneas: 1031, 959, 1028 y 1234) … cualquier afirmación de que 'los archivos nuevos están en LF' es falsa en disco."
+3. **Cómo sospechamos:** contradecía la revisión de T1.10 ("LF puro, 0 CRLF, leído por bytes").
+4. **Evidencia:** `Path(f).read_bytes().count(b'\r\n')` = 0 en `src/part1/hpo.py`, `hpo_experimento.py`, `tests/test_hpo.py`, `tests/test_hpo_experimento.py`, `configs/part1/hpo_demo.yaml` y `tuned.yaml` (y 203/203 en `corrida.py`, que sí está en CRLF). El orquestador reprodujo un conteo igual al número de líneas con `grep -c $'\r'` dentro de `"$(...)"`; en un archivo LF de prueba, el mismo patrón fuera de esa construcción da 0 (causa probable: el patrón no se expande como CR; no verificado más).
+5. **Corrección:** ninguna en el código; se descarta la observación.
+6. **Lección:** una afirmación sobre bytes se comprueba leyendo bytes (Python), no con un patrón de shell cuyo citado depende del contexto.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**
@@ -397,12 +580,24 @@ Se documentan para el blog y para T2.5. Evidencia: `evidencias/T2.4_verificacion
 | 8-oct-2026 | T2.1: 9 capitales difieren de IGR (códigos 01–06, 08, 09 y 47), máx. 2,350 km (Barcelona); Palma (07) también difiere; ninguna otra de 10–50; Ceuta y Melilla sin IGR; ORIGENCOOR 8 DA + 1 Coordinado_IGR | Correcta | `T2.1_verificacion.txt` §5 |
 | 8-oct-2026 | T2.1: cifras de IGR `nuc` (32 consultas, 4 con datos, 50 registros, 34/14/1/1, NUCL 49/ENSI 1, 14 columnas sin nulos, fechas 2025-10-16..2025-12-05), Nominatim (52 consultas, 17/31/4), límites (53 unidades, 1 193 428 vértices, 13 188 834 bytes, timeStamp 03:36:02Z), INE (52 hojas, 8 132 municipios), rango lat/lon y par más cercano/lejano | Correctas | `evidencias/T2.1_verificacion_fuentes.py` → `.txt`; `T2.1_verificacion.txt` §6 |
 | 8-oct-2026 | T2.1: Memoria NGMEP (31-mar-2026; fuentes REL/INE/boletines/Líneas Límite/IGR/BTN; ETRS89/REGCAN95; centroide "lo más centrado posible en el núcleo poblacional"; Anexo I "Entidad en la que está ubicado el Ayuntamiento") | Correctas (citas literales) | `Memoria_NGMEP_2026.pdf` págs. 3, 5, 7–10, 13, 14 |
+| 12-oct-2026 | T1.5: DOI 10.1109/4235.985692 = Clerc y Kennedy, "The particle swarm - explosion, stability, and convergence in a multidimensional complex space", IEEE Trans. Evol. Comput. 6(1), 58-73, 2002 | Correcta (título, autores, revista, volumen, número, páginas, año; el DOI redirige a IEEE Xplore). El texto del artículo publicado no fue accesible (ver H-29) | Crossref `api.crossref.org/works/10.1109/4235.985692` y `doi.org/10.1109/4235.985692`, 12-oct-2026 |
+| 12-oct-2026 | T1.5: w = 0.7298 y c₁ = c₂ = 1.49618 son la constricción con φ = 4.1 en forma de inercia | Correcta numéricamente: χ = 0.72984378…, χφ/2 = 1.49617977… (redondeos con error 4.4e-5 y 2.3e-7); la atribución exacta al artículo es imprecisa (H-29) | `evidencias/T1.5_verificacion.py` → `.txt` §1; `T1.5_verificacion2.py` §A-B |
+| 12-oct-2026 | T1.5: conteo n_f = N(T+1); 2D budget 20 000 → 666 enjambres completos + 20 evaluaciones truncadas, 666 frames (iter 0-665); 3D budget 30 000 → 1 000 enjambres exactos, sin frames; n_grad = 0 | Correcta (4 combinaciones función × dimensión) | `T1.5_verificacion.txt` §2 |
+| 12-oct-2026 | T1.5: v_max = 0.2·rango → 0.8192 (Rosenbrock, ancho 4.096) y 2.048 (Rastrigin, ancho 10.24) | Correcta. El 0.2 es una decisión del proyecto sin fuente (el borrador de Clerc y Kennedy cita a Eberhart y Shi recomendando Vmax igual al rango dinámico) | `T1.5_verificacion.txt` §3; `T1.5_clerc_kennedy_borrador_extractos.txt` |
+| 12-oct-2026 | T1.5: tiempo por corrida 0.4-0.6 s (afirmado por revisor) | Correcta en orden de magnitud: 0.34-0.73 s en 4 corridas (una sola máquina) | `T1.5_verificacion.txt` §2 |
+| 12-oct-2026 | T1.5: aviso "w ≥ 1: la inercia no amortigua la velocidad y el enjambre puede no converger" | Correcta (formulación prudente): en el sistema determinista v' = w·v + c(p − x), x' = x + v', det = w, así que con w ≥ 1 no hay estabilidad estricta (álgebra propia; sin fuente citada) | derivación propia, `T1.5_verificacion2.py` §A es el caso w = χ |
+| 12-oct-2026 | Afirmaciones para el blog: "PSO sin gradientes sirve para funciones no derivables" | Correcta en el código (optimize solo llama a f; n_grad = 0): Σ|x| sin gradiente → f_best 4.1e-6 con 3 000 evaluaciones | `T1.5_verificacion.txt` §6 |
+| 12-oct-2026 | Afirmación para el blog: "PSO garantiza el óptimo global" | **Falsa**: Rastrigin 3D, 30 corridas con presupuesto 30 000: 26/30 éxitos (f_best máx 0.995); el borrador de Clerc y Kennedy dice "convergence on global optima cannot be proven" salvo una clase especial | `T1.5_verificacion.txt` §5; extractos del borrador |
+| 12-oct-2026 | "Inercia alta explora, baja explota" | **Sin cita verificada**: el experimento es compatible (Rastrigin 2D: w=0.4 → 27/30 éxitos, w=0.7298 y 0.9 → 30/30), pero un solo caso no lo demuestra. Referencia candidata: Shi y Eberhart (1998), DOI 10.1109/ICEC.1998.699146 (existe en Crossref; su contenido no se leyó) | `T1.5_verificacion.txt` §7 |
 | 12-oct-2026 | T2.4: 15 tarifas de `peajes_tramos.csv` (dos muestras aleatorias, semillas 20261012 y 20261013, más la cadena AP-68 y la AP-9) frente al PDF oficial, con `pdftotext -raw`; R2-05, AP41-01 y R4-01 a mano en la matriz | Correctas todas. Haro–Logroño 4,85: el modo `-layout` lo desalinea y `-raw` lo confirma | `evidencias/T2.4_verificacion.txt` §1–2 |
 | 12-oct-2026 | T2.4: km de las filas de los 5 pares de validación (AP-68, AP-9, AP-4, AP-41, AP-7, M-12) = suma de `longitud` del Catálogo RCE 2025 | Correctas (lector `.dbf` independiente) | `T2.4_verificacion.txt` §5 |
 | 12-oct-2026 | T2.4: A Coruña–Pontevedra = AP9-01..04 = 16,35 € (AP9-03 a 0 €) | Correcta: la calculadora oficial de Audasa da 16,35 €. Con "Santiago-Santiago" serían 20,90 € | `T2.4_verificacion.txt` §4; `T2.4_audasa_calculadora_2026-10-12.json` |
 | 12-oct-2026 | T2.4: AP-4 Sevilla–Cádiz "Autopista libre" (0 €); vigencias de la AP-68 hasta el 10-nov-2026 y La Rioja/Aragón libres desde el día siguiente; el BOE núm. 225 solo trata de pesados; Bizkaia 6,85 → 4,20 | Correctas | `T2.4_verificacion.txt` §5–6 |
 | 12-oct-2026 | T2.4: los 54 SHA-256 de `data/raw/peajes_2026-10-12/MANIFEST.txt` | Correctos | `T2.4_verificacion.txt` §0 |
 | 8-oct-2026 | T2.1: URL de `fuentes.md` responden; CSW `dateStamp` 2026-01-19; identificador IGR-PO `20251216_…_v2024`; §3.8 "Se permiten combinaciones"; 26codmun.xlsx idéntico al crudo; IGR-PO usa el centroide de áreas residenciales cuando no hay coordenada de un organismo (respalda en parte "centro de la zona residencial") | Correctas (7/7 HTTP 200). "No hay versión NGMEP posterior a 202603": **no verificable** (la lista de ficheros del CNIG se carga dinámicamente; la página muestra "(2026)") | `evidencias/T2.1_urls_http.txt` |
+| 12-oct-2026 | T1.6: `scipy.optimize.differential_evolution` usa por defecto `strategy='best1bin'` y `polish=True` (Spec §10) | Correcta (SciPy v1.18.0; además: `updating='immediate'`, `init='latinhypercube'`, `mutation=(0.5, 1)`, `recombination=0.7`). SciPy re-sortea la componente fuera del dominio sobre el mutante, antes del cruce, y selecciona con `<=`, como `de.py` | documentación oficial y `_differentialevolution.py` (consultados el 12-oct-2026) |
+| 12-oct-2026 | T1.6: éxitos de DE (f − f* ≤ 1e-4, defaults, presupuesto 10 000·n, semillas 0–29): Rosenbrock 2D 30/30, 3D 30/30, Rastrigin 2D 30/30, 3D 28/30 | Correctas: las reprodujo el `verificador-matematico` de forma independiente; la reimplementación coincide bit a bit con `optimize` en las 4 configuraciones × 30 semillas | `evidencias/T1.6_verificacion_A_bit_a_bit.py`, `T1.6_exitos.py` |
+| 12-oct-2026 | T1.6: 26 mutantes del DE; 25 muertos, M11 (`U<=CR`→`U<CR`) sobrevive | Correcta: M11 es equivalente en la práctica (difiere solo si U == CR exacto, prob. ~2⁻⁵³); SciPy usa `<` estricto. Se deja documentado, sin prueba adicional | `evidencias/T1.6_mutantes.py`, `T1.6_mutantes_salida.txt` |
 | 12-oct-2026 | T2.5: referencias oficiales de la validación: Bilbao–Zaragoza 39,90 (PDF AP-68), Bilbao–Altube 6,85, Bilbao–Autop. Burgos 12,40, Zambrana–Zaragoza 26,80, Agoncillo–Zaragoza 18,85, Logroño–Zaragoza 20,70, Autop. Navarra–Zaragoza 11,60; AP-41 5,95 (SEITT); A Coruña–Pontevedra 16,35, A Coruña–Guísamo 2,05, Guísamo–Pontevedra 15,40 (calculadora Audasa); Villalba–Segovia normal 8,60, Villalba–Ávila normal 11,85, Campomanes–León 16,20 (PDF Ministerio); Eibar–Vitoria 10,04 y Eibar–Donostia 7,43 (Bidegi); Málaga–Estepona 9,55 y Estepona–Guadiaro 2,45 | Correctas todas. Fechas de consulta coherentes con las cabeceras `Date` (12-oct-2026) | `evidencias/T2.5_cazador/` y PDFs de `data/raw/peajes_2026-10-12/` (`pdftotext -raw`) |
 | 12-oct-2026 | T2.5: vías de los 5 pares (AP-68 293,2 km con 94 intersecciones `toll`; AP-4 92,8 km sin `toll`; A-42 66,7; A-7 39,3 + A-70 28,5 + A-31 3,0; AP-9 126,5 km con 33) | Correctas (lectura independiente de los crudos OSRM) | `evidencias/T2.5_cazador/T2.5_vias_independiente.py` → `.txt` |
 | 12-oct-2026 | T2.5: A-42, A-31, A-70, A-7 (Alicante/Murcia) = "Autovía"; AP-4 = "Autopista libre"; AP-41 y AP-66 = "Autopista de peaje" en el Catálogo RCE 2025 | Correctas | `evidencias/T2.5_cazador/T2.5_clases_rce.py` → `.txt` |

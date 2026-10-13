@@ -4,3 +4,7 @@ data/raw/** -text
 data/processed/** -text
 # Hunt evidence is also hashed (SHA-256 in each evidence README): keep it byte for byte.
 alucinaciones/evidencias/** -text
+# Code and configs are checked out with LF on every OS: some tests check LF line endings, and Git for Windows
+# (core.autocrlf=true by default) would otherwise turn them into CRLF in the working copy.
+*.py text eol=lf
+*.yaml text eol=lf
