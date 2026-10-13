@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 13 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30) | 3 (H-07, H-08, H-10, puente) |
+| Código | 14 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
-| Conceptos | 4 (H-16; Parte 1: H-26, H-31, H-32, estas dos últimas de severidad baja) — H-12 descartado | 0 |
+| Conceptos | 5 (H-16; Parte 1: H-26, H-31, H-32, H-34; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 32** (H-01–H-32; H-11–H-23 de la Parte 2/puente y H-24–H-32 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 es de T1.6, posterior a esa renumeración): 30 activos y 2 descartados (H-12, H-13).
+**Total registrados: 34** (H-01–H-34; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 32 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -445,6 +445,28 @@
 4. **Evidencia:** `evidencias/T1.6_verificacion_B_propiedades.py` y `T1.6_exitos.py`: (i) Rastrigin 3D con los defaults, semillas 0–29: 28/30 éxitos; las 2 corridas fallidas terminan en f = 0.995 (mínimo local con un gen en ±1), es decir, la población puede colapsar lejos del óptimo; (ii) con `<=` un hijo que empata reemplaza al padre: se conserva el mejor valor de f, no la identidad del individuo; (iii) con f = NaN la comparación `NaN <= x` es falsa y ese puesto queda congelado (no ocurre con Rosenbrock ni Rastrigin).
 5. **Corrección:** (a) "tiende a encogerse cuando la población se concentra; si colapsa en un mínimo local el paso se anula"; (b) "el mejor valor de f de la población nunca empeora (el individuo puede cambiar si un hijo empata)"; (c) "con f finita". Aplicadas en `de.py` (E1–E3).
 6. **Lección:** "converge" y "nunca se pierde" son afirmaciones de garantía: antes de escribirlas, decir si hablan del valor o del individuo, y si hay un caso (Rastrigin 3D) que las contradiga.
+
+### H-33 — Comentarios de prueba que afirman más de lo que la prueba comprueba ("el conteo coincide con las llamadas reales", "ninguna otra prueba lo notaría", "+1 frame si para por presupuesto")
+- **Estado:** candidato — severidad baja (comentarios, no código; corregidos antes de integrarse)
+- **Categoría:** Código (documentación de pruebas)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, tarea de comentarios T1.1–T1.3, ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `revisor-calidad` (ronda 1); el `verificador-matematico` señaló de forma independiente el tercero
+1. **Prompt (literal):** `prompts/comentarios-T1.1-T1.3.md`, bloque "Ronda 1 — `implementador`" (regla 4: "Cada comentario debe ser verdad según el código y el Spec").
+2. **Respuesta relevante de la IA:** (a) `tests/test_gd.py:130-131`: "…; el conteo coincide con las llamadas reales a la función."; (b) `tests/test_gradients.py:46-47`: "un gradiente mal derivado arruinaría el GD sin que ninguna otra prueba lo notara."; (c) `tests/test_gd.py:185-186`: "Frames: forma de §5.1, uno por punto aceptado (+1 si para por presupuesto)".
+3. **Cómo sospechamos:** contraste de cada comentario con las aserciones de su prueba.
+4. **Evidencia:** (a) la prueba exige `n_f == 0` y `func.llamadas_f > 0` (observe evalúa f sin cobrarla): para f el conteo NO coincide con las llamadas reales; solo `llamadas_grad == n_grad`. (b) `test_anclas_calculadas_a_mano` también compara ∇f con valores calculados a mano y `test_f_en_x_star_es_f_star_y_gradiente_nulo` exige ∇f(x*) = 0. (c) siempre hay un frame por punto aceptado, x0 incluido; el "+1" es respecto de `n_grad` (`len(frames) == n_grad + 1` si para por presupuesto, `== n_grad` si para por gradiente; medido: 101 frames con n_grad = 100). Informes de `revisor-calidad` y `verificador-matematico` (ronda 1) transcritos en `prompts/comentarios-T1.1-T1.3.md`.
+5. **Corrección:** ronda 2 del `implementador` con los textos propuestos por los revisores; `revisor-calidad` aprueba la ronda 2. El AST de los archivos no cambió en ningún momento (solo comentarios).
+6. **Lección:** un comentario sobre una prueba se escribe leyendo sus aserciones, no su nombre ni la intención general; "ninguna otra", "siempre" y "coincide" son afirmaciones que se comprueban.
+
+### H-34 — "El redondeo decide la condición de Armijo desde ‖∇f‖ ≈ √(10nε/c) ≈ 10⁻⁵" (cota del término exigido tomada como cota de la diferencia medida)
+- **Estado:** candidato — confirmado con experimento por el `cazador-alucinaciones`; severidad baja a media (la conclusión cualitativa se sostiene; fallan el mecanismo y la magnitud); corregido en el blog antes de integrarse
+- **Categoría:** Conceptos (análisis numérico; también Matemáticas)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `redactor-tecnico`, T4.6 parcial Parte 1, ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`, a partir de la sospecha del orquestador
+1. **Prompt (literal):** `prompts/T4.6-parte1-gd.md`, bloque "Ronda 1 — `redactor-tecnico`", punto B.3. El prompt pide explicar que "la condición se decide por redondeo", pero no da ninguna estimación: la cifra y la derivación son de la redactora.
+2. **Respuesta relevante de la IA:** `blog/secciones/03-parte1-metodologia.md` (ronda 1, líneas 153-155): "En cuanto $10^{-4}\lVert\nabla f\rVert^2$ cae por debajo de esa resolución, lo que ocurre para $\lVert\nabla f\rVert$ del orden de $\sqrt{10n\,\varepsilon/c}$, unos $10^{-5}$, la comparación queda en la práctica como $f(\mathbf{x}_\eta) \le f(\mathbf{x})$ y la decide el redondeo."
+3. **Cómo sospechamos:** el orquestador la marcó como "estimación propia" y la contrastó con la verificación de T1.3, que había medido un piso de ‖∇f‖ de unos 10⁻⁶. Que el término de Armijo sea despreciable no implica que la diferencia de f sea irresoluble.
+4. **Evidencia:** scripts del cazador (pendientes de guardar en `evidencias/`; esta tarea no autorizaba escribir allí): `armijo_traza.py` → `salida_traza.txt` compara la decisión en coma flotante con la de la diferencia de f sin cancelación, (y−x)(y+x) + 20 sin(π(y+x)) sin(π(y−x)). El término c·⟨g, x − x_η⟩ ya es menor que 10nε con ‖g‖ = 6.4e-5 / 7.8e-5 / 1.1e-4, pero entonces la diferencia de f es ≈ 1e-11 y las decisiones coinciden con la aritmética exacta; la primera decisión distinta llega con ‖g‖ = 9.6e-7 / 6.3e-7 / 8.3e-7 (Rastrigin 2D semillas 1 y 2, 3D semilla 1). El umbral correcto, ‖∇f‖ ~ √(2λ·10nε) ≈ 2e-6 con λ ≈ 2 + 40π², es un orden de magnitud menor que el del texto.
+5. **Corrección:** ronda 2 del `redactor-tecnico` con la derivación √(2λ·10nε) ≈ 10⁻⁶ propuesta por el cazador.
+6. **Lección:** una cota del término exigido no es una cota de la diferencia medida; antes de afirmar cuándo decide el ruido, comparar la decisión en coma flotante con la exacta.
 
 ---
 
