@@ -43,12 +43,16 @@ def gradiente_numerico(func, x: np.ndarray, h: float = H) -> np.ndarray:
 
 # ---------------------------------------------------------------- gradiente vs. diferencias
 
+# ∇f analítico = diferencias centrales en 200 puntos (error relativo < 1e-6): aceptación de §6.1;
+# es la prueba que cubre todo el dominio: un gradiente mal derivado arruinaría el GD.
 @pytest.mark.parametrize("nombre,dim", CASOS)
 def test_gradiente_coincide_con_diferencias_centrales(nombre, dim):
+    # Preparación: puntos uniformes en el dominio con semilla fija (reproducible).
     func = get_function(nombre, dim)
     rng = np.random.default_rng(SEMILLA)
     puntos = rng.uniform(func.bounds[:, 0], func.bounds[:, 1], size=(N_PUNTOS, dim))
     peor = 0.0
+    # Ejecución y aserciones: compara punto a punto y guarda el peor error relativo.
     for x in puntos:
         g = func.grad(x)
         g_num = gradiente_numerico(func, x)
@@ -63,6 +67,7 @@ def test_gradiente_coincide_con_diferencias_centrales(nombre, dim):
 
 # ---------------------------------------------------------------- óptimo
 
+# f(x*) = f* y ∇f(x*) = 0: confirma las constantes x*, f* que usa el umbral de éxito f − f* ≤ 1e-4.
 @pytest.mark.parametrize("nombre,dim", CASOS)
 def test_f_en_x_star_es_f_star_y_gradiente_nulo(nombre, dim):
     func = get_function(nombre, dim)
@@ -87,6 +92,8 @@ ANCLAS = [
 ]
 
 
+# f y ∇f coinciden con valores calculados a mano: detecta errores de fórmula que las diferencias
+# centrales no verían (p. ej. f y ∇f equivocadas de forma coherente).
 @pytest.mark.parametrize("nombre,x,f_esperado,g_esperado", ANCLAS)
 def test_anclas_calculadas_a_mano(nombre, x, f_esperado, g_esperado):
     func = get_function(nombre, len(x))
@@ -102,11 +109,15 @@ def test_anclas_calculadas_a_mano(nombre, x, f_esperado, g_esperado):
 
 # ---------------------------------------------------------------- atributos
 
+# Atributos del contrato §5.1 (name, dim, bounds, x*, f*) con forma, tipo y solo lectura: los
+# optimizadores leen el dominio de bounds y no deben poder alterarlo.
 @pytest.mark.parametrize("nombre,dim", CASOS)
 def test_atributos(nombre, dim):
     func = get_function(nombre, dim)
+    # name y dim
     assert func.name == nombre
     assert func.dim == dim
+    # bounds: forma (n, 2), float64, valores del dominio y no escribible
     assert func.bounds.shape == (dim, 2)
     assert func.bounds.dtype == np.float64
     esperado = np.tile([-LIMITE[nombre], LIMITE[nombre]], (dim, 1))
@@ -114,6 +125,7 @@ def test_atributos(nombre, dim):
     assert not func.bounds.flags.writeable
     with pytest.raises(ValueError):
         func.bounds[0, 0] = 0.0
+    # x* y f*: forma, tipo, valor y solo lectura
     assert func.x_star.shape == (dim,)
     assert func.x_star.dtype == np.float64
     assert np.array_equal(func.x_star, np.full(dim, X_STAR[nombre]))
@@ -122,6 +134,7 @@ def test_atributos(nombre, dim):
     assert type(func.f_star) is float
 
 
+# FUNCIONES y get_function devuelven la clase correcta para cada nombre (lo usa el runner).
 @pytest.mark.parametrize("nombre,clase", [("rosenbrock", Rosenbrock), ("rastrigin", Rastrigin)])
 def test_fabrica_y_diccionario(nombre, clase):
     assert FUNCIONES[nombre] is clase
@@ -131,6 +144,7 @@ def test_fabrica_y_diccionario(nombre, clase):
 
 # ---------------------------------------------------------------- contrato de f y grad
 
+# f devuelve float nativo de Python: el resultado debe serializarse a JSON sin tipos de numpy.
 @pytest.mark.parametrize("nombre,dim", CASOS)
 def test_f_devuelve_float_de_python(nombre, dim):
     func = get_function(nombre, dim)
@@ -138,21 +152,27 @@ def test_f_devuelve_float_de_python(nombre, dim):
     assert type(valor) is float, f"type(f(x)) = {type(valor)}"
 
 
+# ∇f es un arreglo nuevo float64 de forma (n,) y ni f ni ∇f modifican x: un optimizador que
+# reutiliza x no puede verse alterado por efectos secundarios.
 @pytest.mark.parametrize("nombre,dim", CASOS)
 def test_grad_devuelve_arreglo_nuevo_y_no_modifica_entrada(nombre, dim):
+    # Preparación: punto de prueba y copia para comparar después.
     func = get_function(nombre, dim)
     x = np.linspace(-0.7, 0.9, dim)
     antes = x.copy()
+    # Ejecución y aserciones sobre ∇f: tipo, forma, sin memoria compartida, x intacto.
     g = func.grad(x)
     assert isinstance(g, np.ndarray)
     assert g.shape == (dim,)
     assert g.dtype == np.float64
     assert g is not x and not np.shares_memory(g, x)
     assert np.array_equal(x, antes), f"grad modificó la entrada: {antes.tolist()} -> {x.tolist()}"
+    # f tampoco modifica x
     func.f(x)
     assert np.array_equal(x, antes), f"f modificó la entrada: {antes.tolist()} -> {x.tolist()}"
 
 
+# f y ∇f aceptan una lista y dan lo mismo que con un arreglo (entradas desde JSON o config).
 @pytest.mark.parametrize("nombre,dim", CASOS)
 def test_entrada_como_lista(nombre, dim):
     func = get_function(nombre, dim)
@@ -161,9 +181,12 @@ def test_entrada_como_lista(nombre, dim):
     assert np.array_equal(func.grad(x), func.grad(np.array(x)))
 
 
+# Una x de forma distinta de (n,) lanza ValueError en f y ∇f: evita que numpy difunda (broadcast)
+# un vector mal formado y devuelva un valor sin sentido en silencio.
 @pytest.mark.parametrize("nombre,dim", CASOS)
 @pytest.mark.parametrize("forma", ["corta", "larga", "matriz", "escalar"])
 def test_forma_incorrecta_lanza_valueerror(nombre, dim, forma):
+    # Preparación: entrada con la forma incorrecta indicada.
     func = get_function(nombre, dim)
     x = {
         "corta": np.zeros(dim - 1),
@@ -171,12 +194,14 @@ def test_forma_incorrecta_lanza_valueerror(nombre, dim, forma):
         "matriz": np.zeros((1, dim)),
         "escalar": np.float64(0.0),
     }[forma]
+    # Aserciones: tanto f como ∇f la rechazan.
     with pytest.raises(ValueError):
         func.f(x)
     with pytest.raises(ValueError):
         func.grad(x)
 
 
+# f se evalúa fuera del dominio sin recortar: la proyección Π es tarea del optimizador, no de f.
 def test_funciones_definidas_fuera_del_dominio():
     """El dominio no se aplica dentro de f ni de grad (la proyección es de los optimizadores)."""
     ros = Rosenbrock(2)
@@ -187,6 +212,7 @@ def test_funciones_definidas_fuera_del_dominio():
 
 # ---------------------------------------------------------------- validaciones
 
+# Una dimensión menor que la mínima (Rosenbrock n < 2, Rastrigin n < 1) se rechaza con ValueError.
 @pytest.mark.parametrize("clase,dim", [(Rosenbrock, 1), (Rosenbrock, 0), (Rastrigin, 0),
                                        (Rastrigin, -2)])
 def test_dim_menor_al_minimo_lanza_valueerror(clase, dim):
@@ -194,6 +220,7 @@ def test_dim_menor_al_minimo_lanza_valueerror(clase, dim):
         clase(dim)
 
 
+# dim no entero (float, bool, texto o None) lanza TypeError: ni 2.0 ni True cuentan como enteros.
 @pytest.mark.parametrize("clase", [Rosenbrock, Rastrigin])
 @pytest.mark.parametrize("dim", [2.5, 2.0, True, "2", None])
 def test_dim_no_entero_lanza_typeerror(clase, dim):
@@ -201,6 +228,7 @@ def test_dim_no_entero_lanza_typeerror(clase, dim):
         clase(dim)
 
 
+# Un entero de numpy (np.int64) se acepta y se guarda como int de Python (JSON y comparaciones).
 @pytest.mark.parametrize("clase", [Rosenbrock, Rastrigin])
 def test_dim_numpy_entero_aceptado(clase):
     func = clase(np.int64(3))
@@ -209,10 +237,12 @@ def test_dim_numpy_entero_aceptado(clase):
     assert func.bounds.shape == (3, 2)
 
 
+# Rastrigin admite n = 1 (su dimensión mínima), a diferencia de Rosenbrock.
 def test_rastrigin_admite_dim_1():
     assert Rastrigin(1).dim == 1
 
 
+# Un nombre desconocido (incluidas mayúsculas o guion bajo) lanza ValueError que lista los válidos.
 @pytest.mark.parametrize("nombre", ["sphere", "Rosenbrock", "", "rastrigin_"])
 def test_nombre_desconocido_lanza_valueerror(nombre):
     with pytest.raises(ValueError, match="rastrigin") as info:

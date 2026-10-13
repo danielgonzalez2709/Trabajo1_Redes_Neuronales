@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 13 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30) | 3 (H-07, H-08, H-10, puente) |
+| Código | 14 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-32) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
 | Conceptos | 3 (H-16; Parte 1: H-26, H-31, esta última severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 31** (H-01–H-31; H-11–H-23 de la Parte 2/puente y H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026): 29 activos y 2 descartados (H-12, H-13).
+**Total registrados: 32** (H-01–H-32; H-11–H-23 de la Parte 2/puente y H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 de la Parte 1): 30 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -434,6 +434,17 @@
 4. **Evidencia:** `evidencias/T1.5_verificacion.py` §4 y `T1.5_verificacion2.py` §C-D (Rastrigin 2D, 30 semillas, configuración de base.yaml): (i) en la iteración 1 el desplazamiento de **todas** las componentes es `c₂·R₂·(g − x)` (0 de 1 800 componentes con paso/(g − x) fuera de [0, c₂]): el primer movimiento es **puramente social**; (ii) el líder (x₀ = g₀) **no se mueve** en la iteración 1 en 30/30 corridas y permanece quieto hasta que g cambia (30/30): no se "mueve por inercia", porque la inercia es w·0 = 0; (iii) sin memoria (b ≡ x) el término cognitivo vale 0: la partícula quedaría atraída solo por g, no "por su posición actual".
 5. **Corrección:** (a) "el primer movimiento es puramente social, porque b_i = x_i anula el término cognitivo"; (b) "sin memoria el término cognitivo sería siempre cero y solo quedaría la atracción hacia g"; (c) "con v = 0, el líder permanece quieto hasta que otra partícula mejora g". Tomar nota: `test_la_particula_que_es_g_y_esta_en_su_memoria_solo_se_mueve_por_inercia` es correcta para un paso con v ≠ 0.
 6. **Lección:** al explicar un algoritmo, evaluar cada término en el estado inicial concreto (b = x, v = 0); una frase didáctica "solo depende de A y B" puede ocultar que A vale cero.
+
+### H-32 — Comentarios de prueba que afirman más de lo que la prueba comprueba ("el conteo coincide con las llamadas reales", "ninguna otra prueba lo notaría", "+1 frame si para por presupuesto")
+- **Estado:** candidato — severidad baja (comentarios, no código; corregidos antes de integrarse)
+- **Categoría:** Código (documentación de pruebas)
+- **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, tarea de comentarios T1.1–T1.3, ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `revisor-calidad` (ronda 1); el `verificador-matematico` señaló de forma independiente el tercero
+1. **Prompt (literal):** `prompts/comentarios-T1.1-T1.3.md`, bloque "Ronda 1 — `implementador`" (regla 4: "Cada comentario debe ser verdad según el código y el Spec").
+2. **Respuesta relevante de la IA:** (a) `tests/test_gd.py:130-131`: "…; el conteo coincide con las llamadas reales a la función."; (b) `tests/test_gradients.py:46-47`: "un gradiente mal derivado arruinaría el GD sin que ninguna otra prueba lo notara."; (c) `tests/test_gd.py:185-186`: "Frames: forma de §5.1, uno por punto aceptado (+1 si para por presupuesto)".
+3. **Cómo sospechamos:** contraste de cada comentario con las aserciones de su prueba.
+4. **Evidencia:** (a) la prueba exige `n_f == 0` y `func.llamadas_f > 0` (observe evalúa f sin cobrarla): para f el conteo NO coincide con las llamadas reales; solo `llamadas_grad == n_grad`. (b) `test_anclas_calculadas_a_mano` también compara ∇f con valores calculados a mano y `test_f_en_x_star_es_f_star_y_gradiente_nulo` exige ∇f(x*) = 0. (c) siempre hay un frame por punto aceptado, x0 incluido; el "+1" es respecto de `n_grad` (`len(frames) == n_grad + 1` si para por presupuesto, `== n_grad` si para por gradiente; medido: 101 frames con n_grad = 100). Informes de `revisor-calidad` y `verificador-matematico` (ronda 1) transcritos en `prompts/comentarios-T1.1-T1.3.md`.
+5. **Corrección:** ronda 2 del `implementador` con los textos propuestos por los revisores; `revisor-calidad` aprueba la ronda 2. El AST de los archivos no cambió en ningún momento (solo comentarios).
+6. **Lección:** un comentario sobre una prueba se escribe leyendo sus aserciones, no su nombre ni la intención general; "ninguna otra", "siempre" y "coincide" son afirmaciones que se comprueban.
 
 ---
 
