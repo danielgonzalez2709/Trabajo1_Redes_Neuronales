@@ -604,7 +604,7 @@ de selección sería el elitismo.
   - Para un recorrido fijo, el costo es función conocida de w: cada arco cuesta el mínimo entre dos rectas
     (rápida y sin peaje, `costos.py`), así que el costo del recorrido es lineal a trozos en w y se evalúa sin optimizar.
   - El umbral es el w donde cambia el recorrido de menor costo de la envolvente; se calcula de forma exacta (cruces entre
-    funciones lineales a trozos), sin resolución fija, y capta cruces finos como los de 0,011 €/h cerca de w = 30.
+    funciones lineales a trozos), sin resolución fija (no depende de una bisección de 0,5 €/h). Los cruces de alternativa dentro de un arco (p. ej. pares (34,40) y (34,42) cerca de w = 30) entran en el cálculo del costo, pero solo producen un umbral si cambian el recorrido ganador; en el barrido real no lo hicieron.
   - Se reporta como "umbral entre las mejores rutas encontradas", no como umbral del óptimo probado (igual que el gap).
 - **Gap [DECIDIDO v1.16, Jose Miguel, 12-oct]:** `gap_aco` (MMAS) y `gap_ga` de `sweep_w.json` son el gap de la **media** de las
   10 corridas frente al mejor costo encontrado en ese w; el gap del mejor y la desviación (n − 1) van en el detalle por método.

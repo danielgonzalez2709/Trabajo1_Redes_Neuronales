@@ -68,7 +68,7 @@
   peaje: ~23 % de los pares vecinos), no un error. `scripts/ver_aco_temporal.py --barrido` lo grafica.
 - [ ] **`base.yaml`: claves `consumo_l100` y `precio_l`** [DECIDIDO v1.16]: opcionales, vacías = `vehiculo.yaml` / `combustible.json`. Las implementa **T3.6**.
 - [x] **T3.6 (13-oct):** implementador 4 rondas (948 pruebas), revisor-spec ✅, revisor-calidad ✅. [DECIDIDO v1.16] gap = media; sensibilidad con unión de candidatos base + nuevos; historiales sin sangría (~6,4 MB) y versionados. **Falta:** commit, correr el barrido real (analista-experimentos, ~10 min + 2 × ~3,7 min), confirmar las decisiones "implementado, pendiente" del Spec §7.5/§5.4.
-- [x] T3.6: cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)): los capta la envolvente (sin resolución fija).
+- [x] T3.6: los cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)) entran en el costo exacto de la envolvente, pero no cambian el recorrido ganador: no aparecen como umbral (barrido real, 13-oct).
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
 - [x] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → resuelto en T2.5 (Spec v1.10: km por anclas, no por proporción de intersecciones).
 - [ ] **T2.5, verificar a mano:** los 63 anclas no-OSM (5 de 6 verificados por muestreo); parámetros 1,5 km y 95 % sin fuente; `GI-20`/`N-622`/`PA-34` sin cobrar (sin tarifa publicada). Ampliación de §5.3 (5 archivos auxiliares): **confirmada por Jose Miguel el 12-oct.**
