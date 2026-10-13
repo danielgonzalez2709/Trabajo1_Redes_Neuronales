@@ -10,10 +10,10 @@
 | Código | 18 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
-| Conceptos | 6 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
+| Conceptos | 8 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39, H-41, H-42; H-31, H-32, H-41 y H-42 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 40** (H-01–H-40; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 38 activos y 2 descartados (H-12, H-13).
+**Total registrados: 42** (H-01–H-42; H-42 (significado de frac_c en el blog, T1.11); H-41 ("1,5e-4 cumple η ≤ 1/L en 2D y 3D", T1.10b/T1.11); H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 40 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -538,6 +538,31 @@
 4. **Evidencia:** `Path(f).read_bytes().count(b'\r\n')` = 0 en `src/part1/hpo.py`, `hpo_experimento.py`, `tests/test_hpo.py`, `tests/test_hpo_experimento.py`, `configs/part1/hpo_demo.yaml` y `tuned.yaml` (y 203/203 en `corrida.py`, que sí está en CRLF). El orquestador reprodujo un conteo igual al número de líneas con `grep -c $'\r'` dentro de `"$(...)"`; en un archivo LF de prueba, el mismo patrón fuera de esa construcción da 0 (causa probable: el patrón no se expande como CR; no verificado más).
 5. **Corrección:** ninguna en el código; se descarta la observación.
 6. **Lección:** una afirmación sobre bytes se comprueba leyendo bytes (Python), no con un patrón de shell cuyo citado depende del contexto.
+
+---
+### H-41 — "η = 1,5e-4 cumple η ≤ 1/L en 2D y 3D" (Rosenbrock; el redondeo de la Spec escondía que en 3D no se cumple)
+- **Estado:** candidato, severidad baja (no cambia la conclusión: η = 1/L sigue convergiendo mucho peor que η = 1e-3); corregido en el blog antes de publicarse.
+- **Categoría:** Conceptos (cota mal comprobada por redondeo)
+- **Herramienta y modelo:** prompt de T1.10b redactado por el humano con ayuda de IA; Spec §6.3 ("η ≤ 1.7e-4 / 1.5e-4", redondeado) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el humano (prompt de T1.11), confirmado por el script de cifras del orquestador
+1. **Prompt (literal):** `prompts/T1.10b.md`, punto 5: "(1.5e-4 cumple η <= 1/L en 2D y 3D, Spec 6.3)".
+2. **Respuesta relevante de la IA:** el orquestador corrió la sensibilidad con η = 1,5e-4 y repitió la afirmación en su reporte de T1.10b sin comprobarla.
+3. **Cómo sospechamos:** la Spec da L ≈ 5 971 (2D) y 6 838 (3D); 1/6 838 < 1,5e-4.
+4. **Evidencia:** `evidencias/H-T1.11_cifras.txt` §1: con el L de la Spec, 1/L = 1,6748e-4 (2D) y 1,4624e-4 (3D); 1,5e-4 · 6 838 = 1,0257, o sea, supera 1/L en un 2,6 % en 3D. Una búsqueda numérica del máximo valor propio de la Hessiana en una malla del dominio da L = 5 970,7 y 6 837,8 (coherente con la Spec). La línea de la Spec "η ≤ 1.7e-4 / 1.5e-4" redondea hacia arriba (1,67e-4 y 1,46e-4).
+5. **Corrección:** el blog (sección 03) dice que 1,5e-4 cumple η ≤ 1/L en 2D y lo supera un 2,6 % en 3D, con las cotas exactas. La línea de la Spec queda para decisión del equipo.
+6. **Lección:** una cota que se compara contra un valor redondeado se comprueba con el valor sin redondear.
+7. **Variante cazada en la auditoría de T1.11 (`cazador-alucinaciones`):** el borrador del blog, siguiendo el prompt de T1.11 ("el 1/L redondeado de la Spec"), presentaba 1,5e-4 como "el valor que la Spec da para η = 1/L"; la Spec da 1,7e-4 para 2D y 1,5e-4 para 3D. Corregido: es la cota redondeada de 3D, usada en las dos dimensiones.
+
+---
+### H-42 — "frac_c = fracción de N que se cruza" (en el EA el relleno decide el cruce; el valor afinado de frac_c no tiene efecto)
+- **Estado:** candidato, severidad baja (texto del blog que habría sugerido "menos cruce" con los valores afinados); corregido antes de publicarse.
+- **Categoría:** Conceptos (significado de un hiperparámetro heredado de un comentario del repositorio)
+- **Herramienta y modelo:** Claude Code, subagente `redactor-tecnico` (claude-opus-5-5), T1.11; el origen probable es el comentario de `configs/part1/base.yaml` ("fracción que se cruza") · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones`, recalculando los grupos con `ParametrosEA.desde_config`
+1. **Prompt (literal):** `prompts/T1.11.md`, apartado (e)3: "Tabla `espacios-hpo` (R7): … significado en una línea. El significado sale de los docstrings …"
+2. **Respuesta relevante de la IA:** tabla `espacios-hpo` de la sección 03 y tabla `hpo-parametros` de la 04 (borrador): frac_c "fracción de N que se cruza", 0,75 → 0,4854.
+3. **Cómo sospechamos:** `ea.py` calcula los cruzantes como el par hacia arriba de int(N·frac_c) y los aumenta si élite + mutantes + cruzantes no llegan a N (pendiente T1.4 (d) de la memoria, que no se había llevado al blog).
+4. **Evidencia:** `evidencias/H-T1.11_cifras.txt` §13: por defecto N = 50 → 8 de élite, 5 mutantes, 38 cruzantes (int(50·0,75) = 37; fracción efectiva 0,760); afinado N = 117 → 19, 20 y 78 cruzantes, aunque int(117·0,4854) = 56 (fracción efectiva 0,667).
+5. **Corrección:** el blog describe frac_c como fracción mínima que se cruza y explica, con las cifras de §13, que el valor afinado no determina el cruce.
+6. **Lección:** el significado de un parámetro se toma del código que lo usa, no del comentario de la config.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**
