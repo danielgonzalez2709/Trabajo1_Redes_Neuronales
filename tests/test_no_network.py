@@ -50,8 +50,15 @@ def test_el_bloqueo_si_detecta_un_acceso_a_la_red(sin_red):
     ],
     ids=["part1-demo", "part2-demo", "figures"],
 )
-def test_comandos_de_run_py_corren_sin_red(sin_red, monkeypatch, argv):
+def test_comandos_de_run_py_corren_sin_red(sin_red, monkeypatch, tmp_path, argv):
     monkeypatch.chdir(RAIZ)
+    if argv[0] == "part2":  # desde T3.6 escribe resultados: a un directorio temporal, nunca a results/
+        argv = [*argv, "--set", f"experimento.salida={tmp_path.as_posix()}"]
+    if argv[0] == "figures":  # desde T4.4 escribe en blog/docs/figures: a un directorio temporal en la prueba
+        from src.viz import gifs, part2_interactivas
+
+        monkeypatch.setattr(part2_interactivas, "SALIDA", tmp_path)
+        monkeypatch.setattr(gifs, "SALIDA", tmp_path)  # T4.5: los GIF van a media/
     assert cli.main(argv) == 0
 
 

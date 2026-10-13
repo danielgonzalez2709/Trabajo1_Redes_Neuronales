@@ -906,10 +906,12 @@ def test_el_manejador_registrado_ya_no_es_el_provisional(capsys):
     assert "pendiente" not in salida.out + salida.err
 
 
-def test_part2_y_figures_siguen_pendientes(capsys):
-    for nombre in ("part2", "figures"):
-        assert cli.SUBCOMANDOS[nombre].manejador(None) == 0
-        assert "pendiente" in capsys.readouterr().out
+def test_part1_part2_y_figures_estan_conectados():
+    # Tras integrar main (T3.6 y T4.4) ningún subcomando sigue en `_pendiente`; no se ejecutan
+    # aquí porque part2 y figures corren el barrido y regeneran figuras.
+    assert cli.SUBCOMANDOS["part1"].manejador is cli._part1
+    assert cli.SUBCOMANDOS["part2"].manejador is cli._part2
+    assert cli.SUBCOMANDOS["figures"].manejador is cli._figures
 
 
 def test_importar_el_cli_no_carga_numpy_ni_el_experimento():

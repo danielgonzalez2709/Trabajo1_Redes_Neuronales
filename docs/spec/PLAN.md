@@ -40,6 +40,7 @@
 | T1.7 | `experiment.py`: 20 configs × 30 semillas, `summary.json`, tablas (el EA lee su bloque `ea:`; `n_grad = 0`) | T1.2–T1.6 (T1.6b recomendada antes, no bloquea) | Resultados | Métricas §6.6; k=2n y k=1; cada JSON de corrida con las claves exactas de §5.4 (`func, dim, method, seed, k, budget, config, result`) usando `run_filename` y la semilla efectiva | **analista-experimentos** | ✅ 2026-10-13 (`corrida.py`, `metricas.py`, `experiment.py` + 463 pruebas; `run.py part1` conectado; suite 2143 passed y los 2 fallos previos de la Parte 2; experimento real 9 min 39 s, 600 + 240 JSON, 193 MB; revisor-spec ✅, revisor-calidad ✅ ronda 2, analista ✅ comparación justa y 7 avisos legítimos, verificador ✅ 40 configuraciones recalculadas sin discrepancias; H-36, H-37; pendiente de Daniel) |
 | T1.8 | `configs/part1/demo.yaml` + salida en consola | T1.7 | Demo | < 2 min medido | auditor-reproducibilidad | ⬜ |
 | T1.9 | Contraste con SciPy/pyswarms (solo informativo) | T1.7 | Tabla de contraste | Documenta diferencias (`best1bin`, `polish`) | cazador-alucinaciones | ⬜ |
+| T1.10 | Optimización de hiperparámetros (Spec §6.9): búsqueda aleatoria con igual esfuerzo por método, experimento afinado y comparación contra los valores por defecto | T1.7 | `hpo.py`, `hpo_experimento.py`, `run.py hpo`, `configs/part1/tuned.yaml`, `results/data/part1_hpo/`, `results/data/part1_tuned/`, `comparacion.csv` | R1–R8 de §6.9 (mismos ensayos y semillas por unidad, semillas de ajuste disjuntas de 0–29, ensayo 0 = defecto, selección por rangos con recorte a 1e-6, `tuned.yaml` solo con lo que cambió, resultados por defecto intactos) | analista-experimentos | ✅ 2026-10-13 (`hpo.py`, `hpo_experimento.py` + 222 pruebas; `run.py hpo`; demo 7 s; HPO real 406 s con 6 procesos, 3 000 corridas de ajuste (600 por método), 732 KB; revisor-spec ✅ y revisor-calidad ✅ en ronda 2; verificador 6/6 ganadores; analista: mejoras claras en EA y gdarmijo Rosenbrock, retrocesos en PSO/DE Rastrigin compatibles con sobreajuste a 5 semillas; H-38; pendiente de Daniel). **Corrección T1.10b (13-oct):** el defecto solo se reemplaza con un rango medio estrictamente menor (antes un desempate de una corrida bastaba); reanudación en 110 s sin repetir corridas (3 000); pso y de vuelven al defecto; evidencia de la regla anterior en `results/data/part1_hpo/regla_v1/`; H-39, H-40 |
 
 ---
 
@@ -63,7 +64,7 @@
 
 ## F3 — Parte 2: algoritmos (Equipo Parte 2) · sáb 3 – mar 6 oct
 
-> **Condiciones heredadas de F0 (9-oct):** T3.3/T3.4 añaden los bloques `aco:` (incl. `iteraciones: 300`, §7.4), `ga:` y `peajes:` con **todos** sus parámetros a `configs/part2/base.yaml`. T3.6 valida la config antes de correr (finita y con tipos correctos) y decide si la prueba de humo de `run.py part2` (tests/test_config.py) se marca como lenta al conectar el manejador real. Solver exacto: PuLP 4.0 + HiGHS con `problema.add_variable(...)` (H-07).
+> **Condiciones heredadas de F0 (9-oct):** T3.3/T3.4 añaden los bloques `aco:` (incl. `iteraciones`, §7.4; desde v1.16, 1 099 ACO / 348 GA = presupuesto común), `ga:` y `peajes:` con **todos** sus parámetros a `configs/part2/base.yaml`. T3.6 valida la config antes de correr (finita y con tipos correctos) y decide si la prueba de humo de `run.py part2` (tests/test_config.py) se marca como lenta al conectar el manejador real. Solver exacto: PuLP 4.0 + HiGHS con `problema.add_variable(...)` (H-07).
 
 > Se puede empezar **antes** de tener los datos reales usando una matriz sintética (distancias euclidianas entre las 47 coordenadas).
 
@@ -73,9 +74,9 @@
 | T3.2 | `exact.py`: DFJ con PuLP + subtours iterativos | T3.1 | `solve()` | `test_exact_small.py` (8 ciudades = fuerza bruta) | verificador-matematico | ⬜ **opcional** (Spec v1.14: solo si sobra tiempo) |
 | T3.3 | `aco.py`: Ant System + MMAS | T3.1 | `solve()` | Tours válidos; feromona dentro de [τ_min, τ_max] en MMAS; conteo de recorridos; 8 ciudades = fuerza bruta (Spec §7.4.1) | revisor-spec + verificador-matematico | ✅ |
 | T3.4 | `ga.py`: OX + inversión + intercambio + torneo + elitismo | T3.1 | `solve()` | `test_tsp_operators.py` (10 000 operaciones válidas) | revisor-spec | ✅ |
-| T3.5 | `local_search.py`: 2-opt (opcional) | T3.1 | Función | Nunca empeora el recorrido; recorrido válido | — | ⬜ |
-| T3.6 | `experiment.py`: barrido de w + bisección del umbral + gaps. **Pendiente de T3.6:** claves de consumo y precio en `configs/part2/base.yaml` para la sensibilidad de §7.5 con `--set` | T3.2–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ⬜ |
-| T3.7 | `configs/part2/demo.yaml` | T3.6 | Demo | < 2 min medido | auditor-reproducibilidad | ⬜ |
+| T3.5 | `local_search.py`: 2-opt (opcional) | T3.1 | Función | Nunca empeora el recorrido; recorrido válido | — | ⬜ **opcional** (no está en el enunciado; solo si sobra tiempo) |
+| T3.6 | `experiment.py`: barrido de w + umbral por envolvente de candidatos (Spec v1.16) + gaps + sensibilidad de consumo con MMAS; claves `consumo_l100`/`precio_l` en `configs/part2/base.yaml` | T3.3–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ✅ |
+| T3.7 | `configs/part2/demo.yaml` (Spec v1.17: MMAS, 10 corridas, gap frente al mejor conocido, figura del recorrido) | T3.6 | Demo | < 2 min medido (~2,6 s; falta medir en otra máquina, §9) | auditor-reproducibilidad | ✅ |
 
 ---
 
@@ -86,8 +87,8 @@
 | T4.1 | `src/viz/theme.py` + `style.py` + `ds.css` desde la skill `apple-design` (tipografía, materiales, accesibilidad) + **paleta de colores propia** | Skill `apple-design` | Tema Plotly + estilo matplotlib + CSS | Aplicado a una figura de muestra; contraste verificado en claro/oscuro | revisor-calidad | ✅ 2026-10-12 (src/viz/paleta.py fuente única; tema Plotly + estilo matplotlib; paleta validada con validate_palette.js; 5 pruebas) |
 | T4.2 | Figuras Parte 1 (Spec §6.7) | T1.7, T4.1 | HTML/PNG en `blog/docs/figures/` | `run.py figures` regenera todo | revisor-spec | ⬜ |
 | T4.3 | GIFs Parte 1 (GD, PSO) | T1.7, T4.1 | `media/*.gif` | Regenerables | — | ⬜ |
-| T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ⬜ |
-| T4.5 | GIF Parte 2 (evolución sobre el mapa) | T3.6, T4.1 | `media/tsp_*.gif` | Regenerable | — | ⬜ |
+| T4.4 | Figuras Parte 2 + mapa interactivo con deslizador de w | T3.6, T4.1 | HTML | Muestra el cambio de ruta en el umbral | revisor-spec | ✅ 2026-10-13 (3 HTML en `blog/docs/figures/part2_*.html`; deslizador 11 w + w≈12,28 cruza los 3 umbrales; `run.py figures`; revisión hecha por el orquestador, sin revisor-spec, a pedido del equipo) |
+| T4.5 | GIF Parte 2 (evolución sobre el mapa) | T3.6, T4.1 | `media/tsp_*.gif` | Regenerable | — | ✅ 2026-10-13 (`media/tsp_mmas_w25.gif` 15 fotogramas, `tsp_ga_w25.gif` 24; mejor corrida en w = 25, un fotograma por mejora, contorno IGN; `run.py figures`, bytes idénticos al regenerar) |
 | T4.6 | Redacción de secciones del blog (cada equipo la suya) | T4.2–T4.5 | `blog/docs/*.md` | Hook sin errores; cifras = `summary.json` | **redactor-tecnico** + cazador | ⬜ |
 | T4.7 | Bibliografía `references.bib` (cada DOI verificado) | — | `.bib` | Todo DOI resuelve en doi.org; todas citadas | **cazador-alucinaciones** | ⬜ |
 | T4.8 | Sección "Uso de IA" + "Cacería de la alucinación" | T4.6 | Secciones | ≥5 hallazgos, ≥3 categorías, con evidencia | cazador-alucinaciones | ⬜ |

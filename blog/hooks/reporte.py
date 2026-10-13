@@ -74,7 +74,9 @@ def _leer_bloque(tipo: str, ident: str, cuerpo: str, raiz: Path) -> tuple[str, s
             ruta = raiz / "docs" / linea.removeprefix("incluir:").strip()
             if not ruta.is_file():
                 raise ErrorReporte(f"{tipo} '{ident}': no existe el archivo a incluir {ruta.name}")
-            contenido.append(ruta.read_text(encoding="utf-8"))
+            # markdown="0": el HTML incluido (p. ej. Plotly, con sangría y JS) no se procesa como Markdown; si no,
+            # las líneas con sangría se vuelven un bloque de código y la figura sale en blanco.
+            contenido.append(f'<div class="apa-html" markdown="0">\n{ruta.read_text(encoding="utf-8")}\n</div>')
         else:
             contenido.append(linea)
     if not titulo:

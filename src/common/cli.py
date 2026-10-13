@@ -1,11 +1,14 @@
 """Interfaz de línea de comandos de `run.py` (Spec §4.1).
 
     python run.py part1   --config configs/part1/demo.yaml [--set clave.subclave=valor ...]
+    python run.py hpo --config configs/part1/base.yaml [--set clave.subclave=valor ...]
     python run.py part2   --config configs/part2/demo.yaml [--set clave.subclave=valor ...]
     python run.py figures
 
 Para conectar un subcomando, cambiar el `manejador` de su entrada en `SUBCOMANDOS` por una
 función `(cfg: dict | None) -> int` (recibe la config final, o None si el subcomando no la usa).
+Si la entrada lleva `con_origen=True`, el manejador es `(cfg, ruta_config, overrides) -> int`:
+recibe además la ruta de `--config` y la lista de `--set` (los usa `hpo`).
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ import yaml
 
 from src.common.config import apply_overrides, load_config
 
-Manejador = Callable[[dict | None], int]
+Manejador = Callable[..., int]  # (cfg) -> int; con con_origen: (cfg, ruta_config, overrides) -> int
 
 CABECERA_CONFIG = "Configuración final resuelta:"
 DESTINO_PARSER = "parser_subcomando"
@@ -36,6 +39,7 @@ class Subcomando(NamedTuple):
     ayuda: str
     usa_config: bool  # True: --config obligatorio y --set repetible
     manejador: Manejador
+    con_origen: bool = False  # True: el manejador recibe también la ruta de --config y los --set
 
 
 def _pendiente(nombre: str, tarea: str) -> Manejador:
@@ -59,17 +63,43 @@ def _part1(cfg: dict | None) -> int:
     return manejador_part1(cfg)
 
 
-# Registro único nombre -> (ayuda, usa_config, manejador).
-# part1 ya está conectado (T1.7). Completar al cerrar T3.6 (part2) y T4.x (figures).
+def _part2(cfg: dict | None) -> int:
+    """Manejador de part2 (T3.6). Import perezoso: cargar la CLI no importa numpy ni el experimento."""
+    from src.part2 import experiment
+
+    return experiment.main(cfg)
+
+
+def _figures(cfg: dict | None) -> int:
+    """Manejador de figures (T4.4: Parte 2). Import perezoso: cargar la CLI no importa plotly."""
+    from src.viz import figuras
+
+    return figuras.main(cfg)
+
+
+def _hpo(cfg: dict, ruta_config: str, overrides: list[str]) -> int:
+    """Manejador de `hpo` (T1.10). Importa `src.part1.hpo_experimento` al llamarse, como `_part1`.
+
+    Recibe la ruta de `--config` y los `--set`: el experimento final se carga desde la config
+    afinada con esos mismos `--set`. Una config inválida devuelve 2 con el motivo en stderr.
+    """
+    from src.part1.hpo_experimento import manejador_hpo
+
+    return manejador_hpo(cfg, ruta_config, overrides)
+
+
+# Registro único nombre -> (ayuda, usa_config, manejador, con_origen).
+# part1 conectado en T1.7, hpo en T1.10, part2 en T3.6 y figures en T4.4 (Parte 1 pendiente: src/viz/figuras.py).
 SUBCOMANDOS: dict[str, Subcomando] = {
     "part1": Subcomando("Parte 1: optimización numérica (GD, EA, PSO, DE)", True, _part1),
+    "hpo": Subcomando("Parte 1: optimización de hiperparámetros", True, _hpo, con_origen=True),
     "part2": Subcomando(
-        "Parte 2: TSP por España (ACO, GA, exacto)", True, _pendiente("part2", "T3.6")
+        "Parte 2: TSP por España (ACO, GA, exacto)", True, _part2
     ),
     "figures": Subcomando(
         "Regenera las figuras interactivas y los GIF desde results/data/",
         False,
-        _pendiente("figures", "T4.x"),
+        _figures,
     ),
 }
 
@@ -80,11 +110,14 @@ def build_parser() -> argparse.ArgumentParser:
         description="Punto de entrada único del Trabajo 1 (Spec §4.1).",
     )
     sub = parser.add_subparsers(dest="comando", required=True)
-    for nombre, (ayuda, usa_config, _) in SUBCOMANDOS.items():
+    for nombre, subcomando in SUBCOMANDOS.items():
         p = sub.add_parser(
-            nombre, help=ayuda, description=ayuda, formatter_class=argparse.RawTextHelpFormatter
+            nombre,
+            help=subcomando.ayuda,
+            description=subcomando.ayuda,
+            formatter_class=argparse.RawTextHelpFormatter,
         )
-        if not usa_config:
+        if not subcomando.usa_config:
             continue
         # Se guarda el parser del subcomando en el Namespace para que main() pueda emitir los
         # errores de configuración con el uso de ESTE subcomando (y no el del parser raíz).
@@ -129,4 +162,6 @@ def main(argv: list[str] | None = None) -> int:
             # subcomando; su .error() imprime "usage: run.py part2 ..." y sale con código 2.
             getattr(args, DESTINO_PARSER).error(str(exc))
         _imprimir_config(cfg)
+    if subcomando.con_origen:
+        return subcomando.manejador(cfg, args.config, args.overrides)
     return subcomando.manejador(cfg)

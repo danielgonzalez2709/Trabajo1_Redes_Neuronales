@@ -1,5 +1,5 @@
 # Reporte técnico (entrada de blog) — Spec §8. Construir:  mkdocs build --strict -f blog/mkdocs.yml
-site_name: "Optimización numérica, metaheurística y combinatoria"
+site_name: "Redes neuronales y algoritmos bioinspirados. Trabajo 1"
 site_description: "Trabajo 1 — Redes neuronales y algoritmos bioinspirados (UNAL, 2026-02)"
 site_url: https://danielgonzalez2709.github.io/Trabajo1_Redes_Neuronales/
 repo_url: https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales

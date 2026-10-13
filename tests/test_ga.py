@@ -170,9 +170,9 @@ def test_conteo_de_recorridos(poblacion, elites, generaciones, monkeypatch):
 
 
 def test_conteo_con_valores_por_defecto():
-    """§7.4.2: 150 + 148 · 1 000 = 148 150 (sin correr el GA: misma fórmula con los valores de la base)."""
+    """§7.4.2: 150 + 148 · 348 = 51 654 (presupuesto común, §7.4 v1.16; sin correr el GA: misma fórmula con la base)."""
     bloque = load_config(BASE_PART2)["ga"]
-    assert bloque["poblacion"] + (bloque["poblacion"] - bloque["elites"]) * bloque["generaciones"] == 148_150
+    assert bloque["poblacion"] + (bloque["poblacion"] - bloque["elites"]) * bloque["generaciones"] == 51_654
 
 
 def test_numero_de_hijos_por_generacion_con_cantidad_impar():
@@ -601,9 +601,9 @@ def test_rng_debe_ser_generator():
 
 
 def test_bloque_ga_en_base_yaml():
-    """Spec §7.4 y §7.4.2: pop = 150, gen = 1 000, pc = 0.9, pm = 0.2, torneo k = 4, élites = 2."""
+    """Spec §7.4 y §7.4.2: pop = 150, gen = 348 (presupuesto común, v1.16), pc = 0.9, pm = 0.2, torneo k = 4, élites = 2."""
     bloque = load_config(BASE_PART2)["ga"]
-    assert bloque == {"poblacion": 150, "generaciones": 1000, "pc": 0.9, "pm": 0.2, "torneo_k": 4, "elites": 2}
+    assert bloque == {"poblacion": 150, "generaciones": 348, "pc": 0.9, "pm": 0.2, "torneo_k": 4, "elites": 2}
     for clave in ("poblacion", "generaciones", "torneo_k", "elites"):
         assert type(bloque[clave]) is int
     assert type(bloque["pc"]) is float and type(bloque["pm"]) is float

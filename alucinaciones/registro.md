@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 17 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
+| Código | 18 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
-| Conceptos | 6 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-38; H-31, H-32 y H-38 de severidad baja) — H-12 descartado | 0 |
+| Conceptos | 7 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39, H-41; H-31, H-32 y H-41 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 38** (H-01–H-38; H-38 (blog, desplazamiento del primer movimiento del PSO sin el recorte por v_max) es de T4.6 parcial Parte 1; H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 36 activos y 2 descartados (H-12, H-13).
+**Total registrados: 41** (H-01–H-41; H-41 (blog, desplazamiento del primer movimiento del PSO sin el recorte por v_max) es de T4.6 parcial Parte 1: en su rama era H-38 y se renumeró al integrar la HPO (T1.10) el 13-oct-2026 porque H-38–H-40 ya estaban en uso; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 39 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -437,7 +437,7 @@
 1. **Prompt (literal):** `prompts/T1.5.md`, prompt de la ronda 1 del `verificador-matematico`, punto 11 ("con v = 0 inicial la partícula líder solo se mueve por inercia hasta que g cambie") y el del `cazador-alucinaciones`, tarea 4 (misma frase). El docstring de `generar_enjambre_inicial` es salida del `implementador` (prompt de la ronda 1: "v = 0; b_i = x_i").
 2. **Respuestas relevantes:** (a) `src/part1/pso.py:265-266`: "Las velocidades en cero hacen que el primer movimiento dependa solo de las atracciones hacia $b_i$ y $g$." (b) `src/part1/pso.py:371-372`: "sin él cada partícula solo sería atraída por su posición actual". (c) la frase del prompt sobre el líder.
 3. **Cómo sospechamos:** con b_i = x_i en la iteración 1, el término cognitivo c₁R₁(b − x) es exactamente cero.
-4. **Evidencia:** `evidencias/T1.5_verificacion.py` §4 y `T1.5_verificacion2.py` §C-D (Rastrigin 2D, 30 semillas, configuración de base.yaml): (i) en la iteración 1 la **velocidad sin limitar** de todas las componentes es `c₂·R₂·(g − x)` y el primer movimiento es **puramente social** (0 de 1 800 componentes con paso/(g − x) fuera de [0, c₂]). *Matiz añadido el 13-oct-2026 (ver H-38):* esa prueba solo acota el cociente, no demuestra igualdad; el desplazamiento real coincide con `c₂·R₂·(g − x)` en 1 122 de 1 800 componentes, porque v_max recorta 678 (`evidencias/T4.6_verificacion.txt`). La versión anterior de este punto decía "el desplazamiento de **todas** las componentes es `c₂·R₂·(g − x)`"; (ii) el líder (x₀ = g₀) **no se mueve** en la iteración 1 en 30/30 corridas y permanece quieto hasta que g cambia (30/30): no se "mueve por inercia", porque la inercia es w·0 = 0; (iii) sin memoria (b ≡ x) el término cognitivo vale 0: la partícula quedaría atraída solo por g, no "por su posición actual".
+4. **Evidencia:** `evidencias/T1.5_verificacion.py` §4 y `T1.5_verificacion2.py` §C-D (Rastrigin 2D, 30 semillas, configuración de base.yaml): (i) en la iteración 1 la **velocidad sin limitar** de todas las componentes es `c₂·R₂·(g − x)` y el primer movimiento es **puramente social** (0 de 1 800 componentes con paso/(g − x) fuera de [0, c₂]). *Matiz añadido el 13-oct-2026 (ver H-41):* esa prueba solo acota el cociente, no demuestra igualdad; el desplazamiento real coincide con `c₂·R₂·(g − x)` en 1 122 de 1 800 componentes, porque v_max recorta 678 (`evidencias/T4.6_verificacion.txt`). La versión anterior de este punto decía "el desplazamiento de **todas** las componentes es `c₂·R₂·(g − x)`"; (ii) el líder (x₀ = g₀) **no se mueve** en la iteración 1 en 30/30 corridas y permanece quieto hasta que g cambia (30/30): no se "mueve por inercia", porque la inercia es w·0 = 0; (iii) sin memoria (b ≡ x) el término cognitivo vale 0: la partícula quedaría atraída solo por g, no "por su posición actual".
 5. **Corrección:** (a) "el primer movimiento es puramente social, porque b_i = x_i anula el término cognitivo"; (b) "sin memoria el término cognitivo sería siempre cero y solo quedaría la atracción hacia g"; (c) "con v = 0, el líder permanece quieto hasta que otra partícula mejora g". Tomar nota: `test_la_particula_que_es_g_y_esta_en_su_memoria_solo_se_mueve_por_inercia` es correcta para un paso con v ≠ 0.
 6. **Lección:** al explicar un algoritmo, evaluar cada término en el estado inicial concreto (b = x, v = 0); una frase didáctica "solo depende de A y B" puede ocultar que A vale cero.
 
@@ -509,8 +509,45 @@
 5. **Corrección:** líneas `[PENDIENTE]` de Spec §4.1, §5.4 y §6.6 reescritas con el alcance exacto de la validación y lo que faltaba. Queda para decisión humana si se validan los bloques de método antes de correr.
 6. **Lección:** "no escribe ningún archivo" es una afirmación universal: se comprueba con un caso que falle tarde, no solo con los que la validación ya rechaza.
 
-### H-38 — Blog: "cada partícula se desplaza c₂·R₂⊙(g − x)" en la primera iteración del PSO (omite el recorte por v_max, que actúa en ~40 % de las componentes)
-- **Estado:** candidato — severidad **baja**. La conclusión del párrafo (primer movimiento puramente social, líder inmóvil) es correcta; lo impreciso es la igualdad del desplazamiento. Detectado y corregido antes del commit.
+---
+### H-38 — Desempate "exacto" con `Fraction` construidas desde floats ya redondeados (selección de la HPO, T1.10)
+- **Estado:** candidato, severidad media (rompía la regla R3/R6 en empates reales; latente en los datos reales); corregido antes de integrarse.
+- **Categoría:** Código (con raíz en un error de aritmética de punto flotante)
+- **Herramienta y modelo:** Claude Code, sesión principal (orquestador, claude-opus-5-5) al redactar el prompt del implementador A, y `implementador`, que lo siguió · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `revisor-calidad` y `revisor-spec`, por separado, reproduciéndolo con datos sintéticos
+1. **Prompt (literal):** `prompts/T1.10.md`, prompt del implementador A, regla R6: "Compara las claves con aritmética exacta (fractions.Fraction a partir de los float) para que el resultado no dependa del orden de las sumas."
+2. **Respuesta relevante de la IA:** `src/part1/hpo.py` (ronda 1) guardaba la tasa de éxito por celda como `float(k/S)` y `_clave_de_orden` la reconstruía con `Fraction(float)`; el markdown afirmaba que así "el resultado no depende del orden de las sumas".
+3. **Cómo sospechamos:** los revisores probaron empates que se alcanzan con celdas distintas (no con registros idénticos, que era lo único que cubrían las pruebas).
+4. **Evidencia:** con 5 semillas y 2 celdas, `Fraction(0.6) + Fraction(1.0) ≠ Fraction(0.8) + Fraction(0.8)` (0,6 y 0,8 no son exactos en binario): ensayo 0 con tasas (0,6; 1,0) y ensayo 1 con (0,8; 0,8), mismas medianas y evaluaciones → `elegir_ganador` devolvía 1, cuando R3/R6 exigen 0. Segundo caso (revisor-spec): éxitos (1, 4) con 900 evaluaciones frente a (2, 3) con 100 → devolvía 0, R6 exige 1 (`Fraction(0.2) + Fraction(0.8) = 1 + 2⁻⁵⁴`). En la HPO real los ganadores de las unidades ya corridas coincidieron con una reimplementación por conteos enteros (el error era latente).
+5. **Corrección:** el puntaje guarda por celda conteos enteros (semillas, éxitos y suma de evaluaciones hasta el éxito) y la clave se calcula con `Fraction(éxitos, semillas)` y `Fraction(suma, éxitos)`; pruebas con los dos casos (también tras pasar por JSON) y un mutante M8 que reintroduce `Fraction(float)` y muere. Spec §6.9 R6 dice ahora que la comparación parte de conteos enteros.
+6. **Lección:** `Fraction` no repara un redondeo que ya ocurrió: la aritmética exacta tiene que empezar en los datos exactos (conteos), no en floats derivados de ellos.
+
+---
+### H-39 — "Solo reemplaza al defecto si es estrictamente mejor" implementado como "mejor en la clave lexicográfica completa" (selección de la HPO)
+- **Estado:** candidato, severidad media (cambió los valores afinados de dos métodos y empeoró sus resultados de reporte); corregido en T1.10b.
+- **Categoría:** Conceptos (criterio de decisión estadístico mal planteado)
+- **Herramienta y modelo:** prompt de T1.10 redactado por el humano con ayuda de IA; implementado tal cual por Claude Code (orquestador e `implementador`, claude-opus-5-5) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el humano, al revisar los resultados reales (la observación ya aparecía en los informes de `analista-experimentos` y `verificador-matematico` de T1.10)
+1. **Prompt (literal):** `prompts/T1.10.md`, R3: "El ganador solo reemplaza al defecto si es estrictamente mejor según el criterio de selección; en empate gana el ensayo de menor índice"; R6: puntaje 1 y desempates 2, 3 y final como una sola ordenación.
+2. **Respuesta relevante de la IA:** `elegir_ganador` (T1.10) tomaba el mínimo de la clave (rango medio, −tasa, evaluaciones, índice): un desempate bastaba para desplazar al ensayo 0.
+3. **Cómo sospechamos:** en `seleccion.json`, pso y de tenían el mismo puntaje principal que el defecto (10,5 = 10,5 y 14,625 = 14,625) y ganaban por un éxito más de 20 a 1e-6 y menos evaluaciones.
+4. **Evidencia:** `results/data/part1_hpo/regla_v1/` (seleccion.json, tuned.yaml, comparacion.csv, summary_afinado.json): con las 30 semillas de reporte, PSO Rastrigin 3D 26/30 → 15/30 a 1e-4; DE Rastrigin 2D 30/30 → 26/30 y 3D 28/30 → 24/30.
+5. **Corrección:** T1.10b. El ensayo 0 solo se reemplaza si el mejor puntaje principal es estrictamente menor; los desempates solo ordenan a los retadores empatados en ese puntaje. Pruebas (a)–(d) y mutantes M9 y M10 muertos. Reanudación sin repetir corridas: pso y de vuelven al ensayo 0. Spec §6.9 R3/R6 actualizados.
+6. **Lección:** una regla de "mejora estricta" tiene que decir sobre qué cantidad es estricta; con 5 semillas, un desempate de una corrida es ruido y no debe poder cambiar el defecto.
+
+---
+### H-40 — Revisor que afirma "archivos nuevos en CRLF en disco" cuando están en LF (medición mal hecha)
+- **Estado:** candidato **débil**, severidad baja (observación no bloqueante; no se cambió nada por ella).
+- **Categoría:** Código (verificación con una herramienta mal usada)
+- **Herramienta y modelo:** Claude Code, subagente `revisor-spec` (claude-opus-5-5), T1.10b · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el orquestador, al comprobarlo antes de actuar
+1. **Prompt (literal):** `prompts/T1.10b.md`, encargo de revisión: "que `git diff --stat` coincide con `--ignore-cr-at-eol`" y reglas de finales de línea.
+2. **Respuesta relevante de la IA:** "Esos cuatro archivos están enteros en CRLF en disco (CR = número de líneas: 1031, 959, 1028 y 1234) … cualquier afirmación de que 'los archivos nuevos están en LF' es falsa en disco."
+3. **Cómo sospechamos:** contradecía la revisión de T1.10 ("LF puro, 0 CRLF, leído por bytes").
+4. **Evidencia:** `Path(f).read_bytes().count(b'\r\n')` = 0 en `src/part1/hpo.py`, `hpo_experimento.py`, `tests/test_hpo.py`, `tests/test_hpo_experimento.py`, `configs/part1/hpo_demo.yaml` y `tuned.yaml` (y 203/203 en `corrida.py`, que sí está en CRLF). El orquestador reprodujo un conteo igual al número de líneas con `grep -c $'\r'` dentro de `"$(...)"`; en un archivo LF de prueba, el mismo patrón fuera de esa construcción da 0 (causa probable: el patrón no se expande como CR; no verificado más).
+5. **Corrección:** ninguna en el código; se descarta la observación.
+6. **Lección:** una afirmación sobre bytes se comprueba leyendo bytes (Python), no con un patrón de shell cuyo citado depende del contexto.
+
+---
+### H-41 — Blog: "cada partícula se desplaza c₂·R₂⊙(g − x)" en la primera iteración del PSO (omite el recorte por v_max, que actúa en ~40 % de las componentes)
+- **Estado:** candidato — severidad **baja** (en la rama de T4.6 se registró como H-38; renumerado a H-41 al integrar la HPO, que ya usaba H-38–H-40). La conclusión del párrafo (primer movimiento puramente social, líder inmóvil) es correcta; lo impreciso es la igualdad del desplazamiento. Detectado y corregido antes del commit.
 - **Categoría:** Conceptos (también Matemáticas)
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `redactor-tecnico`, T4.6 parcial Parte 1) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `cazador-alucinaciones` (T4.6)
 1. **Prompt (literal):** `prompts/T4.6-parte1-heuristicos.md`, "Prompt al `redactor-tecnico` (ronda 1)". La hoja de hechos solo decía "el primer movimiento es puramente social y la partícula que es g no se mueve hasta que g cambie"; la fórmula del desplazamiento la añadió el modelo.

@@ -23,6 +23,21 @@ data/raw/osrm_*/simetria/
 # Demo de la Parte 1 (configs/part1/demo.yaml): salidas que se regeneran en menos de 2 minutos
 results/data/part1_demo/
 results/tables/part1_demo/
+# T3.7: salida de la demo de la Parte 2 (se regenera en segundos con run.py; no se versiona, Spec v1.17 §7.7)
+results/data/part2/demo/
+
+# Demo de la HPO de la Parte 1 (configs/part1/hpo_demo.yaml): salidas que se regeneran
+results/data/part1_hpo_demo/
+results/tables/part1_hpo_demo/
+
+# JSON por corrida de la Parte 1 (por defecto y afinada). Provisional: decisión pendiente del punto (b) de T1.7
+results/data/part1/runs/
+results/data/part1/k1/runs/
+results/data/part1_tuned/runs/
+results/data/part1_tuned/k1/runs/
+# Sensibilidad η = 1/L del GD en Rosenbrock (T1.10b): mismo criterio provisional que arriba
+results/data/part1_eta_1l/runs/
+results/data/part1_eta_1l/k1/runs/
 
 # Claude Code: configuración local de cada integrante (los agentes en .claude/agents/ SÍ se versionan)
 .claude/settings.local.json
