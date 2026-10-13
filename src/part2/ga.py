@@ -40,12 +40,7 @@ from __future__ import annotations
 import numpy as np
 
 from src.common.seeds import validar_entero
-from src.part2.recorridos import costos_recorridos as _costos_recorridos
-from src.part2.recorridos import leer_clave as _leer_clave
-from src.part2.recorridos import validar_generador as _validar_generador
-from src.part2.recorridos import validar_matriz as _validar_matriz
-from src.part2.recorridos import validar_real as _validar_real
-from src.part2.recorridos import vecino_mas_cercano as _vecino_mas_cercano
+from src.part2 import recorridos  # piezas comunes con aco.py (Spec §7.4.2)
 
 __all__ = ["solve", "iterar"]  # Spec §5.2 y §7.4.2: el resto del módulo es privado
 
@@ -58,10 +53,10 @@ _PROB_INVERSION = 0.5  # Spec §7.4.2: inversión o intercambio, elegido 50/50
 
 def _leer_parametros(cfg: dict) -> dict:
     """Parámetros validados de `cfg["ga"]` (rangos de §7.4.2)."""
-    bloque = _leer_clave(cfg, "ga", "ga", _SECCION)
+    bloque = recorridos.leer_clave(cfg, "ga", "ga", _SECCION)
 
     def clave(nombre):
-        return _leer_clave(bloque, nombre, f"ga.{nombre}", _SECCION)
+        return recorridos.leer_clave(bloque, nombre, f"ga.{nombre}", _SECCION)
 
     poblacion = validar_entero(clave("poblacion"), "ga.poblacion", minimo=2)
     generaciones = validar_entero(clave("generaciones"), "ga.generaciones", minimo=1)
@@ -76,8 +71,8 @@ def _leer_parametros(cfg: dict) -> dict:
         "generaciones": generaciones,
         "torneo_k": torneo_k,
         "elites": elites,
-        "pc": _validar_real(clave("pc"), "ga.pc", 0.0, 1.0),
-        "pm": _validar_real(clave("pm"), "ga.pm", 0.0, 1.0),
+        "pc": recorridos.validar_real(clave("pc"), "ga.pc", 0.0, 1.0),
+        "pm": recorridos.validar_real(clave("pm"), "ga.pm", 0.0, 1.0),
     }
 
 
@@ -137,11 +132,11 @@ def _intercambiar(tour: np.ndarray, rng: np.random.Generator) -> np.ndarray:
     return _intercambiar_posiciones(tour, i, j)
 
 
-def _mutar(tour: np.ndarray, rng: np.random.Generator) -> tuple[np.ndarray, str]:
-    """Un solo operador, inversión o intercambio, elegido 50/50 (§7.4.2). Devuelve (hijo, nombre del operador)."""
+def _mutar(tour: np.ndarray, rng: np.random.Generator) -> np.ndarray:
+    """Un solo operador, inversión o intercambio, elegido 50/50 (§7.4.2)."""
     if rng.random() < _PROB_INVERSION:
-        return _invertir(tour, rng), "inversion"
-    return _intercambiar(tour, rng), "intercambio"
+        return _invertir(tour, rng)
+    return _intercambiar(tour, rng)
 
 
 def _torneo(costos: np.ndarray, k: int, rng: np.random.Generator) -> int:
@@ -157,7 +152,7 @@ def _torneo(costos: np.ndarray, k: int, rng: np.random.Generator) -> int:
 def _poblacion_inicial(C: np.ndarray, poblacion: int, rng: np.random.Generator) -> np.ndarray:
     """Matriz poblacion × n: fila 0 = vecino más cercano desde la ciudad 0; el resto, permutaciones uniformes."""
     n = C.shape[0]
-    tour_nn, _ = _vecino_mas_cercano(C)
+    tour_nn, _ = recorridos.vecino_mas_cercano(C)
     filas = [tour_nn] + [rng.permutation(n) for _ in range(poblacion - 1)]
     return np.array(filas, dtype=np.intp)
 
@@ -176,7 +171,7 @@ def _hijos(poblacion: np.ndarray, costos: np.ndarray, cantidad: int, params: dic
             nuevos = [p1.copy()] + ([p2.copy()] if dos else [])
         for hijo in nuevos:
             if rng.random() < params["pm"]:
-                hijo, _ = _mutar(hijo, rng)
+                hijo = _mutar(hijo, rng)
             hijos.append(hijo)
     return np.array(hijos, dtype=np.intp)
 
@@ -194,8 +189,8 @@ def iterar(C: np.ndarray, cfg: dict, rng: np.random.Generator):
     `solve` consume este generador; las pruebas lo usan para revisar cada generación.
     """
     params = _leer_parametros(cfg)
-    C = _validar_matriz(C)
-    _validar_generador(rng)
+    C = recorridos.validar_matriz(C)
+    recorridos.validar_generador(rng)
     return _generar(C, params, rng)
 
 
@@ -205,7 +200,7 @@ def _generar(C: np.ndarray, params: dict, rng: np.random.Generator):
     n_hijos = params["poblacion"] - elites
 
     poblacion = _poblacion_inicial(C, params["poblacion"], rng)
-    costos = _costos_recorridos(C, poblacion)
+    costos = recorridos.costos_recorridos(C, poblacion)
     n_tour_evals = len(costos)
     k = int(np.argmin(costos))  # empates: primer índice
     best_tour, best_cost = poblacion[k].copy(), float(costos[k])
@@ -213,7 +208,7 @@ def _generar(C: np.ndarray, params: dict, rng: np.random.Generator):
     for g in range(params["generaciones"]):
         orden = np.argsort(costos, kind="stable")[:elites]  # empates: primer índice
         hijos = _hijos(poblacion, costos, n_hijos, params, rng)
-        costos_hijos = _costos_recorridos(C, hijos)
+        costos_hijos = recorridos.costos_recorridos(C, hijos)
         n_tour_evals += len(costos_hijos)
         poblacion = np.vstack([poblacion[orden], hijos])
         costos = np.concatenate([costos[orden], costos_hijos])
@@ -241,13 +236,15 @@ def solve(C: np.ndarray, cfg: dict, rng: np.random.Generator) -> dict:
     · generaciones y `history` una entrada por generación con el mejor global hasta ella.
     """
     history = []
+    n_tour_evals = 0
     for estado in iterar(C, cfg, rng):
         history.append(
             {"iter": estado["g"], "best_cost": estado["best_cost"], "best_tour": estado["best_tour"].tolist()}
         )
+        n_tour_evals = estado["n_tour_evals"]  # acumulado hasta la última generación
     return {
         "tour": list(history[-1]["best_tour"]),
         "cost": history[-1]["best_cost"],
-        "n_tour_evals": estado["n_tour_evals"],
+        "n_tour_evals": n_tour_evals,
         "history": history,
     }

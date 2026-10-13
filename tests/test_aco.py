@@ -550,3 +550,24 @@ def test_base_yaml_funciona_con_solve():
     cfg["aco"]["hormigas"], cfg["aco"]["iteraciones"] = 8, 3
     res = aco.solve(C8, cfg, np.random.default_rng(0))
     assert res["n_tour_evals"] == 1 + 8 * 3
+
+
+# ----------------------------------------------------------------------------- 12. estados independientes
+
+
+@pytest.mark.parametrize("variante", ["mmas", "as"])
+def test_modificar_best_tour_de_un_estado_no_afecta_a_los_siguientes(variante):
+    """Cada estado cede su propia copia de `best_tour`: si quien consume `iterar` la modifica, ni los estados
+    siguientes ni la feromona cambian (en MMAS, t impar deposita T^bs). El mejor global se repite entre estados
+    (el caso lo comprueba), que es cuando un arreglo compartido se notaría."""
+    C = _euclidea(10, 5)
+    cfg = _cfg(variante=variante, hormigas=4, iteraciones=20)
+    limpios = [
+        {k: (v.copy() if isinstance(v, np.ndarray) else v) for k, v in e.items()}
+        for e in aco.iterar(C, cfg, np.random.default_rng(3))
+    ]
+    assert any(np.array_equal(a["best_tour"], b["best_tour"]) for a, b in zip(limpios, limpios[1:]))
+    for estado, limpio in zip(aco.iterar(C, cfg, np.random.default_rng(3)), limpios):
+        for k in ("best_tour", "tau", "tours"):
+            assert np.array_equal(estado[k], limpio[k]), (estado["t"], k)
+        estado["best_tour"][...] = 0  # el consumidor estropea el estado recibido

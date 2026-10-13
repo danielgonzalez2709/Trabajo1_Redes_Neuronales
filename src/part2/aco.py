@@ -42,23 +42,20 @@ from __future__ import annotations
 import numpy as np
 
 from src.common.seeds import validar_entero
-from src.part2.recorridos import costos_recorridos as _costos
-from src.part2.recorridos import N_MINIMO  # noqa: F401  (superficie pública de T3.3)
-from src.part2.recorridos import leer_clave, validar_generador
-from src.part2.recorridos import validar_matriz as _validar_matriz
-from src.part2.recorridos import validar_real as _real
-from src.part2.recorridos import vecino_mas_cercano as _vecino_mas_cercano
+from src.part2 import recorridos  # piezas comunes con ga.py (Spec §7.4.2)
 
 VARIANTES = ("mmas", "as")  # Spec §7.4.1: MMAS principal, AS comparación
 
+# Nombres de T3.3 que usan las pruebas de tests/test_aco.py; la implementación vive en `recorridos.py`.
+_costos = recorridos.costos_recorridos
+_vecino_mas_cercano = recorridos.vecino_mas_cercano
+
 
 # ---------------------------------------------------------------------------------------- validación
-# Validación de C, costo de recorridos, vecino más cercano y `_real` viven en `recorridos.py` (compartidos con
-# `ga.py`, Spec §7.4.2); se importan con sus nombres de T3.3 para no cambiar el comportamiento ni las pruebas.
 
 
 def _clave(bloque: dict, clave: str, ruta: str):
-    return leer_clave(bloque, clave, ruta, "§7.4.1")
+    return recorridos.leer_clave(bloque, clave, ruta, "§7.4.1")
 
 
 def _leer_parametros(cfg: dict) -> dict:
@@ -73,12 +70,16 @@ def _leer_parametros(cfg: dict) -> dict:
         "variante": variante,
         "hormigas": validar_entero(_clave(bloque, "hormigas", "aco.hormigas"), "aco.hormigas", minimo=1),
         "iteraciones": validar_entero(_clave(bloque, "iteraciones", "aco.iteraciones"), "aco.iteraciones", minimo=1),
-        "alpha": _real(_clave(bloque, "alpha", "aco.alpha"), "aco.alpha", 0.0),
-        "beta": _real(_clave(bloque, "beta", "aco.beta"), "aco.beta", 0.0),
+        "alpha": recorridos.validar_real(_clave(bloque, "alpha", "aco.alpha"), "aco.alpha", 0.0),
+        "beta": recorridos.validar_real(_clave(bloque, "beta", "aco.beta"), "aco.beta", 0.0),
         # 0 < ρ ≤ 1 (notas §4.2); 0 < p_best < 1 (notas Prop. 2)
-        "rho_as": _real(_clave(sub_as, "rho", "aco.as.rho"), "aco.as.rho", 0.0, 1.0, min_abierto=True),
-        "rho_mmas": _real(_clave(sub_mmas, "rho", "aco.mmas.rho"), "aco.mmas.rho", 0.0, 1.0, min_abierto=True),
-        "p_best": _real(
+        "rho_as": recorridos.validar_real(
+            _clave(sub_as, "rho", "aco.as.rho"), "aco.as.rho", 0.0, 1.0, min_abierto=True
+        ),
+        "rho_mmas": recorridos.validar_real(
+            _clave(sub_mmas, "rho", "aco.mmas.rho"), "aco.mmas.rho", 0.0, 1.0, min_abierto=True
+        ),
+        "p_best": recorridos.validar_real(
             _clave(sub_mmas, "p_best", "aco.mmas.p_best"),
             "aco.mmas.p_best",
             0.0,
@@ -190,9 +191,9 @@ def iterar(C: np.ndarray, cfg: dict, rng: np.random.Generator):
     `solve` consume este generador; las pruebas lo usan para revisar cada actualización.
     """
     params = _leer_parametros(cfg)
-    C = _validar_matriz(C)
-    validar_generador(rng)
-    vecino = _vecino_mas_cercano(C)  # T^bs inicial: L^bs = C^nn (Spec §7.4.1)
+    C = recorridos.validar_matriz(C)
+    recorridos.validar_generador(rng)
+    vecino = recorridos.vecino_mas_cercano(C)  # T^bs inicial: L^bs = C^nn (Spec §7.4.1)
     if params["variante"] == "mmas":
         _limites_mmas(vecino[1], params["rho_mmas"], C.shape[0], params["p_best"])  # τ_min ≥ τ_max → ValueError aquí
     return _generar(C, params, rng, vecino)
@@ -224,7 +225,7 @@ def _generar(C: np.ndarray, params: dict, rng: np.random.Generator, vecino: tupl
     for t in range(params["iteraciones"]):
         W = _pesos(tau, eta_beta, alpha)
         tours = _construir_recorridos(W, m, rng)
-        costos = _costos(C, tours)
+        costos = recorridos.costos_recorridos(C, tours)
         # Orden de §7.4.1: T^ib, T^bs y límites antes de evaporar y depositar.
         k_ib = int(np.argmin(costos))
         ib_tour, ib_cost = tours[k_ib], float(costos[k_ib])
@@ -246,7 +247,7 @@ def _generar(C: np.ndarray, params: dict, rng: np.random.Generator, vecino: tupl
             "tau": tau,
             "tau_min": tau_min,
             "tau_max": tau_max,
-            "best_tour": best_tour,
+            "best_tour": best_tour.copy(),  # copia: T^bs persiste entre iteraciones y MMAS la deposita
             "best_cost": best_cost,
         }
 

@@ -76,8 +76,7 @@ def test_mutacion_10000_operaciones_validas_y_padre_intacto():
     rng = np.random.default_rng(103)
     for n, p, _ in _permutaciones_aleatorias(4):
         copia = p.copy()
-        hijo, operador = ga._mutar(p, rng)
-        assert operador in ("inversion", "intercambio")
+        hijo = ga._mutar(p, rng)
         assert _es_permutacion(hijo, n)
         assert np.array_equal(p, copia)
         assert not np.array_equal(hijo, p)
@@ -88,7 +87,7 @@ def test_ox_encadenado_sigue_siendo_permutacion():
     rng = np.random.default_rng(104)
     a, b = rng.permutation(47), rng.permutation(47)
     for _ in range(N_OPERACIONES):
-        a, b = ga._ox(a, b, rng), ga._mutar(ga._ox(b, a, rng), rng)[0]
+        a, b = ga._ox(a, b, rng), ga._mutar(ga._ox(b, a, rng), rng)
         assert _es_permutacion(a, 47) and _es_permutacion(b, 47)
 
 
@@ -168,27 +167,43 @@ def test_dos_posiciones_distintas_ordenadas_y_todas_posibles():
 # --------------------------------------------------------------------------------------- mutación 50/50
 
 
-def test_mutacion_elige_cada_operador_con_probabilidad_un_medio():
-    """Un solo operador por mutación, inversión o intercambio, 50/50 (§7.4.2). Tolerancia: 5 desviaciones estándar
-    de una binomial con p = 0.5 y k = 20 000 (semilla fija)."""
+@pytest.fixture
+def espia_operadores(monkeypatch):
+    """Envuelve `ga._invertir` y `ga._intercambiar` (que `_mutar` llama por nombre) y anota, por llamada, qué
+    operador se aplicó y qué devolvió."""
+    llamadas = []
+    for nombre in ("_invertir", "_intercambiar"):
+        original = getattr(ga, nombre)
+
+        def espia(tour, rng, _nombre=nombre, _original=original):
+            hijo = _original(tour, rng)
+            llamadas.append((_nombre, hijo))
+            return hijo
+
+        monkeypatch.setattr(ga, nombre, espia)
+    return llamadas
+
+
+def test_mutacion_elige_cada_operador_con_probabilidad_un_medio(espia_operadores):
+    """Inversión o intercambio, 50/50 (§7.4.2). Tolerancia: 5 desviaciones estándar de una binomial con p = 0.5 y
+    k = 20 000 (semilla fija)."""
     k = 20_000
     rng = np.random.default_rng(7)
     tour = np.arange(10)
-    operadores = [ga._mutar(tour, rng)[1] for _ in range(k)]
-    frecuencia = operadores.count("inversion") / k
+    for _ in range(k):
+        ga._mutar(tour, rng)
+    operadores = [nombre for nombre, _ in espia_operadores]
+    assert len(operadores) == k
+    frecuencia = operadores.count("_invertir") / k
     assert abs(frecuencia - 0.5) < 5 * math.sqrt(0.25 / k)
-    assert set(operadores) == {"inversion", "intercambio"}
 
 
-@pytest.mark.parametrize("operador", ["inversion", "intercambio"])
-def test_mutacion_aplica_el_operador_que_reporta(operador):
-    """El hijo coincide con el operador reportado aplicado con el mismo flujo aleatorio (un solo operador)."""
-    tour = np.random.default_rng(8).permutation(12)
-    for semilla in range(200):
-        hijo, nombre = ga._mutar(tour, np.random.default_rng(semilla))
-        if nombre != operador:
-            continue
-        rng = np.random.default_rng(semilla)
-        rng.random()  # el sorteo 50/50
-        esperado = ga._invertir(tour, rng) if operador == "inversion" else ga._intercambiar(tour, rng)
-        assert np.array_equal(hijo, esperado)
+def test_mutacion_aplica_un_solo_operador_y_devuelve_su_resultado(espia_operadores):
+    """Cada mutación llama exactamente a un operador, y el hijo es lo que ese operador devolvió."""
+    rng = np.random.default_rng(8)
+    tour = rng.permutation(12)
+    for k in range(1, 501):
+        hijo = ga._mutar(tour, rng)
+        assert len(espia_operadores) == k
+        assert hijo is espia_operadores[-1][1]
+    assert {nombre for nombre, _ in espia_operadores} == {"_invertir", "_intercambiar"}

@@ -29,7 +29,7 @@ import numpy as np
 import pytest
 
 from src.common.config import load_config
-from src.part2 import aco, ga, recorridos
+from src.part2 import ga, recorridos
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_PART2 = ROOT / "configs" / "part2" / "base.yaml"
@@ -140,15 +140,27 @@ def test_funciona_con_tres_ciudades():
 )
 def test_conteo_de_recorridos(poblacion, elites, generaciones, monkeypatch):
     """n_tour_evals sigue la fórmula de §7.4.2 y coincide con los recorridos que de verdad se evalúan (se cuentan las
-    filas que recibe la función de costos): el segundo hijo sobrante no se evalúa."""
+    filas que recibe la función de costos): el segundo hijo sobrante no se evalúa. El costo que el vecino más cercano
+    calcula por dentro no se cuenta aparte: ese recorrido cuenta 1 como individuo de la población inicial."""
     evaluados = []
-    original = ga._costos_recorridos
+    dentro_del_vecino = []
+    costos_original = recorridos.costos_recorridos
+    vecino_original = recorridos.vecino_mas_cercano
 
     def contar(C, tours):
-        evaluados.append(len(tours))
-        return original(C, tours)
+        if not dentro_del_vecino:
+            evaluados.append(len(tours))
+        return costos_original(C, tours)
 
-    monkeypatch.setattr(ga, "_costos_recorridos", contar)
+    def vecino(C):
+        dentro_del_vecino.append(True)
+        try:
+            return vecino_original(C)
+        finally:
+            dentro_del_vecino.pop()
+
+    monkeypatch.setattr(recorridos, "costos_recorridos", contar)
+    monkeypatch.setattr(recorridos, "vecino_mas_cercano", vecino)
     cfg = _cfg(poblacion=poblacion, generaciones=generaciones, elites=elites, torneo_k=2)
     res = ga.solve(C8, cfg, np.random.default_rng(0))
     esperado = poblacion + (poblacion - elites) * generaciones
@@ -585,20 +597,6 @@ def test_rng_debe_ser_generator():
         ga.solve(C8, _cfg(), 0)
 
 
-# ---------------------------------------------------------------------- piezas comunes con aco.py
-
-
-def test_ga_y_aco_comparten_las_piezas_comunes():
-    """§7.4.2: validación de C, costo de recorridos y vecino más cercano se reutilizan sin duplicar código."""
-    assert aco._validar_matriz is recorridos.validar_matriz
-    assert aco._costos is recorridos.costos_recorridos
-    assert aco._vecino_mas_cercano is recorridos.vecino_mas_cercano
-    assert ga._costos_recorridos is recorridos.costos_recorridos
-    assert ga._vecino_mas_cercano is recorridos.vecino_mas_cercano
-    assert ga._validar_matriz is recorridos.validar_matriz
-    assert "src.part2.aco" not in inspect.getsource(ga)
-
-
 # ----------------------------------------------------------------------------------- 12. base.yaml
 
 
@@ -619,16 +617,17 @@ def test_base_yaml_funciona_con_solve():
     assert res["n_tour_evals"] == 10 + 8 * 3
 
 
-# --------------------------------------------------------------------------------- superficie pública
+# ------------------------------------------------------------------- superficie pública y piezas comunes
 
 
 def test_publicas_solo_solve_e_iterar():
-    """§5.2 y §7.4.2: `ga.py` expone `solve` e `iterar`; el resto (operadores, constantes, imports) es privado."""
+    """§5.2 y §7.4.2: `ga.py` expone `solve` e `iterar`."""
     assert ga.__all__ == ["solve", "iterar"]
-    publicos = {nombre for nombre in vars(ga) if not nombre.startswith("_") and nombre != "annotations"}
-    assert publicos == {"np", "validar_entero", "solve", "iterar"}
 
 
-def test_aco_conserva_n_minimo():
-    """Extraer las piezas comunes no cambia la superficie de `aco.py` (T3.3)."""
-    assert aco.N_MINIMO == recorridos.N_MINIMO == 3
+def test_ga_usa_las_piezas_comunes_de_recorridos():
+    """§7.4.2: validación de C, costo de recorridos y vecino más cercano se reutilizan de `recorridos.py`; `ga.py`
+    no define versiones propias."""
+    assert ga.recorridos is recorridos
+    propias = [n for n, f in vars(ga).items() if inspect.isfunction(f) and f.__module__ == ga.__name__]
+    assert not [n for n in propias if any(p in n for p in ("matriz", "costo", "vecino", "generador"))], propias
