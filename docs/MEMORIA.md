@@ -15,7 +15,7 @@
 | | |
 |---|---|
 | Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (rama `integracion/t05-t41`, PR pendiente) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3 ✅ |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3 ✅ |
 | Próxima tarea | Parte 2: **T3.4** GA, T3.5 2-opt (recomendado: el MMAS deja cruces visibles); **T3.2 exacto = opcional** (Spec v1.14). T3.3 y T3.4 editan `base.yaml`: integrar de a una. Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
 | Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
@@ -69,7 +69,7 @@
 - [x] Zona horaria (T2.8, 12-oct): la 1.ª iteración de OSRM salió del equipo de Camila (UTC−3, Brasil); el resto, del PC de Jose Miguel (UTC−5). Documentado en el encabezado de `fuentes.md`; la atribución a UTC−3 se apoya en `scripts/osrm/README.md`, no en los crudos.
 - [ ] **`AP68-POST-VI`** (Álava, tras el 10-nov): `tarifa_ligeros_eur` en `TODO(dato-faltante)`, sin tarifa oficial. Pendiente de decisión humana; el test lo admite solo fuera de la vigencia del corte y documentado por id.
 - [x] **Acabado** del Corolla: Style Plus 140H e-CVT MY27 (Spec v1.7). Extra alta 5,6–6,2 (catálogo 2023) = sensibilidad.
-- [ ] Puente (Daniel): fijar el estado de H-12 (propuesta: descartar), H-13 (descartar), H-14 (confirmar) y la categoría de H-15.
+- [x] Puente (Daniel, 12-oct): H-12 y H-13 descartados, H-14 confirmado, H-15 en Datos (propuestas del equipo Parte 2). Confirmados además H-03, H-04, H-07, H-08, H-10, H-17, H-22 → **9 confirmados en 4 categorías**.
 - [x] **T2.3 (12-oct):** OSRM depende del historial de consultas del proceso → `--threads 1`, arranque limpio y una
   corrida (Spec v1.8). 26 `sin_peaje` con `toll` (M-12, AP-15, AP-68): **T2.5 los cobra**. Opcional si sobra tiempo: un
   proceso por alternativa (probado, 0 con `toll`). **T2.4 debe incluir M-12 y AP-15.**
@@ -87,7 +87,7 @@
 Candidatos: **23** (H-21 "Logroño" inventado en T3.1 · H-22 Dantzig 1954: revista con el nombre actual · H-23 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
 H-07 PuLP 4 sin CBC · H-08 contador y redondeo · H-09 np.float64 · H-10 prueba que no falla · H-11 campos PBF · H-12 WLTP máx. 4,8 ·
 H-13 buscador "sin ficha" · H-14 "no publican extra alta" · H-15 paráfrasis infiel · H-16 causa OSRM mal atribuida · H-17 AP-9 desplazada una fila · H-18 Catálogo "excluye" la AP-68 navarra · H-19 BOE núm. 225 mal citado) —
-confirmados por el puente: **2** (H-04, H-05); por el cazador: **2** (H-17, H-18) — categorías: Datos (10), Matemáticas (1), Código (7: incl. H-23),
+confirmados por el puente: **9** (H-03, H-04, H-05, H-07, H-08, H-10, H-14, H-17, H-22; 4 categorías); por el cazador, pendiente del puente: H-18; descartados: H-12, H-13 — categorías: Datos (10), Matemáticas (1), Código (7: incl. H-23),
 Conceptos (2: H-12 con propuesta de descarte, y H-16), Bibliografía (2: H-19 origen pendiente, H-22). Técnica útil: **prueba de mutación**.
 Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 
@@ -96,6 +96,8 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 |---|---|---|
 | 2026-10-12 | Jose Miguel + Claude | **T3.3 ✅**: `aco.py` (AS + MMAS, `solve` + `iterar`) y `test_aco.py` (60 pruebas; 769 en total). implementador 3 rondas (Opus); revisor-spec ✅, verificador-matematico ✅ (demostró que con el orden aprobado el recorte superior nunca se activa), revisor-calidad ✅ (Sonnet). w = 25: MMAS 2 589,55 €, AS 2 659,76 €, vecino más cercano 3 173,83 €. Sin candidatos nuevos a la cacería. |
 | 2026-10-12 | Jose Miguel + Claude | **Spec v1.14**: T3.2 opcional; ACO según las notas del profesor (§7.4.1). Hallado: los valores por defecto daban 14 100 recorridos a ACO y ~150 000 a GA (comparación injusta) → presupuesto común en T3.6. Despachada T3.3. |
+| 2026-10-12 | Daniel + Claude | Sección **Uso de IA** del blog (`blog/secciones/09-uso-ia.md`): metodología SDD, tabla de prompts principales con enlace al archivo literal (Tabla 3) e impacto (qué aceleró, qué errores introdujo, cómo se controlaron, qué no se delegó). **Pendiente equipo Parte 1:** agregar sus filas T1.x a la tabla al fusionar. |
+| 2026-10-12 | Daniel + Claude | Sección **Cacería** del blog redactada (`blog/secciones/10-caceria.md`): 7 hallazgos en 4 categorías con prompt literal (citas verificadas contra los archivos) y evidencia enlazada (H-03, H-07, H-08, H-10, H-04, H-17, H-22) + tabla resumen. **Pendiente: que el puente confirme los 7** para marcarlos como confirmados en el registro. |
 | 2026-10-12 | Daniel + Claude | **T0.5 ✅** prueba sin red (run.py con sockets bloqueados + análisis estático de src/; mutante detectado). **T4.1 ✅** `src/viz/paleta.py` (fuente única de colores: método → color fijo; rampa azul), `theme.py` (Plotly) y `style.py` (matplotlib); figuras siempre sobre superficie clara (tarjeta en modo oscuro). 663 pruebas. |
 | 2026-10-12 | Daniel + Claude | **T0.7 ✅** blog: MkDocs Material + hook `reporte.py` (APA con pandoc citeproc; `mkdocs-bibtex` descartado porque cita con notas al pie) + 12 secciones con responsables + 15 pruebas (640 en total). Bibliografía: 12 referencias del BibTeX oficial, 11 contrastadas con Crossref (H-21). H-23 confirmado con PyYAML. `mkdocs` fijado en 1.6.1 por el aviso de MkDocs 2.0. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.1 ✅**: `costos.py` + `test_cost.py` (42 pruebas; 669 en total). implementador 3 rondas; revisor-spec ✅, verificador-matematico ✅ (cifras con aritmética exacta), revisor-calidad ✅. **Spec v1.11**: criterios de §7.3 reformulados (w = 0 por peaje + combustible; simetría contra `rutas.csv`). Validación: punto medio (`rutas.csv` sí; en `matriz_costos` solo parámetros finitos y ≥ 0). 554 de 1 081 pares con alternativas idénticas; 393 cruces en 0 < w ≤ 100. Cacería: **H-21** ("Logroño" inventado para la ciudad 0). |
