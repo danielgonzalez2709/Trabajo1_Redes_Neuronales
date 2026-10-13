@@ -1,16 +1,14 @@
 <!--
-SECCIÓN: Uso de IA · RESPONSABLE: puente (Daniel) · ESTADO: borrador completo (12-oct-2026).
+SECCIÓN: Uso de IA · RESPONSABLE: puente (Daniel) · ESTADO: borrador completo (12-oct-2026; filas T1.4–T1.6b añadidas el 13-oct).
 Enunciado: "los principales prompts utilizados y una discusión de su impacto en el resultado final".
 Fuentes: alucinaciones/prompts/ (prompts literales), alucinaciones/registro.md, docs/MEMORIA.md (bitácora), docs/spec/PLAN.md.
-TODO equipo Parte 1: cuando se fusione su rama, agregar a la Tabla de prompts las filas de T1.x (archivo alucinaciones/prompts/T1.x.md,
-agente y propósito) y, si aplica, una línea en "Qué errores introdujo" con lo que detectaron sus revisores.
 -->
 
 ## Uso de inteligencia artificial
 
 ### Herramientas y metodología
 
-Todo el trabajo se desarrolló con Claude Code (modelo Claude Opus 5.5) siguiendo una metodología de *Subagent Driven
+Todo el trabajo se desarrolló con Claude Code (modelos Claude Opus 5.5 y Claude Sonnet 5.5) siguiendo una metodología de *Subagent Driven
 Development*. Una sesión orquestadora leía la especificación del proyecto (el *Spec*), tomaba la siguiente tarea del plan
 y la encargaba a un subagente con un contexto mínimo: la sección del Spec, las interfaces que debía respetar y la prueba de
 aceptación. El resultado no se aceptaba hasta pasar por revisores independientes, también subagentes, cada uno con un
@@ -45,6 +43,10 @@ Fuente: Elaboración propia a partir de alucinaciones/prompts/ del repositorio (
 | Datos (Parte 2) | [T2.6](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T2.6.md), [T2.7](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T2.7.md) | curador de datos | Precio del combustible y consumo del vehículo |
 | Datos (Parte 2) | [T2.8](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T2.8.md) | curador de datos | Tabla de fuentes y pruebas de integridad de los datos |
 | Algoritmos (Parte 2) | [T3.1](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T3.1.md) | implementador | Matriz de costos del problema del viajero |
+| Algoritmos (Parte 1) | [T1.4](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T1.4.md) | implementador, revisor del Spec, revisor de calidad y verificador matemático | Algoritmo evolutivo con el esquema de clase (élite, mutantes y cruce de un punto) |
+| Algoritmos (Parte 1) | [T1.5](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T1.5.md) | implementador, revisor del Spec, revisor de calidad, verificador matemático y cazador de alucinaciones | Optimización por enjambre de partículas (mejor global con inercia) |
+| Algoritmos (Parte 1) | [T1.6](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T1.6.md) | implementador, revisor del Spec, revisor de calidad y verificador matemático | Evolución diferencial DE/rand/1/bin |
+| Algoritmos (Parte 1) | [T1.6b](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/prompts/T1.6b.md) | implementador, revisor del Spec, revisor de calidad y verificador matemático | Mover a un módulo común lo que los tres algoritmos anteriores repetían, sin cambiar su comportamiento |
 :::
 
 ### Impacto en el resultado final
@@ -55,7 +57,7 @@ común del código (con varios cientos de pruebas automáticas) o el conjunto de
 oficiales, 2 162 rutas calculadas con OSRM, una tabla de tramos de peaje con tarifas oficiales y el precio del combustible,
 cada dato con su fuente y su fecha de consulta.
 
-**Qué errores introdujo.** El registro de la cacería reunió 23 candidatos, de los que se confirmaron nueve en cuatro
+**Qué errores introdujo.** El registro de la cacería reunió 38 candidatos, de los que se confirmaron nueve en cuatro
 categorías (sección *Cacería de la alucinación*). Ninguno era absurdo: todos eran afirmaciones plausibles, como una
 librería que «trae» un solucionador que ya no incluye, un contador que «nunca» se pasa del presupuesto o una prueba que
 «verifica» algo que en realidad no puede fallar. También se observaron patrones repetidos:
@@ -66,6 +68,7 @@ librería que «trae» un solucionador que ya no incluye, un contador que «nunc
 - Al resumir, la IA a veces cambiaba el sentido de lo que había leído: «no encontré la ficha» terminaba como «la ficha no
   existe», o una tabla de un PDF se transcribía con los importes corridos una fila.
 - Las afirmaciones sobre herramientas y datos caducan: versiones de librerías y autopistas que dejaron de cobrar peaje.
+- En los algoritmos de la Parte 1, la IA explicó el comportamiento con más seguridad de la que tenía: escribió que la mutación del algoritmo evolutivo se apaga «al converger» y que la diferencia de la evolución diferencial «se encoge al converger», cuando la población puede colapsar lejos del óptimo, y que el líder del enjambre «solo se mueve por inercia», cuando con velocidad inicial cero no se mueve. Además, asoció a un artículo, con la marca «verificar», unas constantes del enjambre que resultaron ser cifras derivadas de la fórmula de constricción (el texto publicado no se pudo consultar), y citó como línea base de pruebas una cifra que mezclaba dos entradas de la bitácora.
 
 **Cómo se controlaron.** Casi todos los errores se detectaron **antes de llegar a la rama principal**, gracias a los
 revisores independientes. Las tareas de la base común necesitaron entre dos y cuatro rondas de corrección cada una:

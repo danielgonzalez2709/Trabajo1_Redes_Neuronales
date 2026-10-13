@@ -34,8 +34,6 @@ $$
 
 ### Algoritmos para la Parte 1
 
-<!-- TODO equipo Parte 1: revisar contra el código final (nombres de parámetros y valores por defecto de configs/part1/base.yaml). -->
-
 **Descenso por gradiente.** Con tasa de aprendizaje $\eta$ y $\Pi$ la proyección sobre el dominio (recorte de cada
 coordenada a sus límites), la iteración de paso fijo es
 $\mathbf{x}_{k+1} = \Pi\!\left(\mathbf{x}_k - \eta\,\nabla f(\mathbf{x}_k)\right)$.
@@ -58,14 +56,79 @@ $$
 \qquad \mathbf{x}_i \leftarrow \mathbf{x}_i + \mathbf{v}_i,
 $$
 
-donde $\mathbf{p}_i$ es la mejor posición de la partícula, $\mathbf{g}$ la mejor del enjambre y $r_1, r_2 \sim U(0,1)$.
-Los valores $w = 0.7298$ y $c_1 = c_2 = 1.49618$ equivalen al factor de constricción de @clerc2002.
+donde $\mathbf{p}_i$ es la mejor posición visitada por la partícula y $\mathbf{g}$ la mejor del enjambre (la mejor de
+las $\mathbf{p}_i$). Los números $r_1, r_2 \sim U(0,1)$ se sortean de nuevo en cada iteración, por partícula y por
+componente, así que los productos $r_1\,(\mathbf{p}_i - \mathbf{x}_i)$ y $r_2\,(\mathbf{g} - \mathbf{x}_i)$ son componente
+a componente. Las partículas parten en reposo: $\mathbf{v}_i = \mathbf{0}$ y $\mathbf{p}_i = \mathbf{x}_i$. Con
+$[l_j, u_j]$ el intervalo del dominio en la coordenada $j$, cada componente de la velocidad se recorta a
+$[-v_{\max,j},\, v_{\max,j}]$ antes de mover, con $v_{\max,j} = \gamma\,(u_j - l_j)$ y $\gamma$ el parámetro `vmax_frac`.
+Si una componente de la nueva posición sale del dominio, se recorta a la frontera y la velocidad pasa a 0 solo en esa
+componente.
 
-**Evolución diferencial** (DE/rand/1/bin) [@storn1997]: mutación $\mathbf{v}_i = \mathbf{x}_{r_1} + F\,(\mathbf{x}_{r_2} - \mathbf{x}_{r_3})$,
-cruce binomial con probabilidad $CR$ (con al menos una componente del mutante) y selección codiciosa.
+Los valores $w = 0.7298$ y $c_1 = c_2 = 1.49618$ son las cifras redondeadas de la forma con factor de constricción para
+$\varphi = 4.1$ (derivación propia):
+<!-- TODO(cita): verificar Clerc & Kennedy (2002) antes de citarlo -->
 
-**Algoritmo evolutivo** de codificación real: selección por torneo, cruce BLX-$\alpha$, mutación gaussiana y elitismo.
-<!-- TODO equipo Parte 1: ecuación del cruce BLX-α y de la mutación tal como quedaron implementadas. -->
+$$
+\chi = \frac{2}{\left\lvert\, 2 - \varphi - \sqrt{\varphi^2 - 4\varphi}\,\right\rvert} \approx 0.7298,
+\qquad w = \chi,
+\qquad c_1 = c_2 = \frac{\chi\,\varphi}{2} \approx 1.49618.
+$$
+
+**Evolución diferencial** (DE/rand/1/bin) [@storn1997]. Para cada individuo $\mathbf{x}_i$ se eligen tres padres
+$r_1, r_2, r_3$ distintos entre sí y distintos de $i$, y se construye el mutante
+
+$$
+\mathbf{v}_i = \mathbf{x}_{r_1} + F\,(\mathbf{x}_{r_2} - \mathbf{x}_{r_3}).
+$$
+
+Cada componente del mutante que queda fuera de $[l_j, u_j]$ se vuelve a sortear con $U(l_j, u_j)$, antes del cruce. El
+cruce binomial y la selección son
+
+$$
+u_{ij} = \begin{cases} v_{ij} & \text{si } U_{ij} \le CR \ \text{o}\ j = j_{\text{rand},i} \\ x_{ij} & \text{en otro caso,} \end{cases}
+\qquad
+\mathbf{x}_i \leftarrow \begin{cases} \mathbf{u}_i & \text{si } f(\mathbf{u}_i) \le f(\mathbf{x}_i) \\ \mathbf{x}_i & \text{en otro caso,} \end{cases}
+$$
+
+con $U_{ij} \sim U(0,1)$ y $j_{\text{rand},i}$ una coordenada sorteada por individuo, que asegura que el hijo toma al
+menos una componente del mutante. En la selección el hijo gana el empate. El esquema es síncrono: todos los hijos de una
+generación se construyen con la población que había al inicio de esa generación.
+
+**Algoritmo evolutivo** de codificación real, con el esquema visto en clase.
+<!-- TODO(cita): el esquema sale del material de clase IRNA202602 ("intro algoritmos evolutivos", Spec §6.4); no hay entrada en references.bib. -->
+No hay selección de padres por aptitud. Cada generación forma la población siguiente apilando tres grupos y conservando
+las primeras $N$ filas:
+
+$$
+P_{t+1} = \big[\ \text{élite}\ ;\ \text{mutantes}\ ;\ \text{hijos de cruce}\ \big]_{1:N}.
+$$
+
+Con $N$ individuos y las fracciones $f_e$, $f_m$ y $f_c$, los tamaños de los grupos son
+
+$$
+n_e = \operatorname{round}(N f_e), \qquad n_m = \lfloor N f_m \rfloor, \qquad
+n_c = \max\!\Big(\operatorname{par}(\lfloor N f_c \rfloor),\ \operatorname{par}(N - n_e - n_m)\Big),
+\qquad \operatorname{par}(n) = n + (n \bmod 2).
+$$
+
+El segundo término del máximo rellena la población cuando los tres grupos no suman $N$; si suman más, sobran hijos y se
+quitan los últimos. La élite son los $n_e$ individuos de menor $f$, copiados sin cambio. Cada mutante es la copia de un
+individuo elegido al azar en la que cambia un solo gen $g$, también elegido al azar:
+
+$$
+x'_{g} = \operatorname{clip}\big(x_{g} + \sigma_{g}\,z,\ l_{g},\ u_{g}\big), \qquad z \sim \mathcal{N}(0, 1),
+\qquad \sigma_j = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\big(x_{ij} - \bar{x}_j\big)^2},
+$$
+
+donde $\sigma_j$ es la desviación estándar poblacional del gen $j$ en la población actual. El cruce es de un punto: para
+una pareja $(\mathbf{p}, \mathbf{q})$ elegida al azar y un corte $c \in \{1, \dots, d-1\}$, con $d$ la dimensión, los dos
+hijos son
+
+$$
+\mathbf{h}^{(1)} = (p_1, \dots, p_c,\ q_{c+1}, \dots, q_d), \qquad
+\mathbf{h}^{(2)} = (q_1, \dots, q_c,\ p_{c+1}, \dots, p_d).
+$$
 
 ### Problema del viajero (Parte 2)
 

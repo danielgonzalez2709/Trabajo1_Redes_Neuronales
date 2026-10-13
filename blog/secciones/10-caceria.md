@@ -1,6 +1,6 @@
 <!--
-SECCIÓN: Cacería de la alucinación · RESPONSABLE: puente (Daniel) · ESTADO: borrador completo (12-oct-2026), pendiente de la
-confirmación del puente de los 7 hallazgos seleccionados.
+SECCIÓN: Cacería de la alucinación · RESPONSABLE: puente (Daniel) · ESTADO: borrador completo (12-oct-2026); los 7 hallazgos
+seleccionados figuran en el registro como confirmados por el puente (12-oct-2026).
 Fuente única: alucinaciones/registro.md (estado, prompts literales y evidencias). No escribir aquí nada que no esté en el registro.
 Enunciado: ≥5 hallazgos en ≥3 categorías; para cada uno: prompt literal, respuesta relevante, cómo se sospechó, evidencia,
 corrección y lección. Un hallazgo inventado o sin evidencia se penaliza más que uno faltante.
@@ -11,7 +11,7 @@ corrección y lección. Un hallazgo inventado o sin evidencia se penaliza más q
 Durante todo el trabajo se llevó un registro de las afirmaciones de la IA que resultaron incorrectas, imprecisas,
 desactualizadas o subóptimas: el [registro de la cacería](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales/blob/main/alucinaciones/registro.md).
 Cada entrada guarda el prompt literal que la originó (en `alucinaciones/prompts/`), la respuesta, cómo se sospechó, la
-evidencia reproducible (en `alucinaciones/evidencias/`), la corrección y la lección. El registro reúne 23 candidatos;
+evidencia reproducible (en `alucinaciones/evidencias/`), la corrección y la lección. El registro reúne 38 candidatos;
 aquí se presentan siete, elegidos porque cubren cuatro categorías y cada uno tiene prompt literal y evidencia que
 cualquiera puede volver a ejecutar ([[tab:caceria]]). El registro también documenta las verificaciones que resultaron
 correctas, porque comprobar y no encontrar un error también es información.
