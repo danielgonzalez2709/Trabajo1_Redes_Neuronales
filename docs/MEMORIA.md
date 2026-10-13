@@ -14,18 +14,18 @@
 ## 📍 Estado actual
 | | |
 |---|---|
-| Última actualización | 2026-10-12 |
-| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4 ✅ |
-| Próxima tarea | Parte 2: **T3.6** experimentos (presupuesto común ACO vs GA), T3.5 2-opt (recomendado: el MMAS deja cruces visibles); **T3.2 exacto = opcional** (Spec v1.14). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
-| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 1) |
+| Última actualización | 2026-10-13 |
+| Fase | **F0 — Fundaciones** T0.1–T0.4 ✅ en `main`; **T0.5 ✅, T0.7 blog ✅, T4.1 paleta ✅** (en `main`, PR #5) · **F2 — Datos Parte 2** ✅ cerrada (T2.0–T2.8) · **F3** T3.1, T3.3, T3.4, T3.6, T3.7 ✅ |
+| Próxima tarea | Parte 2: **revisar el borrador del blog (05, 06, 07 y TSP de 02)** y pasar redactor-tecnico/cazador si da tiempo; **T3.2 exacto y T3.5 2-opt = opcionales** (Spec v1.14; 2-opt no está en el enunciado, decidido 12-oct). Integración: secciones del puente en el blog (uso de IA, cacería). **Todos: redactar su sección en `blog/secciones/` (guía: `blog/README.md`).** **Las tareas de Camila (T2.3 ejecución, T2.6, T2.7) las asumió Jose Miguel el 11-oct.** |
+| Entrega | **mar 13-oct-2026, 23:59** (días restantes: 0) |
 | Sustentación | jue 15-oct-2026, 6 p. m. (por confirmar) |
 
 ## 👥 Equipo
 | Rol | Quién |
 |---|---|
-| Parte 1 — Optimización numérica | 2 integrantes (nombres: por completar) |
-| Parte 2 — TSP por España | 2 integrantes, incluida Camila |
-| Puente: integración, repositorio, cacería de alucinaciones | Daniel |
+| Parte 1 — Optimización numérica | 2 integrantes (nombres: por completar; **deben agregarlos en `blog/docs/index.md`**) |
+| Parte 2 — TSP por España | Jose Miguel Pulgarin Agudelo, Maria Camila Agudelo Espinosa |
+| Puente: integración, repositorio, cacería de alucinaciones | Daniel Gonzalez Henao |
 
 ## ✅ Decisiones vigentes (resumen — detalle en el Spec)
 - Python 3.12, algoritmos desde cero con numpy; librerías de optimización solo para contrastar.
@@ -46,7 +46,7 @@
   Población inicial con el vecino más cercano (mismo arranque que MMAS). Piezas comunes en `src/part2/recorridos.py`.
 - **ACO (Spec v1.14 §7.4.1):** las **notas del profesor** (`data/raw/ACO/notas_aco.html`) priman sobre el Spec y todo cambio
   se trae al Spec. MMAS principal (ρ 0.02, p_best 0.05, alterna ib/bs), AS comparación (ρ 0.5). Berroa solo como referencia
-  de estructura (repo sin licencia: no se copia código). Presupuesto común de recorridos ACO vs GA: lo fija T3.6.
+  de estructura (repo sin licencia: no se copia código). Presupuesto común ACO vs GA: **51 654 recorridos** (v1.16).
 - Front: **Material for MkDocs** + Plotly (interactivas) + matplotlib con estilo DS (GIF). Todo Python.
 - **Blog (T0.7):** una entrada (`blog/docs/index.md`) que une `blog/secciones/*.md`; hook `blog/hooks/reporte.py` numera figuras/tablas APA
   (`::: figura id` … `:::`), resuelve `[[fig:id]]` y citas `[@clave]` con pandoc + APA 7, y **falla** si falta título/fuente, una figura no
@@ -60,13 +60,15 @@
   `run_filename(func, dim, method, seed)` con identificadores `^[a-z0-9]+$` (`gdfijo`, `gdarmijo`, `ea`, `pso`, `de`).
 
 ## ⏳ Pendientes / bloqueos
-- [ ] **T3.6, presupuesto común** ACO vs GA (hoy 14 101 vs 148 150 recorridos). El GA pierde diversidad (~30 recorridos
-  distintos de 150 desde la gen. ~100, con o sin vecino más cercano); con 3 semillas, final 2 565–2 702 €. `scripts/ver_ga_temporal.py`. Con ρ = 0.02 y 300 iteraciones MMAS
-  sigue mejorando al final y τ_min casi no actúa (~289 iteraciones para llegar). ACO tarda ~29 µs/recorrido (n = 47).
+- [x] **T3.6, presupuesto común [DECIDIDO 12-oct, Spec v1.16]:** 51 654 recorridos (ACO 1 099 iter. / GA 348 gen.).
+  Prueba w = 25, semillas 0–4: MMAS media 2 556,81 € (sigue mejorando), AS 2 640,36 €, GA 2 636,69 € (desv. 78,9; colapsa
+  a 27–35 recorridos distintos, igual que con 1 000 gen.). ~5,4 s por (w, corrida). 30 786 descartado (castiga a MMAS).
+- [x] **T3.6, umbral [DECIDIDO v1.16]:** envolvente inferior de recorridos candidatos (costo lineal a trozos en w), sin bisección.
 - [ ] Hallazgo para el blog: aun con w = 500 solo ~12 de 47 tramos pagan peaje; es el techo (tramos cuya rápida tiene
   peaje: ~23 % de los pares vecinos), no un error. `scripts/ver_aco_temporal.py --barrido` lo grafica.
-- [ ] **`base.yaml` sin clave de consumo ni de precio** (solo `costo.valor_hora`): sin ella la sensibilidad de §7.5 con `--set` no funciona. Asignado a **T3.6**. Punto de partida (no decidido): claves opcionales `consumo_l100` y `precio_l`; vacías = valores de `vehiculo.yaml` y `combustible.json`.
-- [ ] T3.6: hay cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)), por debajo de la resolución de 0,5 €/h de la bisección.
+- [ ] **`base.yaml`: claves `consumo_l100` y `precio_l`** [DECIDIDO v1.16]: opcionales, vacías = `vehiculo.yaml` / `combustible.json`. Las implementa **T3.6**.
+- [x] **T3.6 (13-oct):** implementador 4 rondas (948 pruebas), revisor-spec ✅, revisor-calidad ✅. [DECIDIDO v1.16] gap = media; sensibilidad con unión de candidatos base + nuevos; historiales sin sangría (~6,4 MB) y versionados. **Falta:** commit, correr el barrido real (analista-experimentos, ~10 min + 2 × ~3,7 min), confirmar las decisiones "implementado, pendiente" del Spec §7.5/§5.4.
+- [x] T3.6: los cruces de alternativa a 0,011 €/h de w = 30 (pares (34,40) y (34,42)) entran en el costo exacto de la envolvente, pero no cambian el recorrido ganador: no aparecen como umbral (barrido real, 13-oct).
 - [ ] T2.2: ¿`osrm.sh descargar` como paso manual documentado o vía `descargar_datos.py`? (CLAUDE.md: solo ese script usa internet).
 - [x] Spec §7.2 Bloque 3: la clase `toll` va por intersección, no por paso → resuelto en T2.5 (Spec v1.10: km por anclas, no por proporción de intersecciones).
 - [ ] **T2.5, verificar a mano:** los 63 anclas no-OSM (5 de 6 verificados por muestreo); parámetros 1,5 km y 95 % sin fuente; `GI-20`/`N-622`/`PA-34` sin cobrar (sin tarifa publicada). Ampliación de §5.3 (5 archivos auxiliares): **confirmada por Jose Miguel el 12-oct.**
@@ -86,6 +88,7 @@
 - [ ] Confirmar fecha/hora de la sustentación.
 - [ ] Prompts literales para la cacería: ~~H-01, H-03 (Daniel)~~ ✅ en `alucinaciones/prompts/asesoria_puente_claude.md`; H-02 (Camila) pendiente.
 - [x] `revisor-spec` y `revisor-calidad` no cargaban como agentes: su `description` llevaba `": "` sin comillas (YAML inválido, verificado con PyYAML el 11-oct). Corregido con comillas; reiniciar Claude Code para que carguen.
+- [ ] **Prueba en rojo previa:** `test_rutas_csv_real_coincide_con_lo_que_calcula_el_script` falla en macOS/Linux porque `peajes_resumen.json` (y otros 5 de `data/processed/`) se versionaron con CRLF desde Windows. Regenerar con LF o comparar sin fin de línea.
 
 ## 🎯 Cacería de alucinaciones
 Candidatos: **24** (H-24 GA: prueba que no distinguía el orden de los padres, débil · H-21 "Logroño" inventado en T3.1 · H-22 Dantzig 1954: revista con el nombre actual · H-23 YAML de dos agentes inválido · H-20 débil: mutante de T2.5 que las pruebas no cazaban, ya cerrado · H-01 OSRM público · H-02 AP-68 · H-03 paso de GD · H-04 ORIGENCOOR · H-05 capital = municipio · H-06 Mérida ·
@@ -98,6 +101,12 @@ Meta: ≥5 genuinos en ≥3 categorías. Registro: `alucinaciones/registro.md`.
 ## 🗒️ Bitácora (más reciente primero)
 | Fecha | Quién | Qué pasó |
 |---|---|---|
+| 2026-10-13 | Equipo Parte 2 + Claude | **T4.6 Parte 2 (borrador, sin commit):** secciones 05 (fuentes, simetría, peajes, combustible, vehículo), 06 (algoritmos, presupuesto común, envolvente) y 07 (umbrales 10,75/13,81/42,19 con márgenes ≤ 1,42 € hasta w = 42; MMAS vs AS vs GA; sensibilidad; demo) + TSP de 02 (se quitó «el óptimo se obtiene con Dantzig»; ecuaciones MMAS). `run.py figures` copia los GIF a `blog/docs/figures/`. `mkdocs --strict` ✅. Sin subagentes. |
+| 2026-10-13 | Equipo Parte 2 + Claude | **T4.5 ✅** (sin commit): `src/viz/gifs.py` → `media/tsp_{mmas,ga}_w25.gif` (mejor corrida de cada uno en w = 25, fotograma por mejora, contorno provincial IGN, tramos con peaje en naranja); en `run.py figures`; 6 pruebas. Sin subagentes. |
+| 2026-10-13 | Equipo Parte 2 + Claude | **T4.4 ✅** (sin commit): mapa con deslizador de w (12 pasos, cruza umbrales 10,75 / 13,81 / 42,19 €/h), desglose vs w, convergencia MMAS/AS/GA (gap vs mejor conocido, eje = recorridos evaluados); `run.py figures`. Proceso simplificado: solo implementador, revisión inline. |
+| 2026-10-13 | Jose Miguel + Claude | **T3.7 ✅** demo Parte 2 (**Spec v1.17**): MMAS, w = 25, 100 iter., 10 corridas; gap frente al **mejor conocido** de `sweep_w.json` (2 544,76 €; el exacto no existe), clave `experimento.referencia_gap`, figura `recorrido_w25.png`; salida `results/data/part2/demo/` sin versionar. Resultado: 2 772,91 € (+8,97 % mejor, +15,71 % media: esperable con 100 iter. y ρ = 0,02, explicarlo en la sustentación). ~2,6 s, sin red, reproducible (auditor ✅). implementador 2 rondas, revisor-spec 2 rondas ✅, revisor-calidad ✅; 969 pruebas. Falta medir en otra máquina (§9). Sin candidatos nuevos a la cacería. |
+| 2026-10-13 | Jose Miguel + Claude | **T3.6 ✅**: `experiment.py` + `envolvente.py` + 948 pruebas (implementador 4 rondas, revisor-spec ✅, revisor-calidad ✅). Barrido real (analista-experimentos, 18 min; 330 corridas con 51 654 recorridos): MMAS gap de la media 0,24–0,75 %, GA 2,3–4,1 %. Umbrales de w: **10,75 / 13,81 / 42,19 €/h** (los dos primeros casi indiferentes en euros: 0,002–0,13 €). Sensibilidad 5,6/6,2 l/100 km: umbrales se mueven; con 5,6 cambia una ruta. Verificado de forma independiente por el cazador (CONFORME, 0 candidatos). Historiales compactos (12,5 MB versionados). |
+| 2026-10-12 | Jose Miguel + Claude | **Spec v1.16** (T3.6): presupuesto común 51 654 recorridos (ACO 1 099 / GA 348), probado con 5 semillas (analista-experimentos); umbral por envolvente de candidatos; claves opcionales de consumo y precio. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.4 ✅**: `ga.py` + `recorridos.py` (piezas comunes con ACO) + 103 pruebas (874 en total). implementador 3 rondas (Opus); revisor-spec devolvió una prueba que no distinguía OX(P1,P2)/OX(P2,P1) (**H-24**, débil) y luego ✅; revisor-calidad ✅ (Sonnet). **Spec v1.15** (§7.4.2). w = 25, semilla 0: GA 2 701,56 € con 148 150 recorridos (semillas 1–2: 2 565,53 €). Gráficos temporales en `scripts/ver_ga_temporal.py`. |
 | 2026-10-12 | Jose Miguel + Claude | **T3.3 ✅**: `aco.py` (AS + MMAS, `solve` + `iterar`) y `test_aco.py` (60 pruebas; 769 en total). implementador 3 rondas (Opus); revisor-spec ✅, verificador-matematico ✅ (demostró que con el orden aprobado el recorte superior nunca se activa), revisor-calidad ✅ (Sonnet). w = 25: MMAS 2 589,55 €, AS 2 659,76 €, vecino más cercano 3 173,83 €. Sin candidatos nuevos a la cacería. |
 | 2026-10-12 | Jose Miguel + Claude | **Spec v1.14**: T3.2 opcional; ACO según las notas del profesor (§7.4.1). Hallado: los valores por defecto daban 14 100 recorridos a ACO y ~150 000 a GA (comparación injusta) → presupuesto común en T3.6. Despachada T3.3. |

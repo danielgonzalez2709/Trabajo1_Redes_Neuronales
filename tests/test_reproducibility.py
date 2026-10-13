@@ -226,6 +226,23 @@ def test_save_json_formato_utf8_indent2_sin_escapes(tmp_path):
     assert texto == json.dumps({"ciudad": "A Coruña", "v": [1, 2]}, indent=2, ensure_ascii=False) + "\n"
 
 
+def test_save_json_por_defecto_indent2_y_compacto_con_sangria_none(tmp_path):
+    """T3.6 (historiales): `sangria=None` escribe JSON compacto en una línea; por defecto sigue indent=2."""
+    obj = {"ciudad": "A Coruña", "v": [1, 2], "d": {"x": 1.5}}
+    por_defecto = save_json(tmp_path / "d.json", obj).read_bytes().decode("utf-8")
+    assert por_defecto == json.dumps(obj, indent=2, ensure_ascii=False) + "\n"
+    compacto = save_json(tmp_path / "c.json", obj, sangria=None).read_bytes().decode("utf-8")
+    assert compacto == '{"ciudad":"A Coruña","v":[1,2],"d":{"x":1.5}}\n'
+    assert load_json(tmp_path / "c.json") == load_json(tmp_path / "d.json") == obj
+
+
+def test_save_json_compacto_tambien_rechaza_nan(tmp_path):
+    ruta = tmp_path / "c.json"
+    with pytest.raises(ValueError, match="NaN"):
+        save_json(ruta, {"a": [1.0, float("nan")]}, sangria=None)
+    assert not ruta.exists()
+
+
 def test_save_json_acepta_str(tmp_path):
     ruta = str(tmp_path / "r.json")
     save_json(ruta, {"a": 1})

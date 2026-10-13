@@ -48,19 +48,33 @@ def _pendiente(nombre: str, tarea: str) -> Manejador:
     return manejador
 
 
+def _part2(cfg: dict | None) -> int:
+    """Manejador de part2 (T3.6). Import perezoso: cargar la CLI no importa numpy ni el experimento."""
+    from src.part2 import experiment
+
+    return experiment.main(cfg)
+
+
+def _figures(cfg: dict | None) -> int:
+    """Manejador de figures (T4.4: Parte 2). Import perezoso: cargar la CLI no importa plotly."""
+    from src.viz import figuras
+
+    return figuras.main(cfg)
+
+
 # Registro único nombre -> (ayuda, usa_config, manejador).
-# Completar al cerrar T1.7 (part1), T3.6 (part2) y T4.x (figures).
+# Completar al cerrar T1.7 (part1); part2 conectado en T3.6; figures en T4.4 (Parte 1 pendiente: src/viz/figuras.py).
 SUBCOMANDOS: dict[str, Subcomando] = {
     "part1": Subcomando(
         "Parte 1: optimización numérica (GD, EA, PSO, DE)", True, _pendiente("part1", "T1.7")
     ),
     "part2": Subcomando(
-        "Parte 2: TSP por España (ACO, GA, exacto)", True, _pendiente("part2", "T3.6")
+        "Parte 2: TSP por España (ACO, GA, exacto)", True, _part2
     ),
     "figures": Subcomando(
         "Regenera las figuras interactivas y los GIF desde results/data/",
         False,
-        _pendiente("figures", "T4.x"),
+        _figures,
     ),
 }
 
