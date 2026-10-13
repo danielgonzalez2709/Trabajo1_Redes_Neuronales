@@ -127,6 +127,7 @@ trabajo1/
 ├── docs/spec/  SPEC.md, PLAN.md
 └── .claude/agents/               # definiciones de subagentes (§12)
 ```
+[PENDIENTE: aprobación de Daniel, propuesto en REFACTOR-PARTE1-COMUN — Parte 1, refactor de T1.4/T1.5/T1.6] `src/part1/` añade `_comun.py`: utilidades compartidas **solo** por las tres metaheurísticas de la Parte 1, `ea.py` (T1.4), `pso.py` (T1.5) y `de.py` (T1.6); no es `src/common/` ni afecta a la Parte 2 (validaciones de forma, tipo y claves del bloque, población inicial y su evaluación, frames y retorno de §5.1), para que PSO y DE no importen de `ea.py` ni dupliquen código. Es un refactor sin cambio de comportamiento ni de contratos; `gd.py` no se toca. Detalle y criterios de aceptación en `docs/spec/propuestas/REFACTOR-PARTE1-COMUN.md` (tarea T1.6b del PLAN). Aún **no implementado**.
 
 ### 4.1 Comandos (contrato con el usuario final)
 ```bash
@@ -214,6 +215,7 @@ def optimize(problem: CountedProblem, cfg: dict, rng: np.random.Generator) -> di
   "frames":  [{"iter": int, "positions": [[x, y], ...], "best": [x, y]}] }   # solo si dim == 2 y cfg.record_frames
 ```
 [PENDIENTE: aprobación de Daniel, propuesto en T1.1] src/part1/functions.py expone además la fábrica get_function(name, dim) y el diccionario FUNCIONES; name coincide con los identificadores de la sección 5.4.
+[PENDIENTE: aprobación de Daniel, propuesto en REFACTOR-PARTE1-COMUN — Parte 1, refactor de T1.4/T1.5/T1.6] El diccionario de retorno de `optimize` de `ea.py` (T1.4), `pso.py` (T1.5) y `de.py` (T1.6) lo armaría una sola función de `src/part1/_comun.py` (`construir_resultado`); las claves, los tipos y la regla de `frames` de este contrato no cambian.
 
 ### 5.2 Parte 2
 ```python
