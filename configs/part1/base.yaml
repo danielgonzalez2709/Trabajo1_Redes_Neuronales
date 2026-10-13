@@ -7,6 +7,10 @@ methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
 runs: 30                                      # §6.5
 base_seed: 0                                  # §6.5: semillas 0-29, semilla = base_seed + run_id (§4.1)
 record_frames: true                           # §5.1: frames solo si dim == 2; los GIF (§6.7) se regeneran desde results/data (§9)
+presupuesto_por_dim: 10000                    # §6.2: presupuesto por corrida = presupuesto_por_dim · dim evaluaciones equivalentes
+workers: 1                                    # procesos en paralelo del experimento (>= 1); el resultado no depende de este valor
+salida: results/data/part1                    # carpeta de los JSON de corridas (runs/, k1/runs/) y de summary.json (§5.4)
+tablas: results/tables/part1                  # carpeta de los CSV de la tabla principal y de la sensibilidad k = 1 (§6.6)
 # §6.3 Descenso por gradiente. gdfijo y gdarmijo comparten este bloque; la clave "variante" (fijo/armijo) la fija el
 # runner (T1.7), no esta config.
 gd:

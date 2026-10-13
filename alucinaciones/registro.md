@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 15 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
+| Código | 17 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
 | Conceptos | 5 (H-16; Parte 1: H-26, H-31, H-32, H-34; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 35** (H-01–H-35; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 33 activos y 2 descartados (H-12, H-13).
+**Total registrados: 37** (H-01–H-37; H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 35 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -480,6 +480,28 @@
 4. **Evidencia:** los dos mutantes sobreviven a `tests/test_ga.py` y `tests/test_tsp_operators.py`: `test_sin_cruce_ni_mutacion_los_hijos_son_copias` solo exige que cada fila sea alguna fila previa y `test_con_cruce_aparecen_individuos_nuevos` solo que aparezca algún individuo nuevo.
 5. **Corrección:** ronda 2 del implementador (prueba directa de los hijos con cortes conocidos y orden [P1, P2]).
 6. **Lección:** "probé N mutantes" no dice nada de los mutantes que no se probaron; un revisor independiente elige otros.
+
+### H-36 — Pruebas del experimento de la Parte 1 que no podían fallar (avisos sobre una lista vacía; identidad `workers=1`/`workers=2` sobre una carpeta sin vaciar)
+- **Estado:** candidato **débil** (deficiencia de pruebas, mismo tipo que H-10, H-20 y H-35); corregido antes de integrarse.
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Code → subagente `implementador` (claude-opus-5-5), T1.7-C, ronda 1 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-calidad`, con tres mutantes en memoria sobre una copia fuera del repo
+1. **Prompt (literal):** `prompts/T1.7.md`, bloque "Implementador C" ("workers=1 y workers=2 dan archivos idénticos byte a byte"; "imprime la tabla de consola y los avisos"; prueba de mutación manual M1–M6).
+2. **Respuesta relevante de la IA:** el informe de la ronda 1 declara 132 pruebas en verde y "6 de 6 mutantes muertos". Ninguno de esos mutantes tocaba los avisos ni la escritura en paralelo.
+3. **Cómo sospechamos:** `revisor-calidad` comprobó que el experimento de la fixture `exp` produce `avisos == []` y que la fixture `exp_paralelo` corría sobre la misma carpeta que la ejecución en serie, sin vaciarla.
+4. **Evidencia:** tres mutantes sobreviven con 132 passed: (A) `_correr_tabla` devuelve siempre `[]` como avisos; (C) `manejador_part1` ignora los avisos del summary; (B) con `workers > 1` no se llama a `save_json` ni a `_escribir_csv`. Los `all(...)` y los `for` recorrían una lista vacía, y la "foto" de la ejecución paralela incluía los archivos de la ejecución en serie. Informe de `revisor-calidad` (ronda 1) en la sesión de T1.7.
+5. **Corrección:** ronda 2 del implementador: fixture `exp_con_avisos` (contadores alterados en corridas reales; el summary se compara con la lista exacta de tres avisos y la consola con sus líneas), `exp_paralelo` borra `salida` y `tablas` antes de correr y los lectores usan la foto en memoria. Los mutantes A, B y C mueren; `revisor-calidad` aprueba la ronda 2.
+6. **Lección:** una aserción dentro de un bucle no afirma nada si la colección está vacía; una comparación de carpetas no prueba una escritura si la carpeta ya traía los archivos.
+
+### H-37 — "Una config inválida no escribe ningún archivo" (afirmación del Spec más amplia que lo que hace `validar_config`)
+- **Estado:** candidato **débil**, severidad baja (texto de documentación que no coincidía con el código; el código era correcto y lo documentaba bien); corregido antes de integrarse.
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Code, sesión principal (orquestador, claude-opus-5-5), T1.7 · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `revisor-spec`, ejecutando el comando
+1. **Prompt (literal):** `prompts/T1.7.md`, prompt del humano, punto C.1 y PRUEBAS ("una config inválida no escribe NINGÚN archivo") y bloque CONFIGURACIÓN ("añade … líneas `[PENDIENTE: …]` que describan …").
+2. **Respuesta relevante de la IA:** primera versión de la línea `[PENDIENTE]` de Spec §4.1: "`run.py part1` valida la config antes de correr (tipos, listas no vacías, identificadores conocidos, ningún float no finito) y una config inválida no escribe ningún archivo."
+3. **Cómo sospechamos:** `revisor-spec` contrastó cada línea `[PENDIENTE]` con el comportamiento del comando.
+4. **Evidencia:** `run.py part1 --config configs/part1/base.yaml --set de.NP=2 --set "methods=[pso, de]" --set "func=[rastrigin]" --set "dim=[2]" --set runs=2 --set presupuesto_por_dim=300 --set salida=<tmp>/d --set tablas=<tmp>/t` termina con `ValueError: de.NP debe ser un entero >= 4`, código 1 (no 2) y 2 JSON de `pso` ya escritos. `validar_config` solo revisa las claves de nivel superior y los floats no finitos; cada bloque de método lo valida su optimizador al ejecutarse. La misma línea omitía que se rechazan repetidos, y la de §6.6 omitía el aviso `n_f > 0` en `gdfijo` y que las filas de `ea`/`pso`/`de` de la sensibilidad conservan `k` = 2·dim.
+5. **Corrección:** líneas `[PENDIENTE]` de Spec §4.1, §5.4 y §6.6 reescritas con el alcance exacto de la validación y lo que faltaba. Queda para decisión humana si se validan los bloques de método antes de correr.
+6. **Lección:** "no escribe ningún archivo" es una afirmación universal: se comprueba con un caso que falle tarde, no solo con los que la validación ya rechaza.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**

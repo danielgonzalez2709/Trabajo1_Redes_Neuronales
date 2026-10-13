@@ -20,6 +20,10 @@ data/raw/osrm_*/simetria/
 # Escrituras atómicas interrumpidas (descargar_datos.py escribe a .tmp y renombra)
 *.tmp
 
+# Demo de la Parte 1 (configs/part1/demo.yaml): salidas que se regeneran en menos de 2 minutos
+results/data/part1_demo/
+results/tables/part1_demo/
+
 # Claude Code: configuración local de cada integrante (los agentes en .claude/agents/ SÍ se versionan)
 .claude/settings.local.json
 

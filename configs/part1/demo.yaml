@@ -5,3 +5,5 @@ func: [rastrigin]
 dim: [2]
 methods: [pso, gdfijo]
 runs: 5
+salida: results/data/part1_demo               # carpeta propia: el demo no escribe en la del experimento completo
+tablas: results/tables/part1_demo             # ídem para los CSV

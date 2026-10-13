@@ -48,12 +48,21 @@ def _pendiente(nombre: str, tarea: str) -> Manejador:
     return manejador
 
 
+def _part1(cfg: dict | None) -> int:
+    """Manejador de `part1` (T1.7). Importa `src.part1.experiment` al llamarse, no al cargar este
+    módulo: importar `cli` o pedir `run.py --help` no carga numpy ni los optimizadores.
+
+    Una config que el experimento rechaza al validarla devuelve 2 con el motivo en stderr.
+    """
+    from src.part1.experiment import manejador_part1
+
+    return manejador_part1(cfg)
+
+
 # Registro único nombre -> (ayuda, usa_config, manejador).
-# Completar al cerrar T1.7 (part1), T3.6 (part2) y T4.x (figures).
+# part1 ya está conectado (T1.7). Completar al cerrar T3.6 (part2) y T4.x (figures).
 SUBCOMANDOS: dict[str, Subcomando] = {
-    "part1": Subcomando(
-        "Parte 1: optimización numérica (GD, EA, PSO, DE)", True, _pendiente("part1", "T1.7")
-    ),
+    "part1": Subcomando("Parte 1: optimización numérica (GD, EA, PSO, DE)", True, _part1),
     "part2": Subcomando(
         "Parte 2: TSP por España (ACO, GA, exacto)", True, _pendiente("part2", "T3.6")
     ),
