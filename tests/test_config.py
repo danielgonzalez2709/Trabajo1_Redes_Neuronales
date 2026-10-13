@@ -309,7 +309,7 @@ def test_override_no_muta_la_entrada(cfg: dict):
 
 def test_registro_de_subcomandos():
     usa_config = {nombre: sub.usa_config for nombre, sub in cli.SUBCOMANDOS.items()}
-    assert usa_config == {"part1": True, "part2": True, "figures": False}
+    assert usa_config == {"part1": True, "hpo": True, "part2": True, "figures": False}
 
 
 def test_cli_set_imprime_y_entrega_la_config_final(cfg_file: Path, recibido: dict, capsys):

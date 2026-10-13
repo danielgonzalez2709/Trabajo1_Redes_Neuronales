@@ -1,0 +1,32 @@
+== 1. chi y c con precision de 40 digitos (phi = 4.1) ==
+chi      = 0.7298437881283575656755891162689093367740
+chi*phi/2= 1.496179765663133009634957688351264140386
+chi - 0.7298   = 4.3788128357565674e-05
+c   - 1.49618  = -2.3433686699036504e-07
+phi/2 (c de la forma 'constriccion sobre todo el lado derecho') = 2.05
+0.7298*2.05 = 1.49609  ; 0.729844*2.05 = 1.496179765663133
+
+== 2. conteo y truncado (N=30, k=2n, budget=10000 n) ==
+rosenbrock 2D B=20000: enjambres completos=666 (T=665), truncadas=20; n_f=20000 frames=666 ultimo_iter=665 n_grad=0 f_best=5.985e-27 t=0.43s
+rosenbrock 3D B=30000: enjambres completos=1000 (T=999), truncadas=0; n_f=30000 frames=None ultimo_iter=None n_grad=0 f_best=4.267e-06 t=0.73s
+rastrigin 2D B=20000: enjambres completos=666 (T=665), truncadas=20; n_f=20000 frames=666 ultimo_iter=665 n_grad=0 f_best=0.000e+00 t=0.34s
+rastrigin 3D B=30000: enjambres completos=1000 (T=999), truncadas=0; n_f=30000 frames=None ultimo_iter=None n_grad=0 f_best=0.000e+00 t=0.47s
+
+== 3. v_max por dimension ==
+rosenbrock ancho [4.096 4.096] -> 0.2*ancho [0.8192 0.8192]
+rastrigin ancho [10.24 10.24] -> 0.2*ancho [2.048 2.048]
+
+== 4. Lider con v=0 inicial: se mueve en la iteracion 1? ==
+lideres que NO se mueven en la iteracion 1: 30 / 30
+
+== 5. 'PSO garantiza el optimo global': Rastrigin 2D/3D, 30 corridas ==
+rastrigin 2D: exitos 30/30 ; f_best mediana=0.000 max=0.000
+rastrigin 3D: exitos 26/30 ; f_best mediana=0.000 max=0.995
+
+== 6. no derivable: |x| (no diferenciable en 0) ==
+f_best sobre sum|x| = 4.1471104096511104e-06
+
+== 7. inercia alta vs baja (Rastrigin 2D, c1=c2 fijos, 30 corridas, budget 20000) ==
+w=0.4: f_best mediana=0.000 media=0.099 exitos=27/30
+w=0.7298: f_best mediana=0.000 media=0.000 exitos=30/30
+w=0.9: f_best mediana=0.000 media=0.000 exitos=30/30

@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "runs": 30,
+    "base_seed": 0,
+    "semillas": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "presupuesto_por_dim": 10000,
+    "umbrales": [
+      0.0001,
+      0.01,
+      1e-06
+    ],
+    "umbral_principal": 0.0001,
+    "k_regla": "2n",
+    "k_sensibilidad": 1,
+    "func": [
+      "rosenbrock"
+    ],
+    "dim": [
+      2,
+      3
+    ],
+    "methods": [
+      "gdfijo"
+    ]
+  },
+  "configuraciones": [
+    {
+      "func": "rosenbrock",
+      "dim": 2,
+      "method": "gdfijo",
+      "k": 4.0,
+      "n_corridas": 30,
+      "f_final": {
+        "media": 0.3580509282216661,
+        "desv": 0.7318338917890557,
+        "mediana": 0.14705688484693438,
+        "mejor": 0.0026896462366020023,
+        "peor": 2.9386963786605227
+      },
+      "n_f_medio": 0.0,
+      "n_grad_medio": 5000.0,
+      "eval_equiv_medio": 20000.0,
+      "eval_equiv_medio_k2n": 20000.0,
+      "eval_equiv_medio_k1": 5000.0,
+      "tasa_exito": {
+        "1e-04": 0.0,
+        "1e-02": 0.06666666666666667,
+        "1e-06": 0.0
+      },
+      "evals_hasta_exito_medio": {
+        "1e-04": null,
+        "1e-02": 3742.0,
+        "1e-06": null
+      }
+    },
+    {
+      "func": "rosenbrock",
+      "dim": 3,
+      "method": "gdfijo",
+      "k": 6.0,
+      "n_corridas": 30,
+      "f_final": {
+        "media": 0.3909801436697914,
+        "desv": 0.5156916198987511,
+        "mediana": 0.21887661965759098,
+        "mejor": 0.004602553796825444,
+        "peor": 2.1303193195044305
+      },
+      "n_f_medio": 0.0,
+      "n_grad_medio": 5000.0,
+      "eval_equiv_medio": 30000.0,
+      "eval_equiv_medio_k2n": 30000.0,
+      "eval_equiv_medio_k1": 5000.0,
+      "tasa_exito": {
+        "1e-04": 0.0,
+        "1e-02": 0.06666666666666667,
+        "1e-06": 0.0
+      },
+      "evals_hasta_exito_medio": {
+        "1e-04": null,
+        "1e-02": 6414.0,
+        "1e-06": null
+      }
+    }
+  ],
+  "sensibilidad_k1": [
+    {
+      "func": "rosenbrock",
+      "dim": 2,
+      "method": "gdfijo",
+      "k": 1.0,
+      "n_corridas": 30,
+      "f_final": {
+        "media": 0.01225745917346147,
+        "desv": 0.008970581369812672,
+        "mediana": 0.011297019632375598,
+        "mejor": 0.0004910775565137498,
+        "peor": 0.03856539198580775
+      },
+      "n_f_medio": 0.0,
+      "n_grad_medio": 20000.0,
+      "eval_equiv_medio": 20000.0,
+      "eval_equiv_medio_k2n": 80000.0,
+      "eval_equiv_medio_k1": 20000.0,
+      "tasa_exito": {
+        "1e-04": 0.0,
+        "1e-02": 0.3,
+        "1e-06": 0.0
+      },
+      "evals_hasta_exito_medio": {
+        "1e-04": null,
+        "1e-02": 10526.666666666666,
+        "1e-06": null
+      }
+    },
+    {
+      "func": "rosenbrock",
+      "dim": 3,
+      "method": "gdfijo",
+      "k": 1.0,
+      "n_corridas": 30,
+      "f_final": {
+        "media": 0.0021720522762092844,
+        "desv": 0.0011658137398053519,
+        "mediana": 0.0020906480868606563,
+        "mejor": 0.00015443984170858055,
+        "peor": 0.00493014578799375
+      },
+      "n_f_medio": 0.0,
+      "n_grad_medio": 30000.0,
+      "eval_equiv_medio": 30000.0,
+      "eval_equiv_medio_k2n": 180000.0,
+      "eval_equiv_medio_k1": 30000.0,
+      "tasa_exito": {
+        "1e-04": 0.0,
+        "1e-02": 1.0,
+        "1e-06": 0.0
+      },
+      "evals_hasta_exito_medio": {
+        "1e-04": null,
+        "1e-02": 18426.4,
+        "1e-06": null
+      }
+    }
+  ],
+  "avisos": []
+}

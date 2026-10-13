@@ -1,0 +1,21 @@
+== A. rho del sistema determinista (v,x) con chi=0.729844 y phi_t en (0, 4.1] ==
+phi_t=0.5: |lambda| = [0.72984379 0.72984379]
+phi_t=2.0: |lambda| = [0.72984379 0.72984379]
+phi_t=3.9: |lambda| = [0.72984379 0.72984379]
+phi_t=4.0: |lambda| = [0.72984379 0.72984379]
+phi_t=4.1: |lambda| = [0.53267196 1.        ]
+=> el radio espectral llega a 1 exactamente en phi = 4.1 (derivacion propia, sin fuente)
+
+== B. forma constriccion chi*(v + c(p-x)...) con c=2.05  vs  forma inercia w=chi, c'=chi*2.05 ==
+max |dif| = 3.552713678800501e-15
+c1=c2=1.49618 con w=1 (SIN constriccion) vs constriccion C&K, max|dif| = 1.3375335369392798
+
+== C. Primera iteracion: termino cognitivo nulo (b = x) -> solo atraccion social ==
+componentes con paso/(g-x) fuera de [0, c2=1.49618]: 0 / 1800 (0 = paso puramente social)
+
+== D. El lider (x0 == g0) permanece quieto mientras g no cambie ==
+30/30 corridas: el lider no se mueve antes del primer cambio de g
+
+== E. Rosenbrock: exitos (f - f* <= 1e-4) en 30 corridas, budget 10000 n ==
+rosenbrock 2D: exitos 30/30; max f_best = 2.984e-19
+rosenbrock 3D: exitos 30/30; max f_best = 6.832e-05

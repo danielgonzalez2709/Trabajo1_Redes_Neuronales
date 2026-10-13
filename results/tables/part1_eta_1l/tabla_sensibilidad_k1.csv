@@ -1,0 +1,3 @@
+func,dim,method,k,n_corridas,f_final_media,f_final_desv,f_final_mediana,f_final_mejor,f_final_peor,n_f_medio,n_grad_medio,eval_equiv_medio,eval_equiv_medio_k2n,eval_equiv_medio_k1,tasa_exito_1e-04,tasa_exito_1e-02,tasa_exito_1e-06,evals_hasta_exito_medio_1e-04,evals_hasta_exito_medio_1e-02,evals_hasta_exito_medio_1e-06
+rosenbrock,2,gdfijo,1.0,30,0.01225745917346147,0.008970581369812672,0.011297019632375598,0.0004910775565137498,0.03856539198580775,0.0,20000.0,20000.0,80000.0,20000.0,0.0,0.3,0.0,,10526.666666666666,
+rosenbrock,3,gdfijo,1.0,30,0.0021720522762092844,0.0011658137398053519,0.0020906480868606563,0.00015443984170858055,0.00493014578799375,0.0,30000.0,30000.0,180000.0,30000.0,0.0,1.0,0.0,,18426.4,

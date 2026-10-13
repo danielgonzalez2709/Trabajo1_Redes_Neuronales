@@ -1,7 +1,7 @@
-"""Evidencia H-25: la API "clásica" de estado de PuLP (pulp.LpStatus[modelo.status]) no existe en PuLP 4.0.
+"""Evidencia H-41: la API "clásica" de estado de PuLP (pulp.LpStatus[modelo.status]) no existe en PuLP 4.0.
 
 Primera versión de src/part2/exact.py (13-oct-2026, escrita por Claude) usaba esa forma y fallaba en la primera prueba.
-Ejecutar: .venv/Scripts/python.exe alucinaciones/evidencias/H-25_pulp4_lpstatus.py
+Ejecutar: .venv/Scripts/python.exe alucinaciones/evidencias/H-41_pulp4_lpstatus.py
 """
 import pulp
 

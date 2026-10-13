@@ -1,0 +1,31 @@
+# Config afinada de la Parte 1 (T1.10), generada por:
+#   python run.py hpo --config configs/part1/base.yaml
+# No se edita a mano: se regenera con ese mismo comando (omite los --set de workers y
+# hpo.reanudar, que no cambian el resultado).
+# Solo trae lo que cambió respecto a la config de la que hereda, más salida y tablas.
+# El detalle de la selección está en results/data/part1_hpo/seleccion.json.
+hereda: base.yaml
+salida: results/data/part1_tuned
+tablas: results/tables/part1_tuned
+gd:
+  eta:
+    rosenbrock: 0.0014940661361120264
+  armijo:
+    eta0: 3.520092041250609
+    beta: 0.12427680612997696
+    c: 0.006727603419207777
+ea:
+  N: 117
+  frac_e: 0.1649790031871204
+  frac_m: 0.17663527096566822
+  frac_c: 0.48536490972313745
+pso:
+  N: 23
+  w: 0.724039922532192
+  c1: 0.9690204033396479
+  c2: 1.369895104450284
+  vmax_frac: 0.4883837869666649
+de:
+  NP: 14
+  F: 1.1808908059667669
+  CR: 0.8443027232371483

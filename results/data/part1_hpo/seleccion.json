@@ -1,0 +1,736 @@
+{
+  "meta": {
+    "ensayos": 30,
+    "semillas": 5,
+    "semillas_de_ajuste": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "presupuesto_por_dim": 10000,
+    "semilla_busqueda": 1,
+    "corridas_de_ajuste_total": 3000
+  },
+  "unidades": [
+    {
+      "unidad": "gdfijo_rosenbrock",
+      "metodo": "gdfijo",
+      "func": "rosenbrock",
+      "celdas": [
+        [
+          "rosenbrock",
+          2
+        ],
+        [
+          "rosenbrock",
+          3
+        ]
+      ],
+      "ensayos": 30,
+      "ganador": 26,
+      "defecto": {
+        "gd.eta.{func}": 0.001
+      },
+      "elegido": {
+        "gd.eta.{func}": 0.0014940661361120264
+      },
+      "puntaje_defecto": {
+        "indice": 0,
+        "rango_medio": 3.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0019365722864288237,
+          "rosenbrock_3d": 0.001274718111129823
+        },
+        "rango": {
+          "rosenbrock_2d": 4.0,
+          "rosenbrock_3d": 2.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0
+        }
+      },
+      "puntaje_ganador": {
+        "indice": 26,
+        "rango_medio": 2.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.00022347744800262477,
+          "rosenbrock_3d": 0.0004819294853034909
+        },
+        "rango": {
+          "rosenbrock_2d": 3.0,
+          "rosenbrock_3d": 1.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0
+        }
+      },
+      "corridas_de_ajuste": 300
+    },
+    {
+      "unidad": "gdfijo_rastrigin",
+      "metodo": "gdfijo",
+      "func": "rastrigin",
+      "celdas": [
+        [
+          "rastrigin",
+          2
+        ],
+        [
+          "rastrigin",
+          3
+        ]
+      ],
+      "ensayos": 30,
+      "ganador": 0,
+      "defecto": {
+        "gd.eta.{func}": 0.002
+      },
+      "elegido": {
+        "gd.eta.{func}": 0.002
+      },
+      "puntaje_defecto": {
+        "indice": 0,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      },
+      "puntaje_ganador": {
+        "indice": 0,
+        "rango_medio": 10.0,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rastrigin_2d": 12.934432432041095,
+          "rastrigin_3d": 12.934432432041095
+        },
+        "rango": {
+          "rastrigin_2d": 10.0,
+          "rastrigin_3d": 10.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      },
+      "corridas_de_ajuste": 300
+    },
+    {
+      "unidad": "gdarmijo",
+      "metodo": "gdarmijo",
+      "func": null,
+      "celdas": [
+        [
+          "rosenbrock",
+          2
+        ],
+        [
+          "rosenbrock",
+          3
+        ],
+        [
+          "rastrigin",
+          2
+        ],
+        [
+          "rastrigin",
+          3
+        ]
+      ],
+      "ensayos": 30,
+      "ganador": 10,
+      "defecto": {
+        "gd.armijo.eta0": 1.0,
+        "gd.armijo.beta": 0.5,
+        "gd.armijo.c": 0.0001
+      },
+      "elegido": {
+        "gd.armijo.eta0": 3.520092041250609,
+        "gd.armijo.beta": 0.12427680612997696,
+        "gd.armijo.c": 0.006727603419207777
+      },
+      "puntaje_defecto": {
+        "indice": 0,
+        "rango_medio": 15.375,
+        "tasa_exito_1e-06": 0.0,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.07662276890298525,
+          "rosenbrock_3d": 0.0024762140911381296,
+          "rastrigin_2d": 4.974790247647377,
+          "rastrigin_3d": 5.969749304740667
+        },
+        "rango": {
+          "rosenbrock_2d": 22.0,
+          "rosenbrock_3d": 15.0,
+          "rastrigin_2d": 18.0,
+          "rastrigin_3d": 6.5
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      },
+      "puntaje_ganador": {
+        "indice": 10,
+        "rango_medio": 6.875,
+        "tasa_exito_1e-06": 0.1,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 4.092804539121506e-06,
+          "rosenbrock_3d": 5.8832810029899576e-05,
+          "rastrigin_2d": 1.9899181141865796,
+          "rastrigin_3d": 7.959662381108174
+        },
+        "rango": {
+          "rosenbrock_2d": 4.0,
+          "rosenbrock_3d": 5.0,
+          "rastrigin_2d": 9.0,
+          "rastrigin_3d": 9.5
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.4,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.0,
+          "rastrigin_3d": 0.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 9308.0,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": null,
+          "rastrigin_3d": null
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 2,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 18616,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 0,
+          "rastrigin_3d": 0
+        }
+      },
+      "corridas_de_ajuste": 600
+    },
+    {
+      "unidad": "ea",
+      "metodo": "ea",
+      "func": null,
+      "celdas": [
+        [
+          "rosenbrock",
+          2
+        ],
+        [
+          "rosenbrock",
+          3
+        ],
+        [
+          "rastrigin",
+          2
+        ],
+        [
+          "rastrigin",
+          3
+        ]
+      ],
+      "ensayos": 30,
+      "ganador": 13,
+      "defecto": {
+        "ea.N": 50,
+        "ea.frac_e": 0.15,
+        "ea.frac_m": 0.1,
+        "ea.frac_c": 0.75
+      },
+      "elegido": {
+        "ea.N": 117,
+        "ea.frac_e": 0.1649790031871204,
+        "ea.frac_m": 0.17663527096566822,
+        "ea.frac_c": 0.48536490972313745
+      },
+      "puntaje_defecto": {
+        "indice": 0,
+        "rango_medio": 18.0,
+        "tasa_exito_1e-06": 0.4,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 0.0012552759140873713,
+          "rosenbrock_3d": 0.4230329019672492,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 26.0,
+          "rosenbrock_3d": 28.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.0,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 0.8,
+          "rastrigin_3d": 0.8
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": null,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 4373.0,
+          "rastrigin_3d": 4699.75
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 4,
+          "rastrigin_3d": 4
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 17492,
+          "rastrigin_3d": 18799
+        }
+      },
+      "puntaje_ganador": {
+        "indice": 13,
+        "rango_medio": 8.875,
+        "tasa_exito_1e-06": 0.7,
+        "evals_hasta_exito_1e-06": null,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 0.09872594170430546,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 2.5,
+          "rosenbrock_3d": 15.0,
+          "rastrigin_2d": 7.0,
+          "rastrigin_3d": 11.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 0.8,
+          "rosenbrock_3d": 0.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 16245.25,
+          "rosenbrock_3d": null,
+          "rastrigin_2d": 12924.2,
+          "rastrigin_3d": 11148.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 4,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 64981,
+          "rosenbrock_3d": 0,
+          "rastrigin_2d": 64621,
+          "rastrigin_3d": 55744
+        }
+      },
+      "corridas_de_ajuste": 600
+    },
+    {
+      "unidad": "pso",
+      "metodo": "pso",
+      "func": null,
+      "celdas": [
+        [
+          "rosenbrock",
+          2
+        ],
+        [
+          "rosenbrock",
+          3
+        ],
+        [
+          "rastrigin",
+          2
+        ],
+        [
+          "rastrigin",
+          3
+        ]
+      ],
+      "ensayos": 30,
+      "ganador": 0,
+      "defecto": {
+        "pso.N": 30,
+        "pso.w": 0.7298,
+        "pso.c1": 1.49618,
+        "pso.c2": 1.49618,
+        "pso.vmax_frac": 0.2
+      },
+      "elegido": {
+        "pso.N": 30,
+        "pso.w": 0.7298,
+        "pso.c1": 1.49618,
+        "pso.c2": 1.49618,
+        "pso.vmax_frac": 0.2
+      },
+      "puntaje_defecto": {
+        "indice": 0,
+        "rango_medio": 10.5,
+        "tasa_exito_1e-06": 0.9,
+        "evals_hasta_exito_1e-06": 8195.116666666667,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 1e-06,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 14.0,
+          "rosenbrock_3d": 2.0,
+          "rastrigin_2d": 14.0,
+          "rastrigin_3d": 12.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 1.0,
+          "rosenbrock_3d": 0.6,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 3484.4,
+          "rosenbrock_3d": 23647.666666666668,
+          "rastrigin_2d": 2133.6,
+          "rastrigin_3d": 3514.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 3,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 17422,
+          "rosenbrock_3d": 70943,
+          "rastrigin_2d": 10668,
+          "rastrigin_3d": 17574
+        }
+      },
+      "puntaje_ganador": {
+        "indice": 0,
+        "rango_medio": 10.5,
+        "tasa_exito_1e-06": 0.9,
+        "evals_hasta_exito_1e-06": 8195.116666666667,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 1e-06,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 14.0,
+          "rosenbrock_3d": 2.0,
+          "rastrigin_2d": 14.0,
+          "rastrigin_3d": 12.0
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 1.0,
+          "rosenbrock_3d": 0.6,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 1.0
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 3484.4,
+          "rosenbrock_3d": 23647.666666666668,
+          "rastrigin_2d": 2133.6,
+          "rastrigin_3d": 3514.8
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 3,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 17422,
+          "rosenbrock_3d": 70943,
+          "rastrigin_2d": 10668,
+          "rastrigin_3d": 17574
+        }
+      },
+      "corridas_de_ajuste": 600
+    },
+    {
+      "unidad": "de",
+      "metodo": "de",
+      "func": null,
+      "celdas": [
+        [
+          "rosenbrock",
+          2
+        ],
+        [
+          "rosenbrock",
+          3
+        ],
+        [
+          "rastrigin",
+          2
+        ],
+        [
+          "rastrigin",
+          3
+        ]
+      ],
+      "ensayos": 30,
+      "ganador": 0,
+      "defecto": {
+        "de.NP": 30,
+        "de.F": 0.7,
+        "de.CR": 0.9
+      },
+      "elegido": {
+        "de.NP": 30,
+        "de.F": 0.7,
+        "de.CR": 0.9
+      },
+      "puntaje_defecto": {
+        "indice": 0,
+        "rango_medio": 14.625,
+        "tasa_exito_1e-06": 0.95,
+        "evals_hasta_exito_1e-06": 2962.0375,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 1e-06,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 15.0,
+          "rosenbrock_3d": 12.5,
+          "rastrigin_2d": 15.5,
+          "rastrigin_3d": 15.5
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 1.0,
+          "rosenbrock_3d": 1.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 0.8
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 1547.0,
+          "rosenbrock_3d": 2873.6,
+          "rastrigin_2d": 2521.8,
+          "rastrigin_3d": 4905.75
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 4
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 7735,
+          "rosenbrock_3d": 14368,
+          "rastrigin_2d": 12609,
+          "rastrigin_3d": 19623
+        }
+      },
+      "puntaje_ganador": {
+        "indice": 0,
+        "rango_medio": 14.625,
+        "tasa_exito_1e-06": 0.95,
+        "evals_hasta_exito_1e-06": 2962.0375,
+        "mediana_recortada": {
+          "rosenbrock_2d": 1e-06,
+          "rosenbrock_3d": 1e-06,
+          "rastrigin_2d": 1e-06,
+          "rastrigin_3d": 1e-06
+        },
+        "rango": {
+          "rosenbrock_2d": 15.0,
+          "rosenbrock_3d": 12.5,
+          "rastrigin_2d": 15.5,
+          "rastrigin_3d": 15.5
+        },
+        "tasa_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 1.0,
+          "rosenbrock_3d": 1.0,
+          "rastrigin_2d": 1.0,
+          "rastrigin_3d": 0.8
+        },
+        "evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 1547.0,
+          "rosenbrock_3d": 2873.6,
+          "rastrigin_2d": 2521.8,
+          "rastrigin_3d": 4905.75
+        },
+        "semillas_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 5
+        },
+        "exitos_1e-06_por_celda": {
+          "rosenbrock_2d": 5,
+          "rosenbrock_3d": 5,
+          "rastrigin_2d": 5,
+          "rastrigin_3d": 4
+        },
+        "suma_evals_hasta_exito_1e-06_por_celda": {
+          "rosenbrock_2d": 7735,
+          "rosenbrock_3d": 14368,
+          "rastrigin_2d": 12609,
+          "rastrigin_3d": 19623
+        }
+      },
+      "corridas_de_ajuste": 600
+    }
+  ]
+}
