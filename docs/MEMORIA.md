@@ -23,9 +23,9 @@
 ## 👥 Equipo
 | Rol | Quién |
 |---|---|
-| Parte 1 — Optimización numérica | 2 integrantes (nombres: por completar) |
-| Parte 2 — TSP por España | 2 integrantes, incluida Camila |
-| Puente: integración, repositorio, cacería de alucinaciones | Daniel |
+| Parte 1 — Optimización numérica | 2 integrantes (nombres: por completar; **deben agregarlos en `blog/docs/index.md`**) |
+| Parte 2 — TSP por España | Jose Miguel Pulgarin Agudelo, Maria Camila Agudelo Espinosa |
+| Puente: integración, repositorio, cacería de alucinaciones | Daniel Gonzalez Henao |
 
 ## ✅ Decisiones vigentes (resumen — detalle en el Spec)
 - Python 3.12, algoritmos desde cero con numpy; librerías de optimización solo para contrastar.

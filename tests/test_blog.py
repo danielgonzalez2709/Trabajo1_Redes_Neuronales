@@ -27,6 +27,21 @@ Fuente: Elaboración propia.
 
 
 # ---------------------------------------------------------------- figuras, tablas y referencias cruzadas
+def test_html_incluido_no_lo_procesa_markdown(tmp_path):
+    # Los fragmentos de Plotly traen líneas con sangría y JS: dentro de la figura (markdown="1") Markdown los
+    # convertía en bloque de código y la figura salía en blanco. El HTML incluido debe llegar intacto.
+    import markdown
+
+    (tmp_path / "docs" / "figures").mkdir(parents=True)
+    fragmento = '<div id="g"></div>\n        <script>\n        var a_b_c = 1 * 2 * 3;\n        </script>'
+    (tmp_path / "docs" / "figures" / "g.html").write_text(fragmento, encoding="utf-8")
+    texto = "Ver [[fig:g]].\n\n::: figura g\nTítulo: G\nFuente: F.\nincluir: figures/g.html\n:::"
+    salida, _ = reporte.numerar_bloques(texto, raiz=tmp_path)
+    html = markdown.markdown(salida, extensions=["md_in_html"])
+    assert "<pre>" not in html and "<code>" not in html and "&lt;script" not in html
+    assert "var a_b_c = 1 * 2 * 3;" in html
+
+
 def test_numera_figuras_y_tablas_por_separado_y_en_orden():
     texto = (
         "Ver [[fig:a]], [[tab:t]] y [[fig:b]].\n\n"
