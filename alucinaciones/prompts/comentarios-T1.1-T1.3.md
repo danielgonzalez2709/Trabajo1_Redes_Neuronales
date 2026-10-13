@@ -196,4 +196,4 @@ tus scripts (AST idéntico, docstrings y comentarios previos idénticos, 0 líne
 ENTREGA: dictamen APRUEBA / NO APRUEBA, hallazgos nuevos con archivo:línea si los hay, y la salida de los scripts.
 ```
 
-Resultado: `revisor-calidad` APRUEBA la ronda 2 (sin hallazgos nuevos). Candidato H-32 anotado en registro.md. Cierre hecho por el orquestador.
+Resultado: `revisor-calidad` APRUEBA la ronda 2 (sin hallazgos nuevos). Candidato H-33 anotado en registro.md. Cierre hecho por el orquestador.

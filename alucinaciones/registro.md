@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 14 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-32) | 3 (H-07, H-08, H-10, puente) |
+| Código | 14 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
-| Conceptos | 3 (H-16; Parte 1: H-26, H-31, esta última severidad baja) — H-12 descartado | 0 |
+| Conceptos | 4 (H-16; Parte 1: H-26, H-31, H-32, estas dos últimas de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 32** (H-01–H-32; H-11–H-23 de la Parte 2/puente y H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 de la Parte 1): 30 activos y 2 descartados (H-12, H-13).
+**Total registrados: 33** (H-01–H-33; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6) y H-33 (comentarios de prueba de T1.1–T1.3) posteriores a esa renumeración): 31 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -435,7 +435,18 @@
 5. **Corrección:** (a) "el primer movimiento es puramente social, porque b_i = x_i anula el término cognitivo"; (b) "sin memoria el término cognitivo sería siempre cero y solo quedaría la atracción hacia g"; (c) "con v = 0, el líder permanece quieto hasta que otra partícula mejora g". Tomar nota: `test_la_particula_que_es_g_y_esta_en_su_memoria_solo_se_mueve_por_inercia` es correcta para un paso con v ≠ 0.
 6. **Lección:** al explicar un algoritmo, evaluar cada término en el estado inicial concreto (b = x, v = 0); una frase didáctica "solo depende de A y B" puede ocultar que A vale cero.
 
-### H-32 — Comentarios de prueba que afirman más de lo que la prueba comprueba ("el conteo coincide con las llamadas reales", "ninguna otra prueba lo notaría", "+1 frame si para por presupuesto")
+### H-32 — Docstrings del DE: "la diferencia se encoge al converger", "el mejor individuo nunca se pierde", "la aptitud de cada puesto nunca empeora"
+- **Estado:** candidato — severidad **baja**: son tendencias o garantías algo más fuertes que lo cierto; ya corregidas en `de.py` (12-oct-2026) y sin efecto en los resultados
+- **Categoría:** Conceptos
+- **Herramienta y modelo:** Claude Sonnet 5.5 (`implementador`, T1.6) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** `verificador-matematico`
+1. **Prompt (literal):** `prompts/T1.6.md`, ronda 1 del `implementador` (describe la selección codiciosa y la mutación, pero **no** contiene estas frases: el texto de los docstrings y de las celdas markdown es redacción del modelo).
+2. **Respuestas relevantes:** (a) `src/part1/de.py:279`, celda de la mutación: "La diferencia x_r2 − x_r3 [...] se encoge al converger"; (b) `de.py:521`, docstring de `seleccionar_codiciosa`: "el mejor individuo nunca se pierde"; (c) `de.py:498`: "la aptitud de cada puesto de la población nunca empeora".
+3. **Cómo sospechamos:** misma familia que H-26 ("σ → 0 al converger"): "converger" se usa como si la población siempre llegara al óptimo; y una selección con `<=` conserva el **valor**, no necesariamente el **individuo**.
+4. **Evidencia:** `evidencias/T1.6_verificacion_B_propiedades.py` y `T1.6_exitos.py`: (i) Rastrigin 3D con los defaults, semillas 0–29: 28/30 éxitos; las 2 corridas fallidas terminan en f = 0.995 (mínimo local con un gen en ±1), es decir, la población puede colapsar lejos del óptimo; (ii) con `<=` un hijo que empata reemplaza al padre: se conserva el mejor valor de f, no la identidad del individuo; (iii) con f = NaN la comparación `NaN <= x` es falsa y ese puesto queda congelado (no ocurre con Rosenbrock ni Rastrigin).
+5. **Corrección:** (a) "tiende a encogerse cuando la población se concentra; si colapsa en un mínimo local el paso se anula"; (b) "el mejor valor de f de la población nunca empeora (el individuo puede cambiar si un hijo empata)"; (c) "con f finita". Aplicadas en `de.py` (E1–E3).
+6. **Lección:** "converge" y "nunca se pierde" son afirmaciones de garantía: antes de escribirlas, decir si hablan del valor o del individuo, y si hay un caso (Rastrigin 3D) que las contradiga.
+
+### H-33 — Comentarios de prueba que afirman más de lo que la prueba comprueba ("el conteo coincide con las llamadas reales", "ninguna otra prueba lo notaría", "+1 frame si para por presupuesto")
 - **Estado:** candidato — severidad baja (comentarios, no código; corregidos antes de integrarse)
 - **Categoría:** Código (documentación de pruebas)
 - **Herramienta y modelo:** Claude Opus 5.5 (subagente `implementador`, tarea de comentarios T1.1–T1.3, ronda 1) · **Fecha:** 12-oct-2026 · **Quién lo cazó:** subagente `revisor-calidad` (ronda 1); el `verificador-matematico` señaló de forma independiente el tercero
@@ -504,6 +515,9 @@ Se documentan para el blog y para T2.5. Evidencia: `evidencias/T2.4_verificacion
 | 12-oct-2026 | T2.4: AP-4 Sevilla–Cádiz "Autopista libre" (0 €); vigencias de la AP-68 hasta el 10-nov-2026 y La Rioja/Aragón libres desde el día siguiente; el BOE núm. 225 solo trata de pesados; Bizkaia 6,85 → 4,20 | Correctas | `T2.4_verificacion.txt` §5–6 |
 | 12-oct-2026 | T2.4: los 54 SHA-256 de `data/raw/peajes_2026-10-12/MANIFEST.txt` | Correctos | `T2.4_verificacion.txt` §0 |
 | 8-oct-2026 | T2.1: URL de `fuentes.md` responden; CSW `dateStamp` 2026-01-19; identificador IGR-PO `20251216_…_v2024`; §3.8 "Se permiten combinaciones"; 26codmun.xlsx idéntico al crudo; IGR-PO usa el centroide de áreas residenciales cuando no hay coordenada de un organismo (respalda en parte "centro de la zona residencial") | Correctas (7/7 HTTP 200). "No hay versión NGMEP posterior a 202603": **no verificable** (la lista de ficheros del CNIG se carga dinámicamente; la página muestra "(2026)") | `evidencias/T2.1_urls_http.txt` |
+| 12-oct-2026 | T1.6: `scipy.optimize.differential_evolution` usa por defecto `strategy='best1bin'` y `polish=True` (Spec §10) | Correcta (SciPy v1.18.0; además: `updating='immediate'`, `init='latinhypercube'`, `mutation=(0.5, 1)`, `recombination=0.7`). SciPy re-sortea la componente fuera del dominio sobre el mutante, antes del cruce, y selecciona con `<=`, como `de.py` | documentación oficial y `_differentialevolution.py` (consultados el 12-oct-2026) |
+| 12-oct-2026 | T1.6: éxitos de DE (f − f* ≤ 1e-4, defaults, presupuesto 10 000·n, semillas 0–29): Rosenbrock 2D 30/30, 3D 30/30, Rastrigin 2D 30/30, 3D 28/30 | Correctas: las reprodujo el `verificador-matematico` de forma independiente; la reimplementación coincide bit a bit con `optimize` en las 4 configuraciones × 30 semillas | `evidencias/T1.6_verificacion_A_bit_a_bit.py`, `T1.6_exitos.py` |
+| 12-oct-2026 | T1.6: 26 mutantes del DE; 25 muertos, M11 (`U<=CR`→`U<CR`) sobrevive | Correcta: M11 es equivalente en la práctica (difiere solo si U == CR exacto, prob. ~2⁻⁵³); SciPy usa `<` estricto. Se deja documentado, sin prueba adicional | `evidencias/T1.6_mutantes.py`, `T1.6_mutantes_salida.txt` |
 | 12-oct-2026 | T2.5: referencias oficiales de la validación: Bilbao–Zaragoza 39,90 (PDF AP-68), Bilbao–Altube 6,85, Bilbao–Autop. Burgos 12,40, Zambrana–Zaragoza 26,80, Agoncillo–Zaragoza 18,85, Logroño–Zaragoza 20,70, Autop. Navarra–Zaragoza 11,60; AP-41 5,95 (SEITT); A Coruña–Pontevedra 16,35, A Coruña–Guísamo 2,05, Guísamo–Pontevedra 15,40 (calculadora Audasa); Villalba–Segovia normal 8,60, Villalba–Ávila normal 11,85, Campomanes–León 16,20 (PDF Ministerio); Eibar–Vitoria 10,04 y Eibar–Donostia 7,43 (Bidegi); Málaga–Estepona 9,55 y Estepona–Guadiaro 2,45 | Correctas todas. Fechas de consulta coherentes con las cabeceras `Date` (12-oct-2026) | `evidencias/T2.5_cazador/` y PDFs de `data/raw/peajes_2026-10-12/` (`pdftotext -raw`) |
 | 12-oct-2026 | T2.5: vías de los 5 pares (AP-68 293,2 km con 94 intersecciones `toll`; AP-4 92,8 km sin `toll`; A-42 66,7; A-7 39,3 + A-70 28,5 + A-31 3,0; AP-9 126,5 km con 33) | Correctas (lectura independiente de los crudos OSRM) | `evidencias/T2.5_cazador/T2.5_vias_independiente.py` → `.txt` |
 | 12-oct-2026 | T2.5: A-42, A-31, A-70, A-7 (Alicante/Murcia) = "Autovía"; AP-4 = "Autopista libre"; AP-41 y AP-66 = "Autopista de peaje" en el Catálogo RCE 2025 | Correctas | `evidencias/T2.5_cazador/T2.5_clases_rce.py` → `.txt` |

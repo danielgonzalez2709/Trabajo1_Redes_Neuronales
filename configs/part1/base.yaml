@@ -1,6 +1,6 @@
 # Parte 1 — experimento completo y valores por defecto (Spec §4.1 [DECIDIDO 9-oct]: toda otra config hereda de esta).
 # Claves de nivel superior de §4.1 y un bloque de parámetros por método (gd:, ea:, pso:, de:; Spec §6.3-§6.4) con los
-# valores por defecto del Spec. Hecho: gd: (T1.2), ea: (T1.4), pso: (T1.5). Pendiente: de: (T1.6).
+# valores por defecto del Spec. Hecho: gd: (T1.2), ea: (T1.4), pso: (T1.5), de: (T1.6).
 func: [rosenbrock, rastrigin]                 # §6.1 (identificadores de §5.4)
 dim: [2, 3]                                   # §3: 2D y 3D
 methods: [gdfijo, gdarmijo, ea, pso, de]      # §6.5 (identificadores de §5.4)
@@ -42,3 +42,12 @@ pso:
   c2: 1.49618             # coeficiente social (>= 0)
   vmax_frac: 0.2          # v_max = vmax_frac * (ub - lb) por dimensión; null = sin límite
   iteraciones: null       # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
+
+# Evolución diferencial DE/rand/1/bin (Spec §6.4; implementa src/part1/de.py). Valores por defecto del Spec.
+# Fuera del dominio: la componente del mutante se reinicia con un sorteo uniforme (antes del cruce).
+# Parada por presupuesto (§6.2); n_f = NP * (T + 1) con T generaciones completas.
+de:
+  NP: 30                  # tamaño de la población (>= 4: se necesitan 3 padres distintos de i)
+  F: 0.7                  # factor de mutación diferencial (real finito > 0)
+  CR: 0.9                 # probabilidad de cruce binomial (real en [0, 1])
+  generaciones: null      # null: parar solo por presupuesto (§6.2); entero >= 0: parar antes (rompe la comparación justa)
