@@ -5,8 +5,11 @@ Pasos: (1) para cada w de `costo.valor_hora` se corren `runs` corridas de MMAS, 
 recorridos finales, canonicalizados, son los candidatos; (3) la envolvente inferior exacta (`envolvente.py`) da los
 umbrales; (4) en cada w, mejor encontrado = mínimo de todos los candidatos, y gap % = 100·(costo − mejor)/mejor.
 Con `costo.consumo_l100` o `costo.precio_l` no nulos es una corrida de sensibilidad (salida aparte, unión con la base).
-Uso: `python run.py part2 --config configs/part2/sweep_w.yaml` (barrido) y
-`python run.py part2 --config configs/part2/sensibilidad_consumo.yaml [--set costo.consumo_l100=6.2]`.
+Con `experimento.referencia_gap` no nulo es la demo (§7.7, T3.7): un solo w, gap frente al mejor conocido de ese w en
+el `sweep_w.json` indicado ([DECIDIDO v1.17]: no es un óptimo probado), `demo.json` y la figura del recorrido.
+Uso: `python run.py part2 --config configs/part2/sweep_w.yaml` (barrido),
+`python run.py part2 --config configs/part2/sensibilidad_consumo.yaml [--set costo.consumo_l100=6.2]` y
+`python run.py part2 --config configs/part2/demo.yaml` (demo).
 """
 
 from __future__ import annotations
@@ -17,6 +20,7 @@ import dataclasses
 import json
 import math
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -28,6 +32,7 @@ from src.common.seeds import make_rng, validar_entero
 from src.part2 import aco, ga, recorridos
 from src.part2.costos import ARCHIVO_RUTAS, CLAVE_CONSUMO, Componentes, cargar_componentes, matriz_costos
 from src.part2.envolvente import Rectas, canonico, costo_envolvente, envolvente, rectas
+from src.viz.part2_figs import figura_recorrido
 
 RAIZ = Path(__file__).resolve().parents[2]
 
@@ -46,6 +51,14 @@ ARCHIVO_SWEEP = "sweep_w.json"
 ARCHIVO_UMBRALES = "umbrales_w.json"
 ARCHIVO_COMPARACION = "comparacion_base.json"
 CARPETA_SENSIBILIDAD = "sensibilidad"
+ARCHIVO_CIUDADES = "cities.csv"  # §5.3: coordenadas (lon, lat) para la figura de la demo
+ARCHIVO_DEMO = "demo.json"
+FIGURA_DEMO = "recorrido_w{w}.png"
+NOMBRE_SOLVER = {"mmas": "MMAS", "as": "AS", "ga": "GA"}
+NOTA_DEMO = (
+    "Gap frente al mejor conocido: el mejor costo encontrado en este w por el barrido de T3.6 (sweep_w.json), "
+    "no frente a un óptimo probado (Spec §7.7, v1.17)."
+)
 SANGRIA_HISTORIALES = None  # JSON compacto: decisión de Jose Miguel (12-oct) para reducir el tamaño en results/
 NOTA_UMBRAL = (
     "Umbral entre las mejores rutas encontradas en el barrido (todos los w, métodos y corridas), "
@@ -116,9 +129,9 @@ def consumo_y_precio(cfg: dict, datos: Datos) -> tuple[float, float]:
 # ------------------------------------------------------------------------------- desglose y estadísticas
 
 
-def desglose(datos: Datos, tour, w: float, consumo_l100: float, precio_l: float) -> dict:
-    """{tiempo €, peajes €, combustible €, km_peaje} del recorrido en w, con la alternativa que elige
-    `matriz_costos` en cada arco (incluido su desempate en `rapida`, §7.3)."""
+def arcos(datos: Datos, tour, w: float, consumo_l100: float, precio_l: float) -> dict[str, np.ndarray]:
+    """Por arco del recorrido cerrado (tour[k] → tour[k+1]; el último cierra el ciclo): {tiempo €, peajes €,
+    combustible €, km_peaje} con la alternativa que elige `matriz_costos` (incluido su desempate en `rapida`, §7.3)."""
     comp = datos.comp
     _, alternativa = matriz_costos(comp, w, {CLAVE_CONSUMO: consumo_l100}, precio_l)
     sin_peaje = alternativa == "sin_peaje"
@@ -129,13 +142,16 @@ def desglose(datos: Datos, tour, w: float, consumo_l100: float, precio_l: float)
         return np.where(sin_peaje, sin, rapida)[u, v]
 
     return {
-        "tiempo": float((w * elegido(comp.tiempo_h_rapida, comp.tiempo_h_sin_peaje)).sum()),
-        "peajes": float(elegido(comp.peaje_eur_rapida, comp.peaje_eur_sin_peaje).sum()),
-        "combustible": float(
-            (elegido(comp.dist_km_rapida, comp.dist_km_sin_peaje) * (consumo_l100 / 100) * precio_l).sum()
-        ),
-        "km_peaje": float(elegido(datos.km_peaje_rapida, datos.km_peaje_sin_peaje).sum()),
+        "tiempo": w * elegido(comp.tiempo_h_rapida, comp.tiempo_h_sin_peaje),
+        "peajes": elegido(comp.peaje_eur_rapida, comp.peaje_eur_sin_peaje),
+        "combustible": elegido(comp.dist_km_rapida, comp.dist_km_sin_peaje) * (consumo_l100 / 100) * precio_l,
+        "km_peaje": elegido(datos.km_peaje_rapida, datos.km_peaje_sin_peaje),
     }
+
+
+def desglose(datos: Datos, tour, w: float, consumo_l100: float, precio_l: float) -> dict:
+    """{tiempo €, peajes €, combustible €, km_peaje} del recorrido en w: suma de `arcos`."""
+    return {clave: float(x.sum()) for clave, x in arcos(datos, tour, w, consumo_l100, precio_l).items()}
 
 
 def gap(costo: float, mejor: float) -> float:
@@ -250,6 +266,8 @@ class Plan:
     precio_l: float
     salida: Path
     base: dict | None  # sensibilidad: {"umbrales": ..., "sweep": ...} del barrido base; None en el barrido base
+    referencia: dict | None = None  # demo (§7.7): {archivo, w, cost, tour} del mejor conocido; None si no es demo
+    coordenadas: tuple[np.ndarray, np.ndarray] | None = None  # demo: (lon, lat) por id de ciudad, de cities.csv
 
 
 def _matriz(plan: Plan, w: float) -> np.ndarray:
@@ -267,6 +285,54 @@ def _leer_base(salida_base: Path) -> dict:
             "run.py part2 --config configs/part2/sweep_w.yaml con la misma experimento.salida"
         )
     return {clave: load_json(p) for clave, p in archivos.items()}
+
+
+def _ruta_legible(ruta: Path) -> str:
+    """Ruta relativa a la raíz del repositorio si está dentro; si no, absoluta."""
+    try:
+        return ruta.resolve().relative_to(RAIZ).as_posix()
+    except ValueError:
+        return str(ruta)
+
+
+def leer_referencia(ruta: Path, w: float, C: np.ndarray) -> dict:
+    """Mejor conocido en w (§7.7 [DECIDIDO v1.17]): la entrada de ese w en un `sweep_w.json` (§5.4). Errores claros si
+    falta el archivo o la entrada, si el recorrido no es una permutación o si su costo con la matriz actual `C` no es
+    el guardado (datos, consumo o precio distintos): nunca se inventa una referencia."""
+    ruta = Path(ruta)
+    if not ruta.is_file():
+        raise FileNotFoundError(
+            f"demo: no existe la referencia del gap {ruta} (Spec §7.7); corre primero el barrido "
+            "(run.py part2 --config configs/part2/sweep_w.yaml) o ajusta experimento.referencia_gap"
+        )
+    filas = load_json(ruta)
+    if not isinstance(filas, list):
+        raise ValueError(f"{ruta}: se esperaba la lista de filas de sweep_w.json (Spec §5.4)")
+    entradas = [e for e in filas if isinstance(e, dict) and e.get("w") == w]
+    if len(entradas) != 1:
+        raise ValueError(f"{ruta}: no tiene una (y solo una) entrada con w = {_texto_num(w)} €/h; no hay mejor "
+                         "conocido para la demo (Spec §7.7)")
+    e = entradas[0]
+    costo = recorridos.validar_real(e.get("cost"), f"{ruta}: cost (w = {_texto_num(w)})", 0.0, min_abierto=True)
+    tour, n = e.get("tour"), C.shape[0]
+    if not isinstance(tour, list) or sorted(tour) != list(range(n)):
+        raise ValueError(f"{ruta}: el tour de w = {_texto_num(w)} no es una permutación de 0..{n - 1}")
+    recalculado = float(recorridos.costos_recorridos(C, np.array([tour]))[0])
+    if not math.isclose(recalculado, costo, rel_tol=TOL_REL):
+        raise ValueError(
+            f"{ruta}: la referencia de w = {_texto_num(w)} no corresponde al modelo de costo actual (su recorrido "
+            f"cuesta {recalculado:.6f} € y el archivo dice {costo:.6f} €): datos, consumo o precio distintos"
+        )
+    return {"archivo": _ruta_legible(ruta), "w": w, "cost": costo, "tour": tour}
+
+
+def cargar_coordenadas(ruta: Path, n: int) -> tuple[np.ndarray, np.ndarray]:
+    """(lon, lat) por id de ciudad de cities.csv (§5.3); exige los id 0..n−1, uno por ciudad de la matriz."""
+    with Path(ruta).open(encoding="utf-8", newline="") as f:
+        filas = sorted(csv.DictReader(f), key=lambda fila: int(fila["id"]))
+    if [int(fila["id"]) for fila in filas] != list(range(n)):
+        raise ValueError(f"{ruta}: los id deben ser 0..{n - 1} (una fila por ciudad de la matriz)")
+    return np.array([float(fila["lon"]) for fila in filas]), np.array([float(fila["lat"]) for fila in filas])
 
 
 def _validar_solvers(plan: Plan) -> None:
@@ -301,6 +367,7 @@ def preparar(cfg: dict) -> Plan:
                             "experimento.variantes_aco", aco.VARIANTES)
     datos_dir = _leer_ruta(recorridos.leer_clave(exp, "datos", "experimento.datos", "§7.5"), "experimento.datos")
     salida = _leer_ruta(recorridos.leer_clave(exp, "salida", "experimento.salida", "§5.4"), "experimento.salida")
+    referencia_gap = recorridos.leer_clave(exp, "referencia_gap", "experimento.referencia_gap", "§7.7")
     solvers = tuple(s for s in SOLVERS if FAMILIA[s] in methods and (FAMILIA[s] != "aco" or s in variantes))
 
     datos = cargar_datos(datos_dir)
@@ -310,6 +377,17 @@ def preparar(cfg: dict) -> Plan:
     _validar_solvers(plan)
     if "aco" in methods and "ga" in methods:
         comprobar_presupuesto(cfg)
+
+    if referencia_gap is not None:  # demo (§7.7): sin envolvente ni sensibilidad; la referencia valida el modelo
+        if len(w) != 1:
+            raise ValueError(f"la demo (experimento.referencia_gap) admite un solo valor de costo.valor_hora; "
+                             f"se recibió {w}")
+        ruta = _leer_ruta(referencia_gap, "experimento.referencia_gap")
+        n = datos.comp.tiempo_h_rapida.shape[0]
+        # La referencia se valida con la matriz del plan (consumo y precio efectivos): por eso, p. ej.,
+        # `--set costo.consumo_l100=5.6` falla con "no corresponde" frente al barrido base de 4,6 l/100 km.
+        return dataclasses.replace(plan, referencia=leer_referencia(ruta, w[0], _matriz(plan, w[0])),
+                                   coordenadas=cargar_coordenadas(datos_dir / ARCHIVO_CIUDADES, n))
 
     etiqueta = _etiqueta_sensibilidad(costo)
     if etiqueta is not None:
@@ -358,8 +436,8 @@ def _verificar(valor: float, referencia: float, que: str) -> None:
         raise RuntimeError(f"{que}: {valor!r} ≠ {referencia!r} (tolerancia relativa {TOL_REL})")
 
 
-def _correr_solvers(plan: Plan) -> Corridas:
-    """Corre todos los (w, solver, corrida) del plan."""
+def _correr_solvers(plan: Plan, imprimir: bool = True) -> Corridas:
+    """Corre todos los (w, solver, corrida) del plan; con `imprimir`, una línea por (w, solver)."""
     corridas = Corridas(costos={}, hallazgos={}, historiales={})
     for i_w, w in enumerate(plan.w):
         C = _matriz(plan, w)
@@ -381,7 +459,9 @@ def _correr_solvers(plan: Plan) -> Corridas:
             hist = corridas.historiales.setdefault((w, familia), {"w": w, "metodo": familia, "variantes": {}})
             hist["variantes"][s] = {"parametros": cfg_s[familia], "corridas": registros}
             est = corridas.costos[w][s]
-            print(f"  w = {_texto_num(w):>5} €/h  {s:<4}  mejor {min(est):10.2f} €  media {np.mean(est):10.2f} €")
+            if imprimir:
+                print(f"  w = {_texto_num(w):>5} €/h  {s:<4}  mejor {min(est):10.2f} €  "
+                      f"media {np.mean(est):10.2f} €")
     return corridas
 
 
@@ -435,6 +515,8 @@ def _json_umbrales(plan: Plan, env: dict, hallazgos: dict) -> dict:
 
 def correr(plan: Plan) -> Path:
     """Ejecuta el plan y escribe las salidas en `plan.salida`; devuelve esa carpeta."""
+    if plan.referencia is not None:
+        return _correr_demo(plan)
     corridas = _correr_solvers(plan)
     hallazgos = corridas.hallazgos
     if plan.base is not None:  # sensibilidad: unión con los candidatos del barrido base (§7.5)
@@ -494,6 +576,80 @@ def _imprimir_resumen(sweep: list[dict], umbrales: dict, salida: Path) -> None:
     lista = ", ".join(f"{u['w']:.6g}" for u in umbrales["umbrales"]) or "ninguno"
     print(f"Umbrales (entre las mejores rutas encontradas): {lista}")
     print(f"Resultados en {salida}")
+
+
+def _correr_demo(plan: Plan) -> Path:
+    """Demo (§7.7): corre los solvers en el único w, guarda `demo.json` y la figura del mejor recorrido y resume en
+    consola costo, desglose, gap frente al mejor conocido, recorridos evaluados y tiempo. Solo escribe en
+    `plan.salida`."""
+    inicio = time.perf_counter()
+    res, con_peaje = _resumen_demo(plan, _correr_solvers(plan, imprimir=False))
+    lon, lat = plan.coordenadas
+    figura_recorrido(
+        lon, lat, res["tour"], con_peaje,
+        titulo=f"Mejor recorrido de la demo ({_nombres_solvers(res['solvers'])}, w = {_texto_num(res['w'])} €/h)",
+        subtitulo=f"{res['cost']:.2f} € · gap frente al mejor conocido {res['gap_mejor_conocido']:+.2f} %",
+        ruta=plan.salida / res["figura"],
+    )
+    save_json(plan.salida / ARCHIVO_DEMO, res)
+    _imprimir_demo(res, plan.salida, time.perf_counter() - inicio)
+    return plan.salida
+
+
+def _resumen_demo(plan: Plan, corridas: Corridas) -> tuple[dict, np.ndarray]:
+    """Contenido de `demo.json` (§5.4) a partir de las corridas; calcula, no escribe. Devuelve también qué arcos del
+    mejor recorrido pagan peaje (los marca la figura)."""
+    (w,) = plan.w
+    referencia = plan.referencia
+    # Las claves de `hallazgos` son los recorridos canónicos de todas las corridas, cada uno una sola vez.
+    tours = list(corridas.hallazgos)
+    costos = recorridos.costos_recorridos(_matriz(plan, w), np.array(tours, dtype=np.intp))
+    i_mejor = int(np.argmin(costos))
+    tour, mejor = tours[i_mejor], float(costos[i_mejor])
+    por_arco = arcos(plan.datos, tour, w, plan.consumo_l100, plan.precio_l)
+    totales = {clave: float(x.sum()) for clave, x in por_arco.items()}
+    con_peaje = por_arco["peajes"] > 0
+    n_evals = 0
+    for hist in corridas.historiales.values():
+        for variante in hist["variantes"].values():
+            for corrida in variante["corridas"]:
+                n_evals += corrida["n_tour_evals"]
+    res = {
+        "w": w, "solvers": list(plan.solvers), "tour": list(tour), "cost": mejor,
+        "desglose": {"tiempo": totales["tiempo"], "peajes": totales["peajes"],
+                     "combustible": totales["combustible"]},
+        "km_peaje": totales["km_peaje"], "arcos_con_peaje": int(con_peaje.sum()),
+        "referencia": referencia, "gap_mejor_conocido": gap(mejor, referencia["cost"]),
+        "metodos": {s: estadisticas(c, referencia["cost"]) for s, c in corridas.costos[w].items()},
+        "n_tour_evals": n_evals, "figura": FIGURA_DEMO.format(w=_texto_num(w)), "nota": NOTA_DEMO,
+        "semillas": {"regla": REGLA_SEMILLAS, "base_seed": plan.base_seed, "solvers": list(SOLVERS)},
+        "config": plan.cfg,
+    }
+    return res, con_peaje
+
+
+def _nombres_solvers(solvers: list[str]) -> str:
+    """Nombres legibles de los solvers, p. ej. "MMAS + GA"."""
+    return " + ".join(NOMBRE_SOLVER[s] for s in solvers)
+
+
+def _imprimir_demo(res: dict, salida: Path, segundos: float) -> None:
+    """Resumen en consola de la demo, leído del mismo dict que se guarda en `demo.json`."""
+    desglose, referencia = res["desglose"], res["referencia"]
+    print(f"Demo Parte 2: {_nombres_solvers(res['solvers'])}, w = {_texto_num(res['w'])} €/h, "
+          f"{res['config']['runs']} corrida(s)")
+    print(f"  Mejor recorrido:      {res['cost']:10.2f} €")
+    print(f"    Tiempo:             {desglose['tiempo']:10.2f} €")
+    print(f"    Peajes:             {desglose['peajes']:10.2f} €  ({res['arcos_con_peaje']} tramos con peaje, "
+          f"{res['km_peaje']:.1f} km)")
+    print(f"    Combustible:        {desglose['combustible']:10.2f} €")
+    print(f"  Mejor conocido:       {referencia['cost']:10.2f} €  ({referencia['archivo']}, barrido T3.6)")
+    for s, m in res["metodos"].items():
+        print(f"  Gap frente al mejor conocido ({NOMBRE_SOLVER[s]}): mejor corrida {m['gap_mejor']:+.2f} %, "
+              f"media de {m['n']} corridas {m['gap_media']:+.2f} %")
+    print(f"  Recorridos evaluados: {_miles(res['n_tour_evals'])}")
+    print(f"  Tiempo de ejecución:  {segundos:.1f} s (corridas y figura)")
+    print(f"  Figura:               {_ruta_legible(salida / res['figura'])}")
 
 
 def ejecutar(cfg: dict) -> Path:

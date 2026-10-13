@@ -20,6 +20,9 @@ data/raw/osrm_*/simetria/
 # Escrituras atómicas interrumpidas (descargar_datos.py escribe a .tmp y renombra)
 *.tmp
 
+# T3.7: salida de la demo de la Parte 2 (se regenera en segundos con run.py; no se versiona, Spec v1.17 §7.7)
+results/data/part2/demo/
+
 # Claude Code: configuración local de cada integrante (los agentes en .claude/agents/ SÍ se versionan)
 .claude/settings.local.json
 
