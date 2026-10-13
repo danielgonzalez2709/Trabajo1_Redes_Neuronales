@@ -409,8 +409,8 @@ def test_run_py_figures_genera_la_parte_1_e_imprime_los_bloques(carpetas, tmp_pa
     monkeypatch.setattr(figuras, "GENERADORES", {"Parte 1": figuras.GENERADORES["Parte 1"]})
     assert cli.main(["figures"]) == 0
     texto = capsys.readouterr().out
-    assert "Parte 1: 8 figuras" in texto and "GIF Parte 1: figuras pendientes (T4.3)" in texto
-    assert "Parte 1: figuras pendientes" not in texto.replace("GIF Parte 1", "")
+    assert "Parte 1: 8 figuras" in texto
+    assert not [linea for linea in texto.splitlines() if "pendientes" in linea]  # T4.3: ya no queda nada pendiente
     for f in p1.FIGURAS.values():
         assert p1.bloque_blog(f) in texto and (salida / f.archivo).is_file()
     assert texto.index(str(salida / "part1_cajas.html")) < texto.index("::: figura contorno-rosenbrock")
@@ -427,8 +427,8 @@ def test_run_py_figures_sin_corridas_devuelve_0_y_solo_bloques_de_lo_generado(tm
 
 
 def test_generadores_y_pendientes():
-    assert list(figuras.GENERADORES) == ["Parte 2", "GIF Parte 2", "Parte 1"]
-    assert figuras.PENDIENTES == {"GIF Parte 1": "T4.3"}
+    assert list(figuras.GENERADORES) == ["Parte 2", "GIF Parte 2", "Parte 1", "GIF Parte 1"]
+    assert figuras.PENDIENTES == {}
 
 
 # ------------------------------------------------------------------------------------- datos reales
