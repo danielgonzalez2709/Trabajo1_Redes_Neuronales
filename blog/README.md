@@ -42,6 +42,26 @@ Fuente: Elaboración propia a partir de results/data/part1/summary.json.
 - Para una figura interactiva de Plotly: dentro del bloque, `incluir: figures/<archivo>.html`.
 - El `id` usa minúsculas, números y guiones.
 
+### Figuras de la Parte 1 ya generadas (T4.2)
+Están en `docs/figures/`; falta pegar su bloque en `secciones/04-parte1-resultados.md` (o en la 08) y citarlas.
+`python run.py figures` imprime el bloque `::: figura` completo de cada una (id, título, fuente e `incluir:`), listo para pegar.
+
+| id (para `[[fig:<id>]]`) | Archivo | Qué muestra |
+|---|---|---|
+| `contorno-rosenbrock` | `part1_contorno_rosenbrock.html` | Curvas de nivel de Rosenbrock 2D (niveles logarítmicos) |
+| `contorno-rastrigin` | `part1_contorno_rastrigin.html` | Curvas de nivel de Rastrigin 2D |
+| `convergencia-part1` | `part1_convergencia.html` | Mediana e IQR de f − f* contra evaluaciones equivalentes, config por defecto; selector función × dimensión |
+| `cajas-part1` | `part1_cajas.html` | Cajas de f final − f* por método, config por defecto; mismo selector |
+| `convergencia-afinado-part1` | `part1_convergencia_afinado.html` | Por defecto contra afinado, solo los métodos que la HPO cambió |
+| `cajas-afinado-part1` | `part1_cajas_afinado.html` | Cajas por defecto / afinado, solo los métodos que la HPO cambió |
+| `eta-rosenbrock` | `part1_eta_rosenbrock.html` | Trayectoria del GD de paso fijo en Rosenbrock 2D con deslizador de η |
+| `enjambre-rastrigin` | `part1_enjambre_rastrigin.html` | Superficie de Rastrigin 2D con el enjambre del PSO y deslizador de iteración |
+
+- Las de convergencia y cajas necesitan las corridas (`results/data/part1/runs/` y `part1_tuned/runs/`, que git ignora):
+  sin ellas `run.py figures` avisa del comando que falta y no las regenera.
+- En los ejes logarítmicos los valores menores que 1e-16 (incluido el 0 exacto) se dibujan en 1e-16: decirlo en el texto
+  (en Rosenbrock 2D todas las corridas de PSO y DE quedan en ese piso).
+
 ## Reglas que el build hace cumplir (requisitos del enunciado)
 1. Toda figura y tabla tiene **número, título y fuente** (formato APA 7).
 2. Toda figura y tabla **se cita en el texto** — una figura huérfana hace fallar el build.

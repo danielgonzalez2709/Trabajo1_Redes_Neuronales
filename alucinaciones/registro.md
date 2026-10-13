@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 18 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
+| Código | 19 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil, H-43 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
-| Conceptos | 7 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39, H-41; H-31, H-32 y H-41 de severidad baja) — H-12 descartado | 0 |
+| Conceptos | 8 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39, H-41, H-42; H-31, H-32, H-41 y H-42 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 41** (H-01–H-41; H-41 (blog, desplazamiento del primer movimiento del PSO sin el recorte por v_max) es de T4.6 parcial Parte 1: en su rama era H-38 y se renumeró al integrar la HPO (T1.10) el 13-oct-2026 porque H-38–H-40 ya estaban en uso; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 39 activos y 2 descartados (H-12, H-13).
+**Total registrados: 43** (H-01–H-43; H-42 (figura del deslizador de η: rótulo "f final" sobre el mejor valor visto) y H-43 (pruebas de las figuras que no podían fallar) son de T4.2; H-41 (blog, desplazamiento del primer movimiento del PSO sin el recorte por v_max) es de T4.6 parcial Parte 1: en su rama era H-38 y se renumeró al integrar la HPO (T1.10) el 13-oct-2026 porque H-38–H-40 ya estaban en uso; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 41 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -556,6 +556,30 @@
 4. **Evidencia (cazador, 13-oct-2026):** experimento con la configuración de `base.yaml`, semillas 0–29, iteración 1. La velocidad sin limitar es exactamente c₂·R₂·(g − x) en las 1 800 componentes. El desplazamiento real coincide con ella solo en 1 122/1 800 (Rastrigin 2D) y 1 060/1 800 (Rosenbrock 2D): 678 y 739 componentes quedaron recortadas por v_max, y 0 y 2 por la frontera. El líder no se movió en 30/30 corridas. Código: `pso.py:735-742`. Script y salida: `evidencias/T4.6_verificacion.py` → `T4.6_verificacion.txt` (reejecutado el 13-oct-2026, Linux; se ejecuta desde la raíz con `.venv/bin/python`).
 5. **Corrección (aplicada en el blog):** "la velocidad de cada partícula es c₂·R₂,ᵢ⊙(g − xᵢ), sujeta después al límite v_max (paso 5) y a la frontera (paso 6)". H-31 punto 4(i) tenía el mismo exceso ("el desplazamiento de todas las componentes es c₂·R₂·(g − x)", con una prueba que solo acota el cociente a [0, c₂]); matizado el 13-oct-2026.
 6. **Lección:** al convertir una frase cualitativa en una igualdad, hay que pasarla por todas las etapas del algoritmo (límite de velocidad, frontera); una prueba de rango no demuestra igualdad.
+
+---
+### H-42 — Figura del deslizador de η: rótulo "f final − f*" sobre `f_best` (mejor punto visto), que con η grande no es la f del último iterado dibujado
+- **Estado:** candidato — severidad **baja**. Detectado y corregido antes del commit.
+- **Categoría:** Conceptos (rótulo de una figura que no corresponde a lo que se dibuja)
+- **Herramienta y modelo:** Claude Code, subagente `implementador` (claude-opus-5-5), T4.2-B · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `revisor-spec` (T4.2, observación N1)
+1. **Prompt (literal):** `prompts/T4.2.md`, sección B: "el título o la anotación dice η, f final e iteraciones". El prompt del orquestador ya decía "f final"; el contrato del JSON (sección A) solo trae `f_best`. El implementador rotuló `f_best` como "f final − f*" sin advertir la diferencia.
+2. **Respuesta relevante de la IA:** subtítulo de `part1_eta_rosenbrock.html`: "f final − f* = …" con el valor de `f_best`.
+3. **Cómo sospechamos:** con η = 1e-2 la trayectoria dibujada termina en la esquina (2.048, 2.048) del dominio y el rótulo mostraba 158,37, que es f(x₀).
+4. **Evidencia (revisor-spec, recalculado desde `results/data/part1/eta_deslizador.json`):** η = 3,16e-3: `f_best` 3,45e-2 frente a 0,370 en el último iterado; η = 5,62e-3: 36,7 frente a 470; η = 1e-2: 158,37 frente a 461,8. En los otros 11 valores de η coinciden.
+5. **Corrección:** el subtítulo dice "Mejor f − f* visto" (Spec §5.1), con una prueba que compara el valor mostrado en cada paso con `f_best`.
+6. **Lección:** en un método sin garantía de descenso, "mejor valor visto" y "valor final" son cantidades distintas; el rótulo debe nombrar la que se muestra. La imprecisión nació en el prompt.
+
+---
+### H-43 — Pruebas de las figuras de la Parte 1 que no podían fallar (banda de cuartiles sin comprobar, texto "f final" en lugar del valor, aserción sobre módulos)
+- **Estado:** candidato **débil** (misma familia que H-10 y H-36). Corregido antes del commit.
+- **Categoría:** Código (pruebas)
+- **Herramienta y modelo:** Claude Code, subagente `implementador` (claude-opus-5-5), T4.2-B · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `revisor-spec` (mutantes N2 y N3) y `revisor-calidad` (aserción tautológica)
+1. **Prompt (literal):** `prompts/T4.2.md`, sección B, apartado "Pruebas".
+2. **Respuesta relevante de la IA:** (i) la prueba de convergencia no comprobaba los valores de las trazas q25 y q75; (ii) la prueba del deslizador solo buscaba el texto "f final"; (iii) `assert gifs and part2_interactivas  # los demás generadores siguen conectados` (un módulo importado siempre es verdadero); además, el comentario de la malla de Rastrigin decía "10 períodos, al menos 20 puntos por período" cuando el dominio mide 10,24 períodos (≈ 19,5 intervalos por período).
+3. **Cómo sospechamos:** prueba de mutación del revisor-spec (15 mutantes, 13 muertos).
+4. **Evidencia:** sobrevivían los mutantes "la traza q75 dibuja la mediana" y "el subtítulo muestra η en lugar de `f_best`" (115 passed con ambos).
+5. **Corrección:** prueba nueva de la banda con cuartiles calculados a mano, comparación del valor mostrado con `f_best`, comentario de la malla derivado del dominio real y aserción tautológica eliminada.
+6. **Lección:** una prueba de figura debe mirar los números de las trazas, no la presencia de un texto.
 
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2
 - **Aceptación de T2.2 "Madrid→Barcelona con `exclude=toll`"** (PLAN): esa ruta ya no tiene peaje (A-2 + AP-2 + AP-7 liberadas), así que `rapida` = `sin_peaje` y la prueba no puede validar la clase `toll`. El curador añadió Bilbao–Zaragoza (AP-68) y A Coruña–Pontevedra (AP-9). Falta averiguar quién/qué redactó la aceptación (¿IA?) y su prompt. **SIN PROMPT.**

@@ -1,10 +1,11 @@
 """Manejador de `python run.py figures` (Spec §4.1): regenera las figuras del blog desde results/data/ sin internet.
 
 - Parte 2 (T4.4): `part2_interactivas.generar_part2()` → blog/docs/figures/part2_*.html.
-- Parte 1 (T4.2): pendiente. Punto de extensión: añadir su generador a `GENERADORES` cuando exista.
+- Parte 1 (T4.2): `part1_interactivas.generar_part1()` → blog/docs/figures/part1_*.html; tras sus rutas se imprime el
+  bloque `::: figura` de cada una, listo para pegar en blog/secciones/ (`BLOQUES_BLOG`).
 - GIF Parte 2 (T4.5): `gifs.generar_gifs()` → media/tsp_{mmas|ga}_w25.gif, copiados a blog/docs/figures/ (MkDocs solo
   publica lo que está dentro de blog/docs/).
-- GIF Parte 1 (T4.3): pendiente; mismo punto de extensión.
+- GIF Parte 1 (T4.3): pendiente. Punto de extensión: añadir su generador a `GENERADORES` cuando exista.
 """
 
 from __future__ import annotations
@@ -12,11 +13,11 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
-from src.viz import gifs, part2_interactivas
+from src.viz import gifs, part1_interactivas, part2_interactivas
 
 FIGURAS_BLOG = Path(__file__).resolve().parents[2] / "blog" / "docs" / "figures"
 
-PENDIENTES = {"Parte 1": "T4.2", "GIF Parte 1": "T4.3"}  # se quitan de aquí al añadir su generador
+PENDIENTES = {"GIF Parte 1": "T4.3"}  # se quitan de aquí al añadir su generador
 
 
 def _parte2() -> list:
@@ -29,7 +30,13 @@ def _gif_parte2() -> list:
     return rutas + [Path(shutil.copy2(r, FIGURAS_BLOG / r.name)) for r in rutas]
 
 
-GENERADORES = {"Parte 2": _parte2, "GIF Parte 2": _gif_parte2}
+def _parte1() -> list:
+    return part1_interactivas.generar_part1()
+
+
+GENERADORES = {"Parte 2": _parte2, "GIF Parte 2": _gif_parte2, "Parte 1": _parte1}
+# Generadores cuyas figuras se acompañan del bloque del blog: nombre → función(rutas) → texto.
+BLOQUES_BLOG = {"Parte 1": part1_interactivas.bloques_blog}
 
 
 def main(cfg: dict | None = None) -> int:  # noqa: ARG001 - firma de los manejadores de la CLI
@@ -38,6 +45,9 @@ def main(cfg: dict | None = None) -> int:  # noqa: ARG001 - firma de los manejad
         print(f"{nombre}: {len(rutas)} figuras")
         for ruta in rutas:
             print(f"  {ruta}")
+        if nombre in BLOQUES_BLOG and rutas:
+            print(f"{nombre}: bloques para pegar en blog/secciones/\n")
+            print(BLOQUES_BLOG[nombre](rutas) + "\n")
     for nombre, tarea in PENDIENTES.items():
         print(f"{nombre}: figuras pendientes ({tarea})")
     return 0
