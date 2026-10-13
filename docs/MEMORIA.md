@@ -93,7 +93,7 @@
   evaluaciones dan NaN o +inf, `problem.best_x` es None y `optimize` lanza `AttributeError` (`pso.py` y `ea.py`; no ocurre con Rosenbrock/Rastrigin) — decidir si se añade una guarda;
   (c) la prueba `test_la_particula_que_es_g…solo_se_mueve_por_inercia` conserva un nombre impreciso (opcional); (d) en el blog documentar: el líder no se mueve con v(0)=0 hasta que g cambie
   y "PSO garantiza el óptimo global" es falso (Rastrigin 3D: 26/30 éxitos).
-- [ ] **T1.6 — cambios al Spec que decide Daniel:** en §6.4 DE: (a) regla `≤` en la selección; (b) reinicio sobre el mutante antes del cruce; (c) esquema síncrono y sorteo de padres;
+- [ ] **T1.6 — cambios al Spec que decide Daniel** (ya escritos como línea `[PENDIENTE]` en Spec §6.4, tras la tabla; falta su aprobación): en §6.4 DE: (a) regla `≤` en la selección; (b) reinicio sobre el mutante antes del cruce; (c) esquema síncrono y sorteo de padres;
   (d) claves `NP`, `F`, `CR`, `generaciones` (null = parar por presupuesto) y `NP ≥ 4`; (e) convención `U ≤ CR`; (f) generación truncada descartada: `f_best` puede venir de un hijo de esa
   generación (mejor punto visto, §5.1); (g) `best` del frame = mejor de la población actual. Y la **revisión de Daniel a T1.6** y el PR.
 - [ ] **T1.6 — pendientes menores:** (a) **M1** `_exigir_forma` duplicada con `pso.py` y **M8** helpers de prueba repetidos / pruebas de sanidad lentas (~17 s) → ronda de refactor;

@@ -338,6 +338,17 @@ blog como amenaza a la validez (métodos con recorte a los bordes o inicializaci
 - Comportamiento a discutir en el blog: en 2D el cruce de un punto solo intercambia coordenadas; sin selección por aptitud la única presión es la élite; σ poblacional → 0 apaga la mutación al converger.
 - Validación: `ValueError` si `frac_*` o N son inválidos (negativos, N < 2, `n_élite + n_mutantes > N`).
 
+[PENDIENTE: aprobación de Daniel, propuesto en T1.6] Aclaraciones del DE/rand/1/bin (`src/part1/de.py`; no cambian la fila de la tabla, la precisan):
+(1) **selección** `f(u) ≤ f(x)`: el hijo gana en empate; (2) **fuera del dominio**: cada componente del mutante v fuera de [lb, ub] se re-sortea U(lb, ub) **antes** del cruce
+(cierre inclusivo; no se recorta); (3) **cruce** binomial con `U ≤ CR` o `j = j_rand` (j_rand ∈ {0,…,d−1} sorteado para todos los individuos); (4) **esquema síncrono**: todos los
+hijos se construyen con la población del inicio de la generación; (5) **padres** r1, r2, r3 distintos entre sí y de i, sorteados con una sola llamada al rng (`argsort` de
+uniformes), lo que exige NP ≥ 4; (6) bloque `de:` de `base.yaml` con claves `NP`, `F` (> 0), `CR` ∈ [0, 1] y `generaciones` (`null` = parar por presupuesto, §6.2; un entero rompe la
+comparación justa), sin claves desconocidas; (7) **truncado**: la generación que no cabe en el presupuesto se descarta (población y frame sin actualizar), de modo que `f_best`/`x_best`
+pueden provenir de un hijo evaluado en esa generación (mejor punto visto, §5.1); n_f = NP·(T+1) y, en 2D con 20 000 evaluaciones, 666 frames; (8) `best` de cada frame = mejor individuo de la
+población actual (iter 0 = población inicial).
+Comportamiento a discutir en el blog: "DE garantiza el óptimo global" es falso (Rastrigin 3D con los valores por defecto: 28/30 éxitos); la diferencia x_r2 − x_r3 solo se encoge cuando la
+población se concentra, y si colapsa en un mínimo local el paso se anula.
+
 ### 6.5 Diseño experimental
 - 2 funciones × 2 dimensiones × 5 métodos (GD fijo, GD Armijo, EA, PSO, DE) = 20 configuraciones × **30 corridas** (semillas 0–29, mismas para todos los métodos).
 - Umbral de éxito: **f − f* ≤ 1e-4** (principal); reportar también 1e-2 y 1e-6.
