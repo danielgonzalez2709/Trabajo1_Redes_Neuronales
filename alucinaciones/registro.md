@@ -7,7 +7,7 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
-| Código | 19 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA; puente: H-41) | 3 (H-07, H-08, H-10, puente) |
+| Código | 19 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil; Parte 2: H-35 débil, GA; puente: H-47) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
 | Conceptos | 6 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39; H-31 y H-32 de severidad baja) — H-12 descartado | 0 |
@@ -539,14 +539,14 @@
 5. **Corrección:** ninguna en el código; se descarta la observación.
 6. **Lección:** una afirmación sobre bytes se comprueba leyendo bytes (Python), no con un patrón de shell cuyo citado depende del contexto.
 
-### H-41 — `pulp.LpStatus[modelo.status]`: la API de estado de PuLP 3 escrita de nuevo en PuLP 4 (después de H-07)
+### H-47 — `pulp.LpStatus[modelo.status]`: la API de estado de PuLP 3 escrita de nuevo en PuLP 4 (después de H-07)
 - **Estado:** candidato (prompt literal disponible; evidencia reproducible; severidad baja: falló en la primera prueba)
 - **Categoría:** Código
 - **Herramienta y modelo:** Claude Opus 5.5 (orquestador, verificación exacta de T3.6) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** la primera ejecución de `tests/test_exact.py`
 1. **Prompt (literal):** "Listo, ya lo fusioné, integra la verificación exacta" (Daniel, 13-oct-2026, sesión de asesoría del puente).
 2. **Respuesta relevante de la IA:** la primera versión de `src/part2/exact.py` comprobaba el resultado con `if pulp.LpStatus[modelo.status] != "Optimal":`, la forma de PuLP 3.
 3. **Cómo sospechamos:** 8 de las 9 pruebas fallaron con `AttributeError: module 'pulp' has no attribute 'LpStatus'`.
-4. **Evidencia:** `evidencias/H-41_pulp4_lpstatus.py` → `.txt` (PuLP 4.0.0): no existen `pulp.LpStatus` ni `modelo.status`; en PuLP 4, `solve()` devuelve un `LpSolveStats` cuyo campo `status` es un `LpSolveStatus`.
+4. **Evidencia:** `evidencias/H-47_pulp4_lpstatus.py` → `.txt` (PuLP 4.0.0): no existen `pulp.LpStatus` ni `modelo.status`; en PuLP 4, `solve()` devuelve un `LpSolveStats` cuyo campo `status` es un `LpSolveStatus`.
 5. **Corrección:** `stats = modelo.solve(...)` y `stats.status != pulp.LpSolveStatus.Optimal`.
 6. **Lección:** documentar un cambio de API (H-07: `LpVariable(cat=…)` y CBC) no impide repetir otra parte de la API vieja en la siguiente sesión: cuando una librería cambió de versión mayor, hay que comprobar contra la instalación **cada** llamada, no solo la que ya falló una vez. La prueba escrita antes de usar el código lo atrapó en segundos.
 

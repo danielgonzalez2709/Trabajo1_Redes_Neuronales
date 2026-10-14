@@ -63,3 +63,61 @@ def test_optimo_con_los_datos_reales_coincide_con_el_barrido_en_w25():
     mejor_w25 = next(e["cost"] for e in barrido if e["w"] == 25)
     C, _ = cs.matriz_costos(comp, 25, vehiculo, precio)
     assert resolver_exacto(C)[1] == pytest.approx(mejor_w25, abs=1e-6)
+
+
+# --- umbrales exactos (scripts/umbrales_exactos.py -> results/data/part2/umbrales_exactos.json) ---------------------
+
+EXACTOS = RAIZ / "results" / "data" / "part2" / "umbrales_exactos.json"
+
+
+def _exactos():
+    if not EXACTOS.exists():
+        pytest.skip("falta results/data/part2/umbrales_exactos.json (python scripts/umbrales_exactos.py)")
+    return json.loads(EXACTOS.read_text(encoding="utf-8"))
+
+
+def test_envolvente_exacta_conserva_los_ids_de_t36_y_cubre_el_rango():
+    base = json.loads((RAIZ / "results/data/part2/umbrales_w.json").read_text(encoding="utf-8"))
+    e = _exactos()["consumos"]["4.6"]["envolvente"]
+    n = len(base["candidatos"])
+    assert [c["tour"] for c in e["candidatos"][:n]] == [c["tour"] for c in base["candidatos"]]
+    assert all(not c["exacto_nuevo"] for c in e["candidatos"][:n]) and all(c["exacto_nuevo"] for c in e["candidatos"][n:])
+    iv = e["intervalos"]
+    assert iv[0]["w_desde"] == 0.0 and iv[-1]["w_hasta"] == 100.0
+    assert all(a["w_hasta"] == b["w_desde"] and a["candidato"] != b["candidato"] for a, b in zip(iv, iv[1:]))
+    assert [round(u["w"], 2) for u in e["umbrales"]] == [10.02, 14.53, 42.19]
+
+
+def test_en_cada_tramo_el_ganador_de_la_envolvente_exacta_es_el_optimo():
+    comp = cs.cargar_componentes(RAIZ / "data" / "processed")
+    vehiculo = yaml.safe_load((RAIZ / "data/processed/vehiculo.yaml").read_text(encoding="utf-8"))
+    precio = json.loads((RAIZ / "data/processed/combustible.json").read_text(encoding="utf-8"))["precio_medio_eur_l"]
+    e = _exactos()["consumos"]["4.6"]["envolvente"]
+    for i in e["intervalos"]:
+        w = (i["w_desde"] + i["w_hasta"]) / 2
+        C, _ = cs.matriz_costos(comp, w, vehiculo, precio)
+        tour = e["candidatos"][i["candidato"]]["tour"]
+        assert sum(C[tour[k], tour[(k + 1) % len(tour)]] for k in range(len(tour))) == pytest.approx(
+            resolver_exacto(C)[1], rel=1e-9)
+
+
+def test_el_mapa_usa_la_envolvente_exacta():
+    from src.viz import part2_interactivas as pi
+
+    _exactos()
+    entradas = pi.cargar_entradas()
+    assert [round(u["w"], 2) for u in entradas["umbrales"]["umbrales"]] == [10.02, 14.53, 42.19]
+    pasos = pi.pasos_mapa(entradas)
+    assert any(p["exacto_nuevo"] for p in pasos) and not any(p["exacto_nuevo"] for p in pasos if p["en_barrido"])
+
+
+def test_el_mejor_costo_del_barrido_es_el_optimo_en_los_11_w():
+    """El gap de T3.6 se mide contra el mejor costo conocido; aquí se comprueba que es el óptimo en cada w."""
+    comp = cs.cargar_componentes(RAIZ / "data" / "processed")
+    vehiculo = yaml.safe_load((RAIZ / "data/processed/vehiculo.yaml").read_text(encoding="utf-8"))
+    precio = json.loads((RAIZ / "data/processed/combustible.json").read_text(encoding="utf-8"))["precio_medio_eur_l"]
+    barrido = json.loads((RAIZ / "results/data/part2/sweep_w.json").read_text(encoding="utf-8"))
+    assert len(barrido) == 11
+    for fila in barrido:
+        C, _ = cs.matriz_costos(comp, fila["w"], vehiculo, precio)
+        assert resolver_exacto(C)[1] == pytest.approx(fila["cost"], abs=1e-6), fila["w"]
