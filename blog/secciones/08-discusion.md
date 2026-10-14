@@ -1,6 +1,6 @@
 <!--
-SECCIÓN: Discusión y conclusiones · RESPONSABLES: ambos equipos + puente · ESTADO: Parte 1 redactada el 13-oct-2026;
-Parte 2 y conclusiones generales pendientes de sus responsables.
+SECCIÓN: Discusión y conclusiones · RESPONSABLES: ambos equipos + puente · ESTADO: completa (13-oct-2026): Parte 1 por
+su equipo; Parte 2 y conclusiones por el puente con las cifras de sweep_w.json y umbrales_exactos.json.
 Enunciado (Parte 1): "¿Qué aportaron los métodos de descenso por gradiente y qué aportaron los métodos heurísticos?
 Respondan con base en el valor final de la función objetivo y el número de evaluaciones, apoyándose en la geometría de cada
 función (convexidad local, número de mínimos locales, condicionamiento)". Incluir amenazas a la validez (p. ej. el óptimo
@@ -9,8 +9,7 @@ de Rastrigin en el centro del dominio; η empírica en Rosenbrock; aproximación
 
 ## Discusión y conclusiones
 
-Esta sección discute la Parte 1. La discusión del problema del viajero está en la sección de resultados de la
-Parte 2.
+Esta sección discute las dos partes y cierra con las conclusiones del trabajo.
 
 ### Parte 1: qué aportó el descenso por gradiente y qué aportaron los heurísticos
 
@@ -133,3 +132,53 @@ menor; la explicación esperada, por el mal condicionamiento del valle, es que u
 resulta demasiado corto allí. El experimento solo muestra que con 5 000 gradientes ese paso no llega. La HPO apunta en
 la misma dirección: para el paso fijo en Rosenbrock eligió $\eta \approx 1.494\times10^{-3}$, todavía mayor que
 $10^{-3}$ y sin garantía global.
+
+### Parte 2: qué aportó cada heurística y qué dice el valor de la hora
+
+**MMAS frente al GA y a Ant System.** Con el mismo presupuesto de 51 654 recorridos evaluados por corrida, MAX–MIN Ant
+System (MMAS) encontró el recorrido óptimo en 10 de los 11 valores de $w$, y su media quedó entre 0,24 % y 0,75 % por
+encima ([[tab:metodos-part2]]). Ni el algoritmo genético (GA) ni Ant System (AS) lo encontraron en ninguna corrida: sus
+mejores corridas quedaron entre 0,50 % y 1,92 % y entre 2,40 % y 4,74 % por encima, respectivamente. La diferencia
+viene de cómo usa cada método la estructura del problema. Las hormigas construyen cada recorrido arco por arco con el
+costo de cada tramo ($\eta_{ij} = 1/c_{ij}$), así que rara vez proponen saltos caros; MMAS además acota la feromona y
+la evapora despacio ($\rho = 0{,}02$), lo que mantiene la exploración durante todo el presupuesto [@stutzle2000]. Ant
+System, con $\rho = 0{,}5$ y depósito de todas las hormigas, concentra la feromona pronto y se estanca [@dorigo1996].
+El GA parte de recorridos razonables, pero sus operadores (cruce OX y mutaciones) no usan el costo de los tramos y su
+población pierde diversidad, como muestra la [[fig:convergencia-part2]]; por eso varía más entre corridas: su
+coeficiente de variación va de 1,2 % a 2,2 %, frente a 0,3 %–0,8 % en MMAS.
+
+**El valor de la hora.** El tiempo domina el costo en cuanto $w > 0$: es el 78 % del total en $w = 25$ €/h y el 93 %
+en $w = 100$ €/h, mientras que los peajes no pasan del 1,02 % (en $w = 40$). Por eso la ruta óptima cambia poco: tres
+veces entre 0 y 100 €/h (en 10,02, 14,53 y 42,19 €/h), y hasta 50 €/h le gana a la segunda mejor conocida por menos de
+1,50 €. Para un viajero, el orden de visita apenas depende del valor de su tiempo; lo que cambia con $w$ es qué tramos
+se hacen por autopista de pago.
+
+**Muestrear $w$ no basta.** Las heurísticas hallaron el óptimo en los 11 valores del barrido, pero no la ruta óptima
+entre 10,02 y 14,53 €/h, porque ningún valor del barrido cae en ese tramo. La envolvente de los candidatos ubica bien
+los cambios entre las rutas encontradas, pero no puede producir una ruta que ninguna corrida buscó: ese hueco lo cerró
+el solver exacto con la formulación de @dantzig1954.
+
+**Amenazas a la validez.**
+- Los peajes se aproximan por la suma de los tramos de autopista, con las tarifas de una sola fecha.
+- Los tiempos son los de OSRM sin tráfico; en hora punta serían otros.
+- El precio del combustible es una media peninsular de una fecha y el consumo es el homologado (WLTP). Con 5,6 o
+  6,2 l/100 km los umbrales suben (el primero pasa a 12,20 o 13,51 €/h), aunque las cuatro rutas óptimas son las mismas.
+- Se hicieron 10 corridas por método y valor de $w$.
+
+### Conclusiones
+
+1. **Ningún método gana en todo.** El descenso por gradiente baja muy rápido dentro de una cuenca, pero se detiene en
+   el mínimo local que le toca en Rastrigin y, en el valle mal condicionado de Rosenbrock, se queda sin presupuesto. DE
+   y PSO, que no usan el gradiente, llegaron a menos de $10^{-4}$ del mínimo en 118 y 116 de sus 120 corridas con el
+   mismo presupuesto.
+2. **La regla de conteo es parte del resultado.** Con $k = 2n$ el paso fijo resolvió Rosenbrock en 1 de 30 corridas y
+   con $k = 1$ en 30 de 30. Una comparación justa exige decir cuánto se cobra por un gradiente y mostrar qué pasa si
+   cambia.
+3. **Afinar ayuda, pero no reordena.** La afinación de hiperparámetros, con semillas aparte, llevó al algoritmo
+   evolutivo de 45 a 87 éxitos y al GD con Armijo de 10 a 51, sin cambiar el orden entre los métodos.
+4. **En el problema del viajero, MMAS fue el mejor** con el mismo número de recorridos evaluados, a menos de 1 % del
+   óptimo en media. La ruta óptima cambia con el valor de la hora, pero las rutas que compiten difieren en pocos euros:
+   el tiempo, no los peajes, decide.
+5. **Verificar de forma independiente encontró lo que nadie señalaba.** El óptimo exacto corrigió dos de los tres
+   umbrales, las reimplementaciones y las pruebas de mutación detectaron errores en el código, y la cacería confirmó 9
+   errores de la inteligencia artificial en 4 categorías.

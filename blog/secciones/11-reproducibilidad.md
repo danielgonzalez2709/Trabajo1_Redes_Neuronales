@@ -1,5 +1,5 @@
 <!--
-SECCIÓN: Reproducibilidad · RESPONSABLE: puente · ESTADO: borrador (actualizar con los comandos finales de T1.8 y T3.7).
+SECCIÓN: Reproducibilidad · RESPONSABLE: puente · ESTADO: completa (13-oct).
 -->
 
 ## Reproducibilidad
@@ -9,10 +9,16 @@ Todo el código, los datos del problema del viajero y los registros de este trab
 resultados con Python 3.12:
 
 ```bash
+# Windows
 py -3.12 -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
+# macOS o Linux
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+
+# Demos y blog (python y mkdocs son los del entorno .venv)
 python run.py part1 --config configs/part1/demo.yaml
-python run.py part2 --config configs/part2/demo.yaml --set costo.valor_hora=25
+python run.py part2 --config configs/part2/demo.yaml
 mkdocs build --strict -f blog/mkdocs.yml
 ```
 
@@ -88,3 +94,35 @@ y `gif_trayectorias.json`. Como los JSON por corrida no se versionan, en un clon
 regenera las curvas de nivel, el deslizador de $\eta$ y los GIF; para las figuras de convergencia, de cajas y del
 enjambre avisa del comando que falta, y se regeneran después de ejecutar el experimento por defecto y el afinado
 (`python run.py part1 --config configs/part1/tuned.yaml`).
+
+### Parte 2
+
+```bash
+# Barrido del valor de la hora: 11 valores de w, MMAS, AS y GA, 10 corridas cada uno (unos 18 minutos)
+python run.py part2 --config configs/part2/sweep_w.yaml
+
+# Sensibilidad al consumo (5,6 l/100 km; el segundo valor con --set)
+python run.py part2 --config configs/part2/sensibilidad_consumo.yaml
+python run.py part2 --config configs/part2/sensibilidad_consumo.yaml --set costo.consumo_l100=6.2
+
+# Óptimo exacto y umbrales exactos del valor de la hora para los tres consumos (unos 13 minutos)
+python scripts/umbrales_exactos.py
+```
+
+El barrido escribe `results/data/part2/sweep_w.json`, `umbrales_w.json` y los historiales de convergencia; el script
+exacto, `results/data/part2/umbrales_exactos.json`, que usan el mapa y la sección de resultados. La demo escribe en
+`results/data/part2/demo/`, que no se versiona.
+
+### Pruebas y diferencias entre equipos
+
+`python -m pytest -q` corre las pruebas del proyecto (unas 2 700). Una sola necesita internet, porque consulta el
+certificado del sitio del Ministerio del que sale el precio del combustible.
+
+Con las mismas semillas, los resultados son idénticos en el mismo equipo. Entre sistemas operativos hay una diferencia
+conocida: en Rastrigin, el descenso con búsqueda de Armijo cuenta un número algo distinto de evaluaciones, porque la
+función coseno de cada plataforma puede diferir en el último bit y eso cambia cuántos retrocesos hace la búsqueda. En
+2D la diferencia es menor de 0,02 % y en 3D de unos 5 % (19 882 frente a 20 796 evaluaciones medias de la función);
+los valores finales y las tasas de éxito no cambian.
+
+El reporte se publica en <https://danielgonzalez2709.github.io/Trabajo1_Redes_Neuronales/> con
+`mkdocs gh-deploy -f blog/mkdocs.yml` desde `main`.

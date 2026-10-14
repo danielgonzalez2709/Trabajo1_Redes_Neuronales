@@ -75,7 +75,7 @@ había encontrado en otros valores de $w$.
 
 ::: tabla metodos-part2
 Título: Costo de los recorridos por método y valor de la hora (10 corridas de 51 654 recorridos evaluados cada una)
-Fuente: Elaboración propia a partir de results/data/part2/sweep_w.json. Gap = 100 · (media − mejor conocido) / mejor conocido; el mejor conocido no es un óptimo probado.
+Fuente: Elaboración propia a partir de results/data/part2/sweep_w.json. Gap = 100 · (media − mejor conocido) / mejor conocido; el mejor conocido es el óptimo en los 11 valores de $w$ (verificado con PuLP + HiGHS).
 | $w$ (€/h) | Mejor conocido (€) | MMAS media ± desv. (€) | Gap MMAS | AS media (€) | Gap AS | GA media ± desv. (€) | Gap GA |
 |---|---|---|---|---|---|---|---|
 | 0 | 519,71 | 523,52 ± 4,13 | 0,73 % | 547,98 | 5,44 % | 540,86 ± 11,11 | 4,07 % |
