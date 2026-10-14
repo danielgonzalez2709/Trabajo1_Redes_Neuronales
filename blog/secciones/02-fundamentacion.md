@@ -14,6 +14,21 @@ Se eligieron dos funciones con geometrías opuestas, resumidas en la [[tab:funci
 [@rosenbrock1960] tiene un único mínimo en el fondo de un valle curvo y estrecho, lo que la hace mal condicionada. La
 función de Rastrigin tiene una cantidad de mínimos locales que crece exponencialmente con la dimensión.
 <!-- TODO(cita): referencia original de la función de Rastrigin, pendiente de verificar antes de citarla. -->
+Las curvas de nivel en dos dimensiones muestran esa diferencia: en la [[fig:contorno-rosenbrock]] se ve el valle
+curvo que lleva al mínimo, y en la [[fig:contorno-rastrigin]] la rejilla regular de mínimos locales que rodea al
+mínimo global, situado en el centro del dominio.
+
+::: figura contorno-rosenbrock
+Título: Curvas de nivel de la función de Rosenbrock en dos dimensiones (niveles en escala logarítmica)
+Fuente: Elaboración propia a partir de la definición de la función (src/part1/functions.py).
+incluir: figures/part1_contorno_rosenbrock.html
+:::
+
+::: figura contorno-rastrigin
+Título: Curvas de nivel de la función de Rastrigin en dos dimensiones
+Fuente: Elaboración propia a partir de la definición de la función (src/part1/functions.py).
+incluir: figures/part1_contorno_rastrigin.html
+:::
 
 ::: tabla funciones
 Título: Funciones de prueba, dominio de búsqueda y mínimo global

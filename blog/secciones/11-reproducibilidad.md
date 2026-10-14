@@ -51,3 +51,34 @@ Se versionan `results/data/part1_hpo/` (incluida la carpeta `regla_v1/`, con la 
 regla de selección), `configs/part1/tuned.yaml`, los `summary.json` y las tablas CSV de `results/tables/`. No se
 versionan los JSON por corrida (`runs/` y `k1/runs/` de cada experimento), que se regeneran con los comandos de arriba,
 ni las carpetas `*_demo`. No versionar los JSON por corrida es, por ahora, una decisión provisional del equipo.
+
+### Experimento completo y figuras de la Parte 1
+
+```bash
+# Experimento por defecto: 20 configuraciones x 30 semillas y sensibilidad k = 1 de los dos GD
+# (9 min 39 s en serie en el equipo donde se midió; workers reparte las corridas entre procesos)
+python run.py part1 --config configs/part1/base.yaml
+python run.py part1 --config configs/part1/base.yaml --set workers=6
+
+# Sensibilidad del paso fijo en Rosenbrock con eta = 1.5e-4
+python run.py part1 --config configs/part1/base.yaml --set "methods=[gdfijo]" --set "func=[rosenbrock]" \
+    --set gd.eta.rosenbrock=1.5e-4 --set salida=results/data/part1_eta_1l --set tablas=results/tables/part1_eta_1l
+
+# Datos del deslizador de eta y de las animaciones (no necesitan las corridas del experimento)
+python scripts/part1_eta_deslizador.py
+python scripts/part1_gif_trayectorias.py
+
+# Figuras interactivas y GIF de las dos partes
+python run.py figures
+```
+
+El experimento por defecto escribe en `results/data/part1/` un JSON por corrida (`runs/` y, para la sensibilidad
+$k = 1$, `k1/runs/`) y el resumen `summary.json`, y en `results/tables/part1/` las tablas CSV. La clave `workers`
+solo cambia el tiempo de ejecución, no el resultado. Los dos scripts escriben `results/data/part1/eta_deslizador.json`
+y `results/data/part1/gif_trayectorias.json`.
+
+De la Parte 1 se versionan los `summary.json` (por defecto, afinado y sensibilidad de $\eta$), `eta_deslizador.json`
+y `gif_trayectorias.json`. Como los JSON por corrida no se versionan, en un clon limpio `python run.py figures` solo
+regenera las curvas de nivel, el deslizador de $\eta$ y los GIF; para las figuras de convergencia, de cajas y del
+enjambre avisa del comando que falta, y se regeneran después de ejecutar el experimento por defecto y el afinado
+(`python run.py part1 --config configs/part1/tuned.yaml`).

@@ -141,7 +141,8 @@ gradientes del presupuesto sin acercarse tanto al mínimo. La explicación esper
 con un paso grande la trayectoria entra rápido al valle, donde la curvatura es menor, mientras que con $\eta \le 1/L$
 cada paso a lo largo del fondo del valle es muy corto. El experimento no prueba esa causa; solo muestra que con 5 000
 gradientes el paso $\eta = 1.5\times10^{-4}$ no llega. Por eso se usa $\eta = 10^{-3}$, declarando que no tiene
-garantía global.
+garantía global. La [[fig:eta-rosenbrock]], en la sección de resultados, permite ver en una corrida cómo cambia la
+trayectoria con el tamaño del paso.
 
 ::: tabla sensibilidad-eta
 Título: GD de paso fijo en Rosenbrock con $\eta = 10^{-3}$ y con $\eta = 1.5\times10^{-4}$ (30 corridas, $k = 2n$)
@@ -281,7 +282,7 @@ Fuente: Elaboración propia a partir de configs/part1/base.yaml
 | Tamaño de la población $N$ | `ea.N` | `50` |
 | Fracción de élite $f_e$ | `ea.frac_e` | `0.15` |
 | Fracción de mutantes $f_m$ | `ea.frac_m` | `0.10` |
-| Fracción que se cruza $f_c$ | `ea.frac_c` | `0.75` |
+| Fracción mínima que se cruza $f_c$ | `ea.frac_c` | `0.75` |
 | Volver a evaluar la élite | `ea.reevaluar_elite` | `false` |
 | Número de generaciones | `ea.generaciones` | `null` (parar solo por presupuesto) |
 :::

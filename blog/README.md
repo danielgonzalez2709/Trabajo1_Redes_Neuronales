@@ -43,7 +43,7 @@ Fuente: Elaboración propia a partir de results/data/part1/summary.json.
 - El `id` usa minúsculas, números y guiones.
 
 ### Figuras de la Parte 1 ya generadas (T4.2)
-Están en `docs/figures/`; falta pegar su bloque en `secciones/04-parte1-resultados.md` (o en la 08) y citarlas.
+Están en `docs/figures/`; ya están pegadas y citadas en las secciones 02, 03, 04.
 `python run.py figures` imprime el bloque `::: figura` completo de cada una (id, título, fuente e `incluir:`), listo para pegar.
 
 | id (para `[[fig:<id>]]`) | Archivo | Qué muestra |
@@ -63,8 +63,8 @@ Están en `docs/figures/`; falta pegar su bloque en `secciones/04-parte1-resulta
   (en Rosenbrock 2D todas las corridas de PSO y DE quedan en ese piso).
 
 ### GIF de la Parte 1 ya generados (T4.3)
-Están en `docs/figures/` (y en `media/`); falta pegar su bloque en `secciones/04-parte1-resultados.md` (o en la 08) y
-citarlos. `python run.py figures` imprime el bloque `::: figura` de cada uno (id, título, fuente e imagen).
+Están en `docs/figures/` (y en `media/`); ya están pegadas y citadas en las secciones 02, 03, 04.
+`python run.py figures` imprime el bloque `::: figura` de cada uno (id, título, fuente e imagen).
 
 | id (para `[[fig:<id>]]`) | Archivo | Qué muestra |
 |---|---|---|

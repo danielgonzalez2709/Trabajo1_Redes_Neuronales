@@ -1,0 +1,573 @@
+
+====================================================================================================
+1. Estadísticas recalculadas desde los JSON por corrida y contraste con summary.json
+====================================================================================================
+defecto configuraciones: 20 corridas: 600 semillas distintas por config: [True]
+defecto_k1 configuraciones: 8 corridas: 240 semillas distintas por config: [True]
+afinado configuraciones: 20 corridas: 600 semillas distintas por config: [True]
+afinado_k1 configuraciones: 8 corridas: 240 semillas distintas por config: [True]
+campos de summary.json que NO se reproducen con los JSON por corrida de este equipo: 8
+    afinado ('rastrigin', 2, 'gdarmijo') n_grad_medio corridas locales = 1261.9666666666667 | summary.json = 1263.5
+    afinado ('rastrigin', 2, 'gdarmijo') n_f_medio corridas locales = 14951.6 | summary.json = 14945.466666666667
+    afinado ('rastrigin', 3, 'gdarmijo') n_grad_medio corridas locales = 1639.2 | summary.json = 1639.4666666666667
+    afinado ('rastrigin', 3, 'gdarmijo') n_f_medio corridas locales = 20163.7 | summary.json = 20162.1
+    afinado_k1 ('rastrigin', 2, 'gdarmijo') n_grad_medio corridas locales = 1542.3666666666666 | summary.json = 1544.2333333333333
+    afinado_k1 ('rastrigin', 2, 'gdarmijo') n_f_medio corridas locales = 18457.633333333335 | summary.json = 18455.766666666666
+    afinado_k1 ('rastrigin', 3, 'gdarmijo') n_grad_medio corridas locales = 2234.5 | summary.json = 2234.866666666667
+    afinado_k1 ('rastrigin', 3, 'gdarmijo') n_f_medio corridas locales = 27765.5 | summary.json = 27765.133333333335
+dif. relativa máx. en las estadísticas de f_final (defecto y afinado; principal y k1): 2.38e-16
+desviación: st.stdev (divisor n-1), igual que summary.json
+
+====================================================================================================
+2. Tablas de la sección 04 frente al recálculo
+====================================================================================================
+OK   resultados-rosenbrock 2D gdfijo
+OK   resultados-rosenbrock 2D gdarmijo
+OK   resultados-rosenbrock 2D ea
+OK   resultados-rosenbrock 2D pso
+OK   resultados-rosenbrock 2D de
+OK   resultados-rosenbrock 3D gdfijo
+OK   resultados-rosenbrock 3D gdarmijo
+OK   resultados-rosenbrock 3D ea
+OK   resultados-rosenbrock 3D pso
+OK   resultados-rosenbrock 3D de
+OK   resultados-rastrigin 2D gdfijo
+OK   resultados-rastrigin 2D gdarmijo
+OK   resultados-rastrigin 2D ea
+OK   resultados-rastrigin 2D pso
+OK   resultados-rastrigin 2D de
+OK   resultados-rastrigin 3D gdfijo
+OK   resultados-rastrigin 3D gdarmijo
+OK   resultados-rastrigin 3D ea
+OK   resultados-rastrigin 3D pso
+OK   resultados-rastrigin 3D de
+OK   exito-umbrales Rosenbrock 2D gdfijo
+OK   exito-umbrales Rosenbrock 2D gdarmijo
+OK   exito-umbrales Rosenbrock 2D ea
+OK   exito-umbrales Rosenbrock 2D pso
+OK   exito-umbrales Rosenbrock 2D de
+OK   exito-umbrales Rosenbrock 3D gdfijo
+OK   exito-umbrales Rosenbrock 3D gdarmijo
+OK   exito-umbrales Rosenbrock 3D ea
+OK   exito-umbrales Rosenbrock 3D pso
+OK   exito-umbrales Rosenbrock 3D de
+OK   exito-umbrales Rastrigin 2D gdfijo
+OK   exito-umbrales Rastrigin 2D gdarmijo
+OK   exito-umbrales Rastrigin 2D ea
+OK   exito-umbrales Rastrigin 2D pso
+OK   exito-umbrales Rastrigin 2D de
+OK   exito-umbrales Rastrigin 3D gdfijo
+OK   exito-umbrales Rastrigin 3D gdarmijo
+OK   exito-umbrales Rastrigin 3D ea
+OK   exito-umbrales Rastrigin 3D pso
+OK   exito-umbrales Rastrigin 3D de
+OK   sensibilidad-k1 Rosenbrock 2D gdfijo
+OK   sensibilidad-k1 Rosenbrock 2D gdarmijo
+OK   sensibilidad-k1 Rosenbrock 3D gdfijo
+OK   sensibilidad-k1 Rosenbrock 3D gdarmijo
+OK   sensibilidad-k1 Rastrigin 2D gdfijo
+OK   sensibilidad-k1 Rastrigin 2D gdarmijo
+OK   sensibilidad-k1 Rastrigin 3D gdfijo
+OK   sensibilidad-k1 Rastrigin 3D gdarmijo
+OK   hpo-rosenbrock 2D gdfijo
+OK   hpo-rosenbrock 2D gdarmijo
+OK   hpo-rosenbrock 2D ea
+OK   hpo-rosenbrock 2D pso
+OK   hpo-rosenbrock 2D de
+OK   hpo-rosenbrock 3D gdfijo
+OK   hpo-rosenbrock 3D gdarmijo
+OK   hpo-rosenbrock 3D ea
+OK   hpo-rosenbrock 3D pso
+OK   hpo-rosenbrock 3D de
+OK   hpo-rastrigin 2D gdfijo
+OK   hpo-rastrigin 2D gdarmijo
+OK   hpo-rastrigin 2D ea
+OK   hpo-rastrigin 2D pso
+OK   hpo-rastrigin 2D de
+OK   hpo-rastrigin 3D gdfijo
+OK   hpo-rastrigin 3D gdarmijo
+OK   hpo-rastrigin 3D ea
+OK   hpo-rastrigin 3D pso
+OK   hpo-rastrigin 3D de
+
+Redondeos .5 en 'evaluaciones hasta el éxito' (valor exacto):
+  defecto     ('rastrigin', 2, 'de'): 2174.5000  (n exitosas 30)
+  defecto     ('rastrigin', 2, 'ea'): 3255.8571  (n exitosas 28)
+  defecto     ('rastrigin', 2, 'gdarmijo'): 160.2000  (n exitosas 5)
+  defecto     ('rastrigin', 2, 'pso'): 1663.9000  (n exitosas 30)
+  defecto     ('rastrigin', 3, 'de'): 4981.2857  (n exitosas 28)
+  defecto     ('rastrigin', 3, 'ea'): 3676.5714  (n exitosas 14)
+  defecto     ('rastrigin', 3, 'pso'): 3332.4231  (n exitosas 26)
+  defecto     ('rosenbrock', 2, 'de'): 984.5000  (n exitosas 30)
+  defecto     ('rosenbrock', 2, 'ea'): 2612.6667  (n exitosas 3)
+  defecto     ('rosenbrock', 2, 'gdarmijo'): 9976.4000  (n exitosas 5)
+  defecto     ('rosenbrock', 2, 'gdfijo'): 19220.0000  (n exitosas 1)
+  defecto     ('rosenbrock', 2, 'pso'): 1555.4667  (n exitosas 30)
+  defecto     ('rosenbrock', 3, 'de'): 2212.6667  (n exitosas 30)
+  defecto     ('rosenbrock', 3, 'gdfijo'): 25998.0000  (n exitosas 1)
+  defecto     ('rosenbrock', 3, 'pso'): 19102.5667  (n exitosas 30)
+  defecto_k1  ('rastrigin', 2, 'gdarmijo'): 117.6000  (n exitosas 5)
+  defecto_k1  ('rosenbrock', 2, 'gdarmijo'): 10780.7143  (n exitosas 7)
+  defecto_k1  ('rosenbrock', 2, 'gdfijo'): 8282.2000  (n exitosas 30)
+  defecto_k1  ('rosenbrock', 3, 'gdarmijo'): 28173.0000  (n exitosas 2)
+  defecto_k1  ('rosenbrock', 3, 'gdfijo'): 7424.3000  (n exitosas 30)
+  afinado     ('rastrigin', 2, 'de'): 2174.5000  (n exitosas 30)
+  afinado     ('rastrigin', 2, 'ea'): 7915.4000  (n exitosas 30)
+  afinado     ('rastrigin', 2, 'gdarmijo'): 142.0000  (n exitosas 2)
+  afinado     ('rastrigin', 2, 'pso'): 1663.9000  (n exitosas 30)
+  afinado     ('rastrigin', 3, 'de'): 4981.2857  (n exitosas 28)
+  afinado     ('rastrigin', 3, 'ea'): 8492.1724  (n exitosas 29)
+  afinado     ('rastrigin', 3, 'pso'): 3332.4231  (n exitosas 26)
+  afinado     ('rosenbrock', 2, 'de'): 984.5000  (n exitosas 30)
+  afinado     ('rosenbrock', 2, 'ea'): 8702.5000  (n exitosas 28)
+  afinado     ('rosenbrock', 2, 'gdarmijo'): 10140.4000  (n exitosas 30)
+  afinado     ('rosenbrock', 2, 'gdfijo'): 16759.4286  (n exitosas 7)
+  afinado     ('rosenbrock', 2, 'pso'): 1555.4667  (n exitosas 30)
+  afinado     ('rosenbrock', 3, 'de'): 2212.6667  (n exitosas 30)
+  afinado     ('rosenbrock', 3, 'gdarmijo'): 22558.2105  (n exitosas 19)
+  afinado     ('rosenbrock', 3, 'pso'): 19102.5667  (n exitosas 30)
+
+====================================================================================================
+2b. Tabla sensibilidad-eta (03) frente a summary.json de part1 y part1_eta_1l
+====================================================================================================
+    2 `1e-3` mediana 0.0019054868310523082 n_grad medio 5000.0 éxito 1e-2 30.0 éxito 1e-4 1.0
+    2 `1.5e-4` mediana 0.14705688484693438 n_grad medio 5000.0 éxito 1e-2 2.0 éxito 1e-4 0.0
+    3 `1e-3` mediana 0.001285102045359799 n_grad medio 5000.0 éxito 1e-2 29.0 éxito 1e-4 1.0
+    3 `1.5e-4` mediana 0.21887661965759098 n_grad medio 5000.0 éxito 1e-2 2.0 éxito 1e-4 0.0
+OK   sensibilidad-eta 2D `1e-3`
+OK   sensibilidad-eta 2D `1.5e-4`
+OK   sensibilidad-eta 3D `1e-3`
+OK   sensibilidad-eta 3D `1.5e-4`
+config de part1_eta_1l: {'runs': 30, 'base_seed': 0, 'semillas': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], 'presupuesto_por_dim': 10000, 'umbrales': [0.0001, 0.01, 1e-06], 'umbral_principal': 0.0001, 'k_regla': '2n', 'k_sensibilidad': 1, 'func': ['rosenbrock'], 'dim': [2, 3], 'methods': ['gdfijo']}
+
+====================================================================================================
+3. Motivo de parada de los GD (defecto, k = 2n y k = 1)
+====================================================================================================
+defecto     rosenbrock 2D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 5000/5000.00/5000  eval_equiv media = 20000.00
+defecto     rosenbrock 2D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 1368/1424.37/1484  eval_equiv media = 19999.80
+defecto     rosenbrock 3D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 5000/5000.00/5000  eval_equiv media = 30000.00
+defecto     rosenbrock 3D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 1819/1867.83/1901  eval_equiv media = 29999.47
+defecto     rastrigin  2D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.37/23  eval_equiv media = 73.47
+defecto     rastrigin  2D gdarmijo  {'tolerancia': 6, 'presupuesto': 24}  n_grad min/media/máx = 74/653.10/1594  eval_equiv media = 16393.50
+defecto     rastrigin  3D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.50/23  eval_equiv media = 111.00
+defecto     rastrigin  3D gdarmijo  {'presupuesto': 26, 'tolerancia': 4}  n_grad min/media/máx = 80/1222.67/2062  eval_equiv media = 27218.07
+defecto_k1  rosenbrock 2D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 20000/20000.00/20000  eval_equiv media = 20000.00
+defecto_k1  rosenbrock 2D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 1728/1813.47/1894  eval_equiv media = 20000.00
+defecto_k1  rosenbrock 3D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 30000/30000.00/30000  eval_equiv media = 30000.00
+defecto_k1  rosenbrock 3D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 2617/2694.97/2751  eval_equiv media = 30000.00
+defecto_k1  rastrigin  2D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.37/23  eval_equiv media = 18.37
+defecto_k1  rastrigin  2D gdarmijo  {'tolerancia': 6, 'presupuesto': 24}  n_grad min/media/máx = 74/777.70/2095  eval_equiv media = 16309.60
+defecto_k1  rastrigin  3D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.50/23  eval_equiv media = 18.50
+defecto_k1  rastrigin  3D gdarmijo  {'presupuesto': 26, 'tolerancia': 4}  n_grad min/media/máx = 80/1617.30/3142  eval_equiv media = 26815.90
+afinado     rosenbrock 2D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 5000/5000.00/5000  eval_equiv media = 20000.00
+afinado     rosenbrock 2D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 2341/2356.87/2372  eval_equiv media = 19999.50
+afinado     rosenbrock 3D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 5000/5000.00/5000  eval_equiv media = 30000.00
+afinado     rosenbrock 3D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 2809/2823.77/2831  eval_equiv media = 29999.00
+afinado     rastrigin  2D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.37/23  eval_equiv media = 73.47
+afinado     rastrigin  2D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 774/1261.97/2304  eval_equiv media = 19999.47
+afinado     rastrigin  3D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.50/23  eval_equiv media = 111.00
+afinado     rastrigin  3D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 1571/1639.20/1875  eval_equiv media = 29998.90
+afinado_k1  rosenbrock 2D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 20000/20000.00/20000  eval_equiv media = 20000.00
+afinado_k1  rosenbrock 2D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 3628/3653.43/3677  eval_equiv media = 20000.00
+afinado_k1  rosenbrock 3D gdfijo    {'presupuesto': 30}  n_grad min/media/máx = 30000/30000.00/30000  eval_equiv media = 30000.00
+afinado_k1  rosenbrock 3D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 5310/5338.57/5352  eval_equiv media = 30000.00
+afinado_k1  rastrigin  2D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.37/23  eval_equiv media = 18.37
+afinado_k1  rastrigin  2D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 870/1542.37/3105  eval_equiv media = 20000.00
+afinado_k1  rastrigin  3D gdfijo    {'tolerancia': 30}  n_grad min/media/máx = 16/18.50/23  eval_equiv media = 18.50
+afinado_k1  rastrigin  3D gdarmijo  {'presupuesto': 30}  n_grad min/media/máx = 2095/2234.50/2545  eval_equiv media = 30000.00
+
+====================================================================================================
+3b. Paso fijo en Rastrigin: reejecución en memoria, norma del gradiente en el punto de parada
+====================================================================================================
+rastrigin 2D gdfijo: ||grad|| final máx = 8.26e-09 (< tol 1e-8 en 30/30); n_grad igual al JSON guardado en 30/30; |x - round(x)| máx = 0.0253
+rastrigin 3D gdfijo: ||grad|| final máx = 9.97e-09 (< tol 1e-8 en 30/30); n_grad igual al JSON guardado en 30/30; |x - round(x)| máx = 0.0253
+ejecutar_corrida(rastrigin, 2D, gdfijo, semilla 0): n_grad 19 f_best 4.974790247647379 eval_equiv 76.0
+
+====================================================================================================
+3c. Niveles de f final en Rastrigin (paso fijo): valores distintos y múltiplos de 0.995
+====================================================================================================
+rastrigin 2D gdfijo   : distintos (3 dec.) = 15, (6 dec.) = 16, exactos = 19; min = 1.9899, máx = 33.8283; máx |v/0.995 − entero| = 0.0020
+    valores (3 dec.): [1.99, 3.98, 4.975, 7.96, 8.955, 9.95, 12.934, 15.919, 16.914, 17.909, 19.899, 24.874, 28.854, 31.838, 33.828]
+    v/0.995: [2.0, 4.0, 5.0, 8.0, 9.0, 10.0, 12.999, 15.999, 16.999, 17.999, 19.999, 24.999, 28.999, 31.998, 33.998]
+rastrigin 3D gdfijo   : distintos (3 dec.) = 17, (6 dec.) = 21, exactos = 23; min = 4.9748, máx = 49.7474; máx |v/0.995 − entero| = 0.0030
+    valores (3 dec.): [4.975, 5.97, 8.955, 13.929, 16.914, 17.909, 19.899, 20.894, 23.879, 24.874, 25.869, 29.849, 32.833, 33.828, 40.793, 42.783, 49.747]
+    v/0.995: [5.0, 6.0, 9.0, 13.999, 16.999, 17.999, 19.999, 20.999, 23.999, 24.999, 25.999, 29.999, 32.998, 33.998, 40.998, 42.998, 49.997]
+rastrigin 2D gdarmijo : distintos (3 dec.) = 9, (6 dec.) = 9, exactos = 10; min = 0.0000, máx = 19.8991; máx |v/0.995 − entero| = 0.0010
+rastrigin 3D gdarmijo : distintos (3 dec.) = 19, (6 dec.) = 19, exactos = 19; min = 0.9950, máx = 40.7931; máx |v/0.995 − entero| = 0.0020
+rastrigin 2D ea       : distintos (3 dec.) = 2, (6 dec.) = 2, exactos = 2; min = 0.0000, máx = 0.9950; máx |v/0.995 − entero| = 0.0000
+    fallidas (f > 1e-4): [0.995, 0.995]
+rastrigin 3D ea       : distintos (3 dec.) = 3, (6 dec.) = 3, exactos = 6; min = 0.0000, máx = 1.9899; máx |v/0.995 − entero| = 0.0000
+    fallidas (f > 1e-4): [0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 1.9899, 1.9899, 1.9899, 1.9899]
+rastrigin 2D pso      : distintos (3 dec.) = 1, (6 dec.) = 1, exactos = 1; min = 0.0000, máx = 0.0000; máx |v/0.995 − entero| = 0.0000
+    fallidas (f > 1e-4): []
+rastrigin 3D pso      : distintos (3 dec.) = 2, (6 dec.) = 2, exactos = 2; min = 0.0000, máx = 0.9950; máx |v/0.995 − entero| = 0.0000
+    fallidas (f > 1e-4): [0.995, 0.995, 0.995, 0.995]
+rastrigin 2D de       : distintos (3 dec.) = 1, (6 dec.) = 1, exactos = 1; min = 0.0000, máx = 0.0000; máx |v/0.995 − entero| = 0.0000
+    fallidas (f > 1e-4): []
+rastrigin 3D de       : distintos (3 dec.) = 2, (6 dec.) = 2, exactos = 2; min = 0.0000, máx = 0.9950; máx |v/0.995 − entero| = 0.0000
+    fallidas (f > 1e-4): [0.995, 0.995]
+mínimos locales 1D de Rastrigin: i, x_i, f1d(x_i), f1d/0.995, f1d/i²
+   1  0.994959  0.994959  1.0000  0.994959
+   2  1.989912  3.979831  3.9998  0.994958
+   3  2.984856  8.954601  8.9996  0.994956
+   4  3.979784  15.919244  15.9992  0.994953
+   5  4.974691  24.873723  24.9987  0.994949
+
+====================================================================================================
+4. Armijo en Rastrigin: corridas que agotan el presupuesto y última mejora
+====================================================================================================
+defecto rastrigin 2D gdarmijo: agotan presupuesto 24/30; última mejora (eval_equiv del último punto de history): mediana = 468.0, máx = 2568.0; mediana solo entre las que agotan = 468.0; f=0 exacto en 5 corridas
+defecto rastrigin 3D gdarmijo: agotan presupuesto 26/30; última mejora (eval_equiv del último punto de history): mediana = 557.5, máx = 2332.0; mediana solo entre las que agotan = 564.5; f=0 exacto en 0 corridas
+defecto_k1 rastrigin 2D gdarmijo: agotan presupuesto 24/30; última mejora (eval_equiv del último punto de history): mediana = 358.5, máx = 1989.0; mediana solo entre las que agotan = 358.5; f=0 exacto en 5 corridas
+defecto_k1 rastrigin 3D gdarmijo: agotan presupuesto 26/30; última mejora (eval_equiv del último punto de history): mediana = 372.5, máx = 1542.0; mediana solo entre las que agotan = 377.0; f=0 exacto en 0 corridas
+history solo registra mejoras estrictas de f_best: True
+
+====================================================================================================
+4b. Armijo en Rosenbrock: reparto del presupuesto (n_f frente a k·n_grad)
+====================================================================================================
+defecto rosenbrock 2D gdarmijo: n_f medio 14302.3, n_grad medio 1424.4, k·n_grad = 5697.5, fracción en f = 0.715
+defecto rosenbrock 3D gdarmijo: n_f medio 18792.5, n_grad medio 1867.8, k·n_grad = 11207.0, fracción en f = 0.626
+defecto_k1 rosenbrock 2D gdarmijo: n_f medio 18186.5, n_grad medio 1813.5, k·n_grad = 1813.5, fracción en f = 0.909
+defecto_k1 rosenbrock 3D gdarmijo: n_f medio 27305.0, n_grad medio 2695.0, k·n_grad = 2695.0, fracción en f = 0.910
+
+====================================================================================================
+5. gif_trayectorias.json (una corrida, semilla 0, 2D)
+====================================================================================================
+meta: {'config': 'configs/part1/base.yaml', 'base_seed': 0, 'run_id': 0, 'dim': 2, 'k': 4.0, 'budget': 20000.0, 'marcas_max': 45}
+rosenbrock fotogramas: 41
+   gdfijo: n_iter 5000, n_grad 5000, n_f 0, x0 [0.561, -0.943], f0 158.3659, x_fin [0.9567, 0.915], f_fin 1.8811e-03, f_best 1.8811e-03
+      JSON de la corrida semilla 0: n_grad 5000, n_f 0, f_best 1.8811e-03, eval_equiv 20000.0
+   gdarmijo: n_iter 1416, n_grad 1417, n_f 14332, x0 [0.561, -0.943], f0 158.3659, x_fin [1.0982, 1.2069], f_fin 9.7153e-03, f_best 9.7153e-03
+      JSON de la corrida semilla 0: n_grad 1417, n_f 14332, f_best 9.7153e-03, eval_equiv 20000.0
+rastrigin fotogramas: 32
+   gdfijo: n_iter 18, n_grad 19, n_f 0, x0 [1.4025, -2.3574], f0 41.9520, x_fin [0.995, -1.9899], f_fin 4.9748e+00, f_best 4.9748e+00
+      JSON de la corrida semilla 0: n_grad 19, n_f 0, f_best 4.9748e+00, eval_equiv 76.0
+   gdarmijo: n_iter 89, n_grad 90, n_f 982, x0 [1.4025, -2.3574], f0 41.9520, x_fin [-0.995, 0.995], f_fin 1.9899e+00, f_best 1.9899e+00
+      JSON de la corrida semilla 0: n_grad 90, n_f 982, f_best 1.9899e+00, eval_equiv 1342.0
+pso rastrigin: n_iter 665 n_f 20000 f_best 0.0 fotogramas 38 partículas 30
+   f_mejor[0], [1]: 9.480293574394796 1.026040129118062 iteraciones[0:3]: [0, 1, 2]
+   primer fotograma con f_mejor <= 1e-4: índice 21 iteración 59 valor 8.064973471988424e-05 | anterior: iteración 51 valor 0.0008689883935915077
+   corrida guardada semilla 0: n_f 20000 f_best 0.0 frames 666 evals hasta 1e-4: 1684.0
+   posiciones iniciales: min -5.092 máx 5.091 (dominio ±5.12)
+
+====================================================================================================
+6. eta_deslizador.json
+====================================================================================================
+meta: {'func': 'rosenbrock', 'dim': 2, 'method': 'gdfijo', 'seed': 0, 'k': 4.0, 'budget': 20000.0, 'x0': [0.5609950712686769, -0.9429536204231872], 'puntos_max': 150}
+f(x0) = 158.3658794249573
+   eta 1.0000e-05 marca None     f_best 7.1190e-01 n_grad 5000 f(último punto) 7.1190e-01
+   eta 1.7783e-05 marca None     f_best 6.2110e-01 n_grad 5000 f(último punto) 6.2110e-01
+   eta 3.1623e-05 marca None     f_best 4.9900e-01 n_grad 5000 f(último punto) 4.9900e-01
+   eta 5.6234e-05 marca None     f_best 3.5922e-01 n_grad 5000 f(último punto) 3.5922e-01
+   eta 1.0000e-04 marca None     f_best 2.2558e-01 n_grad 5000 f(último punto) 2.2558e-01
+   eta 1.7783e-04 marca None     f_best 1.1880e-01 n_grad 5000 f(último punto) 1.1880e-01
+   eta 3.1623e-04 marca None     f_best 4.8695e-02 n_grad 5000 f(último punto) 4.8695e-02
+   eta 5.6234e-04 marca None     f_best 1.3438e-02 n_grad 5000 f(último punto) 1.3438e-02
+   eta 1.0000e-03 marca defecto  f_best 1.8811e-03 n_grad 5000 f(último punto) 1.8811e-03
+   eta 1.4941e-03 marca afinado  f_best 2.4137e-04 n_grad 5000 f(último punto) 2.4137e-04
+   eta 1.7783e-03 marca None     f_best 7.6439e-05 n_grad 5000 f(último punto) 7.6439e-05
+   eta 3.1623e-03 marca None     f_best 3.4475e-02 n_grad 5000 f(último punto) 3.7006e-01
+   eta 5.6234e-03 marca None     f_best 3.6702e+01 n_grad 5000 f(último punto) 4.6995e+02
+   eta 1.0000e-02 marca None     f_best 1.5837e+02 n_grad 5000 f(último punto) 4.6176e+02
+n.º de valores de eta: 14 | 2/lambda_max en x* = 0.001996805111821086
+eta por encima de 1e-3 con f_best < 1e-3: ['1.4941e-03', '1.7783e-03']
+
+====================================================================================================
+7. HPO: selección, puntajes, rangos y valores afinados
+====================================================================================================
+meta: {'ensayos': 30, 'semillas': 5, 'semillas_de_ajuste': [1000, 1001, 1002, 1003, 1004], 'presupuesto_por_dim': 10000, 'semilla_busqueda': 1, 'corridas_de_ajuste_total': 3000}
+tuned.yaml: {'hereda': 'base.yaml', 'salida': 'results/data/part1_tuned', 'tablas': 'results/tables/part1_tuned', 'gd': {'eta': {'rosenbrock': 0.0014940661361120264}, 'armijo': {'eta0': 3.520092041250609, 'beta': 0.12427680612997696, 'c': 0.006727603419207777}}, 'ea': {'N': 117, 'frac_e': 0.1649790031871204, 'frac_m': 0.17663527096566822, 'frac_c': 0.48536490972313745}}
+
+gdfijo_rosenbrock: ensayos 30, semillas 5, celdas ['rosenbrock_2d', 'rosenbrock_3d']
+   ganador seleccion.json = 26 (regla_v1: 26); puntaje defecto = 3.0 | mejor puntaje = 2.0 en ensayos [26] | recálculo: retadores [26]
+   guardado: puntaje_defecto 3.0 puntaje_ganador 2.0
+   ensayo 0: rangos [4.0, 2.0] medianas rec. [0.001937, 0.001275] puntaje 3.0 éxitos 1e-6 0/10
+      parámetros: {'gd.eta.{func}': 0.001}
+   ensayo 26: rangos [3.0, 1.0] medianas rec. [0.0002235, 0.0004819] puntaje 2.0 éxitos 1e-6 0/10
+      parámetros: {'gd.eta.{func}': 0.001494}
+   elegido: {'gd.eta.{func}': 0.0014940661361120264}
+
+gdfijo_rastrigin: ensayos 30, semillas 5, celdas ['rastrigin_2d', 'rastrigin_3d']
+   ganador seleccion.json = 0 (regla_v1: 0); puntaje defecto = 10.0 | mejor puntaje = 10.0 en ensayos [0, 1, 2, 4, 7, 8, 9, 10, 11, 12, 13, 15, 18, 20, 21, 22, 25, 27, 29] | recálculo: gana el defecto
+   guardado: puntaje_defecto 10.0 puntaje_ganador 10.0
+   ensayo 0: rangos [10.0, 10.0] medianas rec. [12.93, 12.93] puntaje 10.0 éxitos 1e-6 0/10
+      parámetros: {'gd.eta.{func}': 0.002}
+   elegido: {'gd.eta.{func}': 0.002}
+
+gdarmijo: ensayos 30, semillas 5, celdas ['rosenbrock_2d', 'rosenbrock_3d', 'rastrigin_2d', 'rastrigin_3d']
+   ganador seleccion.json = 10 (regla_v1: 10); puntaje defecto = 15.375 | mejor puntaje = 6.875 en ensayos [10] | recálculo: retadores [10]
+   guardado: puntaje_defecto 15.375 puntaje_ganador 6.875
+   ensayo 0: rangos [22.0, 15.0, 18.0, 6.5] medianas rec. [0.07662, 0.002476, 4.975, 5.97] puntaje 15.375 éxitos 1e-6 0/20
+      parámetros: {'gd.armijo.eta0': 1.0, 'gd.armijo.beta': 0.5, 'gd.armijo.c': 0.0001}
+   ensayo 10: rangos [4.0, 5.0, 9.0, 9.5] medianas rec. [4.093e-06, 5.883e-05, 1.99, 7.96] puntaje 6.875 éxitos 1e-6 2/20
+      parámetros: {'gd.armijo.eta0': 3.52, 'gd.armijo.beta': 0.1243, 'gd.armijo.c': 0.006728}
+   elegido: {'gd.armijo.eta0': 3.520092041250609, 'gd.armijo.beta': 0.12427680612997696, 'gd.armijo.c': 0.006727603419207777}
+
+ea: ensayos 30, semillas 5, celdas ['rosenbrock_2d', 'rosenbrock_3d', 'rastrigin_2d', 'rastrigin_3d']
+   ganador seleccion.json = 13 (regla_v1: 13); puntaje defecto = 18.0 | mejor puntaje = 8.875 en ensayos [13] | recálculo: retadores [13]
+   guardado: puntaje_defecto 18.0 puntaje_ganador 8.875
+   ensayo 0: rangos [26.0, 28.0, 7.0, 11.0] medianas rec. [0.001255, 0.423, 1e-06, 1e-06] puntaje 18.0 éxitos 1e-6 8/20
+      parámetros: {'ea.N': 50.0, 'ea.frac_e': 0.15, 'ea.frac_m': 0.1, 'ea.frac_c': 0.75}
+   ensayo 13: rangos [2.5, 15.0, 7.0, 11.0] medianas rec. [1e-06, 0.09873, 1e-06, 1e-06] puntaje 8.875 éxitos 1e-6 14/20
+      parámetros: {'ea.N': 117.0, 'ea.frac_e': 0.165, 'ea.frac_m': 0.1766, 'ea.frac_c': 0.4854}
+   elegido: {'ea.N': 117, 'ea.frac_e': 0.1649790031871204, 'ea.frac_m': 0.17663527096566822, 'ea.frac_c': 0.48536490972313745}
+
+pso: ensayos 30, semillas 5, celdas ['rosenbrock_2d', 'rosenbrock_3d', 'rastrigin_2d', 'rastrigin_3d']
+   ganador seleccion.json = 0 (regla_v1: 3); puntaje defecto = 10.5 | mejor puntaje = 10.5 en ensayos [0, 3] | recálculo: gana el defecto
+   guardado: puntaje_defecto 10.5 puntaje_ganador 10.5
+   ensayo 0: rangos [14.0, 2.0, 14.0, 12.0] medianas rec. [1e-06, 1e-06, 1e-06, 1e-06] puntaje 10.5 éxitos 1e-6 18/20
+      parámetros: {'pso.N': 30.0, 'pso.w': 0.7298, 'pso.c1': 1.496, 'pso.c2': 1.496, 'pso.vmax_frac': 0.2}
+   ensayo 3: rangos [14.0, 2.0, 14.0, 12.0] medianas rec. [1e-06, 1e-06, 1e-06, 1e-06] puntaje 10.5 éxitos 1e-6 19/20
+      parámetros: {'pso.N': 23.0, 'pso.w': 0.724, 'pso.c1': 0.969, 'pso.c2': 1.37, 'pso.vmax_frac': 0.4884}
+   elegido: {'pso.N': 30, 'pso.w': 0.7298, 'pso.c1': 1.49618, 'pso.c2': 1.49618, 'pso.vmax_frac': 0.2}
+
+de: ensayos 30, semillas 5, celdas ['rosenbrock_2d', 'rosenbrock_3d', 'rastrigin_2d', 'rastrigin_3d']
+   ganador seleccion.json = 0 (regla_v1: 6); puntaje defecto = 14.625 | mejor puntaje = 14.625 en ensayos [0, 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 14, 16, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29] | recálculo: gana el defecto
+   guardado: puntaje_defecto 14.625 puntaje_ganador 14.625
+   ensayo 0: rangos [15.0, 12.5, 15.5, 15.5] medianas rec. [1e-06, 1e-06, 1e-06, 1e-06] puntaje 14.625 éxitos 1e-6 19/20
+      parámetros: {'de.NP': 30.0, 'de.F': 0.7, 'de.CR': 0.9}
+   ensayo 6: rangos [15.0, 12.5, 15.5, 15.5] medianas rec. [1e-06, 1e-06, 1e-06, 1e-06] puntaje 14.625 éxitos 1e-6 20/20
+      parámetros: {'de.NP': 14.0, 'de.F': 1.181, 'de.CR': 0.8443}
+   elegido: {'de.NP': 30, 'de.F': 0.7, 'de.CR': 0.9}
+
+corridas de ajuste: {'gdfijo_rosenbrock': 300, 'gdfijo_rastrigin': 300, 'gdarmijo': 600, 'ea': 600, 'pso': 600, 'de': 600} total 3000
+
+====================================================================================================
+7b. Medianas de ajuste del GD con Armijo (5 semillas) citadas en la 08
+====================================================================================================
+   ensayo 0: {'rosenbrock_2d': 0.07662276890298525, 'rosenbrock_3d': 0.0024762140911381296, 'rastrigin_2d': 4.974790247647377, 'rastrigin_3d': 5.969749304740667}
+   ensayo 10: {'rosenbrock_2d': 4.092804539121506e-06, 'rosenbrock_3d': 5.8832810029899576e-05, 'rastrigin_2d': 1.9899181141865796, 'rastrigin_3d': 7.959662381108174}
+
+====================================================================================================
+7c. Regla v1: tasas con las semillas de reporte (regla_v1/comparacion.csv)
+====================================================================================================
+   rosenbrock 2D pso: 1e-4 100.0 → 100.0 %; 1e-6 100.0 → 100.0 %
+   rosenbrock 2D de: 1e-4 100.0 → 100.0 %; 1e-6 100.0 → 100.0 %
+   rosenbrock 3D pso: 1e-4 100.0 → 100.0 %; 1e-6 40.0 → 100.0 %
+   rosenbrock 3D de: 1e-4 100.0 → 100.0 %; 1e-6 100.0 → 100.0 %
+   rastrigin 2D pso: 1e-4 100.0 → 93.3 %; 1e-6 100.0 → 93.3 %
+   rastrigin 2D de: 1e-4 100.0 → 86.7 %; 1e-6 100.0 → 86.7 %
+   rastrigin 3D pso: 1e-4 86.7 → 50.0 %; 1e-6 86.7 → 50.0 %
+   rastrigin 3D de: 1e-4 93.3 → 80.0 %; 1e-6 93.3 → 80.0 %
+
+====================================================================================================
+7d. Valores afinados en el borde de los intervalos (R7)
+====================================================================================================
+   gdfijo_rosenbrock gd.eta.{func}: 0.001494 en [1e-5, 1e-2] defecto 0.001
+   gdfijo_rastrigin gd.eta.{func}: 0.002 en [1e-5, 1e-2] defecto 0.002
+   gdarmijo gd.armijo.eta0: 3.52 en [0.1, 10.0] defecto 1.0
+   gdarmijo gd.armijo.beta: 0.1243 en [0.1, 0.9] defecto 0.5
+   gdarmijo gd.armijo.c: 0.006728 en [1e-5, 1e-1] defecto 0.0001
+   ea ea.N: 117 en [20, 200] defecto 50
+   ea ea.frac_e: 0.165 en [0.05, 0.3] defecto 0.15
+   ea ea.frac_m: 0.1766 en [0.05, 0.4] defecto 0.1
+   ea ea.frac_c: 0.4854 en [0.4, 0.9] defecto 0.75
+   pso pso.N: 30 en [10, 100] defecto 30
+   pso pso.w: 0.7298 en [0.3, 0.95] defecto 0.7298
+   pso pso.c1: 1.496 en [0.5, 2.5] defecto 1.49618
+   pso pso.c2: 1.496 en [0.5, 2.5] defecto 1.49618
+   pso pso.vmax_frac: 0.2 en [0.05, 0.5] defecto 0.2
+   de de.NP: 30 en [10, 100] defecto 30
+   de de.F: 0.7 en [0.3, 1.2] defecto 0.7
+   de de.CR: 0.9 en [0.1, 1.0] defecto 0.9
+
+====================================================================================================
+8. EA: tamaños de grupo y conteos; PSO y DE: conteos
+====================================================================================================
+N=50: n_e=8 n_m=5 floor(N f_c)=37 par=38 relleno=38 n_c=38 fracción efectiva=0.760 suma=51 evals/gen=42
+     presupuesto 20000: T=475 r=0
+     presupuesto 30000: T=713 r=4
+N=117: n_e=19 n_m=20 floor(N f_c)=56 par=56 relleno=78 n_c=78 fracción efectiva=0.667 suma=117 evals/gen=98
+     presupuesto 20000: T=202 r=87
+     presupuesto 30000: T=304 r=91
+funciones de ea.py con 'tam' o 'grupo': ['TAMANO_PAREJA', '_calcular_tamanos_de_grupos']
+PSO/DE N=30 presupuesto 20000: T=665 r=20
+PSO/DE N=30 presupuesto 30000: T=999 r=0
+    ('rosenbrock', 2, 'ea') n_f: [20000] frames: [0, 476]
+    ('rosenbrock', 3, 'ea') n_f: [30000] frames: [0]
+    ('rosenbrock', 2, 'pso') n_f: [20000] frames: [0, 666]
+    ('rosenbrock', 3, 'pso') n_f: [30000] frames: [0]
+    ('rosenbrock', 2, 'de') n_f: [20000] frames: [0, 666]
+    ('rosenbrock', 3, 'de') n_f: [30000] frames: [0]
+   afinado ('rosenbrock', 2, 'ea') n_f: [20000]
+   afinado ('rosenbrock', 3, 'ea') n_f: [30000]
+
+====================================================================================================
+9. Constantes: L, Hessianas, 1/L, constricción
+====================================================================================================
+Rastrigin L = 2 + 40π² = 396.78417604357435 1/L = 0.002520261795647267
+Rosenbrock, Hessiana en (1,1): valores propios [3.99360767e-01 1.00160064e+03] 2/λmax = 0.0019968038374381654 condición = 2508.0096012775152
+Rosenbrock 2D: L (máx |λ| en rejilla que incluye las esquinas) = 5970.66; 1/L = 1.6749e-04; 1.5e-4 / (1/L) − 1 = -0.1044
+Rosenbrock 3D: L (máx |λ| en rejilla que incluye las esquinas) = 6837.83; 1/L = 1.4625e-04; 1.5e-4 / (1/L) − 1 = +0.0257
+constricción φ=4.1: χ = 0.7298437881283576 χφ/2 = 1.496179765663133
+resolución 10nε (n=2): 4.44e-15  sqrt(2λ·10nε) con λ=396.8: 1.8771212001359954e-06
+base.yaml gd: {'eta': {'rosenbrock': '1e-3', 'rastrigin': '2e-3'}, 'armijo': {'eta0': 1.0, 'beta': 0.5, 'c': '1e-4'}, 'tol_grad': '1e-8'} | ea: {'esquema': 'clase', 'N': 50, 'frac_e': 0.15, 'frac_m': 0.1, 'frac_c': 0.75, 'reevaluar_elite': False, 'generaciones': None} | pso: {'N': 30, 'w': 0.7298, 'c1': 1.49618, 'c2': 1.49618, 'vmax_frac': 0.2, 'iteraciones': None} | de: {'NP': 30, 'F': 0.7, 'CR': 0.9, 'generaciones': None}
+base.yaml hpo (sin espacios): {'ensayos': 30, 'semillas': 5, 'base_seed': 1000, 'semilla_busqueda': 1, 'reanudar': False, 'salida': 'results/data/part1_hpo', 'salida_afinada': 'results/data/part1_tuned', 'tablas_afinada': 'results/tables/part1_tuned', 'config_salida': 'configs/part1/tuned.yaml'}
+
+====================================================================================================
+10. Sensibilidad k = 1 de la versión afinada
+====================================================================================================
+   rosenbrock 2D gdfijo: éxito 1e-4 7 → 30; mediana 2.402e-04 → 3.827e-12; mejor 9.322e-06 → 1.576e-13; media 2.421e-04 → 3.839e-12; peor 5.532e-04 → 8.594e-12; n_grad 5000.0 → 20000.0
+   rosenbrock 2D gdarmijo: éxito 1e-4 30 → 30; mediana 1.259e-06 → 3.531e-10; mejor 6.449e-11 → 1.503e-14; media 4.508e-06 → 1.650e-09; peor 1.723e-05 → 6.605e-09; n_grad 2356.9 → 3653.4
+   rosenbrock 3D gdfijo: éxito 1e-4 0 → 0; mediana 4.777e-04 → 4.770e-04; mejor 4.375e-04 → 4.375e-04; media 5.746e-04 → 5.615e-04; peor 1.850e-03 → 1.850e-03; n_grad 5000.0 → 30000.0
+   rosenbrock 3D gdarmijo: éxito 1e-4 19 → 30; mediana 2.428e-05 → 1.362e-08; mejor 9.066e-09 → 5.185e-12; media 1.129e-04 → 6.324e-08; peor 5.442e-04 → 2.961e-07; n_grad 2823.8 → 5338.6
+   rastrigin 2D gdfijo: éxito 1e-4 0 → 0; mediana 1.642e+01 → 1.642e+01; mejor 1.990e+00 → 1.990e+00; media 1.678e+01 → 1.678e+01; peor 3.383e+01 → 3.383e+01; n_grad 18.4 → 18.4
+   rastrigin 2D gdarmijo: éxito 1e-4 2 → 2; mediana 4.975e+00 → 4.975e+00; mejor 0.000e+00 → 0.000e+00; media 9.352e+00 → 9.352e+00; peor 3.383e+01 → 3.383e+01; n_grad 1262.0 → 1542.4
+   rastrigin 3D gdfijo: éxito 1e-4 0 → 0; mediana 2.438e+01 → 2.438e+01; mejor 4.975e+00 → 4.975e+00; media 2.550e+01 → 2.550e+01; peor 4.975e+01 → 4.975e+01; n_grad 18.5 → 18.5
+   rastrigin 3D gdarmijo: éxito 1e-4 0 → 0; mediana 1.741e+01 → 1.741e+01; mejor 9.950e-01 → 9.950e-01; media 1.748e+01 → 1.748e+01; peor 4.079e+01 → 4.079e+01; n_grad 1639.2 → 2234.5
+   gdfijo afinado Rosenbrock 3D k=1: f del historial al final (últimos 3 puntos de la corrida 0): [{'eval_equiv': 3991.0, 'f_best': 0.0004848278605342355}, {'eval_equiv': 3992.0, 'f_best': 0.00048473590554272156}, {'eval_equiv': 3993.0, 'f_best': 0.00048470474274902025}]
+   eval_equiv de la última mejora (mín/mediana/máx): 58.0 4058.5 5245.0
+
+====================================================================================================
+11. Cajas en el piso 1e-16 (peor valor < 1e-16) con la configuración por defecto
+====================================================================================================
+   caja entera en el piso: ('rastrigin', 2, 'de') peor = 0.0
+   mediana en el piso pero no la caja entera: ('rastrigin', 2, 'ea') peor = 0.9949590570932898
+   caja entera en el piso: ('rastrigin', 2, 'pso') peor = 0.0
+   mediana en el piso pero no la caja entera: ('rastrigin', 3, 'de') peor = 0.9949590570932898
+   mediana en el piso pero no la caja entera: ('rastrigin', 3, 'pso') peor = 0.9949590570932898
+   caja entera en el piso: ('rosenbrock', 2, 'de') peor = 0.0
+   caja entera en el piso: ('rosenbrock', 2, 'pso') peor = 2.984086530085809e-19
+   caja entera en el piso: ('rosenbrock', 3, 'de') peor = 0.0
+avisos de summary.json:
+    Tabla principal (k = 2n): rosenbrock 2D pso: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+    Tabla principal (k = 2n): rosenbrock 2D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+    Tabla principal (k = 2n): rosenbrock 3D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+    Tabla principal (k = 2n): rastrigin 2D pso: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+    Tabla principal (k = 2n): rastrigin 2D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+    Sensibilidad k = 1: rosenbrock 2D gdfijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+    Sensibilidad k = 1: rosenbrock 3D gdfijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+
+====================================================================================================
+12. Registro de la cacería: conteos
+====================================================================================================
+entradas '### H-NN': 48 de H-01 a H-48 | duplicadas: []
+    | Matemáticas | 1 (H-03) | 1 (H-03, puente) |
+    | Código | 23 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil, H-44 débil, H-46 débil, H-47 débil, H-48 déb
+    | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18
+    | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
+    | Conceptos | 10 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39, H-41, H-42, H-43, H-45; H-31, H-32, H-41, H-42, H-43 y H-45 de severidad baja) — H-12 descartado | 0 |
+
+====================================================================================================
+13. Archivos de prompts enlazados en la 09 y claves de cita
+====================================================================================================
+    T0.2.md existe
+    T0.3.md existe
+    T0.4.md existe
+    T1.1.md existe
+    T1.10.md existe
+    T1.10b.md existe
+    T1.11.md existe
+    T1.2.md existe
+    T1.3.md existe
+    T1.4.md existe
+    T1.5.md existe
+    T1.6.md existe
+    T1.6b.md existe
+    T1.7.md existe
+    T2.1.md existe
+    T2.2.md existe
+    T2.3.md existe
+    T2.4.md existe
+    T2.5.md existe
+    T2.6.md existe
+    T2.7.md existe
+    T2.8.md existe
+    T3.1.md existe
+    T4.2.md existe
+    T4.3.md existe
+    T4.6-parte1-gd.md existe
+    T4.6-parte1-heuristicos.md existe
+    T4.6-parte1-resultados.md existe
+    asesoria_puente_claude.md existe
+   02-fundamentacion: citas ['armijo1966', 'dantzig1954', 'dorigo1996', 'kennedy1995', 'rosenbrock1960', 'shi1998', 'storn1997', 'stutzle2000'] | faltan en references.bib: [] | TODO(cita): 3
+   03-parte1-metodologia: citas ['armijo1966', 'berahas2022', 'kennedy1995', 'shi1998', 'storn1997'] | faltan en references.bib: [] | TODO(cita): 4
+   04-parte1-resultados: citas [] | faltan en references.bib: [] | TODO(cita): 0
+   08-discusion: citas [] | faltan en references.bib: [] | TODO(cita): 2
+   09-uso-ia: citas [] | faltan en references.bib: [] | TODO(cita): 0
+   11-reproducibilidad: citas [] | faltan en references.bib: [] | TODO(cita): 0
+
+====================================================================================================
+14. k = 2n frente a k = 1 con la configuración por defecto: ¿cambia f_final corrida a corrida?
+====================================================================================================
+   rosenbrock 2D gdfijo: corridas con f_best idéntico 0/30; dif. máx. 5.355e-03; media 1.962e-03 → 1.081e-08; desv 1.232e-03 → 6.391e-09; mejor 8.572e-05 → 5.517e-10; peor 5.355e-03 → 2.661e-08
+   rosenbrock 2D gdarmijo: corridas con f_best idéntico 0/30; dif. máx. 2.135e-02; media 2.615e-02 → 1.809e-02; desv 3.464e-02 → 2.536e-02; mejor 2.004e-05 → 1.072e-05; peor 7.669e-02 → 5.534e-02
+   rosenbrock 3D gdfijo: corridas con f_best idéntico 0/30; dif. máx. 1.199e-02; media 1.663e-03 → 6.725e-14; desv 2.200e-03 → 7.649e-14; mejor 5.257e-05 → 2.456e-15; peor 1.199e-02 → 4.166e-13
+   rosenbrock 3D gdarmijo: corridas con f_best idéntico 0/30; dif. máx. 5.158e-03; media 2.022e-03 → 4.562e-04; desv 1.783e-03 → 3.237e-04; mejor 2.531e-04 → 6.793e-05; peor 6.249e-03 → 1.091e-03
+   rastrigin 2D gdfijo: corridas con f_best idéntico 30/30; dif. máx. 0.000e+00; media 1.678e+01 → 1.678e+01; desv 1.064e+01 → 1.064e+01; mejor 1.990e+00 → 1.990e+00; peor 3.383e+01 → 3.383e+01
+   rastrigin 2D gdarmijo: corridas con f_best idéntico 30/30; dif. máx. 0.000e+00; media 4.875e+00 → 4.875e+00; desv 5.526e+00 → 5.526e+00; mejor 0.000e+00 → 0.000e+00; peor 1.990e+01 → 1.990e+01
+   rastrigin 3D gdfijo: corridas con f_best idéntico 30/30; dif. máx. 0.000e+00; media 2.550e+01 → 2.550e+01; desv 1.190e+01 → 1.190e+01; mejor 4.975e+00 → 4.975e+00; peor 4.975e+01 → 4.975e+01
+   rastrigin 3D gdarmijo: corridas con f_best idéntico 30/30; dif. máx. 0.000e+00; media 1.373e+01 → 1.373e+01; desv 1.137e+01 → 1.137e+01; mejor 9.950e-01 → 9.950e-01; peor 4.079e+01 → 4.079e+01
+   versión afinada:
+   rastrigin 2D gdfijo afinado: f_best idéntico 30/30; dif. máx. 0.000e+00
+   rastrigin 2D gdarmijo afinado: f_best idéntico 30/30; dif. máx. 0.000e+00
+   rastrigin 3D gdfijo afinado: f_best idéntico 30/30; dif. máx. 0.000e+00
+   rastrigin 3D gdarmijo afinado: f_best idéntico 30/30; dif. máx. 0.000e+00
+
+====================================================================================================
+15. Paso fijo en Rosenbrock: barrido fino de eta en memoria (semilla 0, 2D, 5000 gradientes) y estabilidad local
+====================================================================================================
+   control: eta 1.0000e-03 (defecto): reimplementación 1.881138e-03 | eta_deslizador.json 1.881138e-03
+   control: eta 1.4941e-03 (afinado): reimplementación 2.413747e-04 | eta_deslizador.json 2.413747e-04
+   barrido fino (no está en el blog; sirve para ver dónde deja de converger en esta semilla):
+      eta 1.5000e-03: mejor f visto 2.3561e-04; f del último iterado 2.3561e-04
+      eta 1.7000e-03: mejor f visto 1.0477e-04; f del último iterado 1.0477e-04
+      eta 1.7783e-03: mejor f visto 7.6439e-05; f del último iterado 7.6439e-05
+      eta 1.8500e-03: mejor f visto 5.7308e-05; f del último iterado 5.7308e-05
+      eta 1.9000e-03: mejor f visto 4.6901e-05; f del último iterado 4.6901e-05
+      eta 1.9500e-03: mejor f visto 3.8396e-05; f del último iterado 3.8396e-05
+      eta 1.9900e-03: mejor f visto 3.2724e-05; f del último iterado 3.2724e-05
+      eta 2.0000e-03: mejor f visto 3.1442e-05; f del último iterado 3.1442e-05
+      eta 2.0500e-03: mejor f visto 3.3121e-05; f del último iterado 1.2171e-02
+      eta 2.1000e-03: mejor f visto 2.1852e-04; f del último iterado 1.1577e-03
+      eta 2.2000e-03: mejor f visto 1.1781e-03; f del último iterado 4.2562e-02
+      eta 2.5000e-03: mejor f visto 8.1953e-03; f del último iterado 1.7832e-01
+      eta 3.0000e-03: mejor f visto 2.8064e-02; f del último iterado 3.0443e-01
+      eta 3.1623e-03: mejor f visto 3.4785e-02; f del último iterado 3.7006e-01
+   Hessiana de Rosenbrock 3D en (1,1,1): valores propios [4.75190083e-01 6.01667452e+02 1.40185736e+03] | 2/λmax = 0.0014266786768232559 | eta afinado 1.4941e-3 SUPERA ese límite local
+   Hessiana 2D en (1,1): 2/λmax = 0.0019968038374381654 | eta afinado no supera ese límite
+
+====================================================================================================
+16. Paso fijo en Rastrigin: ¿la corrida termina en la cuenca en la que empieza?
+====================================================================================================
+   rastrigin 2D gdfijo: x_best en la misma celda entera que x0 en 30/30 corridas
+   rastrigin 3D gdfijo: x_best en la misma celda entera que x0 en 30/30 corridas
+   rastrigin 2D gdarmijo: x_best en la misma celda entera que x0 en 4/30 corridas
+   rastrigin 3D gdarmijo: x_best en la misma celda entera que x0 en 9/30 corridas
+
+====================================================================================================
+17. Sensibilidad eta = 1.5e-4: reejecución en memoria frente a part1_eta_1l/summary.json
+====================================================================================================
+   2D: mediana reejecutada 1.470569e-01 | summary 1.470569e-01; media 3.580509e-01 | 3.580509e-01; <=1e-2: 2/30; <=1e-4: 0/30
+   3D: mediana reejecutada 2.188766e-01 | summary 2.188766e-01; media 3.909801e-01 | 3.909801e-01; <=1e-2: 2/30; <=1e-4: 0/30
+
+====================================================================================================
+RESUMEN DE DISCREPANCIAS DE TABLAS
+====================================================================================================
+0 filas de tabla no coinciden con el recálculo
+
+====================================================================================================
+ANEXO. Comprobaciones hechas fuera del script (13-oct-2026, salidas solo en una carpeta temporal)
+====================================================================================================
+A1. Comando de la sección 11 para la sensibilidad de eta, con salida y tablas redirigidas a una carpeta temporal:
+    python run.py part1 --config configs/part1/base.yaml --set "methods=[gdfijo]" --set "func=[rosenbrock]" \
+        --set gd.eta.rosenbrock=1.5e-4 --set salida=<tmp>/eta_1l/data --set tablas=<tmp>/eta_1l/tables --set workers=6
+    Resultado: código de salida 0 en 1 min 9 s; el summary.json generado es igual (comparación de los JSON cargados) al
+    versionado en results/data/part1_eta_1l/summary.json y tabla_principal.csv es idéntica byte a byte.
+A2. `python run.py --help` lista los subcomandos part1, hpo, part2 y figures; `scripts/part1_eta_deslizador.py --help` y
+    `scripts/part1_gif_trayectorias.py --help` responden (no se ejecutaron sin --help: reescriben JSON versionados).
+    Claves usadas con --set en la sección 11 que existen en configs/part1/base.yaml: workers, methods, func,
+    gd.eta.rosenbrock, salida, tablas, hpo.reanudar.
+A3. Clon limpio simulado: carpeta temporal con summary.json y eta_deslizador.json pero sin runs/, y
+    `src.viz.part1_interactivas.generar_part1(defecto=<tmp>, afinado=<tmp>, salida=<tmp>)`:
+    genera part1_contorno_rosenbrock.html, part1_contorno_rastrigin.html y part1_eta_rosenbrock.html, y avisa
+    "faltan 600 de 600 corridas ... No se genera: part1_convergencia.html, part1_cajas.html,
+    part1_enjambre_rastrigin.html, part1_convergencia_afinado.html, part1_cajas_afinado.html. Para generarlo:
+    python run.py part1 --config configs/part1/base.yaml". Los GIF de la Parte 1 solo dependen de
+    results/data/part1/gif_trayectorias.json, que está versionado (lectura de src/viz/figuras.py; no se ejecutó).
+A4. `git ls-files`: están versionados results/data/part1/{summary,eta_deslizador,gif_trayectorias}.json,
+    results/data/part1_tuned/summary.json, results/data/part1_eta_1l/summary.json, results/data/part1_hpo/ (con
+    regla_v1/), configs/part1/tuned.yaml y los CSV de results/tables/part1*/; ningún archivo bajo runs/.
+A5. Prompts enlazados en la sección 09 que no existen en origin/main a esta fecha (los enlaces apuntan a blob/main):
+    T1.11.md, T4.2.md, T4.3.md, T4.6-parte1-heuristicos.md (están en la rama parte1-optimizacion-numerica) y
+    T4.6-parte1-resultados.md (aún sin versionar).

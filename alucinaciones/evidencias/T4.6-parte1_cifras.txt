@@ -1,0 +1,320 @@
+T4.6 (Parte 1) — cifras para el blog. Generado por un script fuera del repo (scratchpad de la sesión);
+solo lee results/data/part1*, results/tables/part1*, configs/part1/tuned.yaml y alucinaciones/registro.md.
+
+== 0. meta por defecto: runs=30 semillas=0..29 presupuesto_por_dim=10000 umbrales=[0.0001, 0.01, 1e-06] principal=0.0001 k_regla=2n k_sensibilidad=1
+presupuesto: 2D = 20000, 3D = 30000 evaluaciones equivalentes; k = 2n: 4 (2D) y 6 (3D)
+
+== 1. Tabla principal, configuración POR DEFECTO (results/data/part1/summary.json, 'configuraciones', k = 2n)
+
+-- por defecto rosenbrock
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 4 | 1.962e-03 | 1.232e-03 | 1.905e-03 | 8.572e-05 | 5.355e-03 | 100.0 % (30/30) | 3.3 % (1/30) | 0.0 % (0/30) | 19220 | 0.0 | 5000.0 | 20000.0 |
+| 2D | gdarmijo | 4 | 2.615e-02 | 3.464e-02 | 2.326e-03 | 2.004e-05 | 7.669e-02 | 63.3 % (19/30) | 16.7 % (5/30) | 0.0 % (0/30) | 9976 | 14302.3 | 1424.4 | 19999.8 |
+| 2D | ea | 4 | 3.049e-02 | 4.071e-02 | 9.329e-03 | 4.221e-07 | 1.379e-01 | 53.3 % (16/30) | 10.0 % (3/30) | 3.3 % (1/30) | 2613 | 20000.0 | 0.0 | 20000.0 |
+| 2D | pso | 4 | 1.019e-20 | 5.444e-20 | 3.320e-24 | 3.386e-28 | 2.984e-19 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 1555 | 20000.0 | 0.0 | 20000.0 |
+| 2D | de | 4 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 985 | 20000.0 | 0.0 | 20000.0 |
+| 3D | gdfijo | 6 | 1.663e-03 | 2.200e-03 | 1.285e-03 | 5.257e-05 | 1.199e-02 | 96.7 % (29/30) | 3.3 % (1/30) | 0.0 % (0/30) | 25998 | 0.0 | 5000.0 | 30000.0 |
+| 3D | gdarmijo | 6 | 2.022e-03 | 1.783e-03 | 1.338e-03 | 2.531e-04 | 6.249e-03 | 100.0 % (30/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 18792.5 | 1867.8 | 29999.5 |
+| 3D | ea | 6 | 3.867e-01 | 2.964e-01 | 3.269e-01 | 2.272e-03 | 1.059e+00 | 3.3 % (1/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 30000.0 | 0.0 | 30000.0 |
+| 3D | pso | 6 | 9.317e-06 | 1.392e-05 | 3.846e-06 | 5.765e-08 | 6.832e-05 | 100.0 % (30/30) | 100.0 % (30/30) | 40.0 % (12/30) | 19103 | 30000.0 | 0.0 | 30000.0 |
+| 3D | de | 6 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 2213 | 30000.0 | 0.0 | 30000.0 |
+
+-- por defecto rastrigin
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 4 | 1.678e+01 | 1.064e+01 | 1.642e+01 | 1.990e+00 | 3.383e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.4 | 73.5 |
+| 2D | gdarmijo | 4 | 4.875e+00 | 5.526e+00 | 2.985e+00 | 0.000e+00 | 1.990e+01 | 16.7 % (5/30) | 16.7 % (5/30) | 16.7 % (5/30) | 160 | 13781.1 | 653.1 | 16393.5 |
+| 2D | ea | 4 | 6.633e-02 | 2.524e-01 | 0.000e+00 | 0.000e+00 | 9.950e-01 | 93.3 % (28/30) | 93.3 % (28/30) | 93.3 % (28/30) | 3256 | 20000.0 | 0.0 | 20000.0 |
+| 2D | pso | 4 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 1664 | 20000.0 | 0.0 | 20000.0 |
+| 2D | de | 4 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 2175 | 20000.0 | 0.0 | 20000.0 |
+| 3D | gdfijo | 6 | 2.550e+01 | 1.190e+01 | 2.438e+01 | 4.975e+00 | 4.975e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.5 | 111.0 |
+| 3D | gdarmijo | 6 | 1.373e+01 | 1.137e+01 | 8.955e+00 | 9.950e-01 | 4.079e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 19882.1 | 1222.7 | 27218.1 |
+| 3D | ea | 6 | 6.633e-01 | 7.076e-01 | 9.950e-01 | 0.000e+00 | 1.990e+00 | 46.7 % (14/30) | 46.7 % (14/30) | 46.7 % (14/30) | 3677 | 30000.0 | 0.0 | 30000.0 |
+| 3D | pso | 6 | 1.327e-01 | 3.440e-01 | 0.000e+00 | 0.000e+00 | 9.950e-01 | 86.7 % (26/30) | 86.7 % (26/30) | 86.7 % (26/30) | 3332 | 30000.0 | 0.0 | 30000.0 |
+| 3D | de | 6 | 6.633e-02 | 2.524e-01 | 0.000e+00 | 0.000e+00 | 9.950e-01 | 93.3 % (28/30) | 93.3 % (28/30) | 93.3 % (28/30) | 4981 | 30000.0 | 0.0 | 30000.0 |
+
+-- por defecto: evaluaciones medias hasta el éxito por umbral (solo corridas exitosas)
+| Función | Dim. | Método | 1e-2 | 1e-4 | 1e-6 |
+|---|---|---|---|---|---|
+| rosenbrock | 2D | gdfijo | 11229 | 19220 | — |
+| rosenbrock | 2D | gdarmijo | 7346 | 9976 | — |
+| rosenbrock | 2D | ea | 1739 | 2613 | 4675 |
+| rosenbrock | 2D | pso | 464 | 1555 | 2855 |
+| rosenbrock | 2D | de | 531 | 985 | 1388 |
+| rosenbrock | 3D | gdfijo | 16467 | 25998 | — |
+| rosenbrock | 3D | gdarmijo | 13893 | — | — |
+| rosenbrock | 3D | ea | 3018 | — | — |
+| rosenbrock | 3D | pso | 6352 | 19103 | 25184 |
+| rosenbrock | 3D | de | 1577 | 2213 | 2870 |
+| rastrigin | 2D | gdfijo | — | — | — |
+| rastrigin | 2D | gdarmijo | 119 | 160 | 210 |
+| rastrigin | 2D | ea | 1951 | 3256 | 4300 |
+| rastrigin | 2D | pso | 1093 | 1664 | 2289 |
+| rastrigin | 2D | de | 1797 | 2175 | 2522 |
+| rastrigin | 3D | gdfijo | — | — | — |
+| rastrigin | 3D | gdarmijo | — | — | — |
+| rastrigin | 3D | ea | 2558 | 3677 | 4924 |
+| rastrigin | 3D | pso | 2545 | 3332 | 4006 |
+| rastrigin | 3D | de | 4444 | 4981 | 5504 |
+
+== 2. Sensibilidad k = 1, POR DEFECTO (summary.json, 'sensibilidad_k1'; solo los GD se re-ejecutan)
+
+-- k = 1, por defecto rosenbrock
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 1 | 1.081e-08 | 6.391e-09 | 1.047e-08 | 5.517e-10 | 2.661e-08 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 8282 | 0.0 | 20000.0 | 20000.0 |
+| 2D | gdarmijo | 1 | 1.809e-02 | 2.536e-02 | 8.596e-04 | 1.072e-05 | 5.534e-02 | 66.7 % (20/30) | 23.3 % (7/30) | 0.0 % (0/30) | 10781 | 18186.5 | 1813.5 | 20000.0 |
+| 3D | gdfijo | 1 | 6.725e-14 | 7.649e-14 | 5.517e-14 | 2.456e-15 | 4.166e-13 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 7424 | 0.0 | 30000.0 | 30000.0 |
+| 3D | gdarmijo | 1 | 4.562e-04 | 3.237e-04 | 3.036e-04 | 6.793e-05 | 1.091e-03 | 100.0 % (30/30) | 6.7 % (2/30) | 0.0 % (0/30) | 28173 | 27305.0 | 2695.0 | 30000.0 |
+
+-- k = 1, por defecto rastrigin
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 1 | 1.678e+01 | 1.064e+01 | 1.642e+01 | 1.990e+00 | 3.383e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.4 | 18.4 |
+| 2D | gdarmijo | 1 | 4.875e+00 | 5.526e+00 | 2.985e+00 | 0.000e+00 | 1.990e+01 | 16.7 % (5/30) | 16.7 % (5/30) | 16.7 % (5/30) | 118 | 15531.9 | 777.7 | 16309.6 |
+| 3D | gdfijo | 1 | 2.550e+01 | 1.190e+01 | 2.438e+01 | 4.975e+00 | 4.975e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.5 | 18.5 |
+| 3D | gdarmijo | 1 | 1.373e+01 | 1.137e+01 | 8.955e+00 | 9.950e-01 | 4.079e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 25198.6 | 1617.3 | 26815.9 |
+
+filas de ea/pso/de en sensibilidad_k1 idénticas a las de la tabla principal: True
+
+== 3. Tabla principal, configuración AFINADA (results/data/part1_tuned/summary.json, k = 2n)
+
+-- afinada rosenbrock
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 4 | 2.421e-04 | 1.727e-04 | 2.402e-04 | 9.322e-06 | 5.532e-04 | 100.0 % (30/30) | 23.3 % (7/30) | 0.0 % (0/30) | 16759 | 0.0 | 5000.0 | 20000.0 |
+| 2D | gdarmijo | 4 | 4.508e-06 | 6.682e-06 | 1.259e-06 | 6.449e-11 | 1.723e-05 | 100.0 % (30/30) | 100.0 % (30/30) | 46.7 % (14/30) | 10140 | 10572.0 | 2356.9 | 19999.5 |
+| 2D | ea | 4 | 2.936e-04 | 1.455e-03 | 3.182e-07 | 2.214e-11 | 7.967e-03 | 100.0 % (30/30) | 93.3 % (28/30) | 70.0 % (21/30) | 8703 | 20000.0 | 0.0 | 20000.0 |
+| 2D | pso | 4 | 1.019e-20 | 5.444e-20 | 3.320e-24 | 3.386e-28 | 2.984e-19 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 1555 | 20000.0 | 0.0 | 20000.0 |
+| 2D | de | 4 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 985 | 20000.0 | 0.0 | 20000.0 |
+| 3D | gdfijo | 6 | 5.746e-04 | 2.981e-04 | 4.777e-04 | 4.375e-04 | 1.850e-03 | 100.0 % (30/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 5000.0 | 30000.0 |
+| 3D | gdarmijo | 6 | 1.129e-04 | 1.526e-04 | 2.428e-05 | 9.066e-09 | 5.442e-04 | 100.0 % (30/30) | 63.3 % (19/30) | 3.3 % (1/30) | 22558 | 13056.4 | 2823.8 | 29999.0 |
+| 3D | ea | 6 | 1.357e-01 | 1.398e-01 | 1.100e-01 | 1.892e-04 | 5.258e-01 | 20.0 % (6/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 30000.0 | 0.0 | 30000.0 |
+| 3D | pso | 6 | 9.317e-06 | 1.392e-05 | 3.846e-06 | 5.765e-08 | 6.832e-05 | 100.0 % (30/30) | 100.0 % (30/30) | 40.0 % (12/30) | 19103 | 30000.0 | 0.0 | 30000.0 |
+| 3D | de | 6 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 2213 | 30000.0 | 0.0 | 30000.0 |
+
+-- afinada rastrigin
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 4 | 1.678e+01 | 1.064e+01 | 1.642e+01 | 1.990e+00 | 3.383e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.4 | 73.5 |
+| 2D | gdarmijo | 4 | 9.352e+00 | 9.151e+00 | 4.975e+00 | 0.000e+00 | 3.383e+01 | 6.7 % (2/30) | 6.7 % (2/30) | 6.7 % (2/30) | 142 | 14945.5 | 1263.5 | 19999.5 |
+| 2D | ea | 4 | 3.924e-09 | 1.392e-08 | 1.089e-10 | 6.146e-13 | 7.581e-08 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 7915 | 20000.0 | 0.0 | 20000.0 |
+| 2D | pso | 4 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 1664 | 20000.0 | 0.0 | 20000.0 |
+| 2D | de | 4 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 0.000e+00 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 2175 | 20000.0 | 0.0 | 20000.0 |
+| 3D | gdfijo | 6 | 2.550e+01 | 1.190e+01 | 2.438e+01 | 4.975e+00 | 4.975e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.5 | 111.0 |
+| 3D | gdarmijo | 6 | 1.748e+01 | 1.163e+01 | 1.741e+01 | 9.950e-01 | 4.079e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 20162.1 | 1639.5 | 29998.9 |
+| 3D | ea | 6 | 3.317e-02 | 1.817e-01 | 0.000e+00 | 0.000e+00 | 9.950e-01 | 96.7 % (29/30) | 96.7 % (29/30) | 96.7 % (29/30) | 8492 | 30000.0 | 0.0 | 30000.0 |
+| 3D | pso | 6 | 1.327e-01 | 3.440e-01 | 0.000e+00 | 0.000e+00 | 9.950e-01 | 86.7 % (26/30) | 86.7 % (26/30) | 86.7 % (26/30) | 3332 | 30000.0 | 0.0 | 30000.0 |
+| 3D | de | 6 | 6.633e-02 | 2.524e-01 | 0.000e+00 | 0.000e+00 | 9.950e-01 | 93.3 % (28/30) | 93.3 % (28/30) | 93.3 % (28/30) | 4981 | 30000.0 | 0.0 | 30000.0 |
+
+== 4. Sensibilidad k = 1, AFINADA (part1_tuned/summary.json, 'sensibilidad_k1')
+
+-- k = 1, afinada rosenbrock
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 1 | 3.839e-12 | 2.658e-12 | 3.827e-12 | 1.576e-13 | 8.594e-12 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 5422 | 0.0 | 20000.0 | 20000.0 |
+| 2D | gdarmijo | 1 | 1.650e-09 | 2.556e-09 | 3.531e-10 | 1.503e-14 | 6.605e-09 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 6568 | 16346.6 | 3653.4 | 20000.0 |
+| 3D | gdfijo | 1 | 5.615e-04 | 2.989e-04 | 4.770e-04 | 4.375e-04 | 1.850e-03 | 100.0 % (30/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 30000.0 | 30000.0 |
+| 3D | gdarmijo | 1 | 6.324e-08 | 8.325e-08 | 1.362e-08 | 5.185e-12 | 2.961e-07 | 100.0 % (30/30) | 100.0 % (30/30) | 100.0 % (30/30) | 13962 | 24661.4 | 5338.6 | 30000.0 |
+
+-- k = 1, afinada rastrigin
+| Dim. | Método | k | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | Éxito 1e-6 | Evals. hasta éxito 1e-4 | n_f medio | n_grad medio | eval_equiv medio |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 2D | gdfijo | 1 | 1.678e+01 | 1.064e+01 | 1.642e+01 | 1.990e+00 | 3.383e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.4 | 18.4 |
+| 2D | gdarmijo | 1 | 9.352e+00 | 9.151e+00 | 4.975e+00 | 0.000e+00 | 3.383e+01 | 6.7 % (2/30) | 6.7 % (2/30) | 6.7 % (2/30) | 91 | 18455.8 | 1544.2 | 20000.0 |
+| 3D | gdfijo | 1 | 2.550e+01 | 1.190e+01 | 2.438e+01 | 4.975e+00 | 4.975e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 0.0 | 18.5 | 18.5 |
+| 3D | gdarmijo | 1 | 1.748e+01 | 1.163e+01 | 1.741e+01 | 9.950e-01 | 4.079e+01 | 0.0 % (0/30) | 0.0 % (0/30) | 0.0 % (0/30) | — | 27765.1 | 2234.9 | 30000.0 |
+
+== 5. Avisos de summary.json (por defecto)
+ - Tabla principal (k = 2n): rosenbrock 2D pso: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rosenbrock 2D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rosenbrock 3D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rastrigin 2D pso: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rastrigin 2D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Sensibilidad k = 1: rosenbrock 2D gdfijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Sensibilidad k = 1: rosenbrock 3D gdfijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+== 5b. Avisos de summary.json (afinado)
+ - Tabla principal (k = 2n): rosenbrock 2D pso: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rosenbrock 2D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rosenbrock 3D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rastrigin 2D ea: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rastrigin 2D pso: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Tabla principal (k = 2n): rastrigin 2D de: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Sensibilidad k = 1: rosenbrock 2D gdfijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Sensibilidad k = 1: rosenbrock 2D gdarmijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+ - Sensibilidad k = 1: rosenbrock 3D gdarmijo: tasa de éxito del 100 % en todos los umbrales (1e-04, 1e-02, 1e-06) sobre 30 corrida(s)
+
+== 6. Por defecto, k = 2n: datos por corrida (results/data/part1/runs)
+fin_presupuesto = corridas con eval_equiv > presupuesto − k·1 − 1 (no cabe otro gradiente);
+ult_mejora = eval_equiv del último registro de history (última vez que mejoró f_best)
+| Función | Dim. | Método | corridas | fin_presupuesto | eval_equiv mín–máx | ult_mejora mediana | ult_mejora máx | valores distintos de f_best (3 decimales): conteo |
+|---|---|---|---|---|---|---|---|---|
+| rosenbrock | 2D | gdfijo | 30 | 30 | 20000–20000 | 20000 | 20000 | (no aplica) |
+| rosenbrock | 2D | gdarmijo | 30 | 30 | 19998–20000 | 19993 | 20000 | (no aplica) |
+| rosenbrock | 2D | ea | 30 | 30 | 20000–20000 | 19939 | 19993 | (no aplica) |
+| rosenbrock | 2D | pso | 30 | 30 | 20000–20000 | 19802 | 19991 | (no aplica) |
+| rosenbrock | 2D | de | 30 | 30 | 20000–20000 | 5926 | 6477 | (no aplica) |
+| rosenbrock | 3D | gdfijo | 30 | 30 | 30000–30000 | 30000 | 30000 | (no aplica) |
+| rosenbrock | 3D | gdarmijo | 30 | 30 | 29996–30000 | 29990 | 29999 | (no aplica) |
+| rosenbrock | 3D | ea | 30 | 30 | 30000–30000 | 29958 | 29999 | (no aplica) |
+| rosenbrock | 3D | pso | 30 | 30 | 30000–30000 | 29976 | 30000 | (no aplica) |
+| rosenbrock | 3D | de | 30 | 30 | 30000–30000 | 10732 | 11970 | (no aplica) |
+| rastrigin | 2D | gdfijo | 30 | 0 | 64–92 | 60 | 84 | 1.99: 1, 3.98: 2, 4.975: 4, 7.96: 2, 8.955: 1, 9.95: 3, 12.934: 1, 15.919: 1, 16.914: 2, 17.909: 1, 19.899: 1, 24.874: 5, 28.854: 1, 31.838: 2, 33.828: 3 |
+| rastrigin | 2D | gdarmijo | 30 | 24 | 1111–20000 | 468 | 2568 | 0: 5, 0.995: 2, 1.99: 8, 3.98: 4, 4.975: 4, 7.96: 3, 12.934: 1, 15.919: 1, 19.899: 2 |
+| rastrigin | 2D | ea | 30 | 30 | 20000–20000 | 9524 | 10596 | 0: 28, 0.995: 2 |
+| rastrigin | 2D | pso | 30 | 30 | 20000–20000 | 5092 | 8469 | 0: 30 |
+| rastrigin | 2D | de | 30 | 30 | 20000–20000 | 4047 | 4713 | 0: 30 |
+| rastrigin | 3D | gdfijo | 30 | 0 | 96–138 | 90 | 108 | 4.975: 1, 5.97: 1, 8.955: 1, 13.929: 2, 16.914: 3, 17.909: 2, 19.899: 1, 20.894: 3, 23.879: 1, 24.874: 2, 25.869: 3, 29.849: 1, 32.833: 1, 33.828: 1, 40.793: 3, 42.783: 3, 49.747: 1 |
+| rastrigin | 3D | gdarmijo | 30 | 26 | 1301–30000 | 558 | 2332 | 0.995: 1, 1.99: 3, 3.98: 2, 4.975: 3, 5.97: 2, 7.96: 2, 8.955: 3, 11.939: 1, 12.934: 1, 13.929: 2, 16.914: 1, 17.909: 1, 20.894: 1, 23.879: 1, 24.874: 1, 25.869: 1, 32.833: 2, 37.808: 1, 40.793: 1 |
+| rastrigin | 3D | ea | 30 | 30 | 30000–30000 | 9564 | 29956 | 0: 14, 0.995: 12, 1.99: 4 |
+| rastrigin | 3D | pso | 30 | 30 | 30000–30000 | 6620 | 11781 | 0: 26, 0.995: 4 |
+| rastrigin | 3D | de | 30 | 30 | 30000–30000 | 7646 | 9731 | 0: 28, 0.995: 2 |
+
+== 6b. Por defecto, k = 1 (solo GD): datos por corrida (results/data/part1/k1/runs)
+fin_presupuesto = corridas con eval_equiv > presupuesto − k·1 − 1 (no cabe otro gradiente);
+ult_mejora = eval_equiv del último registro de history (última vez que mejoró f_best)
+| Función | Dim. | Método | corridas | fin_presupuesto | eval_equiv mín–máx | ult_mejora mediana | ult_mejora máx | valores distintos de f_best (3 decimales): conteo |
+|---|---|---|---|---|---|---|---|---|
+| rosenbrock | 2D | gdfijo | 30 | 30 | 20000–20000 | 20000 | 20000 | (no aplica) |
+| rosenbrock | 2D | gdarmijo | 30 | 30 | 20000–20000 | 19996 | 20000 | (no aplica) |
+| rosenbrock | 3D | gdfijo | 30 | 30 | 30000–30000 | 30000 | 30000 | (no aplica) |
+| rosenbrock | 3D | gdarmijo | 30 | 30 | 30000–30000 | 29994 | 30000 | (no aplica) |
+| rastrigin | 2D | gdfijo | 30 | 0 | 16–23 | 15 | 21 | 1.99: 1, 3.98: 2, 4.975: 4, 7.96: 2, 8.955: 1, 9.95: 3, 12.934: 1, 15.919: 1, 16.914: 2, 17.909: 1, 19.899: 1, 24.874: 5, 28.854: 1, 31.838: 2, 33.828: 3 |
+| rastrigin | 2D | gdarmijo | 30 | 24 | 889–20000 | 358 | 1989 | 0: 5, 0.995: 2, 1.99: 8, 3.98: 4, 4.975: 4, 7.96: 3, 12.934: 1, 15.919: 1, 19.899: 2 |
+| rastrigin | 3D | gdfijo | 30 | 0 | 16–23 | 15 | 18 | 4.975: 1, 5.97: 1, 8.955: 1, 13.929: 2, 16.914: 3, 17.909: 2, 19.899: 1, 20.894: 3, 23.879: 1, 24.874: 2, 25.869: 3, 29.849: 1, 32.833: 1, 33.828: 1, 40.793: 3, 42.783: 3, 49.747: 1 |
+| rastrigin | 3D | gdarmijo | 30 | 26 | 901–30000 | 372 | 1542 | 0.995: 1, 1.99: 3, 3.98: 2, 4.975: 3, 5.97: 2, 7.96: 2, 8.955: 3, 11.939: 1, 12.934: 1, 13.929: 2, 16.914: 1, 17.909: 1, 20.894: 1, 23.879: 1, 24.874: 1, 25.869: 1, 32.833: 2, 37.808: 1, 40.793: 1 |
+
+== 6c. Afinado, k = 2n: datos por corrida (results/data/part1_tuned/runs)
+fin_presupuesto = corridas con eval_equiv > presupuesto − k·1 − 1 (no cabe otro gradiente);
+ult_mejora = eval_equiv del último registro de history (última vez que mejoró f_best)
+| Función | Dim. | Método | corridas | fin_presupuesto | eval_equiv mín–máx | ult_mejora mediana | ult_mejora máx | valores distintos de f_best (3 decimales): conteo |
+|---|---|---|---|---|---|---|---|---|
+| rosenbrock | 2D | gdfijo | 30 | 30 | 20000–20000 | 20000 | 20000 | (no aplica) |
+| rosenbrock | 2D | gdarmijo | 30 | 30 | 19997–20000 | 19997 | 20000 | (no aplica) |
+| rosenbrock | 2D | ea | 30 | 30 | 20000–20000 | 19622 | 19975 | (no aplica) |
+| rosenbrock | 2D | pso | 30 | 30 | 20000–20000 | 19802 | 19991 | (no aplica) |
+| rosenbrock | 2D | de | 30 | 30 | 20000–20000 | 5926 | 6477 | (no aplica) |
+| rosenbrock | 3D | gdfijo | 30 | 30 | 30000–30000 | 24351 | 30000 | (no aplica) |
+| rosenbrock | 3D | gdarmijo | 30 | 30 | 29995–30000 | 29992 | 30000 | (no aplica) |
+| rosenbrock | 3D | ea | 30 | 30 | 30000–30000 | 29924 | 29997 | (no aplica) |
+| rosenbrock | 3D | pso | 30 | 30 | 30000–30000 | 29976 | 30000 | (no aplica) |
+| rosenbrock | 3D | de | 30 | 30 | 30000–30000 | 10732 | 11970 | (no aplica) |
+| rastrigin | 2D | gdfijo | 30 | 0 | 64–92 | 60 | 84 | 1.99: 1, 3.98: 2, 4.975: 4, 7.96: 2, 8.955: 1, 9.95: 3, 12.934: 1, 15.919: 1, 16.914: 2, 17.909: 1, 19.899: 1, 24.874: 5, 28.854: 1, 31.838: 2, 33.828: 3 |
+| rastrigin | 2D | gdarmijo | 30 | 30 | 19997–20000 | 450 | 641 | 0: 2, 0.995: 2, 1.982: 1, 1.99: 4, 3.98: 5, 4.975: 2, 7.96: 1, 8.955: 3, 9.95: 1, 12.934: 1, 15.919: 1, 16.914: 1, 19.899: 2, 24.874: 3, 33.828: 1 |
+| rastrigin | 2D | ea | 30 | 30 | 20000–20000 | 19264 | 19917 | 0: 30 |
+| rastrigin | 2D | pso | 30 | 30 | 20000–20000 | 5092 | 8469 | 0: 30 |
+| rastrigin | 2D | de | 30 | 30 | 20000–20000 | 4047 | 4713 | 0: 30 |
+| rastrigin | 3D | gdfijo | 30 | 0 | 96–138 | 90 | 108 | 4.975: 1, 5.97: 1, 8.955: 1, 13.929: 2, 16.914: 3, 17.909: 2, 19.899: 1, 20.894: 3, 23.879: 1, 24.874: 2, 25.869: 3, 29.849: 1, 32.833: 1, 33.828: 1, 40.793: 3, 42.783: 3, 49.747: 1 |
+| rastrigin | 3D | gdarmijo | 30 | 30 | 29995–30000 | 576 | 1240 | 0.995: 1, 2.985: 1, 4.975: 4, 5.97: 2, 8.955: 3, 9.95: 2, 13.929: 1, 16.914: 1, 17.909: 1, 18.904: 1, 19.899: 1, 20.894: 1, 23.879: 2, 24.874: 1, 25.869: 1, 28.854: 3, 32.833: 1, 33.828: 1, 40.793: 2 |
+| rastrigin | 3D | ea | 30 | 30 | 30000–30000 | 25056 | 28652 | 0: 29, 0.995: 1 |
+| rastrigin | 3D | pso | 30 | 30 | 30000–30000 | 6620 | 11781 | 0: 26, 0.995: 4 |
+| rastrigin | 3D | de | 30 | 30 | 30000–30000 | 7646 | 9731 | 0: 28, 0.995: 2 |
+
+== 7. Sensibilidad eta = 1/L (results/data/part1_eta_1l/summary.json, gdfijo en Rosenbrock)
+| Dim. | Media | Desv. | Mediana | Mejor | Peor | Éxito 1e-2 | Éxito 1e-4 | n_grad medio |
+|---|---|---|---|---|---|---|---|---|
+| rosenbrock 2D gdfijo | 3.581e-01 | 7.318e-01 | 1.471e-01 | 2.690e-03 | 2.939e+00 | 6.7 % | 0.0 % | 5000.0 |
+| rosenbrock 3D gdfijo | 3.910e-01 | 5.157e-01 | 2.189e-01 | 4.603e-03 | 2.130e+00 | 6.7 % | 0.0 % | 5000.0 |
+
+== 8. HPO (results/data/part1_hpo/seleccion.json)
+meta: {'ensayos': 30, 'semillas': 5, 'semillas_de_ajuste': [1000, 1001, 1002, 1003, 1004], 'presupuesto_por_dim': 10000, 'semilla_busqueda': 1, 'corridas_de_ajuste_total': 3000}
+- gdfijo_rosenbrock: ganador = ensayo 26; puntaje (rango medio) defecto 3.0 → ganador 2.0; corridas de ajuste 300
+    defecto: {'gd.eta.{func}': 0.001}
+    elegido: {'gd.eta.{func}': 0.0014940661361120264}
+    rangos por celda, defecto: {'rosenbrock_2d': 4.0, 'rosenbrock_3d': 2.0}
+    rangos por celda, ganador: {'rosenbrock_2d': 3.0, 'rosenbrock_3d': 1.0}
+    mediana recortada, defecto: {'rosenbrock_2d': 0.001937, 'rosenbrock_3d': 0.001275}
+    mediana recortada, ganador: {'rosenbrock_2d': 0.0002235, 'rosenbrock_3d': 0.0004819}
+- gdfijo_rastrigin: ganador = ensayo 0; puntaje (rango medio) defecto 10.0 → ganador 10.0; corridas de ajuste 300
+    defecto: {'gd.eta.{func}': 0.002}
+    elegido: {'gd.eta.{func}': 0.002}
+    rangos por celda, defecto: {'rastrigin_2d': 10.0, 'rastrigin_3d': 10.0}
+    rangos por celda, ganador: {'rastrigin_2d': 10.0, 'rastrigin_3d': 10.0}
+    mediana recortada, defecto: {'rastrigin_2d': 12.93, 'rastrigin_3d': 12.93}
+    mediana recortada, ganador: {'rastrigin_2d': 12.93, 'rastrigin_3d': 12.93}
+- gdarmijo: ganador = ensayo 10; puntaje (rango medio) defecto 15.375 → ganador 6.875; corridas de ajuste 600
+    defecto: {'gd.armijo.eta0': 1.0, 'gd.armijo.beta': 0.5, 'gd.armijo.c': 0.0001}
+    elegido: {'gd.armijo.eta0': 3.520092041250609, 'gd.armijo.beta': 0.12427680612997696, 'gd.armijo.c': 0.006727603419207777}
+    rangos por celda, defecto: {'rosenbrock_2d': 22.0, 'rosenbrock_3d': 15.0, 'rastrigin_2d': 18.0, 'rastrigin_3d': 6.5}
+    rangos por celda, ganador: {'rosenbrock_2d': 4.0, 'rosenbrock_3d': 5.0, 'rastrigin_2d': 9.0, 'rastrigin_3d': 9.5}
+    mediana recortada, defecto: {'rosenbrock_2d': 0.07662, 'rosenbrock_3d': 0.002476, 'rastrigin_2d': 4.975, 'rastrigin_3d': 5.97}
+    mediana recortada, ganador: {'rosenbrock_2d': 4.093e-06, 'rosenbrock_3d': 5.883e-05, 'rastrigin_2d': 1.99, 'rastrigin_3d': 7.96}
+- ea: ganador = ensayo 13; puntaje (rango medio) defecto 18.0 → ganador 8.875; corridas de ajuste 600
+    defecto: {'ea.N': 50, 'ea.frac_e': 0.15, 'ea.frac_m': 0.1, 'ea.frac_c': 0.75}
+    elegido: {'ea.N': 117, 'ea.frac_e': 0.1649790031871204, 'ea.frac_m': 0.17663527096566822, 'ea.frac_c': 0.48536490972313745}
+    rangos por celda, defecto: {'rosenbrock_2d': 26.0, 'rosenbrock_3d': 28.0, 'rastrigin_2d': 7.0, 'rastrigin_3d': 11.0}
+    rangos por celda, ganador: {'rosenbrock_2d': 2.5, 'rosenbrock_3d': 15.0, 'rastrigin_2d': 7.0, 'rastrigin_3d': 11.0}
+    mediana recortada, defecto: {'rosenbrock_2d': 0.001255, 'rosenbrock_3d': 0.423, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06}
+    mediana recortada, ganador: {'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 0.09873, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06}
+- pso: ganador = ensayo 0; puntaje (rango medio) defecto 10.5 → ganador 10.5; corridas de ajuste 600
+    defecto: {'pso.N': 30, 'pso.w': 0.7298, 'pso.c1': 1.49618, 'pso.c2': 1.49618, 'pso.vmax_frac': 0.2}
+    elegido: {'pso.N': 30, 'pso.w': 0.7298, 'pso.c1': 1.49618, 'pso.c2': 1.49618, 'pso.vmax_frac': 0.2}
+    rangos por celda, defecto: {'rosenbrock_2d': 14.0, 'rosenbrock_3d': 2.0, 'rastrigin_2d': 14.0, 'rastrigin_3d': 12.0}
+    rangos por celda, ganador: {'rosenbrock_2d': 14.0, 'rosenbrock_3d': 2.0, 'rastrigin_2d': 14.0, 'rastrigin_3d': 12.0}
+    mediana recortada, defecto: {'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06}
+    mediana recortada, ganador: {'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06}
+- de: ganador = ensayo 0; puntaje (rango medio) defecto 14.625 → ganador 14.625; corridas de ajuste 600
+    defecto: {'de.NP': 30, 'de.F': 0.7, 'de.CR': 0.9}
+    elegido: {'de.NP': 30, 'de.F': 0.7, 'de.CR': 0.9}
+    rangos por celda, defecto: {'rosenbrock_2d': 15.0, 'rosenbrock_3d': 12.5, 'rastrigin_2d': 15.5, 'rastrigin_3d': 15.5}
+    rangos por celda, ganador: {'rosenbrock_2d': 15.0, 'rosenbrock_3d': 12.5, 'rastrigin_2d': 15.5, 'rastrigin_3d': 15.5}
+    mediana recortada, defecto: {'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06}
+    mediana recortada, ganador: {'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06}
+
+configs/part1/tuned.yaml (literal):
+# Config afinada de la Parte 1 (T1.10), generada por:
+#   python run.py hpo --config configs/part1/base.yaml
+# No se edita a mano: se regenera con ese mismo comando (omite los --set de workers y
+# hpo.reanudar, que no cambian el resultado).
+# Solo trae lo que cambió respecto a la config de la que hereda, más salida y tablas.
+# El detalle de la selección está en results/data/part1_hpo/seleccion.json.
+hereda: base.yaml
+salida: results/data/part1_tuned
+tablas: results/tables/part1_tuned
+gd:
+  eta:
+    rosenbrock: 0.0014940661361120264
+  armijo:
+    eta0: 3.520092041250609
+    beta: 0.12427680612997696
+    c: 0.006727603419207777
+ea:
+  N: 117
+  frac_e: 0.1649790031871204
+  frac_m: 0.17663527096566822
+  frac_c: 0.48536490972313745
+
+== 9. GIF (results/data/part1/gif_trayectorias.json)
+meta: {'config': 'configs/part1/base.yaml', 'base_seed': 0, 'run_id': 0, 'dim': 2, 'k': 4.0, 'budget': 20000.0, 'marcas_max': 45}
+- GD rosenbrock: 41 fotogramas; iteraciones marcadas 0..5000
+    gdfijo: n_iter=5000 n_f=0 n_grad=5000 f_best=1.8811e-03 x0=(0.5610, -0.9430) x_final=(0.9567, 0.9150) f inicial=158.3659 f del último fotograma=1.8811e-03
+    gdarmijo: n_iter=1416 n_f=14332 n_grad=1417 f_best=9.7153e-03 x0=(0.5610, -0.9430) x_final=(1.0982, 1.2069) f inicial=158.3659 f del último fotograma=9.7153e-03
+- GD rastrigin: 32 fotogramas; iteraciones marcadas 0..89
+    gdfijo: n_iter=18 n_f=0 n_grad=19 f_best=4.9748e+00 x0=(1.4025, -2.3574) x_final=(0.9950, -1.9899) f inicial=41.9520 f del último fotograma=4.9748e+00
+    gdarmijo: n_iter=89 n_f=982 n_grad=90 f_best=1.9899e+00 x0=(1.4025, -2.3574) x_final=(-0.9950, 0.9950) f inicial=41.9520 f del último fotograma=1.9899e+00
+- PSO rastrigin: 38 fotogramas; iteraciones 0..665; n_iter=665 n_f=20000 f_best=0.0; partículas=30; f del mejor por fotograma (primeros 6): [9.48, 1.026, 1.026, 1.026, 1.026, 1.026]; primer fotograma con f_mejor <= 1e-4: iteración 59
+
+== 10. Deslizador de eta (results/data/part1/eta_deslizador.json; f_best = mejor punto visto)
+meta: {'func': 'rosenbrock', 'dim': 2, 'method': 'gdfijo', 'seed': 0, 'k': 4.0, 'budget': 20000.0, 'x0': [0.5609950712686769, -0.9429536204231872], 'puntos_max': 150}
+| eta | marca | f_best | n_grad |
+|---|---|---|---|
+| 1e-05 |  | 7.119e-01 | 5000 |
+| 1.778e-05 |  | 6.211e-01 | 5000 |
+| 3.162e-05 |  | 4.990e-01 | 5000 |
+| 5.623e-05 |  | 3.592e-01 | 5000 |
+| 0.0001 |  | 2.256e-01 | 5000 |
+| 0.0001778 |  | 1.188e-01 | 5000 |
+| 0.0003162 |  | 4.870e-02 | 5000 |
+| 0.0005623 |  | 1.344e-02 | 5000 |
+| 0.001 | defecto | 1.881e-03 | 5000 |
+| 0.001494 | afinado | 2.414e-04 | 5000 |
+| 0.001778 |  | 7.644e-05 | 5000 |
+| 0.003162 |  | 3.448e-02 | 5000 |
+| 0.005623 |  | 3.670e+01 | 5000 |
+| 0.01 |  | 1.584e+02 | 5000 |
+
+== 11. Registro de la cacería (alucinaciones/registro.md)
+encabezados '### H-NN': 48 (de H-01 a H-48); faltantes: []
+**Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
+**Total registrados: 48** (H-01–H-48; H-47 (pruebas de los GIF que no podían fallar) y H-48 (paleta por fotograma en los GIF) son de T4.3; H-45 (figura del deslizador de η: rótulo "f final" sobre el mejor valor visto) y H-46 (pruebas de las figuras que no podían fallar) son de T4.2: en su commit eran H-42 y H-43 y se renumeraron al integrar T1.11 el 13-oct-2026 porque H-42–H-44 ya estaban en uso; 
