@@ -76,7 +76,7 @@
 | T3.4 | `ga.py`: OX + inversión + intercambio + torneo + elitismo | T3.1 | `solve()` | `test_tsp_operators.py` (10 000 operaciones válidas) | revisor-spec | ✅ |
 | T3.5 | `local_search.py`: 2-opt (opcional) | T3.1 | Función | Nunca empeora el recorrido; recorrido válido | — | ⬜ **opcional** (no está en el enunciado; solo si sobra tiempo) |
 | T3.6 | `experiment.py`: barrido de w + umbral por envolvente de candidatos (Spec v1.16) + gaps + sensibilidad de consumo con MMAS; claves `consumo_l100`/`precio_l` en `configs/part2/base.yaml` | T3.3–T3.4, T2.8 | `sweep_w.json`, historiales | Spec §7.5 | **analista-experimentos** | ✅ |
-| T3.7 | `configs/part2/demo.yaml` (Spec v1.17: MMAS, 10 corridas, gap frente al mejor conocido, figura del recorrido) | T3.6 | Demo | < 2 min medido (~2,6 s; falta medir en otra máquina, §9) | auditor-reproducibilidad | ✅ |
+| T3.7 | `configs/part2/demo.yaml` (Spec v1.17: MMAS, 10 corridas; v1.19: 1 000 iteraciones, gap frente al mejor conocido, figura del recorrido) | T3.6 | Demo | < 2 min medido (~18 s con 1 000 iteraciones; falta medir en otra máquina, §9) | auditor-reproducibilidad | ✅ |
 
 ---
 

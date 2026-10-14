@@ -74,5 +74,5 @@ sin editar código (`configs/part2/sensibilidad_consumo.yaml`, y `--set costo.co
 los nuevos, todos evaluados con el consumo nuevo, para que la diferencia venga del consumo y no del azar.
 
 **Reproducción.** `python run.py part2 --config configs/part2/sweep_w.yaml` regenera el barrido (unos 18 minutos);
-`python run.py part2 --config configs/part2/demo.yaml` corre la demo (MMAS, $w = 25$, 100 iteraciones, 10 corridas)
-en pocos segundos.
+`python run.py part2 --config configs/part2/demo.yaml` corre la demo (MMAS, $w = 25$, 1 000 iteraciones, 10 corridas)
+en unos 18 segundos.
