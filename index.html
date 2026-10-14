@@ -757,6 +757,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#parte-2-que-aporto-cada-heuristica-y-que-dice-el-valor-de-la-hora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2: qué aportó cada heurística y qué dice el valor de la hora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusiones
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -945,6 +967,28 @@
     <span class="md-ellipsis">
       
         Experimento completo y figuras de la Parte 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-y-diferencias-entre-equipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pruebas y diferencias entre equipos
       
     </span>
   </a>
@@ -1445,6 +1489,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#parte-2-que-aporto-cada-heuristica-y-que-dice-el-valor-de-la-hora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2: qué aportó cada heurística y qué dice el valor de la hora
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusiones
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1633,6 +1699,28 @@
     <span class="md-ellipsis">
       
         Experimento completo y figuras de la Parte 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parte-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parte 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pruebas-y-diferencias-entre-equipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pruebas y diferencias entre equipos
       
     </span>
   </a>
@@ -4147,7 +4235,7 @@ había encontrado en otros valores de <span class="arithmatex">\(w\)</span>.</p>
 </tr>
 </tbody>
 </table>
-<p class="apa-nota"><em>Nota.</em> Elaboración propia a partir de results/data/part2/sweep_w.json. Gap = 100 · (media − mejor conocido) / mejor conocido; el mejor conocido no es un óptimo probado.</p>
+<p class="apa-nota"><em>Nota.</em> Elaboración propia a partir de results/data/part2/sweep_w.json. Gap = 100 · (media − mejor conocido) / mejor conocido; el mejor conocido es el óptimo en los 11 valores de <span class="arithmatex">\(w\)</span> (verificado con PuLP + HiGHS).</p>
 </div>
 <p>La <a href="#fig-convergencia-part2">Figura 15</a> muestra por qué. El GA mejora rápido al principio y se estanca: su población colapsa a unas
 pocas decenas de recorridos distintos y el cruce deja de producir novedades. MMAS, con una evaporación lenta
@@ -4232,8 +4320,7 @@ queda un 0,36 % por encima. Con 100 iteraciones, la versión previa de la demo q
 (media) por encima, porque con <span class="arithmatex">\(\rho = 0{,}02\)</span> la feromona apenas empieza a concentrarse. Con 1 000 iteraciones evalúa
 47 001 recorridos por corrida, el 91 % de los 51 654 del barrido.</p>
 <h2 id="discusion-y-conclusiones">Discusión y conclusiones<a class="headerlink" href="#discusion-y-conclusiones" title="Permanent link">&para;</a></h2>
-<p>Esta sección discute la Parte 1. La discusión del problema del viajero está en la sección de resultados de la
-Parte 2.</p>
+<p>Esta sección discute las dos partes y cierra con las conclusiones del trabajo.</p>
 <h3 id="parte-1-que-aporto-el-descenso-por-gradiente-y-que-aportaron-los-heuristicos">Parte 1: qué aportó el descenso por gradiente y qué aportaron los heurísticos<a class="headerlink" href="#parte-1-que-aporto-el-descenso-por-gradiente-y-que-aportaron-los-heuristicos" title="Permanent link">&para;</a></h3>
 <p>Las cifras de este apartado son las de la configuración por defecto, con 30 corridas por configuración y la regla
 <span class="arithmatex">\(k = 2n\)</span>, salvo donde se dice otra cosa. El éxito es <span class="arithmatex">\(f - f^* \le 10^{-4}\)</span>, con <span class="arithmatex">\(f^*\)</span> el valor mínimo de la función.</p>
@@ -4341,6 +4428,51 @@ menor; la explicación esperada, por el mal condicionamiento del valle, es que u
 resulta demasiado corto allí. El experimento solo muestra que con 5 000 gradientes ese paso no llega. La HPO apunta en
 la misma dirección: para el paso fijo en Rosenbrock eligió <span class="arithmatex">\(\eta \approx 1.494\times10^{-3}\)</span>, todavía mayor que
 <span class="arithmatex">\(10^{-3}\)</span> y sin garantía global.</p>
+<h3 id="parte-2-que-aporto-cada-heuristica-y-que-dice-el-valor-de-la-hora">Parte 2: qué aportó cada heurística y qué dice el valor de la hora<a class="headerlink" href="#parte-2-que-aporto-cada-heuristica-y-que-dice-el-valor-de-la-hora" title="Permanent link">&para;</a></h3>
+<p><strong>MMAS frente al GA y a Ant System.</strong> Con el mismo presupuesto de 51 654 recorridos evaluados por corrida, MAX–MIN Ant
+System (MMAS) encontró el recorrido óptimo en 10 de los 11 valores de <span class="arithmatex">\(w\)</span>, y su media quedó entre 0,24 % y 0,75 % por
+encima (<a href="#tab-metodos-part2">Tabla 19</a>). Ni el algoritmo genético (GA) ni Ant System (AS) lo encontraron en ninguna corrida: sus
+mejores corridas quedaron entre 0,50 % y 1,92 % y entre 2,40 % y 4,74 % por encima, respectivamente. La diferencia
+viene de cómo usa cada método la estructura del problema. Las hormigas construyen cada recorrido arco por arco con el
+costo de cada tramo (<span class="arithmatex">\(\eta_{ij} = 1/c_{ij}\)</span>), así que rara vez proponen saltos caros; MMAS además acota la feromona y
+la evapora despacio (<span class="arithmatex">\(\rho = 0{,}02\)</span>), lo que mantiene la exploración durante todo el presupuesto (Stützle &amp; Hoos, 2000). Ant
+System, con <span class="arithmatex">\(\rho = 0{,}5\)</span> y depósito de todas las hormigas, concentra la feromona pronto y se estanca (Dorigo et al., 1996).
+El GA parte de recorridos razonables, pero sus operadores (cruce OX y mutaciones) no usan el costo de los tramos y su
+población pierde diversidad, como muestra la <a href="#fig-convergencia-part2">Figura 15</a>; por eso varía más entre corridas: su
+coeficiente de variación va de 1,2 % a 2,2 %, frente a 0,3 %–0,8 % en MMAS.</p>
+<p><strong>El valor de la hora.</strong> El tiempo domina el costo en cuanto <span class="arithmatex">\(w &gt; 0\)</span>: es el 78 % del total en <span class="arithmatex">\(w = 25\)</span> €/h y el 93 %
+en <span class="arithmatex">\(w = 100\)</span> €/h, mientras que los peajes no pasan del 1,02 % (en <span class="arithmatex">\(w = 40\)</span>). Por eso la ruta óptima cambia poco: tres
+veces entre 0 y 100 €/h (en 10,02, 14,53 y 42,19 €/h), y hasta 50 €/h le gana a la segunda mejor conocida por menos de
+1,50 €. Para un viajero, el orden de visita apenas depende del valor de su tiempo; lo que cambia con <span class="arithmatex">\(w\)</span> es qué tramos
+se hacen por autopista de pago.</p>
+<p><strong>Muestrear <span class="arithmatex">\(w\)</span> no basta.</strong> Las heurísticas hallaron el óptimo en los 11 valores del barrido, pero no la ruta óptima
+entre 10,02 y 14,53 €/h, porque ningún valor del barrido cae en ese tramo. La envolvente de los candidatos ubica bien
+los cambios entre las rutas encontradas, pero no puede producir una ruta que ninguna corrida buscó: ese hueco lo cerró
+el solver exacto con la formulación de Dantzig et al. (1954).</p>
+<p><strong>Amenazas a la validez.</strong>
+- Los peajes se aproximan por la suma de los tramos de autopista, con las tarifas de una sola fecha.
+- Los tiempos son los de OSRM sin tráfico; en hora punta serían otros.
+- El precio del combustible es una media peninsular de una fecha y el consumo es el homologado (WLTP). Con 5,6 o
+  6,2 l/100 km los umbrales suben (el primero pasa a 12,20 o 13,51 €/h), aunque las cuatro rutas óptimas son las mismas.
+- Se hicieron 10 corridas por método y valor de <span class="arithmatex">\(w\)</span>.</p>
+<h3 id="conclusiones">Conclusiones<a class="headerlink" href="#conclusiones" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Ningún método gana en todo.</strong> El descenso por gradiente baja muy rápido dentro de una cuenca, pero se detiene en
+   el mínimo local que le toca en Rastrigin y, en el valle mal condicionado de Rosenbrock, se queda sin presupuesto. DE
+   y PSO, que no usan el gradiente, llegaron a menos de <span class="arithmatex">\(10^{-4}\)</span> del mínimo en 118 y 116 de sus 120 corridas con el
+   mismo presupuesto.</li>
+<li><strong>La regla de conteo es parte del resultado.</strong> Con <span class="arithmatex">\(k = 2n\)</span> el paso fijo resolvió Rosenbrock en 1 de 30 corridas y
+   con <span class="arithmatex">\(k = 1\)</span> en 30 de 30. Una comparación justa exige decir cuánto se cobra por un gradiente y mostrar qué pasa si
+   cambia.</li>
+<li><strong>Afinar ayuda, pero no reordena.</strong> La afinación de hiperparámetros, con semillas aparte, llevó al algoritmo
+   evolutivo de 45 a 87 éxitos y al GD con Armijo de 10 a 51, sin cambiar el orden entre los métodos.</li>
+<li><strong>En el problema del viajero, MMAS fue el mejor</strong> con el mismo número de recorridos evaluados, a menos de 1 % del
+   óptimo en media. La ruta óptima cambia con el valor de la hora, pero las rutas que compiten difieren en pocos euros:
+   el tiempo, no los peajes, decide.</li>
+<li><strong>Verificar de forma independiente encontró lo que nadie señalaba.</strong> El óptimo exacto corrigió dos de los tres
+   umbrales, las reimplementaciones y las pruebas de mutación detectaron errores en el código, y la cacería confirmó 9
+   errores de la inteligencia artificial en 4 categorías.</li>
+</ol>
 <h2 id="uso-de-inteligencia-artificial">Uso de inteligencia artificial<a class="headerlink" href="#uso-de-inteligencia-artificial" title="Permanent link">&para;</a></h2>
 <h3 id="herramientas-y-metodologia">Herramientas y metodología<a class="headerlink" href="#herramientas-y-metodologia" title="Permanent link">&para;</a></h3>
 <p>Todo el trabajo se desarrolló con Claude Code (modelos Claude Opus 5.5 y Claude Sonnet 5.5) siguiendo una metodología de <em>Subagent Driven
@@ -4703,10 +4835,16 @@ cazador de alucinaciones), como se describe en la sección <em>Uso de inteligenc
 <p>Todo el código, los datos del problema del viajero y los registros de este trabajo están en el
 <a href="https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales">repositorio del proyecto</a>. Para reproducir los
 resultados con Python 3.12:</p>
-<div class="highlight"><pre><span></span><code>py<span class="w"> </span>-3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<div class="highlight"><pre><span></span><code><span class="c1"># Windows</span>
+py<span class="w"> </span>-3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 .venv<span class="se">\S</span>cripts<span class="se">\p</span>ython<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="c1"># macOS o Linux</span>
+python3.12<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+.venv/bin/python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># Demos y blog (python y mkdocs son los del entorno .venv)</span>
 python<span class="w"> </span>run.py<span class="w"> </span>part1<span class="w"> </span>--config<span class="w"> </span>configs/part1/demo.yaml
-python<span class="w"> </span>run.py<span class="w"> </span>part2<span class="w"> </span>--config<span class="w"> </span>configs/part2/demo.yaml<span class="w"> </span>--set<span class="w"> </span>costo.valor_hora<span class="o">=</span><span class="m">25</span>
+python<span class="w"> </span>run.py<span class="w"> </span>part2<span class="w"> </span>--config<span class="w"> </span>configs/part2/demo.yaml
 mkdocs<span class="w"> </span>build<span class="w"> </span>--strict<span class="w"> </span>-f<span class="w"> </span>blog/mkdocs.yml
 </code></pre></div>
 <p>Las semillas son fijas (<code>base_seed + run_id</code>), los parámetros se cambian con <code>--set clave=valor</code> sin editar el código, y
@@ -4769,6 +4907,30 @@ y <code>gif_trayectorias.json</code>. Como los JSON por corrida no se versionan,
 regenera las curvas de nivel, el deslizador de <span class="arithmatex">\(\eta\)</span> y los GIF; para las figuras de convergencia, de cajas y del
 enjambre avisa del comando que falta, y se regeneran después de ejecutar el experimento por defecto y el afinado
 (<code>python run.py part1 --config configs/part1/tuned.yaml</code>).</p>
+<h3 id="parte-2">Parte 2<a class="headerlink" href="#parte-2" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Barrido del valor de la hora: 11 valores de w, MMAS, AS y GA, 10 corridas cada uno (unos 18 minutos)</span>
+python<span class="w"> </span>run.py<span class="w"> </span>part2<span class="w"> </span>--config<span class="w"> </span>configs/part2/sweep_w.yaml
+
+<span class="c1"># Sensibilidad al consumo (5,6 l/100 km; el segundo valor con --set)</span>
+python<span class="w"> </span>run.py<span class="w"> </span>part2<span class="w"> </span>--config<span class="w"> </span>configs/part2/sensibilidad_consumo.yaml
+python<span class="w"> </span>run.py<span class="w"> </span>part2<span class="w"> </span>--config<span class="w"> </span>configs/part2/sensibilidad_consumo.yaml<span class="w"> </span>--set<span class="w"> </span>costo.consumo_l100<span class="o">=</span><span class="m">6</span>.2
+
+<span class="c1"># Óptimo exacto y umbrales exactos del valor de la hora para los tres consumos (unos 13 minutos)</span>
+python<span class="w"> </span>scripts/umbrales_exactos.py
+</code></pre></div>
+<p>El barrido escribe <code>results/data/part2/sweep_w.json</code>, <code>umbrales_w.json</code> y los historiales de convergencia; el script
+exacto, <code>results/data/part2/umbrales_exactos.json</code>, que usan el mapa y la sección de resultados. La demo escribe en
+<code>results/data/part2/demo/</code>, que no se versiona.</p>
+<h3 id="pruebas-y-diferencias-entre-equipos">Pruebas y diferencias entre equipos<a class="headerlink" href="#pruebas-y-diferencias-entre-equipos" title="Permanent link">&para;</a></h3>
+<p><code>python -m pytest -q</code> corre las pruebas del proyecto (unas 2 700). Una sola necesita internet, porque consulta el
+certificado del sitio del Ministerio del que sale el precio del combustible.</p>
+<p>Con las mismas semillas, los resultados son idénticos en el mismo equipo. Entre sistemas operativos hay una diferencia
+conocida: en Rastrigin, el descenso con búsqueda de Armijo cuenta un número algo distinto de evaluaciones, porque la
+función coseno de cada plataforma puede diferir en el último bit y eso cambia cuántos retrocesos hace la búsqueda. En
+2D la diferencia es menor de 0,02 % y en 3D de unos 5 % (19 882 frente a 20 796 evaluaciones medias de la función);
+los valores finales y las tasas de éxito no cambian.</p>
+<p>El reporte se publica en <a href="https://danielgonzalez2709.github.io/Trabajo1_Redes_Neuronales/">https://danielgonzalez2709.github.io/Trabajo1_Redes_Neuronales/</a> con
+<code>mkdocs gh-deploy -f blog/mkdocs.yml</code> desde <code>main</code>.</p>
 <h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
 <div class="apa-referencias">
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
