@@ -1,0 +1,132 @@
+== 1. Cota L de Rosenbrock en [-2.048, 2.048]^n (máximo valor propio de la Hessiana, búsqueda numérica)
+n=2: L (malla) = 5970.7; 1/L = 1.6749e-04; 1.5e-4/(1/L) = 0.8956
+n=3: L (malla) = 6837.8; 1/L = 1.4625e-04; 1.5e-4/(1/L) = 1.0257
+n=2: con el L de la Spec (5971): 1/L = 1.6748e-04; 1.5e-4 / (1/L) = 0.8956 -> cumple
+n=3: con el L de la Spec (6838): 1/L = 1.4624e-04; 1.5e-4 / (1/L) = 1.0257 -> supera en 2.6 %
+
+== 2. Tabla sensibilidad-eta (gdfijo, Rosenbrock, k = 2n, 30 semillas; configuraciones de summary.json)
+meta eta_1l: runs=30 semillas=0..29 presupuesto_por_dim=10000
+| Dimensión | $\eta$ | Media de $f_{\text{final}}$ | Mediana | Éxito a $10^{-2}$ | Éxito a $10^{-4}$ |
+|---|---|---|---|---|---|
+| 2D | `1e-3` | 1.962e-03 | 1.905e-03 | 100.0 % | 3.3 % |
+| 2D | `1.5e-4` | 3.581e-01 | 1.471e-01 | 6.7 % | 0.0 % |
+| 3D | `1e-3` | 1.663e-03 | 1.285e-03 | 96.7 % | 3.3 % |
+| 3D | `1.5e-4` | 3.910e-01 | 2.189e-01 | 6.7 % | 0.0 % |
+n_grad_medio eta=1.5e-4 2D: 5000.0
+n_grad_medio eta=1.5e-4 3D: 5000.0
+
+== 3. Config hpo (base.yaml)
+ensayos=30 semillas=5 base_seed=1000 semilla_busqueda=1; reporte: runs=30 base_seed=0; presupuesto_por_dim=10000
+
+== 4. Tabla espacios-hpo (método | nombre | ruta | tipo | [min, max] | defecto)
+| gdfijo | eta | `gd.eta.{func}` | log | [1e-05, 0.01] | rosenbrock: 0.001, rastrigin: 0.002 |
+| gdarmijo | eta0 | `gd.armijo.eta0` | log | [0.1, 10.0] | 1.0 |
+| gdarmijo | beta | `gd.armijo.beta` | uniforme | [0.1, 0.9] | 0.5 |
+| gdarmijo | c | `gd.armijo.c` | log | [1e-05, 0.1] | 0.0001 |
+| ea | N | `ea.N` | entero | [20, 200] | 50 |
+| ea | frac_e | `ea.frac_e` | uniforme | [0.05, 0.3] | 0.15 |
+| ea | frac_m | `ea.frac_m` | uniforme | [0.05, 0.4] | 0.1 |
+| ea | frac_c | `ea.frac_c` | uniforme | [0.4, 0.9] | 0.75 |
+| pso | N | `pso.N` | entero | [10, 100] | 30 |
+| pso | w | `pso.w` | uniforme | [0.3, 0.95] | 0.7298 |
+| pso | c1 | `pso.c1` | uniforme | [0.5, 2.5] | 1.49618 |
+| pso | c2 | `pso.c2` | uniforme | [0.5, 2.5] | 1.49618 |
+| pso | vmax_frac | `pso.vmax_frac` | uniforme | [0.05, 0.5] | 0.2 |
+| de | NP | `de.NP` | entero | [10, 100] | 30 |
+| de | F | `de.F` | uniforme | [0.3, 1.2] | 0.7 |
+| de | CR | `de.CR` | uniforme | [0.1, 1.0] | 0.9 |
+
+== 5. seleccion.json (regla nueva) y regla_v1/seleccion.json
+corridas_de_ajuste_total=3000 semillas_de_ajuste=[1000, 1001, 1002, 1003, 1004]
+gdfijo_rosenbrock: ensayos=30 corridas=300 ganador=26 (regla_v1: 26) rango_medio defecto=3.0 ganador=2.0
+    gd.eta.{func}: defecto 0.001 -> afinado 0.0014940661361120264
+gdfijo_rastrigin: ensayos=30 corridas=300 ganador=0 (regla_v1: 0) rango_medio defecto=10.0 ganador=10.0
+gdarmijo: ensayos=30 corridas=600 ganador=10 (regla_v1: 10) rango_medio defecto=15.375 ganador=6.875
+    gd.armijo.eta0: defecto 1.0 -> afinado 3.520092041250609
+    gd.armijo.beta: defecto 0.5 -> afinado 0.12427680612997696
+    gd.armijo.c: defecto 0.0001 -> afinado 0.006727603419207777
+ea: ensayos=30 corridas=600 ganador=13 (regla_v1: 13) rango_medio defecto=18.0 ganador=8.875
+    ea.N: defecto 50 -> afinado 117
+    ea.frac_e: defecto 0.15 -> afinado 0.1649790031871204
+    ea.frac_m: defecto 0.1 -> afinado 0.17663527096566822
+    ea.frac_c: defecto 0.75 -> afinado 0.48536490972313745
+pso: ensayos=30 corridas=600 ganador=0 (regla_v1: 3) rango_medio defecto=10.5 ganador=10.5
+de: ensayos=30 corridas=600 ganador=0 (regla_v1: 6) rango_medio defecto=14.625 ganador=14.625
+
+== 6. Detalle por celda (ensayos_*.json): rango y mediana recortada, defecto vs ganador
+gdarmijo ensayo 0: rango_medio=15.375 rango={'rosenbrock_2d': 22.0, 'rosenbrock_3d': 15.0, 'rastrigin_2d': 18.0, 'rastrigin_3d': 6.5} mediana_recortada={'rosenbrock_2d': 0.07662, 'rosenbrock_3d': 0.002476, 'rastrigin_2d': 4.975, 'rastrigin_3d': 5.97} exitos_1e-06={'rosenbrock_2d': 0, 'rosenbrock_3d': 0, 'rastrigin_2d': 0, 'rastrigin_3d': 0} (total 0/20) evals_1e-06=None
+gdarmijo ensayo 10: rango_medio=6.875 rango={'rosenbrock_2d': 4.0, 'rosenbrock_3d': 5.0, 'rastrigin_2d': 9.0, 'rastrigin_3d': 9.5} mediana_recortada={'rosenbrock_2d': 4.093e-06, 'rosenbrock_3d': 5.883e-05, 'rastrigin_2d': 1.99, 'rastrigin_3d': 7.96} exitos_1e-06={'rosenbrock_2d': 2, 'rosenbrock_3d': 0, 'rastrigin_2d': 0, 'rastrigin_3d': 0} (total 2/20) evals_1e-06=None
+    ensayos con el mismo rango_medio que el 0: 1
+ea ensayo 0: rango_medio=18.0 rango={'rosenbrock_2d': 26.0, 'rosenbrock_3d': 28.0, 'rastrigin_2d': 7.0, 'rastrigin_3d': 11.0} mediana_recortada={'rosenbrock_2d': 0.001255, 'rosenbrock_3d': 0.423, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06} exitos_1e-06={'rosenbrock_2d': 0, 'rosenbrock_3d': 0, 'rastrigin_2d': 4, 'rastrigin_3d': 4} (total 8/20) evals_1e-06=None
+ea ensayo 13: rango_medio=8.875 rango={'rosenbrock_2d': 2.5, 'rosenbrock_3d': 15.0, 'rastrigin_2d': 7.0, 'rastrigin_3d': 11.0} mediana_recortada={'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 0.09873, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06} exitos_1e-06={'rosenbrock_2d': 4, 'rosenbrock_3d': 0, 'rastrigin_2d': 5, 'rastrigin_3d': 5} (total 14/20) evals_1e-06=None
+    ensayos con el mismo rango_medio que el 0: 1
+gdfijo_rosenbrock ensayo 0: rango_medio=3.0 rango={'rosenbrock_2d': 4.0, 'rosenbrock_3d': 2.0} mediana_recortada={'rosenbrock_2d': 0.001937, 'rosenbrock_3d': 0.001275} exitos_1e-06={'rosenbrock_2d': 0, 'rosenbrock_3d': 0} (total 0/10) evals_1e-06=None
+gdfijo_rosenbrock ensayo 26: rango_medio=2.0 rango={'rosenbrock_2d': 3.0, 'rosenbrock_3d': 1.0} mediana_recortada={'rosenbrock_2d': 0.0002235, 'rosenbrock_3d': 0.0004819} exitos_1e-06={'rosenbrock_2d': 0, 'rosenbrock_3d': 0} (total 0/10) evals_1e-06=None
+    ensayos con el mismo rango_medio que el 0: 1
+pso ensayo 0: rango_medio=10.5 rango={'rosenbrock_2d': 14.0, 'rosenbrock_3d': 2.0, 'rastrigin_2d': 14.0, 'rastrigin_3d': 12.0} mediana_recortada={'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06} exitos_1e-06={'rosenbrock_2d': 5, 'rosenbrock_3d': 3, 'rastrigin_2d': 5, 'rastrigin_3d': 5} (total 18/20) evals_1e-06=8195.116666666667
+pso ensayo 3: rango_medio=10.5 rango={'rosenbrock_2d': 14.0, 'rosenbrock_3d': 2.0, 'rastrigin_2d': 14.0, 'rastrigin_3d': 12.0} mediana_recortada={'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06} exitos_1e-06={'rosenbrock_2d': 5, 'rosenbrock_3d': 5, 'rastrigin_2d': 5, 'rastrigin_3d': 4} (total 19/20) evals_1e-06=5797.6875
+    ensayos con el mismo rango_medio que el 0: 2
+de ensayo 0: rango_medio=14.625 rango={'rosenbrock_2d': 15.0, 'rosenbrock_3d': 12.5, 'rastrigin_2d': 15.5, 'rastrigin_3d': 15.5} mediana_recortada={'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06} exitos_1e-06={'rosenbrock_2d': 5, 'rosenbrock_3d': 5, 'rastrigin_2d': 5, 'rastrigin_3d': 4} (total 19/20) evals_1e-06=2962.0375
+de ensayo 6: rango_medio=14.625 rango={'rosenbrock_2d': 15.0, 'rosenbrock_3d': 12.5, 'rastrigin_2d': 15.5, 'rastrigin_3d': 15.5} mediana_recortada={'rosenbrock_2d': 1e-06, 'rosenbrock_3d': 1e-06, 'rastrigin_2d': 1e-06, 'rastrigin_3d': 1e-06} exitos_1e-06={'rosenbrock_2d': 5, 'rosenbrock_3d': 5, 'rastrigin_2d': 5, 'rastrigin_3d': 5} (total 20/20) evals_1e-06=2247.45
+    ensayos con el mismo rango_medio que el 0: 24
+
+== 7. Tabla hpo-rosenbrock (comparacion.csv nuevo: defecto -> afinado)
+| Dim. | Método | Mediana de $f_{\text{final}}$ | Éxito a $10^{-4}$ | Evaluaciones hasta el éxito |
+|---|---|---|---|---|
+| 2D | gdfijo | 1.905e-03 → 2.402e-04 | 3.3 % → 23.3 % | 19220 → 16759 |
+| 2D | gdarmijo | 2.326e-03 → 1.259e-06 | 16.7 % → 100.0 % | 9976 → 10140 |
+| 2D | ea | 9.329e-03 → 3.182e-07 | 10.0 % → 93.3 % | 2613 → 8703 |
+| 2D | pso | 3.320e-24 → 3.320e-24 | 100.0 % → 100.0 % | 1555 → 1555 |
+| 2D | de | 0.000e+00 → 0.000e+00 | 100.0 % → 100.0 % | 985 → 985 |
+| 3D | gdfijo | 1.285e-03 → 4.777e-04 | 3.3 % → 0.0 % | 25998 → — |
+| 3D | gdarmijo | 1.338e-03 → 2.428e-05 | 0.0 % → 63.3 % | — → 22558 |
+| 3D | ea | 3.269e-01 → 1.100e-01 | 0.0 % → 0.0 % | — → — |
+| 3D | pso | 3.846e-06 → 3.846e-06 | 100.0 % → 100.0 % | 19103 → 19103 |
+| 3D | de | 0.000e+00 → 0.000e+00 | 100.0 % → 100.0 % | 2213 → 2213 |
+
+== 8. Tabla hpo-rastrigin
+| Dim. | Método | Mediana de $f_{\text{final}}$ | Éxito a $10^{-4}$ | Evaluaciones hasta el éxito |
+|---|---|---|---|---|
+| 2D | gdfijo | 1.642e+01 → 1.642e+01 | 0.0 % → 0.0 % | — → — |
+| 2D | gdarmijo | 2.985e+00 → 4.975e+00 | 16.7 % → 6.7 % | 160 → 142 |
+| 2D | ea | 0.000e+00 → 1.089e-10 | 93.3 % → 100.0 % | 3256 → 7915 |
+| 2D | pso | 0.000e+00 → 0.000e+00 | 100.0 % → 100.0 % | 1664 → 1664 |
+| 2D | de | 0.000e+00 → 0.000e+00 | 100.0 % → 100.0 % | 2175 → 2175 |
+| 3D | gdfijo | 2.438e+01 → 2.438e+01 | 0.0 % → 0.0 % | — → — |
+| 3D | gdarmijo | 8.955e+00 → 1.741e+01 | 0.0 % → 0.0 % | — → — |
+| 3D | ea | 9.950e-01 → 0.000e+00 | 46.7 % → 96.7 % | 3677 → 8492 |
+| 3D | pso | 0.000e+00 → 0.000e+00 | 86.7 % → 86.7 % | 3332 → 3332 |
+| 3D | de | 0.000e+00 → 0.000e+00 | 93.3 % → 93.3 % | 4981 → 4981 |
+
+== 9. Regla anterior (regla_v1/comparacion.csv), filas pso y de: tasa 1e-4 y 1e-6 defecto -> afinado v1
+rosenbrock 2D pso: 1e-4 100.0 % -> 100.0 %; 1e-6 100.0 % -> 100.0 %; mediana 3.320e-24 -> 0.000e+00
+rosenbrock 2D de: 1e-4 100.0 % -> 100.0 %; 1e-6 100.0 % -> 100.0 %; mediana 0.000e+00 -> 0.000e+00
+rosenbrock 3D pso: 1e-4 100.0 % -> 100.0 %; 1e-6 40.0 % -> 100.0 %; mediana 3.846e-06 -> 1.100e-10
+rosenbrock 3D de: 1e-4 100.0 % -> 100.0 %; 1e-6 100.0 % -> 100.0 %; mediana 0.000e+00 -> 0.000e+00
+rastrigin 2D pso: 1e-4 100.0 % -> 93.3 %; 1e-6 100.0 % -> 93.3 %; mediana 0.000e+00 -> 0.000e+00
+rastrigin 2D de: 1e-4 100.0 % -> 86.7 %; 1e-6 100.0 % -> 86.7 %; mediana 0.000e+00 -> 0.000e+00
+rastrigin 3D pso: 1e-4 86.7 % -> 50.0 %; 1e-6 86.7 % -> 50.0 %; mediana 0.000e+00 -> 4.975e-01
+rastrigin 3D de: 1e-4 93.3 % -> 80.0 %; 1e-6 93.3 % -> 80.0 %; mediana 0.000e+00 -> 0.000e+00
+
+== 10. Techo por defecto (summary.json, k = 2n): tasa a 1e-4 y 1e-6 de pso y de
+rosenbrock 2D pso: 1e-4 100.0 % 1e-6 100.0 %
+rosenbrock 2D de: 1e-4 100.0 % 1e-6 100.0 %
+rosenbrock 3D pso: 1e-4 100.0 % 1e-6 40.0 %
+rosenbrock 3D de: 1e-4 100.0 % 1e-6 100.0 %
+rastrigin 2D pso: 1e-4 100.0 % 1e-6 100.0 %
+rastrigin 2D de: 1e-4 100.0 % 1e-6 100.0 %
+rastrigin 3D pso: 1e-4 86.7 % 1e-6 86.7 %
+rastrigin 3D de: 1e-4 93.3 % 1e-6 93.3 %
+
+== 11. Medias (comparacion.csv nuevo) para gdarmijo Rastrigin
+2D: media 4.875e+00 -> 9.352e+00
+3D: media 1.373e+01 -> 1.748e+01
+
+== 12. Tiempos registrados (alucinaciones/prompts/T1.10.md y T1.10b.md, sección Resultado)
+alucinaciones/prompts/T1.10.md: - Demo `run.py hpo --config configs/part1/hpo_demo.yaml`: 7 s; no crea `configs/part1/tuned.yaml` ni toca
+alucinaciones/prompts/T1.10.md: - HPO completa `--set workers=6` (8 núcleos): 406 s; 3 000 corridas de ajuste (gdfijo 300 + 300, gdarmijo, ea, pso
+alucinaciones/prompts/T1.10b.md: - Reanudación `run.py hpo --set workers=6 --set hpo.reanudar=true`: 110 s; 3 000 corridas de ajuste; ganadores
+
+== 13. Grupos del EA (ParametrosEA.desde_config de src/part1/ea.py), defecto y afinado
+defecto: N=50 frac_e=0.15 frac_m=0.1 frac_c=0.75 -> n_elite=8 n_mutantes=5 n_cruzantes=38 (int(N*frac_c)=37; fracción efectiva de cruce 0.760)
+afinado: N=117 frac_e=0.1649790031871204 frac_m=0.17663527096566822 frac_c=0.48536490972313745 -> n_elite=19 n_mutantes=20 n_cruzantes=78 (int(N*frac_c)=56; fracción efectiva de cruce 0.667)

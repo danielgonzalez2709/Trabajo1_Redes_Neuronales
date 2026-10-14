@@ -428,6 +428,12 @@ def test_demo_part1_usa_identificadores_de_la_spec():
     assert "hereda" not in demo
 
 
+def test_solo_el_demo_de_la_parte_1_pide_la_figura_de_trayectoria():
+    """§6.8 (T1.8): el demo dibuja la figura de trayectoria; el experimento completo, no."""
+    assert load_config(DEMO_PART1)["figura_trayectoria"] is True
+    assert load_config(BASE_PART1)["figura_trayectoria"] is False
+
+
 def test_demo_part2_hereda_de_la_base():
     demo = load_config(DEMO_PART2)
     assert demo["methods"] == ["aco"]

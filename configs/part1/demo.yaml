@@ -7,3 +7,4 @@ methods: [pso, gdfijo]
 runs: 5
 salida: results/data/part1_demo               # carpeta propia: el demo no escribe en la del experimento completo
 tablas: results/tables/part1_demo             # ídem para los CSV
+figura_trayectoria: true                      # §6.8: results/data/part1_demo/trayectoria_rastrigin_2d.png

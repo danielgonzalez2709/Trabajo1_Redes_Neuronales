@@ -42,6 +42,40 @@ Fuente: Elaboración propia a partir de results/data/part1/summary.json.
 - Para una figura interactiva de Plotly: dentro del bloque, `incluir: figures/<archivo>.html`.
 - El `id` usa minúsculas, números y guiones.
 
+### Figuras de la Parte 1 ya generadas (T4.2)
+Están en `docs/figures/`; ya están pegadas y citadas en las secciones 02, 03, 04.
+`python run.py figures` imprime el bloque `::: figura` completo de cada una (id, título, fuente e `incluir:`), listo para pegar.
+
+| id (para `[[fig:<id>]]`) | Archivo | Qué muestra |
+|---|---|---|
+| `contorno-rosenbrock` | `part1_contorno_rosenbrock.html` | Curvas de nivel de Rosenbrock 2D (niveles logarítmicos) |
+| `contorno-rastrigin` | `part1_contorno_rastrigin.html` | Curvas de nivel de Rastrigin 2D |
+| `convergencia-part1` | `part1_convergencia.html` | Mediana e IQR de f − f* contra evaluaciones equivalentes, config por defecto; selector función × dimensión |
+| `cajas-part1` | `part1_cajas.html` | Cajas de f final − f* por método, config por defecto; mismo selector |
+| `convergencia-afinado-part1` | `part1_convergencia_afinado.html` | Por defecto contra afinado, solo los métodos que la HPO cambió |
+| `cajas-afinado-part1` | `part1_cajas_afinado.html` | Cajas por defecto / afinado, solo los métodos que la HPO cambió |
+| `eta-rosenbrock` | `part1_eta_rosenbrock.html` | Trayectoria del GD de paso fijo en Rosenbrock 2D con deslizador de η |
+| `enjambre-rastrigin` | `part1_enjambre_rastrigin.html` | Superficie de Rastrigin 2D con el enjambre del PSO y deslizador de iteración |
+
+- Las de convergencia y cajas necesitan las corridas (`results/data/part1/runs/` y `part1_tuned/runs/`, que git ignora):
+  sin ellas `run.py figures` avisa del comando que falta y no las regenera.
+- En los ejes logarítmicos los valores menores que 1e-16 (incluido el 0 exacto) se dibujan en 1e-16: decirlo en el texto
+  (en Rosenbrock 2D todas las corridas de PSO y DE quedan en ese piso).
+
+### GIF de la Parte 1 ya generados (T4.3)
+Están en `docs/figures/` (y en `media/`); ya están pegadas y citadas en las secciones 02, 03, 04.
+`python run.py figures` imprime el bloque `::: figura` de cada uno (id, título, fuente e imagen).
+
+| id (para `[[fig:<id>]]`) | Archivo | Qué muestra |
+|---|---|---|
+| `gif-gd-rosenbrock` | `gd_rosenbrock_2d.gif` | GD de paso fijo y GD con Armijo en Rosenbrock 2D desde el mismo punto inicial, por iteración |
+| `gif-gd-rastrigin` | `gd_rastrigin_2d.gif` | Las mismas dos variantes del GD en Rastrigin 2D |
+| `gif-pso-rastrigin` | `pso_rastrigin_2d.gif` | Las 30 partículas del PSO y el mejor del enjambre en Rastrigin 2D, por iteración |
+
+- Salen de `results/data/part1/gif_trayectorias.json` (versionado), así que se regeneran en un clon limpio con
+  `python run.py figures`. Son una sola corrida (semilla 0, configuración por defecto): ilustran la trayectoria, no el
+  comportamiento medio.
+
 ## Reglas que el build hace cumplir (requisitos del enunciado)
 1. Toda figura y tabla tiene **número, título y fuente** (formato APA 7).
 2. Toda figura y tabla **se cita en el texto** — una figura huérfana hace fallar el build.

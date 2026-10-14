@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Experimento de la Parte 1 (T1.7; Spec §4.1, §5.4, §6.2, §6.5 y §6.6)
+# # Experimento de la Parte 1 (T1.7 y T1.8; Spec §4.1, §5.4, §6.2, §6.5, §6.6 y §6.8)
 #
 # **Propósito.** Ejecutar todas las corridas que describe una config de la Parte 1, guardar
 # un JSON por corrida, resumirlas en `summary.json` y en dos tablas CSV, y servir de manejador
@@ -12,8 +12,9 @@
 # |---|---|---|---|
 # | 1 | `validar_config` | revisa la config antes de crear carpetas o correr | `None` |
 # | 2 | `avisos_de_tabla` | avisos de `metricas.py` con el nombre de su tabla | `list[str]` |
-# | 3 | `ejecutar_experimento` | corre, guarda y resume el experimento | `str` |
-# | 4 | `manejador_part1` | manejador del subcomando `part1` de `run.py` | `int` |
+# | 3 | `rutas_de_figuras` | rutas de las figuras de trayectoria que pide la config | `list[Path]` |
+# | 4 | `ejecutar_experimento` | corre, guarda y resume el experimento | `str` |
+# | 5 | `manejador_part1` | manejador del subcomando `part1` de `run.py` | `int` |
 #
 # Entre las auxiliares, `mapeador` (corre tareas en serie o en un grupo de procesos) también es
 # pública: la usa `hpo_experimento.py`.
@@ -27,9 +28,11 @@
 # | `<salida>/summary.json` | `meta`, `configuraciones`, `sensibilidad_k1`, `avisos` |
 # | `<tablas>/tabla_principal.csv` | una fila por configuración, $k = 2n$ |
 # | `<tablas>/tabla_sensibilidad_k1.csv` | una fila por configuración, sensibilidad $k = 1$ |
+# | `<salida>/trayectoria_{func}_2d.png` | solo con `figura_trayectoria: true` (Spec §6.8) |
 #
 # **Conteo y azar.** El costo del gradiente, el presupuesto y el generador de cada corrida los
-# arma `ejecutar_corrida` (Spec §6.2 y §4.1); aquí no se evalúa ninguna función.
+# arma `ejecutar_corrida` (Spec §6.2 y §4.1); aquí no se evalúa ninguna función. La figura de
+# trayectoria la dibuja `src/viz/part1_demo.py` con lo que ya está en los JSON de corrida.
 
 # %%
 """Experimento de la Parte 1: validación de la config, corridas, summary.json y tablas."""
@@ -46,6 +49,7 @@ from collections.abc import Callable, Iterator, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from numbers import Integral, Real
 from pathlib import Path
+from time import perf_counter
 
 from src.common.results import load_json, run_filename, save_json
 from src.common.seeds import seeds_for_runs, validar_entero
@@ -85,9 +89,12 @@ CLAVE_PRESUPUESTO = "presupuesto_por_dim"
 CLAVE_WORKERS = "workers"
 CLAVE_SALIDA = "salida"
 CLAVE_TABLAS = "tablas"
+CLAVE_FIGURA = "figura_trayectoria"
 CLAVES_OBLIGATORIAS = (CLAVE_FUNC, CLAVE_DIM, CLAVE_METODOS, CLAVE_RUNS, CLAVE_BASE_SEED,
                        CLAVE_RECORD_FRAMES, CLAVE_PRESUPUESTO, CLAVE_WORKERS, CLAVE_SALIDA,
-                       CLAVE_TABLAS)
+                       CLAVE_TABLAS, CLAVE_FIGURA)
+# Claves que no cambian el resultado de una corrida: no se guardan en su JSON.
+CLAVES_FUERA_DE_LA_CORRIDA = (CLAVE_WORKERS, CLAVE_FIGURA)
 
 MINIMO_POSITIVO = 1                      # runs, presupuesto_por_dim y workers: enteros >= 1
 WORKERS_EN_SERIE = 1                     # con este valor no se crean procesos
@@ -99,6 +106,7 @@ CARPETA_K1 = "k1"
 NOMBRE_SUMMARY = "summary.json"
 NOMBRE_CSV_PRINCIPAL = "tabla_principal.csv"
 NOMBRE_CSV_SENSIBILIDAD = "tabla_sensibilidad_k1.csv"
+NOMBRE_FIGURA = "trayectoria_{func}_{dim}d.png"
 CODIFICACION = "utf-8"
 SALTO_DE_LINEA = "\n"
 
@@ -106,6 +114,8 @@ ETIQUETA_PRINCIPAL = "Tabla principal (k = 2n)"
 ETIQUETA_SENSIBILIDAD = "Sensibilidad k = 1"
 TITULO_AVISOS = "Avisos (resultados que conviene revisar):"
 TEXTO_SIN_AVISOS = "ninguno"
+TEXTO_FIGURA = "Figura de trayectoria: {ruta}"
+TEXTO_TIEMPO = "Tiempo de ejecución: {segundos:.1f} s"
 CODIGO_CORRECTO = 0
 CODIGO_ERROR_DE_USO = 2                  # el mismo código con el que argparse informa un error
 
@@ -123,7 +133,8 @@ Informar = Callable[[str], None]
 # | `methods` | cada elemento es uno de `METODOS` |
 # | `runs`, `presupuesto_por_dim`, `workers` | entero $\ge 1$ (no bool) |
 # | `base_seed` | entero $\ge 0$ (no bool) |
-# | `record_frames` | bool |
+# | `record_frames`, `figura_trayectoria` | bool |
+# | `figura_trayectoria` | si es `true`: `record_frames` es `true` y 2 está en `dim` |
 # | `salida`, `tablas` | texto con algún carácter que no sea espacio |
 # | toda la config | ningún real no finito (NaN, $\pm\infty$), a cualquier profundidad |
 #
@@ -224,8 +235,8 @@ def validar_config(cfg: dict) -> None:
         bool, bool o texto según la tabla de arriba).
     ValueError
         Falta una clave; lista vacía o con repetidos; identificador desconocido; entero fuera
-        de rango; texto vacío; dimensión que la función no admite; real no finito (el mensaje
-        da la ruta de la clave, p. ej. `pso.w`).
+        de rango; texto vacío; dimensión que la función no admite; `figura_trayectoria` sin
+        frames que dibujar; real no finito (el mensaje da la ruta de la clave, p. ej. `pso.w`).
     """
     if not isinstance(cfg, Mapping):
         raise TypeError(f"la config debe ser un mapeo (dict); se recibió {type(cfg).__name__}")
@@ -247,6 +258,15 @@ def validar_config(cfg: dict) -> None:
     _validar_bool(cfg, CLAVE_RECORD_FRAMES)
     _validar_texto(cfg, CLAVE_SALIDA)
     _validar_texto(cfg, CLAVE_TABLAS)
+    _validar_bool(cfg, CLAVE_FIGURA)
+    # La figura se dibuja con los frames, que solo existen en 2D y con record_frames (§5.4).
+    if cfg[CLAVE_FIGURA] and not cfg[CLAVE_RECORD_FRAMES]:
+        raise ValueError(f"{CLAVE_FIGURA}: true exige {CLAVE_RECORD_FRAMES}: true (la figura "
+                         "se dibuja con los frames de la corrida)")
+    if cfg[CLAVE_FIGURA] and DIMENSION_CON_FRAMES not in dimensiones:
+        raise ValueError(f"{CLAVE_FIGURA}: true exige que {DIMENSION_CON_FRAMES} esté en "
+                         f"{CLAVE_DIM} (solo las corridas en {DIMENSION_CON_FRAMES}D guardan "
+                         f"frames); se recibió {CLAVE_DIM}: {dimensiones}")
     _rechazar_no_finitos(cfg, "")
 
 
@@ -307,13 +327,15 @@ def _configuraciones(cfg: Mapping) -> list[tuple[str, int, str]]:
 
 
 def _config_de_corrida(cfg: Mapping) -> dict:
-    """Copia profunda de `cfg` sin `workers`: es la config que recibe y guarda cada corrida.
+    """Copia profunda de `cfg` sin `workers` ni `figura_trayectoria`: la config de cada corrida.
 
-    `workers` solo decide cuántos procesos se usan; al quitarlo, el JSON de una corrida es
-    el mismo byte a byte con cualquier número de procesos.
+    `workers` solo decide cuántos procesos se usan y `figura_trayectoria`, si se dibuja una
+    figura al terminar; al quitarlas, el JSON de una corrida es el mismo byte a byte con
+    cualquier número de procesos, con figura o sin ella.
     """
     config = copy.deepcopy(dict(cfg))
-    del config[CLAVE_WORKERS]
+    for clave in CLAVES_FUERA_DE_LA_CORRIDA:
+        del config[clave]
     return config
 
 
@@ -411,7 +433,44 @@ def _texto_de_tablas(principales: Sequence[Mapping], sensibilidad: Sequence[Mapp
 
 
 # %% [markdown]
-# ## 3. `ejecutar_experimento`
+# ## 3. `rutas_de_figuras`
+#
+# Con `figura_trayectoria: true` (Spec §6.8) hay una figura por función de la config, en el
+# orden de `func`: `<salida>/trayectoria_{func}_2d.png`. Con `false`, ninguna. Cada figura
+# reúne la corrida con `run_id = 0` de cada método en 2D, la única que guarda frames (§5.4).
+#
+# `rutas_de_figuras` solo calcula las rutas; la usan `ejecutar_experimento` (que escribe las
+# figuras) y `manejador_part1` (que las informa). `src/viz/part1_demo.py` se importa dentro
+# de `_escribir_figuras`: sin figura, el experimento no carga matplotlib.
+
+# %%
+def rutas_de_figuras(cfg: Mapping) -> list[Path]:
+    """Rutas de las figuras de trayectoria de `cfg`, una por función; vacía si no se piden."""
+    if not cfg[CLAVE_FIGURA]:
+        return []
+    salida = Path(cfg[CLAVE_SALIDA])
+    return [salida / NOMBRE_FIGURA.format(func=func, dim=DIMENSION_CON_FRAMES)
+            for func in cfg[CLAVE_FUNC]]
+
+
+def _escribir_figuras(cfg: Mapping) -> None:
+    """Dibuja cada figura de `rutas_de_figuras` con las corridas ya guardadas en `runs/`."""
+    rutas = rutas_de_figuras(cfg)
+    if not rutas:
+        return
+    from src.viz import part1_demo           # perezosa: solo aquí hace falta matplotlib
+
+    carpeta = Path(cfg[CLAVE_SALIDA]) / CARPETA_CORRIDAS
+    semilla = seeds_for_runs(cfg[CLAVE_BASE_SEED], cfg[CLAVE_RUNS])[RUN_ID_CON_FRAMES]
+    for func, ruta in zip(cfg[CLAVE_FUNC], rutas):
+        corridas = [load_json(carpeta / run_filename(func, DIMENSION_CON_FRAMES, method,
+                                                     semilla))
+                    for method in cfg[CLAVE_METODOS]]
+        part1_demo.figura_trayectoria(corridas, ruta)
+
+
+# %% [markdown]
+# ## 4. `ejecutar_experimento`
 #
 # Pasos, en este orden:
 #
@@ -423,6 +482,7 @@ def _texto_de_tablas(principales: Sequence[Mapping], sensibilidad: Sequence[Mapp
 #    `<salida>/k1/runs/`. En `ea`, `pso` y `de` la entrada de sensibilidad es una copia de la
 #    principal (su campo `k` conserva el valor $2n$ con el que se ejecutaron).
 # 4. Escribir `<salida>/summary.json` y los dos CSV de `<tablas>/`.
+# 5. Con `figura_trayectoria: true`, escribir las figuras de `rutas_de_figuras`.
 #
 # El presupuesto de cada corrida es el de Spec §6.2:
 #
@@ -496,18 +556,22 @@ def ejecutar_experimento(cfg: dict, informar: Informar = print) -> str:
     tablas = Path(cfg[CLAVE_TABLAS])
     _escribir_csv(tablas / NOMBRE_CSV_PRINCIPAL, principales)
     _escribir_csv(tablas / NOMBRE_CSV_SENSIBILIDAD, sensibilidad)
+    _escribir_figuras(cfg)
     return _texto_de_tablas(principales, sensibilidad, cfg[CLAVE_METODOS])
 
 
 # %% [markdown]
-# ## 4. `manejador_part1`
+# ## 5. `manejador_part1`
 #
 # Es la función que `src/common/cli.py` llama con la config final de `run.py part1`.
 #
 # | Caso | Qué hace | Retorna |
 # |---|---|---|
 # | config que `validar_config` rechaza | escribe el motivo en la salida de error | 2 |
-# | config válida | corre el experimento e imprime las tablas y los avisos | 0 |
+# | config válida | corre el experimento e imprime las tablas, el tiempo y los avisos | 0 |
+#
+# Entre las tablas y los avisos imprime la ruta de cada figura de trayectoria (si la config
+# las pide) y el tiempo de ejecución.
 #
 # Solo se convierten en código 2 los errores de `validar_config`. Un error posterior (por
 # ejemplo, el de un optimizador que rechaza su bloque) sale como excepción.
@@ -516,7 +580,8 @@ def ejecutar_experimento(cfg: dict, informar: Informar = print) -> str:
 def manejador_part1(cfg: dict) -> int:
     """Manejador de `python run.py part1`: valida, corre el experimento e imprime el resumen.
 
-    Los avisos que imprime son los que quedaron guardados en `<salida>/summary.json`.
+    Los avisos que imprime son los que quedaron guardados en `<salida>/summary.json`. El
+    tiempo es el de `ejecutar_experimento` completo: las corridas, los archivos y la figura.
     """
     try:
         validar_config(cfg)
@@ -524,7 +589,14 @@ def manejador_part1(cfg: dict) -> int:
         print(f"run.py part1: error: configuración inválida: {error}", file=sys.stderr)
         return CODIGO_ERROR_DE_USO
 
-    print(ejecutar_experimento(cfg))
+    inicio = perf_counter()
+    tablas = ejecutar_experimento(cfg)
+    segundos = perf_counter() - inicio
+    print(tablas)
+    print()
+    for ruta in rutas_de_figuras(cfg):
+        print(TEXTO_FIGURA.format(ruta=ruta))
+    print(TEXTO_TIEMPO.format(segundos=segundos))
     textos = load_json(Path(cfg[CLAVE_SALIDA]) / NOMBRE_SUMMARY)["avisos"]
     print()
     print(TITULO_AVISOS)

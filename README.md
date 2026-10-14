@@ -59,7 +59,7 @@ tiempos se midieron en la máquina de desarrollo (Windows).
 
 | Comando | Qué hace | Tiempo |
 |---|---|---|
-| `python run.py part1 --config configs/part1/demo.yaml` | Rastrigin 2D, PSO contra descenso por gradiente, 5 corridas; tabla en consola | ~1 s |
+| `python run.py part1 --config configs/part1/demo.yaml` | Rastrigin 2D, PSO contra descenso por gradiente, 5 corridas; tabla en consola y figura de trayectoria | ~1 s |
 | `python run.py part2 --config configs/part2/demo.yaml` | MMAS en $w$ = 25 €/h, 1 000 iteraciones, 10 corridas; costo, gap y figura del recorrido | ~20 s |
 | `python run.py hpo --config configs/part1/hpo_demo.yaml` | Afinación de hiperparámetros en pequeño (Rastrigin 2D, PSO y paso fijo) | ~9 s |
 

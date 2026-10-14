@@ -1,0 +1,47 @@
+== bloques
+{'esquema': 'clase', 'N': 50, 'frac_e': 0.15, 'frac_m': 0.1, 'frac_c': 0.75, 'reevaluar_elite': False, 'generaciones': None}
+{'N': 30, 'w': 0.7298, 'c1': 1.49618, 'c2': 1.49618, 'vmax_frac': 0.2, 'iteraciones': None}
+{'NP': 30, 'F': 0.7, 'CR': 0.9, 'generaciones': None}
+EA n_e,n_m,n_c: 8 5 38 | 50*0.15 = 7.5 50*0.10 = 5.0 50*0.75 = 37.5
+chi = 0.7298437881283576  chi*phi/2 = 1.496179765663133
+== conteo (semilla 0 y 7)
+rosenbrock 2D ea  seed=0 n_f=20000 n_grad=0 T=475 r=0 frames=476
+rosenbrock 2D ea  seed=7 n_f=20000 n_grad=0 T=475 r=0 frames=476
+rosenbrock 2D pso seed=0 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rosenbrock 2D pso seed=7 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rosenbrock 2D de  seed=0 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rosenbrock 2D de  seed=7 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rosenbrock 3D ea  seed=0 n_f=30000 n_grad=0 T=713 r=4 frames=None
+rosenbrock 3D ea  seed=7 n_f=30000 n_grad=0 T=713 r=4 frames=None
+rosenbrock 3D pso seed=0 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rosenbrock 3D pso seed=7 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rosenbrock 3D de  seed=0 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rosenbrock 3D de  seed=7 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rastrigin  2D ea  seed=0 n_f=20000 n_grad=0 T=475 r=0 frames=476
+rastrigin  2D ea  seed=7 n_f=20000 n_grad=0 T=475 r=0 frames=476
+rastrigin  2D pso seed=0 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rastrigin  2D pso seed=7 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rastrigin  2D de  seed=0 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rastrigin  2D de  seed=7 n_f=20000 n_grad=0 T=665 r=20 frames=666
+rastrigin  3D ea  seed=0 n_f=30000 n_grad=0 T=713 r=4 frames=None
+rastrigin  3D ea  seed=7 n_f=30000 n_grad=0 T=713 r=4 frames=None
+rastrigin  3D pso seed=0 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rastrigin  3D pso seed=7 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rastrigin  3D de  seed=0 n_f=30000 n_grad=0 T=999 r=0 frames=None
+rastrigin  3D de  seed=7 n_f=30000 n_grad=0 T=999 r=0 frames=None
+== EA 2D: hijos = (p1,q2),(q1,p2) en las 19 parejas: True cortes: {1}
+pareja k = (cruzante_k, cruzante_{k+m}): True
+3D cortes: {1, 2} | valores hijos ya en la columna: True
+col constante 0.1: std numpy = np.float64(4.163336342344337e-17); llamadas de mutación que cambian la columna: 1869/2000, max|delta| = np.float64(1.5265566588595902e-16)
+col constante 0.3333333333333333: std numpy = np.float64(1.6653345369377348e-16); llamadas de mutación que cambian la columna: 1869/2000, max|delta| = np.float64(6.106226635438361e-16)
+col constante 0.995: std numpy = np.float64(6.661338147750939e-16); llamadas de mutación que cambian la columna: 1902/2000, max|delta| = np.float64(2.4424906541753444e-15)
+col constante 2.7182818: std numpy = np.float64(0.0); llamadas de mutación que cambian la columna: 0/2000, max|delta| = 0.0
+col constante -4.52299366: std numpy = np.float64(1.7763568394002505e-15); llamadas de mutación que cambian la columna: 1828/2000, max|delta| = np.float64(6.217248937900877e-15)
+== PSO lider / primer movimiento (rastrigin y rosenbrock 2D, 30 semillas)
+rastrigin: lider quieto en iter 1: 30/30; quieto hasta que g cambia: 30/30; iter 1: desplazamiento == c2*R2*(g-x) en 1122/1800 componentes; recortadas por v_max: 678; por frontera: 0
+rosenbrock: lider quieto en iter 1: 30/30; quieto hasta que g cambia: 30/30; iter 1: desplazamiento == c2*R2*(g-x) en 1060/1800 componentes; recortadas por v_max: 739; por frontera: 2
+== DE
+componentes de hijos fuera del dominio: 0 | reiniciadas: 30112
+valor igual al limite se conserva: [[False, False], [True, False]]
+consumo del rng del reinicio independiente de los datos: True
+poblacion colapsada: mutante == x_r1: True

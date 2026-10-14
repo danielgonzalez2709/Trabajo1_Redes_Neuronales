@@ -12,6 +12,7 @@ Grupos:
     8. efectos                   -> config intacta, avance, nada fuera de salida/tablas
     9. CLI                       -> `run.py part1`, importación perezosa
    10. configs del repo e higiene
+   11. figura de trayectoria     -> clave `figura_trayectoria` (T1.8; Spec §6.8)
 
 El experimento se ejecuta con un presupuesto pequeño (`PRESUPUESTO` por dimensión) y pocas
 corridas; las fixtures de módulo lo ejecutan una vez por variante. La configuración parte de la
@@ -450,7 +451,8 @@ def test_la_reejecucion_con_k_1_difiere_de_la_principal_en_rosenbrock(exp, metho
 def test_la_reejecucion_guardada_es_la_de_ejecutar_corrida_con_k_1(exp, method):
     esperada = ejecutar_corrida("rosenbrock", 3, method, BASE_SEED, 1, exp.cfg_original,
                                 k=K_SENSIBILIDAD, presupuesto_por_dim=PRESUPUESTO)
-    del esperada["config"]["workers"]      # la config de una corrida no guarda `workers`
+    for clave in ("workers", "figura_trayectoria"):    # la config de una corrida no las guarda
+        del esperada["config"][clave]
     assert exp.corrida_k1("rosenbrock", 3, method, run_id=1) == to_jsonable(esperada)
 
 
@@ -662,6 +664,9 @@ CASOS_INVALIDOS = [
     ("salida", None, TypeError, "salida"),
     ("tablas", "", ValueError, "tablas"),
     ("tablas", 3, TypeError, "tablas"),
+    ("figura_trayectoria", 1, TypeError, "figura_trayectoria"),
+    ("figura_trayectoria", "true", TypeError, "figura_trayectoria"),
+    ("figura_trayectoria", None, TypeError, "figura_trayectoria"),
 ]
 
 
@@ -679,7 +684,7 @@ def test_validacion_rechaza_y_no_escribe_nada(tmp_path, clave, valor, error, fra
 
 @pytest.mark.parametrize("clave", ["func", "dim", "methods", "runs", "base_seed",
                                    "record_frames", "presupuesto_por_dim", "workers",
-                                   "salida", "tablas"])
+                                   "salida", "tablas", "figura_trayectoria"])
 def test_validacion_rechaza_una_clave_que_falta(tmp_path, clave):
     cfg = config_de_prueba(tmp_path / "x")
     del cfg[clave]
@@ -965,6 +970,7 @@ def test_la_base_trae_las_claves_que_lee_el_experimento():
     assert base["presupuesto_por_dim"] == 10_000
     assert base["workers"] == 1
     assert base["runs"] == 30 and base["base_seed"] == 0
+    assert base["figura_trayectoria"] is False
 
 
 @pytest.mark.parametrize("ruta", [RUTA_EXPERIMENT, RUTA_PRUEBAS],
@@ -999,3 +1005,196 @@ def test_el_experimento_no_usa_azar_global_ni_cuenta_evaluaciones():
     texto = RUTA_EXPERIMENT.read_text(encoding="utf-8")
     for prohibido in ("np.random", "import random", "CountedProblem(", "default_rng"):
         assert prohibido not in texto
+
+
+# ================================================================================================
+# 11. Figura de trayectoria (T1.8; Spec §6.8)
+# ================================================================================================
+
+FIRMA_PNG = b"\x89PNG\r\n\x1a\n"
+CAMBIOS_DEMO = dict(func=["rastrigin"], dim=[2], methods=["pso", "gdfijo"])
+
+
+@pytest.fixture(scope="module")
+def exp_con_figura(tmp_path_factory) -> Experimento:
+    """Dos funciones, 3D antes que 2D, y `figura_trayectoria: true`."""
+    return Experimento(tmp_path_factory.mktemp("con_figura"), dim=[3, 2],
+                       methods=["de", "gdfijo"], figura_trayectoria=True)
+
+
+@pytest.mark.parametrize("cambios, fragmento", [
+    (dict(record_frames=False), "record_frames"),
+    (dict(dim=[3]), "dim"),
+], ids=["sin record_frames", "sin 2D"])
+def test_la_figura_exige_que_haya_frames(tmp_path, cambios, fragmento):
+    cfg = config_de_prueba(tmp_path / "x", figura_trayectoria=True, **cambios)
+    with pytest.raises(ValueError, match="figura_trayectoria") as error:
+        ejecutar_experimento(cfg, informar=silencio)
+    assert fragmento in str(error.value)
+    assert list(tmp_path.iterdir()) == []
+    validar_config({**cfg, "figura_trayectoria": False})     # sin figura, la config es válida
+
+
+def test_con_figura_false_no_se_crea_ningun_png(exp, exp_sin_frames):
+    for experimento in (exp, exp_sin_frames):
+        assert experimento.cfg["figura_trayectoria"] is False
+        assert not [nombre for nombre in experimento.bytes if nombre.endswith(".png")]
+
+
+def test_con_figura_true_hay_un_png_por_funcion_en_salida(exp_con_figura):
+    imagenes = sorted(nombre for nombre in exp_con_figura.bytes if nombre.endswith(".png"))
+    assert imagenes == ["datos/trayectoria_rastrigin_2d.png",
+                        "datos/trayectoria_rosenbrock_2d.png"]
+    for nombre in imagenes:
+        assert exp_con_figura.bytes[nombre].startswith(FIRMA_PNG)
+    assert exp_con_figura.bytes[imagenes[0]] != exp_con_figura.bytes[imagenes[1]]
+
+
+def test_rutas_de_figuras_sigue_el_orden_de_func_y_no_escribe(tmp_path):
+    cfg = config_de_prueba(tmp_path / "x", func=["rastrigin", "rosenbrock"])
+    assert experiment.rutas_de_figuras(cfg) == []
+    cfg["figura_trayectoria"] = True
+    assert experiment.rutas_de_figuras(cfg) == [
+        tmp_path / "x" / "datos" / "trayectoria_rastrigin_2d.png",
+        tmp_path / "x" / "datos" / "trayectoria_rosenbrock_2d.png"]
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_la_figura_no_cambia_ningun_otro_archivo(tmp_path):
+    """Mismas rutas con false y con true: solo se añade el PNG; el resto, byte a byte."""
+    sin_figura = Experimento(tmp_path, **CAMBIOS_DEMO).bytes
+    con_figura = Experimento(tmp_path, figura_trayectoria=True, **CAMBIOS_DEMO).bytes
+    nombre = "datos/trayectoria_rastrigin_2d.png"
+    assert sorted(con_figura) == sorted([*sin_figura, nombre])
+    assert {clave: valor for clave, valor in con_figura.items() if clave != nombre} == sin_figura
+
+
+def test_la_config_guardada_en_cada_corrida_no_trae_la_clave_de_la_figura(exp, exp_con_figura):
+    for experimento in (exp, exp_con_figura):
+        corridas = {**experimento.corridas(),
+                    **{f"k1/{nombre}": corrida
+                       for nombre, corrida in experimento.corridas(RUNS_K1).items()}}
+        assert corridas
+        for nombre, corrida in corridas.items():
+            assert "figura_trayectoria" not in corrida["config"], nombre
+            assert "record_frames" in corrida["config"], nombre
+
+
+def test_la_figura_recibe_las_corridas_guardadas_de_la_primera_semilla_en_2d(tmp_path,
+                                                                           monkeypatch):
+    from src.viz import part1_demo
+
+    llamadas = []
+
+    def espia(corridas, ruta):
+        llamadas.append((corridas, Path(ruta)))
+        return Path(ruta)
+
+    monkeypatch.setattr(part1_demo, "figura_trayectoria", espia)
+    cfg = config_de_prueba(tmp_path, func=["rosenbrock", "rastrigin"], dim=[3, 2],
+                           methods=["pso", "gdfijo"], figura_trayectoria=True)
+    ejecutar_experimento(cfg, informar=silencio)
+    assert [ruta for _corridas, ruta in llamadas] == experiment.rutas_de_figuras(cfg)
+    for (corridas, _ruta), func in zip(llamadas, ["rosenbrock", "rastrigin"]):
+        assert [corrida["method"] for corrida in corridas] == ["pso", "gdfijo"]
+        for corrida in corridas:
+            assert (corrida["func"], corrida["dim"], corrida["seed"]) == (func, 2, BASE_SEED)
+            assert corrida["result"]["frames"]
+            guardada = tmp_path / "datos" / "runs" / run_filename(func, 2, corrida["method"],
+                                                                  BASE_SEED)
+            assert corrida == load_json(guardada)
+
+
+def test_la_figura_se_escribe_despues_del_summary_y_los_csv(tmp_path, monkeypatch):
+    from src.viz import part1_demo
+
+    existentes = []
+
+    def espia(_corridas, ruta):
+        existentes.append([(tmp_path / "datos" / "summary.json").is_file(),
+                           (tmp_path / "tablas" / CSV_PRINCIPAL).is_file(),
+                           (tmp_path / "tablas" / CSV_SENSIBILIDAD).is_file()])
+        return Path(ruta)
+
+    monkeypatch.setattr(part1_demo, "figura_trayectoria", espia)
+    cfg = config_de_prueba(tmp_path, figura_trayectoria=True, **CAMBIOS_DEMO)
+    ejecutar_experimento(cfg, informar=silencio)
+    assert existentes == [[True, True, True]]
+
+
+def test_el_texto_devuelto_y_el_summary_no_dependen_de_la_figura(tmp_path):
+    sin_figura = Experimento(tmp_path, **CAMBIOS_DEMO)
+    con_figura = Experimento(tmp_path, figura_trayectoria=True, **CAMBIOS_DEMO)
+    assert con_figura.texto == sin_figura.texto
+    assert con_figura.avance == sin_figura.avance
+    assert list(con_figura.summary()) == CLAVES_SUMMARY
+    assert con_figura.summary() == sin_figura.summary()
+
+
+def test_sin_figura_el_experimento_no_carga_matplotlib(tmp_path):
+    codigo = (
+        "import sys\n"
+        "from src.common.config import load_config\n"
+        "from src.part1.experiment import manejador_part1\n"
+        f"cfg = load_config({str(RUTA_BASE)!r})\n"
+        "cfg.update(func=['rastrigin'], dim=[2], methods=['pso', 'gdfijo'], runs=1,\n"
+        f"           presupuesto_por_dim={PRESUPUESTO}, salida={str(tmp_path / 'datos')!r},\n"
+        f"           tablas={str(tmp_path / 'tablas')!r})\n"
+        "assert cfg['figura_trayectoria'] is False\n"
+        "assert manejador_part1(cfg) == 0\n"
+        "cargados = [m for m in ('matplotlib', 'PIL', 'src.viz.part1_demo') "
+        "if m in sys.modules]\n"
+        "print('CARGADOS', cargados)\n"
+    )
+    res = subprocess.run([sys.executable, "-c", codigo], cwd=RAIZ, capture_output=True,
+                         encoding="utf-8", check=False)
+    assert res.returncode == 0, res.stderr
+    assert res.stdout.strip().endswith("CARGADOS []")
+
+
+def _reloj_de_prueba(monkeypatch, *instantes: float) -> None:
+    """Hace que `experiment.perf_counter` devuelva `instantes`, uno por llamada."""
+    pendientes = list(instantes)
+    monkeypatch.setattr(experiment, "perf_counter", lambda: pendientes.pop(0))
+
+
+def test_el_manejador_imprime_el_tiempo_y_la_ruta_de_la_figura(tmp_path, capsys, monkeypatch):
+    figura = tmp_path / "datos" / "trayectoria_rastrigin_2d.png"
+    instantes, habia_figura = [10.0, 12.5], []
+
+    def reloj() -> float:
+        habia_figura.append(figura.is_file())
+        return instantes.pop(0)
+
+    monkeypatch.setattr(experiment, "perf_counter", reloj)
+    cfg = config_de_prueba(tmp_path, figura_trayectoria=True, **CAMBIOS_DEMO)
+    assert manejador_part1(cfg) == 0
+    assert habia_figura == [False, True]       # el tiempo cubre las corridas y la figura
+    lineas = capsys.readouterr().out.splitlines()
+    assert figura.read_bytes().startswith(FIRMA_PNG)
+    assert lineas.count(f"Figura de trayectoria: {figura}") == 1
+    assert lineas.count("Tiempo de ejecución: 2.5 s") == 1
+    assert len([linea for linea in lineas if linea.startswith("Tiempo de ejecución")]) == 1
+    # Las dos líneas van después de las tablas y antes de los avisos.
+    assert (max(i for i, linea in enumerate(lineas) if linea.startswith("rastrigin | 2"))
+            < lineas.index(f"Figura de trayectoria: {figura}")
+            < lineas.index("Tiempo de ejecución: 2.5 s")
+            < lineas.index(experiment.TITULO_AVISOS))
+
+
+def test_sin_figura_el_manejador_imprime_el_tiempo_y_ninguna_ruta(tmp_path, capsys,
+                                                                 monkeypatch):
+    _reloj_de_prueba(monkeypatch, 3.0, 3.04)
+    assert manejador_part1(config_de_prueba(tmp_path, **CAMBIOS_DEMO)) == 0
+    salida = capsys.readouterr().out
+    assert "Tiempo de ejecución: 0.0 s" in salida.splitlines()
+    assert "Figura" not in salida and ".png" not in salida
+
+
+def test_con_config_invalida_el_manejador_no_imprime_tiempo_ni_figura(tmp_path, capsys):
+    cfg = config_de_prueba(tmp_path, figura_trayectoria=True, record_frames=False)
+    assert manejador_part1(cfg) == 2
+    salida = capsys.readouterr()
+    assert "figura_trayectoria" in salida.err
+    assert "Tiempo" not in salida.out + salida.err
+    assert list(tmp_path.iterdir()) == []
