@@ -6,7 +6,7 @@ Profesor: Juan David Ospina Arango
 **Autores:** Jose Miguel Pulgarin Agudelo, Maria Camila Agudelo Espinosa, Daniel Gonzalez Henao, Juan Jose Gonzalez
 Morales y Edinson Andrés Ariza Mendoza.
 
-El reporte completo es una entrada de blog en MkDocs (carpeta [`blog/`](blog/)); más abajo se explica cómo verlo.
+**Reporte (blog):** <https://danielgonzalez2709.github.io/Trabajo1_Redes_Neuronales/> · fuente en [`blog/`](blog/).
 
 ## Qué se hizo
 
@@ -59,7 +59,7 @@ tiempos se midieron en la máquina de desarrollo (Windows).
 
 | Comando | Qué hace | Tiempo |
 |---|---|---|
-| `python run.py part1 --config configs/part1/demo.yaml` | Rastrigin 2D, PSO contra descenso por gradiente, 5 corridas; tabla en consola y figura de trayectoria | ~1 s |
+| `python run.py part1 --config configs/part1/demo.yaml` | Rastrigin 2D, PSO contra descenso por gradiente, 5 corridas; tabla en consola y figura de trayectoria | ~3 s |
 | `python run.py part2 --config configs/part2/demo.yaml` | MMAS en $w$ = 25 €/h, 1 000 iteraciones, 10 corridas; costo, gap y figura del recorrido | ~20 s |
 | `python run.py hpo --config configs/part1/hpo_demo.yaml` | Afinación de hiperparámetros en pequeño (Rastrigin 2D, PSO y paso fijo) | ~9 s |
 
@@ -99,9 +99,9 @@ En la Parte 1, `--set workers=N` reparte las corridas en `N` procesos sin cambia
   internet y un servidor OSRM local.
 - **Corridas de la Parte 1:** los JSON de cada corrida (`results/data/part1/runs/` y `part1_tuned/runs/`) no se
   versionan. Las figuras de convergencia y de cajas se regeneran después de correr los dos experimentos de la Parte 1.
-- **Plataforma:** en otra máquina, el número de evaluaciones del descenso con Armijo en Rastrigin puede variar en menos
-  de 0,02 % por diferencias de la librería matemática en el último bit; los valores finales y las tasas de éxito son
-  los mismos.
+- **Plataforma:** entre sistemas operativos, el número de evaluaciones del descenso con Armijo en Rastrigin puede
+  variar (menos de 0,02 % en 2D y unos 5 % en 3D) por diferencias de la librería matemática en el último bit; los
+  valores finales y las tasas de éxito son los mismos.
 
 ## Dónde está cada cosa
 
