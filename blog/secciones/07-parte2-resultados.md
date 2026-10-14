@@ -3,7 +3,8 @@ SECCIÓN: Parte 2 — resultados · RESPONSABLE: equipo Parte 2 · ESTADO: borra
 Enunciado: "¿cambia la ruta óptima al variarlo? ¿a partir de qué valor?" + GIF de la evolución de la mejor solución sobre el
 mapa de España. Figuras (Spec §7.6): mapa con deslizador de w, costo desglosado vs. w, convergencia ACO vs. GA (gap), GIF.
 Cifras: results/data/part2/sweep_w.json, umbrales_w.json y sensibilidad/consumo{5.6,6.2}/comparacion_base.json
-(barrido del 13-oct). Las cifras por recorrido (km, h, tramos con peaje, ventaja frente al segundo candidato) se
+(barrido del 13-oct); umbrales, recorridos óptimos por tramo y sensibilidad: results/data/part2/umbrales_exactos.json
+(verificación exacta, scripts/umbrales_exactos.py). Las cifras por recorrido (km, h, tramos con peaje, ventaja frente al segundo candidato) se
 calcularon con src/part2/costos.py y src/part2/envolvente.py sobre esos archivos.
 -->
 
@@ -11,37 +12,43 @@ calcularon con src/part2/costos.py y src/part2/envolvente.py sobre esos archivos
 
 ### ¿Cambia la ruta al variar el valor de la hora?
 
-**Sí, en tres valores de $w$: 10,75, 13,81 y 42,19 €/h.** La envolvente de los candidatos divide el intervalo
-$[0, 100]$ €/h en cuatro tramos, cada uno con un recorrido ganador distinto
-([[tab:umbrales-part2]]). La [[fig:mapa-w]] permite recorrer los valores de $w$ con un deslizador y ver qué arcos
-cambian y cuáles pasan a pagar peaje.
+**Sí, en tres valores de $w$: 10,02, 14,53 y 42,19 €/h.** Con el óptimo exacto, el intervalo $[0, 100]$ €/h se
+divide en cuatro tramos, cada uno con un recorrido óptimo distinto ([[tab:umbrales-part2]]). La [[fig:mapa-w]] permite
+recorrer los valores de $w$ con un deslizador y ver qué arcos cambian y cuáles pasan a pagar peaje.
+
+La envolvente de los recorridos que hallaron las heurísticas ponía los dos primeros umbrales en 10,75 y 13,81 €/h. El
+recorrido óptimo entre 10,02 y 14,53 €/h (el 215) no estaba entre sus 215 candidatos: ningún valor del barrido cae en
+ese tramo, que salta de 10 a 15 €/h, así que MMAS, AS y GA nunca lo buscaron. En su lugar ganaba el recorrido 139, que
+en ese tramo cuesta como mucho 0,38 € más que el óptimo (1 499,23 € frente a 1 498,90 € en $w = 12$). El tercer
+umbral, 42,19 €/h, es el mismo en los dos cálculos.
 
 ::: tabla umbrales-part2
-Título: Recorrido de menor costo encontrado en cada tramo del valor de la hora
-Fuente: Elaboración propia a partir de results/data/part2/umbrales_w.json; km, horas y peajes evaluados en un valor representativo de cada tramo.
-| Tramo de $w$ (€/h) | Recorrido (candidato) | $w$ evaluado | Distancia | Tiempo | Peajes | Arcos con peaje | Ventaja máxima sobre el 2.º candidato |
+Título: Recorrido óptimo en cada tramo del valor de la hora
+Fuente: Elaboración propia a partir de results/data/part2/umbrales_exactos.json (óptimo exacto con PuLP + HiGHS); km, horas y peajes evaluados en un valor representativo de cada tramo.
+| Tramo de $w$ (€/h) | Recorrido (candidato) | $w$ evaluado | Distancia | Tiempo | Peajes | Arcos con peaje | Ventaja máxima sobre el 2.º mejor recorrido conocido |
 |---|---|---|---|---|---|---|---|
-| 0 – 10,75 | 128 | 5 | 6 158,2 km | 81,66 h | 1,05 € | 1 de 47 | 1,42 € |
-| 10,75 – 13,81 | 139 | 12 | 6 224,3 km | 81,14 h | 1,05 € | 1 de 47 | 0,66 € |
-| 13,81 – 42,19 | 138 | 25 | 6 283,7 km | 79,64 h | 24,25 € | 3 de 47 | 0,96 € |
+| 0 – 10,02 | 128 | 5 | 6 158,2 km | 81,66 h | 1,05 € | 1 de 47 | 1,42 € |
+| 10,02 – 14,53 | 215 (solo exacto) | 12 | 6 216,8 km | 81,17 h | 1,05 € | 1 de 47 | 0,36 € |
+| 14,53 – 42,19 | 138 | 25 | 6 283,7 km | 79,64 h | 24,25 € | 3 de 47 | 0,95 € |
 | 42,19 – 100 | 140 | 100 | 6 284,9 km | 78,83 h | 64,81 € | 8 de 47 | 10,65 € |
 :::
 
-Los cambios de recorrido son locales: entre dos ganadores consecutivos cambian entre 4 y 6 de los 47 arcos, todos en el
-centro y el noroeste peninsular. Al cruzar 10,75 €/h, por ejemplo, salen
-Salamanca–Zamora y Valladolid–León y entran Cáceres–Salamanca y Palencia–León. Además, las rutas compiten muy de cerca.
-Hasta $w = 50$ €/h la mejor ruta supera a la segunda por menos de 1,50 €, en viajes que cuestan entre 520 € y 4 530 €, y
-la ruta 139 gana por 0,66 € como máximo. Los dos primeros umbrales son reales en el modelo, pero en la práctica las rutas son
+Los cambios de recorrido no siempre son locales. Al cruzar 10,02 €/h cambian 13 de los 47 arcos y al cruzar
+14,53 €/h cambian 10, repartidos por toda la península: en el primer umbral, por ejemplo, Burgos–Santander y
+Soria–Zaragoza dejan su lugar a Burgos–Soria y Oviedo/Uviéu–Santander. Al cruzar 42,19 €/h solo cambian 5, en el oeste
+y el noroeste (salen León–Zamora y Ourense–Zamora y entran Salamanca–Zamora y Lugo–Ourense, entre otros). Además, las
+rutas compiten muy de cerca. Hasta $w = 50$ €/h la ruta óptima supera a la segunda mejor conocida por menos de 1,50 €,
+en viajes que cuestan entre 520 € y 4 530 €, y en el tramo de 10,02 a 14,53 €/h por solo 0,36 €. Los dos primeros umbrales son reales en el modelo, pero en la práctica las rutas son
 **casi indiferentes**: un error de pocos céntimos en un peaje o en un tiempo podría moverlos.
 
 ::: figura mapa-w
 Título: Recorrido de menor costo encontrado según el valor de la hora, con los tramos de peaje resaltados
-Fuente: Elaboración propia a partir de results/data/part2/sweep_w.json y umbrales_w.json (python run.py figures). Los arcos son segmentos rectos entre capitales, no el trazado de la carretera.
+Fuente: Elaboración propia a partir de results/data/part2/sweep_w.json y umbrales_exactos.json (python run.py figures). Los arcos son segmentos rectos entre capitales, no el trazado de la carretera.
 incluir: figures/part2_mapa_w.html
 :::
 
 Hay un segundo efecto, que no cambia el orden de visita: **qué alternativa se toma en cada arco**. El recorrido 138
-gana en todo el tramo de 13,81 a 42,19 €/h, pero paga 1,05 € de peaje en $w = 15$, 24,25 € en $w = 25$ y 37,95 € en
+gana en todo el tramo de 14,53 a 42,19 €/h, pero paga 1,05 € de peaje en $w = 15$, 24,25 € en $w = 25$ y 37,95 € en
 $w = 40$, porque cada arco se pasa a la autopista de pago cuando el tiempo ahorrado vale más que el peaje.
 
 ### ¿Cuánto pesa cada componente?
@@ -116,24 +123,26 @@ Fuente: Elaboración propia a partir de results/data/part2/history_ga_w25.json (
 
 Con un consumo de autopista mayor que el homologado, el combustible pesa más y la autopista de pago compensa más tarde:
 los tres umbrales suben ([[tab:sensibilidad-part2]]). El combustible del recorrido en $w = 25$ €/h pasa de 529,48 € a
-644,58 € (+21,7 %) con 5,6 l/100 km y a 713,65 € (+34,8 %) con 6,2 l/100 km. Con 6,2 l/100 km los cuatro recorridos
-ganadores son los mismos que en la base, solo que cambian en otros valores de $w$. Con 5,6 l/100 km cambia el ganador
-del segundo tramo. En los dos casos el recorrido de $w = 15$ €/h deja de ser el mismo, porque ese valor queda ahora por debajo del
+644,58 € (+21,7 %) con 5,6 l/100 km y a 713,65 € (+34,8 %) con 6,2 l/100 km. Con el óptimo exacto, los cuatro
+recorridos óptimos son los mismos que en la base con los dos consumos: solo cambian los valores de $w$ en que se
+alternan. (La envolvente de las heurísticas mostraba otro ganador en el segundo tramo con 5,6 l/100 km: era el recorrido
+óptimo que el barrido base no había encontrado.) En los dos casos el recorrido de $w = 15$ €/h deja de ser el mismo, porque ese valor queda ahora por debajo del
 segundo umbral.
 
 ::: tabla sensibilidad-part2
 Título: Umbrales del valor de la hora según el consumo del vehículo
-Fuente: Elaboración propia a partir de results/data/part2/sensibilidad/consumo{5.6,6.2}/comparacion_base.json.
-| Consumo (l/100 km) | Umbral 1 (€/h) | Umbral 2 (€/h) | Umbral 3 (€/h) | Mismos recorridos ganadores que la base |
+Fuente: Elaboración propia a partir de results/data/part2/umbrales_exactos.json (óptimo exacto con PuLP + HiGHS).
+| Consumo (l/100 km) | Umbral 1 (€/h) | Umbral 2 (€/h) | Umbral 3 (€/h) | Mismos recorridos óptimos que la base |
 |---|---|---|---|---|
-| 4,6 (WLTP combinado, base) | 10,75 | 13,81 | 42,19 | — |
-| 5,6 (extra alta, mínimo) | 12,20 | 17,69 | 43,57 | No |
-| 6,2 (extra alta, máximo) | 14,49 | 18,62 | 44,39 | Sí |
+| 4,6 (WLTP combinado, base) | 10,02 | 14,53 | 42,19 | — |
+| 5,6 (extra alta, mínimo) | 12,20 | 17,69 | 43,57 | Sí |
+| 6,2 (extra alta, máximo) | 13,51 | 19,59 | 44,39 | Sí |
 :::
 
 ### Demo
 
-La demo (`configs/part2/demo.yaml`: MMAS, $w = 25$ €/h, 100 iteraciones, 10 corridas) tarda menos de un segundo en esta
-máquina. Su mejor recorrido cuesta 2 772,91 €, un 8,97 % por encima del mejor conocido (15,71 % en media). Es lo
-esperable: con 100 iteraciones evalúa 4 701 recorridos por corrida, menos del 10 % del presupuesto del barrido, y
-con $\rho = 0{,}02$ la feromona apenas se ha concentrado.
+La demo (`configs/part2/demo.yaml`: MMAS, $w = 25$ €/h, 1 000 iteraciones, 10 corridas) tarda unos 18 segundos en esta
+máquina. Su mejor recorrido cuesta 2 544,76 €, igual al mejor conocido (0,00 %); la media de las 10 corridas
+queda un 0,36 % por encima. Con 100 iteraciones, la versión previa de la demo quedaba un 8,97 % (mejor) y un 15,71 %
+(media) por encima, porque con $\rho = 0{,}02$ la feromona apenas empieza a concentrarse. Con 1 000 iteraciones evalúa
+47 001 recorridos por corrida, el 91 % de los 51 654 del barrido.

@@ -158,8 +158,9 @@ c_{ij}(w) = \min\left(c^{\text{rápida}}_{ij}(w),\; c^{\text{sin peaje}}_{ij}(w)
 $$
 
 Con 47 ciudades hay $46!/2 \approx 2{,}8 \times 10^{57}$ recorridos distintos, así que la búsqueda exhaustiva es
-imposible. La formulación entera de @dantzig1954 daría el óptimo, pero quedó como tarea opcional y no se implementó: los
-resultados se comparan contra el mejor recorrido encontrado.
+imposible. La formulación entera de @dantzig1954, resuelta con un solver de programación entera, da el óptimo en pocos
+segundos para este tamaño: aquí se usa para verificar los resultados de las heurísticas y para ubicar con exactitud los
+valores de la hora en que cambia la ruta óptima.
 
 **Colonia de hormigas.** Cada hormiga parte de una ciudad al azar y elige la siguiente, entre las no visitadas, con
 probabilidad $p_{ij} \propto \tau_{ij}^{\alpha}\,\eta_{ij}^{\beta}$, con $\eta_{ij} = 1/c_{ij}$. Después de cada iteración

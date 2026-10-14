@@ -437,7 +437,7 @@ def test_solo_el_demo_de_la_parte_1_pide_la_figura_de_trayectoria():
 def test_demo_part2_hereda_de_la_base():
     demo = load_config(DEMO_PART2)
     assert demo["methods"] == ["aco"]
-    assert demo["aco"]["iteraciones"] == 100  # §7.7
+    assert demo["aco"]["iteraciones"] == 1000  # §7.7
     assert demo["costo"]["valor_hora"] == 25  # §7.7
     assert demo["runs"] == load_config(BASE_PART2)["runs"]
     assert "hereda" not in demo

@@ -1,7 +1,7 @@
 """Pruebas de T3.7: demo de la Parte 2 (Spec §7.7, [DECIDIDO v1.17]).
 
 Qué se prueba:
-  1. `configs/part2/demo.yaml`: MMAS (variante principal, §7.4.1), w = 25, 100 iteraciones, salida propia y
+  1. `configs/part2/demo.yaml`: MMAS (variante principal, §7.4.1), w = 25, 1 000 iteraciones, salida propia y
      referencia del gap = `results/data/part2/sweep_w.json`.
   2. Referencia del gap: el mejor costo conocido de `sweep_w.json` en el w de la demo; error claro si falta el archivo,
      falta la entrada de ese w o la referencia no corresponde al modelo de costo actual (no se inventa una referencia).
@@ -30,7 +30,7 @@ SWEEP_REAL = ROOT / "results" / "data" / "part2" / "sweep_w.json"
 RESULTADOS_PART2 = ROOT / "results" / "data" / "part2"
 PNG = b"\x89PNG\r\n\x1a\n"
 
-# Demo diminuta (rápida en las pruebas); la demo real (10 × 100 iteraciones) se mide aparte.
+# Demo diminuta (rápida en las pruebas); la demo real (10 × 1 000 iteraciones) se mide aparte.
 DIMINUTA = ["runs=2", "aco.hormigas=4", "aco.iteraciones=5"]  # 2 × (1 + 4 · 5) = 42 recorridos
 
 
@@ -59,10 +59,10 @@ def _entrada_real(w: float) -> dict:
 # ------------------------------------------------------------------------------------------- 1. config
 
 
-def test_demo_yaml_corre_solo_mmas_con_w_25_y_100_iteraciones():
+def test_demo_yaml_corre_solo_mmas_con_w_25_y_1000_iteraciones():
     demo = load_config(DEMO)
     assert demo["methods"] == ["aco"] and demo["experimento"]["variantes_aco"] == ["mmas"]  # §7.4.1: principal
-    assert demo["costo"]["valor_hora"] == 25 and demo["aco"]["iteraciones"] == 100  # §7.7
+    assert demo["costo"]["valor_hora"] == 25 and demo["aco"]["iteraciones"] == 1000  # §7.7
     assert demo["experimento"]["salida"] == "results/data/part2/demo"
     assert demo["experimento"]["referencia_gap"] == "results/data/part2/sweep_w.json"  # §7.7 [DECIDIDO v1.17]
 

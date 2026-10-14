@@ -7,13 +7,13 @@
 | Categoría | Candidatos | Confirmados |
 |---|---|---|
 | Matemáticas | 2 (H-03; Parte 1: H-49, severidad baja) | 1 (H-03, puente) |
-| Código | 25 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil, H-44 débil, H-46 débil, H-47 débil, H-48 débil, H-51 débil, H-53 débil; Parte 2: H-35 débil, GA) | 3 (H-07, H-08, H-10, puente) |
+| Código | 26 (H-07, H-08, H-09, H-10, H-11, H-20 débil, H-21, H-23; Parte 1: H-24, H-25, H-27, H-28, H-30, H-33, H-36 débil, H-37 débil, H-38, H-40 débil, H-44 débil, H-46 débil, H-48 débil, H-51 débil, H-53 débil, H-54 débil; Parte 2: H-35 débil, GA; puente: H-47) | 3 (H-07, H-08, H-10, puente) |
 | Datos del mundo real | 9 (H-01, H-02, H-04, H-05, H-06, H-14, H-15, H-17, H-18) — H-13 descartado | 4 por el puente (H-04, H-05, H-14, H-17) + 1 confirmado por el cazador, pendiente del puente (H-18) |
 | Bibliografía | 3 (H-19: error de cita confirmado, origen IA pendiente; H-22; Parte 1: H-29, severidad baja: atribución imprecisa, no cita falsa) | 1 (H-22, puente) |
 | Conceptos | 12 (H-16; Parte 1: H-26, H-31, H-32, H-34, H-39, H-41, H-42, H-43, H-45, H-50, H-52; H-31, H-32, H-41, H-42, H-43, H-45 y H-52 de severidad baja) — H-12 descartado | 0 |
 
 **Total confirmados por el puente: 9 en 4 categorías** (meta del enunciado: ≥5 en ≥3). Los 7 de la sección del blog: H-03, H-07, H-08, H-10, H-04, H-17, H-22.
-**Total registrados: 53** (H-01–H-53; H-51 (pruebas de la figura del demo que no podían fallar), H-52 (rótulos «f final» y «camino del mejor de N puntos» en la figura del demo) y H-53 (prueba de T4.2 que reescribía los GIF reales de `media/`) son de T1.8 (13-oct-2026), detectados antes del commit; H-49 (niveles de Rastrigin descritos como «múltiplos enteros de 0.995» con tres decimales) y H-50 (conclusiones de la discusión más amplias que lo medido: «el límite del GD es el costo del gradiente, no la dirección» y «el EA es el más sensible») son de la auditoría de T4.6 Parte 1 (resultados y discusión, 13-oct-2026), detectados antes del commit; H-47 (pruebas de los GIF que no podían fallar) y H-48 (paleta por fotograma en los GIF) son de T4.3; H-45 (figura del deslizador de η: rótulo "f final" sobre el mejor valor visto) y H-46 (pruebas de las figuras que no podían fallar) son de T4.2: en su commit eran H-42 y H-43 y se renumeraron al integrar T1.11 el 13-oct-2026 porque H-42–H-44 ya estaban en uso; H-44 (la fila de Código de esta tabla decía 18 con 19 hallazgos listados, merge de T1.11); H-42 ("1,5e-4 cumple η ≤ 1/L en 2D y 3D", T1.10b/T1.11) y H-43 (significado de frac_c en el blog, T1.11) eran H-41 y H-42 en el commit de T1.11 y se renumeraron al integrar T4.6 parcial Parte 1 el 13-oct-2026 porque H-41 ya estaba en uso; H-41 (blog, desplazamiento del primer movimiento del PSO sin el recorte por v_max) es de T4.6 parcial Parte 1: en su rama era H-38 y se renumeró al integrar la HPO (T1.10) el 13-oct-2026 porque H-38–H-40 ya estaban en uso; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 48 activos y 2 descartados (H-12, H-13).
+**Total registrados: 54** (H-01–H-54; H-47 es el hallazgo de PuLP 4 del puente (`pulp.LpStatus`, T3.2), que llegó de `main`; las pruebas de los GIF de T4.3, que en la rama de la Parte 1 eran H-47, pasan a **H-54** al integrar `main` el 13-oct-2026; H-51 (pruebas de la figura del demo que no podían fallar), H-52 (rótulos «f final» y «camino del mejor de N puntos» en la figura del demo) y H-53 (prueba de T4.2 que reescribía los GIF reales de `media/`) son de T1.8 (13-oct-2026), detectados antes del commit; H-49 (niveles de Rastrigin descritos como «múltiplos enteros de 0.995» con tres decimales) y H-50 (conclusiones de la discusión más amplias que lo medido: «el límite del GD es el costo del gradiente, no la dirección» y «el EA es el más sensible») son de la auditoría de T4.6 Parte 1 (resultados y discusión, 13-oct-2026), detectados antes del commit; H-54 (pruebas de los GIF que no podían fallar; antes H-47) y H-48 (paleta por fotograma en los GIF) son de T4.3; H-45 (figura del deslizador de η: rótulo "f final" sobre el mejor valor visto) y H-46 (pruebas de las figuras que no podían fallar) son de T4.2: en su commit eran H-42 y H-43 y se renumeraron al integrar T1.11 el 13-oct-2026 porque H-42–H-44 ya estaban en uso; H-44 (la fila de Código de esta tabla decía 18 con 19 hallazgos listados, merge de T1.11); H-42 ("1,5e-4 cumple η ≤ 1/L en 2D y 3D", T1.10b/T1.11) y H-43 (significado de frac_c en el blog, T1.11) eran H-41 y H-42 en el commit de T1.11 y se renumeraron al integrar T4.6 parcial Parte 1 el 13-oct-2026 porque H-41 ya estaba en uso; H-41 (blog, desplazamiento del primer movimiento del PSO sin el recorte por v_max) es de T4.6 parcial Parte 1: en su rama era H-38 y se renumeró al integrar la HPO (T1.10) el 13-oct-2026 porque H-38–H-40 ya estaban en uso; H-39 (regla de selección que deja a un desempate de una corrida reemplazar al defecto, T1.10b) y H-40 (revisor que da por CRLF archivos en LF, T1.10b); H-38 (desempate "exacto" con fracciones de floats ya redondeados, T1.10); H-36 (pruebas del experimento que no podían fallar) y H-37 (afirmación del Spec más amplia que la validación) son de T1.7; H-35 es el candidato del GA (T3.4), que en `main` era H-24 y se renumeró al integrar `main` en la Parte 1 el 12-oct-2026 porque H-24–H-34 ya estaban en uso; H-11–H-23 de la Parte 2/puente; H-24–H-31 de la Parte 1, renumerados al integrar `main` el 12-oct-2026; H-32 (docstrings del DE, T1.6), H-33 (comentarios de prueba de T1.1–T1.3) y H-34 (blog, límite numérico de Armijo) posteriores a esa renumeración): 48 activos y 2 descartados (H-12, H-13).
 
 ---
 
@@ -619,16 +619,16 @@
 6. **Lección:** una prueba de figura debe mirar los números de las trazas, no la presencia de un texto.
 
 ---
-### H-47 — Pruebas de los GIF de la Parte 1 que no podían fallar (color "en algún sitio" con el fondo del mismo azul; aserción muerta; dos mutantes vivos)
-- **Estado:** candidato **débil**, severidad baja (misma familia que H-10, H-36 y H-46). Corregido antes del commit.
-- **Categoría:** Código (pruebas)
-- **Herramienta y modelo:** prompt de T4.3 (redactado por el humano con ayuda de IA) y Claude Code, subagente `implementador` (claude-opus-5-5), T4.3-B · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el orquestador (prueba (3) del prompt, antes de despachar), `revisor-spec` (mutantes) y `revisor-calidad` (aserción muerta)
-1. **Prompt (literal):** `prompts/T4.3.md`, pieza B, prueba (3): "en un fotograma renderizado, aparece un color a distancia RGB < 30 del de cada método dibujado".
-2. **Respuesta relevante de la IA:** (i) la prueba (3) tal como estaba escrita; (ii) en `tests/test_part1_gifs.py`, `assert part.get_zorder() > mejor.get_zorder() or mejor.get_markerfacecolor() == "none"`, siempre verdadera porque la línea anterior ya exige `"none"`; (iii) la prueba de "terminó" no probaba una marca igual a n_iter y la del rótulo del PSO solo miraba la marca en la que `f_mejor` = `f_best`.
-3. **Cómo sospechamos:** la rampa del fondo `SECUENCIAL_AZUL` contiene `#2a78d6`, el color de gdfijo: con la prueba (3) literal, intercambiar los colores de gdfijo y gdarmijo (mutante m3) seguiría pasando. Para (iii), prueba de mutación de revisor-spec.
-4. **Evidencia:** `src/viz/paleta.py` (`SECUENCIAL_AZUL[7]` = `COLOR_METODO["gdfijo"]`); sobrevivían los mutantes `marca >= n_iter` y "rótulo del PSO con `f_best`" (34 pruebas en verde con cada uno).
-5. **Corrección:** la prueba de color mira el artista de cada serie y el píxel en la posición de su marcador (mata a m3); aserción muerta eliminada; aserciones nuevas con marca = n_iter y con el rótulo del PSO en la marca 0 (matan a los dos mutantes). Los 5 mutantes del prompt (m1–m5) mueren.
-6. **Lección:** "el color aparece en la imagen" no prueba nada si el fondo puede tener ese color: hay que mirar dónde aparece.
+### H-47 — `pulp.LpStatus[modelo.status]`: la API de estado de PuLP 3 escrita de nuevo en PuLP 4 (después de H-07)
+- **Estado:** candidato (prompt literal disponible; evidencia reproducible; severidad baja: falló en la primera prueba)
+- **Categoría:** Código
+- **Herramienta y modelo:** Claude Opus 5.5 (orquestador, verificación exacta de T3.6) · **Fecha:** 13-oct-2026 · **Quién lo cazó:** la primera ejecución de `tests/test_exact.py`
+1. **Prompt (literal):** "Listo, ya lo fusioné, integra la verificación exacta" (Daniel, 13-oct-2026, sesión de asesoría del puente).
+2. **Respuesta relevante de la IA:** la primera versión de `src/part2/exact.py` comprobaba el resultado con `if pulp.LpStatus[modelo.status] != "Optimal":`, la forma de PuLP 3.
+3. **Cómo sospechamos:** 8 de las 9 pruebas fallaron con `AttributeError: module 'pulp' has no attribute 'LpStatus'`.
+4. **Evidencia:** `evidencias/H-47_pulp4_lpstatus.py` → `.txt` (PuLP 4.0.0): no existen `pulp.LpStatus` ni `modelo.status`; en PuLP 4, `solve()` devuelve un `LpSolveStats` cuyo campo `status` es un `LpSolveStatus`.
+5. **Corrección:** `stats = modelo.solve(...)` y `stats.status != pulp.LpSolveStatus.Optimal`.
+6. **Lección:** documentar un cambio de API (H-07: `LpVariable(cat=…)` y CBC) no impide repetir otra parte de la API vieja en la siguiente sesión: cuando una librería cambió de versión mayor, hay que comprobar contra la instalación **cada** llamada, no solo la que ya falló una vez. La prueba escrita antes de usar el código lo atrapó en segundos.
 
 ---
 ### H-48 — GIF con paleta por fotograma junto a "sin cambios bruscos de color" (el amarillo del PSO cambiaba de tono entre fotogramas)
@@ -668,7 +668,7 @@
 
 ---
 ### H-51 — Pruebas de la figura del demo de la Parte 1 que no podían fallar (alto de la figura, número de la leyenda, reloj que no distinguía el orden)
-- **Estado:** candidato **débil**, severidad baja (misma familia que H-10, H-36, H-46 y H-47). Corregido antes del commit.
+- **Estado:** candidato **débil**, severidad baja (misma familia que H-10, H-36, H-46 y H-54). Corregido antes del commit.
 - **Categoría:** Código (pruebas)
 - **Herramienta y modelo:** Claude Code, subagente `implementador` (claude-opus-5-5), T1.8 ronda 1 · **Fecha:** 13-oct-2026 · **Quién lo cazó:** `revisor-calidad` (mutantes R1 y R2) y el propio `implementador` (mutante M6)
 1. **Prompt (literal):** `prompts/T1.8.md`, prompt a implementador, apartado "PRUEBAS".
@@ -701,6 +701,18 @@
 4. **Evidencia:** al ejecutar solo esa prueba (79 s) cambian la fecha y el md5 de los tres GIF; ni la prueba ni `src/viz/figuras.py` ni `src/viz/part1_gifs.py` tenían cambios respecto a HEAD (`fe4ef3c` añadió el generador; la prueba es de `91ebc9f`).
 5. **Corrección:** `monkeypatch.setattr(part1_gifs, "SALIDA", otros / "media")` en esa prueba; tras ejecutarla, `git status` no muestra nada en `media/`.
 6. **Lección:** al conectar un generador nuevo a un comando, buscar todas las pruebas que llaman a ese comando, no solo la que el prompt menciona.
+
+---
+### H-54 — Pruebas de los GIF de la Parte 1 que no podían fallar (color "en algún sitio" con el fondo del mismo azul; aserción muerta; dos mutantes vivos)
+- **Estado:** candidato **débil**, severidad baja (misma familia que H-10, H-36 y H-46; en el commit de T4.3 era H-47, renumerado a H-54 al integrar `main` el 13-oct-2026 porque `main` ya usaba H-47 para el hallazgo de PuLP 4; los prompts y evidencias anteriores lo citan como H-47). Corregido antes del commit.
+- **Categoría:** Código (pruebas)
+- **Herramienta y modelo:** prompt de T4.3 (redactado por el humano con ayuda de IA) y Claude Code, subagente `implementador` (claude-opus-5-5), T4.3-B · **Fecha:** 13-oct-2026 · **Quién lo cazó:** el orquestador (prueba (3) del prompt, antes de despachar), `revisor-spec` (mutantes) y `revisor-calidad` (aserción muerta)
+1. **Prompt (literal):** `prompts/T4.3.md`, pieza B, prueba (3): "en un fotograma renderizado, aparece un color a distancia RGB < 30 del de cada método dibujado".
+2. **Respuesta relevante de la IA:** (i) la prueba (3) tal como estaba escrita; (ii) en `tests/test_part1_gifs.py`, `assert part.get_zorder() > mejor.get_zorder() or mejor.get_markerfacecolor() == "none"`, siempre verdadera porque la línea anterior ya exige `"none"`; (iii) la prueba de "terminó" no probaba una marca igual a n_iter y la del rótulo del PSO solo miraba la marca en la que `f_mejor` = `f_best`.
+3. **Cómo sospechamos:** la rampa del fondo `SECUENCIAL_AZUL` contiene `#2a78d6`, el color de gdfijo: con la prueba (3) literal, intercambiar los colores de gdfijo y gdarmijo (mutante m3) seguiría pasando. Para (iii), prueba de mutación de revisor-spec.
+4. **Evidencia:** `src/viz/paleta.py` (`SECUENCIAL_AZUL[7]` = `COLOR_METODO["gdfijo"]`); sobrevivían los mutantes `marca >= n_iter` y "rótulo del PSO con `f_best`" (34 pruebas en verde con cada uno).
+5. **Corrección:** la prueba de color mira el artista de cada serie y el píxel en la posición de su marcador (mata a m3); aserción muerta eliminada; aserciones nuevas con marca = n_iter y con el rótulo del PSO en la marca 0 (matan a los dos mutantes). Los 5 mutantes del prompt (m1–m5) mueren.
+6. **Lección:** "el color aparece en la imagen" no prueba nada si el fondo puede tener ese color: hay que mirar dónde aparece.
 
 ---
 ## Pistas por probar (aún no son hallazgos) — aportadas por el equipo Parte 2

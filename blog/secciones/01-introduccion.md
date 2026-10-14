@@ -1,5 +1,5 @@
 <!--
-SECCIÓN: Introducción · RESPONSABLE: puente (Daniel) · ESTADO: borrador inicial (revisar al final).
+SECCIÓN: Introducción · RESPONSABLE: puente (Daniel) · ESTADO: borrador completo (13-oct).
 Enunciado: "el entendimiento desarrollado en el trabajo". Explicar el propósito, las dos partes y el papel de la IA.
 -->
 
@@ -20,4 +20,15 @@ El trabajo se desarrolló con apoyo de herramientas de inteligencia artificial. 
 seguridad, una parte del trabajo consistió en verificar sus afirmaciones; los errores encontrados se documentan en la
 sección *Cacería de la alucinación*.
 
-<!-- TODO (al final): un párrafo con los resultados principales y la estructura del reporte. -->
+Dos preguntas guían el trabajo. ¿Cuándo compensa usar la información del gradiente en lugar de explorar con una
+población, si ambos pagan lo mismo por cada evaluación? ¿Y cómo cambia la mejor ruta por España cuando el tiempo del
+viajero vale más o menos dinero? Para que las respuestas se puedan defender, todos los métodos comparten presupuesto,
+semillas y protocolo, y los recorridos que encuentran las heurísticas de la Parte 2 se contrastan con el óptimo exacto
+de la formulación de @dantzig1954.
+
+El reporte sigue este orden. La *Fundamentación matemática* presenta las funciones de prueba, los algoritmos y el
+modelo de costo del recorrido. Las secciones de la Parte 1 describen el protocolo y los resultados de la optimización
+continua, incluida la afinación de hiperparámetros; las de la Parte 2, los datos reales, la metodología y los resultados
+del recorrido. La *Discusión y conclusiones* contrasta las dos partes. Cierran el reporte el *Uso de inteligencia
+artificial*, la *Cacería de la alucinación* y la *Reproducibilidad*, que explica cómo regenerar cada cifra y cada figura
+desde el repositorio.

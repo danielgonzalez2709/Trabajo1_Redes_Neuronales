@@ -6,8 +6,7 @@ title: Redes neuronales y algoritmos bioinspirados. Trabajo 1
 
 *Optimización numérica, metaheurística y combinatoria · Universidad Nacional de Colombia, Facultad de Minas · 2026-02*
 
-**Autores:** Jose Miguel Pulgarin Agudelo, Maria Camila Agudelo Espinosa, Daniel Gonzalez Henao, Juan José González Morales y Edinson Andrés Ariza Mendoza. 
-
+**Autores:** Jose Miguel Pulgarin Agudelo, Maria Camila Agudelo Espinosa, Daniel Gonzalez Henao, Juan José González Morales y Edinson Andrés Ariza Mendoza ·
 **Repositorio:** [github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales](https://github.com/danielgonzalez2709/Trabajo1_Redes_Neuronales)
 
 --8<-- "secciones/00-resumen.md"
