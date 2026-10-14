@@ -11,6 +11,7 @@ presupuesto_por_dim: 10000                    # §6.2: presupuesto por corrida =
 workers: 1                                    # procesos en paralelo del experimento (>= 1); el resultado no depende de este valor
 salida: results/data/part1                    # carpeta de los JSON de corridas (runs/, k1/runs/) y de summary.json (§5.4)
 tablas: results/tables/part1                  # carpeta de los CSV de la tabla principal y de la sensibilidad k = 1 (§6.6)
+figura_trayectoria: false                     # §6.8: true = <salida>/trayectoria_{func}_2d.png (pide 2 en dim y record_frames)
 # §6.3 Descenso por gradiente. gdfijo y gdarmijo comparten este bloque; la clave "variante" (fijo/armijo) la fija el
 # runner (T1.7), no esta config.
 gd:

@@ -244,12 +244,13 @@ def test_humo_el_deslizador_real_cruza_cada_umbral():
 
 
 def test_run_py_figures_genera_la_parte_2(tmp_path, monkeypatch, capsys):
-    from src.viz import figuras, gifs, part1_interactivas
+    from src.viz import figuras, gifs, part1_gifs, part1_interactivas
 
     otros = tmp_path.parent / (tmp_path.name + "_otros")  # lo que no es de la Parte 2 interactiva, fuera de tmp_path
     monkeypatch.setattr(pi, "SALIDA", tmp_path)
     monkeypatch.setattr(part1_interactivas, "SALIDA", otros / "part1")  # T4.2
     monkeypatch.setattr(gifs, "SALIDA", otros / "media")  # T4.5: sin reescribir los GIF versionados
+    monkeypatch.setattr(part1_gifs, "SALIDA", otros / "media")  # T4.3: ídem con los GIF de la Parte 1
     monkeypatch.setattr(figuras, "FIGURAS_BLOG", otros / "blog")
     assert cli.main(["figures"]) == 0
     assert {r.name for r in tmp_path.iterdir()} == set(pi.ARCHIVOS.values())

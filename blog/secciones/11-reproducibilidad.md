@@ -19,6 +19,12 @@ mkdocs build --strict -f blog/mkdocs.yml
 Las semillas son fijas (`base_seed + run_id`), los parámetros se cambian con `--set clave=valor` sin editar el código, y
 ningún experimento usa internet: los datos del problema del viajero están guardados en `data/processed/`.
 
+La demostración de la Parte 1 (Rastrigin 2D, PSO frente al descenso por gradiente de paso fijo, 5 corridas) imprime
+las tablas, el tiempo de ejecución y la ruta de la figura de trayectoria que escribe,
+`results/data/part1_demo/trayectoria_rastrigin_2d.png`. En el equipo de desarrollo (AMD Ryzen 5 3500U, Fedora 43)
+tardó entre 3,7 y 3,8 s en tres repeticiones, y dos ejecuciones seguidas dejaron los mismos archivos byte a byte.
+Falta medirla en un equipo distinto al de desarrollo.
+
 ### Optimización de hiperparámetros de la Parte 1
 
 La optimización de hiperparámetros (HPO, Hyperparameter Optimization) de la Parte 1 se ejecuta con el subcomando
