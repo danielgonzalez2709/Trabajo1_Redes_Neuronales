@@ -75,7 +75,7 @@ optimalidad cero (1 a 3 s por valor de $w$). Con él se calcula el recorrido óp
 donde cambia, se ubica el cambio por bisección con precisión de 0,005 €/h. Después se agregan a los candidatos las
 rutas óptimas que las heurísticas no hallaron y se recalcula la envolvente, que da los umbrales de forma analítica y
 coincide con la bisección; en el punto medio de cada tramo se comprueba que el ganador es el óptimo. Los umbrales que se
-reportan en los resultados son, por tanto, los del **óptimo** (`python scripts/umbrales_exactos.py`, unos 9 minutos).
+reportan en los resultados son, por tanto, los del **óptimo** (`python scripts/umbrales_exactos.py`, unos 13 minutos).
 
 **Sensibilidad del consumo.** Se repiten el barrido con MMAS y la envolvente con 5,6 y 6,2 l/100 km en lugar de 4,6,
 sin editar código (`configs/part2/sensibilidad_consumo.yaml`, y `--set costo.consumo_l100=6.2` para el segundo valor). La envolvente de cada consumo usa los candidatos del barrido base más

@@ -8,7 +8,7 @@ Para cada consumo (base 4,6 y sensibilidad 5,6 y 6,2 l/100 km):
    de forma analítica; se comprueba que coinciden con la bisección y que en cada tramo el ganador es el óptimo exacto.
    Los candidatos de T3.6 conservan su id (el de umbrales_w.json y sweep_w.json); las rutas nuevas van al final.
 
-No usa internet. Uso: .venv\\Scripts\\python.exe scripts/umbrales_exactos.py              (≈ 9 min)
+No usa internet. Uso: .venv\\Scripts\\python.exe scripts/umbrales_exactos.py              (≈ 13 min)
                        .venv\\Scripts\\python.exe scripts/umbrales_exactos.py --solo-envolvente
 (--solo-envolvente reutiliza las rutas exactas de la salida anterior y solo rehace el paso 2, en segundos).
 Salida: results/data/part2/umbrales_exactos.json
