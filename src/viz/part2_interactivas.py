@@ -2,9 +2,11 @@
 
 - Fig. 2 `figura_mapa`: recorrido de menor costo conocido para cada w, con deslizador; tramos con peaje en
   COLOR_PEAJE y más gruesos. Pasos del deslizador (`pasos_deslizador`): los 11 w del barrido MÁS el punto medio de
-  cada intervalo de la envolvente (§7.5, `umbrales_w.json`) que no contiene ningún w del barrido. Así hay un paso a
-  cada lado de cada umbral y se ve cada cambio de ruta (el recorrido 139, ganador solo en 10,75–13,81 €/h, no aparece
-  en la rejilla del barrido). En cada paso el recorrido es el `candidato` de la envolvente en ese w.
+  cada intervalo de la envolvente que no contiene ningún w del barrido. Así hay un paso a cada lado de cada umbral y
+  se ve cada cambio de ruta (el ganador del tramo 10,02–14,53 €/h no aparece en la rejilla del barrido). En cada paso
+  el recorrido es el `candidato` de la envolvente en ese w. La envolvente es la EXACTA de
+  `umbrales_exactos.json` (candidatos de T3.6 + rutas óptimas que las heurísticas no hallaron, mismos ids) si existe;
+  si no, la de T3.6 (`umbrales_w.json`, §7.5).
 - Fig. 3 `figura_desglose`: barras apiladas tiempo / peajes / combustible de `sweep_w.json` por w, con los umbrales.
 - Fig. 4 `figura_convergencia`: gap (%) del mejor recorrido hasta el momento frente al mejor conocido en ese w (el
   `cost` de `sweep_w.json`, §7.5 y §7.7: no es un óptimo probado) contra recorridos evaluados; media y banda mín–máx de
@@ -45,6 +47,7 @@ ARCHIVOS = {
     "desglose": "part2_desglose_w.html",
     "convergencia": "part2_convergencia.html",
 }
+ARCHIVO_UMBRALES_EXACTOS = "umbrales_exactos.json"  # scripts/umbrales_exactos.py (verificación exacta, T3.2)
 FAMILIAS = ("aco", "ga")  # history_{familia}_w{w}.json
 SOLVERS = ex.SOLVERS  # mmas, as, ga (orden fijo de las salidas)
 COMPONENTES = ("tiempo", "peajes", "combustible")  # Spec §5.4: desglose
@@ -150,7 +153,8 @@ def pasos_mapa(entradas: dict) -> list[dict]:
     pasos = []
     for x in pasos_deslizador(sweep, umbrales["intervalos"]):
         tour = umbrales["candidatos"][x["candidato"]]["tour"]
-        paso = {**x, "tour": list(tour), **detalle_paso(datos, tour, x["w"])}
+        paso = {**x, "tour": list(tour), **detalle_paso(datos, tour, x["w"]),
+                "exacto_nuevo": bool(umbrales["candidatos"][x["candidato"]].get("exacto_nuevo", False))}
         C, _ = matriz_costos(datos.comp, x["w"], {CLAVE_CONSUMO: datos.consumo_l100}, datos.precio_l)
         _comprobar_paso(paso, por_w.get(x["w"]) if x["en_barrido"] else None,
                         float(costos_recorridos(C, tours).min()))
@@ -188,6 +192,8 @@ def _textos_paso(paso: dict, anterior: dict | None, umbrales: list[dict]) -> tup
         + ("(w del barrido)" if paso["en_barrido"]
            else "(punto medio de su intervalo de la envolvente, fuera del barrido)"),
     ]
+    if paso.get("exacto_nuevo"):
+        lineas.append("Óptimo exacto (PuLP + HiGHS): las heurísticas no hallaron este recorrido")
     if anterior is not None:
         for u in _umbrales_entre(umbrales, anterior["w"], paso["w"]):
             lineas.append(f"Desde el paso anterior: umbral en w = {_num(u['w'])} €/h, el recorrido cambia del "
@@ -359,11 +365,15 @@ def _nombres(ruta: Path, n: int) -> list[str]:
 
 
 def cargar_entradas(resultados: Path = RESULTADOS, datos: Path = DATOS) -> dict:
-    """Lee sweep_w.json, umbrales_w.json, los historiales de cada w, los datos de costo y cities.csv."""
+    """Lee sweep_w.json, la envolvente (exacta si existe umbrales_exactos.json; si no, umbrales_w.json), los
+    historiales de cada w, los datos de costo y cities.csv."""
     resultados, datos = Path(resultados), Path(datos)
     sweep = load_json(resultados / ex.ARCHIVO_SWEEP)
-    umbrales = load_json(resultados / ex.ARCHIVO_UMBRALES)
     d = ex.cargar_datos(datos)
+    exactos = resultados / ARCHIVO_UMBRALES_EXACTOS
+    por_consumo = load_json(exactos)["consumos"] if exactos.exists() else {}
+    umbrales = next((c["envolvente"] for clave, c in por_consumo.items() if _cerca(float(clave), d.consumo_l100)),
+                    None) or load_json(resultados / ex.ARCHIVO_UMBRALES)
     if not (_cerca(umbrales["consumo_l100"], d.consumo_l100) and _cerca(umbrales["precio_l"], d.precio_l)):
         raise ValueError(f"umbrales_w.json usa consumo {umbrales['consumo_l100']} y precio {umbrales['precio_l']}, "
                          f"distintos de data/processed ({d.consumo_l100}, {d.precio_l})")
