@@ -431,7 +431,7 @@ def test_demo_part1_usa_identificadores_de_la_spec():
 def test_demo_part2_hereda_de_la_base():
     demo = load_config(DEMO_PART2)
     assert demo["methods"] == ["aco"]
-    assert demo["aco"]["iteraciones"] == 100  # §7.7
+    assert demo["aco"]["iteraciones"] == 1000  # §7.7
     assert demo["costo"]["valor_hora"] == 25  # §7.7
     assert demo["runs"] == load_config(BASE_PART2)["runs"]
     assert "hereda" not in demo
